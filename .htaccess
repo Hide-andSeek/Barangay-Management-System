@@ -1,0 +1,8 @@
+Options +Indexes
+#comments
+
+IndexOptions FancyIndexing
+
+#DirectoryIndex index.html  
+
+IndexIgnore index.html 
