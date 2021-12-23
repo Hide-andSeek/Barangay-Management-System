@@ -18,6 +18,7 @@ include "db/user.php";
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/captain.css">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -29,120 +30,7 @@ include "db/user.php";
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Employee Management </title>
-	 
-	 
-	 <style>
-		*{
-			font-family: 'Monserrat', sans-serif;
-			font-size: 14px;
-		}
-		
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-		}
-		
-		.captain_sidebar{
-		  background: gray;
-		}
-		
-		#formatValidatorName{
-			top: 50px;
-		}
-		
-		.employeemanagement-modal{
-            display: none; 
-            position: absolute; 
-            z-index: 999; 
-            left: 0;
-			top: 0;
-            width: 100%; 
-            height: 145%; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 5px; 
-			
-        }
-		.modal-contentemployee {
-		    font-family: 'Montserrat', sans-serif;
-		    padding-top: 1%;
-            background-color: #fefefe;
-            margin: 5% auto 2% auto;
-            border: 1px solid #888;
-		    height: 78%;
-            width: 68%; 
-		   
-        }
-		
-		.inputtext, .inputpass {
-		    font-family: 'Montserrat', sans-serif;
-			font-size: 14px;
-			height: 35px;
-            width: 94%;
-            padding: 10px 10px;
-            margin: 4px 25px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-		.employee-label{margin-left: 26px;}
-		
-		.submtbtn{
-			height: 40px;
-		}
-		
-		.submtbtn:hover{
-			background: orange;
-			color: black;
-			height: 40px;
-		}
-		
-		
-		.lname, .fname, .mname{
-			 width: 80%;
-		}
-		
-		.addbtn{
-			position: absolute;
-			margin-left: 25px;
-			margin-top: -25px;
-		}
-
-		.emp_tbl{ 
-			margin-top: 65px;
-			border-collapse: collapse;
-			table-layout: auto;
-			width: 100%;
-			transition: margin-left 300ms;
-			overflow-y: scroll;  
-			box-shadow: inset;
-			display: block;
-		}
-		
-		/* Add Zoom Animation */
-        .animate {
-          -webkit-animation: animatezoom 0.6s;
-          animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-          from {-webkit-transform: scale(0)} 
-          to {-webkit-transform: scale(1)}
-        }
-  
-        @keyframes animatezoom {
-          from {transform: scale(0)} 
-          to {transform: scale(1)}
-        }
-		
-
-	 </style>
+	
    </head>
 	<body>
 																							<!-- Side Navigation Bar-->
@@ -153,6 +41,14 @@ include "db/user.php";
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
+				<li>
+					<a class="side_bar" href="captaindashboard.php">
+						<i class='bx bx-category-alt'></i>
+						<span class="links_name">Dashboard</span>
+					</a>
+					 <span class="tooltip">Dashboard</span>
+			 	</li>
+
 			  <li>
 			  <a class="side_bar" href="adminmanagement.php">
 				  <i class='bx bx-user-circle'></i>
@@ -217,7 +113,7 @@ include "db/user.php";
 			  </section>
 				
 				<div>
-					<div><button type="button" style="font-size: 13px;" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus" style="font-size: 15px"></i>Add Employee</button></div>
+					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
 <!--Modal form for Add Employee-->
 				<div id="formatValidatorName" >
 					<div >

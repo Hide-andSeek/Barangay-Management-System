@@ -26,21 +26,6 @@
 	 
 	 
 	 <style>
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-		}
-		
-		.captain_sidebar{
-		  background: gray;
-		}
-
 		.adminmanagement-modal{
             display: none; 
             position: absolute; 
@@ -64,38 +49,7 @@
 		    height: 42%;
             width: 30%; 
             border-radius: 20px;
-		   
         }
-		
-		.inputtext, .inputpass {
-		    font-family: 'Montserrat', sans-serif;
-			height: 35px;
-            width: 87%;
-            padding: 10px 10px;
-            margin: 4px 25px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-		  
-        }
-		
-		/* Add Zoom Animation */
-        .animate {
-          -webkit-animation: animatezoom 0.6s;
-          animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-          from {-webkit-transform: scale(0)} 
-          to {-webkit-transform: scale(1)}
-        }
-  
-        @keyframes animatezoom {
-          from {transform: scale(0)} 
-          to {transform: scale(1)}
-        }
-		
-
 	 </style>
    </head>
 	<body>
@@ -103,16 +57,24 @@
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Barangay Captain</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
+				<li>
+					<a class="side_bar" href="captaindashboard.php">
+						<i class='bx bx-category-alt'></i>
+						<span class="links_name">Dashboard</span>
+					</a>
+					 <span class="tooltip">Dashboard</span>
+			 	</li>
+
 			  <li>
-			  <a class="side_bar" href="adminmanagement.php">
-				  <i class='bx bx-user-circle'></i>
-				  <span class="links_name">Admin Management</span>
-				</a>
-				 <span class="tooltip">Admin Management</span>
+					<a class="side_bar" href="adminmanagement.php">
+						<i class='bx bx-user-circle'></i>
+						<span class="links_name">Admin Management</span>
+					</a>
+					<span class="tooltip">Admin Management</span>
 			  </li>	
 
 				<li>

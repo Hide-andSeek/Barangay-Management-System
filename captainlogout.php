@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	session_unset();
 	session_destroy();
-	header("location: employee-login.php");
+	header("location: captainlogin.php");
 ?>

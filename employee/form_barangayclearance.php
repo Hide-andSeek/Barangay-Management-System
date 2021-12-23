@@ -154,19 +154,23 @@ if(!isset($_SESSION["employee_no"])){
 							include "db/conn.php";
 							include "db/users.php";
 							
-							$miquery = "SELECT * FROM businesspermit";
+							$miquery = "SELECT * FROM barangayclearance";
 							$countnu = $db->query($miquery);
 							
 							?>
 
 							<thead>
 								<tr class="t_head">
-									<th>Date</th>
-									<th>Selection</th>
-									<th>Owner's name</th>
-									<th>Business Name</th>
-									<th>Business Address</th>
-									<th>Contact no</th>
+									<th>Full name</th>
+									<th>Age</th>
+									<th>Status</th>
+									<th>Citizenship</th>
+									<th>Address</th>
+									<th>Date Issued</th>
+									<th>CTC no</th>
+									<th>Issued at</th>
+									<th>Issued on</th>
+									<th>Precint no</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -174,20 +178,22 @@ if(!isset($_SESSION["employee_no"])){
 							{
 							?>
 								<tr class="table-row">
-									<td><?php echo $data1 ['dateissued']; ?></td>
-									<td><?php echo $data1 ['selection']; ?></td>
-									<td><?php echo $data1 ['ownername']; ?></td>
-									<td><?php echo $data1 ['businessname']; ?></td>
-									<td><?php echo $data1 ['businessaddress']; ?></td>
-									<td><?php echo $data1 ['contact']; ?></td>
+									<td><?php echo $data1 ['full_name']; ?></td>
+									<td><?php echo $data1 ['age']; ?></td>
+									<td><?php echo $data1 ['status']; ?></td>
+									<td><?php echo $data1 ['citizenship']; ?></td>
+									<td><?php echo $data1 ['address']; ?></td>
+									<td><?php echo $data1 ['purpose']; ?></td>
+									<td><?php echo $data1 ['date_issued']; ?></td>
+									<td><?php echo $data1 ['ctc_no']; ?></td>
+									<td><?php echo $data1 ['issued_at']; ?></td>
+									<td><?php echo $data1 ['issued_on']; ?></td>
+									<td><?php echo $data1 ['precint_no']; ?></td>
 								</tr>	
 							<?php
 							}
 							?>
 						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
 						</div>
 			</section>
 	</body>
