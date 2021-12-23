@@ -15,11 +15,12 @@ include "db/user.php";
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 
+	<!-- Customize Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/employee.css">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -27,222 +28,11 @@ include "db/user.php";
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Employee - Barangay Commonwealth QC.</title>
-	 
-	 
+
 	 <style>
-	*{
-	  margin: 0;
-	  padding: 0;
-	  box-sizing: border-box;
-	  font-family: "Poppins" , sans-serif;
-	}
-	
-	main.employee-main{
-		padding-top: 175px;
-
-	}
-	
-	.employee-logform{
-		min-height: 20vh;
-		min-width: 90vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.btn-size{
-		padding: 50px 50px 50px 50px;
-		margin: 10px 10px 10px 10px;
-	}
-	
-	
-	.docureq-modal{
-            display: none; 
-            position: fixed; 
-            z-index: 2; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 5px; 
-			
-        }
-	
-	.modal-contentdocreq {
-		    font-family: 'Montserrat', sans-serif;
-		    padding-top: 2%;
-            background-color: #fefefe;
-            margin: 5% auto 15% auto;
-            border: 1px solid #888;
-		    height: 22%;
-            width: 30%; 
-            border-radius: 20px;
-		   
-        }
-		
-
-        .f_l_name{
-            margin-bottom: 25px;
-        }
-		
-
-        .b_login{
-            border: rgb(0, 177, 0);
-        }
-
-
-        .form-active{
-            color:#fff!important;
-            background-color:#ee544a!important;
-        }
-
-        .form-button:hover{
-            color:#000!important;
-            background-color:#ccc!important
-        }
-
-        .form-bar{
-            padding-left: 25px;
-            padding-bottom: 45px;
-
-        }
-
-        button.log_in{
-            width: 43%;
-            border-top-left-radius: 10px;
-        }
-
-        .form-bar-item{
-            padding:8px 16px;
-            float:left;
-            width:auto;
-            border:none;
-            display:block;
-            outline:0
-        }
-
-        .inputtext, .inputpass {
-		    font-family: 'Montserrat', sans-serif;
-			height: 35px;
-            width: 87%;
-            padding: 10px 10px;
-            margin: 4px 25px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-		  
-        }
-		
-		.form-text{
-			font-size: 10px;
-			margin: 3px 3px;
-			color: red;
-		}
-
-        .c_password{
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-        
-		.log_heading{
-			font-family: 'Montserrat', sans-serif;
-			user-select: none;
-		}
-		
-        .log_button {
-            background-color: #808080;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-			height: 40px;
-            cursor: pointer;
-            width: 100%;
-        }
-		
-		button.gmail{
-			background-color: #dd4b39;
-			color: #fff;
-			margin-left: 25px;
-			width: 87%;
-			padding: 12px 20px;
-			border-radius: 25px;
-		}
-		
-		
-		button.sign_in, button.create_acc {
-			margin-left: 25px;
-			width: 160px;
-			text-decoration: none;
-			background-color: #04AA6D;
-			color: #fff;
-			text-transform: capitalize;
-			font-weight: 300;
-			padding: 12px 20px;
-			border-radius: 20px;
-			transition: all 0.3s;
-		}
-
-        button.create_account{
-            margin-left: 25px;
-			width: 160px;
-            border-top-right-radius: 10px;
-        }
-
-
-		button.sign_in:hover, button.create_acc:hover{
-			background-color: #48c76e;
-			color: #fff;
-		}
-
-        button.sign_in{
-            width: 87%;
-        }
-		
-		button.gmail:hover{
-			background-color: #fc4949;
-			color: #fff;
-		}
-		.fp{
-			padding: 8px;
-			margin-left: 145px;
-		}
-
-         
-		 div.login_container{
-		  align-items: center;
-         }
-
-        .button:hover {
-          opacity: 0.8;
-        }
-
-        /* Center the image */
-        .imgcontainer {
-		  padding: 0px 125px;
-          margin: 24px 0 12px 0;
-          position: relative;
-        }
-        
-        /* Add Zoom Animation */
-        .animate {
-          -webkit-animation: animatezoom 0.6s;
-          animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-          from {-webkit-transform: scale(0)} 
-          to {-webkit-transform: scale(1)}
-        }
-  
-        @keyframes animatezoom {
-          from {transform: scale(0)} 
-          to {transform: scale(1)}
-        }
-		
-	
+		 
 	 </style>
+	 
    </head>
 	<body>
 		<main class="employee-main">

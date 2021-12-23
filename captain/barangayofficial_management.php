@@ -143,8 +143,8 @@ include "db/users.php";
 
 	 </style>
    </head>
-	<body>
-																							<!-- Side Navigation Bar-->
+	<body>																
+		<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -154,7 +154,7 @@ include "db/users.php";
 			<ul class="nav-list">
 			  <li>
 			  <a class="side_bar" href="adminmanagement.php">
-				  <i class='bx bx-grid-alt'></i>
+				  <i class='bx bx-user-circle'></i>
 				  <span class="links_name">Admin Management</span>
 				</a>
 				 <span class="tooltip">Admin Management</span>
@@ -162,7 +162,7 @@ include "db/users.php";
 
 				<li>
 				  <a class="side_bar" href="employeemanagement.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bx-group'></i>
 					  <span class="links_name">Employee Management</span>
 					</a>
 					 <span class="tooltip">Employee Management</span>

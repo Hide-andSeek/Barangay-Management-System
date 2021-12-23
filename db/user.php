@@ -1,9 +1,7 @@
 <?php
 
-//Employee Create Account Form
+//Employee - For Create Account Form
 if(isset($_POST['empBtn'])){
-	
-	$mess1 = '';
 	
 	$employee_uname = $_POST['employee_uname'];
 	$employee_lname = $_POST['employee_lname'];
@@ -13,21 +11,30 @@ if(isset($_POST['empBtn'])){
 	$address = $_POST['address'];
 	$contact = $_POST['contact'];
 	$department = $_POST['department'];
-	
-	try{
-		$employeesql = "INSERT INTO employeedb (employee_uname, employee_lname, employee_fname, employee_mname, birthday, address, contact, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		$reqdocemployeeresult = $db->prepare($employeesql);
-		$reqdocemployeeresult->execute(array($employee_uname, $employee_lname, $employee_fname, $employee_mname, $birthday, $address, $contact, $department));
-	} catch (PDOException $e){
-		if($e->getCode() == 0) {
-		}else{
-			$mess1 = $e->getMessage();
-		} 
-	} finally {
-		echo $mess1;
-	}
+		
+		$stmt = $db->prepare("INSERT INTO employeedb (employee_uname, employee_lname, employee_fname, employee_mname, birthday, address, contact, department) VALUES (:employee_uname, :employee_lname, :employee_fname, :employee_mname, :birthday, :address, :contact, :department)");
+		$stmt->bindParam(':employee_uname', $employee_uname);
+		$stmt->bindParam(':employee_lname', $employee_lname);
+		$stmt->bindParam(':employee_fname', $employee_fname);
+		$stmt->bindParam(':employee_mname', $employee_mname);
+		$stmt->bindParam(':birthday', $birthday);
+		$stmt->bindParam(':address', $address);
+		$stmt->bindParam(':contact', $contact);
+		$stmt->bindParam(':department', $department);
+		
+	if($stmt->execute()){
+		echo "<script>
+				alert('You are registered');
+				window.location.href='employeemanagement.php';
+			 </script>";
+	}else{
+		echo '<script>alert("An error occured")</script>';
+	}	
 }
 
+
+
+//Employee - For Login Form
 if(isset($_POST['documentlogbtn'])){
 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
 		
@@ -43,7 +50,5 @@ if(isset($_POST['documentlogbtn'])){
 	}
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
-} 	
-
-
+} 
 ?>

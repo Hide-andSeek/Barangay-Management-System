@@ -155,7 +155,7 @@ include "db/user.php";
 			<ul class="nav-list">
 			  <li>
 			  <a class="side_bar" href="adminmanagement.php">
-				  <i class='bx bx-grid-alt'></i>
+				  <i class='bx bx-user-circle'></i>
 				  <span class="links_name">Admin Management</span>
 				</a>
 				 <span class="tooltip">Admin Management</span>
@@ -163,7 +163,7 @@ include "db/user.php";
 
 			   <li>
 				 <a class="side_bar" href="employeemanagement.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bx-group'></i>
 					  <span class="links_name">Employee Management</span>
 					</a>
 					 <span class="tooltip">Employee Management</span>
@@ -217,7 +217,7 @@ include "db/user.php";
 			  </section>
 				
 				<div>
-					<div><button type="button" style="font-size: 13px;" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-plus"></i>Add Employee</button></div>
+					<div><button type="button" style="font-size: 13px;" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus" style="font-size: 15px"></i>Add Employee</button></div>
 <!--Modal form for Add Employee-->
 				<div id="formatValidatorName" >
 					<div >
