@@ -52,7 +52,7 @@ if(!isset($_SESSION["employee_no"])){
 	 </style>
    </head>
 	<body>
-																							<!-- Side Navigation Bar-->
+		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -106,15 +106,8 @@ if(!isset($_SESSION["employee_no"])){
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-			 
-			  <li>
-				<a class="side_bar" href="blotter.php">
-				   <i class='bx bxs-conversation blotter-com' ></i>
-				  <span class="links_name">Blotter/Complain</span>
-				</a>
-				 <span class="tooltip">Blotter/Complain</span>
-			  </li>										
-																						<!--Setting Section-->
+												
+			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>
@@ -138,10 +131,9 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 			</ul>
 		  </div>
-		  
-																						<!-- Middle Section -->
+		  <!-- Middle Section -->
 		  <section class="home-section">
-																						<!-- Top Section -->
+			<!-- Top Section -->
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
@@ -156,19 +148,42 @@ if(!isset($_SESSION["employee_no"])){
 			    <div class="align-box">
 				  <div class="box-report"> 
 					<i class="bx bx-user"></i>
-					<label>No. of Resident: </label>
-					<label id="no_resident">null</label>
+
+					<?php 
+					require 'db/conn.php';
+
+					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<label> No. of Resident: $pdoexecute</label>"
+					?>
+					
 				  </div>
 				  <div class="box-report"> 
-					<label>No. of Request: </label>
-					<label id="no_request">null</label>
+				  <?php 
+					require 'db/conn.php';
+
+					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<label> No. of Barangay ID (Request): $pdoexecute</label>"
+					?>
 				  </div>
 				  <div class="box-report"> 
-					<label>No. of Approved Documents: </label>
-					<label id="no_approved">null</label>
+				  <?php 
+					require 'db/conn.php';
+
+					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<label> No. of Barangay Certificate (Request): $pdoexecute</label>"
+					?>
 				  </div>
 				  <div class="box-report"> 
-					<label>No. of Blotter/Complain: </label>
+					<label>No. of Barangay Clearance (Request) </label>
 					<label id="no_resident">null</label>
 				  </div>
 			  <div>

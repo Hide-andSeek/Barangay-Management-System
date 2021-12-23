@@ -69,21 +69,6 @@
 				 <span class="tooltip">Announcement</span>
 			  </li>
 			 
-			 <!--
-			Gawin natin to pag natapos na yung ibang forms.
-			May isa tayo form na kung saan siya yung mag m-momonitor kung 
-			sino yung nag facilitate ng documents. Parang history ganun. 
-			Nakainclude kung anong oras nag login, yung activity na ginawa
-			ni admin.
-			 
-			  <li>
-			   <a class="side_bar" href="logs.php">
-				 <i class='bx bx-copy-alt' ></i>
-				 <span class="links_name">Logs</span>
-			   </a>
-			   <span class="tooltip">Logs</span>
-			 </li>
-			 -->
 															
 																						<!--Setting Section-->
 			 <li>

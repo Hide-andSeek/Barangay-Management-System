@@ -52,15 +52,13 @@ if(!isset($_SESSION["employee_no"])){
 		
 		.respersonal_inf{border-radius: 5px; user-select:none; background:#b5f5c6; padding: 25px 25px 25px 25px; margin-top: 25px;}
 		.personal_inf{width: 300px; padding-bottom: 5px; border: none;}
-		.viewdetail{user-select: auto}
+		.viewdetail{user-select: auto;}
 	
-		 p.content{width: 450px; height: 300px;
-		 
-		
+		 p.content{width: 450px; height: 300px;}
 	 </style>
    </head>
 	<body class="body">
-																							<!-- Side Navigation Bar-->
+		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -114,15 +112,8 @@ if(!isset($_SESSION["employee_no"])){
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-			 
-			  <li>
-				<a class="side_bar" href="blotter.php">
-				   <i class='bx bxs-conversation blotter-com' ></i>
-				  <span class="links_name">Blotter/Complain</span>
-				</a>
-				 <span class="tooltip">Blotter/Complain</span>
-			  </li>										
-																						<!--Setting Section-->
+			 								
+				<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>
@@ -146,9 +137,9 @@ if(!isset($_SESSION["employee_no"])){
 			</ul>
 		  </div>
 		  
-																						<!-- Middle Section -->
+				<!-- Middle Section -->
 		  <section class="home-section">
-																						<!-- Top Section -->
+					<!-- Top Section -->
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
@@ -234,7 +225,7 @@ if(!isset($_SESSION["employee_no"])){
 													<input type="text" name="selection" id="selection" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Selection">
 											</div>
 											<div>
-													Owner's Name: 
+													Owners Name: 
 													<input type="text" name="ownername" id="ownername" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Owner's Name">
 											</div>
 											<div>
@@ -262,12 +253,6 @@ if(!isset($_SESSION["employee_no"])){
 										</div>
 								</fieldset>
 							</div>
-						
-							<!--
-							<div class="col-lg-12 col-md-12 col-sm-12" style="width: 60%; margin-left: 45px; height: 350px; background: gray;">
-								Hello
-							</div>
-							-->
 						</div>
 						<button class="permitbtn" style="margin-left: 50px; margin-top: 5px;" onclick="window.print(); ">
 							<i class="bx bx-save"></i>
@@ -292,7 +277,6 @@ if(!isset($_SESSION["employee_no"])){
 						document.getElementById("contactno").value = this.cells[7].innerHTML;				
 					};
 				}
-
 			</script>
 	</body>
 </html>

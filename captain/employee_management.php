@@ -281,10 +281,11 @@ include "db/user.php";
 														<option value="COMPLAINT">COMPLAINT</option>
 													</select>
 												</div>
-											
+
+
 												<div class="information">   
 													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-														<i class="bx bx-check"></i>Submit
+														<i class="bx bx-t67check"></i>Submit
 													</button>  
 												</div>
 										</div> 	

@@ -38,31 +38,7 @@ include "db/user.php";
 		<main class="employee-main">
 			<h2 style="text-align: center;">Login Forms</h2>
 			<div class="employee-logform">
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id2').style.display='block'">Barangay Captain</button>
 					
-					<div id="formatValidatorName" >
-						  <div id="id2" class="docureq-modal">
-								<div class="modal-contentdocreq animate">
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="Login" class="login_container form">
-												<div class="information">
-													<input required class="inputtext control-label" id="official_name" name ="official_name" type="text"  placeholder="Barangay Official's Name"> 
-												</div>
-												
-												<div class="information">
-													<input required class="inputpass control-label" id="official_password" name="official_password" type="password"  placeholder="Password"> 
-												</div>
-											   
-												<div class="information">   
-													<button type="submit" id="officiallogbtn" name="officiallogbtn" value="Login" class="log_button sign_in">
-														Login
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-					</div>
 					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id5').style.display='block'">BCPC</button>
 					
 					<div id="formatValidatorName" >
@@ -74,7 +50,6 @@ include "db/user.php";
 													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
 												</div>
 												
-										
 											   <div class="information">
 													<input class="inputtext control-label" id="department" name="department" type="hidden" value="BCPC">
 												</div>
@@ -236,6 +211,8 @@ include "db/user.php";
 												<div class="information">
 													<input class="inputtext control-label" id="department" name="department" type="hidden" value="COMPLAINT">
 												</div>
+
+												
 
 												<div class="information">   
 													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">

@@ -15,6 +15,7 @@
 8.0 Footer
     8.1 Scroll to top
     8.2 Color Selection
+9.0 Resident Default Page CSS
 ----------------------------------------------------------------
 */
 
@@ -1048,7 +1049,7 @@ section#barangay_officials .section-subheading, section#contact_officials .secti
 
 .block-text {
     background-color: #d1d1d1;
-    color: #62626x;
+    color: #626264;
     font-size: 14px;
     margin-top: 27px;
     padding: 15px 18px;
@@ -1435,3 +1436,4 @@ ul.social-buttons li a:active {
 	border-bottom: 1px solid #eee;
 	padding: 15px 0px;
 }
+

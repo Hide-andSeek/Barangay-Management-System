@@ -27,6 +27,7 @@ include "db/users.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+	<link rel="stylesheet" href="resident-css/resident.css">
 	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
@@ -43,19 +44,7 @@ include "db/users.php";
     <link rel="stylesheet" href="residentcss/animate.css">
 
 	<style>
-		.documentbtn{font-size: 15px;width: 250px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
-		.documentbtn:hover{background-color: gray;color: white;}
-	    .document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
 		
-		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
-		.document-section{margin-top:16px!important;margin-bottom:16px!important}
-		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;background-color:#f1f1f1!important}
-		
-		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
-		.document-block{display:block;width:100%}
-		.document-hide{display:none!important}
-		.document-show{display:block!important}
-		 p.content{width: 450px; height: 300px;}
 	</style>
 </head>
 
@@ -292,64 +281,78 @@ include "db/users.php";
 															<fieldset class="field_set">
 																<legend>Personal Information</legend>
 																<div class="form-group">
-																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text" id="firstname" name="fname">
+																	<label for="full_name">Full Name: </label>
+																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																</div><br>
 																
 																<div class="form-group">
-																	<label for="middlename">Middle Name:</label>
-																	<input required type="text" placeholder="(Optional)" class="form-control form-text" id="middlename" name="mname">
+																	<label for="age">Age: </label>
+																	<input required type="number" class="form-control form-text age" id="age" name="age" >
 																</div><br>
-																
+
 																<div class="form-group">
-																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="lastname" name="lname">
+																	<label>Status: </label>
+																	<select class="form-control" name="status">
+																		<option disabled>--Select--</option>
+																		<option value="SINGLE">SINGLE</option>
+																		<option value="MARRIED">MARRIED</option>
+																		<option value="WIDOWED">WIDOWED</option>
+																	</select>
 																</div><br>
-																
-																
+
 																 <div class="form-group">
-																	<label for="address">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="address" name="address">
+																	<label for="citizenship">Citizenship: </label>
+																	<input required type="text" class="form-control form-text" id="citizenship" name="citizenship" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div></br>
 																
 																<div class="form-group">
-																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date" class="form-control form-text" id="birthday" name="birthday">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="pob">Place of Birth: </label><i class="red">*</i>
-																	<input required type="text" class="form-control form-text" id="pob" name="placeofbirth">
-																</div><br>
+																	<label for="address">Address: </label>
+																	<input required type="text" class="form-control form-text" id="address" name="address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																</div><br>	
 															</fieldset>
 														</div>
 													
 													<div class="right_userpersonal_info">
 														<fieldset class="field_set">
-																<legend>In Case of Emergency</legend>
+																<legend>Other Information</legend>
+
 																<div class="form-group">
-																	<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text" id="guardianname" name="guardianname">
+																	<label for="purpose">Purpose: <i class="red">*</i></label>
+																	<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																</div><br>
+
+																<div class="form-group">
+																		<label for="date_issued">Date Issued: </label>
+																		<input type="date" class="form-control form-text" id="date_issued" name="date_issued">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="emrgncycontact">CTC No.: </label>
+																	<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="issued_at">Issued at: </label>
+																	<input type="text" min="12" class="form-control form-text" id="issued_at" name="issued_at">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="precint_no">Precint No.: </label>
+																	<input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no">
 																</div><br>
 																
-																<div class="form-group">
-																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" min="12" class="form-control number form-text" id="emrgncycontact" name="emrgncycontact">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="reladdress">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="reladdress" name="reladdress">
-																</div><br>
-																<!--
-																<div class="form-group">
-																	<label for="dateissued">Date: <i class="red">*</i></label>
-																	<input required type="date" class="form-control form-text" id="date" name="dateissued">
-																</div><br>
-																-->
 														</fieldset>
 													</div>
-												
+
+													<div class="right_userpersonal_info">
+														<fieldset class="field_set">
+																<legend>File Upload</legend>
+
+																<div class="form-group">
+																	<label for="purpose">ID Type: </label>
+																	<input type="text" class="form-control form-text" id="purpose" name="purpose">
+																</div><br>
+
 												</section>
 													<button type="submit" name="permitbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
@@ -402,68 +405,8 @@ include "db/users.php";
   <script src="resident-js/barangay.js"></script>
   <!-- Isotope -->
   <script src="resident-js/jquery.isotope.min.js"></script>
-  
-  <script src="resident-js/accordions.js"></script>
-  
-  <script>
-  var slideIndex = 1;
-	showDivs(slideIndex);
+   <!-- Accordion -->
+  <script src="js/resident.js"></script>
 
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
-	}
-
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("newsSlides");
-	  if (n > x.length) {slideIndex = 1}
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-		x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block";  
-	}
-	
-	
-	
-	
-	function myFunction(hidedocument) {
-		var x = document.getElementById(hidedocument);
-			if (x.className.indexOf("document-show") == -1) {
-			x.className += " document-show";
-			} else { 
-				x.className = x.className.replace(" document-show", "");
-			}
-		}
-	function myFunction(hidedocument1) {
-		var x = document.getElementById(hidedocument1);
-			if (x.className.indexOf("document-show") == -1) {
-			x.className += " document-show";
-			} else { 
-				x.className = x.className.replace(" document-show", "");
-			}
-		}
-	function myFunction(hidedocument2) {
-		var x = document.getElementById(hidedocument2);
-			if (x.className.indexOf("document-show") == -1) {
-			x.className += " document-show";
-			} else { 
-				x.className = x.className.replace(" document-show", "");
-			}
-		}
-	function myFunction(hidedocument3) {
-		var x = document.getElementById(hidedocument3);
-			if (x.className.indexOf("document-show") == -1) {
-			x.className += " document-show";
-			} else { 
-				x.className = x.className.replace(" document-show", "");
-			}
-		}
-
-  </script>
-  <script>
-		let date_issue = new Date().toISOString().substr(0,10);
-		document.querySelector("#date_issue").value = date_issue;
-  </script>
 </body>
 </html>

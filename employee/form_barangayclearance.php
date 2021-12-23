@@ -107,15 +107,8 @@ if(!isset($_SESSION["employee_no"])){
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-			 
-			  <li>
-				<a class="side_bar" href="blotter.php">
-				   <i class='bx bxs-conversation blotter-com' ></i>
-				  <span class="links_name">Blotter/Complain</span>
-				</a>
-				 <span class="tooltip">Blotter/Complain</span>
-			  </li>										
-																						<!--Setting Section-->
+			 									
+			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>

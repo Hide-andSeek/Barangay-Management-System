@@ -51,7 +51,7 @@ if(!isset($_SESSION["employee_no"])){
 	
    </head>
 	<body>
-																							<!-- Side Navigation Bar-->
+			<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -104,16 +104,8 @@ if(!isset($_SESSION["employee_no"])){
 				 <span class="links_name">SMS</span>
 			   </a>
 			   <span class="tooltip">SMS</span>
-			 </li>
-			 
-			  <li>
-				<a class="side_bar" href="blotter.php">
-				   <i class='bx bxs-conversation blotter-com' ></i>
-				  <span class="links_name">Blotter/Complain</span>
-				</a>
-				 <span class="tooltip">Blotter/Complain</span>
-			  </li>										
-																						<!--Setting Section-->
+			 </li>									
+			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>
@@ -137,9 +129,9 @@ if(!isset($_SESSION["employee_no"])){
 			</ul>
 		  </div>
 		  
-																						<!-- Middle Section -->
+			<!-- Middle Section -->
 		  <section class="home-section">
-																						<!-- Top Section -->
+			<!-- Top Section -->
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
