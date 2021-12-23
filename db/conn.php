@@ -6,13 +6,4 @@
     } catch (PDOException $e) {
        return "Error!: " . $e->getMessage();
     }
-	
-	//$host = "localhost";
-	//$user	= "root";
-	//$password = "";
-	//$dbname = "dbname";
-	
-	//$dsn or db = "mysql:host=$host, dbname=$dbname";
-	
-	//$pdo = new PDO($dsn, $user, $password);
 ?>
