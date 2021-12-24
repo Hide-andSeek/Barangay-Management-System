@@ -1,5 +1,5 @@
 <?php
-require_once 'employee/employee-defaultpage.php'; 
+require_once 'department/employee-defaultpage.php'; 
 ?>
 <?php 
 

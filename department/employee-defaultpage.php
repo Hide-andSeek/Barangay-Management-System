@@ -47,7 +47,7 @@ include "db/user.php";
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 												<div class="information">
-													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
 												</div>
 												
 											   <div class="information">
@@ -55,7 +55,7 @@ include "db/user.php";
 												</div>
 												
 												<div class="information">   
-													<button type="submit" id="officiallogbtn" name="officiallogbtn" value="Login" class="log_button sign_in">
+													<button type="submit" id="bcpcbtn" name="bcpclogbtn" class="log_button sign_in">
 														Login
 													</button>  
 												</div>

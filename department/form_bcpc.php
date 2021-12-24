@@ -1,8 +1,9 @@
-<?php 
-include "db/conn.php";
-include "db/users.php";
-
+<?php session_start();
+if(!isset($_SESSION["employee_no"])){
+	header("location: form_bcpc.php");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -159,6 +160,5 @@ include "db/users.php";
 			
 				
 			</section>
-			<script href="test.js"></script>
 	</body>
 </html>
