@@ -55,7 +55,7 @@ include "db/user.php";
 												</div>
 												
 												<div class="information">   
-													<button type="submit" id="bcpcbtn" name="bcpclogbtn" class="log_button sign_in">
+													<button type="submit" id="bcpcbtn" name="bcpcbtn" class="log_button sign_in">
 														Login
 													</button>  
 												</div>

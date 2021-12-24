@@ -7,6 +7,7 @@ if(!isset($_SESSION['email'])){
 <?php 
 include "db/conn.php";
 include "db/users.php";
+include "db/user.php";
 
 ?>
 
@@ -301,8 +302,8 @@ include "db/users.php";
 																</div><br>
 
 																 <div class="form-group">
-																	<label for="citizenship">Citizenship: </label>
-																	<input required type="text" class="form-control form-text" id="citizenship" name="citizenship" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																	<label for="nationality">Nationality: </label>
+																	<input required type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div></br>
 																
 																<div class="form-group">
@@ -344,17 +345,10 @@ include "db/users.php";
 														</fieldset>
 													</div>
 
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>File Upload</legend>
-
-																<div class="form-group">
-																	<label for="purpose">ID Type: </label>
-																	<input type="text" class="form-control form-text" id="purpose" name="purpose">
-																</div><br>
+													
 
 												</section>
-													<button type="submit" name="permitbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
 							</div>
 						</div>

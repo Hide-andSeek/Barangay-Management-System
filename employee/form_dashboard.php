@@ -183,8 +183,15 @@ if(!isset($_SESSION["employee_no"])){
 					?>
 				  </div>
 				  <div class="box-report"> 
-					<label>No. of Barangay Clearance (Request) </label>
-					<label id="no_resident">null</label>
+					<?php 
+					require 'db/conn.php';
+
+					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<label> No. of Barangay Clearance (Request): $pdoexecute</label>"
+					?>
 				  </div>
 			  <div>
 			

@@ -79,44 +79,60 @@ if(isset($_POST['bcpcbtn'])){
 <?php
 
 //Barangay Clearance
-if(isset($_POST['empBtn'])){
+if(isset($_POST['clearancebtn'])){
 	
 	$full_name = $_POST['full_name'];
 	$age = $_POST['age'];
 	$status = $_POST['status'];
-	$citizenship = $_POST['citizenship'];
+	$nationality = $_POST['nationality'];
 	$address = $_POST['address'];
 	$purpose = $_POST['purpose'];
 	$date_issued = $_POST['date_issued'];
 	$ctc_no = $_POST['ctc_no'];
 	$issued_at = $_POST['issued_at'];
-	$issued_on = $_POST['issued_on'];
 	$precint_no = $_POST['precint_no'];
 		
-		$stmt = $db->prepare("INSERT INTO barangayclearance (full_name, age, status, citizenship, address, purpose, date_issued, ctc_no, issued_at, issued_on, precint_no) VALUES (:full_name, :age, :status, :citizenship, :address, :purpose, :date_issued, :ctc_no, :issued_at, :issued_on, :precint_no)");
+		$stmt = $db->prepare("INSERT INTO barangayclearance (full_name, age, status, nationality, address, purpose, date_issued, ctc_no, issued_at, precint_no) VALUES (:full_name, :age, :status, :nationality, :address, :purpose, :date_issued, :ctc_no, :issued_at, :precint_no)");
 
 		$stmt->bindParam(':full_name', $full_name);
 		$stmt->bindParam(':age', $age);
 		$stmt->bindParam(':status', $status);
-		$stmt->bindParam(':citizenship', $citizenship);
+		$stmt->bindParam(':nationality', $nationality);
 		$stmt->bindParam(':address', $address);
 		$stmt->bindParam(':purpose', $purpose);
 		$stmt->bindParam(':date_issued', $date_issued);
+		$stmt->bindParam(':ctc_no', $ctc_no);
 		$stmt->bindParam(':issued_at', $issued_at);
-		$stmt->bindParam(':issued_on', $issued_on);
 		$stmt->bindParam(':precint_no', $precint_no);
 		
 	if($stmt->execute()){
 		echo "<script>
-				alert('You are registered');
-				window.location.href='barangayclearance.php';
+				alert('Successfully Added!');
+				window.location.href='resident-defaultpage.php';
 			 </script>";
 	}else{
 		echo "<script>
 				alert('An error occured');
-				window.location.href='barangayclearance.php';
+				window.location.href='resident-defaultpage.php';
 				</script>";
 	}	
 }
+?>
 
+<?php
+
+//Live Search
+if(isset($_POST['input'])){
+
+$input = $_POST['input'];
+
+$stmt = $db->prepare("SELECT * FROM barangayclearance WHERE name LIKE '($input)%'"); 
+
+$control=$stmt->fetch(PDO::FETCH_OBJ);
+	if($control>0){
+		
+	}else{
+		echo "<h5 class='text-danger text-center mt-3'>No data found!</h5>";
+	}
+}
 ?>
