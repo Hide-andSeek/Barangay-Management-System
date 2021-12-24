@@ -408,5 +408,12 @@ include "db/users.php";
    <!-- Accordion -->
   <script src="js/resident.js"></script>
 
+
+			<script>
+
+				 document.querySelector("#date_issued").valueAsDate = new Date();
+			</script>
+
+
 </body>
 </html>
