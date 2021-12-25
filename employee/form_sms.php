@@ -28,7 +28,7 @@ if (isset($_POST["number"]) && isset($_POST["msg"])) {
 
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_sms.php");
+	header("location: employee/form_sms.php");
 }
 ?>
 

@@ -286,7 +286,8 @@ a.login{cursor:pointer;}
 								</div>
 								
 								<div class="information">
-									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
+									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password"> 
+                                      
 								</div>
 							   
 								<div>

@@ -119,20 +119,3 @@ if(isset($_POST['clearancebtn'])){
 }
 ?>
 
-<?php
-
-//Live Search
-if(isset($_POST['input'])){
-
-$input = $_POST['input'];
-
-$stmt = $db->prepare("SELECT * FROM barangayclearance WHERE name LIKE '($input)%'"); 
-
-$control=$stmt->fetch(PDO::FETCH_OBJ);
-	if($control>0){
-		
-	}else{
-		echo "<h5 class='text-danger text-center mt-3'>No data found!</h5>";
-	}
-}
-?>

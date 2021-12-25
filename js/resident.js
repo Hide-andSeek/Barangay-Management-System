@@ -55,5 +55,8 @@ function myFunction(hidedocument3) {
     let date_issue = new Date().toISOString().param(0,10);
 		document.querySelector("#date_issue").value = date_issue;
 
+
+       
+
     
     

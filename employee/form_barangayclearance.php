@@ -5,6 +5,13 @@ if(!isset($_SESSION["employee_no"])){
 ?>
 
 
+<?php 
+include "db/conn.php";
+include "db/user.php";
+//Live Search
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -21,7 +28,6 @@ if(!isset($_SESSION["employee_no"])){
 
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -166,29 +172,20 @@ if(!isset($_SESSION["employee_no"])){
 
 				<div class="search_content">
                         <label>Search: 
-                            <input type="text" id="live_search" class="r_search" name="keyword">
+                            <input type="text" id="tags" class="r_search">
+							<button type="button" name="search" class="btn btn-primary" id="search">Search</button>
                         </label>
                 </div> 
 
-				<div id="searchdata"></div>
-
 			  <div class="reg_table">
-
-			  <?php 
-
-				include "db/conn.php";
-				include "db/user.php";
-			  //Live Search
-				if(isset($_POST['input'])){
-
-					$input = $_POST['input'];
-					
-					$stmt = $db->prepare("SELECT * FROM barangayclearance WHERE name LIKE '($input)%'"); 
-					
-					$control=$stmt->fetch(PDO::FETCH_OBJ);
-						if($control>0){?>
-
-							<table class="content-table"  id="table">
+							<table class="content-table "  id="table">
+							<?php
+								include "db/conn.php";
+								include "db/users.php";
+								
+								$mquery = "SELECT * FROM barangayclearance";
+								$countn = $db->query($mquery);
+							?>
 								<thead>
 									<tr class="t_head">
 										<th>Full name</th>
@@ -204,46 +201,28 @@ if(!isset($_SESSION["employee_no"])){
 										<th>Precint no</th>
 									</tr>                       
 								</thead>
-
-								<tbody>
-									<?php
-									foreach($countnu as $data1) {
-										$full_name = $data1['full_name'];
-										$age = $data1['age'];
-										$status = $data1['status'];
-										$nationality = $data1['nationality'];
-										$address = $data1['address'];
-										$purpose = $data1['purpose'];
-										$date_issued = $data1['date_issued'];
-										$ctc_no = $data1['ctc_no'];
-										$issued_at = $data1['issued_at'];
-										$date_issued = $data1['date_issued'];
-										$precint_no = $data1['precint_no'];
-									}
-									?>
-									<tr class="table-row">
-									<td><?php echo $data1 ['full_name']; ?></td>
-									<td><?php echo $data1 ['age']; ?></td>
-									<td><?php echo $data1 ['status']; ?></td>
-									<td><?php echo $data1 ['nationality']; ?></td>
-									<td><?php echo $data1 ['address']; ?></td>
-									<td><?php echo $data1 ['purpose']; ?></td>
-									<td><?php echo $data1 ['date_issued']; ?></td>
-									<td><?php echo $data1 ['ctc_no']; ?></td>
-									<td><?php echo $data1 ['issued_at']; ?></td>
-									<td><?php echo $data1 ['date_issued']; ?></td>
-									<td><?php echo $data1 ['precint_no']; ?></td>
+								<?php
+								foreach($countn as $data2) 
+								{
+								?>
+								<tr class="table-row">
+									<td><?php echo $data2 ['full_name']; ?></td>
+									<td><?php echo $data2 ['age']; ?></td>
+									<td><?php echo $data2 ['status']; ?></td>
+									<td><?php echo $data2 ['nationality']; ?></td>
+									<td><?php echo $data2 ['address']; ?></td>
+									<td><?php echo $data2 ['purpose']; ?></td>
+									<td><?php echo $data2 ['date_issued']; ?></td>
+									<td><?php echo $data2 ['ctc_no']; ?></td>
+									<td><?php echo $data2 ['issued_at']; ?></td>
+									<td><?php echo $data2 ['date_issued']; ?></td>
+									<td><?php echo $data2 ['precint_no']; ?></td>
 								</tr>	
-
-								</tbody>
-							</table>
-						<?php
-								}else{
-									echo "<h5 class='text-danger text-center mt-3'>No data found!</h5>";
-								}
+							
+							<?php
 							}
-						?>
-		
+							?>
+							</table>
 						</div>
 
 						<div class="document-light-grey document-section">
@@ -418,28 +397,6 @@ if(!isset($_SESSION["employee_no"])){
 						x.className = x.className.replace(" document-show", "");
 					}
 				}
-
-				$(document).ready(function()){
-
-					$("#live_search").keyup(function()){
-						
-						var input = $(this).val();
-
-						if(input != ""){
-							$.ajax({
-								url:"barangayclearance.php",
-								method:"POST",
-								data:(input:input),
-
-								success:function(data){
-									$("#searchdata").html(data);
-								}
-							});
-						}else{
-							$("#searchdata").css("display","none");
-						}
-					});
-				});
 			</script>
 	</body>
 </html>

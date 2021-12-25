@@ -102,7 +102,7 @@ include "db/user.php";
 					Barangay ID</button>
 						<div id="hidedocument" class="document-hide">
 								<div class="preview">
-										<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+										<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 											  <section class="userpersonal_form">
 														<div class="left_userpersonal_info">
 															<fieldset class="field_set">
@@ -276,7 +276,7 @@ include "db/user.php";
 					Barangay Clearance</button>
 						<div id="hidedocument3" class="document-hide">
 							<div class="preview">
-								<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+								<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 											  <section class="userpersonal_form">
 														<div class="left_userpersonal_info">
 															<fieldset class="field_set">
@@ -324,7 +324,7 @@ include "db/user.php";
 
 																<div class="form-group">
 																		<label for="date_issued">Date Issued: </label>
-																		<input type="date" class="form-control form-text" id="date_issued" name="date_issued">
+																		<input type="date" class="form-control form-text" id="date_issued" name="date_issued" >
 																</div><br>
 
 																<div class="form-group">
