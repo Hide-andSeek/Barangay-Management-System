@@ -307,7 +307,7 @@ if(!isset($_SESSION["employee_no"])){
 												<br>
 												<p style="margin-top: -5px; margin-left: 280px;">Whom It May Concern</p>
 												<br>
-												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 65px;">This is to certify that <input class="inp" type="text" id="fullname" name="fullname" width="auto">, of legal age, Filipino and a bonafide resident of <input class="inp" type="text" id="address" name="address" width="auto"> District II, Quezon City.</p>
+												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 65px;">This is to certify that <input class="inp" type="text" id="fullname" name="fullname" style="user-select:none;"  width="auto">, of legal age, Filipino and a bonafide resident of <input class="inp" type="text" id="address" name="address" width="auto"> District II, Quezon City.</p>
 												<br>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Further certify that above-named subject is of good moral character and has good community standing, but unfortunately belongs to the indigent family in this Community</p>
 												<br>
