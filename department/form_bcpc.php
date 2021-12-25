@@ -62,7 +62,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar" href="bcpcdashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
