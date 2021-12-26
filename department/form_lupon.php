@@ -17,6 +17,10 @@ if(!isset($_SESSION["employee_no"])){
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
+
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -158,6 +162,61 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  <div>
 			
+<div>
+		<div class="w3-row-padding w3-margin-bottom">
+			<div class="w3-quarter">
+			<div class="w3-container w3-red w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+
+					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					
+					?>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Active</h4>
+
+				
+			</div>
+			</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-blue w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<h3>99</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Settled</h4>
+			</div>
+			</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<h3>23</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Not Settled</h4>
+			</div>
+			</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<h3>50</h3>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Ongoing</h4>
+			</div>
+			</div>
+		</div>
+	</div>
 				
 			</section>
 	</body>
