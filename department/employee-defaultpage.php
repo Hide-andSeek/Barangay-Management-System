@@ -33,6 +33,11 @@ include "db/user.php";
 		 main.employee-main{
 			padding-top: 155px;
 		}
+
+		.btn-size{
+			padding: 50px 50px 50px 50px;
+			margin: 10px 10px 10px 10px;
+		}
 	 </style>
 	 
    </head>
