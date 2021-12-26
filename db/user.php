@@ -68,7 +68,7 @@ if(isset($_POST['bcpcbtn'])){
 	$control=$query->fetch(PDO::FETCH_OBJ);
 	if($control>0){
 		$_SESSION["employee_no"]=$employee_no;
-		header("location: bcpc.php");
+		header("location: bcpcdashboard.php");
 	}
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
@@ -92,6 +92,23 @@ if(isset($_POST['luponbtn'])){
 	}
 } 
 
+//Employee - VAWC Login
+if(isset($_POST['officiallogbtn'])){
+	if($_POST["employee_no"]=="" or $_POST["department"]==""){
+		
+	}else{
+	$employee_no=trim($_POST['employee_no']);
+	$department=strip_tags(trim($_POST['department']));
+	$query=$db->prepare("SELECT * FROM employeedb WHERE employee_no=? AND department=?");
+	$query->execute(array($employee_no,$department));
+	$control=$query->fetch(PDO::FETCH_OBJ);
+	if($control>0){
+		$_SESSION["employee_no"]=$employee_no;
+		header("location: vawcdashboard.php");
+	}
+	echo"<script>alert('Wrong Employee No! Please try again')</script>";
+	}
+} 
 
 
 ?>
