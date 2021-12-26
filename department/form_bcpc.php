@@ -135,7 +135,7 @@ if(!isset($_SESSION["employee_no"])){
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Resident: $pdoexecute</label>"
+					echo "<label> Total of Complaints: $pdoexecute</label>"
 					?>
 					
 				  </div>
@@ -147,7 +147,7 @@ if(!isset($_SESSION["employee_no"])){
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Barangay ID (Request): $pdoexecute</label>"
+					echo "<label> No. of Ongoing Complaints: $pdoexecute</label>"
 					?>
 				  </div>
 				  <div class="box-report"> 
@@ -158,7 +158,7 @@ if(!isset($_SESSION["employee_no"])){
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Barangay Certificate (Request): $pdoexecute</label>"
+					echo "<label> No. of Pending Complaints: $pdoexecute</label>"
 					?>
 				  </div>
 				  <div class="box-report"> 
@@ -169,7 +169,7 @@ if(!isset($_SESSION["employee_no"])){
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Barangay Clearance (Request): $pdoexecute</label>"
+					echo "<label> No. of Closed Complaints: $pdoexecute</label>"
 					?>
 				  </div>
 			  <div>

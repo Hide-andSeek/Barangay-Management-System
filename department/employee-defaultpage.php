@@ -64,7 +64,7 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id6').style.display='block'">BAWC</button>
+					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id6').style.display='block'">VAWC</button>
 					
 					<div id="formatValidatorName" >
 						  <div id="id6" class="docureq-modal">
@@ -72,7 +72,7 @@ include "db/user.php";
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 												<div class="information">
-													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee ID"> 
 												</div>
 												
 										
