@@ -107,7 +107,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Lupon
+						<h5>Lupon Department
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
