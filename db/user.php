@@ -74,6 +74,26 @@ if(isset($_POST['bcpcbtn'])){
 	}
 } 
 
+//Employee - Lupon Login
+if(isset($_POST['luponbtn'])){
+	if($_POST["employee_no"]=="" or $_POST["department"]==""){
+		
+	}else{
+	$employee_no=trim($_POST['employee_no']);
+	$department=strip_tags(trim($_POST['department']));
+	$query=$db->prepare("SELECT * FROM employeedb WHERE employee_no=? AND department=?");
+	$query->execute(array($employee_no,$department));
+	$control=$query->fetch(PDO::FETCH_OBJ);
+	if($control>0){
+		$_SESSION["employee_no"]=$employee_no;
+		header("location: lupon.php");
+	}
+	echo"<script>alert('Wrong Employee No! Please try again')</script>";
+	}
+} 
+
+
+
 ?>
 
 <?php
