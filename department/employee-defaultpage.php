@@ -30,7 +30,9 @@ include "db/user.php";
      <title> Employee - Barangay Commonwealth QC.</title>
 
 	 <style>
-		 
+		 main.employee-main{
+			padding-top: 155px;
+		}
 	 </style>
 	 
    </head>
