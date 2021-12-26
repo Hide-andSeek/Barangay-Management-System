@@ -265,7 +265,7 @@ include "db/user.php";
 															</fieldset>
 														</div>
 												</section>
-													<button type="submit" name="indigencybtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+													<button type="submit" name="indigencybtn" class="btn btn-primary btn-block" id="indigencybtn"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
 							</div>
 						</div>

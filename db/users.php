@@ -146,31 +146,29 @@ if(isset($_POST['permitBtn'])){
 
 
 <?php
-
-
 //Indigency
+
 if(isset($_POST['indigencybtn'])){
-	
-	$mess = "";
 	
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
 	$purpose = $_POST['purpose'];
 	$date_issue = $_POST['date_issue'];
-	
-	try{
-		$indigencysql = "INSERT INTO certificateindigency (fullname, address, purpose, date_issue) VALUES (?, ?, ?, ?)";
-		$indigencyresult = $db->prepare($indigencysql);
-		$indigencyresult->execute(array($fullname, $address, $purpose, $date_issue));
 		
-	}catch(PDOException $c){
-		if($c->getCode() == 0) {
-		}else{
-			$mess = $c->getMessage();
-		}
-	} finally {
-		echo $mess;
-	}
+		$stmt = $db->prepare("INSERT INTO certificateindigency (fullname, address, purpose, date_issue) VALUES (:fullname, :address, :purpose, :date_issue)");
+		$stmt->bindParam(':fullname', $fullname);
+		$stmt->bindParam(':address', $address);
+		$stmt->bindParam(':purpose', $purpose);
+		$stmt->bindParam(':date_issue', $date_issue);
+		
+	if($stmt->execute()){
+		echo "<script>
+				alert('Added Successfully!');
+				window.location.href='resident-defaultpage.php';
+			 </script>";
+	}else{
+		echo '<script>alert("An error occured! Please try again!")</script>';
+	}	
 }
 
 ?>

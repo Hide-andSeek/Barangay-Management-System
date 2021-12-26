@@ -109,8 +109,6 @@ if(isset($_POST['officiallogbtn'])){
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
 } 
-
-
 ?>
 
 <?php
