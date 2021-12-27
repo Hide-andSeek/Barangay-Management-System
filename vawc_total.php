@@ -1,6 +1,6 @@
 <?php
 $title = 'Documents';
-require_once 'department/form_complaints.php'; 
+require_once 'department/form_vawc_total.php'; 
 ?>
 <?php 
 echo '1';

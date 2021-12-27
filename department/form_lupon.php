@@ -69,7 +69,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="bcpcdashboard.php">
+			  <a class="side_bar" href="     ">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -77,13 +77,36 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Active</span>
 			   </a>
-			   <span class="tooltip">SMS</span>
+			   <span class="tooltip">Active</span>
 			 </li>
-												
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Settled</span>
+			   </a>
+			   <span class="tooltip">Settled</span>
+			 </li>
+					
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Not Settled</span>
+			   </a>
+			   <span class="tooltip">Not Settled</span>
+			 </li>
+			
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Upcoming Hearing</span>
+			   </a>
+			   <span class="tooltip">Upcoming</span>
+			 </li>
+			
 			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
@@ -202,7 +225,7 @@ if(!isset($_SESSION["employee_no"])){
 				
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Ongoing Hearing</h4>
+				<h4>Upcoming Hearing</h4>
 			</div>
 			</div>
 		</div>
@@ -219,7 +242,7 @@ if(!isset($_SESSION["employee_no"])){
 
 			  
 				<div>
-					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
+					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add New</button></div>
 <!--Modal form for Add Employee-->
 				<div id="formatValidatorName" >
 					<div >

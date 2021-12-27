@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_bcpc.php");
+	header("location: form_vawc.php");
 }
 ?>
 
@@ -24,10 +24,6 @@ if(!isset($_SESSION["employee_no"])){
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -66,7 +62,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="bcpcdashboard.php">
+			  <a class="side_bar" href="vawcdashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -74,7 +70,7 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			  <li>
-			   <a class="side_bar" href="bcpc_ongoing.php">
+			   <a class="side_bar" href="vawc_ongoing.php">
 				 <i class='bx bx-user-circle'></i>
 				 <span class="links_name">Ongoing Case</span>
 			   </a>
@@ -82,7 +78,7 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="bcpc_pending.php">
+			   <a class="side_bar" href="vawc_pending.php">
 				 <i class='bx bx-user'></i>
 				 <span class="links_name">Pending Case</span>
 			   </a>
@@ -90,7 +86,7 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="bcpc_closed.php">
+			   <a class="side_bar" href="vawc_closed.php">
 				 <i class='bx bx-user-check'></i>
 				 <span class="links_name">Closed Case</span>
 			   </a>
@@ -98,11 +94,11 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="bcpc_total.php">
+			   <a class="side_bar" href="vawc_total.php">
 				 <i class='bx bx-user-pin'></i>
-				 <span class="links_name">Total Complaints</span>
+				 <span class="links_name">Total Cases</span>
 			   </a>
-			   <span class="tooltip">Total Complaints</span>
+			   <span class="tooltip">Total Cases</span>
 			 </li>
 			  
 			 <li>
@@ -143,7 +139,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard
+						<h5>Pending Case
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -152,90 +148,66 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  </section>
 			  
-			  <br> 
-			 
-			 <div>
-				<div class="w3-row-padding w3-margin-bottom">
-					<div class="w3-quarter">
-					<div class="w3-container w3-red w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							require 'db/conn.php';
-		
-							$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-		
-							echo "<h3>$pdoexecute</h3>"
+			  <form action="user.php" method="POST">
+				<div class="search_content">
+                        <label>Search: 
+                            <input type="text" class="r_search" name="keyword">
+							<button type="button" name="search"><i class="bx bx-search"></i></button>
+                        </label>
+                </div> 
+			  </form>
+			  
+			  <div class="reg_table">
+						<table class="content-table table_indigency"  id="table">
+						
+							<?php
+							include "db/conn.php";
+							include "db/users.php";
+							
+							$mquery = "SELECT * FROM certificateindigency";
+							$countn = $db->query($mquery);
 							
 							?>
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Total Cases</h4>
-					</div>
-					</div>
-		
-					<div class="w3-quarter">
-					<div class="w3-container w3-blue w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							require 'db/conn.php';
-		
-							$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-		
-							echo "<h3>$pdoexecute</h3>"
+
+							<thead>
+								<tr class="t_head">
+									<th>Complaint ID</th>
+									<th>Fullname</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Address</th>
+									<th>Incident Address</th>
+									<th>Name of violaters</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Relationship</th>
+									<th>Address</th>
+									<th>Witnesses</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countn as $data2) 
+							{
 							?>
+								<tr class="table-row">
+									<td><?php echo $data2 ['indigency_id']; ?></td>
+									<td><?php echo $data2 ['fullname']; ?></td>
+									<td><?php echo $data2 ['address']; ?></td>
+									<td><?php echo $data2 ['purpose']; ?></td>
+									<td><?php echo $data2 ['id_type']; ?></td>
+									<td><?php echo $data2 ['date_issue']; ?></td>
+									<td><?php echo $data2 ['date_issue']; ?></td>
+								</tr>	
+							
+							<?php
+							}
+							?>
+						</table>
+							<!--
+								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
+						     -->
+			   </div>
 				
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Ongoing Cases</h4>
-					</div>
-					</div>
-		
-					<div class="w3-quarter">
-					<div class="w3-container w3-teal w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							require 'db/conn.php';
-		 
-							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-		
-							echo "<h3>$pdoexecute</h3>"
-							?>
-						
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Pending Cases</h4>
-					</div>
-					</div>
-					<div class="w3-quarter">
-					<div class="w3-container w3-orange w3-text-white w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							require 'db/conn.php';
-		 
-							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-		
-							echo "<h3>$pdoexecute</h3>"
-							?>
-						
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Closed Cases</h4>
-					</div>
-					</div>
-				</div>
-			</div>
 			</section>
 	</body>
 </html>
