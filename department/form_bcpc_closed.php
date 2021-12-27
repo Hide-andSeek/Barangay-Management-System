@@ -139,7 +139,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard
+						<h5>Closed Case
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -148,55 +148,65 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  </section>
 			  
-			  <div class="align-box">
-				  <div class="box-report"> 
-					<i class="bx bx-user"></i>
+			  <form action="user.php" method="POST">
+				<div class="search_content">
+                        <label>Search: 
+                            <input type="text" class="r_search" name="keyword">
+							<button type="button" name="search"><i class="bx bx-search"></i></button>
+                        </label>
+                </div> 
+			  </form>
+			  
+			  <div class="reg_table">
+						<table class="content-table table_indigency"  id="table">
+						
+							<?php
+							include "db/conn.php";
+							include "db/users.php";
+							
+							$mquery = "SELECT * FROM certificateindigency";
+							$countn = $db->query($mquery);
+							
+							?>
 
-					<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> Total of Cases: $pdoexecute</label>"
-					?>
-					
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
-					require 'db/conn.php';
-
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Ongoing Cases: $pdoexecute</label>"
-					?>
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
-					require 'db/conn.php';
-
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Pending Cases: $pdoexecute</label>"
-					?>
-				  </div>
-				  <div class="box-report"> 
-					<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Closed Cases: $pdoexecute</label>"
-					?>
-				  </div>
-			  <div>
+							<thead>
+								<tr class="t_head">
+									<th>Complaint ID</th>
+									<th>Fullname</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Address</th>
+									<th>Incident Address</th>
+									<th>Name of violaters</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Relationship</th>
+									<th>Address</th>
+									<th>Witnesses</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countn as $data2) 
+							{
+							?>
+								<tr class="table-row">
+									<td><?php echo $data2 ['indigency_id']; ?></td>
+									<td><?php echo $data2 ['fullname']; ?></td>
+									<td><?php echo $data2 ['address']; ?></td>
+									<td><?php echo $data2 ['purpose']; ?></td>
+									<td><?php echo $data2 ['id_type']; ?></td>
+									<td><?php echo $data2 ['date_issue']; ?></td>
+									<td><?php echo $data2 ['date_issue']; ?></td>
+								</tr>	
+							
+							<?php
+							}
+							?>
+						</table>
+							<!--
+								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
+						     -->
+			   </div>
 				
 			</section>
 	</body>

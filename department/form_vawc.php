@@ -62,7 +62,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="bcpcdashboard.php">
+			  <a class="side_bar" href="vawcdashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -70,11 +70,35 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			  <li>
-			   <a class="side_bar" href="bcpc_complaints.php">
+			   <a class="side_bar" href="vawc_ongoing.php">
 				 <i class='bx bx-user-circle'></i>
-				 <span class="links_name">Complaints</span>
+				 <span class="links_name">Ongoing Case</span>
 			   </a>
-			   <span class="tooltip">Complaints</span>
+			   <span class="tooltip">Ongoing Case</span>
+			 </li>
+			 
+			 <li>
+			   <a class="side_bar" href="vawc_pending.php">
+				 <i class='bx bx-user'></i>
+				 <span class="links_name">Pending Case</span>
+			   </a>
+			   <span class="tooltip">Pending Case</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="vawc_closed.php">
+				 <i class='bx bx-user-check'></i>
+				 <span class="links_name">Closed Case</span>
+			   </a>
+			   <span class="tooltip">Closed Cased</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="vawc_total.php">
+				 <i class='bx bx-user-pin'></i>
+				 <span class="links_name">Total Cases</span>
+			   </a>
+			   <span class="tooltip">Total Cases</span>
 			 </li>
 			  
 			 <li>
