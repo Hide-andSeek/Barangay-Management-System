@@ -1,6 +1,6 @@
 <?php
 $title = 'Documents';
-require_once 'employee/form_dashboard.php'; 
+require_once 'department/form_dashboard.php'; 
 ?>
 <?php 
 echo '1';

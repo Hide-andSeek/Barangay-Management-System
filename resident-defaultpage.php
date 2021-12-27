@@ -126,7 +126,10 @@ include "db/users.php";
 	<!--Document Section-->
 <div class="document_section">
 	<section>
-		<h1>Test</h1>
+
+		<!-- Instructions: For request document!-->
+		<h1 style="width: 550px; height: 350px;">Request Documet Instructions</h1>
+
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
 				<i class="bx bx-id-card"></i>
@@ -498,13 +501,7 @@ include "db/users.php";
 																	<textarea name="complaints" id="complaints" cols="30" rows="10" class="form-group"></textarea>
 																</div><br>
 
-																<div class="form-group">
-																	<label>Department: </label>
-																	<select class="form-control" name="department">
-																		<option disabled>--Select--</option>
-																		<option value="BCPC">BCPC</option>
-																	</select>
-																</div><br>
+															
 														</div>
 													
 												</section>

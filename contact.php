@@ -28,7 +28,7 @@ include "db/users.php";
     <!-- Custom Fonts -->
 
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet" type="text/css">
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Custom Animations -->
 
@@ -93,9 +93,9 @@ include "db/users.php";
           <div id="id01" class="modal">
                 <div class="modal-content animate " >
                     <span class="imgcontainer">
-						<label>
-                            <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
-						</label>
+                      <label>
+                          <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
+                      </label>
                     </span>
                     
 					
@@ -106,10 +106,15 @@ include "db/users.php";
 					  
 					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 						<div id="Login" class="login_container form">
+
+              <div class="information">
+								  <input required class="inputtext" type="text" name="uname" placeholder="Username" >
+							</div>
+
 								<div class="information">
 									<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email"> 
 								</div>
-								
+
 								<div class="information">
 									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
 								</div>
@@ -297,7 +302,7 @@ include "db/users.php";
         </div>
         <div class="col-md-4">
           <h3 class="accordion">
-			Let us know how we can help you! Send us a message.
+		      	Let us know how we can help you! Send us a message.
           </h3>   
         </div>
       </div>
@@ -330,7 +335,7 @@ include "db/users.php";
 
     <!-- Scroll-up -->
     <div class="scroll-up">
-      <a href="#header" class="page-scroll"><i class="fa fa-angle-up"></i></a>
+      <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
 	
   <!-- jQuery -->

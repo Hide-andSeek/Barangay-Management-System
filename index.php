@@ -210,7 +210,7 @@ div.announce{background-color: white; margin-top: 15px; float: center;}
 	}
 }
 
-a.login{cursor:pointer;}
+a.login{cursor:pointer;};
 
 	</style>
 
@@ -218,7 +218,7 @@ a.login{cursor:pointer;}
 
 
 
-<body onload=" onload=display_ct()" id="home">
+<body onload="display_ct()" id="home">
     <!-- HEADER -->
 
     <header id="header">
@@ -234,7 +234,7 @@ a.login{cursor:pointer;}
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand logo-top page-scroll" href="#header">
-                            <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
+                        <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->

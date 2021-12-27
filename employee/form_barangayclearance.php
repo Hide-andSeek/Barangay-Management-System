@@ -130,14 +130,6 @@ include "db/documents.php";
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-
-			 <li>
-			   <a class="side_bar" href="docblotter.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">Blotter</span>
-			   </a>
-			   <span class="tooltip">Blotter</span>
-			 </li>
 			 									
 			<!--Setting Section-->
 			 <li>

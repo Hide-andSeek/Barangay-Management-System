@@ -30,18 +30,14 @@ include "db/users.php";
      <title> Employee - Barangay Commonwealth QC.</title>
 
 	 <style>
-		 
+		 .captain-mainpage{}
 	 </style>
 	 
    </head>
 	<body>
-		<main class="employee-main">
-			<h2 style="text-align: center;">Login Forms</h2>
-			<button type="button" class="btn btn-outline-primary btn-size" style="display: flex; align-items: center; justify-alignment: center;" onclick="document.getElementById('id2').style.display='block'">Barangay Captain</button>
-					
+		<main class="captain-mainpage">
+
 					<div id="formatValidatorName" >
-						  <div id="id2" class="docureq-modal">
-								<div class="modal-contentdocreq animate">
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 												<div class="information">
@@ -59,8 +55,6 @@ include "db/users.php";
 												</div>
 										</div> 	
 									</form>
-							  </div>
-						</div>
 					</div>
 		</main>
 
