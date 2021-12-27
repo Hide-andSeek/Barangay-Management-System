@@ -73,9 +73,10 @@ include "db/users.php";
 		.detailid{padding-top: 50px; color: red;}
 		.form-text-desc{font-size: 10px;margin: 3px 3px; color:black;}
 
-		.animatem{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}}
-		.modal-header{padding:15px;border-bottom:1px solid #e5e5e5}
-		.modalcontent-notif{height: 150px; width: 450px;}
+		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
+		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
+		.modalcontent-notif{height: 230px; width: 450px;}
+		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
 	</style>
 </head>
 
@@ -140,12 +141,12 @@ include "db/users.php";
 																<legend>Personal Information</legend>
 																<div class="form-group">
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="firstname" name="fname">
+																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname">
 																</div><br/>
 																
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
-																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="middlename" name="mname">
+																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname">
 																	<!--
 																	<i aria-details="detail-id" class="detailid">This field is optional</i>
 																	-->
@@ -153,7 +154,7 @@ include "db/users.php";
 																
 																<div class="form-group">
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="lastname" name="lname">
+																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname">
 																</div><br>
 																
 																
@@ -169,7 +170,7 @@ include "db/users.php";
 																
 																<div class="form-group">
 																	<label for="pob">Place of Birth: </label><i class="red">*</i>
-																	<input required type="text" class="form-control form-text form-text-desc" id="pob" name="placeofbirth">
+																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
 																</div><br>
 															</fieldset>
 														</div>
@@ -201,21 +202,26 @@ include "db/users.php";
 													</div>`
 												</section>
 													<a class="btn btn-primary btn-block"
-													onclick="document.getElementById('id01').style.display='block'"><i class='bx bx-save'></i> Submit</a>
+													onclick="document.getElementById('id01').style.display='block'" data-toggle="modal" data-target="savebtn"><i class='bx bx-save'></i> Submit</a>
 
 												<div id="formatValidatorName" >
 													<div id="id01" class="modal">
 															<div class="modal-content animatem modalcontent-notif">
-																<div class="login_container form">
+
 																<div class="modal-header">
-																	<h4 class="modal-title">Modal Header</h4>
+																	<h4 class="modal-title">Warning!</h4>
 																</div>
+																<div class="modal-body">
+																	<p>Are you sure you want to submit this form? Click  button below to proceed</p>
+
+																	<div class="modal-footer">
+               															 <button type="submit" class="btn btn-default" type="brgyidbtn" data-toggle="modal" data-target="savebtn">Ok</button>
+																	</div>
 																</div>
 															</div>
+																
+														</div>
 													</div>
-												</div>
-
-
 										  </form> 
 								</div>
 						</div>
@@ -474,17 +480,11 @@ include "db/users.php";
    <!-- Accordion -->
   <script src="js/resident.js"></script>
 
-
-
-
 			<script>
-
 				 document.querySelector("#date_issued").valueAsDate = new Date();
 				 document.querySelector("#date_issue").valueAsDate = new Date();
 				 document.querySelector("#dateissue").valueAsDate = new Date();
 				 document.querySelector("#dateissued").valueAsDate = new Date();
 			</script>
-
-
 </body>
 </html>

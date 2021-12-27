@@ -73,7 +73,7 @@ if(isset($_POST['brgyidbtn'])){
 		echo "<script>
 				alert('Added Successfully!');
 				window.location.href='resident-defaultpage.php';
-			 </script>";
+			 </script";
 	}else{
 		echo '<script>alert("An error occured! Please try again!")</script>';
 	}	
