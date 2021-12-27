@@ -24,6 +24,10 @@ if(!isset($_SESSION["employee_no"])){
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -148,56 +152,90 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  </section>
 			  
-			  <div class="align-box">
-				  <div class="box-report"> 
-					<i class="bx bx-user"></i>
-
-					<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> Total of Cases: $pdoexecute</label>"
-					?>
-					
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
-					require 'db/conn.php';
-
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Ongoing Cases: $pdoexecute</label>"
-					?>
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
-					require 'db/conn.php';
-
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Pending Cases: $pdoexecute</label>"
-					?>
-				  </div>
-				  <div class="box-report"> 
-					<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<label> No. of Closed Cases: $pdoexecute</label>"
-					?>
-				  </div>
-			  <div>
+			  <br> 
+			 
+			 <div>
+				<div class="w3-row-padding w3-margin-bottom">
+					<div class="w3-quarter">
+					<div class="w3-container w3-red w3-padding-16">
+						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-right">
+						<?php 
+							require 'db/conn.php';
+		
+							$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
+		
+							echo "<h3>$pdoexecute</h3>"
+							
+							?>
+						</div>
+						<div class="w3-clear"></div>
+						<h4>Total Cases</h4>
+					</div>
+					</div>
+		
+					<div class="w3-quarter">
+					<div class="w3-container w3-blue w3-padding-16">
+						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-right">
+						<?php 
+							require 'db/conn.php';
+		
+							$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
+		
+							echo "<h3>$pdoexecute</h3>"
+							?>
 				
+						</div>
+						<div class="w3-clear"></div>
+						<h4>Ongoing Cases</h4>
+					</div>
+					</div>
+		
+					<div class="w3-quarter">
+					<div class="w3-container w3-teal w3-padding-16">
+						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-right">
+						<?php 
+							require 'db/conn.php';
+		 
+							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
+		
+							echo "<h3>$pdoexecute</h3>"
+							?>
+						
+						</div>
+						<div class="w3-clear"></div>
+						<h4>Pending Cases</h4>
+					</div>
+					</div>
+					<div class="w3-quarter">
+					<div class="w3-container w3-orange w3-text-white w3-padding-16">
+						<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+						<div class="w3-right">
+						<?php 
+							require 'db/conn.php';
+		 
+							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
+		
+							echo "<h3>$pdoexecute</h3>"
+							?>
+						
+						</div>
+						<div class="w3-clear"></div>
+						<h4>Closed Cases</h4>
+					</div>
+					</div>
+				</div>
+			</div>
 			</section>
 	</body>
 </html>
