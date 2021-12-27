@@ -36,7 +36,6 @@ include "db/users.php";
     <!-- Custom Fonts -->
 
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -201,6 +200,7 @@ include "db/users.php";
 														</fieldset>
 													</div>`
 												</section>
+												<form  method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 													<a class="btn btn-primary btn-block"
 													onclick="document.getElementById('id01').style.display='block'" data-toggle="modal" data-target="savebtn"><i class='bx bx-save'></i> Submit</a>
 
@@ -222,6 +222,7 @@ include "db/users.php";
 																
 														</div>
 													</div>
+												<form>
 										  </form> 
 								</div>
 						</div>
@@ -406,32 +407,113 @@ include "db/users.php";
 										  
 							</div>
 						</div>
-		</div>
-		<div >
-        <h2>Modal Example</h2>
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-      
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-          
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure you want to submit this form? Click submit button below, to proceed</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button close" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+				</div>
+				<div class="document-light-grey document-section">
+			<button onclick="myFunction('hidedocument4')" class="document-button document-block documentbtn form-control documentbtn">
+				<i class="bx bx-receipt"></i>
+					Online Blottering</button>
+						<div id="hidedocument4" class="document-hide">
+							<div class="preview">
+							<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+											  <section class="userpersonal_form">
+														<div class="left_userpersonal_info">
+															<fieldset class="field_set">
+																<legend>Personal Information</legend>
+																<div class="form-group">
+																	<label for="n_complainant">Name of Complainant: </label>
+																	<input required type="text" class="form-control form-text" id="n_complainant" name="n_complainant">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="comp_age">Age: </label>
+																	<input required type="number" class="form-control form-text age" id="comp_age" name="comp_age" >
+																</div><br>
+
+																<div class="form-group">
+																	<label>Gender: </label>
+																	<select class="form-control" name="comp_gender">
+																		<option disabled>--Select--</option>
+																		<option value="Male">Male</option>
+																		<option value="Female">Female</option>
+																	</select>
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="comp_address">Address: </label>
+																	<input required type="text" class="form-control form-text" id="comp_address" name="comp_address">
+																</div><br>	
+
+																<div class="form-group">
+																	<label for="inci_address">Incident Address: </label>
+																	<input required type="text" class="form-control form-text" id="inci_address" name="inci_address">
+																</div><br>
+															</fieldset>
+														</div>
+													
+													<div class="right_userpersonal_info">
+														<fieldset class="field_set">
+																<legend>Other Information</legend>
+
+																<div class="form-group">
+																	<label for="n_violator">Name of Violator: </label>
+																	<input required type="text" class="form-control form-text" id="n_violator" name="n_violator">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="violator_age">Age: </label>
+																	<input required type="number" class="form-control form-text age" id="violator_age" name="violator_age" >
+																</div><br>
+
+																<div class="form-group">
+																	<label>Gender: </label>
+																	<select class="form-control" name="violator_gender">
+																		<option disabled>--Select--</option>
+																		<option value="Male">Male</option>
+																		<option value="Female">Female</option>
+																	</select>
+																</div><br>
+
+																<div class="form-group">
+																	<label for="relationship">Relationship: </label>
+																	<select class="form-control" name="relationship">
+																		<option disabled>--Select--</option>
+																		<option value="Relative">Relative</option>
+																	</select>
+																</div><br>
+
+																<div class="form-group">
+																	<label for="violator_address">Address: </label>
+																	<input required type="text" class="form-control form-text" id="violator_address" name="violator_address">
+																</div><br>
+														</fieldset>
+
+														<div>
+														<div class="form-group">
+																	<label for="witnesses">Witnesses: </label>
+																	<input required type="text" class="form-control form-text" id="witnesses" name="witnesses">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="complaints">Complaints: </label>
+																	<textarea name="complaints" id="complaints" cols="30" rows="10" class="form-group"></textarea>
+																</div><br>
+
+																<div class="form-group">
+																	<label>Department: </label>
+																	<select class="form-control" name="department">
+																		<option disabled>--Select--</option>
+																		<option value="BCPC">BCPC</option>
+																	</select>
+																</div><br>
+														</div>
+													
+												</section>
+
+													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+										  </form> 
+							</div>
+						</div>
+				</div>
 	</section>
 </div>
  

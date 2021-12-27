@@ -50,7 +50,14 @@ function myFunction(hidedocument3) {
             x.className = x.className.replace(" document-show", "");
         }
     }
-
+function myFunction(hidedocument4) {
+        var x = document.getElementById(hidedocument4);
+            if (x.className.indexOf("document-show") == -1) {
+            x.className += " document-show";
+            } else { 
+                x.className = x.className.replace(" document-show", "");
+            }
+        }
 
     let date_issue = new Date().toISOString().param(0,10);
 		document.querySelector("#date_issue").value = date_issue;
