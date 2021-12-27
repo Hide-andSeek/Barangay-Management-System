@@ -17,6 +17,10 @@ if(!isset($_SESSION["employee_no"])){
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
+
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -24,7 +28,10 @@ if(!isset($_SESSION["employee_no"])){
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    
+     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/captain.css">
+	
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Lupon Dashboard </title>
@@ -62,7 +69,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="bcpcdashboard.php">
+			  <a class="side_bar" href="     ">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -70,13 +77,36 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Active</span>
 			   </a>
-			   <span class="tooltip">SMS</span>
+			   <span class="tooltip">Active</span>
 			 </li>
-												
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Settled</span>
+			   </a>
+			   <span class="tooltip">Settled</span>
+			 </li>
+					
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Not Settled</span>
+			   </a>
+			   <span class="tooltip">Not Settled</span>
+			 </li>
+			
+			 <li>
+			   <a class="side_bar" href="">
+				 <i class='fa fa-users fa-fw'></i>
+				 <span class="links_name">Upcoming Hearing</span>
+			   </a>
+			   <span class="tooltip">Upcoming</span>
+			 </li>
+			
 			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
@@ -107,7 +137,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Lupon
+						<h5>OFFICE OF THE LUPONG TAGAPAMAYAPA
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -115,50 +145,258 @@ if(!isset($_SESSION["employee_no"])){
 					</div>
 				  </div>
 			  </section>
-			    <div class="align-box">
-				  <div class="box-report"> 
-					<i class="bx bx-user"></i>
-
-					<?php 
+			    <br>
+			  <div>
+			
+<div>
+		<div class="w3-row-padding w3-margin-bottom">
+			<div class="w3-quarter">
+			<div class="w3-container w3-red w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
 					require 'db/conn.php';
 
 					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Resident: $pdoexecute</label>"
-					?>
+					echo "<h3>$pdoexecute</h3>"
 					
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
+					?>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Active</h4>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-blue w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
 					require 'db/conn.php';
 
 					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Barangay ID (Request): $pdoexecute</label>"
+					echo "<h3>$pdoexecute</h3>"
 					?>
-				  </div>
-				  <div class="box-report"> 
-				  <?php 
-					require 'db/conn.php';
+		
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Settled</h4>
+			</div>
+			</div>
 
+			<div class="w3-quarter">
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+ 
 					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
-					echo "<label> No. of Barangay Certificate (Request): $pdoexecute</label>"
+					echo "<h3>$pdoexecute</h3>"
 					?>
-				  </div>
-				  <div class="box-report"> 
-					<label>No. of Barangay Clearance (Request) </label>
-					<label id="no_resident">null</label>
-				  </div>
-			  <div>
-			
 				
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Not Settled</h4>
+			</div>
+			</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+ 
+					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Upcoming Hearing</h4>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<form action="user.php" method="POST">
+				<div class="search_content">
+                        <label>Search: 
+                            <input type="text" class="r_search" name="keyword">
+							<button type="button" name="search"><i class="bx bx-search"></i></button>
+                        </label>
+                </div> 
+			  </form>
+
+			  
+				<div>
+					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add New</button></div>
+<!--Modal form for Add Employee-->
+				<div id="formatValidatorName" >
+					<div >
+						  <div id="id1" class="employeemanagement-modal modal" >
+								<div class="modal-contentemployee animate" >
+									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+										<div id="employee_form" class="container">
+												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+												Add Employee
+												</div>
+												
+												
+												<div class="information">
+													<label class="employee-label"> Username </label>
+													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+												</div>
+												
+												<div class="row align-items-start">
+													<div class="information col">
+														<label class="employee-label"> Last Name </label>
+														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> First Name </label> 
+														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> Middle Name </label>
+														<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+													</div>
+												</div>
+												<div class="information">
+													<label class="employee-label"> Birthday </label>
+													<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
+												</div>
+												
+												<div class="information">
+													<label class="employee-label"> Address </label>
+													<input required class="form-control inputtext control-label" id="address" name ="address" type="text"  placeholder="Address"> 
+												</div>
+												
+												<div class="information">
+													<label class="employee-label"> Contact No </label>
+													<input required class="form-control inputtext control-label" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
+												</div>
+												
+												<div>
+													<label class="employee-label"> Department </label>
+													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+													5px;" id="department" name="department">
+														<option disabled>--Select--</option>
+														<option value="KAPITAN">KAPITAN</option>
+														<option value="BCPC">BCPC</option>
+														<option value="BAWC">BAWC</option>
+														<option value="LUPON">LUPON</option>
+														<option value="ACCOUNTING">ACCOUNTING</option>
+														<option value="BPSO">BPSO</option>
+														<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
+														<option value="COMPLAINT">COMPLAINT</option>
+													</select>
+												</div>
+
+
+												<div class="information">   
+													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+														<i class="bx bx-t67check"></i>Submit
+													</button>  
+												</div>
+										</div> 	
+									</form>
+							  </div>
+						</div>
+					</div>
+					
+									
+					
+					<div class="reg_table emp_tbl">
+						<table class="content-table">
+						
+						<?php
+							include "db/conn.php";
+							include "db/users.php";
+							
+							$mquery = "SELECT * FROM employeedb";
+							$countemployee = $db->query($mquery)
+						?>
+						
+							<thead>
+								<tr class="t_head">
+									<th>Employee No.</th>
+									<th>Last Name</th>
+									<th>First name</th>
+									<th>Middle name</th>
+									<th>Birthday</th>
+									<th>Address</th>
+									<th>Contact No.</th>
+									<th>Department</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['employee_no']; ?></td>
+									<td><?php echo $data ['employee_lname']; ?></td>
+									<td><?php echo $data ['employee_fname']; ?></td>
+									<td><?php echo $data ['employee_mname']; ?></td>
+									<td><?php echo $data ['birthday']; ?></td>
+									<td><?php echo $data ['address']; ?></td>
+									<td><?php echo $data ['contact']; ?></td>
+									<td><?php echo $data ['department']; ?></td>
+									<td>Active</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
+									</td>
+								</tr>	
+							
+							<?php
+							}
+							?>
+						
+						</table>
+							<!--
+								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
+						     -->
+						</div>
+					</div>
+				</div>
+				
+			</section>
+			
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<script>
+			
+			 /*-- Fuction for Login Modal Form --*/
+			var modal = document.getElementById('id1');
+				window.onclick = function (event) {
+					if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}  
+			</script>
+			
 			</section>
 	</body>
 </html>

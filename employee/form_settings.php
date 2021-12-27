@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_settings.php");
+	header("location: employee/form_settings.php");
 }
 ?>
 
@@ -81,6 +81,14 @@ if(!isset($_SESSION["employee_no"])){
 				 <span class="links_name">SMS</span>
 			   </a>
 			   <span class="tooltip">SMS</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="docblotter.php">
+				 <i class='bx bx-mail-send sms'></i>
+				 <span class="links_name">Blotter</span>
+			   </a>
+			   <span class="tooltip">Blotter</span>
 			 </li>
 			 						
 			<!--Setting Section-->

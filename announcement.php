@@ -77,7 +77,10 @@ include "db/users.php";
                             <a class="page-scroll" href="index.php">Home</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#contact">Contact Us</a>
+                            <a class="page-scroll" href="#news_section">Announcement</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="contact.php">Contact Us</a>
                         </li>
                         <li>
                             <a class="page-scroll b_login" onclick="document.getElementById('id01').style.display='block'" href="#login">Login</a>
@@ -142,13 +145,10 @@ include "db/users.php";
 							<div class="information controls">
 								<input required class="inputpass" type="password" id="" name ="password"" placeholder="Password">
 							</div>
-							<div class="information">
-								<input required class="inputpass c_password" type="password" id=""  name ="confirmpass" placeholder="Confirm Password">
-							</div>
 
 							<div class="guidelines">
-								<input type="checkbox" value="yes" id="policy">
-								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
+              <input type="checkbox" value="yes" id="policy" name="policy">
+								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
 								<span class="checkmark"></span>	
 							</div>
 							<div class="information">   

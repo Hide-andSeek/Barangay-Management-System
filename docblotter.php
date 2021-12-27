@@ -1,6 +1,6 @@
 <?php
 $title = 'Copy';
-require_once 'employee/form_blottering.php'; 
+require_once 'employee/form_blotter.php'; 
 ?>
 <?php 
 echo '5';

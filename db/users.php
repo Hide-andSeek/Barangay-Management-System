@@ -47,6 +47,7 @@ if(isset($_POST['regbtn'])){
 	$uname = $_POST['uname'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+	$policy = $_POST['policy'];
 	
 	$password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -65,10 +66,11 @@ if(isset($_POST['regbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO accreg_resident (uname, email, password) VALUES (:uname, :email, :password)");
+		$stmt = $db->prepare("INSERT INTO accreg_resident (uname, email, password, policy) VALUES (:uname, :email, :password, :policy)");
 		$stmt->bindParam(':uname', $uname);
 		$stmt->bindParam(':email', $email);
 		$stmt->bindParam(':password', $password);
+		$stmt->bindParam(':policy', $policy);
 		
 	if($stmt->execute()){
 		echo "<script>
@@ -84,96 +86,6 @@ if(isset($_POST['regbtn'])){
 
 ?>
 
-<?php
-//Barangay ID Form
-if(isset($_POST['brgyidbtn'])){
-	$mess1 = "";
-	
-	$fname = $_POST['fname'];
-	$mname = $_POST['mname'];
-	$lname	= $_POST['lname'];
-	$address = $_POST['address'];
-	$birthday = $_POST['birthday'];
-	$placeofbirth = $_POST['placeofbirth'];
-	$guardianname = $_POST['guardianname'];
-	$emrgncycontact = $_POST['emrgncycontact'];
-	$reladdress = $_POST['reladdress'];
-	
-	try{
-		//Positional Parameter 
-		$sql = "INSERT INTO barangayid (fname, mname, lname, address, birthday, placeofbirth, guardianname, emrgncycontact, reladdress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		$result = $db->prepare($sql);
-		$result->execute(array($fname, $mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress));
-	} catch (PDOException $e){
-		if($e->getCode() == 23000) {
-		}else{
-			$mess1 = $e->getMessage();
-		}
-	} finally {
-		echo $mess1;
-	}
-}
-
-
-//Barangay Permit
-if(isset($_POST['permitBtn'])){
-	
-	$mess = "";
-	
-	$dateissued = $_POST['dateissued'];
-	$selection = $_POST['selection'];
-	$ownername	= $_POST['ownername'];
-	$businessname = $_POST['businessname'];
-	$businessaddress = $_POST['businessaddress'];
-	$contactno = $_POST['contactno'];
-	
-	try{
-		$permitsql = "INSERT INTO businesspermit (dateissued, selection, ownername, businessname, businessaddress, contactno) VALUES (?, ?, ?, ?, ?, ?)";
-		$permitresult = $db->prepare($permitsql);
-		$permitresult->execute(array($dateissued, $selection, $ownername, $businessname, $businessaddress, $contactno));
-		
-	}catch(PDOException $a){
-		if($a->getCode() == 0) {
-		}else{
-			$mess = $a->getMessage();
-		}
-	} finally {
-		echo $mess;
-	}
-}
-
-?>
-
-
-<?php
-
-
-//Indigency
-if(isset($_POST['indigencybtn'])){
-	
-	$mess = "";
-	
-	$fullname = $_POST['fullname'];
-	$address = $_POST['address'];
-	$purpose = $_POST['purpose'];
-	$date_issue = $_POST['date_issue'];
-	
-	try{
-		$indigencysql = "INSERT INTO certificateindigency (fullname, address, purpose, date_issue) VALUES (?, ?, ?, ?)";
-		$indigencyresult = $db->prepare($indigencysql);
-		$indigencyresult->execute(array($fullname, $address, $purpose, $date_issue));
-		
-	}catch(PDOException $c){
-		if($c->getCode() == 0) {
-		}else{
-			$mess = $c->getMessage();
-		}
-	} finally {
-		echo $mess;
-	}
-}
-
-?>
 
 
 

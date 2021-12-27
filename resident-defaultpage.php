@@ -6,8 +6,8 @@ if(!isset($_SESSION['email'])){
 
 <?php 
 include "db/conn.php";
+include "db/documents.php";
 include "db/users.php";
-include "db/user.php";
 
 ?>
 
@@ -45,7 +45,38 @@ include "db/user.php";
     <link rel="stylesheet" href="residentcss/animate.css">
 
 	<style>
-		
+				/* 9.0 -- Resident Default Page -- */
+		.documentbtn{font-size: 15px;width: 200px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
+		.documentbtn:hover{background-color: gray;color: white;}
+		.document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
+
+		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
+		.document-section{margin-top:16px!important;margin-bottom:16px!important}
+		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;background-color:#f1f1f1!important}
+
+		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
+		.document-block{display:block;width:100%}
+		.document-hide{display:none!important}
+		.document-show{display:block!important}
+		p.content{width: 450px; height: 300px;}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type=number]{
+			-moz-appearance: textfield;
+		}
+
+		.detailid{padding-top: 50px; color: red;}
+		.form-text-desc{font-size: 10px;margin: 3px 3px; color:black;}
+
+		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
+		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
+		.modalcontent-notif{height: 230px; width: 450px;}
+		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
 	</style>
 </head>
 
@@ -96,6 +127,7 @@ include "db/user.php";
 	<!--Document Section-->
 <div class="document_section">
 	<section>
+		<h1>Test</h1>
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
 				<i class="bx bx-id-card"></i>
@@ -109,33 +141,36 @@ include "db/user.php";
 																<legend>Personal Information</legend>
 																<div class="form-group">
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text" id="firstname" name="fname">
-																</div><br>
+																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname">
+																</div><br/>
 																
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
-																	<input required type="text" placeholder="(Optional)" class="form-control form-text" id="middlename" name="mname">
+																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname">
+																	<!--
+																	<i aria-details="detail-id" class="detailid">This field is optional</i>
+																	-->
 																</div><br>
 																
 																<div class="form-group">
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="lastname" name="lname">
+																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname">
 																</div><br>
 																
 																
 																 <div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="address" name="address">
+																	<input required type="text" class="form-control form-text form-text-desc" id="address" name="address">
 																</div></br>
 																
 																<div class="form-group">
 																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date" class="form-control form-text" id="birthday" name="birthday">
+																		<input type="date" class="form-control form-text form-text-desc" id="birthday" name="birthday">
 																</div><br>
 																
 																<div class="form-group">
 																	<label for="pob">Place of Birth: </label><i class="red">*</i>
-																	<input required type="text" class="form-control form-text" id="pob" name="placeofbirth">
+																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
 																</div><br>
 															</fieldset>
 														</div>
@@ -145,28 +180,48 @@ include "db/user.php";
 																<legend>In Case of Emergency</legend>
 																<div class="form-group">
 																	<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text" id="guardianname" name="guardianname">
+																	<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname">
 																</div><br>
 																
 																<div class="form-group">
 																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" min="12" class="form-control number form-text" id="emrgncycontact" name="emrgncycontact">
+																	<input type="number" min="12" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
 																</div><br>
 																
 																<div class="form-group">
 																	<label for="reladdress">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text" id="reladdress" name="reladdress">
+																	<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress">
 																</div><br>
 																
 																<div class="form-group">
 																	<label>Date Issued: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text" id="dateissued" name="dateissued">
+																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
 																</div><br>
 																
 														</fieldset>
 													</div>`
 												</section>
-													<button type="submit" name="brgyidbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+													<a class="btn btn-primary btn-block"
+													onclick="document.getElementById('id01').style.display='block'" data-toggle="modal" data-target="savebtn"><i class='bx bx-save'></i> Submit</a>
+
+												<div id="formatValidatorName" >
+													<div id="id01" class="modal">
+															<div class="modal-content animatem modalcontent-notif">
+
+																<div class="modal-header">
+																	<h4 class="modal-title">Warning!</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Are you sure you want to submit this form? Click  button below to proceed</p>
+
+																	<div class="modal-footer">
+               															 <button type="submit" class="btn btn-default" type="brgyidbtn" data-toggle="modal" data-target="savebtn">Ok</button>
+																	</div>
+																</div>
+															</div>
+																
+														</div>
+													</div>
 										  </form> 
 								</div>
 						</div>
@@ -258,14 +313,14 @@ include "db/user.php";
 																	<input required type="file" class="form-control form-text" id="id_type" name="id_type">
 																</div></br>
 																-->
-																<div class="form-group" style="visibility: hidden;">
+																<div class="form-group">
 																	<label for="date_issue">Date Issued: </label>
 																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
 																</div><br>
 															</fieldset>
 														</div>
 												</section>
-													<button type="submit" name="indigencybtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+													<button type="submit" name="indigencybtn" class="btn btn-primary btn-block" id="indigencybtn"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
 							</div>
 						</div>
@@ -283,7 +338,7 @@ include "db/user.php";
 																<legend>Personal Information</legend>
 																<div class="form-group">
 																	<label for="full_name">Full Name: </label>
-																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>
 																
 																<div class="form-group">
@@ -345,15 +400,38 @@ include "db/user.php";
 														</fieldset>
 													</div>
 
-													
-
 												</section>
 													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
+										  
 							</div>
 						</div>
 		</div>
-		
+		<div >
+        <h2>Modal Example</h2>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+      
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to submit this form? Click submit button below, to proceed</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button close" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
 	</section>
 </div>
  
@@ -402,12 +480,11 @@ include "db/user.php";
    <!-- Accordion -->
   <script src="js/resident.js"></script>
 
-
 			<script>
-
 				 document.querySelector("#date_issued").valueAsDate = new Date();
+				 document.querySelector("#date_issue").valueAsDate = new Date();
+				 document.querySelector("#dateissue").valueAsDate = new Date();
+				 document.querySelector("#dateissued").valueAsDate = new Date();
 			</script>
-
-
 </body>
 </html>

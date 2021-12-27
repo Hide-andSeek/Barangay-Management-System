@@ -7,7 +7,7 @@ if(!isset($_SESSION["employee_no"])){
 
 <?php 
 include "db/conn.php";
-include "db/user.php";
+include "db/documents.php";
 //Live Search
 ?>
 
@@ -129,6 +129,14 @@ include "db/user.php";
 				 <span class="links_name">SMS</span>
 			   </a>
 			   <span class="tooltip">SMS</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="docblotter.php">
+				 <i class='bx bx-mail-send sms'></i>
+				 <span class="links_name">Blotter</span>
+			   </a>
+			   <span class="tooltip">Blotter</span>
 			 </li>
 			 									
 			<!--Setting Section-->
