@@ -7,7 +7,7 @@ if(!isset($_SESSION["employee_no"])){
 
 <?php 
 include "db/conn.php";
-include "db/user.php";
+include "db/documents.php";
 //Live Search
 ?>
 

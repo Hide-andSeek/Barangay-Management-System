@@ -6,8 +6,8 @@ if(!isset($_SESSION['email'])){
 
 <?php 
 include "db/conn.php";
+include "db/documents.php";
 include "db/users.php";
-include "db/user.php";
 
 ?>
 
@@ -45,7 +45,32 @@ include "db/user.php";
     <link rel="stylesheet" href="residentcss/animate.css">
 
 	<style>
-		
+				/* 9.0 -- Resident Default Page -- */
+		.documentbtn{font-size: 15px;width: 200px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
+		.documentbtn:hover{background-color: gray;color: white;}
+		.document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
+
+		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
+		.document-section{margin-top:16px!important;margin-bottom:16px!important}
+		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;background-color:#f1f1f1!important}
+
+		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
+		.document-block{display:block;width:100%}
+		.document-hide{display:none!important}
+		.document-show{display:block!important}
+		p.content{width: 450px; height: 300px;}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type=number]{
+			-moz-appearance: textfield;
+		}
+
+		.detailid{padding-top: 50px; color: red;}
 	</style>
 </head>
 
@@ -110,11 +135,14 @@ include "db/user.php";
 																<div class="form-group">
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
 																	<input required type="text" class="form-control form-text" id="firstname" name="fname">
-																</div><br>
+																</div><br/>
 																
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
-																	<input required type="text" placeholder="(Optional)" class="form-control form-text" id="middlename" name="mname">
+																	<input type="text" placeholder="(Optional)" class="form-control form-text" id="middlename" name="mname">
+																	<!--
+																	<i aria-details="detail-id" class="detailid">This field is optional</i>
+																	-->
 																</div><br>
 																
 																<div class="form-group">
@@ -160,7 +188,7 @@ include "db/user.php";
 																
 																<div class="form-group">
 																	<label>Date Issued: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text" id="dateissued" name="dateissued">
+																	<input type="date" class="form-control form-text" id="dateissue" name="dateissue">
 																</div><br>
 																
 														</fieldset>
@@ -258,7 +286,7 @@ include "db/user.php";
 																	<input required type="file" class="form-control form-text" id="id_type" name="id_type">
 																</div></br>
 																-->
-																<div class="form-group" style="visibility: hidden;">
+																<div class="form-group">
 																	<label for="date_issue">Date Issued: </label>
 																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
 																</div><br>
@@ -283,7 +311,7 @@ include "db/user.php";
 																<legend>Personal Information</legend>
 																<div class="form-group">
 																	<label for="full_name">Full Name: </label>
-																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>
 																
 																<div class="form-group">
@@ -345,15 +373,14 @@ include "db/user.php";
 														</fieldset>
 													</div>
 
-													
-
 												</section>
 													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
+										  
 							</div>
 						</div>
 		</div>
-		
+		<h1>Test</h1>
 	</section>
 </div>
  
@@ -406,6 +433,8 @@ include "db/user.php";
 			<script>
 
 				 document.querySelector("#date_issued").valueAsDate = new Date();
+				 document.querySelector("#date_issue").valueAsDate = new Date();
+				 document.querySelector("#dateissued").valueAsDate = new Date();
 			</script>
 
 

@@ -29,7 +29,6 @@ include "db/users.php";
     <!-- Custom Fonts -->
 
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -219,7 +218,7 @@ a.login{cursor:pointer;}
 
 
 
-<body onload="myFunction_1(), onload=display_ct()" id="home">
+<body onload=" onload=display_ct()" id="home">
     <!-- HEADER -->
 
     <header id="header">
@@ -248,6 +247,9 @@ a.login{cursor:pointer;}
                             <a class="page-scroll" href="#home">Home</a>
                         </li>
                         <li>
+                            <a class="page-scroll" href="announcement.php">Announcement</a>
+                        </li>
+                        <li>
                             <a class="page-scroll" href="contact.php">Contact Us</a>
                         </li>
                         <li>
@@ -271,9 +273,7 @@ a.login{cursor:pointer;}
                             <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
 						</label>
                     </span>
-                    
-					
-	
+        
                     <div class="form-bar">
                         <button class="form-bar-item form-button tablink form-active log_in" onclick="openForm(event.preventDefault(),'Login')">Login</button>
                         <button class="form-bar-item form-button tablink create_account" onclick="openForm(event.preventDefault(),'CreateAcc')">Create Account</button>
@@ -299,7 +299,7 @@ a.login{cursor:pointer;}
 									</button>  
 									<div>
 										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
+											<i class="bx bx-mail-send"></i>  Sign with Gmail
 										</button>
 									</div>
 								</div>
@@ -319,8 +319,8 @@ a.login{cursor:pointer;}
 							</div>
 
 							<div class="guidelines">
-								<input type="checkbox" value="yes" id="policy">
-								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
+								<input type="checkbox" value="Yes" id="policy" name="policy" required>
+								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
 								<span class="checkmark"></span>	
 							</div>
 							<div class="information">   
@@ -350,8 +350,8 @@ a.login{cursor:pointer;}
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight">Barangay Commonwealth Hall</h1>
-                                    <h2 class="intro-heading animated bounceInLeft ">Barangay Services</h2>
+                                    <h1 class="intro-lead-in animated bounceInRight">Barangay Commonwealth</h1>
+                                    <h2 class="intro-heading animated bounceInLeft ">Barangay Management</h2>
                                     <p class="intro-paragraph animated bounceInRight"> </p>
                                 </div>
                                 <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
