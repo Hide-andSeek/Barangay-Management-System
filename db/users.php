@@ -163,7 +163,7 @@ if(isset($_POST['officialcreatebtn'])){
 						exit;
 				}else{
 					echo '<script>
-							alert("Invalid Brgy Official Name or Password.")
+							alert("Invalid Official Name or Password.")
 							window.location.href="employee-login.php";
 						</script>';
 				}

@@ -1,4 +1,9 @@
 
+<?php session_start();
+if(!isset($_SESSION["official_name"])){
+	header("location: captain/admin_management.php");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

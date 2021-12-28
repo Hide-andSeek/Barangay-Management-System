@@ -1,9 +1,8 @@
 
-
-<?php 
-include "db/conn.php";
-include "db/users.php";
-
+<?php session_start();
+if(!isset($_SESSION["official_name"])){
+	header("location: captain/dashboard.php");
+}
 ?>
 
 

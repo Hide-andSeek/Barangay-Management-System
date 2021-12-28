@@ -319,7 +319,7 @@ if(!isset($_SESSION["employee_no"])){
 												<br>
 												<br>
 												<br>
-												<div style="display: auto; float: right; text-align:center; padding-right: 65px;" class="side_information">
+												<div style="display: auto; float: right; text-align:center; padding-right: 105px;" class="side_information">
 													<p>MANUEL A. CO</p>
 													<p>Punong Barangay</p>
 												</div>
@@ -342,7 +342,7 @@ if(!isset($_SESSION["employee_no"])){
 														<em>Not valid without Barangay Seal</em>
 														<p>CONTACT PERSON. MARK LEAN CRUZ</p>
 													</div>
-													<div style="margin-top: -45px; margin-left: 655px; font-size: 13px; margin-right: 65px; text-align: right;" class="side_information">
+													<div style="margin-top: -45px; margin-left: 655px; font-size: 13px; margin-right: 85px; text-align: right;" class="side_information">
 														<p> www.brgycommonwealth.com.ph</p>
 														<p> @maningningnacommonwealth</p>
 														<p> @BrgyCommonwealth</p>

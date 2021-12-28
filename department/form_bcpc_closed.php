@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_bcpc.php");
+	header("location: deparment/form_bcpc_closed.php");
 }
 ?>
 

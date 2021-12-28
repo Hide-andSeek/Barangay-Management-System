@@ -620,7 +620,7 @@ a.login{cursor:pointer;};
 				<button class="see_news">Learn More</button>
 			</div>	
 	</section >
-	
+
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
@@ -723,14 +723,7 @@ a.login{cursor:pointer;};
 				}
 				return true
 		}
-		
-
-		
     </script>
-	
-	<script>
-	
-	</script>
 	
 
 </body>

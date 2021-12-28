@@ -1,9 +1,10 @@
-<?php 
-include "db/conn.php";
-include "db/users.php";
-include "db/user.php";
 
+<?php session_start();
+if(!isset($_SESSION["official_name"])){
+	header("location: captain/employee_management.php");
+}
 ?>
+
 
 
 <!DOCTYPE html>
