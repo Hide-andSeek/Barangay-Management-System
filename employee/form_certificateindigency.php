@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: employee/form_certificateindigency.php");
+	header("location: employee/form_dashboard.php");
 }
 ?>
 
