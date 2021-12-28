@@ -292,7 +292,7 @@ include "db/users.php";
 					Certificate of Indigency</button>
 						<div id="hidedocument2" class="document-hide">
 							<div class="preview">
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+									<form method="POST" enctype='multipart/form-data' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 											  <section class="userpersonal_form">
 														<div class="left_userpersonal_info">
 															<fieldset class="field_set">
@@ -311,16 +311,15 @@ include "db/users.php";
 																	<label for="purpose">Purpose: </label>
 																	<input required type="text" class="form-control form-text" id="purpose" name="purpose">
 																</div></br>
-																<!--
-																<div class="form-group">
-																	<label for="purpose">Attach ID: <i class="red">*</i></label>
-																	<input required type="file" class="form-control form-text" id="id_type" name="id_type">
-																</div></br>
-																-->
+													
 																<div class="form-group">
 																	<label for="date_issue">Date Issued: </label>
 																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
 																</div><br>
+
+																<div>
+																<input type='file'  name='files[]' multiple />
+																</div>
 															</fieldset>
 														</div>
 												</section>

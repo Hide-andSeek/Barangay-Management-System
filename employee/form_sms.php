@@ -58,7 +58,13 @@ if(!isset($_SESSION["employee_no"])){
 	 .contact-form{margin-top: 350px; }
 	 .sms-section{margin-bottom: 15px;}
 	 .send-message{margin-left: 25px; font-size: 15px; font-family: inherit}
-	 .textarea{font-family: inherit; font-size: 15px; width: 100% }
+	 .textarea{font-family: inherit; font-size: 15px; width: 100% 
+
+    .number::-webkit-outer-spin-button,
+	.number::-webkit-inner-spin-button{
+		-webkit-appearance: none;
+		margin: 0;
+	 }
 	 </style>
 	 
    </head>
@@ -116,14 +122,6 @@ if(!isset($_SESSION["employee_no"])){
 				 <span class="links_name">SMS</span>
 			   </a>
 			   <span class="tooltip">SMS</span>
-			 </li>
-
-			 <li>
-			   <a class="side_bar" href="docblotter.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">Blotter</span>
-			   </a>
-			   <span class="tooltip">Blotter</span>
 			 </li>
 															<!--Setting Section-->
 			 <li>
