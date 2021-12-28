@@ -112,6 +112,9 @@ include "db/users.php";
 					  
 					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 						<div id="Login" class="login_container form">
+               <div class="information">
+								  <input required class="inputtext" type="text" name="uname" placeholder="Username" >
+							</div>
 								<div class="information">
 									<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email"> 
 								</div>

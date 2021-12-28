@@ -61,9 +61,9 @@ if(!isset($_SESSION["employee_no"])){
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-			  <li>
+			<li>
 			  <a class="side_bar" href="bcpcdashboard.php">
-				  <i class='bx bx-grid-alt dash'></i>
+				  <i class='bx bx-category-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
@@ -71,7 +71,7 @@ if(!isset($_SESSION["employee_no"])){
 			  
 			  <li>
 			   <a class="side_bar" href="bcpc_ongoing.php">
-				 <i class='bx bx-user-circle'></i>
+				 <i class='bx bx-user-voice ongoing'></i>
 				 <span class="links_name">Ongoing Case</span>
 			   </a>
 			   <span class="tooltip">Ongoing Case</span>
@@ -79,7 +79,7 @@ if(!isset($_SESSION["employee_no"])){
 
 			 <li>
 			   <a class="side_bar" href="bcpc_pending.php">
-				 <i class='bx bx-user'></i>
+				 <i class='bx bx-history pending'></i>
 				 <span class="links_name">Pending Case</span>
 			   </a>
 			   <span class="tooltip">Pending Case</span>
@@ -87,7 +87,7 @@ if(!isset($_SESSION["employee_no"])){
 
 			 <li>
 			   <a class="side_bar" href="bcpc_closed.php">
-				 <i class='bx bx-user-check'></i>
+				 <i class='bx bx-user-check closed'></i>
 				 <span class="links_name">Closed Case</span>
 			   </a>
 			   <span class="tooltip">Closed Cased</span>
@@ -95,7 +95,7 @@ if(!isset($_SESSION["employee_no"])){
 
 			 <li>
 			   <a class="side_bar" href="bcpc_total.php">
-				 <i class='bx bx-user-pin'></i>
+				 <i class='bx bx-group total'></i>
 				 <span class="links_name">Total Complaints</span>
 			   </a>
 			   <span class="tooltip">Total Complaints</span>

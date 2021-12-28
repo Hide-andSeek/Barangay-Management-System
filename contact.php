@@ -355,6 +355,8 @@ include "db/users.php";
   <!-- Isotope -->
   <script src="resident-js/jquery.isotope.min.js"></script>
   
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+  
   <script src="resident-js/accordions.js"></script>
 
 </body>

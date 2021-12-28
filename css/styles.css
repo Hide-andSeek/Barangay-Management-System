@@ -642,3 +642,7 @@ padding: 10px 25px;
 	i.saveicon:hover{color: blue;}
 	
 	
+  i.ongoing{color: blue;}
+  i.pending{color: gray;}
+  i.closed{color: red;}
+  i.total{color: #d834eb}
