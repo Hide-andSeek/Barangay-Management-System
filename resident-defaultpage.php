@@ -112,7 +112,7 @@ include "db/users.php";
                             <a class="page-scroll" href="logout.php">Logout</a>
                         </li>
 						<li>
-							<a style="color: green" class="page-scroll" href="#"><div></div></a>
+							<a style="color: green" class="page-scroll" href="#"></a>
 						</li>
                     </ul>
                 </div>
@@ -318,7 +318,7 @@ include "db/users.php";
 																</div><br>
 
 																<div>
-																<input type='file'  name='files[]' multiple />
+																<input type='file' name='files[]' multiple />
 																</div>
 															</fieldset>
 														</div>

@@ -35,8 +35,7 @@ include "db/documents.php";
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Barangay Clearance </title>
-	 
-	 
+
 	 <style>
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -71,12 +70,10 @@ include "db/documents.php";
 		.document-show{display:block!important}
 		.inp{border: none; }
 		.borderb{border-bottom: 1px solid black}
-		 
-		 
 	 </style>
    </head>
 	<body>
-																							<!-- Side Navigation Bar-->
+		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -248,7 +245,8 @@ include "db/documents.php";
 												<div style="border-left: 2px solid #000000; height: 1100px; margin-left: 245px;"></div>
 													<div  style="position: inherit; margin-top: -1075px;">
 														<p style="font-size: 21px; line-height: 0.5;">MANUEL A. CO</p>
-														<p >Punong Barangay</p>
+														<em>Punong Barangay</em>
+														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="fileno" id="fileno" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
 														<br>
 														<div class="side_information">
 															<p>PRESY C. BAQUIRING</p>
@@ -327,26 +325,33 @@ include "db/documents.php";
 										</div>
 										<div style="display: flex; ">
 											<div style="display: auto;">
-												<div style="margin-left: 40px;">
-													<h4 style="margin-top: -45px; margin-left: 420px;">CERTIFICATE OF INDIGENCY</h4>
+												<div style="margin-left: 50px;">
+													<h4 style="margin-top: -115px; margin-left: 420px;">BARANGAY CLEARANCE</h4>
 												</div>
 												<br>
-												<p style="margin-top: -5px; margin-left: 280px;">Whom It May Concern</p>
 												<br>
-												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 65px;">This is to certify that <input class="inp" type="text" id="fullname" name="fullname" width="auto">, of legal age, Filipino and a bonafide resident of <input class="inp" type="text" id="address" name="address" width="auto"> District II, Quezon City.</p>
+												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 95px; word-spacing: 3.5px;">This is to certify that <strong>CLEARANCE</strong> is granted to <input class="inp borderb" style="width: 100%; padding-left: 15px;" type="text" id="address" name="address" width="auto" placeholder="FULL A. NAME"><input class="inp borderb" style="width: 10%; padding-left: 15px;" type="text" id="address" name="address" width="auto" placeholder="AGE"> years old <input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="STATUS">,<input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="NATIONALITY"> and a bonafide resident at No. <input class="inp borderb" style="width: 90%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="ADDRESS">, Barangay Commonwealth, Quezon City, possesses with good moral character has no derogatory record in this office, law abiding citizen and reliable.</p>
 												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Further certify that above-named subject is of good moral character and has good community standing, but unfortunately belongs to the indigent family in this Community</p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="address" name="address" width="auto" placeholder="PURPOSE"></p>
 												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">This certification is issued upon the request of the above-named party as supporting document needed for <input class="inp borderb" type="text" id="purpose" name="purpose" width="auto">.</p>
-												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp" type="text" id="date_issue" name="date_issue" width="auto"> of December 2021, Quezon City.</p>
+												
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp borderb" type="text" id="date_issue" name="date_issue" placeholder="DAY" style="width:35px; padding-left: 5px;"> day of <input class="inp  borderb" style="padding-left: 10px; width:105px;" type="text" id="date_issue" name="date_issue" placeholder="MONTH"> <input class="inp  borderb" style="padding-left: 10px; width:55px;" type="text" id="date_issue" name="date_issue" placeholder="YEAR">, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
 												<br>
-												<br>
-												<br>
-												<div style="display: auto; float: right; text-align:center; padding-right: 65px;" class="side_information">
-													<p>MANUEL A. CO</p>
-													<p>Punong Barangay</p>
+												<div style="display: auto; float: left; text-align:center; padding-left: 290px;" class="side_information">
+													<p><input class="inp  borderb"></p>
+													<p>Signature of Applicant</p>
+													
+													<div style="text-align: left; margin-top: 45px;"> 
+														CTC NO.: <input class="inp  borderb" style="width: 75px;"><br>
+														Issued AT: <input class="inp  borderb" style="width: 75px;"><br>
+														ISSUED ON: <input class="inp  borderb" style="width: 75px;"><br>
+														PRECINT NO.: <input class="inp  borderb" style="width: 75px;"><br>
+													</div>
+												</div>
+												
+												<div style="padding-right: 105px;">
+												<img src="img/1.jpeg" style="width: 140px; height: 140px; float: right; ">
 												</div>
 												<br>
 												<br>
@@ -364,10 +369,16 @@ include "db/documents.php";
 												<br>
 												<div >
 													<div style="margin-left: 255px; font-size: 13px;">
+														<div style="float: right; text-align: center; padding-right: 95px; margin-top: -45px;">
+															<h5>MANUEL A. CO</h5>
+															<p>Punong Barangay</p>
+														</div>
 														<em>Not valid without Barangay Seal</em>
 														<p>CONTACT PERSON. MARK LEAN CRUZ</p>
+														<br>
+														<p>NOTE: This clearance is valid for a period of <br> Six (6) months from date of issue.</p>
 													</div>
-													<div style="margin-top: -45px; margin-left: 655px; font-size: 13px; margin-right: 65px; text-align: right;" class="side_information">
+													<div style="margin-top: -70px; margin-left: 655px; font-size: 13px; margin-right: 65px; text-align: right;" class="side_information">
 														<p> www.brgycommonwealth.com.ph</p>
 														<p> @maningningnacommonwealth</p>
 														<p> @BrgyCommonwealth</p>
