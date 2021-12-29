@@ -88,7 +88,7 @@ include "db/user.php";
 												</div>
 												
 												<div class="information">   
-													<button type="submit" id="officiallogbtn" name="officiallogbtn" value="Login" class="log_button sign_in">
+													<button type="submit" id="vawcbtn" name="vawcbtn" value="Login" class="log_button sign_in">
 														Login
 													</button>  
 												</div>

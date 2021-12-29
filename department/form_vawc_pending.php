@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_vawc.php");
+	header("location: form_vawc_pending.php");
 }
 ?>
 
@@ -16,10 +16,10 @@ if(!isset($_SESSION["employee_no"])){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 	
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
@@ -56,7 +56,7 @@ if(!isset($_SESSION["employee_no"])){
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
@@ -102,7 +102,7 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 			  
 			 <li>
-			   <a class="side_bar" href="sms.php">
+			   <a class="side_bar" href="vawc_sms.php">
 				 <i class='bx bx-mail-send sms'></i>
 				 <span class="links_name">SMS</span>
 			   </a>
@@ -161,8 +161,8 @@ if(!isset($_SESSION["employee_no"])){
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							include "db/conn.php";
-							include "db/users.php";
+							include "../db/conn.php";
+							include "../db/users.php";
 							
 							$mquery = "SELECT * FROM certificateindigency";
 							$countn = $db->query($mquery);

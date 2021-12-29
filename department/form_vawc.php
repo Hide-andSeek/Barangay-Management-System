@@ -16,10 +16,10 @@ if(!isset($_SESSION["employee_no"])){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 	
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
@@ -60,7 +60,7 @@ if(!isset($_SESSION["employee_no"])){
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
@@ -106,7 +106,7 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 			  
 			 <li>
-			   <a class="side_bar" href="sms.php">
+			   <a class="side_bar" href="vawc_sms.php">
 				 <i class='bx bx-mail-send sms'></i>
 				 <span class="links_name">SMS</span>
 			   </a>
@@ -124,7 +124,7 @@ if(!isset($_SESSION["employee_no"])){
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				    
 					 <div><?php echo $_SESSION["employee_no"];?></div>
@@ -145,7 +145,7 @@ if(!isset($_SESSION["employee_no"])){
 					<div>
 						<h5>Dashboard
 						<a href="#" class="circle">
-							 <img src="img/dt.png" >
+							 <img src="../img/dt.png" >
 					    </a>
 					    </h5>	  
 					</div>
@@ -161,7 +161,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
 
 					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
 					$query_run = $db->query($query);
@@ -181,7 +181,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
 
 					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
 					$query_run = $db->query($query);
@@ -201,7 +201,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
  
 					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
 					$query_run = $db->query($query);
@@ -220,7 +220,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
  
 					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
 					$query_run = $db->query($query);

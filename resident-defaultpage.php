@@ -318,7 +318,7 @@ include "db/users.php";
 																</div><br>
 
 																<div>
-																<input type='file' name='files[]' multiple />
+																<input class="custom-file-input" type='file' name='files[]'/>
 																</div>
 															</fieldset>
 														</div>

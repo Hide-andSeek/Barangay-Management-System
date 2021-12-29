@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: employee/form_dashboard.php");
+	header("location: ../employee/form_dashboard.php");
 }
 ?>
 
@@ -15,7 +15,7 @@ if(!isset($_SESSION["employee_no"])){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
 	<!--Customize-->
 
@@ -23,7 +23,7 @@ if(!isset($_SESSION["employee_no"])){
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
@@ -123,7 +123,7 @@ if(!isset($_SESSION["employee_no"])){
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   	 <div><?php echo $_SESSION["employee_no"];?></div>
 					 <div class="job" id="">Employee</div>
@@ -143,7 +143,7 @@ if(!isset($_SESSION["employee_no"])){
 					<div>
 						<h5>Dashboard
 						<a href="#" class="circle">
-							 <img src="img/dt.png" >
+							 <img src="../img/dt.png" >
 					    </a>
 					    </h5>	  
 					</div>
@@ -158,7 +158,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
 					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
@@ -176,7 +176,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
 
 					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
 					$query_run = $db->query($query);
@@ -196,7 +196,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
  
 					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
 					$query_run = $db->query($query);
@@ -215,7 +215,7 @@ if(!isset($_SESSION["employee_no"])){
 				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
-					require 'db/conn.php';
+					require '../db/conn.php';
  
 					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
 					$query_run = $db->query($query);

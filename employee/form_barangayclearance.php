@@ -6,8 +6,8 @@ if(!isset($_SESSION["employee_no"])){
 
 
 <?php 
-include "db/conn.php";
-include "db/documents.php";
+include "../db/conn.php";
+include "../db/documents.php";
 //Live Search
 ?>
 
@@ -23,11 +23,11 @@ include "db/documents.php";
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/documentprint_styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/documentprint_styles.css">
 
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="../image/png" href="img/Brgy-Commonwealth.png">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -82,14 +82,14 @@ include "db/documents.php";
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar" href="../dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="barangayid.php">
+				<a class="side_bar" href="../barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -97,7 +97,7 @@ include "db/documents.php";
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="barangayclearance.php">
+				<a class="side_bar" href="../barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -139,7 +139,7 @@ include "db/documents.php";
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 					 <div><?php echo $_SESSION["employee_no"];?></div>
 					 <div class="job" id="">Employee</div>
@@ -160,7 +160,7 @@ include "db/documents.php";
 					<div>
 						<h5>Barangay Clearance
 						<a href="#" class="circle">
-							 <img src="img/dt.png" >
+							 <img src="../img/dt.png" >
 					    </a>
 					    </h5>	  
 					</div>
@@ -177,8 +177,8 @@ include "db/documents.php";
 			  <div class="reg_table">
 							<table class="content-table "  id="table">
 							<?php
-								include "db/conn.php";
-								include "db/users.php";
+								include "../db/conn.php";
+								include "../db/users.php";
 								
 								$mquery = "SELECT * FROM barangayclearance";
 								$countn = $db->query($mquery);
@@ -239,14 +239,14 @@ include "db/documents.php";
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
-												<img style="float: left; width: 130px; height: 125px; margin-left: 35px;" src="img/QCSealnew.png">
+												<img style="float: left; width: 130px; height: 125px; margin-left: 35px;" src="../img/QCSeal.png">
 													<div style="margin-left: 120px;">
 														<p class="center_description" style="font-size: 17px; padding-left: 75px;">Republic of the Philippines</p>
 														<p class="center_description" style="font-size: 15px; padding-left: 95px;">District II, Quezon City</p>
-														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px;">BARANGAY COMMONWEALTH</p>
-														<p class="center_description" style="font-size: 20px;">OFFICE OF THE BARANGAY CAPTAIN</p>
+														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px; ">BARANGAY COMMONWEALTH</p>
+														<p class="center_description" style="font-size: 20px; color: red;">OFFICE OF THE BARANGAY CAPTAIN</p>
 													</div>
-												<img style=" display: flex; float: right; height: 130px; width: 130px; margin-left: 135px; " class="commonwealthlogo" src="img/Brgy-Commonwealth150x150.png">
+												<img style=" display: flex; float: right;  margin-left: 135px; " class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
 											</div>
 											<div>
 												<div style="margin-top:5px; border-top: 2px solid #000000; width: 1220px; width: calc(100%  - 70px); transition: all 0.5s ease;"></div>
@@ -334,7 +334,7 @@ include "db/documents.php";
 										<div style="display: flex; ">
 											<div style="display: auto;">
 												<div style="margin-left: 50px;">
-													<h4 style="margin-top: -115px; margin-left: 420px;">BARANGAY CLEARANCE</h4>
+													<h4 style="margin-top: -115px; margin-left: 420px; color: red;">BARANGAY CLEARANCE</h4>
 												</div>
 												<br>
 												<br>
@@ -359,7 +359,7 @@ include "db/documents.php";
 												</div>
 												
 												<div style="padding-right: 105px;">
-												<img src="img/1.jpeg" style="width: 140px; height: 140px; float: right; ">
+												<img src="../img/1.jpeg" style="width: 140px; height: 140px; float: right; ">
 												</div>
 												<br>
 												<br>

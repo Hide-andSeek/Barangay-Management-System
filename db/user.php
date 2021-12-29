@@ -46,7 +46,7 @@ if(isset($_POST['documentlogbtn'])){
 	$control=$query->fetch(PDO::FETCH_OBJ);
 	if($control>0){
 		$_SESSION["employee_no"]=$employee_no;
-		header("location: dashboard.php");
+		header("location: includes/dashboard.php");
 	}
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
@@ -93,7 +93,7 @@ if(isset($_POST['luponbtn'])){
 } 
 
 //Employee - VAWC Login
-if(isset($_POST['officiallogbtn'])){
+if(isset($_POST['vawcbtn'])){
 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
 		
 	}else{
@@ -104,7 +104,7 @@ if(isset($_POST['officiallogbtn'])){
 	$control=$query->fetch(PDO::FETCH_OBJ);
 	if($control>0){
 		$_SESSION["employee_no"]=$employee_no;
-		header("location: vawcdashboard.php");
+		header("location: includes/vawcdashboard.php");
 	}
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}

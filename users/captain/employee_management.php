@@ -1,7 +1,7 @@
 
 <?php session_start();
 if(!isset($_SESSION["official_name"])){
-	header("location: captain/employee_management.php");
+	header("location: users/captain/employee_management.php");
 }
 ?>
 
@@ -31,10 +31,10 @@ if(!isset($_SESSION["official_name"])){
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Employee Management </title>
-	
+
    </head>
 	<body>
-																							<!-- Side Navigation Bar-->
+			<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
@@ -251,13 +251,6 @@ if(!isset($_SESSION["official_name"])){
 				</div>
 				
 			</section>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-
 			<script>
 			
 			 /*-- Fuction for Login Modal Form --*/

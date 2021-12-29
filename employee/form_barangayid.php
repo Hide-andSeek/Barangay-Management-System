@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: employee/form-barangayid.php");
+	header("location: form-barangayid.php");
 }
 ?>
 
@@ -13,11 +13,11 @@ if(!isset($_SESSION["employee_no"])){
    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/documentprint_styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/documentprint_styles.css">
 	
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
@@ -56,13 +56,13 @@ if(!isset($_SESSION["employee_no"])){
 																							<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
 			 <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar" href="../dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -119,7 +119,7 @@ if(!isset($_SESSION["employee_no"])){
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 					 <div><?php echo $_SESSION["employee_no"];?></div>
 					 <div class="job" id="">Employee</div>
@@ -139,7 +139,7 @@ if(!isset($_SESSION["employee_no"])){
 					<div>
 						<h5>Barangay ID
 						<a href="#" class="circle">
-							 <img src="img/dt.png" >
+							 <img src="../img/dt.png" >
 					    </a>
 					    </h5>	  
 					</div>
@@ -158,8 +158,8 @@ if(!isset($_SESSION["employee_no"])){
 						<table class="content-table" id="table">
 							
 							<?php
-							include "db/conn.php";
-							include "db/users.php";
+							include "../db/conn.php";
+							include "../db/users.php";
 							
 							$myquery = "SELECT * FROM barangayid";
 							$countnum = $db->query($myquery);
@@ -222,14 +222,14 @@ if(!isset($_SESSION["employee_no"])){
 									<section>
 										<div class="background_id" style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
-												<img style="float: left; width: 80px; height: 70px; margin-left: 15px;" src="img/QCSealnew.png">
+												<img style="float: left; width: 80px; height: 70px; margin-left: 15px;" src="../img/QCSealnew.png">
 													<div>
 														<p class="center_description" style="font-size: 15px; padding-left: 75px;">Republika ng Pilipinas</p>
 														<p class="center_description" style="color: #1700cd; padding-left: 35px;">BARANGAY COMMONWEALTH</p>
 														<p class="center_description" style="font-size: 13px; padding-left: 55px">Lungsod Quezon, Metro Manila</p>
 														<p class="center_description">Tel. No.: 427-9210/ TeleFax No.: 951-7912</p>
 													</div>
-												<img style=" display: flex; float: right; width: 80px; height: 80px;" class="commonwealthlogo" src="img/Brgy-Commonwealth.png">
+												<img style=" display: flex; float: right; width: 80px; height: 80px;" class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
 												
 												<div style=" padding-left: 45px; padding-right: 45px;">
 													<div style="position: absolute; padding-left: 5px; border: 2px solid; width: 430px; height: 100px; font-size: 15px;">

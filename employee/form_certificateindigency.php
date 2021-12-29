@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: employee/form_dashboard.php");
+	header("location: ../employee/form_dashboard.php");
 }
 ?>
 
@@ -16,8 +16,8 @@ if(!isset($_SESSION["employee_no"])){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
-	 <link rel="stylesheet" href="css/documentprint_styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+	 <link rel="stylesheet" href="../css/documentprint_styles.css">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -54,7 +54,7 @@ if(!isset($_SESSION["employee_no"])){
 			<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
@@ -117,7 +117,7 @@ if(!isset($_SESSION["employee_no"])){
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 					 <div><?php echo $_SESSION["employee_no"];?></div>
 					 <div class="job" id="">Administrator</div>
@@ -138,7 +138,7 @@ if(!isset($_SESSION["employee_no"])){
 					<div>
 						<h5>Certificate of Indigency
 						<a href="#" class="circle">
-							 <img src="img/dt.png" >
+							 <img src="../img/dt.png" >
 					    </a>
 					    </h5>	  
 					</div>
@@ -158,8 +158,8 @@ if(!isset($_SESSION["employee_no"])){
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							include "db/conn.php";
-							include "db/users.php";
+							include "../db/conn.php";
+							include "../db/users.php";
 							
 							$mquery = "SELECT * FROM certificateindigency";
 							$countn = $db->query($mquery);
@@ -213,14 +213,14 @@ if(!isset($_SESSION["employee_no"])){
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
-												<img style="float: left; width: 130px; height: 125px; margin-left: 35px;" src="img/QCSealnew.png">
+												<img style="float: left; width: 130px; height: 125px; margin-left: 35px;" src="../img/QCSeal.png">
 													<div style="margin-left: 120px;">
 														<p class="center_description" style="font-size: 17px; padding-left: 75px;">Republic of the Philippines</p>
 														<p class="center_description" style="font-size: 15px; padding-left: 95px;">District II, Quezon City</p>
 														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px;">BARANGAY COMMONWEALTH</p>
 														<p class="center_description" style="font-size: 20px;">OFFICE OF THE BARANGAY CAPTAIN</p>
 													</div>
-												<img style=" display: flex; float: right; height: 130px; width: 130px; margin-left: 135px; " class="commonwealthlogo" src="img/Brgy-Commonwealth150x150.png">
+												<img style=" display: flex; float: right; height: 130px; width: 130px; margin-left: 135px; " class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
 											</div>
 											<div>
 												<div style="margin-top:5px; border-top: 2px solid #000000; width: 1220px; width: calc(100%  - 70px); transition: all 0.5s ease;"></div>

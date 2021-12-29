@@ -1,7 +1,7 @@
 
 <?php session_start();
 if(!isset($_SESSION["official_name"])){
-	header("location: captain/dashboard.php");
+	header("location: users/captain/dashboard.php");
 }
 ?>
 

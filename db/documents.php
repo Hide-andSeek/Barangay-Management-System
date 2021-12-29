@@ -110,31 +110,59 @@ if(isset($_POST['permitBtn'])){
 //Indigency
 
 if(isset($_POST['indigencybtn'])){
-	
+   
+    // Count total files
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
 	$purpose = $_POST['purpose'];
 	$date_issue = $_POST['date_issue'];
-		
-		$stmt = $db->prepare("INSERT INTO certificateindigency (fullname, address, purpose, date_issue) VALUES (:fullname, :address, :purpose, :date_issue)");
-		$stmt->bindParam(':fullname', $fullname);
-		$stmt->bindParam(':address', $address);
-		$stmt->bindParam(':purpose', $purpose);
-		$stmt->bindParam(':date_issue', $date_issue);
-		
-	if($stmt->execute()){
-		echo "<script>
-				alert('Added Successfully!');
+	$countfiles = count($_FILES['files']['name']);
+    
+    // Prepared statement
+    $query = "INSERT INTO certificateindigency (fullname,address, purpose, date_issue, name,image) VALUES(?,?,?,?,?,?)";
+   
+    $statement = $db->prepare($query);
+   
+    // Loop all files
+    for($i = 0; $i < $countfiles; $i++) {
+   
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+       
+        // Location
+        $target_file = 'image/'.$filename;
+       
+        // file extension
+        $file_extension = pathinfo(
+            $target_file, PATHINFO_EXTENSION);
+              
+        $file_extension = strtolower($file_extension);
+       
+        // Valid image extension
+        $valid_extension = array("png","jpeg","jpg");
+       
+        if(in_array($file_extension, $valid_extension)) {
+   
+            // Upload file
+            if(move_uploaded_file(
+                $_FILES['files']['tmp_name'][$i],
+                $target_file)
+            ) {
+                // Execute query
+                $statement->execute(
+                    array($fullname,$address, $purpose, $date_issue, $filename, $target_file));
+            }
+        }
+    }
+    echo "<script>
+				alert('Submitted Successfully!');
 				window.location.href='resident-defaultpage.php';
 			 </script>";
-	}else{
-		echo '<script>alert("An error occured! Please try again!")</script>';
-	}	
 }
 
 
 //Resident side - Blotter -> Cuyones/Verbo
-if(isset($_POST['indigencybtn'])){
+if(isset($_POST[''])){
 	
 	$n_complainant = $_POST['n_complainant'];
 	$comp_age = $_POST['comp_age'];
