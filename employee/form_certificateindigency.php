@@ -172,9 +172,11 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Fullname</th>
 									<th>Address</th>
 									<th>Purpose</th>
-									<th>ID type</th>
 									<th>Date Issued</th>
 									<th>Date Expiration</th>
+									<th>ID type</th>
+									<th>Approved by</th>
+									<th>Action</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -186,9 +188,11 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data2 ['fullname']; ?></td>
 									<td><?php echo $data2 ['address']; ?></td>
 									<td><?php echo $data2 ['purpose']; ?></td>
-									<td><?php echo $data2 ['id_type']; ?></td>
 									<td><?php echo $data2 ['date_issue']; ?></td>
 									<td><?php echo $data2 ['date_issue']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
+									<td><button>Approve</button></td>
 								</tr>	
 							
 							<?php
@@ -308,11 +312,11 @@ if(!isset($_SESSION["employee_no"])){
 												<br>
 												<p style="margin-top: -5px; margin-left: 280px;">Whom It May Concern</p>
 												<br>
-												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 65px;">This is to certify that <input class="inp" type="text" id="fullname" name="fullname" style="user-select:none;"  width="auto">, of legal age, Filipino and a bonafide resident of <input class="inp" type="text" id="address" name="address" width="auto"> District II, Quezon City.</p>
+												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 65px;">This is to certify that <input class="inp" type="text" id="fullname" name="fullname" style="padding-left: 15px;">, of legal age, Filipino and a bonafide resident of <input class="inp" type="text" id="address" name="address" style="padding-left:15px;"> District II, Quezon City.</p>
 												<br>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Further certify that above-named subject is of good moral character and has good community standing, but unfortunately belongs to the indigent family in this Community</p>
 												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">This certification is issued upon the request of the above-named party as supporting document needed for <input class="inp borderb" type="text" id="purpose" name="purpose" width="auto">.</p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">This certification is issued upon the request of the above-named party as supporting document needed for <input class="inp borderb" type="text" id="purpose" name="purpose" style="width:45%;">.</p>
 												<br>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp" type="text" id="date_issue" name="date_issue" width="auto"> of December 2021, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >

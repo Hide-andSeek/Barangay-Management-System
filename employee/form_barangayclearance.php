@@ -169,8 +169,8 @@ include "db/documents.php";
 
 				<div class="search_content">
                         <label>Search: 
-                            <input type="text" id="tags" class="r_search">
-							<button type="button" name="search" class="btn btn-primary" id="search">Search</button>
+							<input type="text" class="r_search" name="keyword">
+							<button type="button" name="search"><i class="bx bx-search"></i></button>
                         </label>
                 </div> 
 
@@ -185,6 +185,7 @@ include "db/documents.php";
 							?>
 								<thead>
 									<tr class="t_head">
+										<th>File No</th>
 										<th>Full name</th>
 										<th>Age</th>
 										<th>Status</th>
@@ -196,6 +197,9 @@ include "db/documents.php";
 										<th>Issued at</th>
 										<th>Issued on</th>
 										<th>Precint no</th>
+										<th>ID type</th>
+										<th>Approved by</th>
+										<th>Action</th>
 									</tr>                       
 								</thead>
 								<?php
@@ -203,6 +207,7 @@ include "db/documents.php";
 								{
 								?>
 								<tr class="table-row">
+									<td><?php echo $data2 ['clearance_id']; ?></td>
 									<td><?php echo $data2 ['full_name']; ?></td>
 									<td><?php echo $data2 ['age']; ?></td>
 									<td><?php echo $data2 ['status']; ?></td>
@@ -214,6 +219,9 @@ include "db/documents.php";
 									<td><?php echo $data2 ['issued_at']; ?></td>
 									<td><?php echo $data2 ['date_issued']; ?></td>
 									<td><?php echo $data2 ['precint_no']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
+									<td><button>Approve</button></td>
 								</tr>	
 							
 							<?php
@@ -227,7 +235,7 @@ include "db/documents.php";
 						<div id="hidedocument"	 class="document-hide">
 							<div id="indigency_file" style="display: auto; ">
 								<fieldset >
-									<legend class="indigency">Barangay Indigency</legend>
+									<legend class="indigency">Barangay Clearance</legend>
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
@@ -246,7 +254,7 @@ include "db/documents.php";
 													<div  style="position: inherit; margin-top: -1075px;">
 														<p style="font-size: 21px; line-height: 0.5;">MANUEL A. CO</p>
 														<em>Punong Barangay</em>
-														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="fileno" id="fileno" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
+														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="clearance_id" id="clearance_id" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
 														<br>
 														<div class="side_information">
 															<p>PRESY C. BAQUIRING</p>
@@ -330,9 +338,9 @@ include "db/documents.php";
 												</div>
 												<br>
 												<br>
-												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 95px; word-spacing: 3.5px;">This is to certify that <strong>CLEARANCE</strong> is granted to <input class="inp borderb" style="width: 100%; padding-left: 15px;" type="text" id="address" name="address" width="auto" placeholder="FULL A. NAME"><input class="inp borderb" style="width: 10%; padding-left: 15px;" type="text" id="address" name="address" width="auto" placeholder="AGE"> years old <input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="STATUS">,<input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="NATIONALITY"> and a bonafide resident at No. <input class="inp borderb" style="width: 90%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="ADDRESS">, Barangay Commonwealth, Quezon City, possesses with good moral character has no derogatory record in this office, law abiding citizen and reliable.</p>
+												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 95px; word-spacing: 3.5px;">This is to certify that <strong>CLEARANCE</strong> is granted to <input class="inp borderb" style="width: 100%; padding-left: 15px;" type="text" id="full_name" name="full_name" width="auto" placeholder="FULL A. NAME"><input class="inp borderb" style="width: 10%; padding-left: 15px;" type="text" id="age" name="age" width="auto" placeholder="AGE"> years old <input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="status" name="status" width="auto" placeholder="STATUS">,<input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="nationality" name="nationality" width="auto" placeholder="NATIONALITY"> and a bonafide resident at No. <input class="inp borderb" style="width: 90%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="ADDRESS">, Barangay Commonwealth, Quezon City, possesses with good moral character has no derogatory record in this office, law abiding citizen and reliable.</p>
 												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="address" name="address" width="auto" placeholder="PURPOSE"></p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="purpose" name="purpose" width="auto" placeholder="PURPOSE"></p>
 												<br>
 												
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp borderb" type="text" id="date_issue" name="date_issue" placeholder="DAY" style="width:35px; padding-left: 5px;"> day of <input class="inp  borderb" style="padding-left: 10px; width:105px;" type="text" id="date_issue" name="date_issue" placeholder="MONTH"> <input class="inp  borderb" style="padding-left: 10px; width:55px;" type="text" id="date_issue" name="date_issue" placeholder="YEAR">, Quezon City.</p>
@@ -343,10 +351,10 @@ include "db/documents.php";
 													<p>Signature of Applicant</p>
 													
 													<div style="text-align: left; margin-top: 45px;"> 
-														CTC NO.: <input class="inp  borderb" style="width: 75px;"><br>
-														Issued AT: <input class="inp  borderb" style="width: 75px;"><br>
-														ISSUED ON: <input class="inp  borderb" style="width: 75px;"><br>
-														PRECINT NO.: <input class="inp  borderb" style="width: 75px;"><br>
+														CTC NO.: <input class="inp  borderb" style="width: 75px;" name="ctc_no" id="ctc_no"><br>
+														Issued AT: <input class="inp  borderb" style="width: 215px;" name="issued_at" id="issued_at"><br>
+														ISSUED ON: <input class="inp  borderb"  style="width: 215px;" name="date_issued" id="date_issued"><br>
+														PRECINT NO.: <input class="inp  borderb" style="width: 75px;" name="precint_no" id="precint_no"><br>
 													</div>
 												</div>
 												
@@ -407,6 +415,26 @@ include "db/documents.php";
 					} else { 
 						x.className = x.className.replace(" document-show", "");
 					}
+				}
+
+				var table = document.getElementById('table');
+				
+				for (var i = 1; i < table.rows.length; i++)
+				{
+					table.rows[i].onclick = function()
+					{
+						document.getElementById("clearance_id").value = this.cells[0].innerHTML;
+						document.getElementById("full_name").value = this.cells[1].innerHTML;
+						document.getElementById("age").value = this.cells[2].innerHTML;
+						document.getElementById("status").value = this.cells[3].innerHTML;
+						document.getElementById("nationality").value = this.cells[4].innerHTML;
+						document.getElementById("address").value = this.cells[5].innerHTML;
+						document.getElementById("purpose").value = this.cells[6].innerHTML;
+						document.getElementById("ctc_no").value = this.cells[8].innerHTML;
+						document.getElementById("issued_at").value = this.cells[9].innerHTML;
+						document.getElementById("date_issued").value = this.cells[10].innerHTML;
+						document.getElementById("precint_no").value = this.cells[11].innerHTML;						
+					};
 				}
 			</script>
 	</body>
