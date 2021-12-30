@@ -130,7 +130,7 @@ if(!isset($_SESSION["employee_no"])){
 					 <div class="job" id="">Administrator</div>
 				   </div>
 				 </div>
-				 <a href="emplogout.php">
+				 <a href="../emplogout.php">
 					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 				 </a>
 			 </li>
@@ -181,6 +181,9 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Business Address</th>
 									<th>Plate No</th>
 									<th>Contact no</th>
+									<th>ID Type</th>
+									<th>Approved by</th>
+									<th>Action</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -196,6 +199,9 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data1 ['businessaddress']; ?></td>
 									<td><?php echo $data1 ['plateno']; ?></td>
 									<td><?php echo $data1 ['contactno']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
+									<td><button>Approve</button></td>
 								</tr>	
 							
 							<?php

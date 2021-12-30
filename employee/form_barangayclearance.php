@@ -82,14 +82,14 @@ include "../db/documents.php";
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="../dashboard.php">
+			  <a class="side_bar" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="../barangayid.php">
+				<a class="side_bar" href="barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -97,7 +97,7 @@ include "../db/documents.php";
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="../barangayclearance.php">
+				<a class="side_bar" href="barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -145,7 +145,7 @@ include "../db/documents.php";
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>
-				 <a href="emplogout.php">
+				 <a href="../emplogout.php">
 					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 				 </a>
 			 </li>

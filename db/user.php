@@ -28,7 +28,9 @@ if(isset($_POST['empBtn'])){
 				window.location.href='employeemanagement.php';
 			 </script>";
 	}else{
-		echo '<script>alert("An error occured")</script>';
+		echo '<script>
+				alert("An error occured")
+			</script>';
 	}	
 }
 

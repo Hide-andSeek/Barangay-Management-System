@@ -19,9 +19,10 @@
 			$email = $stmt->fetch(PDO::FETCH_ASSOC);
 			
 			if($email === false){
-				echo "<script>
-						alert('Invalid Email or Password');
-					</script>";
+				echo '<script>
+						alert("Invalid Email or Password");
+						window.location.href="index.php";
+					</script>';
 			}else{
 				$validPassword = password_verify($passwordAttempt, $email['password']);
 				
@@ -82,8 +83,6 @@ if(isset($_POST['regbtn'])){
 		}	
 	}
 }
-
-
 ?>
 
 

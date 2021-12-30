@@ -62,7 +62,7 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			 <li>
-			  <a class="side_bar" href="../dashboard.php">
+			  <a class="side_bar" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -125,7 +125,7 @@ if(!isset($_SESSION["employee_no"])){
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>
-				 <a href="emplogout.php">
+				 <a href="../emplogout.php">
 					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 				 </a>
 			 </li>
@@ -180,6 +180,9 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Emergency Contact</th>
 									<th>Date of Request</th>
 									<th>Date of Validity</th>
+									<th>ID Type</th>
+									<th>Approved by</th>
+									<th>Action</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -201,6 +204,9 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['emrgncycontact']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
+									<td><button>Approve</button></td>
 								</tr>	
 							
 							<?php

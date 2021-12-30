@@ -100,7 +100,7 @@ if(!isset($_SESSION["employee_no"])){
 					 <div class="job" id="">Administrator</div>
 				   </div>
 				 </div>
-				 <a href="emplogout.php">
+				 <a href="../emplogout.php">
 					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 				 </a>
 			 </li>

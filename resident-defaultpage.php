@@ -69,7 +69,7 @@ include "db/users.php";
 			-moz-appearance: textfield;
 		}
 
-		.detailid{padding-top: 50px; color: red;}
+		.detailid{padding-top: 50px; color: #19c410;}
 		.form-text-desc{font-size: 10px;margin: 3px 3px; color:black;}
 
 		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
@@ -109,7 +109,7 @@ include "db/users.php";
                             <a class="page-scroll" href="#documents">Documents</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="logout.php">Logout</a>
+                            <a class="page-scroll" href="resident_logout.php">Logout</a>
                         </li>
 						<li>
 							<a style="color: green" class="page-scroll" href="#"></a>
@@ -128,8 +128,8 @@ include "db/users.php";
 	<section>
 
 		<!-- Instructions: For request document!-->
-		<h1 style="width: 550px; height: 350px;">Request Documet Instructions</h1>
-
+		<h5 style="text-align: center;">Request Document Instructions</h5>
+		
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
 				<i class="bx bx-id-card"></i>
@@ -158,7 +158,6 @@ include "db/users.php";
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname">
 																</div><br>
-																
 																
 																 <div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
@@ -199,33 +198,35 @@ include "db/users.php";
 																	<label>Date Issued: <i class="red">*</i></label>
 																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
 																</div><br>
-																
+
+																<div class="form-group">
+																	<label for="file">Attach valid ID: <i class="red">*</i></label>
+																	<input type='file' name='files[]' required aria-details="detail-id"/>
+																	
+																	<!--
+																	<i aria-details="detail-id" class="detailid">This field is optional</i>
+																	-->
+																</div>
 														</fieldset>
-													</div>`
-												</section>
-												<form  method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-													<a class="btn btn-primary btn-block"
-													onclick="document.getElementById('id01').style.display='block'" data-toggle="modal" data-target="savebtn"><i class='bx bx-save'></i> Submit</a>
-
-												<div id="formatValidatorName" >
-													<div id="id01" class="modal">
-															<div class="modal-content animatem modalcontent-notif">
-
-																<div class="modal-header">
-																	<h4 class="modal-title">Warning!</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Are you sure you want to submit this form? Click  button below to proceed</p>
-
-																	<div class="modal-footer">
-               															 <button type="submit" class="btn btn-default" type="brgyidbtn" data-toggle="modal" data-target="savebtn">Ok</button>
-																	</div>
-																</div>
-															</div>
-																
-														</div>
 													</div>
-												<form>
+
+													<div class="right_userpersonal_info">
+														<fieldset class="field_set" >
+																<legend>Guidelines/ Panuto (Barangay ID)</legend>
+																<div class="form-group">
+																	<label>Sundin ang mga sumunod, sa pag proseso ng Barangay ID:</label>
+																	<ol style="padding: 15px 15px 15px 15px">
+																		<li>Siguraduhin na ang iyong impormasyon ay tugma. </li>
+																		<li>Kuhaan ng litrato ang harap at likod ng iyong ID</li>
+																		<li>Lagyan ng pangalan ang iyong file at pangalanan ito. Halimbawa <strong style="color: red">[Your name]-FrontID.jpg </strong>  </li>
+																		<li>I-save ang iyong file sa <strong style="color: red">png, jpeg and jpg </strong> format.</li>
+																		<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;">see more</a></li>
+																	</ol>
+																</div>
+														</fieldset>
+													</div>
+												</section>
+												<button type="submit" id="brgyidbtn" name="brgyidbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
 								</div>
 						</div>
@@ -299,7 +300,7 @@ include "db/users.php";
 																<legend>Personal Information</legend>
 																<div class="form-group">
 																	<label for="fullname">Full Name: </label>
-																	<input required type="text" class="form-control form-text" id="fullname" name="fullname">
+																	<input required type="text" class="form-control form-text" id="fullname" name="fullname" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>
 																
 																 <div class="form-group">
@@ -317,8 +318,9 @@ include "db/users.php";
 																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
 																</div><br>
 
-																<div>
-																<input class="custom-file-input" type='file' name='files[]'/>
+																<div class="form-group">
+																	<label for="file">Attach ID: </label>
+																	<input type='file' name='files[]'/>
 																</div>
 															</fieldset>
 														</div>
@@ -377,7 +379,7 @@ include "db/users.php";
 
 																<div class="form-group">
 																	<label for="purpose">Purpose: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																	<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>
 
 																<div class="form-group">
@@ -527,7 +529,7 @@ include "db/users.php";
            
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright" >
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
+                    Copyright &copy; Barangay Commonwealth - 2021 Created By 
                     <a href="http://betaencorp" target="_blank">Beta Encorp</a>
                 </span>
             </div>

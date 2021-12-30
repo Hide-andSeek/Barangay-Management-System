@@ -45,7 +45,7 @@ if(isset($_POST['clearancebtn'])){
 <?php
 //Barangay ID Form
 if(isset($_POST['brgyidbtn'])){
-	
+   
 	$fname = $_POST['fname'];
 	$mname = $_POST['mname'];
 	$lname	= $_POST['lname'];
@@ -56,28 +56,46 @@ if(isset($_POST['brgyidbtn'])){
 	$emrgncycontact = $_POST['emrgncycontact'];
 	$reladdress = $_POST['reladdress'];
     $dateissue = $_POST['dateissue'];
-		
-		$stmt = $db->prepare("INSERT INTO barangayid (fname, mname, lname, address, birthday, placeofbirth, guardianname, emrgncycontact, reladdress, dateissue) VALUES (:fname, :mname, :lname, :address, :birthday, :placeofbirth, :guardianname, :emrgncycontact, :reladdress, :dateissue)");
-		$stmt->bindParam(':fname', $fname);
-		$stmt->bindParam(':mname', $mname);
-		$stmt->bindParam(':lname', $lname);
-		$stmt->bindParam(':address', $address);
-		$stmt->bindParam(':birthday', $birthday);
-        $stmt->bindParam(':placeofbirth', $placeofbirth);
-        $stmt->bindParam(':guardianname', $guardianname);
-        $stmt->bindParam(':emrgncycontact', $emrgncycontact);
-        $stmt->bindParam(':reladdress', $reladdress);
-        $stmt->bindParam(':dateissue', $dateissue);
-
-	if($stmt->execute()){
-		echo "<script>
-				alert('Added Successfully!');
+	$countfiles = count($_FILES['files']['name']);
+    
+    $query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, guardianname, emrgncycontact, reladdress, dateissue, file_name,image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+   
+    $stmt = $db->prepare($query);
+   
+    for($i = 0; $i < $countfiles; $i++) {
+   
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+        // Location
+        $target_file = 'img/fileupload_barangayid/'.$filename;
+        // File Path
+        $file_extension = pathinfo(
+            $target_file, PATHINFO_EXTENSION);
+    
+        $file_extension = strtolower($file_extension);
+       
+        //Image extension
+        $valid_extension = array("png","jpeg","jpg");
+       
+        if(in_array($file_extension, $valid_extension)) {
+   
+            // Upload file
+            if(move_uploaded_file(
+                $_FILES['files']['tmp_name'][$i],
+                $target_file)
+            ) {
+                // Execute query
+                $stmt->execute(
+                    array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress, $dateissue, $filename, $target_file));
+            }
+        }
+    }
+    echo 	"<script>
+				alert('Submitted Successfully!');
 				window.location.href='resident-defaultpage.php';
-			 </script";
-	}else{
-		echo '<script>alert("An error occured! Please try again!")</script>';
-	}	
+			 </script>";
 }
+
 
 
 //Barangay Permit
@@ -111,31 +129,26 @@ if(isset($_POST['permitBtn'])){
 
 if(isset($_POST['indigencybtn'])){
    
-    // Count total files
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
 	$purpose = $_POST['purpose'];
 	$date_issue = $_POST['date_issue'];
 	$countfiles = count($_FILES['files']['name']);
     
-    // Prepared statement
     $query = "INSERT INTO certificateindigency (fullname,address, purpose, date_issue, name,image) VALUES(?,?,?,?,?,?)";
    
-    $statement = $db->prepare($query);
+    $stmt = $db->prepare($query);
    
-    // Loop all files
     for($i = 0; $i < $countfiles; $i++) {
    
         // File name
         $filename = $_FILES['files']['name'][$i];
-       
         // Location
-        $target_file = 'image/'.$filename;
-       
+        $target_file = 'img/fileupload_clearance/'.$filename;
         // file extension
         $file_extension = pathinfo(
             $target_file, PATHINFO_EXTENSION);
-              
+    
         $file_extension = strtolower($file_extension);
        
         // Valid image extension
@@ -149,12 +162,12 @@ if(isset($_POST['indigencybtn'])){
                 $target_file)
             ) {
                 // Execute query
-                $statement->execute(
+                $stmt->execute(
                     array($fullname,$address, $purpose, $date_issue, $filename, $target_file));
             }
         }
     }
-    echo "<script>
+    echo 	"<script>
 				alert('Submitted Successfully!');
 				window.location.href='resident-defaultpage.php';
 			 </script>";
