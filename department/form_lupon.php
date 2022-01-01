@@ -34,7 +34,7 @@ if(!isset($_SESSION["employee_no"])){
 	
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Lupon Dashboard </title>
+     <title>  Dashboard </title>
 	 
 	 
 	 <style>
@@ -77,11 +77,11 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs.php">
+			   <a class="side_bar" href="form_bpso_violators.php">
 				 <i class='fa fa-print'></i>
-				 <span class="links_name">Print Document</span>
+				 <span class="links_name">Violators</span>
 			   </a>
-			   <span class="tooltip">Print Document</span>
+			   <span class="tooltip">Violators</span>
 			 </li>
 			   
 
@@ -115,7 +115,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>OFFICE OF THE LUPONG TAGAPAMAYAPA
+						<h5>BARANGAY PUBLIC SAFETY OFFICER
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
