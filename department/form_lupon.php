@@ -77,36 +77,14 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="">
-				 <i class='fa fa-users fa-fw'></i>
-				 <span class="links_name">Active</span>
+			   <a class="side_bar" href="form_lupon_printdocs.php">
+				 <i class='fa fa-print'></i>
+				 <span class="links_name">Print Document</span>
 			   </a>
-			   <span class="tooltip">Active</span>
+			   <span class="tooltip">Print Document</span>
 			 </li>
-			 <li>
-			   <a class="side_bar" href="">
-				 <i class='fa fa-users fa-fw'></i>
-				 <span class="links_name">Settled</span>
-			   </a>
-			   <span class="tooltip">Settled</span>
-			 </li>
-					
-			 <li>
-			   <a class="side_bar" href="">
-				 <i class='fa fa-users fa-fw'></i>
-				 <span class="links_name">Not Settled</span>
-			   </a>
-			   <span class="tooltip">Not Settled</span>
-			 </li>
-			
-			 <li>
-			   <a class="side_bar" href="">
-				 <i class='fa fa-users fa-fw'></i>
-				 <span class="links_name">Upcoming Hearing</span>
-			   </a>
-			   <span class="tooltip">Upcoming</span>
-			 </li>
-			
+			   
+
 			<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
@@ -335,13 +313,13 @@ if(!isset($_SESSION["employee_no"])){
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
-									<th>Last Name</th>
-									<th>First name</th>
-									<th>Middle name</th>
-									<th>Birthday</th>
-									<th>Address</th>
+									<th>Complainant</th>
+									<th>Accused</th>
+									<th>Respondent</th>
+									<th>Tirahan</th>
+									<th>Oras at Petsa</th>
 									<th>Contact No.</th>
-									<th>Department</th>
+									<th>Attested By:</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
