@@ -1008,6 +1008,15 @@ h4.mv_heading{
     font-size: 3rem;
 }
 
+
+@media all and (max-width:480px) {
+    .mv_heading {
+        font-size: 14px;
+        text-align: center;
+    }
+ 
+}
+
 /* News */
 
 

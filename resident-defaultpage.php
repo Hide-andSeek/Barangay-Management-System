@@ -120,7 +120,6 @@ include "db/users.php";
             </div>
             <!-- /.container-fluid -->
         </nav>
-
     </header>
 	
 	<!--Document Section-->
@@ -522,8 +521,8 @@ include "db/users.php";
                 <p class="footer-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <p>
-                  <span class="footer_dt" id="date-time"></span>
+               
+                  <span class="footer_dt" style="position: inherit;" id="date-time"></span>
                 </p>
             </div>
            
