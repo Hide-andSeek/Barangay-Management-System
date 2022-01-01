@@ -28,7 +28,6 @@ include "db/users.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
-	<link rel="stylesheet" href="resident-css/resident.css">
 	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
@@ -76,6 +75,8 @@ include "db/users.php";
 		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
 		.modalcontent-notif{height: 230px; width: 450px;}
 		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
+
+		.instruction{height: 150px; width: 150px; background-color:#f1f1f1!important; border-radius: 50%; display: inline-block; position: auto; margin-left: 15px}
 	</style>
 </head>
 
@@ -128,6 +129,12 @@ include "db/users.php";
 
 		<!-- Instructions: For request document!-->
 		<h5 style="text-align: center;">Request Document Instructions</h5>
+		<br>
+		<div  style="text-align: center;">
+			<span class="instruction">Step 1</span>
+			<span class="instruction">Step 2</span>
+			<span class="instruction">Step 3</span>
+		</div>
 		
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
@@ -199,12 +206,16 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach valid ID: <i class="red">*</i></label>
+																	<label for="file">Attach Front ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required aria-details="detail-id"/>
 																	
 																	<!--
 																	<i aria-details="detail-id" class="detailid">This field is optional</i>
 																	-->
+																</div>
+																<div class="form-group">
+																	<label for="file">Attach Back ID: <i class="red">*</i></label>
+																	<input type='file' />
 																</div>
 														</fieldset>
 													</div>
@@ -278,6 +289,16 @@ include "db/users.php";
 																	<label for="contactno">Contact No.: </label>
 																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
 																</div><br>
+
+																<div class="form-group">
+																	<label for="file">Attach Front ID: <i class="red">*</i></label>
+																	<input type='file' />
+																</div>
+
+																<div class="form-group">
+																	<label for="file">Attach Back ID: <i class="red">*</i></label>
+																	<input type='file' />
+																</div>
 															</fieldset>
 														</div>
 												</section>
@@ -318,9 +339,14 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach ID: </label>
+																	<label for="file">Attach Front ID: </label>
 																	<input type='file' name='files[]'/>
 																</div>
+																<div class="form-group">
+																	<label for="file">Attach Back ID: </label>
+																	<input type='file'/>
+																</div>
+																
 															</fieldset>
 														</div>
 												</section>
@@ -520,10 +546,9 @@ include "db/users.php";
             <div class="col-lg-12 footer-info">
                 <p class="footer-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					<span class="footer_dt"  id="date-time"></span>
                 </p>
-               
-                  <span class="footer_dt" style="position: inherit;" id="date-time"></span>
-                </p>
+			
             </div>
            
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
