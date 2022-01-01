@@ -125,6 +125,9 @@ a.filled-button:hover {
         margin-top: 15px !important;
         color: #000;
     }
+    .u-description{
+        display: none;
+    }
 }
 
 .radius{
@@ -350,8 +353,8 @@ a.login{cursor:pointer;};
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight">Barangay Commonwealth</h1>
-                                    <h2 class="intro-heading animated bounceInLeft ">Barangay Management</h2>
+                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth</h1>
+                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Management</h2>
                                     <p class="intro-paragraph animated bounceInRight"> </p>
                                 </div>
                                 <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
@@ -367,8 +370,8 @@ a.login{cursor:pointer;};
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight">Barangay Commonwealth Hall</h1>
-                                    <h2 class="intro-heading animated bounceInLeft ">Barangay Services</h2>
+                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth Hall</h1>
+                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Services</h2>
                                     <p class="intro-paragraph animated bounceInRight"> </p>
                                 </div>
                                 <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
@@ -572,53 +575,7 @@ a.login{cursor:pointer;};
 			</div>	
 			
 			
-	<!-- News Section-->
-		<div class="container-fluid wrapper">
-            <div class="row">
-                <div class="col-sm-8 col-lg-12 text-left">
-                    <h2 class="section-heading a_c">News</h2>
-                </div>
-            </div>
-            <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
-                <!-- Wrapper for Slides -->
-                <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-md-4 col-sm-6 news">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-										<img class="news_item" src="resident-img/sett.png" alt="newsentry1" class="col-md-6">
-										<h3 class="news_entry_text">News Entry #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 news">
-                                <div class="block-text">
-									<div class="pic"></div>
-									<a class="news_heading" href="#">
-										<img class="news_item" src="resident-img/sett.png" alt="newsentry2" class="col-md-6">
-										<h3 class="news_entry_text">News Entry #2: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6 news">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-									    <img class="news_item" src="resident-img/sett.png" alt="newsentry3" class="col-md-6">
-										<h3 class="news_entry_text">News Entry #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-					</div>
-				</div>			
-			</div>
-			
-			<div class="news">
-				<button class="see_news">Learn More</button>
-			</div>	
+	
 	</section >
 
     <!-- Footer -->

@@ -19,7 +19,7 @@ if(!isset($_SESSION["official_name"])){
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/captain.css">
+
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -32,6 +32,121 @@ if(!isset($_SESSION["official_name"])){
 
      <title> Employee Management </title>
 
+	 <style>
+		 *{
+    font-family: "Poppins" , sans-serif;
+    font-size: 14px;
+}
+
+div.align-box{padding-top: 23px; display: flex; align-items: center;}
+.box-report{
+    width: 300px;
+    font-size: 14px;
+    border: 4px solid #7dc748;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.captain_sidebar{
+  background: gray;
+}
+
+#formatValidatorName{
+    top: 50px;
+}
+
+.employeemanagement-modal{
+    display: none; 
+    position: absolute; 
+    z-index: 999; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 115%; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 5px; 
+    
+}
+
+
+.modal-contentemployee {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 1%;
+    background-color: #fefefe;
+    margin: 5% auto 2% auto;
+    border: 1px solid #888;
+    height: 78%;
+    width: 68%; 
+   
+}
+
+.inputtext, .inputpass {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    height: 35px;
+    width: 94%;
+    padding: 10px 10px;
+    margin: 4px 25px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.employee-label{margin-left: 26px;}
+
+.submtbtn{
+    height: 40px;
+}
+
+.submtbtn:hover{
+    background: orange;
+    color: black;
+    height: 40px;
+}
+
+
+.lname, .fname, .mname{
+     width: 80%;
+}
+
+.addbtn{
+    position: absolute;
+    margin-left: 25px;
+    margin-top: -25px;
+    font-family: inherit;
+}
+
+.emp_tbl{ 
+    margin-top: 65px;
+    border-collapse: collapse;
+    table-layout: auto;
+    width: 100%;
+    transition: margin-left 300ms;
+    overflow-y: scroll;  
+    box-shadow: inset;
+    display: block;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+
+	 </style>
    </head>
 	<body>
 			<!-- Side Navigation Bar-->
@@ -233,7 +348,48 @@ if(!isset($_SESSION["official_name"])){
 									<td><?php echo $data ['department']; ?></td>
 									<td>Active</td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
+
+							<div id="id2" class="employeemanagement-modal modal" >
+								<div class="modal-contentemployee animate" >
+									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+										<div id="employee_form" class="container">
+												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+												Add Employee
+												</div>
+												
+												
+												<div class="information">
+													<label class="employee-label"> Username </label>
+													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+												</div>
+												
+												<div class="row align-items-start">
+													<div class="information col">
+														<label class="employee-label"> Last Name </label>
+														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> First Name </label> 
+														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> Middle Name </label>
+														<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+													</div>
+												</div>
+
+												<div class="information">   
+													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+														<i class="bx bx-t67check"></i>Submit
+													</button>  
+												</div>
+										</div> 	
+									</form>
+							  </div>
+						</div>
 										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
 									</td>
 								</tr>	
@@ -255,6 +411,13 @@ if(!isset($_SESSION["official_name"])){
 			
 			 /*-- Fuction for Login Modal Form --*/
 			var modal = document.getElementById('id1');
+				window.onclick = function (event) {
+					if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}  
+
+			var modal = document.getElementById('id2');
 				window.onclick = function (event) {
 					if (event.target == modal) {
 					modal.style.display = "none";

@@ -740,6 +740,10 @@ nav.navnav{
 		font-size: 18px;
 	}
 
+   
+
+    
+
 
 
 
@@ -1006,6 +1010,15 @@ h4.mv_heading{
     text-align: justify;
     text-justify: inter-word;
     font-size: 3rem;
+}
+
+
+@media all and (max-width:480px) {
+    .mv_heading {
+        font-size: 14px;
+        text-align: center;
+    }
+ 
 }
 
 /* News */
