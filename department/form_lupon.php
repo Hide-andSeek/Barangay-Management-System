@@ -125,7 +125,7 @@ if(!isset($_SESSION["employee_no"])){
 			  </section>
 			    <br>
 			  <div>
-			
+			<h4>  ALL CASES </H4>
 <div>
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
