@@ -1,15 +1,19 @@
-<?php session_start();
-if(!isset($_SESSION['email'])){
-	header("location: resident-defaultpage.php");
-}
-?>
-
 <?php 
 include "db/conn.php";
 include "db/documents.php";
 include "db/users.php";
 
 ?>
+
+<?php session_start();
+$email = '';
+
+if(isset($_SESSION['email'])){
+	$email = $_SESSION['email'];
+}
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -113,7 +117,7 @@ include "db/users.php";
                             <a class="page-scroll" href="resident_logout.php">Logout</a>
                         </li>
 						<li>
-							<a style="color: green" class="page-scroll" href="#"></a>
+							<a style="color: green" class="page-scroll" href="#"><?php  echo array_values($email)[1] ?></a>
 						</li>
                     </ul>
                 </div>
@@ -547,9 +551,10 @@ include "db/users.php";
             <div class="col-lg-12 footer-info">
                 <p class="footer-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					<span class="footer_dt"  id="date-time"></span>
                 </p>
-			
+				<p>
+					<span class="footer_dt"  id="date-time"></span>
+				</p>
             </div>
            
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
