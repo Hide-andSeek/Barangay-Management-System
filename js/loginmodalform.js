@@ -14,35 +14,42 @@ var modal = document.getElementById('id3');
 	}
 }  
 
-var modal = document.getElementById('id4');
+var modal = document.getElementById('complaints');
 	window.onclick = function (event) {
 		if (event.target == modal) {
 		modal.style.display = "none";
 	}
 }  
 
-var modal = document.getElementById('id5');
+var modal = document.getElementById('bcpc');
 	window.onclick = function (event) {
 		if (event.target == modal) {
 		modal.style.display = "none";
 	}
 }  
 
-var modal = document.getElementById('id6');
+var modal = document.getElementById('vawc');
 	window.onclick = function (event) {
 		if (event.target == modal) {
 		modal.style.display = "none";
 	}
 }  
 
-var modal = document.getElementById('id7');
+var modal = document.getElementById('lupon');
 	window.onclick = function (event) {
 		if (event.target == modal) {
 		modal.style.display = "none";
 	}
 }  
 
-var modal = document.getElementById('id8');
+var modal = document.getElementById('accounting');
+	window.onclick = function (event) {
+		if (event.target == modal) {
+		modal.style.display = "none";
+	}
+}  
+
+var modal = document.getElementById('bpso');
 	window.onclick = function (event) {
 		if (event.target == modal) {
 		modal.style.display = "none";

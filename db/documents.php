@@ -101,28 +101,50 @@ if(isset($_POST['brgyidbtn'])){
 //Barangay Permit
 if(isset($_POST['permitBtn'])){
 	
-	$mess = "";
-	
 	$dateissued = $_POST['dateissued'];
 	$selection = $_POST['selection'];
 	$ownername	= $_POST['ownername'];
 	$businessname = $_POST['businessname'];
 	$businessaddress = $_POST['businessaddress'];
 	$contactno = $_POST['contactno'];
+	$countfiles = count($_FILES['files']['name']);
 	
-	try{
-		$permitsql = "INSERT INTO businesspermit (dateissued, selection, ownername, businessname, businessaddress, contactno) VALUES (?, ?, ?, ?, ?, ?)";
-		$permitresult = $db->prepare($permitsql);
-		$permitresult->execute(array($dateissued, $selection, $ownername, $businessname, $businessaddress, $contactno));
-		
-	}catch(PDOException $a){
-		if($a->getCode() == 0) {
-		}else{
-			$mess = $a->getMessage();
-		}
-	} finally {
-		echo $mess;
-	}
+	$query = "INSERT INTO barangayid (dateissued, selection, ownername, businessname, businessaddress,contactno, file_name, image) VALUES(?,?,?,?,?,?,?,?)";
+   
+    $stmt = $db->prepare($query);
+   
+    for($i = 0; $i < $countfiles; $i++) {
+   
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+        // Location
+        $target_file = 'img/fileupload_bpermit/'.$filename;
+        // File Path
+        $file_extension = pathinfo(
+            $target_file, PATHINFO_EXTENSION);
+    
+        $file_extension = strtolower($file_extension);
+       
+        //Image extension
+        $valid_extension = array("png","jpeg","jpg");
+       
+        if(in_array($file_extension, $valid_extension)) {
+   
+            // Upload file
+            if(move_uploaded_file(
+                $_FILES['files']['tmp_name'][$i],
+                $target_file)
+            ) {
+                // Execute query
+                $stmt->execute(
+                    array($dateissued, $selection, $ownername, $contactno, $filename, $target_file));
+            }
+        }
+    }
+    echo 	"<script>
+				alert('Submitted Successfully!');
+				window.location.href='resident-defaultpage.php';
+			 </script>";
 }
 
 //Indigency
@@ -175,7 +197,7 @@ if(isset($_POST['indigencybtn'])){
 
 
 //Resident side - Blotter -> Cuyones/Verbo
-if(isset($_POST[''])){
+if(isset($_POST['blotterbtn'])){
 	
 	$n_complainant = $_POST['n_complainant'];
 	$comp_age = $_POST['comp_age'];

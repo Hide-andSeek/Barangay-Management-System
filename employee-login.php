@@ -18,7 +18,6 @@ include "db/user.php";
 	<!-- Customize Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/employee.css">
-
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
 	
@@ -30,31 +29,76 @@ include "db/user.php";
      <title> Employee - Barangay Commonwealth QC.</title>
 
 	 <style>
+		 *{
+			 box-sizing: border-box;
+		 }
+
 		 main.employee-main{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
 			padding-top: 155px;
 		}
 
 		.btn-size{
-			padding: 50px 50px 50px 50px;
-			margin: 10px 10px 10px 10px;
+			flex: 25%;
+			font-size: 15px;
 		}
 
+		.btn-box{
+			flex: 50%;
+		}
 
+		.topright{
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.topright:hover {
+			color: red;
+			cursor: pointer;
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		
+		@media(max-width: 800px){
+			.btn-box{
+				flex: 100%;
+			}
+		}
+
+.modal-contentdocreq {
+        font-family: 'Montserrat', sans-serif;
+        padding-top: 2%;
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        height: 32%;
+        width: 30%; 
+        border-radius: 20px;
+    }
 	 </style>
 	 
    </head>
-	<body>
+	<body>	
+		<h2 style="text-align: center;">Login Forms</h2>
 		<main class="employee-main">
-			<h2 style="text-align: center;">Login Forms</h2>
+		
 			<div class="employee-logform">
 					
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id5').style.display='block'">BCPC</button>
-					
+				<div class="btn-box">
+					<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('bcpc').style.display='block'">BCPC</button>
+				</div>		
 					<div id="formatValidatorName" >
-						  <div id="id5" class="docureq-modal">
+						  <div id="bcpc" class="docureq-modal">
 								<div class="modal-contentdocreq animate">
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+												<span onclick="document.getElementById('bcpc').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
 												</div>
@@ -73,13 +117,17 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id6').style.display='block'">VAWC</button>
-					
+					<div class="btn-box">
+						<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('vawc').style.display='block'">VAWC</button>
+					</div>
 					<div id="formatValidatorName" >
-						  <div id="id6" class="docureq-modal">
+						  <div id="vawc" class="docureq-modal">
 								<div class="modal-contentdocreq animate">
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+												<span onclick="document.getElementById('vawc').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee ID"> 
 												</div>
@@ -99,13 +147,17 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id7').style.display='block'">Lupon</button>
-					
+					<div class="btn-box">
+						<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('lupon').style.display='block'">Lupon</button>
+					</div>
 					<div id="formatValidatorName" >
-						  <div id="id7" class="docureq-modal">
+						  <div id="lupon" class="docureq-modal">
 								<div class="modal-contentdocreq animate">
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+												<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
 												</div>
@@ -124,13 +176,17 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id8').style.display='block'">Accounting Department</button>
-
+					<div class="btn-box">
+						<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('accounting').style.display='block'">Accounting Department</button>
+					</div>
 					<div id="formatValidatorName" >
-						  <div id="id8" class="docureq-modal">
+						  <div id="accounting" class="docureq-modal">
 								<div class="modal-contentdocreq animate" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+												<span onclick="document.getElementById('accounting').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
 												</div>
@@ -151,13 +207,17 @@ include "db/user.php";
 					</div>
 			</div>
 			<div class="employee-logform">
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id3').style.display='block'">BPSO</button>
-					
+				<div class=" btn-box">
+					<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('bpso').style.display='block'">BPSO</button>
+				</div>
 					<div id="formatValidatorName" >
-						  <div id="id4" class="docureq-modal">
+						  <div id="bpso" class="docureq-modal">
 								<div class="modal-contentdocreq animate" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+												<span onclick="document.getElementById('bpso').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
 												</div>
@@ -176,15 +236,19 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id3').style.display='block'">Document Request</button>
+					<div class=" btn-box">
+						<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('docreq').style.display='block'">Document Request</button>
+					</div>
 					
 									<!--Modal form for Login-->
 					<div id="formatValidatorName" >
-						  <div id="id3" class="docureq-modal">
+						  <div id="docreq" class="docureq-modal">
 								<div class="modal-contentdocreq animate">
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+											
+												<span onclick="document.getElementById('docreq').style.display='none'" class="topright">&times;</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
 												</div>
@@ -203,17 +267,17 @@ include "db/user.php";
 							  </div>
 						</div>
 					</div>
-					
-					<button type="button" class="btn btn-outline-primary btn-size" onclick="document.getElementById('id4').style.display='block'">Complaints</button>
-					
+					<div class="btn-box">
+						<button type="button" class=" btn btn-outline-primary btn-size" onclick="document.getElementById('complaints').style.display='block'">Complaints</button>
+					</div>
 									<!--Modal form for Login-->
 					<div id="formatValidatorName" >
-						  <div id="id4" class="docureq-modal">
+						  <div id="complaints" class="docureq-modal">
 								<div class="modal-contentdocreq animate" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 
-										<span onclick="document.getElementById('id4').style.display='none'" class="w3-button w3-display-topright">hey</span>
+												<span onclick="document.getElementById('complaints').style.display='none'" class="topright">&times;</span>
 
 												<div class="information">
 													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 

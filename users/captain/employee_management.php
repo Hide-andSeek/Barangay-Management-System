@@ -65,7 +65,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
     left: 0;
     top: 0;
     width: 100%; 
-    height: 115%; 
+    height: 120%; 
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
     padding-top: 5px; 
@@ -99,6 +99,12 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 
 .submtbtn{
     height: 40px;
+}
+
+
+.closebtn:hover{
+	background: red;
+	color: white;
 }
 
 .submtbtn:hover{
@@ -238,14 +244,20 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			  </section>
 				
 				<div>
-					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
+					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('addemployee').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
 <!--Modal form for Add Employee-->
 				<div id="formatValidatorName" >
 					<div >
-						  <div id="id1" class="employeemanagement-modal modal" >
+						  <div id="addemployee" class="employeemanagement-modal modal" >
 								<div class="modal-contentemployee animate" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="employee_form" class="container">
+
+										<div class="information">   
+													<span type="submit" onclick="document.getElementById('addemployee').style.display='none'" class="closebtn" style="float: right">
+													X
+													</span>  
+												</div>
 												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
 												Add Employee
 												</div>
@@ -354,11 +366,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>
 									<td><?php echo $data ['department']; ?></td>
-									<td>
-										<?php
-											if($data[''])
-										?>
-									</td>
+									<td>Active</td>
 									<td>
 										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
 
@@ -422,7 +430,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			<script>
 			
 			 /*-- Fuction for Login Modal Form --*/
-			var modal = document.getElementById('id1');
+			var modal = document.getElementById('addemployee');
 				window.onclick = function (event) {
 					if (event.target == modal) {
 					modal.style.display = "none";
@@ -430,6 +438,13 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			}  
 
 			var modal = document.getElementById('id2');
+				window.onclick = function (event) {
+					if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}  
+
+			var modal = document.getElementById('close');
 				window.onclick = function (event) {
 					if (event.target == modal) {
 					modal.style.display = "none";

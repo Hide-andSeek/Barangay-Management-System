@@ -172,7 +172,7 @@ include "db/users.php";
 																
 																<div class="form-group">
 																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date" class="form-control form-text form-text-desc" id="birthday" name="birthday">
+																		<input type="date" min="2020-01-01" max="1950-01-01" class="form-control form-text form-text-desc" id="birthday" name="birthday">
 																</div><br>
 																
 																<div class="form-group">
@@ -192,7 +192,8 @@ include "db/users.php";
 																
 																<div class="form-group">
 																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" min="12" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
+																	<input type="number" min="0"
+																	max="12" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
 																</div><br>
 																
 																<div class="form-group">
@@ -287,7 +288,7 @@ include "db/users.php";
 																
 																<div class="form-group">
 																	<label for="contactno">Contact No.: </label>
-																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																	<input type="number" min="0" max="12" class="form-control number form-text" id="contactno" name="contactno">
 																</div><br>
 
 																<div class="form-group">
@@ -532,7 +533,7 @@ include "db/users.php";
 													
 												</section>
 
-													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+													<button type="submit" name="blotterbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
 										  </form> 
 							</div>
 						</div>
