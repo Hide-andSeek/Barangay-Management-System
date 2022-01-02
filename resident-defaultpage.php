@@ -176,7 +176,7 @@ if(isset($_SESSION['email'])){
 																
 																<div class="form-group">
 																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date" min="2020-01-01" max="1950-01-01" class="form-control form-text form-text-desc" id="birthday" name="birthday">
+																		<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
 																</div><br>
 																
 																<div class="form-group">
@@ -196,8 +196,7 @@ if(isset($_SESSION['email'])){
 																
 																<div class="form-group">
 																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" min="0"
-																	max="12" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
+																	<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
 																</div><br>
 																
 																<div class="form-group">
@@ -252,13 +251,13 @@ if(isset($_SESSION['email'])){
 					Business Permit</button>
 						<div id="hidedocument1" class="document-hide">
 							<div class="preview">
-								<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 											  <section class="userpersonal_form">
 														<div class="left_userpersonal_info">
 															<fieldset class="field_set">
 																<legend>For Business</legend>
 																<div class="form-group">
-																	<label for="dateissued">Date: </label>
+																	<label for="dateissued">Date issued: </label>
 																	<input required type="date" class="form-control form-text" id="dateissued" name="dateissued">
 																</div><br>
 																
@@ -292,12 +291,12 @@ if(isset($_SESSION['email'])){
 																
 																<div class="form-group">
 																	<label for="contactno">Contact No.: </label>
-																	<input type="number" min="0" max="12" class="form-control number form-text" id="contactno" name="contactno">
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
 																</div><br>
 
 																<div class="form-group">
 																	<label for="file">Attach Front ID: <i class="red">*</i></label>
-																	<input type='file' />
+																	<input type='file' name='files[]' required/>
 																</div>
 
 																<div class="form-group">

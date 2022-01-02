@@ -1,51 +1,9 @@
 <?php session_start();
-define('BASEPATH', true);
 
 include "db/conn.php";
+include "db/user.php";
 
 
-
-$_SESSION['email'] = '';
-
-if(isset($_POST['logbtn'])){
-			
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $email = !empty($_POST['email']) ? trim($_POST['email']) :null;
-    $passwordAttempt = !empty($_POST['password']) ? trim($_POST['password']) :null;
-    
-    //Retrieve : Name Parameter
-    $logsql = "SELECT resident_id, email, password FROM accreg_resident WHERE email = :email";
-    $stmt = $db->prepare($logsql);
-    
-    $stmt->bindValue(':email', $email);
-    
-    $stmt->execute();
-    
-    $email = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if($email === false){
-        echo '<script>
-                alert("Invalid Email or Password");
-                window.location.href="index.php";
-            </script>';
-    }else{
-        $validPassword = password_verify($passwordAttempt, $email['password']);
-        
-        if($validPassword){
-            $_SESSION['email'] = $email;
-            echo '<script>
-                    window.location.href="resident-defaultpage.php";
-                </script>';
-                exit;
-        }else{
-            echo '<script>
-                    alert("Invalid mail or Password")
-                    window.location.href="index.php";
-                </script>';
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>

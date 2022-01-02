@@ -43,61 +43,61 @@ if(isset($_POST['clearancebtn'])){
 ?>
 
 <?php
-//Barangay ID Form
-if(isset($_POST['brgyidbtn'])){
-   
-	$fname = $_POST['fname'];
-	$mname = $_POST['mname'];
-	$lname	= $_POST['lname'];
-	$address = $_POST['address'];
-	$birthday = $_POST['birthday'];
-	$placeofbirth = $_POST['placeofbirth'];
-	$guardianname = $_POST['guardianname'];
-	$emrgncycontact = $_POST['emrgncycontact'];
-	$reladdress = $_POST['reladdress'];
-    $dateissue = $_POST['dateissue'];
-	$countfiles = count($_FILES['files']['name']);
-    
-    $query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, guardianname, emrgncycontact, reladdress, dateissue, file_name,image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-   
-    $stmt = $db->prepare($query);
-   
-    for($i = 0; $i < $countfiles; $i++) {
-   
-        // File name
-        $filename = $_FILES['files']['name'][$i];
-        // Location
-        $target_file = 'img/fileupload_barangayid/'.$filename;
-        // File Path
-        $file_extension = pathinfo(
-            $target_file, PATHINFO_EXTENSION);
-    
-        $file_extension = strtolower($file_extension);
-       
-        //Image extension
-        $valid_extension = array("png","jpeg","jpg");
-       
-        if(in_array($file_extension, $valid_extension)) {
-   
-            // Upload file
-            if(move_uploaded_file(
-                $_FILES['files']['tmp_name'][$i],
-                $target_file)
-            ) {
-                // Execute query
-                $stmt->execute(
-                    array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress, $dateissue, $filename, $target_file));
-            }
-        }
-    }
-    echo 	"<script>
-				alert('Submitted Successfully!');
-				window.location.href='resident-defaultpage.php';
-			 </script>";
-}
+	//Barangay ID Form
+	if(isset($_POST['brgyidbtn'])){
+	
+		$fname = $_POST['fname'];
+		$mname = $_POST['mname'];
+		$lname	= $_POST['lname'];
+		$address = $_POST['address'];
+		$birthday = $_POST['birthday'];
+		$placeofbirth = $_POST['placeofbirth'];
+		$guardianname = $_POST['guardianname'];
+		$emrgncycontact = $_POST['emrgncycontact'];
+		$reladdress = $_POST['reladdress'];
+		$dateissue = $_POST['dateissue'];
+		$countfiles = count($_FILES['files']['name']);
+		
+		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, guardianname, emrgncycontact, reladdress, dateissue, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	
+		$stmt = $db->prepare($query);
+	
+		for($i = 0; $i < $countfiles; $i++) {
+	
+			// File name
+			$filename = $_FILES['files']['name'][$i];
+			// Location
+			$target_file = 'img/fileupload_barangayid/'.$filename;
+			// File Path
+			$file_extension = pathinfo(
+				$target_file, PATHINFO_EXTENSION);
+		
+			$file_extension = strtolower($file_extension);
+		
+			//Image extension
+			$valid_extension = array("png","jpeg","jpg");
+		
+			if(in_array($file_extension, $valid_extension)) {
+	
+				// Upload file
+				if(move_uploaded_file(
+					$_FILES['files']['tmp_name'][$i],
+					$target_file)
+				) {
+					// Execute query
+					$stmt->execute(
+						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress, $dateissue, $filename, $target_file));
+				}
+			}
+		}
+		echo 	"<script>
+					alert('Submitted Successfully!');
+					window.location.href='resident-defaultpage.php';
+				</script>";
+	}
+?>
 
-
-
+<?php
 //Barangay Permit
 if(isset($_POST['permitBtn'])){
 	
@@ -106,10 +106,11 @@ if(isset($_POST['permitBtn'])){
 	$ownername	= $_POST['ownername'];
 	$businessname = $_POST['businessname'];
 	$businessaddress = $_POST['businessaddress'];
+	$plateno = $_POST['plateno'];
 	$contactno = $_POST['contactno'];
 	$countfiles = count($_FILES['files']['name']);
 	
-	$query = "INSERT INTO barangayid (dateissued, selection, ownername, businessname, businessaddress,contactno, file_name, image) VALUES(?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO barangayid (dateissued, selection, ownername, businessname, businessaddress, plateno, contactno, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?)";
    
     $stmt = $db->prepare($query);
    
@@ -137,7 +138,7 @@ if(isset($_POST['permitBtn'])){
             ) {
                 // Execute query
                 $stmt->execute(
-                    array($dateissued, $selection, $ownername, $contactno, $filename, $target_file));
+                    array($dateissued, $selection, $ownername,  $businessname, $businessaddress, $plateno, $contactno, $filename, $target_file));
             }
         }
     }
@@ -146,9 +147,11 @@ if(isset($_POST['permitBtn'])){
 				window.location.href='resident-defaultpage.php';
 			 </script>";
 }
+?>
+
+<?php
 
 //Indigency
-
 if(isset($_POST['indigencybtn'])){
    
 	$fullname = $_POST['fullname'];
