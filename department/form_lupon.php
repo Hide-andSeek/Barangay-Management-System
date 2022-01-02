@@ -79,9 +79,17 @@ if(!isset($_SESSION["employee_no"])){
 			 <li>
 			   <a class="side_bar" href="form_bpso_violators.php">
 				 <i class='fa fa-print'></i>
-				 <span class="links_name">Violators</span>
+				 <span class="links_name">Summon Letter</span>
 			   </a>
-			   <span class="tooltip">Violators</span>
+			   <span class="tooltip">Summon Letter</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="form_bpso_violators.php">
+				 <i class='fa fa-print'></i>
+				 <span class="links_name">Sworn Statement</span>
+			   </a>
+			   <span class="tooltip">Sworn Statement</span>
 			 </li>
 			   
 
