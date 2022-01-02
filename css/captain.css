@@ -14,10 +14,6 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
     align-items: center;
 }
 
-.captain_sidebar{
-  background: gray;
-}
-
 #formatValidatorName{
     top: 50px;
 }

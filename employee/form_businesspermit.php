@@ -181,7 +181,8 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Business Address</th>
 									<th>Plate No</th>
 									<th>Contact no</th>
-									<th>ID Type</th>
+									<th>Front ID</th>
+									<th>Back ID</th>
 									<th>Approved by</th>
 									<th>Action</th>
 								</tr>                       
@@ -199,6 +200,7 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data1 ['businessaddress']; ?></td>
 									<td><?php echo $data1 ['plateno']; ?></td>
 									<td><?php echo $data1 ['contactno']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
 									<td><a style="color: blue;">view id</a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
 									<td><button>Approve</button></td>

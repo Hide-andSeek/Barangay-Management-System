@@ -72,6 +72,14 @@ if(!isset($_SESSION["official_name"])){
 					 <span class="tooltip">Brgy Official Management</span>
 				</li>
 
+				<li>
+				 <a class="side_bar" href="residentcensus.php">
+					  <i class='bx bxs-user-detail'></i>
+					  <span class="links_name">Resident Census</span>
+					</a>
+					 <span class="tooltip">Resident Census</span>
+				</li>
+
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>

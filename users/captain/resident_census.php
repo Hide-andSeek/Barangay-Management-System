@@ -27,7 +27,7 @@ if(!isset($_SESSION["official_name"])){
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Admin Management </title>
+     <title> Resident Census </title>
 	 
 	 
 	 <style>

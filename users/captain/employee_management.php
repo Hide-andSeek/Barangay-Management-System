@@ -5,6 +5,11 @@ if(!isset($_SESSION["official_name"])){
 }
 ?>
 
+<?php 
+include "db/conn.php";
+include "db/user.php";
+?>
+
 
 
 <!DOCTYPE html>
@@ -23,7 +28,6 @@ if(!isset($_SESSION["official_name"])){
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -49,9 +53,6 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
     align-items: center;
 }
 
-.captain_sidebar{
-  background: gray;
-}
 
 #formatValidatorName{
     top: 50px;
@@ -188,6 +189,14 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 					</a>
 					 <span class="tooltip">Brgy Official Management</span>
 				</li>
+
+				<li>
+				 <a class="side_bar" href="residentcensus.php">
+					  <i class='bx bxs-user-detail'></i>
+					  <span class="links_name">Resident Census</span>
+					</a>
+					 <span class="tooltip">Resident Census</span>
+				</li>
 																						<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
@@ -283,9 +292,8 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
 													5px;" id="department" name="department">
 														<option disabled>--Select--</option>
-														<option value="KAPITAN">KAPITAN</option>
 														<option value="BCPC">BCPC</option>
-														<option value="BAWC">BAWC</option>
+														<option value="VAWC">VAWC</option>
 														<option value="LUPON">LUPON</option>
 														<option value="ACCOUNTING">ACCOUNTING</option>
 														<option value="BPSO">BPSO</option>
@@ -346,54 +354,58 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>
 									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
+										<?php
+											if($data[''])
+										?>
+									</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
 
-							<div id="id2" class="employeemanagement-modal modal" >
-								<div class="modal-contentemployee animate" >
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="employee_form" class="container">
-												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-												Add Employee
-												</div>
 												
-												
-												<div class="information">
-													<label class="employee-label"> Username </label>
-													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
-												</div>
-												
-												<div class="row align-items-start">
-													<div class="information col">
-														<label class="employee-label"> Last Name </label>
-														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> First Name </label> 
-														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> Middle Name </label>
-														<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
-													</div>
-												</div>
-
-												<div class="information">   
-													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-														<i class="bx bx-t67check"></i>Submit
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Disable</button>
 									</td>
 								</tr>	
-							
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+															<div id="employee_form" class="container">
+																	<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+																	Update Employee
+																	</div>
+																	
+																	
+																	<div class="information">
+																		<label class="employee-label"> Username </label>
+																		<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+																	</div>
+																	
+																	<div class="row align-items-start">
+																		<div class="information col">
+																			<label class="employee-label"> Last Name </label>
+																			<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+																		</div>
+																		
+																		<div class="information col">
+																			<label class="employee-label"> First Name </label> 
+																			<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+																		</div>
+																		
+																		<div class="information col">
+																			<label class="employee-label"> Middle Name </label>
+																			<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+																		</div>
+																	</div>
+
+																	<div class="information">   
+																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																			<i class="bx bx-t67check"></i>Submit
+																		</button>  
+																	</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
 							<?php
 							}
 							?>

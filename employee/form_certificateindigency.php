@@ -174,7 +174,8 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Purpose</th>
 									<th>Date Issued</th>
 									<th>Date Expiration</th>
-									<th>ID type</th>
+									<th>Front ID</th>
+									<th>Back ID</th>
 									<th>Approved by</th>
 									<th>Action</th>
 								</tr>                       
@@ -190,7 +191,8 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data2 ['purpose']; ?></td>
 									<td><?php echo $data2 ['date_issue']; ?></td>
 									<td><?php echo $data2 ['date_issue']; ?></td>
-									<td><?php echo $data2 ['name']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
+									<td><a style="color: blue;">view id</a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
 									<td><button>Approve</button></td>
 								</tr>	

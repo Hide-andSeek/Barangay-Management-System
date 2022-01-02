@@ -36,7 +36,7 @@ if(isset($_POST['empBtn'])){
 
 
 
-//Employee - Document Request Login
+//Employee - Document Request Login 
 if(isset($_POST['documentlogbtn'])){
 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
 		

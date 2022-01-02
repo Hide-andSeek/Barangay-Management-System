@@ -197,7 +197,8 @@ include "../db/documents.php";
 										<th>Issued at</th>
 										<th>Issued on</th>
 										<th>Precint no</th>
-										<th>ID type</th>
+										<th>Front ID</th>
+										<th>Back ID</th>
 										<th>Approved by</th>
 										<th>Action</th>
 									</tr>                       
@@ -219,6 +220,7 @@ include "../db/documents.php";
 									<td><?php echo $data2 ['issued_at']; ?></td>
 									<td><?php echo $data2 ['date_issued']; ?></td>
 									<td><?php echo $data2 ['precint_no']; ?></td>
+									<td><a style="color: blue;">view id</a></td>
 									<td><a style="color: blue;">view id</a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
 									<td><button>Approve</button></td>

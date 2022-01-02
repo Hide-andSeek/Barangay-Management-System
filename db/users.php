@@ -1,5 +1,4 @@
-
-																															<!--Resident Login Form-->
+<!--Resident Login Form-->
 <?php 
 	if(isset($_POST['logbtn'])){
 

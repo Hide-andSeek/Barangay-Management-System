@@ -120,7 +120,7 @@ if(!isset($_SESSION["employee_no"])){
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				    
 					 <div><?php echo $_SESSION["employee_no"];?></div>

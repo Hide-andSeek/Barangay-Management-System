@@ -18,7 +18,7 @@ include "db/user.php";
 	<!-- Customize Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/employee.css">
-	
+
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
 	
@@ -38,6 +38,8 @@ include "db/user.php";
 			padding: 50px 50px 50px 50px;
 			margin: 10px 10px 10px 10px;
 		}
+
+
 	 </style>
 	 
    </head>
@@ -84,7 +86,7 @@ include "db/user.php";
 												
 										
 											   <div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="BAWC">
+													<input class="inputtext control-label" id="department" name="department" type="hidden" value="VAWC">
 												</div>
 												
 												<div class="information">   
@@ -210,16 +212,18 @@ include "db/user.php";
 								<div class="modal-contentdocreq animate" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+
+										<span onclick="document.getElementById('id4').style.display='none'" class="w3-button w3-display-topright">hey</span>
+
 												<div class="information">
 													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
 												</div>
-												
+											
 												<div class="information">
 													<input class="inputtext control-label" id="department" name="department" type="hidden" value="COMPLAINT">
 												</div>
 
 												
-
 												<div class="information">   
 													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 														Login

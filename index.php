@@ -22,6 +22,8 @@ include "db/users.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
