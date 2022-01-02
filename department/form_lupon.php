@@ -34,7 +34,7 @@ if(!isset($_SESSION["employee_no"])){
 	
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title>  Dashboard </title>
+     <title> Lupon Dashboard </title>
 	 
 	 
 	 <style>
@@ -115,7 +115,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>BARANGAY PUBLIC SAFETY OFFICER
+						<h5>OFFICE OF THE LUPONG TAGAPAMAYAPA
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
