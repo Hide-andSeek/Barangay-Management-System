@@ -492,19 +492,7 @@ a.login{cursor:pointer;};
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
                 <!-- Wrapper for Slides -->
                 <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement1" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-									<div class="pic"></div>
+                        
                                     <?php
 										include ('db/conn.php');
 										include ('db/captain.php');
@@ -512,31 +500,29 @@ a.login{cursor:pointer;};
 										$stmt = $db->prepare('SELECT * from announcement');
 										$stmt->execute();
 										$imagelist = $stmt->fetchAll();
-									
-										foreach($imagelist as $image) {
+											if (count($imagelist) > 0) {
+												foreach ($imagelist as $image) {
 										?>
-										<a class="news_heading" href="#">
-											
-											<img src="<?=$image['announcement_image']?>" 
-												title="<?=$image['announcement_imgname'] ?>" 
-												style="width='700' height='700'">
-											<span><?=$image ['description']?></span>
-										</a>
+													<div class="item active">
+														<div class="col-md-4 col-sm-6 announce">
+															<div class="block-text">
+																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" >
+
+																		<a class="news_heading" href="postannouncement.php">
+																			<h3 class="announcement_entry_text"><?=$image ['description']?></h3>
+																		</a>
+															</div>
+														</div>
+													</div>
 										<?php
+														}
+											} else {
+											echo "<p>No Announcement yet!</p>";
 										}
 										?> 
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement3" class="col-md-6">
-									<a class="news_heading" href="#">
-										<h3 class="announcement_entry_text">Announcement Entry #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                        </div>
+                     
+<!-- 2nd Section of Announcement-->
+
                         <div class="item">
                             <div class="col-md-4 col-sm-6">
                                 <div class="block-text">
