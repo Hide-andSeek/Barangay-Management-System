@@ -77,7 +77,7 @@ if(!isset($_SESSION["employee_no"])){
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_bpso_violators.php">
+			   <a class="side_bar" href="">
 				 <i class='fa fa-print'></i>
 				 <span class="links_name">Summon Letter</span>
 			   </a>
@@ -85,7 +85,7 @@ if(!isset($_SESSION["employee_no"])){
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="form_bpso_violators.php">
+			   <a class="side_bar" href="">
 				 <i class='fa fa-print'></i>
 				 <span class="links_name">Sworn Statement</span>
 			   </a>
@@ -132,8 +132,9 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  </section>
 			    <br>
+				
 			  <div>
-			<h4>  ALL CASES </H4>
+			
 <div>
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
@@ -150,9 +151,12 @@ if(!isset($_SESSION["employee_no"])){
 					echo "<h3>$pdoexecute</h3>"
 					
 					?>
+					<a href= "lupon_active.php">
 				</div>
+				
 				<div class="w3-clear"></div>
 				<h4>Active</h4>
+				
 			</div>
 			</div>
 
@@ -169,7 +173,7 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-		
+		<a href= "lupon_settled.php">
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Settled</h4>
@@ -189,10 +193,10 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-				
+				<a href= "lupon_mediation.php">
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Not Settled</h4>
+				<h4>Mediation</h4>
 			</div>
 			</div>
 			<div class="w3-quarter">
@@ -208,7 +212,7 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-				
+<a href= "lupon_ongoing.php">				
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Upcoming Hearing</h4>
@@ -226,7 +230,7 @@ if(!isset($_SESSION["employee_no"])){
                 </div> 
 			  </form>
 
-			  
+			
 				<div>
 					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add New</button></div>
 <!--Modal form for Add Employee-->

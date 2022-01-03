@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_lupon_active.php");
+	header("location: form_lupon_mediation.php");
 }
 ?>
 
@@ -21,7 +21,6 @@ if(!isset($_SESSION["employee_no"])){
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -116,7 +115,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>ACTIVE CASES
+						<h5>FOR MEDIATION
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -136,10 +135,9 @@ if(!isset($_SESSION["employee_no"])){
                         </label>
                 </div> 
 			  </form>
-	
-			 
-	
-	<div>
+
+			  
+				<div>
 					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add New</button></div>
 <!--Modal form for Add Employee-->
 				<div id="formatValidatorName" >
