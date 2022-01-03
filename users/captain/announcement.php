@@ -171,7 +171,7 @@ include "db/users.php";
 										<div id="Login" class="login_container form">
 												
 												<div class="information">
-													<input required class="form-control inputtext control-label" id="description" name ="description" type="text"  placeholder="Description"> 
+													<textarea required class="form-control inputtext control-label" id="description" name ="description" type="text"  placeholder="Description"></textarea>
 												</div>
 												
 												<div class="form-group">
@@ -223,7 +223,6 @@ include "db/users.php";
 									<td>
 										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
 
-												
 										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Disable</button>
 									</td>
 								</tr>	

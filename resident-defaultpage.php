@@ -516,10 +516,11 @@ a.login{cursor:pointer;};
 										foreach($imagelist as $image) {
 										?>
 										<a class="news_heading" href="#">
-											<?=$image ['description']?>
+											
 											<img src="<?=$image['announcement_image']?>" 
 												title="<?=$image['announcement_imgname'] ?>" 
-												style ="width='200' height='200'">
+												style="width='700' height='700'">
+											<span><?=$image ['description']?></span>
 										</a>
 										<?php
 										}
