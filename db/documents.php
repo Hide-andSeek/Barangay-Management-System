@@ -13,31 +13,44 @@ if(isset($_POST['clearancebtn'])){
 	$ctc_no = $_POST['ctc_no'];
 	$issued_at = $_POST['issued_at'];
 	$precint_no = $_POST['precint_no'];
+	$countfiles = count($_FILES['files']['name']);
 		
-		$stmt = $db->prepare("INSERT INTO barangayclearance (full_name, age, status, nationality, address, purpose, date_issued, ctc_no, issued_at, precint_no) VALUES (:full_name, :age, :status, :nationality, :address, :purpose, :date_issued, :ctc_no, :issued_at, :precint_no)");
+	$query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,purpose, date_issued, ctc_no, issued_at, precint_no, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	
+	$stmt = $db->prepare($query);
 
-		$stmt->bindParam(':full_name', $full_name);
-		$stmt->bindParam(':age', $age);
-		$stmt->bindParam(':status', $status);
-		$stmt->bindParam(':nationality', $nationality);
-		$stmt->bindParam(':address', $address);
-		$stmt->bindParam(':purpose', $purpose);
-		$stmt->bindParam(':date_issued', $date_issued);
-		$stmt->bindParam(':ctc_no', $ctc_no);
-		$stmt->bindParam(':issued_at', $issued_at);
-		$stmt->bindParam(':precint_no', $precint_no);
-		
-	if($stmt->execute()){
-		echo "<script>
-				alert('Successfully Added!');
-				window.location.href='resident-defaultpage.php';
-			 </script>";
-	}else{
-		echo "<script>
-				alert('An error occured');
-				window.location.href='resident-defaultpage.php';
-				</script>";
-	}	
+	for($i = 0; $i < $countfiles; $i++) {
+
+		// File name
+		$filename = $_FILES['files']['name'][$i];
+		// Location
+		$target_file = 'img/fileupload_clearance/'.$filename;
+		// File Path
+		$file_extension = pathinfo(
+			$target_file, PATHINFO_EXTENSION);
+	
+		$file_extension = strtolower($file_extension);
+	
+		//Image extension
+		$valid_extension = array("png","jpeg","jpg");
+	
+		if(in_array($file_extension, $valid_extension)) {
+
+			// Upload file
+			if(move_uploaded_file(
+				$_FILES['files']['tmp_name'][$i],
+				$target_file)
+			) {
+				// Execute query
+				$stmt->execute(
+					array($full_name, $age, $status, $nationality, $address, $purpose, $date_issued, $ctc_no, $issued_at, $precint_no, $filename, $target_file));
+			}
+		}
+	}
+	echo "<script>
+				alert('Submitted Successfully!');
+				window.location.href='residentreqdocu.php';
+			</script>";
 }
 
 ?>
@@ -92,7 +105,7 @@ if(isset($_POST['clearancebtn'])){
 		}
 		echo 	"<script>
 					alert('Submitted Successfully!');
-					window.location.href='resident-defaultpage.php';
+					window.location.href='residentreqdocu.php';
 				</script>";
 	}
 ?>
@@ -110,7 +123,7 @@ if(isset($_POST['permitBtn'])){
 	$contactno = $_POST['contactno'];
 	$countfiles = count($_FILES['files']['name']);
 	
-	$query = "INSERT INTO barangayid (dateissued, selection, ownername, businessname, businessaddress, plateno, contactno, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO businesspermit (dateissued, selection, ownername, businessname, businessaddress, plateno, contactno, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?)";
    
     $stmt = $db->prepare($query);
    
@@ -142,9 +155,9 @@ if(isset($_POST['permitBtn'])){
             }
         }
     }
-    echo 	"<script>
+    echo "<script>
 				alert('Submitted Successfully!');
-				window.location.href='resident-defaultpage.php';
+				window.location.href='residentreqdocu.php';
 			 </script>";
 }
 ?>
@@ -169,7 +182,7 @@ if(isset($_POST['indigencybtn'])){
         // File name
         $filename = $_FILES['files']['name'][$i];
         // Location
-        $target_file = 'img/fileupload_clearance/'.$filename;
+        $target_file = 'img/fileupload_indigency/'.$filename;
         // file extension
         $file_extension = pathinfo(
             $target_file, PATHINFO_EXTENSION);
@@ -194,7 +207,7 @@ if(isset($_POST['indigencybtn'])){
     }
     echo 	"<script>
 				alert('Submitted Successfully!');
-				window.location.href='resident-defaultpage.php';
+				window.location.href='residentreqdocu.php';
 			 </script>";
 }
 
@@ -232,7 +245,7 @@ if(isset($_POST['blotterbtn'])){
 	if($stmt->execute()){
 		echo "<script>
 				alert('Submitted Successfully!');
-				window.location.href='resident-defaultpage.php';
+				window.location.href='residentreqdocu.php';
 			 </script>";
 	}else{
 		echo '<script>alert("An error occured! Please try again!")</script>';

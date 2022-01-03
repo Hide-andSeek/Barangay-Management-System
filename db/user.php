@@ -1,9 +1,5 @@
 <?php
-
-
-
-$_SESSION['email'] = '';
-
+//Resident Login
 if(isset($_POST['logbtn'])){
 			
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

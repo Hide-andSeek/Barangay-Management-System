@@ -1,37 +1,38 @@
+<?php session_start();
+if(!isset($_SESSION['email'])){
+	header("location: resident-defaultpage.php");
+}
+?>
+
 <?php 
+
 include "db/conn.php";
 include "db/documents.php";
 include "db/users.php";
 
 ?>
 
-<?php session_start();
-$email = '';
-
-if(isset($_SESSION['email'])){
-	$email = $_SESSION['email'];
-}
-?>
-
-
-
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Resident - Documents</title>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
+    <title>Home - Barangay Commonwealth QC.</title>
 
     <!-- Bootstrap Core CSS -->
 
-    <link href="resident-css/bootstrap.css" rel="stylesheet">
+    <link href="resident-css/bootstrap.css" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
@@ -44,51 +45,232 @@ if(isset($_SESSION['email'])){
 
     <!-- Custom Animations -->
 
-    <link rel="stylesheet" href="residentcss/animate.css">
-
+    <link rel="stylesheet" href="resident-css/animate.css">
+	
 	<style>
-				/* 9.0 -- Resident Default Page -- */
-		.documentbtn{font-size: 15px;width: 200px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
-		.documentbtn:hover{background-color: gray;color: white;}
-		.document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
+		.guidelines{font-size: 11px; color: #808080; padding-left: 25px; padding-right:25px; text-align: justify; padding-bottom: 15px;}
+		button.getstarted{margin-bottom: 55px;}
+		.blotter {margin-top: 15px;}
+		.colu{margin: 15px 15px 15px 15px; background-color: black;}
+		
+		
+		
+		
+.section {
+    padding: 20px 20px;
+}
 
-		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
-		.document-section{margin-top:16px!important;margin-bottom:16px!important}
-		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;background-color:#f1f1f1!important}
+section#services {
+    /*background-image: url(../img/backgrounds/services-bg.jpg);*/
+	background-color: gray;
+    background-position: center;
+    background-size: cover;
+	font-family: 'Montserrat', sans-serif;
+}
 
-		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
-		.document-block{display:block;width:100%}
-		.document-hide{display:none!important}
-		.document-show{display:block!important}
-		p.content{width: 450px; height: 300px;}
+section#services .section-subheading {
+    color:#fff !important;
+}
 
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button{
-			-webkit-appearance: none;
-			margin: 0;
+section h2.section-heading {
+    font-size: 40px;
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase !important;
+    color: #058BCE;
+    
+}
+
+section h3.section-subheading {
+    font-size: 15px;
+    line-height: 26px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: none;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 47px;
+    margin-top: 20px !important;
+    color: #222222;
+}
+
+
+a.filled-button {
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 300;
+	border-radius: 5px;
+	transition: all 0.3s;
+	cursor: pointer;
+}
+
+a.filled-button:hover {
+	background-color: #7cfa66d7;
+	color: #fff;
+}
+
+
+@media all and (min-width:768px) {
+    section {
+        padding: 80px 0;
+    }
+    
+}
+
+@media all and (max-width:480px) {
+    section h2.section-heading {
+        font-size: 25px;
+        margin-top: 0;
+        text-align: center;
+        text-transform: uppercase !important;
+        color: #058BCE;
+    }
+    
+    section h3.section-subheading {
+        font-size: 14px;
+        line-height: 26px;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: none;
+        text-align: center;
+        font-weight: 400;
+        margin-bottom: 47px;
+        margin-top: 15px !important;
+        color: #000;
+    }
+    .u-description{
+        display: none;
+    }
+}
+
+.radius{
+	border-radius: 20px;
+}
+
+
+
+.services_1 {
+	background-size: cover;
+	padding: 20px 0px;
+}
+
+.services_1 .service-item1 {
+	text-align: center;
+
+}
+
+.services_1 .service-item1 .icon {
+	background-color: #f7f7f7;
+	padding: 40px;
+    border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+
+}
+
+.services_1 .service-item1 .icon i {
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	line-height: 100px;
+	background-color: #52d673;
+	color: #fff;
+	font-size: 32px;
+	border-radius: 20px 20px 20px 20px;
+}
+
+.services_1 .service-item1 .down-content1 {
+	background-color: #fff;
+	padding: 20px 10px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+.services_1 .service-item1 .down-content1 h4 {
+	font-size: 17px;
+	color: #1a6692;
+	margin-bottom: 20px;
+	
+}
+
+.services_1 .service-item1 .down-content1 p {
+	margin-bottom: 25px;
+}
+
+.service{color: white;}
+
+.announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
+.announce, .news{display: flex; justify-content: center; align-items: center;}
+.news{margin-top: 15px;}
+.see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
+.block-text{background-color: #d1d1d1;}
+.see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
+
+.news_heading{color: black; text-align: justify;}
+.news_heading:hover{color: blue; text-decoration: none;}
+div.announce{background-color: white; margin-top: 15px; float: center;}
+.pic{background-color: gray; margin: 50px 50px 50px 50px}
+
+/*-- Mobile Device --*/
+
+
+@media all and (max-width: 700px){
+    .services_1 .service-item1 .icon i {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media all and (max-width: 1200px){
+	.service-item1{
+		padding-bottom: 20px;
+	}
+}
+
+a.login{cursor:pointer;};
+
+.logdropbtn {
+		display: inline-block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
 		}
 
-		input[type=number]{
-			-moz-appearance: textfield;
+		.logdropdown {
+		display: inline-block;
 		}
 
-		.detailid{padding-top: 50px; color: #19c410;}
-		.form-text-desc{font-size: 10px;margin: 3px 3px; color:black;}
+		.logdropdown-content {
+		display: none;
+		position: absolute;
+		background-color: gray;
+		min-width: 260px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		}
 
-		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
-		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
-		.modalcontent-notif{height: 230px; width: 450px;}
-		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
+		.logdropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		text-align: left;
+		}
 
-		.instruction{height: 150px; width: 150px; background-color:#f1f1f1!important; border-radius: 50%; display: inline-block; position: auto; margin-left: 15px}
+		.logdropdown-content a:hover {background-color: #f1f1f1;}
+
+		.logdropdown:hover .logdropdown-content {
+		display: block;
+		}
+
 	</style>
+
 </head>
 
-<body onload="display_ct()" id="#documents">
-    
+
+
+<body onload="display_ct()" id="home">
+    <!-- HEADER -->
 
     <header id="header">
-         <!-- Navigation -->
+        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top navnav">
             <div class="container-fluid top-nav">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -99,25 +281,38 @@ if(isset($_SESSION['email'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand logo-top page-scroll" href="resident-defaultpage.php">
-                            <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
+                    <a class="navbar-brand logo-top page-scroll" href="#header">
+                        <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
                     </a>
                 </div>
-
-                 <!-- Collect the nav links, forms, and other content for toggling -->
-                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden nav-buttons">
                             <a href="#page-top"></a>
                         </li>
-						<li>
-                            <a class="page-scroll" href="#documents">Documents</a>
-                        </li>
                         <li>
-                            <a class="page-scroll" href="resident_logout.php">Logout</a>
+                            <a class="page-scroll" href="announcement.php">Announcement</a>
                         </li>
-						<li>
-							<a style="color: green" class="page-scroll" href="#"><?php  echo array_values($email)[1] ?></a>
+						<li class="logdropdown">
+							<a class="page-scroll logout" href="javascript:void(0)">Services</a>
+							<span class="logdropdown-content">
+								<a class="page-scroll" href="residentreqdocu.php#barangayid">Barangay ID</a>
+								<a class="page-scroll" href="residentreqdocu.php#permit">Business Permit</a>
+								<a class="page-scroll" href="residentreqdocu.php#indigency">Certificate of Indigency</a>
+								<a class="page-scroll" href="residentreqdocu.php#clearance">Barangay Clearance</a>
+								<a class="page-scroll" href="residentreqdocu.php#blotter">Blotter</a>
+							</span>
+						</li>
+                        <li>
+                            <a class="page-scroll" href="contact.php">Contact Us</a>
+                        </li>
+                        <li class="logdropdown">
+							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
+							<span class="logdropdown-content">
+								<a class="page-scroll" href="resident_logout.php">Logout</a>
+								<a href="#">View Profile</a>
+							</span>
 						</li>
                     </ul>
                 </div>
@@ -126,474 +321,363 @@ if(isset($_SESSION['email'])){
             <!-- /.container-fluid -->
         </nav>
     </header>
+
+    <!-- Slider -->
+    <section id="slider">
+      <div id="myCarousel-one" class="carousel slide">
+
+       <ol class="carousel-indicators">
+            <li data-target="#myCarousel-one" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel-one" data-slide-to="1"></li>
+        </ol>
+
+            <div class="carousel-inner">
+                <div class="item active"> 
+                
+                    <div class="carousel-caption wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="intro-text">
+                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth</h1>
+                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Management</h2>
+                                    <p class="intro-paragraph animated bounceInRight"> </p>
+                                </div>
+                                <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth_1.jpg" alt="slider-image"/>
+                </div>
+               
+                <div class="item"> 
+                
+                    <div class="carousel-caption wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="intro-text">
+                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth Hall</h1>
+                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Services</h2>
+                                    <p class="intro-paragraph animated bounceInRight"> </p>
+                                </div>
+                                <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth.jpg" alt="slider-image"/>
+                </div>				
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Vision -->
+    <div class="best-features about-features">
+        <div class="mv_container">
+          <div class="row">
+            
+            <div class="col-md-6">
+              <div class="right-content">
+                <h4 class="mv_heading section-heading">Misyon</h4>
+                <p class="mv_content section-subheading "><blockquote class="section-subheading">Upang maglingkod ng lubusan sa barangay sa paghahatid ng serbisyo sa pagsulong ng kagalingan na may pantay na pagtingin at kasiguruhan ng daynamiko, maunlad at payapang pamayanan.</blockquote></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="left-content">
+                <h4 class="mv_heading section-heading">Adhikain</h4>
+                <p class="mv_content section-subheading"><blockquote class="section-subheading">Upang makabuo ng isang pamayanang binigkis ng layunin para sa mabuting buhay sa diwa ng pagkakaisa, paninindigan ng paglilingkod sa kapwa na may paggalang sa dignidad at karangalan ng iba, na ginagabayan ng higit sa lahat ng pagmamahal sa diyos at bayan.</blockquote></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container-fluid wrapper">
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <h2 class="section-heading service">Services</h2>
+                </div>
+            </div>
+        </div>
+			
+			<div class="services_1">
+				  <div class="container">
+					<div class="row">
+					  <div class="col-md-2">
+					  <a class="filled-button" href="residentreqdocu.php#barangayid">
+						<div class="service-item1">
+						  <div class="icon">
+							<i class="bx bx-id-card"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Barangay ID</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					  <div class="col-md-2">
+					  <a class="filled-button" href="residentreqdocu.php#clearance">
+						<div class="service-item1">
+						  <div class="icon">
+							<i class="bx bx-receipt bx_icon"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Barangay Clearance</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					  <div class="col-md-2">
+					  <a class="filled-button" href="residentreqdocu.php#indigency">
+						<div class="service-item1">
+						  <div class="icon">
+							<i class="bx bxs-file"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Certificate of Indigency</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					  <div class="col-md-2">
+					    <a class="filled-button" href="residentreqdocu.php#blotter">
+						<div class="service-item1">
+						  <div class="icon">
+							<i class="bx bx-message-rounded"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Online Blotter</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					  <div class="col-md-2">
+					    <a class="filled-button" href="residentreqdocu.php#permit">
+						<div class="service-item1" >
+						  <div class="icon">
+							<i class="bx bx-copy"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Business Permit</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					  <div class="col-md-2">
+					    <a class="filled-button" >
+						<div class="service-item1">
+						  <div class="icon">
+							<i class="fa fa-gear"></i>
+						  </div>
+						  <div class="down-content1">
+							<h4>Others</h4>
+						  </div>
+						</div>
+						</a>
+					  </div>
+					</div>
+				  </div>
+				</div>
+    </section>
+   
+    <!-- Announcement Section-->
+    <section id="news_and_announcement">
+        <div class="container-fluid wrapper">
+            <div class="row">
+                <div class="col-sm-8 col-lg-12 text-left">
+                    <h2 class="section-heading a_c">Announcement</h2>
+                </div>
+            </div>
+            <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
+                <!-- Wrapper for Slides -->
+                <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-md-4 col-sm-6 announce">
+                                <div class="block-text">
+								<div class="pic"></div>
+									<a class="news_heading" href="#">
+                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement1" class="col-md-6">
+										<h3 class="announcement_entry_text">Announcement Entry #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 announce">
+                                <div class="block-text">
+									<div class="pic"></div>
+                                    <?php
+										include ('db/conn.php');
+										include ('db/captain.php');
+
+										$stmt = $db->prepare('SELECT * from announcement');
+										$stmt->execute();
+										$imagelist = $stmt->fetchAll();
+									
+										foreach($imagelist as $image) {
+										?>
+										<a class="news_heading" href="#">
+											<?=$image ['description']?>
+											<img src="<?=$image['announcement_image']?>" 
+												title="<?=$image['announcement_imgname'] ?>" 
+												style ="width='200' height='200'">
+										</a>
+										<?php
+										}
+										?> 
+                                </div>
+                            </div>
+							 <div class="col-md-4 col-sm-6 announce">
+                                <div class="block-text">
+								<div class="pic"></div>
+                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement3" class="col-md-6">
+									<a class="news_heading" href="#">
+										<h3 class="announcement_entry_text">Announcement Entry #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+									</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="block-text">
+								<div class="pic"></div>
+									<a class="news_heading" href="#">
+                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement4" class="col-md-6">
+										<h3 class="announcement_entry_text">Announcement Entry #4: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="block-text">
+								<div class="pic"></div>
+									<a class="news_heading" href="#">
+                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement5" class="col-md-6">
+										<h3 class="announcement_entry_text">Announcement Entry #5: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+									</a>
+                                </div>
+                            </div>
+							 <div class="col-md-4 col-sm-6">
+                                <div class="block-text">
+								<div class="pic"></div>
+									<a class="news_heading" href="#">
+                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement6" class="col-md-6">
+										<h3 class="announcement_entry_text">Announcement Entry #6: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+									</a>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			
+			<div class="announce">
+				<button class="see_announcement" onclick="document.location='announcement.php'" >See announcements</button>
+			</div>	
+			
+			
 	
-	<!--Document Section-->
-<div class="document_section">
-	<section>
+	</section >
 
-		<!-- Instructions: For request document!-->
-		<h5 style="text-align: center;">Request Document Instructions</h5>
-		<br>
-		<div  style="text-align: center;">
-			<span class="instruction">Step 1</span>
-			<span class="instruction">Step 2</span>
-			<span class="instruction">Step 3</span>
-		</div>
-		
-		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-id-card"></i>
-					Barangay ID</button>
-						<div id="hidedocument" class="document-hide">
-								<div class="preview">
-										<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
-																<div class="form-group">
-																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname">
-																</div><br/>
-																
-																<div class="form-group">
-																	<label for="middlename">Middle Name:</label>
-																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname">
-																	<!--
-																	<i aria-details="detail-id" class="detailid">This field is optional</i>
-																	-->
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname">
-																</div><br>
-																
-																 <div class="form-group">
-																	<label for="address">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="address" name="address">
-																</div></br>
-																
-																<div class="form-group">
-																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="pob">Place of Birth: </label><i class="red">*</i>
-																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
-																</div><br>
-															</fieldset>
-														</div>
-													
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>In Case of Emergency</legend>
-																<div class="form-group">
-																	<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="reladdress">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress">
-																</div><br>
-																
-																<div class="form-group">
-																	<label>Date Issued: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
-																	<input type='file' name='files[]' required aria-details="detail-id"/>
-																	
-																	<!--
-																	<i aria-details="detail-id" class="detailid">This field is optional</i>
-																	-->
-																</div>
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
-																</div>
-														</fieldset>
-													</div>
-
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set" >
-																<legend>Guidelines/ Panuto (Barangay ID)</legend>
-																<div class="form-group">
-																	<label>Sundin ang mga sumunod, sa pag proseso ng Barangay ID:</label>
-																	<ol style="padding: 15px 15px 15px 15px">
-																		<li>Siguraduhin na ang iyong impormasyon ay tugma. </li>
-																		<li>Kuhaan ng litrato ang harap at likod ng iyong ID</li>
-																		<li>Lagyan ng pangalan ang iyong file at pangalanan ito. Halimbawa <strong style="color: red">[Your name]-FrontID.jpg </strong>  </li>
-																		<li>I-save ang iyong file sa <strong style="color: red">png, jpeg and jpg </strong> format.</li>
-																		<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;">see more</a></li>
-																	</ol>
-																</div>
-														</fieldset>
-													</div>
-												</section>
-												<button type="submit" id="brgyidbtn" name="brgyidbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
-								</div>
-						</div>
-		</div>
-		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument1')" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-receipt"></i>
-					Business Permit</button>
-						<div id="hidedocument1" class="document-hide">
-							<div class="preview">
-								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>For Business</legend>
-																<div class="form-group">
-																	<label for="dateissued">Date issued: </label>
-																	<input required type="date" class="form-control form-text" id="dateissued" name="dateissued">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="selection">Please Select:</label>
-																	<span>
-																		Renewal <input required type="radio" value="renewal" id="renewal" name="selection">
-																		New <input required type="radio" value="new"  id="new" name="selection">
-																	</span>
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="ownername">Owner's Name: </label>
-																	<input required type="text" class="form-control form-text" id="ownername" name="ownername" placeholder="Please write your Full name">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="businessname">Business Name: </label>
-																	<input required type="text" class="form-control form-text" id="businessname" name="businessname">
-																</div><br>	
-																
-																 <div class="form-group">
-																	<label for="businessaddress">Business Address: </label>
-																	<input required type="text" class="form-control form-text" id="businessaddress" name="businessaddress">
-																</div></br>
-																
-																<div class="form-group">
-																	<label for="plateno">Plate No.: </label>
-																	<input type="number" class="form-control number form-text" id="plateno" name="plateno">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="contactno">Contact No.: </label>
-																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
-																	<input type='file' name='files[]' required/>
-																</div>
-
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
-																</div>
-															</fieldset>
-														</div>
-												</section>
-													<button type="submit" name="permitBtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
-							</div>
-						</div>
-		</div>
-		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument2')" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bxs-file"></i>
-					Certificate of Indigency</button>
-						<div id="hidedocument2" class="document-hide">
-							<div class="preview">
-									<form method="POST" enctype='multipart/form-data' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
-																<div class="form-group">
-																	<label for="fullname">Full Name: </label>
-																	<input required type="text" class="form-control form-text" id="fullname" name="fullname" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br>
-																
-																 <div class="form-group">
-																	<label for="address">Address: </label>
-																	<input required type="text" class="form-control form-text" id="address" name="address">
-																</div></br>
-												
-																 <div class="form-group">
-																	<label for="purpose">Purpose: </label>
-																	<input required type="text" class="form-control form-text" id="purpose" name="purpose">
-																</div></br>
-													
-																<div class="form-group">
-																	<label for="date_issue">Date Issued: </label>
-																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="file">Attach Front ID: </label>
-																	<input type='file' name='files[]'/>
-																</div>
-																<div class="form-group">
-																	<label for="file">Attach Back ID: </label>
-																	<input type='file'/>
-																</div>
-																
-															</fieldset>
-														</div>
-												</section>
-													<button type="submit" name="indigencybtn" class="btn btn-primary btn-block" id="indigencybtn"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
-							</div>
-						</div>
-		</div>
-		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument3')" style="border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-copy"></i>
-					Barangay Clearance</button>
-						<div id="hidedocument3" class="document-hide">
-							<div class="preview">
-								<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
-																<div class="form-group">
-																	<label for="full_name">Full Name: </label>
-																	<input required type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="age">Age: </label>
-																	<input required type="number" class="form-control form-text age" id="age" name="age" >
-																</div><br>
-
-																<div class="form-group">
-																	<label>Status: </label>
-																	<select class="form-control" name="status">
-																		<option disabled>--Select--</option>
-																		<option value="SINGLE">SINGLE</option>
-																		<option value="MARRIED">MARRIED</option>
-																		<option value="WIDOWED">WIDOWED</option>
-																	</select>
-																</div><br>
-
-																 <div class="form-group">
-																	<label for="nationality">Nationality: </label>
-																	<input required type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div></br>
-																
-																<div class="form-group">
-																	<label for="address">Address: </label>
-																	<input required type="text" class="form-control form-text" id="address" name="address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br>	
-															</fieldset>
-														</div>
-													
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>Other Information</legend>
-
-																<div class="form-group">
-																	<label for="purpose">Purpose: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br>
-
-																<div class="form-group">
-																		<label for="date_issued">Date Issued: </label>
-																		<input type="date" class="form-control form-text" id="date_issued" name="date_issued" >
-																</div><br>
-
-																<div class="form-group">
-																	<label for="emrgncycontact">CTC No.: </label>
-																	<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="issued_at">Issued at: </label>
-																	<input type="text" min="12" class="form-control form-text" id="issued_at" name="issued_at">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="precint_no">Precint No.: </label>
-																	<input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no">
-																</div><br>
-																
-														</fieldset>
-													</div>
-
-												</section>
-													<button type="submit" name="clearancebtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
-										  
-							</div>
-						</div>
-				</div>
-				<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument4')" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-receipt"></i>
-					Online Blottering</button>
-						<div id="hidedocument4" class="document-hide">
-							<div class="preview">
-							<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
-																<div class="form-group">
-																	<label for="n_complainant">Name of Complainant: </label>
-																	<input required type="text" class="form-control form-text" id="n_complainant" name="n_complainant">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="comp_age">Age: </label>
-																	<input required type="number" class="form-control form-text age" id="comp_age" name="comp_age" >
-																</div><br>
-
-																<div class="form-group">
-																	<label>Gender: </label>
-																	<select class="form-control" name="comp_gender">
-																		<option disabled>--Select--</option>
-																		<option value="Male">Male</option>
-																		<option value="Female">Female</option>
-																	</select>
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="comp_address">Address: </label>
-																	<input required type="text" class="form-control form-text" id="comp_address" name="comp_address">
-																</div><br>	
-
-																<div class="form-group">
-																	<label for="inci_address">Incident Address: </label>
-																	<input required type="text" class="form-control form-text" id="inci_address" name="inci_address">
-																</div><br>
-															</fieldset>
-														</div>
-													
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>Other Information</legend>
-
-																<div class="form-group">
-																	<label for="n_violator">Name of Violator: </label>
-																	<input required type="text" class="form-control form-text" id="n_violator" name="n_violator">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="violator_age">Age: </label>
-																	<input required type="number" class="form-control form-text age" id="violator_age" name="violator_age" >
-																</div><br>
-
-																<div class="form-group">
-																	<label>Gender: </label>
-																	<select class="form-control" name="violator_gender">
-																		<option disabled>--Select--</option>
-																		<option value="Male">Male</option>
-																		<option value="Female">Female</option>
-																	</select>
-																</div><br>
-
-																<div class="form-group">
-																	<label for="relationship">Relationship: </label>
-																	<select class="form-control" name="relationship">
-																		<option disabled>--Select--</option>
-																		<option value="Relative">Relative</option>
-																	</select>
-																</div><br>
-
-																<div class="form-group">
-																	<label for="violator_address">Address: </label>
-																	<input required type="text" class="form-control form-text" id="violator_address" name="violator_address">
-																</div><br>
-														</fieldset>
-
-														<div>
-														<div class="form-group">
-																	<label for="witnesses">Witnesses: </label>
-																	<input required type="text" class="form-control form-text" id="witnesses" name="witnesses">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="complaints">Complaints: </label>
-																	<textarea name="complaints" id="complaints" cols="30" rows="10" class="form-group"></textarea>
-																</div><br>
-
-															
-														</div>
-													
-												</section>
-
-													<button type="submit" name="blotterbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
-							</div>
-						</div>
-				</div>
-	</section>
-</div>
- 
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
-            <div class="col-lg-12 footer-info">
-                <p class="footer-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-				<p>
-					<span class="footer_dt"  id="date-time"></span>
-				</p>
-            </div>
-           
+        
+			<p>
+				<span class="footer_dt" id="date-time"></span>
+           </p>
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
-                <span class="copyright" >
-                    Copyright &copy; Barangay Commonwealth - 2021 Created By 
+                <span class="copyright">
+                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
                     <a href="http://betaencorp" target="_blank">Beta Encorp</a>
                 </span>
             </div>
         </div>
     </footer>
-
+	
     <!-- Scroll-up -->
     <div class="scroll-up">
-      <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
+        <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-	
-  <!-- jQuery -->
-  <script src="resident-js/jquery.js"></script>
-  <!-- Bootstrap Core JavaScript -->
-  <script src="resident-js/bootstrap.min.js"></script>
-  <!-- Color Settings script -->
-  <script src="resident-js/settings-script.js"></script>
-  <!-- Plugin JavaScript -->
-  <script src="resident-js/jquery.easing.min.js"></script>
-  <!-- Contact Form JavaScript -->
-  <script src="resident-js/jqBootstrapValidation.js"></script>
-  <!-- SmoothScroll script -->
-  <script src="resident-js/smoothscroll.js"></script>
-  <!-- Custom Theme JavaScript -->
-  <script src="resident-js/barangay.js"></script>
-  <!-- Isotope -->
-  <script src="resident-js/jquery.isotope.min.js"></script>
-   <!-- Accordion -->
-  <script src="js/resident.js"></script>
+    <div id="theme-settings">
+        <div id="settings-button">
+			<img src="resident-img/options.png"></img>
+        </div>
+        <div class="color">
+            <span class="settings-title">Theme color selector</span>
+            <ul class="gradients">
+                <li>
+                    <div class="gradient1">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient2">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient3">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient4">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient5">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient6">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient7">
+                    </div>
+                </li>
+                <li>
+                    <div class="gradient8">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+    <!-- jQuery -->
+    <script src="resident-js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="resident-js/bootstrap.min.js"></script>
+    <!-- Color Settings script -->
+    <script src="resident-js/settings-script.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="resident-js/jquery.easing.min.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="resident-js/jqBootstrapValidation.js"></script>
+    <!-- SmoothScroll script -->
+    <script src="resident-js/smoothscroll.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="resident-js/barangay.js"></script>
+    <!-- Isotope -->
+    <script src="resident-js/jquery.isotope.min.js"></script>
 
-			<script>
-				 document.querySelector("#date_issued").valueAsDate = new Date();
-				 document.querySelector("#date_issue").valueAsDate = new Date();
-				 document.querySelector("#dateissue").valueAsDate = new Date();
-				 document.querySelector("#dateissued").valueAsDate = new Date();
-			</script>
+    <script>
+		document.querySelector('.button').onclick = function(){
+			var password = document.querySelector('.password').value,
+				confirmpass = document.querySelector('.confirmpass').value;
+				
+				if(password == ""){
+					alert("Field cannot be empty.");
+				}
+				else if(password != confirmpass){
+					alert("Password didn't match try again.");
+					return false
+				}
+				else if(password == confirmpass){
+					alert("Password match.");
+				}
+				return true
+		}
+    </script>
+	
+
 </body>
+
 </html>
+

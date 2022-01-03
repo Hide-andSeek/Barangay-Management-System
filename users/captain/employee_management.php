@@ -203,7 +203,15 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 					</a>
 					 <span class="tooltip">Resident Census</span>
 				</li>
-																						<!--Setting Section-->
+
+				<li>
+				 <a class="side_bar" href="postannouncement.php">
+					  <i class='bx bxs-user-detail'></i>
+					  <span class="links_name">Announcement</span>
+					</a>
+					 <span class="tooltip"> Announcement</span>
+				</li>
+				<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>
@@ -264,8 +272,8 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 												
 												
 												<div class="information">
-													<label class="employee-label"> Username </label>
-													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+													<label class="employee-label"> Full name </label>
+													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
 												</div>
 												
 												<div class="row align-items-start">
@@ -281,7 +289,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 													
 													<div class="information col">
 														<label class="employee-label"> Middle Name </label>
-														<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+														<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
 													</div>
 												</div>
 												<div class="information">

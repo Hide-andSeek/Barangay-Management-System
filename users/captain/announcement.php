@@ -1,8 +1,14 @@
 
 <?php session_start();
 if(!isset($_SESSION["official_name"])){
-	header("location: captain/admin_management.php");
+	header("location: users/captain/admin_management.php");
 }
+?>
+
+<?php
+include "db/conn.php";
+include "db/captain.php";
+include "db/users.php";
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +33,7 @@ if(!isset($_SESSION["official_name"])){
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Resident Census </title>
+     <title> Post - Announcement </title>
 	 
 	 
 	 <style>
@@ -145,7 +151,7 @@ if(!isset($_SESSION["official_name"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Admin Management
+						<h5>Post Announcement
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -155,31 +161,27 @@ if(!isset($_SESSION["official_name"])){
 			  </section>
 			
 				<div>
-					<div><button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Admin</button></div>
+					<div><button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Announcement</button></div>
 									<!--Modal form for Login-->
 					<div id="formatValidatorName" >
 						  <div id="id01" class="adminmanagement-modal modal">
 								<div class="modal-contentadmin  animate" >
 								
-									  
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+									<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
-												<div class="information">
-													<input required class="form-control inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
-												</div>
 												
 												<div class="information">
-													<input required class="form-control inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input required class="form-control inputtext control-label" id="description" name ="description" type="text"  placeholder="Description"> 
 												</div>
 												
-												<div class="information">
-													<input required class="form-control inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
-												</div>
-											  
+												<div class="form-group">
+													<label for="file">Attach Photo<i class="red">*</i></label>
+													<input type='file' name='files[]' required/>
+											    </div>
 
 												<div class="information">   
-													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
-														Login
+													<button type="submit" id="announcebtn" name="announcebtn" class="log_button sign_in">
+														Submit
 													</button>  
 												</div>
 										</div> 	
@@ -187,6 +189,95 @@ if(!isset($_SESSION["official_name"])){
 							  </div>
 						</div>
 					</div>
+
+                    <div class="reg_table emp_tbl">
+						<table class="content-table">
+						
+						<?php
+							include "db/conn.php";
+							include "db/captain.php";
+							
+							$mquery = "SELECT * FROM announcement";
+							$count = $db->query($mquery)
+						?>
+						
+							<thead>
+								<tr class="t_head">
+									<th>Employee No.</th>
+									<th>Description</th>
+                                    <th>Image Name</th>
+                                    <th>Announcement Image</th>									<th>Status</th>
+									<th>Action</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($count as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['announcementid']; ?></td>
+									<td><?php echo $data ['description']; ?></td>
+									<td><?php echo $data ['announcement_imgname']; ?></td>
+									<td><?php echo $data ['announcement_image']; ?></td>
+									<td>Active</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
+
+												
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Disable</button>
+									</td>
+								</tr>	
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+															<div id="employee_form" class="container">
+																	<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+																	Update Employee
+																	</div>
+																	
+																	
+																	<div class="information">
+																		<label class="employee-label"> Username </label>
+																		<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+																	</div>
+																	
+																	<div class="row align-items-start">
+																		<div class="information col">
+																			<label class="employee-label"> Last Name </label>
+																			<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+																		</div>
+																		
+																		<div class="information col">
+																			<label class="employee-label"> First Name </label> 
+																			<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+																		</div>
+																		
+																		<div class="information col">
+																			<label class="employee-label"> Middle Name </label>
+																			<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+																		</div>
+																	</div>
+
+																	<div class="information">   
+																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																			<i class="bx bx-t67check"></i>Submit
+																		</button>  
+																	</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
+							<?php
+							}
+							?>
+						
+						</table>
+							<!--
+								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
+						     -->
+						</div>
+					</div>
+				</div>
 				</div>
 			</section>
 			

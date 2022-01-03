@@ -108,6 +108,14 @@ if(!isset($_SESSION["official_name"])){
 					</a>
 					 <span class="tooltip">Resident Census</span>
 				</li>
+
+				<li>
+				 <a class="side_bar" href="postannouncement.php">
+					  <i class='bx bxs-user-detail'></i>
+					  <span class="links_name">Announcement</span>
+					</a>
+					 <span class="tooltip"> Announcement</span>
+				</li>
 																						<!--Setting Section-->
 			 <li>
 			   <a class="side_bar" href="settings.php">
