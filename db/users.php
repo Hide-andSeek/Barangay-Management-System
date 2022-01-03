@@ -1,7 +1,5 @@
 <!--Resident Login Form-->
 <?php 
-	
-
 
 //Resident Create Account Form
 if(isset($_POST['regbtn'])){
@@ -89,7 +87,7 @@ if(isset($_POST['officialcreatebtn'])){
 	}
 }
 
-																																//Barangay official Login
+	//Barangay official Login
 	
 	if(isset($_POST['officiallogbtn'])){
 
