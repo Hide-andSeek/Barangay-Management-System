@@ -151,10 +151,12 @@ if(!isset($_SESSION["employee_no"])){
 					echo "<h3>$pdoexecute</h3>"
 					
 					?>
+					<a href= "form_lupon_active.php">
 				</div>
+				
 				<div class="w3-clear"></div>
 				<h4>Active</h4>
-				<a href= "form_lupon_active.php">
+				
 			</div>
 			</div>
 
