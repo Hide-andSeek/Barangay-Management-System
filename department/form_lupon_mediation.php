@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_lupon_active.php");
+	header("location: form_lupon_mediation.php");
 }
 ?>
 
@@ -115,7 +115,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>ACTIVE CASES
+						<h5>FOR MEDIATION
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>

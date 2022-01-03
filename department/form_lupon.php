@@ -151,7 +151,7 @@ if(!isset($_SESSION["employee_no"])){
 					echo "<h3>$pdoexecute</h3>"
 					
 					?>
-					<a href= "form_lupon_active.php">
+					<a href= "lupon_active.php">
 				</div>
 				
 				<div class="w3-clear"></div>
@@ -173,7 +173,7 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-		
+		<a href= "lupon_settled.php">
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Settled</h4>
@@ -193,7 +193,7 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-				
+				<a href= "lupon_mediation.php">
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Mediation</h4>
@@ -212,7 +212,7 @@ if(!isset($_SESSION["employee_no"])){
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-				
+<a href= "lupon_ongoing.php">				
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Upcoming Hearing</h4>
