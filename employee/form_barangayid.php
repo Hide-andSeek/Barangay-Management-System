@@ -50,6 +50,9 @@ if(!isset($_SESSION["employee_no"])){
 		 p.personal_information{padding-left: 35px;}
 		 .borderstyle{border: none;}
 		 .id_dashed{border: 3px dashed gray; padding: 10px 10px 10px 10px; width: 990px;}
+		
+		 button.view_approvebtn{width: 150px;}
+		 button.view_approvebtn:hover{color: green; background: orange;}
 	 </style>
    </head>
 	<body>
@@ -180,8 +183,7 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Emergency Contact</th>
 									<th>Date of Request</th>
 									<th>Date of Validity</th>
-									<th>Front ID</th>
-									<th>Back ID</th>
+									<th>Valid ID</th>
 									<th>Approved by</th>
 									<th>Action</th>
 								</tr>                       
@@ -205,10 +207,9 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['emrgncycontact']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
-									<td><a style="color: blue;">view id</a></td>
-									<td><a style="color: blue;">view id</a></td>
+									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
-									<td><button>Approve</button></td>
+									<td><button class="view_approvebtn">Approve</button></td>
 								</tr>	
 							
 							<?php

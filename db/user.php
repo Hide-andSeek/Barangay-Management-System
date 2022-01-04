@@ -1,7 +1,9 @@
 <?php
 //Resident Login
 if(isset($_POST['logbtn'])){
-			
+	
+	$email = '';
+
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     $email = !empty($_POST['email']) ? trim($_POST['email']) :null;

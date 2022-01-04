@@ -31,6 +31,7 @@ include "db/users.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    <link rel="stylesheet" href="resident-css/resident.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
@@ -225,41 +226,6 @@ div.announce{background-color: white; margin-top: 15px; float: center;}
 }
 
 a.login{cursor:pointer;};
-
-.logdropbtn {
-		display: inline-block;
-		color: white;
-		text-align: center;
-		padding: 14px 16px;
-		text-decoration: none;
-		}
-
-		.logdropdown {
-		display: inline-block;
-		}
-
-		.logdropdown-content {
-		display: none;
-		position: absolute;
-		background-color: gray;
-		min-width: 260px;
-		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-		}
-
-		.logdropdown-content a {
-		color: black;
-		padding: 12px 16px;
-		text-decoration: none;
-		display: block;
-		text-align: left;
-		}
-
-		.logdropdown-content a:hover {background-color: #f1f1f1;}
-
-		.logdropdown:hover .logdropdown-content {
-		display: block;
-		}
-
 	</style>
 
 </head>
@@ -292,7 +258,7 @@ a.login{cursor:pointer;};
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="announcement.php">Announcement</a>
+                            <a class="page-scroll" href="residentannouncement.php">Announcement</a>
                         </li>
 						<li class="logdropdown">
 							<a class="page-scroll logout" href="javascript:void(0)">Services</a>
@@ -305,7 +271,7 @@ a.login{cursor:pointer;};
 							</span>
 						</li>
                         <li>
-                            <a class="page-scroll" href="contact.php">Contact Us</a>
+                            <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
@@ -506,7 +472,7 @@ a.login{cursor:pointer;};
 													<div class="item active">
 														<div class="col-md-4 col-sm-6 announce">
 															<div class="block-text">
-																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" >
+																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" le="<?=$image['announcement_imgname'] ?>" style="width:300px; height:200px">
 
 																		<a class="news_heading" href="postannouncement.php">
 																			<h3 class="announcement_entry_text"><?=$image ['description']?></h3>
@@ -517,7 +483,10 @@ a.login{cursor:pointer;};
 										<?php
 														}
 											} else {
-											echo "<p>No Announcement yet!</p>";
+											echo "<div class='errormessage'>
+                                                    <i class='bx bx-error'></i>
+                                                    No announcement yet!
+                                                 </div>";
 										}
 										?> 
                      

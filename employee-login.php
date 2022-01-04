@@ -38,7 +38,7 @@ include "db/user.php";
 			justify-content: center;
 			align-items: center;
 			flex-wrap: wrap;
-			padding-top: 155px;
+			padding-top: 115px;
 		}
 
 		.btn-size{
@@ -48,6 +48,8 @@ include "db/user.php";
 
 		.btn-box{
 			flex: 50%;
+			padding: 15px 10px;
+
 		}
 
 		.topright{

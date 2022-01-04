@@ -190,13 +190,18 @@ if(!isset($_SESSION["employee_no"])){
 							{
 							?>
 								<tr class="table-row">
-									<td><?php echo $data2 ['indigency_id']; ?></td>
-									<td><?php echo $data2 ['fullname']; ?></td>
-									<td><?php echo $data2 ['address']; ?></td>
-									<td><?php echo $data2 ['purpose']; ?></td>
-									<td><?php echo $data2 ['id_type']; ?></td>
-									<td><?php echo $data2 ['date_issue']; ?></td>
-									<td><?php echo $data2 ['date_issue']; ?></td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
+									<td>NULL</td>
 								</tr>	
 							
 							<?php

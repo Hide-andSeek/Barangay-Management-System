@@ -252,16 +252,12 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required aria-details="detail-id"/>
 																	
 																	<!--
 																	<i aria-details="detail-id" class="detailid">This field is optional</i>
 																	-->
-																</div>
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
 																</div>
 														</fieldset>
 													</div>
@@ -337,14 +333,10 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required/>
 																</div>
 
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
-																</div>
 															</fieldset>
 														</div>
 												</section>
@@ -385,7 +377,7 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: </label>
+																	<label for="file">Attach Valid ID: </label>
 																	<input type='file' name='files[]'/>
 																</div>
 																

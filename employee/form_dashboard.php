@@ -31,7 +31,7 @@ if(!isset($_SESSION["employee_no"])){
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Dashboard </title>
+     <title> Request Document Dashboard </title>
 	 
 	 
 	 <style>

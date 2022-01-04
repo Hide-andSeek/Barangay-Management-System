@@ -352,14 +352,14 @@ img.brgy_icon{
 }
 																			    /*-- Table --*/
 .content-table, .table_indigency{
-    border-collapse: collapse;
+  border-collapse: collapse;
 	table-layout: fixed;
-    margin: 5px 0;
-    font-size: 13px;
+  margin: 5px 0;
+  font-size: 13px;
 	transition: margin-left 300ms;
 	margin-left: 4px;
-    border-radius: 5px 5px 0 0;
-    overflow-y: scroll;  
+  border-radius: 5px 5px 0 0;
+  overflow-y: scroll;  
 	box-shadow: inset;
 	display: block;
 }
@@ -646,3 +646,6 @@ padding: 10px 25px;
   i.pending{color: gray;}
   i.closed{color: red;}
   i.total{color: #d834eb}
+
+  /* View and Approve btn from req documents*/
+
