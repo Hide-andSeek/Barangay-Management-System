@@ -37,6 +37,10 @@ include "db/user.php";
 
     <link rel="stylesheet" href="resident-css/animate.css">
 	
+    <style>
+      .body{background: #ebebeb}
+      .sep_announcement{padding: 15px 15px 15px 15px; }
+    </style>
 </head>
 
 <body onload=display_ct() class="body">
@@ -102,11 +106,9 @@ include "db/user.php";
     <main>
   <div class="sep_announcement">
     <h2>Announcement</h2>
-    <span>
+    <div>
       <a href="resident-defaultpage.php">Home</a><label> >> <label><a>Announcement</a>
-    </span>
-        <h4>Resize the browser window to see the effect.</h4>
-
+    </div>
        
           <?php
 										include ('db/conn.php');

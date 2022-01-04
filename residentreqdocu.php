@@ -197,7 +197,7 @@ include "db/users.php";
                             <a class="page-scroll" href="#reqdocu">Services</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="contact.php">Contact Us</a>
+                            <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
