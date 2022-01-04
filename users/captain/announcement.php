@@ -74,6 +74,8 @@ include "db/users.php";
 		}
 
 		.description{ height: 50px;}
+
+	
 	 </style>
    </head>
 	<body>
