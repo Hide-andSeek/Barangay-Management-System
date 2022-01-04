@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: department/form_bpso_violators.php");
+	header("location: form_bpso_violators.php");
 }
 ?>
 
