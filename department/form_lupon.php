@@ -78,7 +78,7 @@ if(!isset($_SESSION["employee_no"])){
 			  
 			 <li>
 			   <a class="side_bar" href="">
-				 <i class='fa fa-print'></i>
+				 <i class='bx bx-file'></i>
 				 <span class="links_name">Summon Letter</span>
 			   </a>
 			   <span class="tooltip">Summon Letter</span>
@@ -86,10 +86,20 @@ if(!isset($_SESSION["employee_no"])){
 
 			 <li>
 			   <a class="side_bar" href="">
-				 <i class='fa fa-print'></i>
+			   <i class='bx bx-file'></i>
+			   
 				 <span class="links_name">Sworn Statement</span>
 			   </a>
 			   <span class="tooltip">Sworn Statement</span>
+			 </li>
+			
+			 <li>
+			   <a class="side_bar" href="">
+			   <i class='bx bx-file'></i>
+			   
+				 <span class="links_name">Certification to File Action (CFA)</span>
+			   </a>
+			   <span class="tooltip">Certification to File Action (CFA)</span>
 			 </li>
 			   
 
