@@ -42,7 +42,7 @@ include "db/users.php";
             position: absolute; 
             z-index: 999; 
             left: 0;
-            top: 0;
+            top: 30;
             width: 100%; 
             height: 100%; 
             background-color: rgb(0,0,0); 
@@ -52,15 +52,30 @@ include "db/users.php";
         }
 	
 		.modal-contentadmin {
-		    font-family: 'Montserrat', sans-serif;
 		    padding-top: 2%;
             background-color: #fefefe;
             margin: 5% auto 15% auto;
             border: 1px solid #888;
-		    height: 42%;
-            width: 30%; 
-            border-radius: 20px;
+		    height: 50%;
+            width: 50%;
+            border-radius: 5px;
         }
+
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		.description{ height: 50px;}
+
+	
 	 </style>
    </head>
 	<body>
@@ -169,9 +184,18 @@ include "db/users.php";
 								
 									<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
-												
+												<div class="information">   
+													<span type="submit" onclick="document.getElementById('id01').style.display='none'" class="closebtn" style="float: right">
+													X
+													</span>  
+												</div>
+
+												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+												Add Announcement
+												</div>
+
 												<div class="information">
-													<textarea required class="form-control inputtext control-label" id="description" name ="description" type="text"  placeholder="Description"></textarea>
+													<textarea required class="form-control inputtext control-label description" id="description" name ="description" type="text"  placeholder="Description" style="resize: none;"></textarea>
 												</div>
 												
 												<div class="form-group">
@@ -180,8 +204,8 @@ include "db/users.php";
 											    </div>
 
 												<div class="information">   
-													<button type="submit" id="announcebtn" name="announcebtn" class="log_button sign_in">
-														Submit
+													<button type="submit" id="announcebtn" name="announcebtn" class="inputtext submtbtn">
+														<i class="bx bx-t67check"></i>Submit
 													</button>  
 												</div>
 										</div> 	
@@ -204,9 +228,9 @@ include "db/users.php";
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
-									<th>Description</th>
+									<th >Description</th>
                                     <th>Image Name</th>
-                                    <th>Announcement Image</th>									<th>Status</th>
+                                    <th>Announcement Image</th>									
 									<th>Action</th>
 								</tr>                       
 							</thead>
@@ -216,14 +240,12 @@ include "db/users.php";
 							?>
 							<tr class="table-row">
 									<td><?php echo $data ['announcementid']; ?></td>
-									<td><?php echo $data ['description']; ?></td>
+									<td ><?php echo $data ['description']; ?></td>
 									<td><?php echo $data ['announcement_imgname']; ?></td>
 									<td><?php echo $data ['announcement_image']; ?></td>
-									<td>Active</td>
 									<td>
 										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
-
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Disable</button>
+										<button class="form-control btn-danger" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;"><i class="bx bx-edit"></i>Delete</button>
 									</td>
 								</tr>	
 								<div id="id2" class="employeemanagement-modal modal" >

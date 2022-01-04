@@ -31,6 +31,7 @@ include "db/users.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    <link rel="stylesheet" href="resident-css/resident.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
@@ -225,41 +226,6 @@ div.announce{background-color: white; margin-top: 15px; float: center;}
 }
 
 a.login{cursor:pointer;};
-
-.logdropbtn {
-		display: inline-block;
-		color: white;
-		text-align: center;
-		padding: 14px 16px;
-		text-decoration: none;
-		}
-
-		.logdropdown {
-		display: inline-block;
-		}
-
-		.logdropdown-content {
-		display: none;
-		position: absolute;
-		background-color: gray;
-		min-width: 260px;
-		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-		}
-
-		.logdropdown-content a {
-		color: black;
-		padding: 12px 16px;
-		text-decoration: none;
-		display: block;
-		text-align: left;
-		}
-
-		.logdropdown-content a:hover {background-color: #f1f1f1;}
-
-		.logdropdown:hover .logdropdown-content {
-		display: block;
-		}
-
 	</style>
 
 </head>
@@ -292,7 +258,7 @@ a.login{cursor:pointer;};
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="announcement.php">Announcement</a>
+                            <a class="page-scroll" href="residentannouncement.php">Announcement</a>
                         </li>
 						<li class="logdropdown">
 							<a class="page-scroll logout" href="javascript:void(0)">Services</a>
@@ -305,7 +271,7 @@ a.login{cursor:pointer;};
 							</span>
 						</li>
                         <li>
-                            <a class="page-scroll" href="contact.php">Contact Us</a>
+                            <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
@@ -492,19 +458,7 @@ a.login{cursor:pointer;};
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
                 <!-- Wrapper for Slides -->
                 <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement1" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-									<div class="pic"></div>
+                        
                                     <?php
 										include ('db/conn.php');
 										include ('db/captain.php');
@@ -512,31 +466,32 @@ a.login{cursor:pointer;};
 										$stmt = $db->prepare('SELECT * from announcement');
 										$stmt->execute();
 										$imagelist = $stmt->fetchAll();
-									
-										foreach($imagelist as $image) {
+											if (count($imagelist) > 0) {
+												foreach ($imagelist as $image) {
 										?>
-										<a class="news_heading" href="#">
-											
-											<img src="<?=$image['announcement_image']?>" 
-												title="<?=$image['announcement_imgname'] ?>" 
-												style="width='700' height='700'">
-											<span><?=$image ['description']?></span>
-										</a>
+													<div class="item active">
+														<div class="col-md-4 col-sm-6 announce">
+															<div class="block-text">
+																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" le="<?=$image['announcement_imgname'] ?>" style="width:300px; height:200px">
+
+																		<a class="news_heading" href="postannouncement.php">
+																			<h3 class="announcement_entry_text"><?=$image ['description']?></h3>
+																		</a>
+															</div>
+														</div>
+													</div>
 										<?php
+														}
+											} else {
+											echo "<div class='errormessage'>
+                                                    <i class='bx bx-error'></i>
+                                                    No announcement yet!
+                                                 </div>";
 										}
 										?> 
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement3" class="col-md-6">
-									<a class="news_heading" href="#">
-										<h3 class="announcement_entry_text">Announcement Entry #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                        </div>
+                     
+<!-- 2nd Section of Announcement-->
+
                         <div class="item">
                             <div class="col-md-4 col-sm-6">
                                 <div class="block-text">
@@ -571,7 +526,7 @@ a.login{cursor:pointer;};
 			</div>
 			
 			<div class="announce">
-				<button class="see_announcement" onclick="document.location='announcement.php'" >See announcements</button>
+				<button class="see_announcement" onclick="document.location='residentannouncement.php'" >See announcements</button>
 			</div>	
 			
 			

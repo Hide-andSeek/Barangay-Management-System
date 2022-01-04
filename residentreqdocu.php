@@ -113,6 +113,51 @@ include "db/users.php";
 		.logdropdown:hover .logdropdown-content {
 		display: block;
 		}
+
+		div.processgallery {
+		border: 1px solid #ccc;
+		}
+
+		div.processgallery:hover {
+		border: 1px solid #777;
+		}
+
+		div.processgallery img {
+		width: 100%;
+		height: auto;
+		}
+
+		div.description {
+		padding: 15px;
+		text-align: center;
+		}
+
+	
+
+		.process {
+		padding: 0 6px;
+		float: left;
+		width: 24.99999%;
+		}
+
+		@media only screen and (max-width: 700px) {
+		.process {
+			width: 49.99999%;
+			margin: 6px 0;
+		}
+		}
+
+		@media only screen and (max-width: 500px) {
+		.process {
+			width: 100%;
+		}
+		}
+
+		.clearfix:after {
+		content: "";
+		display: table;
+		clear: both;
+		}
 	</style>
 </head>
 
@@ -152,7 +197,7 @@ include "db/users.php";
                             <a class="page-scroll" href="#reqdocu">Services</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="contact.php">Contact Us</a>
+                            <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
@@ -176,12 +221,45 @@ include "db/users.php";
 		<!-- Instructions: For request document!-->
 		<h5 style="text-align: center;" id="reqdocu">Request Document Instructions</h5>
 		<br>
-		<div  style="text-align: center;">
-			<span class="instruction">Step 1</span>
-			<span class="instruction">Step 2</span>
-			<span class="instruction">Step 3</span>
-		</div>
 		
+		<div class="process">
+			<div class="processgallery">
+				<a target="_blank" href="img_5terre.jpg">
+				<img src="#" alt="Process 1" width="600" height="400">
+				</a>
+				<div class="description">1. </div>
+			</div>
+			</div>
+
+			<div class="process">
+			<div class="processgallery">
+				<a target="_blank" href="img_forest.jpg">
+				<img src="#" alt="Process 2" width="600" height="400">
+				</a>
+				<div class="description">2. </div>
+			</div>
+			</div>
+
+			<div class="process">
+			<div class="processgallery">
+				<a target="_blank" href="img_lights.jpg">
+				<img src="#" alt="Process 3" width="600" height="400">
+				</a>
+				<div class="description">3. </div>
+			</div>
+			</div>
+
+			<div class="process">
+			<div class="processgallery">
+				<a target="_blank" href="img_mountains.jpg">
+				<img src="#" alt="Process 3" width="600" height="400">
+				</a>
+				<div class="description">4</div>
+			</div>
+			</div>
+
+			<div class="clearfix"></div>
+
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" id="barangayid" class="document-button document-block documentbtn form-control documentbtn">
 				<i class="bx bx-id-card"></i>
@@ -252,16 +330,12 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required aria-details="detail-id"/>
 																	
 																	<!--
 																	<i aria-details="detail-id" class="detailid">This field is optional</i>
 																	-->
-																</div>
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
 																</div>
 														</fieldset>
 													</div>
@@ -337,14 +411,10 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: <i class="red">*</i></label>
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required/>
 																</div>
 
-																<div class="form-group">
-																	<label for="file">Attach Back ID: <i class="red">*</i></label>
-																	<input type='file' />
-																</div>
 															</fieldset>
 														</div>
 												</section>
@@ -385,7 +455,7 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Front ID: </label>
+																	<label for="file">Attach Valid ID: </label>
 																	<input type='file' name='files[]'/>
 																</div>
 																

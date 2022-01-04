@@ -28,18 +28,19 @@ include "db/users.php";
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Employee - Barangay Commonwealth QC.</title>
-
 	 <style>
-		 .captain-mainpage{}
+		 /*Captain Login Form*/
+		 .captain-mainpage{display: flex; justify-content: center; align-items: center;}
+		 .center {display: block; margin-left: auto; margin-right: auto; width: 50%;}
 	 </style>
 	 
    </head>
 	<body>
 		<main class="captain-mainpage">
-
 					<div id="formatValidatorName" >
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
 												<div class="information">
 													<input required class="inputtext control-label" id="official_name" name ="official_name" type="text"  placeholder="Barangay Official's Name"> 
 												</div>
