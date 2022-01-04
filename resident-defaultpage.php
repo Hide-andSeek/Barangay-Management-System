@@ -526,7 +526,7 @@ a.login{cursor:pointer;};
 			</div>
 			
 			<div class="announce">
-				<button class="see_announcement" onclick="document.location='announcement.php'" >See announcements</button>
+				<button class="see_announcement" onclick="document.location='residentannouncement.php'" >See announcements</button>
 			</div>	
 			
 			
