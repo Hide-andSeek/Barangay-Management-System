@@ -32,7 +32,7 @@
 			$file_extension = strtolower($file_extension);
 		
 			//Image extension
-			$valid_extension = array("png","jpeg","jpg");
+			$valid_extension = array("png","jpeg","jpg", "pdf");
 		
 			if(in_array($file_extension, $valid_extension)) {
 	

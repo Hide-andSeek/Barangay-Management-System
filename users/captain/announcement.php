@@ -37,6 +37,8 @@ include "db/users.php";
 	 
 	 
 	 <style>
+
+
 		.adminmanagement-modal{
             display: none; 
             position: absolute; 
@@ -174,6 +176,13 @@ include "db/users.php";
 					</div>
 				  </div>
 			  </section>
+
+			  <div class="search_content">
+                        <label for="">Search: 
+                            <input class="r_search" type="search">
+							<i class='bx bx-search'></i>
+                        </label>
+                </div> 
 			
 				<div>
 					<div><button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Announcement</button></div>
@@ -227,8 +236,8 @@ include "db/users.php";
 						
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
-									<th >Description</th>
+									<th>Announcement ID</th>
+									<th>Description</th>
                                     <th>Image Name</th>
                                     <th>Announcement Image</th>									
 									<th>Action</th>

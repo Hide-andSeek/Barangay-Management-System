@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'dc007fa0f48a3e4a53a6b946c8fd6866702070a3',
+        'reference' => '7737b14983709effb63214cd0773eec50f32f979',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'dc007fa0f48a3e4a53a6b946c8fd6866702070a3',
+            'reference' => '7737b14983709effb63214cd0773eec50f32f979',
             'dev_requirement' => false,
         ),
         'smsgatewayme/client' => array(

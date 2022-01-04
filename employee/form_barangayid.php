@@ -30,6 +30,8 @@ if(!isset($_SESSION["employee_no"])){
 	 
 	 
 	 <style>
+
+		 /* Barangay ID CSS */
 		.documentbtn{font-size: 15px;width: 250px; height: 40px; padding: 12px 12px 12px 12px; }
 		.documentbtn:hover{background-color: gray;color: white;}
 	
@@ -53,6 +55,71 @@ if(!isset($_SESSION["employee_no"])){
 		
 		 button.view_approvebtn{width: 150px;}
 		 button.view_approvebtn:hover{color: green; background: orange;}
+
+		 div.align-box{padding-top: 23px; display: flex; align-items: center;}
+.box-report{
+    width: 300px;
+    font-size: 14px;
+    border: 4px solid #7dc748;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+
+#formatValidatorName{
+    top: 50px;
+}
+
+.employeemanagement-modal{
+    display: none; 
+    position: absolute; 
+    z-index: 999; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 120%; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 5px; 
+    
+}
+
+
+.modal-contentemployee {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 1%;
+    background-color: #fefefe;
+    margin: 5% auto 2% auto;
+    border: 1px solid #888;
+    height: 78%;
+    width: 68%; 
+   
+}
+
+.inputtext, .inputpass {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    height: 35px;
+    width: 94%;
+    padding: 10px 10px;
+    margin: 4px 25px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.employee-label{margin-left: 26px;}
+
+.submtbtn{
+    height: 40px;
+}
+
+input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
 	 </style>
    </head>
 	<body>
@@ -178,6 +245,7 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Address</th>
 									<th>Birthday</th>
 									<th>Place of Birth</th>
+									<th>Contact Number</th>
 									<th>Guardian's Name</th>
 									<th>Relative Address</th>
 									<th>Emergency Contact</th>
@@ -186,6 +254,7 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Valid ID</th>
 									<th>Approved by</th>
 									<th>Action</th>
+									<th>Message</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -202,6 +271,7 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['placeofbirth']; ?></td>
+									<td><?php echo $data ['contact_no']; ?></td>
 									<td><?php echo $data ['guardianname']; ?></td>
 									<td><?php echo $data ['reladdress']; ?></td>
 									<td><?php echo $data ['emrgncycontact']; ?></td>
@@ -210,7 +280,57 @@ if(!isset($_SESSION["employee_no"])){
 									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
 									<td><button class="view_approvebtn">Approve</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
+							
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+														<div class="send-message">
+																<div class="container">
+																<div class="row">
+																	<div class="col-md-8">
+																	<div class="contact-form">
+																	<div class="section-heading">
+																		<h4>Send a Message</h4>
+																	</div>
+																		<form id="contact" action="" method="post">
+																		<div class="row">
+																			<div class="col-lg-12 col-md-12 col-sm-12">
+																			<fieldset class="sms-section">
+																				<input name="number" type="number" class="form-control textarea" id="contact_no" placeholder="Contact no.">
+																			</fieldset>
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<textarea name="msg" rows="6" class="form-control textarea" id="message" placeholder="Text Message"></textarea>
+																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
+																				
+																			</fieldset>
+																			
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bxs-send"></i>Send Message</button>
+																			</fieldset>
+																			</div>
+																		</div>
+																		</form>
+																	</div>
+																	</div>
+																</div>
+																</div>
+															</div>
+
+																	<div class="information">   
+																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																			<i class="bx bx-t67check"></i>Submit
+																		</button>  
+																	</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
 							
 							<?php
 							}
@@ -321,6 +441,119 @@ if(!isset($_SESSION["employee_no"])){
 							</div>
 						</div>
 					</div>
+					<div class="reg_table " >
+						<table class="content-table" id="table">
+							
+							<?php
+							include "../db/conn.php";
+							include "../db/users.php";
+							
+							$myquery = "SELECT * FROM barangayid";
+							$countnum = $db->query($myquery);
+							
+							?>
+							
+							<thead>
+								<tr class="t_head">
+									<th>Resident ID</th>
+									<th>First name</th>
+									<th>Middle name</th>
+									<th>Last Name</th>
+									<th>Address</th>
+									<th>Birthday</th>
+									<th>Place of Birth</th>
+									<th>Contact Number</th>
+									<th>Guardian's Name</th>
+									<th>Relative Address</th>
+									<th>Emergency Contact</th>
+									<th>Date of Request</th>
+									<th>Date of Validity</th>
+									<th>Valid ID</th>
+									<th>Approved by</th>
+									<th>Action</th>
+									<th>Message</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countnum as $data) 
+							{
+							?>
+		
+
+								<tr class="table-row">
+									<td><?php echo $data ['barangay_id']; ?></td>
+									<td><?php echo $data ['fname']; ?></td>
+									<td><?php echo $data ['mname']; ?></td>
+									<td><?php echo $data ['lname']; ?></td>
+									<td><?php echo $data ['address']; ?></td>
+									<td><?php echo $data ['birthday']; ?></td>
+									<td><?php echo $data ['placeofbirth']; ?></td>
+									<td><?php echo $data ['contact_no']; ?></td>
+									<td><?php echo $data ['guardianname']; ?></td>
+									<td><?php echo $data ['reladdress']; ?></td>
+									<td><?php echo $data ['emrgncycontact']; ?></td>
+									<td><?php echo $data ['dateissue']; ?></td>
+									<td><?php echo $data ['dateissue']; ?></td>
+									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
+									<td><button class="view_approvebtn">Approve</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
+								</tr>	
+							
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+														<div class="send-message">
+																<div class="container">
+																<div class="row">
+																	<div class="col-md-8">
+																	<div class="contact-form">
+																	<div class="section-heading">
+																		<h4>Send a Message</h4>
+																	</div>
+																		<form id="contact" action="" method="post">
+																		<div class="row">
+																			<div class="col-lg-12 col-md-12 col-sm-12">
+																			<fieldset class="sms-section">
+																				<input name="number" type="number" class="form-control textarea" id="contact_no" placeholder="Contact no.">
+																			</fieldset>
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<textarea name="msg" rows="6" class="form-control textarea" id="message" placeholder="Text Message"></textarea>
+																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
+																				
+																			</fieldset>
+																			
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bxs-send"></i>Send Message</button>
+																			</fieldset>
+																			</div>
+																		</div>
+																		</form>
+																	</div>
+																	</div>
+																</div>
+																</div>
+															</div>
+
+																	<div class="information">   
+																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																			<i class="bx bx-t67check"></i>Submit
+																		</button>  
+																	</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
+							<?php
+							}
+							?>
+						</table>
+				</div>
+
 						<button class="permitbtn" style="float: right; padding: 5px 5px 5px 5px;" onclick="window.print(); ">
 							<i class="bx bx-save saveicon"></i>
 						</button>
@@ -346,6 +579,7 @@ if(!isset($_SESSION["employee_no"])){
 						document.getElementById("reladdress").value = this.cells[8].innerHTML;
 						document.getElementById("emrgncycontact").value = this.cells[9].innerHTML;
 						document.getElementById("dateissue").value = this.cells[10].innerHTML;
+						document.getElementById("contact_no").value = this.cells[10].innerHTML;
 						
 						
 					};
