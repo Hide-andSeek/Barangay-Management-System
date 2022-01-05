@@ -123,7 +123,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>BARANGAY PUBLIC SAFETY OFFICER
+						<h5>BARANGAY PUBLIC SAFETY OFFICER (BPSO)
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -211,7 +211,7 @@ if(!isset($_SESSION["employee_no"])){
 				
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Upcoming Hearing</h4>
+				<h4>Overall Cases</h4>
 			</div>
 			</div>
 		</div>

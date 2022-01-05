@@ -41,8 +41,12 @@ if(!isset($_SESSION["employee_no"])){
 			margin: 10px;
 			border-radius: 5px;
 			align-items: center;
-
 		}
+
+		button.view_approvebtn{width: 150px;}
+		button.view_approvebtn:hover{color: green; background: orange;}
+
+		
 	 </style>
    </head>
 	<body>
@@ -157,7 +161,7 @@ if(!isset($_SESSION["employee_no"])){
 							include "db/conn.php";
 							include "db/users.php";
 							
-							$mquery = "SELECT * FROM certificateindigency";
+							$mquery = "SELECT * FROM admin_complaints";
 							$countn = $db->query($mquery);
 							
 							?>
@@ -176,6 +180,9 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Relationship</th>
 									<th>Address</th>
 									<th>Witnesses</th>
+									<th>Complaints</th>
+									<th>Department</th>
+									<th>Action</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -183,13 +190,21 @@ if(!isset($_SESSION["employee_no"])){
 							{
 							?>
 								<tr class="table-row">
-									<td><?php echo $data2 ['indigency_id']; ?></td>
-									<td><?php echo $data2 ['fullname']; ?></td>
-									<td><?php echo $data2 ['address']; ?></td>
-									<td><?php echo $data2 ['purpose']; ?></td>
-									<td><?php echo $data2 ['id_type']; ?></td>
-									<td><?php echo $data2 ['date_issue']; ?></td>
-									<td><?php echo $data2 ['date_issue']; ?></td>
+									<td><?php echo $data2 ['blotterID']; ?></td>
+									<td><?php echo $data2 ['complainant']; ?></td>
+									<td><?php echo $data2 ['c_age']; ?></td>
+									<td><?php echo $data2 ['c_gender']; ?></td>
+									<td><?php echo $data2 ['c_address']; ?></td>
+									<td><?php echo $data2 ['incident_add']; ?></td>
+									<td><?php echo $data2 ['violators']; ?></td>
+									<td><?php echo $data2 ['v_age']; ?></td>
+									<td><?php echo $data2 ['v_gender']; ?></td>
+									<td><?php echo $data2 ['v_rel']; ?></td>
+									<td><?php echo $data2 ['v_address']; ?></td>
+									<td><?php echo $data2 ['witness']; ?></td>
+									<td><?php echo $data2 ['ex_complaints']; ?></td>
+									<td><?php echo $data2 ['dept']; ?></td>
+									<td><button class="view_approvebtn">Process</button></td>
 								</tr>	
 							
 							<?php
