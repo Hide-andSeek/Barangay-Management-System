@@ -149,6 +149,15 @@ if(!isset($_SESSION["employee_no"])){
                             <input class="r_search" type="search">
 							<i class='bx bx-search'></i>
                         </label>
+                        <label class="select__select" for="">Filter by: 
+                            <select class="selection">
+                                <option disabled>--Select--</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="decline">Decline</option>
+                            </select>
+								<i class='bx bx-sort'></i>
+                        </label>
                 </div> 
 			
 			<div class="reg_table">

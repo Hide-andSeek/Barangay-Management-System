@@ -59,7 +59,7 @@ if(!isset($_SESSION["employee_no"])){
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="60">
+	 <meta http-equiv="refresh" content="120">
 
      <title> Barangay ID </title>
 	 
@@ -131,7 +131,7 @@ if(!isset($_SESSION["employee_no"])){
 			margin: 5% auto 2% auto;
 			border: 1px solid #888;
 			height: 78%;
-			width: 68%; 
+			width: 48%; 
 		
 		}
 
@@ -169,6 +169,8 @@ if(!isset($_SESSION["employee_no"])){
 			float:right;
 			padding:8px 16px;
 		}
+		.send-message{margin: 15px 15px 15px 15px;}
+		
 	 </style>
    </head>
 	<body>
@@ -325,8 +327,8 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px;" value="<?php echo $_SESSION["employee_no"];?>"></td>
-									
+									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $_SESSION["employee_no"];?>"></td>
+
 									<td><button class="view_approvebtn">Approve</button>
 									<button class="view_approvebtn view_declinebtn">Decline</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
@@ -350,19 +352,16 @@ if(!isset($_SESSION["employee_no"])){
 																		<div class="row">
 																			<div class="col-lg-12 col-md-12 col-sm-12">
 																			<fieldset class="sms-section">
-																				<input name="number" type="number" class="form-control textarea" id="contact_no" placeholder="Contact no.">
+																				<input required type="number" class="form-control textarea" id="contact_no"
+																				name="contact_no"placeholder="Contact no.">
 																			</fieldset>
 																			</div>
 																			<div class="col-lg-12">
 																			<fieldset >
-																				<textarea name="msg" rows="6" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
+																				<textarea name="msg" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
 																				-From Barangay Commonwealth</textarea>
 																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
-																				<input type="text" id="residentid">
-																				<input type="text" id="fname">
-																				<input type="text" id="mname">
-																				<input type="text" id="lname">
-																				<input type="text" id="address">
+																				
 																			</fieldset>
 																			
 																			</div>
