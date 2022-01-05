@@ -65,13 +65,15 @@ if(isset($_POST['clearancebtn'])){
 		$address = $_POST['address'];
 		$birthday = $_POST['birthday'];
 		$placeofbirth = $_POST['placeofbirth'];
+		$contact_no = $_POST['contact_no'];
 		$guardianname = $_POST['guardianname'];
 		$emrgncycontact = $_POST['emrgncycontact'];
 		$reladdress = $_POST['reladdress'];
 		$dateissue = $_POST['dateissue'];
+		$emailadd = $_POST['emailadd'];
 		$countfiles = count($_FILES['files']['name']);
 		
-		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, guardianname, emrgncycontact, reladdress, dateissue, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, contact_no, guardianname, emrgncycontact, reladdress, dateissue, emailadd, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 		$stmt = $db->prepare($query);
 	
@@ -99,7 +101,7 @@ if(isset($_POST['clearancebtn'])){
 				) {
 					// Execute query
 					$stmt->execute(
-						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress, $dateissue, $filename, $target_file));
+						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $contact_no, $guardianname, $emrgncycontact, $reladdress, $dateissue, $emailadd, $filename, $target_file));
 				}
 			}
 		}

@@ -157,6 +157,18 @@ if(!isset($_SESSION["employee_no"])){
 			-webkit-appearance: none;
 			margin: 0;
 		}
+		.topright{
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.topright:hover {
+			color: red;
+			cursor: pointer;
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
 	 </style>
    </head>
 	<body>
@@ -206,14 +218,6 @@ if(!isset($_SESSION["employee_no"])){
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 			
 																											<!--Setting Section-->
 			 <li>
@@ -321,7 +325,8 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="<?php echo $_SESSION["employee_no"];?>"></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px;" value="<?php echo $_SESSION["employee_no"];?>"></td>
+									
 									<td><button class="view_approvebtn">Approve</button>
 									<button class="view_approvebtn view_declinebtn">Decline</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
@@ -363,7 +368,7 @@ if(!isset($_SESSION["employee_no"])){
 																			</div>
 																			<div class="col-lg-12">
 																			<fieldset >
-																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bxs-send"></i>Send Message</button>
+																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bx bx-send"></i>Send Message</button>
 																			</fieldset>
 																			</div>
 																		</div>

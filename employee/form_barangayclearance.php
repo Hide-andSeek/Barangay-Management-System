@@ -119,14 +119,6 @@ include "../db/documents.php";
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 			 									
 			<!--Setting Section-->
 			 <li>

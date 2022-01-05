@@ -123,7 +123,7 @@ include "db/user.php";
 												 <div class="responsive">
                               <div class="gallery">
 																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" >
-
+                                    
 																		<a href="#">
 																			<div class="desc"><?=$image ['description']?></div>
 																		</a>

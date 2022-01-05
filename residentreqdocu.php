@@ -303,6 +303,11 @@ include "db/users.php";
 																	<label for="pob">Place of Birth: </label><i class="red">*</i>
 																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
 																</div><br>
+																
+																<div class="form-group">
+																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
+																	<input type="number" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no">
+																</div><br>
 															</fieldset>
 														</div>
 													
@@ -327,6 +332,12 @@ include "db/users.php";
 																<div class="form-group">
 																	<label>Date Issued: <i class="red">*</i></label>
 																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
+																</div><br>
+
+																
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
 																</div><br>
 
 																<div class="form-group">
