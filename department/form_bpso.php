@@ -79,7 +79,7 @@ if(!isset($_SESSION["employee_no"])){
               
 
 			 <li>
-			   <a class="side_bar" href="form_bpso_violators.php">
+			   <a class="side_bar" href="bpso_violators.php">
 				 <i class='bx bx-error'></i>
 				 <span class="links_name">Violators</span>
 			   </a>
