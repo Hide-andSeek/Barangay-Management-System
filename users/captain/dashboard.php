@@ -40,33 +40,33 @@ if(!isset($_SESSION["official_name"])){
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-				<li>
+			<li>
 					<a class="side_bar" href="captaindashboard.php">
-						<i class='bx bx-category-alt'></i>
+						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
 			 	</li>
 
 			  <li>
-			  <a class="side_bar" href="adminmanagement.php">
-				  <i class='bx bx-user-circle'></i>
-				  <span class="links_name">Admin Management</span>
-				</a>
-				 <span class="tooltip">Admin Management</span>
+					<a class="side_bar" href="adminmanagement.php">
+						<i class='bx bx-user-circle admin'></i>
+						<span class="links_name">Admin Management</span>
+					</a>
+					<span class="tooltip">Admin Management</span>
 			  </li>	
 
 				<li>
 				  <a class="side_bar" href="employeemanagement.php">
-					  <i class='bx bx-group'></i>
+					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">Employee Management</span>
 					</a>
 					 <span class="tooltip">Employee Management</span>
-				  </li>	
-				  
-				  <li>
+				  </li>
+			 
+				<li>
 				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-user-detail official'></i>
 					  <span class="links_name">Brgy Official Management</span>
 					</a>
 					 <span class="tooltip">Brgy Official Management</span>
@@ -74,7 +74,7 @@ if(!isset($_SESSION["official_name"])){
 
 				<li>
 				 <a class="side_bar" href="residentcensus.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
 					 <span class="tooltip">Resident Census</span>
@@ -82,10 +82,10 @@ if(!isset($_SESSION["official_name"])){
 
 				<li>
 				 <a class="side_bar" href="postannouncement.php">
-					  <i class='bx bxs-user-detail'></i>
-					  <span class="links_name">Announcement</span>
+					  <i class='bx bx-news iannouncement'></i>
+					  <span class="links_name">Post Announcement</span>
 					</a>
-					 <span class="tooltip"> Announcement</span>
+					 <span class="tooltip">Post Announcement</span>
 				</li>
 
 			 <li>

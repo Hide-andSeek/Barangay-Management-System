@@ -440,6 +440,7 @@ div.a_u_d_buttons{
 	color: #fff;
 	opacity: 0.5px;
 	font-size: 13px;
+  height: 150px;
 	padding-top: 70px;
 	padding-left: 830px;
 
@@ -633,12 +634,12 @@ padding: 10px 25px;
 			 
 																			/*bx - icon color */
 	i.menu{color: #fff}
-	i.id{color: #a809b0}
-	i.clearance{color: #1cb009}
-	i.sms{color: #478eff}
-	i.blotter-com{color: #9e0202}
-	i.indigency{color: #0218bd}
-	i.permit{color: #e0149c}
+	i.id, i.admin{color: #a809b0}
+	i.clearance, i.employee{color: #1cb009}
+	i.sms, i.official{color: #478eff}
+	i.blotter-com, i.census{color: #9e0202}
+	i.indigency, i.dash{color: #0218bd}
+	i.permit, i.iannouncement{color: #e0149c}
 	i.saveicon:hover{color: blue;}
 	
 	
