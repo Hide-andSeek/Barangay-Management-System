@@ -8,6 +8,8 @@ if(isset($_POST['clearancebtn'])){
 	$status = $_POST['status'];
 	$nationality = $_POST['nationality'];
 	$address = $_POST['address'];
+	$contactno = $_POST['contactno'];
+	$emailadd = $_POST['emailadd'];
 	$purpose = $_POST['purpose'];
 	$date_issued = $_POST['date_issued'];
 	$ctc_no = $_POST['ctc_no'];
@@ -15,7 +17,7 @@ if(isset($_POST['clearancebtn'])){
 	$precint_no = $_POST['precint_no'];
 	$countfiles = count($_FILES['files']['name']);
 		
-	$query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,purpose, date_issued, ctc_no, issued_at, precint_no, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	$stmt = $db->prepare($query);
 
@@ -43,7 +45,7 @@ if(isset($_POST['clearancebtn'])){
 			) {
 				// Execute query
 				$stmt->execute(
-					array($full_name, $age, $status, $nationality, $address, $purpose, $date_issued, $ctc_no, $issued_at, $precint_no, $filename, $target_file));
+					array($full_name, $age, $status, $nationality, $address, $contactno, $emailadd, $purpose, $date_issued, $ctc_no, $issued_at, $precint_no, $filename, $target_file));
 			}
 		}
 	}
@@ -65,13 +67,15 @@ if(isset($_POST['clearancebtn'])){
 		$address = $_POST['address'];
 		$birthday = $_POST['birthday'];
 		$placeofbirth = $_POST['placeofbirth'];
+		$contact_no = $_POST['contact_no'];
 		$guardianname = $_POST['guardianname'];
 		$emrgncycontact = $_POST['emrgncycontact'];
 		$reladdress = $_POST['reladdress'];
 		$dateissue = $_POST['dateissue'];
+		$emailadd = $_POST['emailadd'];
 		$countfiles = count($_FILES['files']['name']);
 		
-		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, guardianname, emrgncycontact, reladdress, dateissue, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, contact_no, guardianname, emrgncycontact, reladdress, dateissue, emailadd, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 		$stmt = $db->prepare($query);
 	
@@ -99,7 +103,7 @@ if(isset($_POST['clearancebtn'])){
 				) {
 					// Execute query
 					$stmt->execute(
-						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $guardianname, $emrgncycontact, $reladdress, $dateissue, $filename, $target_file));
+						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $contact_no, $guardianname, $emrgncycontact, $reladdress, $dateissue, $emailadd, $filename, $target_file));
 				}
 			}
 		}
@@ -121,9 +125,10 @@ if(isset($_POST['permitBtn'])){
 	$businessaddress = $_POST['businessaddress'];
 	$plateno = $_POST['plateno'];
 	$contactno = $_POST['contactno'];
+	$emailadd = $_POST['emailadd'];
 	$countfiles = count($_FILES['files']['name']);
 	
-	$query = "INSERT INTO businesspermit (dateissued, selection, ownername, businessname, businessaddress, plateno, contactno, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO businesspermit (dateissued, selection, ownername, businessname, businessaddress, plateno, contactno, emailadd, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?,?)";
    
     $stmt = $db->prepare($query);
    
@@ -151,7 +156,7 @@ if(isset($_POST['permitBtn'])){
             ) {
                 // Execute query
                 $stmt->execute(
-                    array($dateissued, $selection, $ownername,  $businessname, $businessaddress, $plateno, $contactno, $filename, $target_file));
+                    array($dateissued, $selection, $ownername,  $businessname, $businessaddress, $plateno, $contactno, $emailadd, $filename, $target_file));
             }
         }
     }
@@ -171,9 +176,11 @@ if(isset($_POST['indigencybtn'])){
 	$address = $_POST['address'];
 	$purpose = $_POST['purpose'];
 	$date_issue = $_POST['date_issue'];
+	$contactno = $_POST['contactno'];
+	$emailadd = $_POST['emailadd'];
 	$countfiles = count($_FILES['files']['name']);
     
-    $query = "INSERT INTO certificateindigency (fullname,address, purpose, date_issue, name,image) VALUES(?,?,?,?,?,?)";
+    $query = "INSERT INTO certificateindigency (fullname,address, purpose, date_issue, contactno , emailadd, name,image) VALUES(?,?,?,?,?,?,?,?)";
    
     $stmt = $db->prepare($query);
    
@@ -201,7 +208,7 @@ if(isset($_POST['indigencybtn'])){
             ) {
                 // Execute query
                 $stmt->execute(
-                    array($fullname,$address, $purpose, $date_issue, $filename, $target_file));
+                    array($fullname,$address, $purpose, $date_issue, $contactno, $emailadd, $filename, $target_file));
             }
         }
     }

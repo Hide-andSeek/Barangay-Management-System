@@ -103,14 +103,6 @@ if(!isset($_SESSION["employee_no"])){
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 												
 			<!--Setting Section-->
 			 <li>
@@ -170,7 +162,7 @@ if(!isset($_SESSION["employee_no"])){
 				<h4>Total of Residents</h4>
 			</div>
 			</div>
-
+		
 			<div class="w3-quarter">
 			<div class="w3-container w3-blue w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
@@ -190,7 +182,7 @@ if(!isset($_SESSION["employee_no"])){
 				<h4>Barangay ID (Request)</h4>
 			</div>
 			</div>
-
+	
 			<div class="w3-quarter">
 			<div class="w3-container w3-teal w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
@@ -210,6 +202,46 @@ if(!isset($_SESSION["employee_no"])){
 				<h4>Certificate of Indigency</h4>
 			</div>
 			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+ 
+					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+				?>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Barangay Clearance</h4>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+ 
+					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Approved Barangay ID</h4>
+			</div>
+			</div>
+
 			<div class="w3-quarter">
 			<div class="w3-container w3-orange w3-text-white w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
@@ -226,13 +258,29 @@ if(!isset($_SESSION["employee_no"])){
 				
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Barangay Clearance</h4>
+				<h4>Approved Clearance</h4>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-red w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Approved Indigency</h4>
 			</div>
 			</div>
 		</div>
-	</div>
-			
-				
+	</div>		
 			</section>
 			<script href="test.js"></script>
 	</body>

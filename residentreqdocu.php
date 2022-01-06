@@ -303,6 +303,11 @@ include "db/users.php";
 																	<label for="pob">Place of Birth: </label><i class="red">*</i>
 																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
 																</div><br>
+																
+																<div class="form-group">
+																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
+																	<input type="number" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no">
+																</div><br>
 															</fieldset>
 														</div>
 													
@@ -327,6 +332,12 @@ include "db/users.php";
 																<div class="form-group">
 																	<label>Date Issued: <i class="red">*</i></label>
 																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
+																</div><br>
+
+																
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
 																</div><br>
 
 																<div class="form-group">
@@ -411,6 +422,11 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
+																</div><br>
+
+																<div class="form-group">
 																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
 																	<input type='file' name='files[]' required/>
 																</div>
@@ -435,23 +451,33 @@ include "db/users.php";
 															<fieldset class="field_set">
 																<legend>Personal Information</legend>
 																<div class="form-group">
-																	<label for="fullname">Full Name: </label>
+																	<label for="fullname">Full Name: <i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text" id="fullname" name="fullname" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>
 																
 																 <div class="form-group">
-																	<label for="address">Address: </label>
+																	<label for="address">Address: <i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text" id="address" name="address">
 																</div></br>
 												
 																 <div class="form-group">
-																	<label for="purpose">Purpose: </label>
+																	<label for="purpose">Purpose: <i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text" id="purpose" name="purpose">
 																</div></br>
 													
 																<div class="form-group">
-																	<label for="date_issue">Date Issued: </label>
+																	<label for="date_issue">Date Issued: <i class="red">*</i></label>
 																	<input required type="date" class="form-control form-text" id="date_issue" name="date_issue">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="contactno">Contact No.: <i class="red">*</i></label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
 																</div><br>
 
 																<div class="form-group">
@@ -508,6 +534,16 @@ include "db/users.php";
 																	<label for="address">Address: </label>
 																	<input required type="text" class="form-control form-text" id="address" name="address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div><br>	
+																
+																<div class="form-group">
+																	<label for="contactno">Contact No.: <i class="red">*</i></label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
+																</div><br>
 															</fieldset>
 														</div>
 													

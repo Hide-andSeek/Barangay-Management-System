@@ -97,14 +97,6 @@ if(!isset($_SESSION["employee_no"])){
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 			 
 			<!--Setting Section-->
 			 <li>
@@ -145,14 +137,21 @@ if(!isset($_SESSION["employee_no"])){
 				  </div>
 			  </section>
 			  
-			   <form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
+			   <<div class="search_content">
+                        <label for="">Search: 
+                            <input class="r_search" type="search">
+							<i class='bx bx-search'></i>
+                        </label>
+                        <label class="select__select" for="">Filter by: 
+                            <select class="selection">
+                                <option disabled>--Select--</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="decline">Decline</option>
+                            </select>
+								<i class='bx bx-sort'></i>
                         </label>
                 </div> 
-			  </form>
 			  
 			  <div class="reg_table">
 						<table class="content-table table_indigency"  id="table">

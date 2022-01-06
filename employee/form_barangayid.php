@@ -4,6 +4,41 @@ if(!isset($_SESSION["employee_no"])){
 }
 ?>
 
+<?php
+
+require '../vendor/autoload.php';
+
+use SMSGatewayMe\Client\ApiClient;
+use SMSGatewayMe\Client\Configuration;
+use SMSGatewayMe\Client\Api\MessageApi;
+use SMSGatewayMe\Client\Model\SendMessageRequest;
+
+// Configure client
+$config = Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTYzOTY1MTE0MCwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjkyMDA2LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.lPTgmVIR-RnDz2Z2OBr-lRcoy3Ppgi_5Nt-qQ_61eWE');
+$apiClient = new ApiClient($config);
+$messageClient = new MessageApi($apiClient);
+
+if (isset($_POST["number"]) && isset($_POST["msg"])) {
+    // Sending a SMS Message
+    $sendMessageRequest2 = new SendMessageRequest([
+        'phoneNumber' => $_POST["number"],
+        'message' => $_POST["msg"],
+        'deviceId' => 126644
+    ]);
+    $sendMessages = $messageClient->sendMessages([
+        $sendMessageRequest2
+		
+    ]);
+}
+?>
+
+<?php
+if(!isset($_SESSION["employee_no"])){
+	header("location: ../employee/form_sms.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -24,12 +59,14 @@ if(!isset($_SESSION["employee_no"])){
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="60">
+	 <meta http-equiv="refresh" content="120">
 
      <title> Barangay ID </title>
 	 
 	 
 	 <style>
+
+		 /* Barangay ID CSS */
 		.documentbtn{font-size: 15px;width: 250px; height: 40px; padding: 12px 12px 12px 12px; }
 		.documentbtn:hover{background-color: gray;color: white;}
 	
@@ -51,8 +88,89 @@ if(!isset($_SESSION["employee_no"])){
 		 .borderstyle{border: none;}
 		 .id_dashed{border: 3px dashed gray; padding: 10px 10px 10px 10px; width: 990px;}
 		
-		 button.view_approvebtn{width: 150px;}
+		 button.view_approvebtn{width: 150px; margin-bottom: 5px;}
 		 button.view_approvebtn:hover{color: green; background: orange;}
+		 button.view_declinebtn{background: #c24c44}
+		 button.view_declinebtn:hover{color: white; background: #d9534a;}
+
+		div.align-box{padding-top: 23px; display: flex; align-items: center;}
+		.box-report{
+			width: 300px;
+			font-size: 14px;
+			border: 4px solid #7dc748;
+			padding: 30px;
+			margin: 10px;
+			border-radius: 5px;
+			align-items: center;
+		}
+
+
+		#formatValidatorName{
+			top: 50px;
+		}
+
+		.employeemanagement-modal{
+			display: none; 
+			position: absolute; 
+			z-index: 999; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 120%; 
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4); 
+			padding-top: 5px; 
+			
+		}
+
+
+		.modal-contentemployee {
+			font-family: 'Montserrat', sans-serif;
+			padding-top: 1%;
+			background-color: #fefefe;
+			margin: 5% auto 2% auto;
+			border: 1px solid #888;
+			height: 78%;
+			width: 48%; 
+		
+		}
+
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		.employee-label{margin-left: 26px;}
+
+		.submtbtn{
+			height: 40px;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
+		.topright{
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.topright:hover {
+			color: red;
+			cursor: pointer;
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.send-message{margin: 15px 15px 15px 15px;}
+		
 	 </style>
    </head>
 	<body>
@@ -102,14 +220,6 @@ if(!isset($_SESSION["employee_no"])){
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 			
 																											<!--Setting Section-->
 			 <li>
@@ -148,14 +258,22 @@ if(!isset($_SESSION["employee_no"])){
 					</div>
 				  </div>
 			  </section>
-			  <form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
+			  <div class="search_content">
+                        <label for="">Search: 
+                            <input class="r_search" type="search">
+							<i class='bx bx-search'></i>
+                        </label>
+                        <label class="select__select" for="">Filter by: 
+                            <select class="selection">
+                                <option disabled>--Select--</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="decline">Decline</option>
+                            </select>
+								<i class='bx bx-sort'></i>
                         </label>
                 </div> 
-			  </form>
+				
 																					<!-- Table-->
 				<div class="reg_table " >
 						<table class="content-table" id="table">
@@ -186,6 +304,7 @@ if(!isset($_SESSION["employee_no"])){
 									<th>Valid ID</th>
 									<th>Approved by</th>
 									<th>Action</th>
+									<th>Message</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -208,9 +327,60 @@ if(!isset($_SESSION["employee_no"])){
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
-									<td><button class="view_approvebtn">Approve</button></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $_SESSION["employee_no"];?>"></td>
+
+									<td><button class="view_approvebtn">Approve</button>
+									<button class="view_approvebtn view_declinebtn">Decline</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
+							
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+														<span onclick="document.getElementById('id2').style.display='none'" class="topright">&times;</span>
+
+														
+														<div class="send-message">
+																<div class="container">
+																<div class="row">
+																	<div class="col-md-8">
+																	<div class="contact-form">
+																	<div class="section-heading">
+																		<h4>Send a Message</h4>
+																	</div>
+																		<form id="contact" action="" method="post">
+																		<div class="row">
+																			<div class="col-lg-12 col-md-12 col-sm-12">
+																			<fieldset class="sms-section">
+																				<input required type="number" class="form-control textarea" id="contact_no"
+																				name="contact_no"placeholder="Contact no.">
+																			</fieldset>
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<textarea name="msg" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
+																				-From Barangay Commonwealth</textarea>
+																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
+																				
+																			</fieldset>
+																			
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bx bx-send"></i>Send Message</button>
+																			</fieldset>
+																			</div>
+																		</div>
+																		</form>
+																	</div>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
 							
 							<?php
 							}
@@ -321,6 +491,8 @@ if(!isset($_SESSION["employee_no"])){
 							</div>
 						</div>
 					</div>
+	
+
 						<button class="permitbtn" style="float: right; padding: 5px 5px 5px 5px;" onclick="window.print(); ">
 							<i class="bx bx-save saveicon"></i>
 						</button>
@@ -335,6 +507,7 @@ if(!isset($_SESSION["employee_no"])){
 				{
 					table.rows[i].onclick = function()
 					{
+						
 						document.getElementById("residentid").value = this.cells[0].innerHTML;
 						document.getElementById("fname").value = this.cells[1].innerHTML;
 						document.getElementById("mname").value = this.cells[2].innerHTML;
@@ -346,8 +519,6 @@ if(!isset($_SESSION["employee_no"])){
 						document.getElementById("reladdress").value = this.cells[8].innerHTML;
 						document.getElementById("emrgncycontact").value = this.cells[9].innerHTML;
 						document.getElementById("dateissue").value = this.cells[10].innerHTML;
-						
-						
 					};
 				}
 				

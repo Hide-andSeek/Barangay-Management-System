@@ -27,7 +27,7 @@ include "db/users.php";
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Employee - Barangay Commonwealth QC.</title>
+     <title> Captain - Barangay Commonwealth QC.</title>
 	 <style>
 		 /*Captain Login Form*/
 		 .captain-mainpage{display: flex; justify-content: center; align-items: center;}

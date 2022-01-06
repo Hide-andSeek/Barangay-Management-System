@@ -37,6 +37,8 @@ include "db/users.php";
 	 
 	 
 	 <style>
+		 *{font-size: 13px;}
+
 		.adminmanagement-modal{
             display: none; 
             position: absolute; 
@@ -45,6 +47,7 @@ include "db/users.php";
             top: 30;
             width: 100%; 
             height: 100%; 
+			overflow-x: hidden; 
             background-color: rgb(0,0,0); 
             background-color: rgba(0,0,0,0.4); 
             padding-top: 5px; 
@@ -52,12 +55,12 @@ include "db/users.php";
         }
 	
 		.modal-contentadmin {
-		    padding-top: 2%;
             background-color: #fefefe;
             margin: 5% auto 15% auto;
             border: 1px solid #888;
-		    height: 50%;
-            width: 50%;
+		    height: 55%;
+            width: 70%;
+		
             border-radius: 5px;
         }
 
@@ -71,14 +74,18 @@ include "db/users.php";
 			display: inline-block;
 			border: 1px solid #ccc;
 			box-sizing: border-box;
-		}
+		}	
+		
+		
+		.closebtn{margin-right: 15px; font-stretch: expanded;}
+		.closebtn:hover{color:red; }
+		.description{ height: 50px; font-size: 13px;}
 
-		.description{ height: 50px;}
-
-	
+		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.fileupload{font-size: 13px; margin-left: 15px;}
 	 </style>
    </head>
-	<body>
+	<body onload="display_ct()">
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
@@ -89,7 +96,7 @@ include "db/users.php";
 			<ul class="nav-list">
 				<li>
 					<a class="side_bar" href="captaindashboard.php">
-						<i class='bx bx-category-alt'></i>
+						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
@@ -97,7 +104,7 @@ include "db/users.php";
 
 			  <li>
 					<a class="side_bar" href="adminmanagement.php">
-						<i class='bx bx-user-circle'></i>
+						<i class='bx bx-user-circle admin'></i>
 						<span class="links_name">Admin Management</span>
 					</a>
 					<span class="tooltip">Admin Management</span>
@@ -105,16 +112,15 @@ include "db/users.php";
 
 				<li>
 				  <a class="side_bar" href="employeemanagement.php">
-					  <i class='bx bx-group'></i>
+					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">Employee Management</span>
 					</a>
 					 <span class="tooltip">Employee Management</span>
-				  </li>	
-																						<!--Setting Section-->
+				  </li>
 			 
 				<li>
 				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-user-detail official'></i>
 					  <span class="links_name">Brgy Official Management</span>
 					</a>
 					 <span class="tooltip">Brgy Official Management</span>
@@ -122,7 +128,7 @@ include "db/users.php";
 
 				<li>
 				 <a class="side_bar" href="residentcensus.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
 					 <span class="tooltip">Resident Census</span>
@@ -130,10 +136,10 @@ include "db/users.php";
 
 				<li>
 				 <a class="side_bar" href="postannouncement.php">
-					  <i class='bx bxs-user-detail'></i>
-					  <span class="links_name">Announcement</span>
+					  <i class='bx bx-news iannouncement'></i>
+					  <span class="links_name">Post Announcement</span>
 					</a>
-					 <span class="tooltip"> Announcement</span>
+					 <span class="tooltip">Post Announcement</span>
 				</li>
 				
 				<li>
@@ -174,45 +180,26 @@ include "db/users.php";
 					</div>
 				  </div>
 			  </section>
+
+			  <div class="search_content">
+                        <label for="">Search: 
+                            <input class="r_search" type="search">
+							<i class='bx bx-search'></i>
+                        </label>
+						<!--
+						<label class="select__select" for="">Filter by: 
+                            <select class="selection">
+                                <option disabled>--Select--</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="decline">Decline</option>
+                            </select>
+								<i class='bx bx-sort'></i>
+                        </label>
+						-->
+                </div>
 			
-				<div>
-					<div><button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Announcement</button></div>
-									<!--Modal form for Login-->
-					<div id="formatValidatorName" >
-						  <div id="id01" class="adminmanagement-modal modal">
-								<div class="modal-contentadmin  animate" >
-								
-									<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="Login" class="login_container form">
-												<div class="information">   
-													<span type="submit" onclick="document.getElementById('id01').style.display='none'" class="closebtn" style="float: right">
-													X
-													</span>  
-												</div>
-
-												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-												Add Announcement
-												</div>
-
-												<div class="information">
-													<textarea required class="form-control inputtext control-label description" id="description" name ="description" type="text"  placeholder="Description" style="resize: none;"></textarea>
-												</div>
-												
-												<div class="form-group">
-													<label for="file">Attach Photo<i class="red">*</i></label>
-													<input type='file' name='files[]' required/>
-											    </div>
-
-												<div class="information">   
-													<button type="submit" id="announcebtn" name="announcebtn" class="inputtext submtbtn">
-														<i class="bx bx-t67check"></i>Submit
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-					</div>
+				
 
                     <div class="reg_table emp_tbl">
 						<table class="content-table">
@@ -227,8 +214,8 @@ include "db/users.php";
 						
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
-									<th >Description</th>
+									<th>Announcement ID</th>
+									<th>Description</th>
                                     <th>Image Name</th>
                                     <th>Announcement Image</th>									
 									<th>Action</th>
@@ -248,46 +235,42 @@ include "db/users.php";
 										<button class="form-control btn-danger" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;"><i class="bx bx-edit"></i>Delete</button>
 									</td>
 								</tr>	
-								<div id="id2" class="employeemanagement-modal modal" >
-													<div class="modal-contentemployee animate" >
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-															<div id="employee_form" class="container">
-																	<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-																	Update Employee
-																	</div>
-																	
-																	
-																	<div class="information">
-																		<label class="employee-label"> Username </label>
-																		<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
-																	</div>
-																	
-																	<div class="row align-items-start">
-																		<div class="information col">
-																			<label class="employee-label"> Last Name </label>
-																			<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-																		</div>
-																		
-																		<div class="information col">
-																			<label class="employee-label"> First Name </label> 
-																			<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-																		</div>
-																		
-																		<div class="information col">
-																			<label class="employee-label"> Middle Name </label>
-																			<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
-																		</div>
-																	</div>
+								<div id="id2" class="adminmanagement-modal modal" >
+											<div class="modal-contentadmin  animate" >
+												<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+														<div id="Login" class="login_container form">
+																<div class="information">   
+																	<span type="submit" onclick="document.getElementById('id2').style.display='none'" class="closebtn" style="float: right">
+																	X
+																	</span>  
+																</div>
 
-																	<div class="information">   
-																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-																			<i class="bx bx-t67check"></i>Submit
-																		</button>  
-																	</div>
-															</div> 	
-														</form>
-												</div>
+																<div class="form-control inputtext information" style="text-align:center; color: white; background: green; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+																Edit Announcement
+																</div>
+
+																<div class="form-group">
+																	<label for="file">Attach Photo<i class="red">*</i></label>
+																	<input type='file' name='files[]' id='files 'class="form-control fileupload" required/>
+																</div>
+																<div class="information">
+																	<label for="file" class="fileupload">Headline<i class="red">*</i></label>
+																	<input type="text" class="form-control inputtext " name="headline" id="headline">
+																</div>
+																<div class="information">
+																	<label for="file" class="fileupload">Add Description<i class="red">*</i></label>
+																	<textarea required class="form-control inputtext control-label description" id="description" name ="description" type="text"  placeholder="Description"></textarea>
+																</div>
+																
+																<div class="information">   
+																	<button type="submit" id="announcebtn" name="announcebtn" class="inputtext submtbtn">
+																		<i class="bx bx-t67check"></i>Submit
+																	</button>  
+																</div>
+														</div> 	
+													</form>
 											</div>
+									</div>
 							<?php
 							}
 							?>
@@ -300,7 +283,50 @@ include "db/users.php";
 					</div>
 				</div>
 				</div>
+				<div>
+					<div ><button type="button" class="btn btn-primary addannounce" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Announcement</button></div>
+									<!--Modal form for Login-->
+					<div id="formatValidatorName" >
+						  <div id="id01" class="adminmanagement-modal modal">
+								<div class="modal-contentadmin  animate" >
+								
+									<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+										<div id="Login" class="login_container form">
+																<div class="information">   
+																	<span type="submit" onclick="document.getElementById('id01').style.display='none'" class="closebtn" style="float: right">
+																		X
+																	</span>  
+																</div>
+
+																<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+																Add Announcement
+																</div>
+
+																<div class="form-group">
+																	<label for="file">Attach Photo<i class="red">*</i></label>
+																	<input type='file' name='files[]' id='files 'class="form-control fileupload" required/>
+																</div>
+																<div class="information">
+																	<label for="file" class="fileupload">Headline<i class="red">*</i></label>
+																	<input type="text" class="form-control inputtext " name="headline" id="headline">
+																</div>
+																<div class="information">
+																	<label for="file" class="fileupload">Add Description<i class="red">*</i></label>
+																	<textarea required class="form-control inputtext control-label description" id="description" name ="description" type="text"  placeholder="Description" style="resize: none;"></textarea>
+																</div>
+																
+																<div class="information">   
+																	<button type="submit" id="announcebtn" name="announcebtn" class="inputtext submtbtn">
+																		<i class="bx bx-t67check"></i>Submit
+																	</button>  
+																</div>
+										</div> 	
+									</form>
+									<h1>Hgello</h1>
+							  </div>
+						</div>
+					</div>
 			</section>
-			
+			<script src="resident-js/barangay.js"></script>
 	</body>
 </html>

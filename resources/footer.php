@@ -1,4 +1,5 @@
 <div id="footer" class="footer">
+				  <span style="float: right;" class="footer_dt" id="date-time"></span>
 	<br>
 </div>
       </section>

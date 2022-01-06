@@ -39,7 +39,7 @@ include "db/user.php";
 	 <style>
 		 *{
     font-family: "Poppins" , sans-serif;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 div.align-box{padding-top: 23px; display: flex; align-items: center;}
@@ -166,31 +166,31 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			<ul class="nav-list">
 				<li>
 					<a class="side_bar" href="captaindashboard.php">
-						<i class='bx bx-category-alt'></i>
+						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
 			 	</li>
 
 			  <li>
-			  <a class="side_bar" href="adminmanagement.php">
-				  <i class='bx bx-user-circle'></i>
-				  <span class="links_name">Admin Management</span>
-				</a>
-				 <span class="tooltip">Admin Management</span>
+					<a class="side_bar" href="adminmanagement.php">
+						<i class='bx bx-user-circle admin'></i>
+						<span class="links_name">Admin Management</span>
+					</a>
+					<span class="tooltip">Admin Management</span>
 			  </li>	
 
-			   <li>
-				 <a class="side_bar" href="employeemanagement.php">
-					  <i class='bx bx-group'></i>
+				<li>
+				  <a class="side_bar" href="employeemanagement.php">
+					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">Employee Management</span>
 					</a>
 					 <span class="tooltip">Employee Management</span>
-				</li>
-
+				  </li>
+			 
 				<li>
 				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-user-detail official'></i>
 					  <span class="links_name">Brgy Official Management</span>
 					</a>
 					 <span class="tooltip">Brgy Official Management</span>
@@ -198,7 +198,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 
 				<li>
 				 <a class="side_bar" href="residentcensus.php">
-					  <i class='bx bxs-user-detail'></i>
+					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
 					 <span class="tooltip">Resident Census</span>
@@ -206,12 +206,12 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 
 				<li>
 				 <a class="side_bar" href="postannouncement.php">
-					  <i class='bx bxs-user-detail'></i>
-					  <span class="links_name">Announcement</span>
+					  <i class='bx bx-news iannouncement'></i>
+					  <span class="links_name">Post Announcement</span>
 					</a>
-					 <span class="tooltip"> Announcement</span>
+					 <span class="tooltip">Post Announcement</span>
 				</li>
-				<!--Setting Section-->
+			
 			 <li>
 			   <a class="side_bar" href="settings.php">
 				 <i class='bx bx-cog' ></i>
@@ -386,14 +386,20 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 													<div class="modal-contentemployee animate" >
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 															<div id="employee_form" class="container">
+
+																	<div class="information">   
+																		<span type="submit" onclick="document.getElementById('id2').style.display='none'" class="closebtn" style="float: right">
+																		X
+																		</span>  
+																	</div>
+
 																	<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
 																	Update Employee
 																	</div>
-																	
-																	
+
 																	<div class="information">
-																		<label class="employee-label"> Username </label>
-																		<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
+																		<label class="employee-label"> Full name </label>
+																		<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
 																	</div>
 																	
 																	<div class="row align-items-start">
@@ -409,9 +415,39 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 																		
 																		<div class="information col">
 																			<label class="employee-label"> Middle Name </label>
-																			<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
+																			<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
 																		</div>
 																	</div>
+																	<div class="information">
+																		<label class="employee-label"> Birthday </label>
+																		<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
+																	</div>
+																	
+																	<div class="information">
+																		<label class="employee-label"> Address </label>
+																		<input required class="form-control inputtext control-label" id="address" name ="address" type="text"  placeholder="Address"> 
+																	</div>
+																	
+																	<div class="information">
+																		<label class="employee-label"> Contact No </label>
+																		<input required class="form-control inputtext control-label" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
+																	</div>
+																	
+																	<div>
+																		<label class="employee-label"> Department </label>
+																		<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+																		5px;" id="department" name="department">
+																			<option disabled>--Select--</option>
+																			<option value="BCPC">BCPC</option>
+																			<option value="VAWC">VAWC</option>
+																			<option value="LUPON">LUPON</option>
+																			<option value="ACCOUNTING">ACCOUNTING</option>
+																			<option value="BPSO">BPSO</option>
+																			<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
+																			<option value="COMPLAINT">COMPLAINT</option>
+																		</select>
+																	</div>
+
 
 																	<div class="information">   
 																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
@@ -427,9 +463,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 							?>
 						
 						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
+							
 						</div>
 					</div>
 				</div>
