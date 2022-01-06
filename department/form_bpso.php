@@ -76,17 +76,11 @@ if(!isset($_SESSION["employee_no"])){
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  
-              <li>
-			   <a class="side_bar" href="form_bpso_incidents.php">
-				 <i class='bx bx-user-circle'></i>
-				 <span class="links_name">Incidents</span>
-			   </a>
-			   <span class="tooltip">Incidents</span>
-			 </li>
+              
 
 			 <li>
 			   <a class="side_bar" href="form_bpso_violators.php">
-				 <i class='fa fa-print'></i>
+				 <i class='bx bx-error'></i>
 				 <span class="links_name">Violators</span>
 			   </a>
 			   <span class="tooltip">Violators</span>
