@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["employee_no"])){
-	header("location: form_bpso_violators.php");
+	header("location: department/form_bpso_violators.php");
 }
 ?>
 
@@ -69,24 +69,18 @@ if(!isset($_SESSION["employee_no"])){
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="     ">
+			  <a class="side_bar" href="bpso.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  
-              <li>
-			   <a class="side_bar" href="form_bpso_incidents.php">
-				 <i class='bx bx-user-circle'></i>
-				 <span class="links_name">Incidents</span>
-			   </a>
-			   <span class="tooltip">Incidents</span>
-			 </li>
+              
 
 			 <li>
-			   <a class="side_bar" href="form_bpso_violators.php">
-				 <i class='fa fa-print'></i>
+			   <a class="side_bar" href="bpso_violators.php">
+				 <i class='bx bx-error'></i>
 				 <span class="links_name">Violators</span>
 			   </a>
 			   <span class="tooltip">Violators</span>
@@ -123,7 +117,7 @@ if(!isset($_SESSION["employee_no"])){
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>BARANGAY PUBLIC SAFETY OFFICER
+						<h5>VIOLATION
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -131,91 +125,7 @@ if(!isset($_SESSION["employee_no"])){
 					</div>
 				  </div>
 			  </section>
-			    <br>
-			  <div>
-			
-<div>
-		<div class="w3-row-padding w3-margin-bottom">
-			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
 
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					
-					?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Active</h4>
-			</div>
-			</div>
-
-			<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-		
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Settled</h4>
-			</div>
-			</div>
-
-			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Not Settled</h4>
-			</div>
-			</div>
-			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Upcoming Hearing</h4>
-			</div>
-			</div>
-		</div>
-	</div>
 
 	<form action="user.php" method="POST">
 				<div class="search_content">
