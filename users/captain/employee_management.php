@@ -1,7 +1,7 @@
 
 <?php session_start();
 if(!isset($_SESSION["official_name"])){
-	header("location: users/captain/employee_management.php");
+	header("location: captainlogin.php");
 }
 ?>
 
@@ -118,12 +118,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
      width: 80%;
 }
 
-.addbtn{
-    position: absolute;
-    margin-left: 25px;
-    margin-top: -25px;
-    font-family: inherit;
-}
+
 
 .emp_tbl{ 
     margin-top: 65px;
@@ -152,6 +147,15 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
   to {transform: scale(1)}
 }
 
+
+.addemployee{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+
+
+.select__select{
+	position: absolute;
+	margin-left: 69%;
+	font-size: 13px;
+}
 
 	 </style>
    </head>
@@ -250,91 +254,19 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 					</div>
 				  </div>
 			  </section>
-				
-				<div>
-					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('addemployee').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
-<!--Modal form for Add Employee-->
-				<div id="formatValidatorName" >
-					<div >
-						  <div id="addemployee" class="employeemanagement-modal modal" >
-								<div class="modal-contentemployee animate" >
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="employee_form" class="container">
 
-										<div class="information">   
-													<span type="submit" onclick="document.getElementById('addemployee').style.display='none'" class="closebtn" style="float: right">
-													X
-													</span>  
-												</div>
-												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-												Add Employee
-												</div>
-												
-												
-												<div class="information">
-													<label class="employee-label"> Full name </label>
-													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
-												</div>
-												
-												<div class="row align-items-start">
-													<div class="information col">
-														<label class="employee-label"> Last Name </label>
-														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> First Name </label> 
-														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> Middle Name </label>
-														<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
-													</div>
-												</div>
-												<div class="information">
-													<label class="employee-label"> Birthday </label>
-													<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
-												</div>
-												
-												<div class="information">
-													<label class="employee-label"> Address </label>
-													<input required class="form-control inputtext control-label" id="address" name ="address" type="text"  placeholder="Address"> 
-												</div>
-												
-												<div class="information">
-													<label class="employee-label"> Contact No </label>
-													<input required class="form-control inputtext control-label" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
-												</div>
-												
-												<div>
-													<label class="employee-label"> Department </label>
-													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
-													5px;" id="department" name="department">
-														<option disabled>--Select--</option>
-														<option value="BCPC">BCPC</option>
-														<option value="VAWC">VAWC</option>
-														<option value="LUPON">LUPON</option>
-														<option value="ACCOUNTING">ACCOUNTING</option>
-														<option value="BPSO">BPSO</option>
-														<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
-														<option value="COMPLAINT">COMPLAINT</option>
-													</select>
-												</div>
-
-
-												<div class="information">   
-													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-														<i class="bx bx-t67check"></i>Submit
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-					</div>
-					
-									
+			  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			  <div class="search_content">
+						<label class="select__select" for="">Filter by: 
+                            <select class="selection" name="filterstats">
+                                <option disabled>--Select--</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+								<button class="filterbtn"><i class='bx bx-sort filter'></i></button>
+                        </label>
+                </div>
+			</form>				
 					
 					<div class="reg_table emp_tbl">
 						<table class="content-table">
@@ -467,7 +399,115 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 						</div>
 					</div>
 				</div>
-				
+				<div>
+					<div><button type="button" class="btn btn-primary addbtn addemployee" onclick="document.getElementById('addemployee').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
+<!--Modal form for Add Employee-->
+				<div id="formatValidatorName" >
+					<div >
+						  <div id="addemployee" class="employeemanagement-modal modal" >
+								<div class="modal-contentemployee animate" >
+									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+										<div id="employee_form" class="container">
+
+										<div class="information">   
+													<span type="submit" onclick="document.getElementById('addemployee').style.display='none'" class="closebtn" style="float: right">
+													X
+													</span>  
+												</div>
+												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+												Add Employee
+												</div>
+												
+												
+												<div class="information">
+													<label class="employee-label"> Full name </label>
+													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
+												</div>
+												
+												<div class="row align-items-start">
+													<div class="information col">
+														<label class="employee-label"> Last Name </label>
+														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> First Name </label> 
+														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+													</div>
+													
+													<div class="information col">
+														<label class="employee-label"> Middle Name </label>
+														<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
+													</div>
+												</div>
+
+												<div class="information">
+													<label class="employee-label"> Birthday </label>
+													<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
+												</div>
+												
+												<div class="information">
+													<label class="employee-label"> Address </label>
+													<input required class="form-control inputtext control-label" id="address" name ="address" type="text"  placeholder="Address"> 
+												</div>
+												
+												<div class="information">
+													<label class="employee-label"> Contact No </label>
+													<input required class="form-control inputtext control-label" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
+												</div>
+												
+												<div class="information col">
+													<label class="employee-label"> User Type </label>
+													<select class="form-control inputtext " style="padding: 0px 0px 0px 
+													5px;" id="user_type" name="user_type">
+														<option disabled>--Select--</option>
+														<option value="Admin">Admin</option>
+														<option value="Employee">Employee</option>
+													</select>
+												</div>
+
+												<div class="information col">
+													<label class="employee-label"> Department </label>
+													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+													5px;" id="department" name="department">
+														<option disabled>--Select--</option>
+														<option value="ADMIN">ADMIN</option>
+														<option value="BCPC">BCPC</option>
+														<option value="VAWC">VAWC</option>
+														<option value="LUPON">LUPON</option>
+														<option value="ACCOUNTING">ACCOUNTING</option>
+														<option value="BPSO">BPSO</option>
+														<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
+														<option value="COMPLAINT">COMPLAINT</option>
+													</select>
+												</div>
+
+												<div class="information col">
+													<label class="employee-label"> Status </label>
+													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+													5px;" id="status" name="status">
+														<option disabled>--Select--</option>
+														<option value="active">active</option>
+														<option value="inactive">inactive</option>
+													</select>
+												</div>
+
+												<div class="information">
+													<label class="employee-label"> Added On </label>
+													<input required class="form-control inputtext control-label" id="added_on" name ="added_on" type="datetime-local"> 
+												</div>
+
+												<div class="information">   
+													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+														<i class="bx bx-t67check"></i>Submit
+													</button>  
+												</div>
+										</div> 	
+									</form>
+							  </div>
+						</div>
+					</div>
+					
 			</section>
 			<script>
 			

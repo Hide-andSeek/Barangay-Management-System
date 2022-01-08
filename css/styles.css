@@ -323,9 +323,9 @@ img.brgy_icon{
 .r_search{
 	border-radius: 25px;
 	color: #003800;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 	padding-left: 10px;
 	height: 30px;
 	font-size: 13px;
@@ -350,6 +350,12 @@ img.brgy_icon{
     padding-left: 10px;
 	height: 30px;
 }
+
+
+.filter{color: black;}
+.filter:hover{color: orange}
+.filterbtn{height: 33px; width: 5px; margin-top: 5px; padding: 5px 15px 5px 0px; background: none;}
+
 																			    /*-- Table --*/
 .content-table, .table_indigency{
   border-collapse: collapse;
@@ -440,13 +446,12 @@ div.a_u_d_buttons{
 	color: #fff;
 	opacity: 0.5px;
 	font-size: 13px;
-  height: 150px;
 	padding-top: 70px;
 	padding-left: 830px;
 
 }
 
-																/*-- User Information --*/
+/*-- User Information --*/
 
 i.dash{
 	color: orange;

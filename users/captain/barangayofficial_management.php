@@ -228,7 +228,7 @@ if(!isset($_SESSION["official_name"])){
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
-									<th>Last Name</th>
+									<th>Brgy Official Name</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       

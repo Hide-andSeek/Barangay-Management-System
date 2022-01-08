@@ -153,6 +153,7 @@ if(isset($_POST['vawcbtn'])){
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
 } 
+
 ?>
 
 
