@@ -1,4 +1,4 @@
-<!--Resident Login Form-->
+
 <?php 
 
 //Resident Create Account Form
@@ -128,4 +128,50 @@ if(isset($_POST['officialcreatebtn'])){
 			}
 	}
 	 
+?>
+
+<?php
+
+//Resident Create Account Form
+if(isset($_POST['regbtn'])){
+	
+	$uname = $_POST['uname'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$policy = $_POST['policy'];
+	
+	$password = password_hash($password, PASSWORD_BCRYPT);
+
+	$sql_create_acc = "SELECT COUNT(email) AS num FROM accreg_resident WHERE email = :email";
+	$stmt = $db->prepare($sql_create_acc);
+	$stmt->bindValue(':email', $email);
+	$stmt->execute();
+	
+	$count_row = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	if($count_row['num']>0){
+		echo "<script>
+				alert('Email already exist. Please choose unique email address!');
+				window.location.href='index.php';
+			</script>";
+	
+	}else{
+		
+		$stmt = $db->prepare("INSERT INTO accreg_resident (uname, email, password, policy) VALUES (:uname, :email, :password, :policy)");
+		$stmt->bindParam(':uname', $uname);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':password', $password);
+		$stmt->bindParam(':policy', $policy);
+		
+	if($stmt->execute()){
+		echo "<script>
+				alert('You are registered');
+				window.location.href='index.php';
+			 </script>";
+	}else{
+		echo '<script>alert("An error occured")</script>';
+		}	
+	}
+}
+
 ?>

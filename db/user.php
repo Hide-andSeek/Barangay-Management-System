@@ -52,9 +52,12 @@ if(isset($_POST['empBtn'])){
 	$birthday = $_POST['birthday'];
 	$address = $_POST['address'];
 	$contact = $_POST['contact'];
+	$user_type = $_POST['user_type'];
 	$department = $_POST['department'];
+	$status = $_POST['status'];
+	$added_on = $_POST['added_on'];
 		
-		$stmt = $db->prepare("INSERT INTO employeedb (employee_uname, employee_lname, employee_fname, employee_mname, birthday, address, contact, department) VALUES (:employee_uname, :employee_lname, :employee_fname, :employee_mname, :birthday, :address, :contact, :department)");
+		$stmt = $db->prepare("INSERT INTO employeedb (employee_uname, employee_lname, employee_fname, employee_mname, birthday, address, contact, user_type, department, status, added_on) VALUES (:employee_uname, :employee_lname, :employee_fname, :employee_mname, :birthday, :address, :contact, :user_type, :department, :status, :added_on)");
 		$stmt->bindParam(':employee_uname', $employee_uname);
 		$stmt->bindParam(':employee_lname', $employee_lname);
 		$stmt->bindParam(':employee_fname', $employee_fname);
@@ -62,11 +65,14 @@ if(isset($_POST['empBtn'])){
 		$stmt->bindParam(':birthday', $birthday);
 		$stmt->bindParam(':address', $address);
 		$stmt->bindParam(':contact', $contact);
+		$stmt->bindParam(':user_type', $user_type);
 		$stmt->bindParam(':department', $department);
+		$stmt->bindParam(':status', $status);
+		$stmt->bindParam(':added_on', $added_on);
 		
 	if($stmt->execute()){
 		echo "<script>
-				alert('You are registered');
+				alert('Successfully added!');
 				window.location.href='employeemanagement.php';
 			 </script>";
 	}else{
@@ -95,9 +101,10 @@ if(isset($_POST['documentlogbtn'])){
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
 } 
-
-
 ?>
+
+
+
 
 <?php
 //Employee - BCPC Login
