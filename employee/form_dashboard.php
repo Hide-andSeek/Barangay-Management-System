@@ -1,6 +1,9 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: 0index.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
 
@@ -11,6 +14,7 @@ if(!isset($_SESSION["employee_no"])){
 	<!-- Bootstrap CSS -->
     <link href="https://cdn
 	.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
@@ -60,7 +64,7 @@ if(!isset($_SESSION["employee_no"])){
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
@@ -117,7 +121,7 @@ if(!isset($_SESSION["employee_no"])){
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-				   	 <div><?php echo $_SESSION["employee_no"];?></div>
+				   	 <div class="job" id="">Employee Name</div>
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>

@@ -191,7 +191,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" >
 				   <div class="name_job">
 				    
 					 <div>Employee</div>

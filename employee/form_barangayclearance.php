@@ -1,9 +1,11 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: form_barangayclearance.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
-
 
 <?php 
 include "../db/conn.php";
@@ -76,7 +78,7 @@ include "../db/documents.php";
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
@@ -133,7 +135,7 @@ include "../db/documents.php";
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-					 <div><?php echo $_SESSION["employee_no"];?></div>
+				   	 <div class="job" id="">Employee Name</div>
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>

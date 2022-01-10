@@ -1,6 +1,9 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: ../employee/form_businesspermit.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
 
@@ -118,8 +121,8 @@ if(!isset($_SESSION["employee_no"])){
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-					 <div><?php echo $_SESSION["employee_no"];?></div>
-					 <div class="job" id="">Administrator</div>
+				   	 <div class="job" id="">Employee Name</div>
+					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">

@@ -152,7 +152,7 @@ include "db/users.php";
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic" >
 				   <div class="name_job">
 				    
 					 <div>Employee</div>

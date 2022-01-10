@@ -4,6 +4,8 @@ include "db/users.php";
 include "db/user.php";
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,6 +13,7 @@ include "db/user.php";
     <meta charset="UTF-8">
 	<!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
@@ -252,11 +255,12 @@ include "db/user.php";
 												<span onclick="document.getElementById('docreq').style.display='none'" class="topright">&times;</span>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
+													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 												</div>
-												
+
 												<div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="REQUESTDOCUMENT">
+													<input class="inputpass control-label" id="employeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show" id="togglePassword" style="margin-left: 10px; cursor: pointer;"></i>
 												</div>
 											   
 												<div class="information">   
@@ -304,5 +308,17 @@ include "db/user.php";
 		</main>
 		
 		<script src="js/loginmodalform.js"></script>
+		<script>
+			const togglePassword = document.querySelector('#togglePassword');
+			const password = document.querySelector('#employeeno');
+			
+			togglePassword.addEventListener('click', function (e) {
+				// toggle the type attribute
+				const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+				password.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
+		</script>
 	</body>
 </html> 

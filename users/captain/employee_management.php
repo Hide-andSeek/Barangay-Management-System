@@ -19,6 +19,7 @@ include "db/user.php";
 	<!-- Bootstrap CSS -->
     <link href="https://cdn
 	.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
@@ -34,7 +35,7 @@ include "db/user.php";
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> User Management </title>
+     <title> Employee Management </title>
 
 	 <style>
 		 *{
@@ -79,7 +80,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
     background-color: #fefefe;
     margin: 5% auto 2% auto;
     border: 1px solid #888;
-    height: 78%;
+    height: 84%;
     width: 75%; 
    
 }
@@ -157,9 +158,15 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 	font-size: 13px;
 }
 
+.label-success{background-color:#5cb85c}.label-success[href]:focus,.label-success[href]:hover{background-color:#449d44}
+.label-danger{background-color:#d9534f}.label-danger[href]:focus,.label-danger[href]:hover{background-color:#c9302c}
+.label{display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em}
+.alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}
+.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
+.panel-default{margin-top: 60px;}
 	 </style>
    </head>
-	<body>
+	<body onload="display_ct()">
 			<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
@@ -226,7 +233,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
+				   <img class="profile_pic">
 				   <div class="name_job">
 				    
 					 <div>Employee</div>
@@ -246,7 +253,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>User Management
+						<h5>Employee Management
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -266,183 +273,76 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 								<button class="filterbtn"><i class='bx bx-sort filter'></i></button>
                         </label>
                 </div>
-			</form>			
-					
-					<div class="reg_table emp_tbl">
-						<table class="content-table">
-						
-						<?php
-							include "db/conn.php";
-						
+			</form>	
+			
+			<div class="container">
+            <?php
+			include('db/user.php');
+				if($_SESSION['type'] == 'user')
+				{
+				
+				}
+                else
+                {
+			?>	
+			<div class="panel panel-default">
+					<span id="message"></span>
+					<div class="panel-body">
+						<div class="table-responsive" id="user_data">
 
-							if(isset($_POST['filterstats'])){
-								$filter = $_POST["filterstats"];
-
-								$filterquery = "SELECT * FROM employeedb WHERE status='$filter' ORDER BY employee_no";
-							}else{
-								$filterquery = "SELECT * FROM employeedb WHERE status='Active' ORDER BY employee_no";
-							}
-	
-							$countemployee = $db->query($filterquery)
-						?>
-						
-							<thead>
-								<tr class="t_head">
-									<th>Employee No.</th>
-									<th>Last Name</th>
-									<th>First name</th>
-									<th>Middle name</th>
-									<th>Birthday</th>
-									<th>Address</th>
-									<th>Contact No.</th>
-									<th>User type </th>
-									<th>Department</th>
-									<th>Status</th>
-									<th>View</th>
-									<th>Added on</th>
-									<th>Action</th>
-								</tr>                       
-							</thead>
-							<?php
-							foreach($countemployee as $data) 
-							{
-							?>
-							<tbody>
-							<tr class="table-row">
-									<td><?php echo $data ['employee_no']; ?></td>
-									<td><?php echo $data ['employee_lname']; ?></td>
-									<td><?php echo $data ['employee_fname']; ?></td>
-									<td><?php echo $data ['employee_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['user_type']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
-									<td><?php echo $data ['status']; ?></td>
-									<td><button class="view_approvebtn">View Details</button></td>
-									<td><?php echo $data ['added_on']; ?></td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Edit</button>
-
-												
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Disable</button>
-									</td>
-								</tr>	
-								<div id="id2" class="employeemanagement-modal modal" >
-													<div class="modal-contentemployee animate" >
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-															<div id="employee_form" class="container">
-
-															<div class="information">   
-																<span type="submit" onclick="document.getElementById('id2').style.display='none'" class="closebtn" style="float: right">
-																X
-																</span>  
-															</div>
-															<div class="form-control inputtext information" style="text-align:center; color: white; background: green; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-															Update User
-															</div>
-															
-															
-															<div class="information">
-																<label class="employee-label"> Full name </label>
-																<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
-															</div>
-															
-															<div class="row align-items-start">
-																<div class="information col">
-																	<label class="employee-label"> Last Name </label>
-																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-																</div>
-																
-																<div class="information col">
-																	<label class="employee-label"> First Name </label> 
-																	<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-																</div>
-																
-																<div class="information col">
-																	<label class="employee-label"> Middle Name </label>
-																	<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
-																</div>
-															</div>
-
-															<div class="information">
-																<label class="employee-label"> Birthday </label>
-																<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
-															</div>
-														<div class="row align-items-start">
-															<div class="information col">
-																<label class="employee-label"> Address </label>
-																<input required class="form-control inputtext control-label address" id="address" name ="address" type="text"  placeholder="Address"> 
-															</div>
-															
-															<div class="information col">
-																<label class="employee-label"> Contact No </label>
-																<input required class="form-control inputtext control-label contact" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
-															</div>
-														</div>
-														<div class="row align-items-start">
-															<div class="information col">
-																<label class="employee-label"> User Type </label>
-																<select class="form-control inputtext usr_type" style="padding: 0px 0px 0px 
-																5px;" id="user_type" name="user_type">
-																	<option disabled>--Select--</option>
-																	<option value="Admin">Admin</option>
-																	<option value="Employee">Employee</option>
-																</select>
-															</div>
-
-															<div class="information col">
-																<label class="employee-label"> Department </label>
-																<select class="form-control inputtext departmnt control-label" style="padding: 0px 0px 0px 
-																5px; " id="department" name="department">
-																	<option disabled>--Select--</option>
-																	<option value="ADMIN">ADMIN</option>
-																	<option value="BCPC">BCPC</option>
-																	<option value="VAWC">VAWC</option>
-																	<option value="LUPON">LUPON</option>
-																	<option value="ACCOUNTING">ACCOUNTING</option>
-																	<option value="BPSO">BPSO</option>
-																	<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
-																	<option value="COMPLAINT">COMPLAINT</option>
-																</select>
-															</div>
-
-															<div class="information col">
-																<label class="employee-label"> Status </label>
-																<select class="form-control inputtext stats control-label" style="padding: 0px 0px 0px 
-																5px; " id="status" name="status">
-																	<option disabled>--Select--</option>
-																	<option style="color: green" value="active">active</option>
-																	<option style="color: red" value="inactive">inactive</option>
-																</select>
-															</div>
-														</div>
-
-															<div class="information">
-																<label class="employee-label"> Added On </label>
-																<input required class="form-control inputtext control-label" id="added_on" name ="added_on" type="datetime-local"> 
-															</div>
-
-
-																	<div class="information">   
-																		<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-																			<i class="bx bx-t67check"></i>Submit
-																		</button>  
-																	</div>
-															</div> 	
-														</form>
-												</div>
-											</div>
-							</tbody>
-							<?php
-							}
-							?>
-						
-						</table>
-							
 						</div>
 					</div>
-				</div>
+			</div>
+
+            <script>
+				$(document).ready(function(){
+					
+					load_user_data();
+
+					function load_user_data()
+					{
+
+						var action = 'fetch';
+						$.ajax({
+							url:"employee-action.php",
+							method: "POST",
+							data:{action:action},
+							success:function(data)
+							{
+								$('#user_data').html(data);
+							}
+						})
+					}
+					$(document).on('click', '.action', function(){
+						var employee_id = $(this).data('employee_id');
+						var status = $(this).data('status');
+						var action = 'change_status';
+						$('#message').html('');
+						if(confirm("Change status?"))
+						{
+							$.ajax({
+								url:"employee-action.php",
+								method:"POST",
+								data: {employee_id:employee_id, status:status, action:action},
+								success:function(data)
+								{
+									if(data != '')
+									{
+										load_user_data();
+										$('#message').html(data);
+									}
+								}
+							})
+						}else{
+							return false;
+						}
+					});
+				});
+			</script>
+			<?php
+			}
+			?>
+        </div>
 				<div>
 					<div><button type="button" class="btn btn-primary addbtn addemployee" onclick="document.getElementById('addemployee').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>
 <!--Modal form for Add Employee-->
@@ -464,8 +364,14 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 												
 												
 												<div class="information">
-													<label class="employee-label"> Full name </label>
-													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname"> 
+													<label class="employee-label"> Username </label>
+													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Firstname   Middlename   Lastname" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+												</div>
+
+												<div class="information">
+													<label class="employee-label"> Employee No. </label>
+													<input required class="form-control inputpass control-label" id="employee_no" name ="employee_no" type="password"  placeholder="Ex. 112-1001-01"> 
+													<i class="bx bx-show" id="togglePassword" style="margin-left: -50px; cursor: pointer;"></i>
 												</div>
 												
 												<div class="row align-items-start">
@@ -497,7 +403,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 												
 												<div class="information col">
 													<label class="employee-label"> Contact No </label>
-													<input required class="form-control inputtext control-label contact" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
+													<input required class="form-control inputtext control-label contact" id="contact" name ="contact" type="number"  placeholder="Ex. 09123456789"> 
 												</div>
 											</div>
 											<div class="row align-items-start">
@@ -506,7 +412,6 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 													<select class="form-control inputtext usr_type" style="padding: 0px 0px 0px 
 													5px;" id="user_type" name="user_type">
 														<option disabled>--Select--</option>
-														<option value="Admin">Admin</option>
 														<option value="Employee">Employee</option>
 													</select>
 												</div>
@@ -516,7 +421,6 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 													<select class="form-control inputtext departmnt control-label" style="padding: 0px 0px 0px 
 													5px; " id="department" name="department">
 														<option disabled>--Select--</option>
-														<option value="ADMIN">ADMIN</option>
 														<option value="BCPC">BCPC</option>
 														<option value="VAWC">VAWC</option>
 														<option value="LUPON">LUPON</option>
@@ -553,8 +457,8 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 							  </div>
 						</div>
 					</div>
-					
 			</section>
+			<script src="resident-js/barangay.js"></script>
 			<script>
 			
 			 /*-- Fuction for Login Modal Form --*/
@@ -578,6 +482,17 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 					modal.style.display = "none";
 				}
 			}  
+
+			const togglePassword = document.querySelector('#togglePassword');
+			const password = document.querySelector('#employee_no');
+			
+			togglePassword.addEventListener('click', function (e) {
+				// toggle the type attribute
+				const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+				password.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
 			</script>
 			
 	</body>
