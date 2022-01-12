@@ -441,6 +441,177 @@ if(isset($_POST['vawcbtn']))
 	}
 
 }
+
+// Complaints Login 
+if(isset($_POST['complaintsbtn']))
+{
+
+	if(empty($_POST["employee_uname"]) || empty($_POST["employee_no"]))
+	{
+		echo "<script>
+				alert('Both Fields are required!');
+			</script>";
+	}
+	else
+	{
+		$employeequery = "SELECT * FROM employeedb WHERE employee_uname = :employee_uname";
+		$stmt = $db->prepare($employeequery);
+		$stmt->execute(array('employee_uname' => $_POST["employee_uname"]));
+		$count = $stmt->rowCount();
+		if($count > 0)
+		{
+			$result = $stmt->fetchAll();
+			foreach($result as $row)
+			{
+				if($row["status"] == 'active')
+				{
+					if(password_verify($_POST["employee_no"], $row["employee_no"]))
+					{
+						$_SESSION["type"] = $row["user_type"];
+						header("location: includes/compAdmin_dashboard.php");
+					}
+					else
+					{
+					   echo "<script>
+					   			alert('Wrong Password!')
+							</script>";
+					}
+				}
+				else
+				{
+					echo "<script>
+							alert('Your account has been disabled, please contact the admin!')
+						</script>";
+				}
+			}
+		}
+		else
+		{
+			echo "<script>
+					alert('Wrong Username. Please try again!!') 
+				</script>";
+		}
+	}
+}
+
+// Accounting Login - Employee
+
+if(isset($_POST['accountingbtn']))
+{
+
+	if(empty($_POST["employee_uname"]) || empty($_POST["employee_no"]))
+	{
+		echo "<script>
+				alert('Both Fields are required!');
+			</script>";
+	}
+	else
+	{
+		$employeequery = "SELECT * FROM employeedb WHERE employee_uname = :employee_uname";
+		$stmt = $db->prepare($employeequery);
+		$stmt->execute(array('employee_uname' => $_POST["employee_uname"]));
+		$count = $stmt->rowCount();
+		if($count > 0)
+		{
+			$result = $stmt->fetchAll();
+			foreach($result as $row)
+			{
+				if($row["status"] == 'active')
+				{
+					if(password_verify($_POST["employee_no"], $row["employee_no"]))
+					{
+						$_SESSION["type"] = $row["user_type"];
+						header("location: includes/compAdmin_dashboard.php");
+					}
+					else
+					{
+					   echo "<script>
+					   			alert('Wrong Password!')
+							</script>";
+					}
+				}
+				else
+				{
+					echo "<script>
+							alert('Your account has been disabled, please contact the admin!')
+						</script>";
+				}
+			}
+		}
+		else
+		{
+			echo "<script>
+					alert('Wrong Username. Please try again!!') 
+				</script>";
+		}
+	}
+}
+
+//Contact Us
+
+//Resident side - Blotter -> Cuyones/Verbo
+if(isset($_POST['blotterbtn'])){
+	
+	$n_complainant = $_POST['n_complainant'];
+	$comp_age = $_POST['comp_age'];
+	$comp_gender = $_POST['comp_gender'];
+	$comp_address = $_POST['comp_address'];
+	$inci_address = $_POST['inci_address'];
+	$n_violator = $_POST['n_violator'];
+	$violator_age = $_POST['violator_age'];
+	$violator_gender = $_POST['violator_gender'];
+	$relationship = $_POST['relationship'];
+	$violator_address = $_POST['violator_address'];
+	$witnesses = $_POST['witnesses'];
+	$complaints = $_POST['complaints'];
+		
+		$stmt = $db->prepare("INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints) VALUES (:n_complainant, :comp_age, :comp_gender, :comp_address, :inci_address, :n_violator, :violator_age, :violator_gender, :relationship, :violator_address, :witnesses, :complaints)");
+		$stmt->bindParam(':n_complainant', $n_complainant);
+		$stmt->bindParam(':comp_age', $comp_age);
+		$stmt->bindParam(':comp_gender', $comp_gender);
+		$stmt->bindParam(':comp_address', $comp_address);
+		$stmt->bindParam(':inci_address', $n_complainant);
+		$stmt->bindParam(':n_violator', $n_violator);
+		$stmt->bindParam(':violator_age', $violator_age);
+		$stmt->bindParam(':violator_gender', $violator_gender);
+		$stmt->bindParam(':relationship', $relationship);
+		$stmt->bindParam(':violator_address', $violator_address);
+		$stmt->bindParam(':witnesses', $witnesses);
+		$stmt->bindParam(':complaints', $complaints);
+		
+	if($stmt->execute()){
+		echo "<script>
+				alert('Submitted Successfully!');
+				window.location.href='residentreqdocu.php';
+			 </script>";
+	}else{
+		echo '<script>alert("An error occured! Please try again!")</script>';
+	}	
+}
+
+
+if(isset($_POST['contactusbtn'])){
+	
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+	$subject = $_POST['subject'];
+	$message = $_POST['message'];
+		
+		$stmt = $db->prepare("INSERT INTO contactustbl (username, email, subject, message) VALUES (:username, :email, :subject, :message)");
+		$stmt->bindParam(':username', $username);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':subject', $subject);
+		$stmt->bindParam(':message', $message);
+		
+	if($stmt->execute()){
+		echo "<script>
+				alert('Submitted Successfully!');
+				window.location.href='residentcontactus.php';
+			 </script>";
+	}else{
+		echo '<script>alert("An error occured! Please try again!")</script>';
+	}	
+}
 ?>
 
 
