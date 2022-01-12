@@ -1,7 +1,8 @@
 <?php session_start();
 if(!isset($_SESSION['email'])){
-	header("location: index.php");
+    header("location: index.php");
 }
+
 ?>
 
 <?php 
@@ -274,7 +275,11 @@ a.login{cursor:pointer;};
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
-							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
+							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">
+                            <?php if(isset($_SESSION['email']))?>
+                             Email Address
+                             </a>
+
 							<span class="logdropdown-content">
 								<a class="page-scroll" href="resident_logout.php">Logout</a>
 								<a href="#">View Profile</a>

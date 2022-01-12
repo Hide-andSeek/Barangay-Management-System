@@ -213,18 +213,24 @@ include "db/user.php";
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 
-												<span onclick="document.getElementById('accounting').style.display='none'" class="topright">&times;</span>
+										<span onclick="document.getElementById('accounting').style.display='none'" class="topright">&times;</span>
+												
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">Accounting Department</h5>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="BPSO">
+													<input class="inputpass control-label" id="accountingemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show showpass ipass" id="accountingtogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
 												<div class="information">   
-													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
+													<button type="submit" id="accountingbtn" name="accountingbtn" value="signin" class="log_button sign_in">
 														Login
 													</button>  
 												</div>
@@ -311,18 +317,24 @@ include "db/user.php";
 										<div id="Login" class="login_container form">
 
 												<span onclick="document.getElementById('complaints').style.display='none'" class="topright">&times;</span>
+												
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">Complaints Department</h5>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
-											
+												
 												<div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="COMPLAINT">
+													<input class="inputpass control-label" id="complaintsemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show showpass ipass" id="complaintstogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
 												
 												<div class="information">   
-													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
+													<button type="submit" id="complaintsbtn" name="complaintsbtn" value="signin" class="log_button sign_in">
 														Login
 													</button>  
 												</div>
@@ -335,50 +347,6 @@ include "db/user.php";
 		</main>
 		
 		<script src="js/loginmodalform.js"></script>
-		<script>
-			const togglePassword = document.querySelector('#togglePassword');
-			const password = document.querySelector('#employeeno');
-			
-			togglePassword.addEventListener('click', function (e) {
-				// toggle the type attribute
-				const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-				password.setAttribute('type', type);
-				// toggle the eye slash icon
-				this.classList.toggle('fa-eye-slash');
-			});
-
-			const bcpctogglePassword = document.querySelector('#bcpctogglePassword');
-			const bcpcemployee_no = document.querySelector('#bcpcemployeeno');
-			
-			bcpctogglePassword.addEventListener('click', function (e) {
-				// toggle the type attribute
-				const type = bcpcemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
-				bcpcemployee_no.setAttribute('type', type);
-				// toggle the eye slash icon
-				this.classList.toggle('fa-eye-slash');
-			});
-
-			const lupontogglePassword = document.querySelector('#lupontogglePassword');
-			const luponemployee_no = document.querySelector('#luponemployeeno');
-			
-			lupontogglePassword.addEventListener('click', function (e) {
-				// toggle the type attribute
-				const type = luponemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
-				luponemployee_no.setAttribute('type', type);
-				// toggle the eye slash icon
-				this.classList.toggle('fa-eye-slash');
-			});
-
-			const vawctogglePassword = document.querySelector('#vawctogglePassword');
-			const vawcemployee_no = document.querySelector('#vawcemployeeno');
-			
-			vawctogglePassword.addEventListener('click', function (e) {
-				// toggle the type attribute
-				const type = vawcemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
-				vawcemployee_no.setAttribute('type', type);
-				// toggle the eye slash icon
-				this.classList.toggle('fa-eye-slash');
-			});
-		</script>
+		<script src="js/employee.js"></script>
 	</body>
 </html> 
