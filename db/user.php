@@ -141,7 +141,7 @@ if(isset($_POST['empBtn'])){
 	}
 }
 
-
+//Request Document Login
 if(isset($_POST['documentlogbtn']))
 {
 	if(empty($_POST["employee_uname"]) || empty($_POST["employee_no"]))
@@ -178,7 +178,7 @@ if(isset($_POST['documentlogbtn']))
 				else
 				{
 					echo "<script>
-							alert('Your account has been disabled, please contact admin!')
+							alert('Your account has been disabled, please contact the admin!')
 						</script>";
 				}
 			}
@@ -216,7 +216,143 @@ if(isset($_POST[''])){
 
 <?php
 //Employee - BCPC Login
-if(isset($_POST['bcpcbtn'])){
+// if(isset($_POST['bcpcbtn'])){
+// 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
+		
+// 	}else{
+// 	$employee_no=trim($_POST['employee_no']);
+// 	$department=strip_tags(trim($_POST['department']));
+// 	$query=$db->prepare("SELECT * FROM employeedb WHERE employee_no=? AND department=?");
+// 	$query->execute(array($employee_no,$department));
+// 	$control=$query->fetch(PDO::FETCH_OBJ);
+// 	if($control>0){
+// 		$_SESSION["employee_no"]=$employee_no;
+// 		header("location: bcpcdashboard.php");
+// 	}
+// 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
+// 	}
+// } 
+
+if(isset($_POST['bcpcbtn']))
+{
+	if(empty($_POST["employee_uname"]) || empty($_POST["employee_no"]))
+	{
+		echo "<script>
+				alert('Both Fields are required!');
+			</script>";
+	}
+	else
+	{
+		$employeequery = "SELECT * FROM employeedb WHERE employee_uname = :employee_uname";
+		$stmt = $db->prepare($employeequery);
+		$stmt->execute(array('employee_uname' => $_POST["employee_uname"]));
+		$count = $stmt->rowCount();
+		if($count > 0)
+		{
+			$result = $stmt->fetchAll();
+			foreach($result as $row)
+			{
+				if($row["status"] == 'active')
+				{
+					if(password_verify($_POST["employee_no"], $row["employee_no"]))
+					{
+						$_SESSION["type"] = $row["user_type"];
+						header("location: bcpcdashboard.php");
+					}
+					else
+					{
+					   echo "<script>
+					   			alert('Wrong Password!')
+							</script>";
+					}
+				}
+				else
+				{
+					echo "<script>
+							alert('Your account has been disabled, please contact the admin!')
+						</script>";
+				}
+			}
+		}
+		else
+		{
+			echo "<script>
+					alert('Wrong Username. Please try again!!') 
+				</script>";
+		}
+	}
+}
+
+//Employee - Lupon Login
+// if(isset($_POST['luponbtn'])){
+// 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
+		
+// 	}else{
+// 	$employee_no=trim($_POST['employee_no']);
+// 	$department=strip_tags(trim($_POST['department']));
+// 	$query=$db->prepare("SELECT * FROM employeedb WHERE employee_no=? AND department=?");
+// 	$query->execute(array($employee_no,$department));
+// 	$control=$query->fetch(PDO::FETCH_OBJ);
+// 	if($control>0){
+// 		$_SESSION["employee_no"]=$employee_no;
+// 		header("location: lupon.php");
+// 	}
+// 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
+// 	}
+// } 
+
+if(isset($_POST['luponbtn']))
+{
+	if(empty($_POST["employee_uname"]) || empty($_POST["employee_no"]))
+	{
+		echo "<script>
+				alert('Both Fields are required!');
+			</script>";
+	}
+	else
+	{
+		$employeequery = "SELECT * FROM employeedb WHERE employee_uname = :employee_uname";
+		$stmt = $db->prepare($employeequery);
+		$stmt->execute(array('employee_uname' => $_POST["employee_uname"]));
+		$count = $stmt->rowCount();
+		if($count > 0)
+		{
+			$result = $stmt->fetchAll();
+			foreach($result as $row)
+			{
+				if($row["status"] == 'active')
+				{
+					if(password_verify($_POST["employee_no"], $row["employee_no"]))
+					{
+						$_SESSION["type"] = $row["user_type"];
+						header("location: lupon.php");
+					}
+					else
+					{
+					   echo "<script>
+					   			alert('Wrong Password!')
+							</script>";
+					}
+				}
+				else
+				{
+					echo "<script>
+							alert('Your account has been disabled, please contact the admin!')
+						</script>";
+				}
+			}
+		}
+		else
+		{
+			echo "<script>
+					alert('Wrong Username. Please try again!!') 
+				</script>";
+		}
+	}
+}
+
+//Employee - Document Request Login 
+if(isset($_POST[''])){
 	if($_POST["employee_no"]=="" or $_POST["department"]==""){
 		
 	}else{
@@ -227,29 +363,12 @@ if(isset($_POST['bcpcbtn'])){
 	$control=$query->fetch(PDO::FETCH_OBJ);
 	if($control>0){
 		$_SESSION["employee_no"]=$employee_no;
-		header("location: bcpcdashboard.php");
+		header("location: includes/dashboard.php");
 	}
 	echo"<script>alert('Wrong Employee No! Please try again')</script>";
 	}
 } 
 
-//Employee - Lupon Login
-if(isset($_POST['luponbtn'])){
-	if($_POST["employee_no"]=="" or $_POST["department"]==""){
-		
-	}else{
-	$employee_no=trim($_POST['employee_no']);
-	$department=strip_tags(trim($_POST['department']));
-	$query=$db->prepare("SELECT * FROM employeedb WHERE employee_no=? AND department=?");
-	$query->execute(array($employee_no,$department));
-	$control=$query->fetch(PDO::FETCH_OBJ);
-	if($control>0){
-		$_SESSION["employee_no"]=$employee_no;
-		header("location: lupon.php");
-	}
-	echo"<script>alert('Wrong Employee No! Please try again')</script>";
-	}
-} 
 
 //Employee - VAWC Login
 if(isset($_POST['vawcbtn'])){

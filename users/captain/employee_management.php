@@ -3,6 +3,7 @@
 if(!isset($_SESSION["official_name"])){
 	header("location: captainlogin.php");
 }
+
 ?>
 
 <?php 
@@ -39,131 +40,131 @@ include "db/user.php";
 
 	 <style>
 		 *{
-    font-family: "Poppins" , sans-serif;
-    font-size: 13px;
-}
+			font-family: "Poppins" , sans-serif;
+			font-size: 13px;
+		}
 
-div.align-box{padding-top: 23px; display: flex; align-items: center;}
-.box-report{
-    width: 300px;
-    font-size: 14px;
-    border: 4px solid #7dc748;
-    padding: 30px;
-    margin: 10px;
-    border-radius: 5px;
-    align-items: center;
-}
-
-
-#formatValidatorName{
-    top: 50px;
-}
-
-.employeemanagement-modal{
-    display: none; 
-    position: absolute; 
-    z-index: 999; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 120%; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    padding-top: 5px; 
-    
-}
+		div.align-box{padding-top: 23px; display: flex; align-items: center;}
+		.box-report{
+			width: 300px;
+			font-size: 14px;
+			border: 4px solid #7dc748;
+			padding: 30px;
+			margin: 10px;
+			border-radius: 5px;
+			align-items: center;
+		}
 
 
-.modal-contentemployee {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 1%;
-    background-color: #fefefe;
-    margin: 5% auto 2% auto;
-    border: 1px solid #888;
-    height: 84%;
-    width: 75%; 
-   
-}
+		#formatValidatorName{
+			top: 50px;
+		}
 
-.inputtext, .inputpass {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    height: 35px;
-    width: 94%;
-    padding: 10px 10px;
-    margin: 4px 25px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-.employee-label{margin-left: 26px;}
-
-.submtbtn{
-    height: 40px;
-}
+		.employeemanagement-modal{
+			display: none; 
+			position: absolute; 
+			z-index: 999; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 120%; 
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4); 
+			padding-top: 5px; 
+			
+		}
 
 
-.closebtn:hover{
-	background: red;
-	color: white;
-}
+		.modal-contentemployee {
+			font-family: 'Montserrat', sans-serif;
+			padding-top: 1%;
+			background-color: #fefefe;
+			margin: 5% auto 2% auto;
+			border: 1px solid #888;
+			height: 84%;
+			width: 75%; 
+		
+		}
 
-.submtbtn:hover{
-    background: orange;
-    color: black;
-    height: 40px;
-}
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		.employee-label{margin-left: 26px;}
 
-
-.lname, .fname, .mname, .usr_type, .departmnt, .stats, .address, .contact{
-     width: 80%;
-}
-.address, .contact{ width: 88%;}
-
-
-.emp_tbl{ 
-    margin-top: 65px;
-    border-collapse: collapse;
-    table-layout: auto;
-    width: 100%;
-    transition: margin-left 300ms;
-    overflow-y: scroll;  
-    box-shadow: inset;
-    display: block;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
+		.submtbtn{
+			height: 40px;
+		}
 
 
-.addemployee{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.closebtn:hover{
+			background: red;
+			color: white;
+		}
+
+		.submtbtn:hover{
+			background: orange;
+			color: black;
+			height: 40px;
+		}
 
 
-.select__select{
-	position: absolute;
-	margin-left: 69%;
-	font-size: 13px;
-}
+		.lname, .fname, .mname, .usr_type, .departmnt, .stats, .address, .contact{
+			width: 80%;
+		}
+		.address, .contact{ width: 88%;}
 
-.label-success{background-color:#5cb85c}.label-success[href]:focus,.label-success[href]:hover{background-color:#449d44}
-.label-danger{background-color:#d9534f}.label-danger[href]:focus,.label-danger[href]:hover{background-color:#c9302c}
-.label{display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em}
-.alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}
-.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
-.panel-default{margin-top: 60px;}
+
+		.emp_tbl{ 
+			margin-top: 65px;
+			border-collapse: collapse;
+			table-layout: auto;
+			width: 100%;
+			transition: margin-left 300ms;
+			overflow-y: scroll;  
+			box-shadow: inset;
+			display: block;
+		}
+
+		/* Add Zoom Animation */
+		.animate {
+		-webkit-animation: animatezoom 0.6s;
+		animation: animatezoom 0.6s
+		}
+
+		@-webkit-keyframes animatezoom {
+		from {-webkit-transform: scale(0)} 
+		to {-webkit-transform: scale(1)}
+		}
+
+		@keyframes animatezoom {
+		from {transform: scale(0)} 
+		to {transform: scale(1)}
+		}
+
+
+		.addemployee{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+
+
+		.select__select{
+			position: absolute;
+			margin-left: 69%;
+			font-size: 13px;
+		}
+
+		.label-success{background-color:#5cb85c}.label-success[href]:focus,.label-success[href]:hover{background-color:#449d44}
+		.label-danger{background-color:#d9534f}.label-danger[href]:focus,.label-danger[href]:hover{background-color:#c9302c}
+		.label{display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em}
+		.alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}
+		.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
+		.panel-default{margin-top: 60px;}
 	 </style>
    </head>
 	<body onload="display_ct()">
@@ -235,7 +236,6 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 				 <div class="profile-details">
 				   <img class="profile_pic">
 				   <div class="name_job">
-				    
 					 <div>Employee</div>
 					 <div class="job" id="">Employee</div>
 				   </div>
@@ -276,15 +276,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 			</form>	
 			
 			<div class="container">
-            <?php
-			include('db/user.php');
-				if($_SESSION['type'] == 'user')
-				{
-				
-				}
-                else
-                {
-			?>	
+           
 			<div class="panel panel-default">
 					<span id="message"></span>
 					<div class="panel-body">
@@ -339,9 +331,7 @@ div.align-box{padding-top: 23px; display: flex; align-items: center;}
 					});
 				});
 			</script>
-			<?php
-			}
-			?>
+			
         </div>
 				<div>
 					<div><button type="button" class="btn btn-primary addbtn addemployee" onclick="document.getElementById('addemployee').style.display='block'"><i class="bx bx-user-plus"></i>Add Employee</button></div>

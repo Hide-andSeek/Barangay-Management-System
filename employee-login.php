@@ -33,7 +33,8 @@ include "db/user.php";
 
 	 <style>
 		 *{
-			 box-sizing: border-box;
+			font-family: "Poppins" , sans-serif;
+			box-sizing: border-box;
 		 }
 
 		 main.employee-main{
@@ -41,7 +42,8 @@ include "db/user.php";
 			justify-content: center;
 			align-items: center;
 			flex-wrap: wrap;
-			padding-top: 115px;
+			padding-top: 100px;
+			border-radius: none;
 		}
 
 		.btn-size{
@@ -55,16 +57,16 @@ include "db/user.php";
 
 		}
 
-		.topright{
-			width:100%;
-			float:right;
+		span.topright{
+			display: flex;
+			float: right;
 			padding:8px 16px;
+			font-size: 25px;
 		}
 		.topright:hover {
 			color: red;
 			cursor: pointer;
-			width:100%;
-			float:right;
+			float: right;
 			padding:8px 16px;
 		}
 		
@@ -74,16 +76,20 @@ include "db/user.php";
 			}
 		}
 
-.modal-contentdocreq {
+	.modal-contentdocreq {
         font-family: 'Montserrat', sans-serif;
-        padding-top: 2%;
         background-color: #fefefe;
         margin: 5% auto 15% auto;
         border: 1px solid #888;
-        height: 32%;
+		padding-top: 2%;
+        height: 55%;
         width: 30%; 
-        border-radius: 20px;
+		
     }
+	.inputtext, .inputpass, .logbtn{width: 82%;}
+	.showpass:hover{color:red}
+	.center {display: block; margin-left: auto; margin-right: auto;}
+	.txtalign{text-align: center; user-select: none;}
 	 </style>
 	 
    </head>
@@ -103,13 +109,19 @@ include "db/user.php";
 										<div id="Login" class="login_container form">
 
 												<span onclick="document.getElementById('bcpc').style.display='none'" class="topright">&times;</span>
+												
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">BCPC Department</h5>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
+													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
-											   <div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="BCPC">
+												<div class="information">
+													<input class="inputpass control-label" id="bcpcemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show showpass ipass" id="bcpctogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 												
 												<div class="information">   
@@ -161,14 +173,20 @@ include "db/user.php";
 									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 
-												<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
+										<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
+												
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">Lupon Department</h5>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="employee_no" name ="employee_no" type="text"  placeholder="Employee No."> 
+													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
-											   <div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="LUPON">
+												<div class="information">
+													<input class="inputpass control-label" id="luponemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show showpass ipass" id="lupontogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 												
 												<div class="information">   
@@ -254,17 +272,21 @@ include "db/user.php";
 											
 												<span onclick="document.getElementById('docreq').style.display='none'" class="topright">&times;</span>
 
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">Request Document Dept.</h5>
 												<div class="information">
 													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
-
+												
 												<div class="information">
 													<input class="inputpass control-label" id="employeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
-													<i class="bx bx-show" id="togglePassword" style="margin-left: 10px; cursor: pointer;"></i>
+													<i class="bx bx-show showpass" id="togglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 											   
 												<div class="information">   
-													<button type="submit" id="documentlogbtn" name="documentlogbtn" value="Login" class="log_button sign_in">
+													<button type="submit" id="documentlogbtn" name="documentlogbtn" value="Login" class="log_button sign_in logbtn">
 														Login
 													</button>  
 												</div>
@@ -316,6 +338,28 @@ include "db/user.php";
 				// toggle the type attribute
 				const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
 				password.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
+
+			const bcpctogglePassword = document.querySelector('#bcpctogglePassword');
+			const bcpcemployee_no = document.querySelector('#bcpcemployeeno');
+			
+			bcpctogglePassword.addEventListener('click', function (e) {
+				// toggle the type attribute
+				const type = bcpcemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
+				bcpcemployee_no.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
+
+			const lupontogglePassword = document.querySelector('#lupontogglePassword');
+			const luponemployee_no = document.querySelector('#luponemployeeno');
+			
+			lupontogglePassword.addEventListener('click', function (e) {
+				// toggle the type attribute
+				const type = luponemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
+				luponemployee_no.setAttribute('type', type);
 				// toggle the eye slash icon
 				this.classList.toggle('fa-eye-slash');
 			});

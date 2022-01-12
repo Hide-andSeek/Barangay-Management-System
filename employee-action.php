@@ -29,6 +29,7 @@ if(isset($_POST["action"]))
             </thead>
         ';
         
+        
         foreach($result as $data)
         {
             $istatus = '';
@@ -50,7 +51,7 @@ if(isset($_POST["action"]))
                 <td>'.$data["added_on"].'</td>
                 <td>'.$istatus.'</td>
                 <td>
-                
+                    
 					<button type="button" name="action" class="btn btn-info btn-xs action"  data-employee_id="'.$data["employee_id"].'"" data-status="'.$data["status"].'""><i class="bx bx-trash"></i>Action</button>
 				</td>
             </tr>
@@ -87,3 +88,16 @@ if(isset($_POST["action"]))
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
