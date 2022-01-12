@@ -60,7 +60,7 @@ if(!isset($_SESSION["official_name"])){
         }
 	 </style>
    </head>
-	<body>																
+	<body onload="display_ct()">																
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
@@ -260,13 +260,7 @@ if(!isset($_SESSION["official_name"])){
 				</div>
 				
 			</section>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-
+			<script src="resident-js/barangay.js"></script>
 			<script>
 			
 			 /*-- Fuction for Login Modal Form --*/
@@ -276,6 +270,6 @@ if(!isset($_SESSION["official_name"])){
 					modal.style.display = "none";
 				}
 			}  
-	</script>
+			</script>
 	</body>
 </html>

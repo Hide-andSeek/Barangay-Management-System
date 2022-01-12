@@ -1,17 +1,25 @@
 <?php
 session_start();
+include "../db/conn.php";
+include "../db/user.php";
+include "../db/documents.php";
+
 
 if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
+
+$employee_uname = '';
+$employee_no = '';
+
+if(isset($_SESSION['employee_uname']))
+{
+	$employee_uname = $_SESSION['employee_uname'];
+	$employee_no = $_SESSION['employee_no'];
+}
 ?>
 
-<?php 
-include "../db/conn.php";
-include "../db/documents.php";
-//Live Search
-?>
 
 
 <!DOCTYPE html>
@@ -29,7 +37,7 @@ include "../db/documents.php";
 	<link rel="stylesheet" href="../css/documentprint_styles.css">
 
 	<!--Font Styles-->
-	<link rel="icon" type="../image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -135,7 +143,7 @@ include "../db/documents.php";
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-				   	 <div class="job" id="">Employee Name</div>
+				   	 <div><?php echo $employee_uname; ?></div>
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>
@@ -199,8 +207,7 @@ include "../db/documents.php";
 										<th>Issued at</th>
 										<th>Issued on</th>
 										<th>Precint no</th>
-										<th>Front ID</th>
-										<th>Back ID</th>
+										<th>ID</th>
 										<th>Approved by</th>
 										<th>Action</th>
 									</tr>                       
@@ -222,7 +229,6 @@ include "../db/documents.php";
 									<td><?php echo $data2 ['issued_at']; ?></td>
 									<td><?php echo $data2 ['date_issued']; ?></td>
 									<td><?php echo $data2 ['precint_no']; ?></td>
-									<td><a style="color: blue;">view id</a></td>
 									<td><a style="color: blue;">view id</a></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
 									<td><button>Approve</button></td>

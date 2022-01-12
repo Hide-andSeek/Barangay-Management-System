@@ -1,9 +1,11 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: form_lupon_mediation.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

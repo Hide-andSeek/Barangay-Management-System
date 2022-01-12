@@ -1,7 +1,6 @@
 
 <?php session_start();
 
-
 if(!isset($_SESSION["official_name"])){
 	header("location: captain/admin_management.php");
 }
@@ -60,7 +59,7 @@ if(!isset($_SESSION["official_name"])){
         }
 	 </style>
    </head>
-	<body>
+	<body onload="display_ct()">
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
@@ -191,6 +190,6 @@ if(!isset($_SESSION["official_name"])){
 					</div>
 				</div>
 			</section>
-			
+			<script src="resident-js/barangay.js"></script>
 	</body>
 </html>

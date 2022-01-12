@@ -263,7 +263,7 @@ include "db/user.php";
 			  </section>
 
 			  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			  <div class="search_content">
+			  <!-- <div class="search_content">
 						<label class="select__select" for="">Filter by: 
                             <select class="selection" name="filterstats">
                                 <option disabled>--Select--</option>
@@ -272,7 +272,7 @@ include "db/user.php";
                             </select>
 								<button class="filterbtn"><i class='bx bx-sort filter'></i></button>
                         </label>
-                </div>
+                </div> -->
 			</form>	
 			
 			<div class="container">
@@ -344,8 +344,8 @@ include "db/user.php";
 										<div id="employee_form" class="container">
 
 										<div class="information">   
-													<span type="submit" onclick="document.getElementById('addemployee').style.display='none'" class="closebtn" style="float: right">
-													X
+													<span type="submit" onclick="document.getElementById('addemployee').style.display='none'" class="closebtn" style="float: right; font-size: 20px;">
+													&times;
 													</span>  
 												</div>
 												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">

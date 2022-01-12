@@ -1,10 +1,11 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: form_barangayclearance.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
-
-
 <?php 
 include "../db/conn.php";
 include "../db/documents.php";

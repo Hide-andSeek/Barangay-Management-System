@@ -1,6 +1,9 @@
-<?php session_start();
-if(!isset($_SESSION["employee_no"])){
-	header("location: form_lupon_ongoing.php");
+<?php
+session_start();
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: 0index.php");
 }
 ?>
 

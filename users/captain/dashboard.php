@@ -31,7 +31,7 @@ if(!isset($_SESSION["official_name"])){
      <title> Employee Management </title>
 	 
    </head>
-	<body>																
+	<body onload="display_ct()">																
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar captain_sidebar">
 			<div class="logo-details">
@@ -130,5 +130,6 @@ if(!isset($_SESSION["official_name"])){
 				
 				
 			</section>
+			<script src="resident-js/barangay.js"></script>
 	</body>
 </html>
