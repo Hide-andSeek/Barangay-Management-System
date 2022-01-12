@@ -147,7 +147,7 @@ include "db/user.php";
 												
 												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
 
-												<h5 class="txtalign">BCPC Department</h5>
+												<h5 class="txtalign">VAWC Department</h5>
 
 												<div class="information">
 													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
