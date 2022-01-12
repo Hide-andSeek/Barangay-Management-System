@@ -56,6 +56,49 @@ if(!isset($_SESSION["type"]))
 			 i.blotter-com{color: #9e0202}
 			 i.indigency{color: #0218bd}
 			 i.permit{color: #e0149c}
+
+			 .employeemanagement-modal{
+			display: none; 
+			position: absolute; 
+			z-index: 999; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 120%; 
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4); 
+			padding-top: 5px; 
+			
+		}
+
+
+		.modal-contentemployee {
+			font-family: 'Montserrat', sans-serif;
+			padding-top: 1%;
+			background-color: #fefefe;
+			margin: 5% auto 2% auto;
+			border: 1px solid #888;
+			height: 78%;
+			width: 48%; 
+		
+		}
+
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		.employee-label{margin-left: 26px;}
+
+		.submtbtn{
+			height: 40px;
+		}
 	 </style>
    </head>
 	<body>
@@ -174,68 +217,202 @@ if(!isset($_SESSION["type"]))
 					?>
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Total Cases</h4>
+				<h4>LUPON</h4>
 			</div>
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
+				<div class="w3-container w3-blue w3-padding-16">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
 
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
+						$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
 
-					echo "<h3>$pdoexecute</h3>"
-					?>
+						echo "<h3>$pdoexecute</h3>"
+						?>
+			
+					</div>
+					<div class="w3-clear"></div>
+					<h4>BPSO</h4>
+				</div>
+			</div>
+
+			<div class="w3-quarter">
+				<div class="w3-container w3-teal w3-padding-16">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+	
+						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
+
+						echo "<h3>$pdoexecute</h3>"
+						?>
+					
+					</div>
+					<div class="w3-clear"></div>
+					<h4>VAWC</h4>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-container w3-orange w3-text-white w3-padding-16">
+					<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+	
+						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
+
+						echo "<h3>$pdoexecute</h3>"
+						?>
+					
+					</div>
+					<div class="w3-clear"></div>
+					<h4>BCPC</h4>
+				</div>
+			</div>
+
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<h5>All Complaints</h5>
+			<div class="reg_table">
+						<table class="content-table table_indigency"  id="table">
+						
+							<?php
+							include "../db/conn.php";
+							include "../db/user.php";
+							
+							$mquery = "SELECT * FROM blotterdb";
+							$countn = $db->query($mquery);
+							
+							?>
+
+							<thead>
+								<tr class="t_head">
+									<th>Complaint ID</th>
+									<th>Fullname</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Address</th>
+									<th>Incident Address</th>
+									<th>Name of violaters</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Relationship</th>
+									<th>Address</th>
+									<th>Witnesses</th>
+									<th>Complaints</th>
+									<th>Valid ID</th>
+									<th>View Details</th>
+									<th>Message</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countn as $data) 
+							{
+							?>
+								<tr class="table-row">
+									<td><?php echo $data ['blotter_id']; ?></td>
+									<td><?php echo $data ['n_complainant']; ?></td>
+									<td><?php echo $data ['comp_age']; ?></td>
+									<td><?php echo $data ['comp_gender']; ?></td>
+									<td><?php echo $data ['comp_address']; ?></td>
+									<td><?php echo $data ['inci_address']; ?></td>
+									<td><?php echo $data ['n_violator']; ?></td>
+									<td><?php echo $data ['violator_age']; ?></td>
+									<td><?php echo $data ['violator_gender']; ?></td>
+									<td><?php echo $data ['relationship']; ?></td>
+									<td><?php echo $data ['violator_address']; ?></td>
+									<td><?php echo $data ['witnesses']; ?></td>
+									<td><?php echo $data ['complaints']; ?></td>
+									<td><a class="view_approvebtn">Valid Id</a></td>
+
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Edit</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
+								</tr>	
+							
+								<div id="id2" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+														<span onclick="document.getElementById('id2').style.display='none'" class="topright">&times;</span>
+
+														
+														<div class="send-message">
+																<div class="container">
+																<div class="row">
+																	<div class="col-md-8">
+																	<div class="contact-form">
+																	<div class="section-heading">
+																		<h4>Send a Message</h4>
+																	</div>
+																		<form id="contact" action="" method="post">
+																		<div class="row">
+																			<div class="col-lg-12 col-md-12 col-sm-12">
+																			<fieldset class="sms-section">
+																				<input required type="number" class="form-control textarea" id="contact_no"
+																				name="contact_no"placeholder="Contact no.">
+																			</fieldset>
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<textarea name="msg" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
+																				-From Barangay Commonwealth</textarea>
+																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
+																				
+																			</fieldset>
+																			
+																			</div>
+																			<div class="col-lg-12">
+																			<fieldset >
+																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bx bx-send"></i>Send Message</button>
+																			</fieldset>
+																			</div>
+																		</div>
+																		</form>
+																	</div>
+																	</div>
+																</div>
+																</div>
+															</div>
+															</div> 	
+														</form>
+												</div>
+											</div>
+
+											<div id="lupon" class="employeemanagement-modal modal" >
+													<div class="modal-contentemployee animate" >
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+														<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
+
+														
 		
+														</form>
+												</div>
+											</div>
+							
+							<?php
+							}
+							?>
+						</table>
 				</div>
-				<div class="w3-clear"></div>
-				<h4>Ongoing Cases</h4>
-			</div>
-			</div>
-
-			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Pending Cases</h4>
-			</div>
-			</div>
-			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Closed Cases</h4>
-			</div>
-			</div>
 		</div>
 	</div>
 				
