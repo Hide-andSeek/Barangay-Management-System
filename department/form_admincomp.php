@@ -49,12 +49,12 @@ if(!isset($_SESSION["type"]))
 
 		}
 		
-		 i.menu{color: #fff}
-			 i.id{color: #a809b0}
-			 i.clearance{color: #1cb009}
+			 i.menu{color: #fff}
+			 i.id, i.lupon{color: #a809b0}
+			 i.clearance, i.bpso{color: #1cb009}
 			 i.sms{color: #478eff}
-			 i.blotter-com{color: #9e0202}
-			 i.indigency{color: #0218bd}
+			 i.blotter-com, i.vawc{color: #9e0202}
+			 i.indigency, i.bcpc{color: #0218bd}
 			 i.permit{color: #e0149c}
 
 			 .employeemanagement-modal{
@@ -64,7 +64,7 @@ if(!isset($_SESSION["type"]))
 			left: 0;
 			top: 0;
 			width: 100%; 
-			height: 120%; 
+			height: 125%; 
 			background-color: rgb(0,0,0); 
 			background-color: rgba(0,0,0,0.4); 
 			padding-top: 5px; 
@@ -78,8 +78,8 @@ if(!isset($_SESSION["type"]))
 			background-color: #fefefe;
 			margin: 5% auto 2% auto;
 			border: 1px solid #888;
-			height: 78%;
-			width: 48%; 
+			height: 82%;
+			width: 52%; 
 		
 		}
 
@@ -94,11 +94,27 @@ if(!isset($_SESSION["type"]))
 			border: 1px solid #ccc;
 			box-sizing: border-box;
 		}
+
+		input.comage, input.comgender {
+			font-family: inherit;
+			font-size: 14px;
+			height: 35px;
+			width: 80%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
 		.employee-label{margin-left: 26px;}
 
 		.submtbtn{
 			height: 40px;
 		}
+		span.topright{display: flex; float: right; padding:8px 16px;font-size: 25px;}
+		.topright:hover {color: red; cursor: pointer; float: right; padding:8px 16px;}
+		.processbtn:hover{background: orange;}
+		
 	 </style>
    </head>
 	<body>
@@ -120,7 +136,7 @@ if(!isset($_SESSION["type"]))
 			  
 			  <li>
 			   <a class="side_bar" href="compAdmin_Lupon.php">
-				 <i class='bx bx-user-circle'></i>
+				 <i class='bx bx-user-circle lupon'></i>
 				 <span class="links_name">Lupon</span>
 			   </a>
 			   <span class="tooltip">Lupon</span>
@@ -128,7 +144,7 @@ if(!isset($_SESSION["type"]))
 			 
 			 <li>
 			   <a class="side_bar" href="compAdmin_BPSO.php">
-				 <i class='bx bx-user'></i>
+				 <i class='bx bx-user bpso'></i>
 				 <span class="links_name">BPSO</span>
 			   </a>
 			   <span class="tooltip">BPSO</span>
@@ -136,7 +152,7 @@ if(!isset($_SESSION["type"]))
 
 			 <li>
 			   <a class="side_bar" href="compAdmin_Vawc.php">
-				 <i class='bx bx-user-check'></i>
+				 <i class='bx bx-user-check vawc'></i>
 				 <span class="links_name">VAWC</span>
 			   </a>
 			   <span class="tooltip">VAWC</span>
@@ -144,7 +160,7 @@ if(!isset($_SESSION["type"]))
 
 			 <li>
 			   <a class="side_bar" href="compAdmin_BCPC.php">
-				 <i class='bx bx-user-pin'></i>
+				 <i class='bx bx-user-pin bcpc'></i>
 				 <span class="links_name">BCPC</span>
 			   </a>
 			   <span class="tooltip">BCPC</span>
@@ -283,17 +299,9 @@ if(!isset($_SESSION["type"]))
 			<br>
 			<br>
 			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<h5>All Complaints</h5>
+		
 			<div class="reg_table">
+			<h5 style="text-align: center;">All Complaints</h5>
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
@@ -345,7 +353,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><a class="view_approvebtn">Valid Id</a></td>
 
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Edit</button></td>
+									<td><button class="form-control btn-info processbtn" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Process</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
 							
@@ -402,7 +410,160 @@ if(!isset($_SESSION["type"]))
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 														<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
 
-														
+											
+														<div >
+															<button class="w3-bar-item w3-button" onclick="openCity('London')">Complainant</button>
+															<button class="w3-bar-item w3-button" onclick="openCity('Paris')">Violator</button>
+															<button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Approval</button>
+														</div>
+
+															<div id="London" class="w3-container city">
+																<h5 style="text-align: center;">Complainant</h5>
+																<div class="information col">
+																	<label class="employee-label"> Complaint ID </label>
+																	<input required class="form-control inputtext " id="" name ="" type="text">
+																</div>
+						
+																
+																<div class="information col">
+																	<label class="employee-label"> Fullname </label>
+																	<input required class="form-control inputtext " id="" name ="" type="text"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																</div>
+
+																<div class="row align-items-start">
+																	<div class="information col">
+																		<label class="employee-label"> Age </label>
+																		<input required class="form-control inputtext comage" id="employee_lname" name ="employee_lname" type="text"  placeholder="Age"> 
+																	</div>
+																	
+																	<div class="information col">
+																		<label class="employee-label"> Gender </label> 
+																		<input required class="form-control inputtext comgender" id="" name ="" type="text"  placeholder="Gender"> 
+																	</div>	
+																</div>
+																		<div class="information col">
+																			<label class="employee-label"> Address </label>
+																			<input required class="form-control inputtext control-label address" id=" " name ="address" type="text"  placeholder="Address"> 
+																		</div>
+																	
+																	
+																		<div class="information col">
+																			<label class="employee-label">Incident Address </label>
+																			<input required class="form-control inputtext control-label address" id="" name ="" type="text"  placeholder="Incident Address"> 
+																		</div>
+																	
+																
+															</div>
+
+															<div id="Paris" class="w3-container city" style="display:none">
+															<h5 style="text-align: center;">Violator</h5>
+
+															<div class="information col">
+																<label class="employee-label"> Fullname </label>
+																<input required class="form-control inputtext " id="" name ="" type="text"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+															</div>
+
+															<div class="row align-items-start">
+																<div class="information col">
+																	<label class="employee-label"> Age </label>
+																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Gender </label> 
+																	<input required class="form-control inputtext fname" id="" name ="" type="text"  placeholder="First Name"> 
+																</div>
+																
+															</div>
+
+
+															<div class="information">
+																<label class="employee-label"> Employee No. </label>
+																<input required class="form-control inputpass control-label" id="employee_no" name ="employee_no" type="password"  placeholder="Ex. 112-1001-01"> 
+																<i class="bx bx-show" id="togglePassword" style="margin-left: -50px; cursor: pointer;"></i>
+															</div>
+
+															<div class="row align-items-start">
+																<div class="information col">
+																	<label class="employee-label"> Last Name </label>
+																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> First Name </label> 
+																	<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Middle Name </label>
+																	<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
+																</div>
+															</div>
+
+															<div class="information">
+																<label class="employee-label"> Birthday </label>
+																<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
+															</div>
+															<div class="row align-items-start">
+															<div class="information col">
+																<label class="employee-label"> Address </label>
+																<input required class="form-control inputtext control-label address" id="address" name ="address" type="text"  placeholder="Address"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Contact No </label>
+																<input required class="form-control inputtext control-label contact" id="contact" name ="contact" type="number"  placeholder="Ex. 09123456789"> 
+															</div>
+															</div>
+															<div class="row align-items-start">
+															<div class="information col">
+																<label class="employee-label"> User Type </label>
+																<select class="form-control inputtext usr_type" style="padding: 0px 0px 0px 
+																5px;" id="user_type" name="user_type">
+																	<option disabled>--Select--</option>
+																	<option value="Employee">Employee</option>
+																</select>
+															</div>
+															</div>
+
+															</div>
+
+															<div id="Tokyo" class="w3-container city" style="display:none">
+																<div class="information col">
+																	<label class="employee-label"> Department </label>
+																	<select class="form-control inputtext departmnt control-label" style="padding: 0px 0px 0px 
+																	5px; " id="department" name="department">
+																		<option disabled>--Select--</option>
+																		<option value="BCPC">BCPC</option>
+																		<option value="VAWC">VAWC</option>
+																		<option value="LUPON">LUPON</option>
+																		
+																		<option value="BPSO">BPSO</option>
+																		
+																		<option value="DENY">DENY</option>
+																	</select>
+																</div>
+																<div class="information">
+																	<label class="employee-label ">Approval Date </label>
+																	<input required type="date" class="form-control inputtext control-label" id="" name="">
+																</div>
+
+																<div class="information col">
+																<label class="employee-label"> Approved By </label>
+																<input required class="form-control inputtext control-label" id="" name ="" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+															</div>
+																<div class="information">   
+																<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																	<i class="bx bx-t67check"></i>Submit
+																</button>  
+															</div>
+															</div>
+															
+
+											</div>
+
+
+												
 		
 														</form>
 												</div>
@@ -417,5 +578,15 @@ if(!isset($_SESSION["type"]))
 	</div>
 				
 			</section>
+			<script>
+				function openCity(cityName) {
+				var i;
+				var x = document.getElementsByClassName("city");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";  
+				}
+				document.getElementById(cityName).style.display = "block";  
+				}
+			</script>
 	</body>
 </html>
