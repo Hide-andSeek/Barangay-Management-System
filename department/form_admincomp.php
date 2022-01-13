@@ -353,7 +353,69 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><a class="view_approvebtn">Valid Id</a></td>
 
-									<td><button class="form-control btn-info processbtn" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Process</button></td>
+									<?php
+									if(isset($_POST[''])){
+			
+										$n_complainant = $_POST['n_complainant'];
+										$comp_age = $_POST['comp_age'];
+										$comp_gender = $_POST['comp_gender'];
+										$comp_address = $_POST['comp_address'];
+										$inci_address = $_POST['inci_address'];
+										$n_violator = $_POST['n_violator'];
+										$violator_age = $_POST['violator_age'];
+										$violator_gender = $_POST['violator_gender'];
+										$relationship = $_POST['relationship'];
+										$violator_address = $_POST['violator_address'];
+										$witnesses = $_POST['witnesses'];
+										$complaints = $_POST['complaints'];
+											
+										// checking empty fields
+										if(empty($n_complainant) || empty($comp_age) || empty($comp_gender) || empty($comp_address) || empty($inci_address) || empty($n_violator) || empty($violator_age) || empty($violator_gender) || empty($relationship) || empty($violator_address) || empty($witnesses) || empty($complaints)) {	
+												
+											if(empty($n_complainant)) {
+												echo "<font color='red'>Complainant field is empty.</font><br/>";
+											}
+											
+											if(empty($comp_age)) {
+												echo "<font color='red'>Complainant Age field is empty.</font><br/>";
+											}
+											
+											if(empty($comp_gender)) {
+												echo "<font color='red'>Complainant Gender field is empty.</font><br/>";
+											}
+											if(empty($comp_address)) {
+												echo "<font color='red'>Complainant Address field is empty.</font><br/>";
+											}	
+											if(empty($inci_address)) {
+												echo "<font color='red'>Incident Address field is empty.</font><br/>";
+											}	
+											if(empty($n_violator)) {
+												echo "<font color='red'>Name of Violator field is empty.</font><br/>";
+											}	
+											if(empty($violator_age)) {
+												echo "<font color='red'>Name of Violator Age field is empty.</font><br/>";
+											}	
+											if(empty($violator_gender)) {
+												echo "<font color='red'>Name of Violator Gender field is empty.</font><br/>";
+											}	
+											if(empty($relationship)) {
+												echo "<font color='red'>Relationship field is empty.</font><br/>";
+											}	
+											if(empty($violator_address)) {
+												echo "<font color='red'>Violator Address field is empty.</font><br/>";
+											}	
+											if(empty($witnesses)) {
+												echo "<font color='red'>Witnesses field is empty.</font><br/>";
+											}
+											if(empty($complaints)) {
+												echo "<font color='red'>Complaint field is empty.</font><br/>";
+											}	
+										}	
+									}
+
+									?>
+									<td><button class="form-control btn-info processbtn" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" name="processbtn" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Process</button></td>
+
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
 							
@@ -421,29 +483,34 @@ if(!isset($_SESSION["type"]))
 																<h5 style="text-align: center;">Complainant</h5>
 																<div class="information col">
 																	<label class="employee-label"> Complaint ID </label>
-																	<input required class="form-control inputtext " id="" name ="" type="text">
+																	<input class="form-control inputtext " id="" name ="" type="text">
 																</div>
 						
 																
 																<div class="information col">
 																	<label class="employee-label"> Fullname </label>
+																	<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
 																	<input required class="form-control inputtext " id="" name ="" type="text"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div>
 
 																<div class="row align-items-start">
 																	<div class="information col">
 																		<label class="employee-label"> Age </label>
-																		<input required class="form-control inputtext comage" id="employee_lname" name ="employee_lname" type="text"  placeholder="Age"> 
+																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
+																		<input required class="form-control inputtext comage" id="comp_age" name ="comp_age" type="text"  value="<?php echo $row['comp_age']; ?>"> 
 																	</div>
 																	
 																	<div class="information col">
 																		<label class="employee-label"> Gender </label> 
-																		<input required class="form-control inputtext comgender" id="" name ="" type="text"  placeholder="Gender"> 
+																		<?php echo isset($error['comp_gender']) ? $error['comp_gender'] : '';?>
+																		<input required class="form-control inputtext comgender" id="comp_gender" name ="comp_gender" type="text" value="<?php echo $row['comp_gender']; ?>" > 
 																	</div>	
 																</div>
 																		<div class="information col">
 																			<label class="employee-label"> Address </label>
-																			<input required class="form-control inputtext control-label address" id=" " name ="address" type="text"  placeholder="Address"> 
+																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																			<input required class="form-control inputtext control-label address" id="comp_address" name ="comp_address" type="text"  
+																			value="<?php echo $data['comp_address']; ?>"> 
 																		</div>
 																	
 																	
@@ -466,7 +533,7 @@ if(!isset($_SESSION["type"]))
 															<div class="row align-items-start">
 																<div class="information col">
 																	<label class="employee-label"> Age </label>
-																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
+																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
 																</div>
 																
 																<div class="information col">
