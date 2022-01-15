@@ -7,6 +7,13 @@ if(!isset($_SESSION["type"]))
 }
 ?>
 
+<?php
+	include ("../db/conn.php");
+	include ("../db/user.php");
+	//getting id from url
+
+	?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -19,7 +26,8 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-	
+
+
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -28,13 +36,11 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Admin Complaints Dashboard </title>
-	 
 	 
 	 <style>
 		div.align-box{padding-top: 23px; display: flex; align-item: center;}
@@ -57,7 +63,7 @@ if(!isset($_SESSION["type"]))
 			 i.indigency, i.bcpc{color: #0218bd}
 			 i.permit{color: #e0149c}
 
-			 .employeemanagement-modal{
+			.employeemanagement-modal{
 			display: none; 
 			position: absolute; 
 			z-index: 999; 
@@ -78,8 +84,9 @@ if(!isset($_SESSION["type"]))
 			background-color: #fefefe;
 			margin: 5% auto 2% auto;
 			border: 1px solid #888;
+
 			height: 82%;
-			width: 52%; 
+			width: 82%; 
 		
 		}
 
@@ -95,11 +102,11 @@ if(!isset($_SESSION["type"]))
 			box-sizing: border-box;
 		}
 
-		input.comage, input.comgender {
+		input.comage, input.comgender, input.inp {
 			font-family: inherit;
 			font-size: 14px;
 			height: 35px;
-			width: 80%;
+			width: 88%;
 			padding: 10px 10px;
 			margin: 4px 25px;
 			display: inline-block;
@@ -114,10 +121,11 @@ if(!isset($_SESSION["type"]))
 		span.topright{display: flex; float: right; padding:8px 16px;font-size: 25px;}
 		.topright:hover {color: red; cursor: pointer; float: right; padding:8px 16px;}
 		.processbtn:hover{background: orange;}
-		
+		.inputele{pointer-events: none; outline: 1px solid orange;}
+		.displayflex{display: flex;}
 	 </style>
    </head>
-	<body>
+	<body onload="display_ct()">
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
@@ -187,8 +195,6 @@ if(!isset($_SESSION["type"]))
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-				    
-					 <div><?php echo $_SESSION["employee_no"];?></div>
 					 <div class="job" id="">Employee</div>
 				   </div>
 				 </div>
@@ -302,15 +308,22 @@ if(!isset($_SESSION["type"]))
 		
 			<div class="reg_table">
 			<h5 style="text-align: center;">All Complaints</h5>
+			<?php 
+                if(isset($_SESSION['message'])){
+                    ?>
+                    <span class="alert alert-info text-center" style="margin-top:20px;">
+                        <?php echo $_SESSION['message']; ?>
+					</span>
+                    <?php
+
+                    unset($_SESSION['message']);
+                }
+            ?>
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							include "../db/conn.php";
-							include "../db/user.php";
-							
 							$mquery = "SELECT * FROM blotterdb";
 							$countn = $db->query($mquery);
-							
 							?>
 
 							<thead>
@@ -352,73 +365,151 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['witnesses']; ?></td>
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><a class="view_approvebtn">Valid Id</a></td>
-
-									<?php
-									if(isset($_POST[''])){
-			
-										$n_complainant = $_POST['n_complainant'];
-										$comp_age = $_POST['comp_age'];
-										$comp_gender = $_POST['comp_gender'];
-										$comp_address = $_POST['comp_address'];
-										$inci_address = $_POST['inci_address'];
-										$n_violator = $_POST['n_violator'];
-										$violator_age = $_POST['violator_age'];
-										$violator_gender = $_POST['violator_gender'];
-										$relationship = $_POST['relationship'];
-										$violator_address = $_POST['violator_address'];
-										$witnesses = $_POST['witnesses'];
-										$complaints = $_POST['complaints'];
-											
-										// checking empty fields
-										if(empty($n_complainant) || empty($comp_age) || empty($comp_gender) || empty($comp_address) || empty($inci_address) || empty($n_violator) || empty($violator_age) || empty($violator_gender) || empty($relationship) || empty($violator_address) || empty($witnesses) || empty($complaints)) {	
-												
-											if(empty($n_complainant)) {
-												echo "<font color='red'>Complainant field is empty.</font><br/>";
-											}
-											
-											if(empty($comp_age)) {
-												echo "<font color='red'>Complainant Age field is empty.</font><br/>";
-											}
-											
-											if(empty($comp_gender)) {
-												echo "<font color='red'>Complainant Gender field is empty.</font><br/>";
-											}
-											if(empty($comp_address)) {
-												echo "<font color='red'>Complainant Address field is empty.</font><br/>";
-											}	
-											if(empty($inci_address)) {
-												echo "<font color='red'>Incident Address field is empty.</font><br/>";
-											}	
-											if(empty($n_violator)) {
-												echo "<font color='red'>Name of Violator field is empty.</font><br/>";
-											}	
-											if(empty($violator_age)) {
-												echo "<font color='red'>Name of Violator Age field is empty.</font><br/>";
-											}	
-											if(empty($violator_gender)) {
-												echo "<font color='red'>Name of Violator Gender field is empty.</font><br/>";
-											}	
-											if(empty($relationship)) {
-												echo "<font color='red'>Relationship field is empty.</font><br/>";
-											}	
-											if(empty($violator_address)) {
-												echo "<font color='red'>Violator Address field is empty.</font><br/>";
-											}	
-											if(empty($witnesses)) {
-												echo "<font color='red'>Witnesses field is empty.</font><br/>";
-											}
-											if(empty($complaints)) {
-												echo "<font color='red'>Complaint field is empty.</font><br/>";
-											}	
-										}	
-									}
-
-									?>
-									<td><button class="form-control btn-info processbtn" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" name="processbtn" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Process</button></td>
+									
+									<td>
+										<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
+									</td>
 
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
+									
 								</tr>	
 							
+								
+
+										<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
+											
+													<div class="modal-contentemployee animate displayflex" >
+														<form method="POST" action="process.php?blotter_id=<?php echo $data['blotter_id'];?>">
+														
+															
+
+															<div id="Complainant">
+																<h5 style="text-align: center;">Complainant</h5>
+																<hr>
+															<div class="row align-items-start">
+																<div class="information col">
+																	<label class="employee-label"> Complaint ID </label>
+																	<input class="form-control inputtext inputele inp"  id="blotter_id" name ="blotter_id" type="text" value="<?php echo $data['blotter_id'];?>">
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Fullname </label>
+																	
+																	<input class="form-control inputtext inputele inp" id="n_complainant" name ="n_complainant" type="text" value="<?php echo $data['n_complainant'];?>">
+																</div>
+															</div>
+
+																<div class="row align-items-start">
+																	<div class="information col">
+																		<label class="employee-label"> Age </label>
+																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
+																		<input class="form-control inputtext comage inputele" id="comp_age" name ="comp_age" type="text" value="<?php echo $data['comp_age'];?>"> 
+																	</div>
+																	
+																	<div class="information col">
+																		<label class="employee-label"> Gender </label> 
+												
+																		<input class="form-control inputtext comgender inputele" id="comp_gender" name ="comp_gender" type="text" value="<?php echo $data['comp_gender'];?>"> 
+																	</div>	
+																</div>
+																		<div class="information col">
+																			<label class="employee-label"> Address </label>
+																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																			<input  class="form-control inputtext control-label address inputele" id="comp_address" name ="comp_address" type="text"  
+																			value="<?php echo $data['comp_address']; ?>"> 
+																		</div>
+																	
+																	
+																		<div class="information col">
+																			<label class="employee-label">Incident Address </label>
+																			<input class="form-control inputtext control-label address inputele" id="" name ="" type="text"  value="<?php echo $data['inci_address']; ?>"> 
+																		</div>
+															</div>
+														
+															<div id="Violator" >
+															<h5 style="text-align: center;">Violator</h5>
+
+															<div class="information col">
+																<label class="employee-label"> Fullname </label>
+																<input class="form-control inputtext inputele" id="n_violator" name ="n_violator" type="text" value="<?php echo $data['n_violator']; ?>">
+															</div>
+
+															<div class="row align-items-start">
+																<div class="information col">
+																	<label class="employee-label"> Age </label>
+																	<input class="form-control inputtext lname comage inputele" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Gender </label> 
+																	<input class="form-control inputtext fname comage inputele" id="violator_gender" name ="violator_gender" type="text"
+																	value="<?php echo $data['violator_gender']; ?>"> 
+																</div>
+
+															</div>
+
+
+															<div class="information">
+																<label class="employee-label"> Relationship </label>
+																<input class="form-control inputtext fname inputele" id="relationship" name ="relationship" type="text" value="<?php echo $data['relationship']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Address </label>
+																<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																<input  class="form-control inputtext control-label address inputele" id="violator_address" name ="violator_address" type="text" value="<?php echo $data['violator_address']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Witnesses </label>
+																<input class="form-control inputtext inputele" id="witnesses" name ="witnesses" type="text" value="<?php echo $data['witnesses']; ?>">
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Complaints </label>
+																<textarea name="complaints" class="form-control inputtext inputele" id="complaints" ><?php echo $data['complaints']; ?></textarea>
+															</div>
+															</div>
+															
+															<div id="Approval" >
+															<span onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='none'" class="topright">&times;</span>
+																<div class="information col">
+																	<label class="employee-label"> Department </label>
+																	<select class="form-control inputtext departmnt control-label" style="padding: 0px 0px 0px 
+																	5px; " id="department" name="department">
+																		<option disabled>--Select--</option>
+																		<option value="BCPC">BCPC</option>
+																		<option value="VAWC">VAWC</option>
+																		<option value="LUPON">LUPON</option>
+																		
+																		<option value="BPSO">BPSO</option>
+																		
+																		<option value="DENY">DENY</option>
+																	</select>
+																</div>
+																
+																<div class="information">
+																	<label class="employee-label ">Approval Date </label>
+																	<input type="date" class="form-control inputtext control-label" id="approvedate" name="approvedate">
+																</div>
+
+																<div class="information col">
+																<label class="employee-label"> Approved By </label>
+																<input class="form-control inputtext control-label" id="" name ="" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+															</div>
+																<div class="information">   
+																<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
+																	<i class="bx bx-t67check"></i>Approve
+																</button>  
+															</div>
+															</div>
+															
+										                	</div>
+													</form>
+												</div>
+											</div>
+									
+
 								<div id="id2" class="employeemanagement-modal modal" >
 													<div class="modal-contentemployee animate" >
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -466,175 +557,6 @@ if(!isset($_SESSION["type"]))
 														</form>
 												</div>
 											</div>
-
-											<div id="lupon" class="employeemanagement-modal modal" >
-													<div class="modal-contentemployee animate" >
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-														<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
-
-											
-														<div >
-															<button class="w3-bar-item w3-button" onclick="openCity('London')">Complainant</button>
-															<button class="w3-bar-item w3-button" onclick="openCity('Paris')">Violator</button>
-															<button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Approval</button>
-														</div>
-
-															<div id="London" class="w3-container city">
-																<h5 style="text-align: center;">Complainant</h5>
-																<div class="information col">
-																	<label class="employee-label"> Complaint ID </label>
-																	<input class="form-control inputtext " id="" name ="" type="text">
-																</div>
-						
-																
-																<div class="information col">
-																	<label class="employee-label"> Fullname </label>
-																	<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
-																	<input required class="form-control inputtext " id="" name ="" type="text"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div>
-
-																<div class="row align-items-start">
-																	<div class="information col">
-																		<label class="employee-label"> Age </label>
-																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
-																		<input required class="form-control inputtext comage" id="comp_age" name ="comp_age" type="text"  value="<?php echo $row['comp_age']; ?>"> 
-																	</div>
-																	
-																	<div class="information col">
-																		<label class="employee-label"> Gender </label> 
-																		<?php echo isset($error['comp_gender']) ? $error['comp_gender'] : '';?>
-																		<input required class="form-control inputtext comgender" id="comp_gender" name ="comp_gender" type="text" value="<?php echo $row['comp_gender']; ?>" > 
-																	</div>	
-																</div>
-																		<div class="information col">
-																			<label class="employee-label"> Address </label>
-																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
-																			<input required class="form-control inputtext control-label address" id="comp_address" name ="comp_address" type="text"  
-																			value="<?php echo $data['comp_address']; ?>"> 
-																		</div>
-																	
-																	
-																		<div class="information col">
-																			<label class="employee-label">Incident Address </label>
-																			<input required class="form-control inputtext control-label address" id="" name ="" type="text"  placeholder="Incident Address"> 
-																		</div>
-																	
-																
-															</div>
-
-															<div id="Paris" class="w3-container city" style="display:none">
-															<h5 style="text-align: center;">Violator</h5>
-
-															<div class="information col">
-																<label class="employee-label"> Fullname </label>
-																<input required class="form-control inputtext " id="" name ="" type="text"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-															</div>
-
-															<div class="row align-items-start">
-																<div class="information col">
-																	<label class="employee-label"> Age </label>
-																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
-																</div>
-																
-																<div class="information col">
-																	<label class="employee-label"> Gender </label> 
-																	<input required class="form-control inputtext fname" id="" name ="" type="text"  placeholder="First Name"> 
-																</div>
-																
-															</div>
-
-
-															<div class="information">
-																<label class="employee-label"> Employee No. </label>
-																<input required class="form-control inputpass control-label" id="employee_no" name ="employee_no" type="password"  placeholder="Ex. 112-1001-01"> 
-																<i class="bx bx-show" id="togglePassword" style="margin-left: -50px; cursor: pointer;"></i>
-															</div>
-
-															<div class="row align-items-start">
-																<div class="information col">
-																	<label class="employee-label"> Last Name </label>
-																	<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-																</div>
-																
-																<div class="information col">
-																	<label class="employee-label"> First Name </label> 
-																	<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-																</div>
-																
-																<div class="information col">
-																	<label class="employee-label"> Middle Name </label>
-																	<input class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="(Optional)"> 
-																</div>
-															</div>
-
-															<div class="information">
-																<label class="employee-label"> Birthday </label>
-																<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
-															</div>
-															<div class="row align-items-start">
-															<div class="information col">
-																<label class="employee-label"> Address </label>
-																<input required class="form-control inputtext control-label address" id="address" name ="address" type="text"  placeholder="Address"> 
-															</div>
-
-															<div class="information col">
-																<label class="employee-label"> Contact No </label>
-																<input required class="form-control inputtext control-label contact" id="contact" name ="contact" type="number"  placeholder="Ex. 09123456789"> 
-															</div>
-															</div>
-															<div class="row align-items-start">
-															<div class="information col">
-																<label class="employee-label"> User Type </label>
-																<select class="form-control inputtext usr_type" style="padding: 0px 0px 0px 
-																5px;" id="user_type" name="user_type">
-																	<option disabled>--Select--</option>
-																	<option value="Employee">Employee</option>
-																</select>
-															</div>
-															</div>
-
-															</div>
-
-															<div id="Tokyo" class="w3-container city" style="display:none">
-																<div class="information col">
-																	<label class="employee-label"> Department </label>
-																	<select class="form-control inputtext departmnt control-label" style="padding: 0px 0px 0px 
-																	5px; " id="department" name="department">
-																		<option disabled>--Select--</option>
-																		<option value="BCPC">BCPC</option>
-																		<option value="VAWC">VAWC</option>
-																		<option value="LUPON">LUPON</option>
-																		
-																		<option value="BPSO">BPSO</option>
-																		
-																		<option value="DENY">DENY</option>
-																	</select>
-																</div>
-																<div class="information">
-																	<label class="employee-label ">Approval Date </label>
-																	<input required type="date" class="form-control inputtext control-label" id="" name="">
-																</div>
-
-																<div class="information col">
-																<label class="employee-label"> Approved By </label>
-																<input required class="form-control inputtext control-label" id="" name ="" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
-															</div>
-																<div class="information">   
-																<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-																	<i class="bx bx-t67check"></i>Submit
-																</button>  
-															</div>
-															</div>
-															
-
-											</div>
-
-
-												
-		
-														</form>
-												</div>
-											</div>
 							
 							<?php
 							}
@@ -645,6 +567,8 @@ if(!isset($_SESSION["type"]))
 	</div>
 				
 			</section>
+			<script src="../bootstrap/jquery.min.js"></script>
+			<script src="../bootstrap/js/bootstrap.min.js"></script>
 			<script>
 				function openCity(cityName) {
 				var i;
@@ -654,6 +578,11 @@ if(!isset($_SESSION["type"]))
 				}
 				document.getElementById(cityName).style.display = "block";  
 				}
+
+				
+			</script>
+			<script>
+				document.querySelector("#approvedate").valueAsDate = new Date();
 			</script>
 	</body>
 </html>
