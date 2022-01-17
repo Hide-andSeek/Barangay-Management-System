@@ -98,6 +98,12 @@ if(!isset($_SESSION["type"]))
 		.submtbtn{
 			height: 40px;
 		}
+		span.topright{text-align: right; padding:8px 16px;font-size: 25px;}
+		.topright:hover {text-align: right;color: red; cursor: pointer;padding:8px 16px;}
+		.processbtn:hover{background: orange;}
+		.inputele{pointer-events: none; outline: 1px solid orange;}
+		.displayflex{display: flex;}
+		.approvebtn:hover{background: orange;}
 	 </style>
    </head>
 	<body>
@@ -258,16 +264,147 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><a class="view_approvebtn">Valid Id</a></td>
 
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('lupon').style.display='block'"><i class="bx bx-edit"></i>Edit</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>View Details</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
 							
-								<div id="id2" class="employeemanagement-modal modal" >
+								<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
+											
+											<div class="modal-contentemployee animate displayflex" >
+												<form method="POST" action="process.php?blotter_id=<?php echo $data['blotter_id'];?>">
+												
+													
+
+												<div id="Complainant">
+																<h5 style="text-align: center;">Complainant</h5>
+																<hr>
+															
+																<div class="information col">
+																	<label class="employee-label"> Complainant's ID </label>
+																	<input class="form-control inputtext inputele"  id="blotter_id" name ="blotter_id" type="text" value="<?php echo $data['blotter_id'];?>">
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Complainant's  name </label>
+																	
+																	<input class="form-control inputtext inputele" id="n_complainant" name ="n_complainant" type="text" value="<?php echo $data['n_complainant'];?>">
+																</div>
+															
+
+																
+																	<div class="information col">
+																		<label class="employee-label"> Complainant's  Age </label>
+																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
+																		<input class="form-control inputtext inputele" id="comp_age" name ="comp_age" type="text" value="<?php echo $data['comp_age'];?>"> 
+																	</div>
+																	
+																	<div class="information col">
+																		<label class="employee-label"> Complainant's  Gender </label> 
+												
+																		<input class="form-control inputtext inputele" id="comp_gender" name ="comp_gender" type="text" value="<?php echo $data['comp_gender'];?>"> 
+																	</div>	
+															
+																		<div class="information col">
+																			<label class="employee-label">Complainant's  Address </label>
+																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																			<input  class="form-control inputtext inputele" id="comp_address" name ="comp_address" type="text"  
+																			value="<?php echo $data['comp_address']; ?>"> 
+																		</div>
+																	
+																	
+																		<div class="information col">
+																			<label class="employee-label">Incident Address </label>
+																			<input class="form-control inputtext inputele" id="" name ="" type="text"  value="<?php echo $data['inci_address']; ?>"> 
+																		</div>
+															</div>
+														
+															<div id="Violator" >
+															<h5 style="text-align: center;">Violator</h5>
+
+															<hr>
+															<div class="information col">
+																<label class="employee-label"> Violator's name </label>
+																<input class="form-control inputtext inputele" id="n_violator" name ="n_violator" type="text" value="<?php echo $data['n_violator']; ?>">
+															</div>
+
+															
+																<div class="information col">
+																	<label class="employee-label">Violator's Age </label>
+																	<input class="form-control inputtext lname  inputele" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Violator's Gender </label> 
+																	<input class="form-control inputtext fname  inputele" id="violator_gender" name ="violator_gender" type="text"
+																	value="<?php echo $data['violator_gender']; ?>"> 
+																</div>
+
+
+															<div class="information">
+																<label class="employee-label"> Relationship </label>
+																<input class="form-control inputtext fname inputele" id="relationship" name ="relationship" type="text" value="<?php echo $data['relationship']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Violator's Address </label>
+																<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																<input  class="form-control inputtext control-label address inputele" id="violator_address" name ="violator_address" type="text" value="<?php echo $data['violator_address']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Witnesses </label>
+																<input class="form-control inputtext inputele" id="witnesses" name ="witnesses" type="text" value="<?php echo $data['witnesses']; ?>">
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Complaints </label>
+																<textarea name="complaints" class="form-control inputtext inputele " id="complaints" ><?php echo $data['complaints']; ?></textarea>
+															</div>
+															</div>
+															
+															<div id="Approval" >
+															<span onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='none'" class="topright">&times;</span>
+															
+																
+																<div class="information col">
+																	<label class="employee-label"> Department </label>
+																	<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+																	5px; " id="department" name="department">
+																		<option disabled>--Select--</option>
+																		<option value="BCPC">BCPC</option>
+																		<option value="VAWC">VAWC</option>
+																		<option value="LUPON">LUPON</option>
+																		
+																		<option value="BPSO">BPSO</option>
+																		
+																		<option style="color: red;" value="DENY">DENY</option>
+																	</select>
+																</div>
+																
+																<div class="information">
+																	<label class="employee-label ">Approval Date </label>
+																	<input type="date" class="form-control inputtext control-label" id="approvedate" name="approvedate">
+																</div>
+
+																<div class="information col">
+																<label class="employee-label"> Approved By </label>
+																<input class="form-control inputtext control-label" id="" name ="" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+															</div>
+																<div class="information">   
+																<button type="submit" id="approvebtn" name="approvebtn" value="empBtn" class="inputtext submtbtn approvebtn"><i class="bx bx-check"></i>Approve
+																</button>  
+															</div>
+															</div>
+										                	</div>
+													</form>
+												</div>
+											</div>
+											<div id="id2" class="employeemanagement-modal modal" >
 													<div class="modal-contentemployee animate" >
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 														<span onclick="document.getElementById('id2').style.display='none'" class="topright">&times;</span>
 
-														
+
 														<div class="send-message">
 																<div class="container">
 																<div class="row">
@@ -279,47 +416,31 @@ if(!isset($_SESSION["type"]))
 																		<form id="contact" action="" method="post">
 																		<div class="row">
 																			<div class="col-lg-12 col-md-12 col-sm-12">
-																			<fieldset class="sms-section">
+
 																				<input required type="number" class="form-control textarea" id="contact_no"
 																				name="contact_no"placeholder="Contact no.">
-																			</fieldset>
+
 																			</div>
 																			<div class="col-lg-12">
-																			<fieldset >
+
 																				<textarea name="msg" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
 																				-From Barangay Commonwealth</textarea>
 																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
-																				
-																			</fieldset>
-																			
+
+
+
 																			</div>
 																			<div class="col-lg-12">
-																			<fieldset >
+
 																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bx bx-send"></i>Send Message</button>
-																			</fieldset>
+
 																			</div>
 																		</div>
 																		</form>
 																	</div>
 																	</div>
-																</div>
-																</div>
-															</div>
-															</div> 	
-														</form>
-												</div>
-											</div>
 
-											<div id="lupon" class="employeemanagement-modal modal" >
-													<div class="modal-contentemployee animate" >
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-														<span onclick="document.getElementById('lupon').style.display='none'" class="topright">&times;</span>
-
-														
-		
-														</form>
-												</div>
-											</div>
+											
 							
 							<?php
 							}
