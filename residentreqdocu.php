@@ -660,7 +660,8 @@ include "db/users.php";
 																	<label for="relationship">Relationship: </label>
 																	<select class="form-control" name="relationship">
 																		<option disabled>--Select--</option>
-																		<option value="Relative">Relative</option>
+																		<option value="Relative/Family">Relative/Family</option>
+																		<option value="Others">Others</option>
 																	</select>
 																</div><br>
 
@@ -669,9 +670,8 @@ include "db/users.php";
 																	<input required type="text" class="form-control form-text" id="violator_address" name="violator_address">
 																</div><br>
 														</fieldset>
-
 														<div>
-														<div class="form-group">
+																<div class="form-group">
 																	<label for="witnesses">Witnesses: </label>
 																	<input required type="text" class="form-control form-text" id="witnesses" name="witnesses">
 																</div><br>
@@ -680,8 +680,26 @@ include "db/users.php";
 																	<label for="complaints">Complaints: </label>
 																	<textarea name="complaints" id="complaints" cols="30" rows="10" class="form-group"></textarea>
 																</div><br>
-
-															
+														</div>
+														<div>
+																
+																<div class="form-group">
+																	<label for="id_type">ID Type: </label>
+																	<select class="form-control form-text" name="id_type">
+																		<option disabled>--Select--</option>
+																		<option value="Barangay ID">Barangay ID</option>
+																		<option value="SSS">SSS</option>
+																		<option value="PhilHealth">PhilHealth</option>
+																		<option value="Passport ID">Passport ID</option>
+																		<option value="Barangay Clearance">Barangay Clearance</option>
+																		<option value="Barangay ID">Barangay ID</option>
+																		<option value="Barangay ID">Barangay ID</option>
+																	</select>
+																</div><br>
+																<div class="form-group">
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
+																	<input type='file' name='files[]' required/>
+																</div>
 														</div>
 													
 												</section>

@@ -372,9 +372,7 @@ if(!isset($_SESSION["type"]))
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 									
 								</tr>	
-							
-								
-
+						
 										<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
 											
 													<div class="modal-contentemployee animate displayflex" >

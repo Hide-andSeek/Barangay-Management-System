@@ -220,7 +220,7 @@ if(isset($_POST['indigencybtn'])){
 
 
 //Resident side - Blotter -> Cuyones/Verbo
-if(isset($_POST['blotterbtn'])){
+if(isset($_POST[''])){
 	
 	$n_complainant = $_POST['n_complainant'];
 	$comp_age = $_POST['comp_age'];
@@ -249,6 +249,7 @@ if(isset($_POST['blotterbtn'])){
 		$stmt->bindParam(':witnesses', $witnesses);
 		$stmt->bindParam(':complaints', $complaints);
 		
+		
 	if($stmt->execute()){
 		echo "<script>
 				alert('Submitted Successfully!');
@@ -260,4 +261,58 @@ if(isset($_POST['blotterbtn'])){
 }
 
 
+if(isset($_POST['blotterbtn'])){
+	
+	$n_complainant = $_POST['n_complainant'];
+	$comp_age = $_POST['comp_age'];
+	$comp_gender = $_POST['comp_gender'];
+	$comp_address = $_POST['comp_address'];
+	$inci_address = $_POST['inci_address'];
+	$n_violator = $_POST['n_violator'];
+	$violator_age = $_POST['violator_age'];
+	$violator_gender = $_POST['violator_gender'];
+	$relationship = $_POST['relationship'];
+	$violator_address = $_POST['violator_address'];
+	$witnesses = $_POST['witnesses'];
+	$complaints = $_POST['complaints'];
+	$id_type = $_POST['id_type'];
+	$countfiles = count($_FILES['files']['name']);
+		
+	$query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	
+	$stmt = $db->prepare($query);
+
+	for($i = 0; $i < $countfiles; $i++) {
+
+		// File name
+		$filename = $_FILES['files']['name'][$i];
+		// Location
+		$target_file = 'img/fileupload_blotter/'.$filename;
+		// File Path
+		$file_extension = pathinfo(
+			$target_file, PATHINFO_EXTENSION);
+	
+		$file_extension = strtolower($file_extension);
+	
+		//Image extension
+		$valid_extension = array("png","jpeg","jpg");
+	
+		if(in_array($file_extension, $valid_extension)) {
+
+			// Upload file
+			if(move_uploaded_file(
+				$_FILES['files']['tmp_name'][$i],
+				$target_file)
+			) {
+				// Execute query
+				$stmt->execute(
+					array($n_complainant, $comp_age, $comp_gender, $comp_address, $inci_address, $n_violator, $violator_age, $violator_gender, $relationship, $violator_address, $witnesses, $complaints, $id_type, $filename, $target_file));
+			}
+		}
+	}
+	echo "<script>
+				alert('Submitted Successfully!');
+				window.location.href='residentreqdocu.php';
+			</script>";
+}
 ?>
