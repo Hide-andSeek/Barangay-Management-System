@@ -342,7 +342,7 @@ if(!isset($_SESSION["type"]))
 									<th>Complaints</th>
 									<th>Valid ID</th>
 									<th>View Details</th>
-									<th>Message</th>
+									
 								</tr>                       
 							</thead>
 							<?php
@@ -369,7 +369,7 @@ if(!isset($_SESSION["type"]))
 										<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
 									</td>
 
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
+									
 									
 								</tr>	
 							
@@ -508,46 +508,7 @@ if(!isset($_SESSION["type"]))
 											</div>
 									
 
-								<div id="id2" class="employeemanagement-modal modal" >
-													<div class="modal-contentemployee animate" >
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-														<span onclick="document.getElementById('id2').style.display='none'" class="topright">&times;</span>
-
-														
-														<div class="send-message">
-																<div class="container">
-																<div class="row">
-																	<div class="col-md-8">
-																	<div class="contact-form">
-																	<div class="section-heading">
-																		<h4>Send a Message</h4>
-																	</div>
-																		<form id="contact" action="" method="post">
-																		<div class="row">
-																			<div class="col-lg-12 col-md-12 col-sm-12">
-																			
-																				<input required type="number" class="form-control textarea" id="contact_no"
-																				name="contact_no"placeholder="Contact no.">
-																			
-																			</div>
-																			<div class="col-lg-12">
-																			
-																				<textarea name="msg" class="form-control textarea" id="message" placeholder="Text Message">Hello good evening < Name >, we received your Barangay ID Request. You are now in Step 2, wait for the confirmation of Barangay. Please be guided accordingly! Thank you 
-																				-From Barangay Commonwealth</textarea>
-																				<small id="messageHelp" class="form-text text-muted">160 characters remaining.</small>
-																				
-																		
-																			
-																			</div>
-																			<div class="col-lg-12">
-																			
-																				<button type="submit" name="sendSms" id="form-submit" class="filled-button"><i class="bx bx-send"></i>Send Message</button>
-																			
-																			</div>
-																		</div>
-																		</form>
-																	</div>
-																	</div>
+						
 																</div>
 																</div>
 															</div>
