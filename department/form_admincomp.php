@@ -509,13 +509,6 @@ if(!isset($_SESSION["type"]))
 									
 
 						
-																</div>
-																</div>
-															</div>
-															</div> 	
-														</form>
-												</div>
-											</div>
 							
 							<?php
 							}
@@ -528,18 +521,7 @@ if(!isset($_SESSION["type"]))
 			</section>
 			<script src="../bootstrap/jquery.min.js"></script>
 			<script src="../bootstrap/js/bootstrap.min.js"></script>
-			<script>
-				function openCity(cityName) {
-				var i;
-				var x = document.getElementsByClassName("city");
-				for (i = 0; i < x.length; i++) {
-					x[i].style.display = "none";  
-				}
-				document.getElementById(cityName).style.display = "block";  
-				}
-
-				
-			</script>
+			
 			<script>
 				document.querySelector("#approvedate").valueAsDate = new Date();
 			</script>
