@@ -16,4 +16,14 @@
     //    return "Error!: " . $e->getMessage();
 	//    die();
     // }
+
+	
+	$connect = new mysqli("mysql5046.site4now.net","a7d59c_combrgy","ecajucom143","db_a7d59c_combrgy");
+
+	// Check connection
+	if ($connect -> connect_errno) {
+	echo "Failed to connect to MySQL: " . $connect -> connect_error;
+	exit();
+	}
+
 ?>

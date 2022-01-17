@@ -279,7 +279,7 @@ img.brgy_icon{
  .home-section{
   position: relative;
   background: #f6faf5;
-  min-height: 87vh;
+  min-height: 93vh;
   top: 0;
   left: 78px;
   width: calc(100% - 78px);
@@ -388,10 +388,12 @@ img.brgy_icon{
 					
 table.content-table thead tr{
 	padding: 8px 12px 0px 0px;
+    /* background-color: black; */
     background-color: #009879;
     color: #ffffff;
     text-align: center;
     position: relative;
+    height: 50px;
 }
 
 .content-table th,

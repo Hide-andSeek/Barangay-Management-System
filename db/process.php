@@ -82,7 +82,7 @@
 // }	
 
  
-	if(isset($_POST['editbtn'])){
+	if(isset($_POST['approvebtn'])){
 		try{
 			$id = $_GET['blotter_id'];
             $n_complainant = $_POST['n_complainant'];
