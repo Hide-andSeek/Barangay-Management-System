@@ -409,7 +409,7 @@ include "db/announcementquery.php";
 								while ($stmt_paging->fetch()){ ?>
 									<tr>
 										<td><?php echo $data['category_name'];?></td>
-										<td width="20%"><img src="upload/category/<?php echo $data['category_image']; ?>" width="50" height="50"/></td>
+										<td width="20%"><img src="upload/category/<?php echo $data['category_image']; ?>" width="90" height="90"/></td>
 										<td>
 											<!-- <button onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='block'" class="edit" > Edit</button> -->
 											<button class="edit">

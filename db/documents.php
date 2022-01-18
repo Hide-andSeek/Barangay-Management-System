@@ -315,4 +315,6 @@ if(isset($_POST['blotterbtn'])){
 				window.location.href='residentreqdocu.php';
 			</script>";
 }
+
+
 ?>

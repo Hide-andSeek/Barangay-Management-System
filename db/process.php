@@ -82,7 +82,7 @@
 // }	
 
  
-	if(isset($_POST['approvebtn'])){
+	if(isset($_POST[''])){
 		try{
 			$id = $_GET['blotter_id'];
             $n_complainant = $_POST['n_complainant'];
@@ -117,4 +117,68 @@
  
 	header('location: index.php');
  
+
+	
+
+
+
+
+	if(isset($_POST['approvebtn'])){
+	
+		$blotterID = $_POST['blotterID'];
+		$complainant = $_POST['complainant'];
+		$c_age = $_POST['c_age'];
+		$c_gender = $_POST['c_gender'];
+		$c_address = $_POST['c_address'];
+		$incident_add = $_POST['incident_add'];
+		$violators = $_POST['violators'];
+		$v_age = $_POST['v_age'];
+		$v_gender = $_POST['v_gender'];
+		$v_rel = $_POST['v_rel'];
+		$v_address = $_POST['v_address'];
+		$witness = $_POST['witness'];
+		$ex_complaints = $_POST['ex_complaints'];
+		$id_type = $_POST['id_type'];
+		$dept = $_POST['dept'];
+		$app_date = $_POST['app_date'];
+		$app_by = $_POST['app_by'];
+		$countfiles = count($_FILES['files']['name']);
+			
+		$query = "INSERT INTO admin_complaints (blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, id_type, dept, app_date, app_by, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		$stmt = $db->prepare($query);
+	
+		for($i = 0; $i < $countfiles; $i++) {
+	
+			// File name
+			$filename = $_FILES['files']['name'][$i];
+			// Location
+			$target_file = 'img/fileupload_admincomp/'.$filename;
+			// File Path
+			$file_extension = pathinfo(
+				$target_file, PATHINFO_EXTENSION);
+		
+			$file_extension = strtolower($file_extension);
+		
+			//Image extension
+			$valid_extension = array("png","jpeg","jpg");
+		
+			if(in_array($file_extension, $valid_extension)) {
+	
+				// Upload file
+				if(move_uploaded_file(
+					$_FILES['files']['tmp_name'][$i],
+					$target_file)
+				) {
+					// Execute query
+					$stmt->execute(
+						array($blotterID, $complainant, $c_age, $c_gender, $c_address, $incident_add, $violators, $v_age, $v_gender, $v_rel, $v_address, $witness, $ex_complaints, $id_type, $dept, $app_date, $app_by, $filename, $target_file));
+				}
+			}
+		}
+		echo "<script>
+					alert('Submitted Successfully!');
+					window.location.href='compAdmin_dashboard.php';
+				</script>";
+	}
 ?>
