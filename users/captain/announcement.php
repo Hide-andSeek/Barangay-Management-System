@@ -10,7 +10,7 @@ include "db/captain.php";
 include "db/users.php";
 include_once('db/conn.php'); 
 include_once('announcement_includes/functions.php'); 
-include_once "db/announcementquery.php";
+include "db/announcementquery.php";
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ include_once "db/announcementquery.php";
 		.modal-contentdelete{height: 32%; }
 		.modal-contentedit{height: 68%;  overflow-x: hidden;}
 
-		::-webkit-scrollbar{ width: 5px; border-radius: 5px;}
+		::-webkit-scrollbar{ width: 15px; border-radius: 5px;}
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
 		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
 		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;}
@@ -372,7 +372,7 @@ include_once "db/announcementquery.php";
 										</div> 	
 							  </div>
 						</div>
-	</div>
+		</div>
 								
 					
 							<div class="search_content">
@@ -408,10 +408,15 @@ include_once "db/announcementquery.php";
 								while ($stmt_paging->fetch()){ ?>
 									<tr>
 										<td><?php echo $data['category_name'];?></td>
-										<td width="20%"><a href="delete-category.php?id=<?php echo $data['cid'];?>"><img src="img/fileupload_announcement/<?php echo $data['category_image']; ?>" width="50" height="50"/></a></td>
+										<td width="20%"><img src="upload/category/<?php echo $data['category_image']; ?>" width="50" height="50"/></td>
 										<td>
-											<button onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='block'" class="edit" ><i class="bx bxs-edit"></i> Edit</button>
-											
+											<!-- <button onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='block'" class="edit" > Edit</button> -->
+											<button  class="edit">
+												<a href="announcement_edit.php?id=<?php echo $data['cid'];?>">
+												<i class="bx bxs-edit"></i>
+													Edit
+												</a>
+											</button>
 											<button onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='block'" class="del"><i class="bx bxs-edit"></i> Delete
 											</button>
 										</td>
@@ -423,37 +428,7 @@ include_once "db/announcementquery.php";
 							</table>
 							</div>
 <!-- Edit Category -->
-							<div id="formatValidatorName" >
-									<div id="edit_<?php echo $data['cid']; ?>" class="edit-modal modal" >
-											<div class="modal-contentedit animate" >	
-											
-											<span  onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
-
-											<br>
-											<br>
-
-											<h4 style="text-align: center;"><br> Edit Category </h4>
-											
-											<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-											<hr />
-									
-										
-											<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
-												<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['category_name']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-												</span>
-												<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-												<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-												<span class="imgup">
-												<img  src="img/fileupload_announcement/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-												</span>
-												<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-											</form>
-										0.</div>
-									</div>
-								</div>
+							
 <!--Modal form for Category Deletion -->
 					<div id="formatValidatorName" >
 							<div id="delete_<?php echo $data['cid']; ?>" class="delete-modal modal" >
@@ -483,10 +458,45 @@ include_once "db/announcementquery.php";
 								</h4>
 							</div>
 							</div>
-							
+							<div class="col-md-12">
+			<div id="formatValidatorName" >
+									<div id="edit_<?php echo $data['cid']; ?>" class="edit-modal modal" >
+											<div class="modal-contentedit animate" >	
+											
+											<span  onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
+
+											<br>
+											<br>
+
+											<h4 style="text-align: center;"><br> Edit Category </h4>
+											
+											<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
+											<hr />
+									
+										
+											<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+												<span>
+												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['category_name']; ?>"/>
+												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
+												</span>
+												<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
+												<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
+
+												<span class="imgup">
+												<img  src="img/fileupload_announcement/<?php echo $data['category_image']; ?>" width="260" height="170"/>
+												</span>
+												<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
+											</form>
+										</div>
+									</div>
+								</div>
+						</div>
 							<div class="separator"></div>
-						</div>     
+							</div>     
 			</section>
+	
 			<script src="resident-js/barangay.js"></script>
+			<script src="announcement_css/js/jquery.min.js"></script>
+   			<script src="announcement_css/js/bootstrap.min.js"></script>	
 	</body>
 </html>
