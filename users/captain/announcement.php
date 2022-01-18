@@ -11,6 +11,7 @@ include "db/users.php";
 include_once('db/conn.php'); 
 include_once('announcement_includes/functions.php'); 
 include "db/announcementquery.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +66,7 @@ include "db/announcementquery.php";
 		.modal-contentdelete{height: 32%; }
 		.modal-contentedit{height: 68%;  overflow-x: hidden;}
 
-		::-webkit-scrollbar{ width: 15px; border-radius: 5px;}
+		::-webkit-scrollbar{ width: 8px; border-radius: 5px;}
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
 		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
 		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;}
@@ -374,7 +375,7 @@ include "db/announcementquery.php";
 						</div>
 		</div>
 								
-					
+<!-- Search -->
 							<div class="search_content">
 								<form class="list_header" method="get">
 									<label>
@@ -411,7 +412,7 @@ include "db/announcementquery.php";
 										<td width="20%"><img src="upload/category/<?php echo $data['category_image']; ?>" width="50" height="50"/></td>
 										<td>
 											<!-- <button onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='block'" class="edit" > Edit</button> -->
-											<button  class="edit">
+											<button class="edit">
 												<a href="announcement_edit.php?id=<?php echo $data['cid'];?>">
 												<i class="bx bxs-edit"></i>
 													Edit
@@ -428,38 +429,7 @@ include "db/announcementquery.php";
 							</table>
 							</div>
 <!-- Edit Category -->
-							
-<!--Modal form for Category Deletion -->
-					<div id="formatValidatorName" >
-							<div id="delete_<?php echo $data['cid']; ?>" class="delete-modal modal" >
-								<div class="modal-contentdelete animate" >
-								
-								<span  onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
-
-								<h4 style="text-align: center;">Confirm Action</h4>
-								<hr />
-								<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-									<p style="font-size: 15px; text-align: center;">Are you sure want to <strong style="color: red;"> DELETE </strong>this category?</p>
-									<span style="float: right; padding: 15px 15px 15px 15px" >
-									<input type="submit" class="btn btn-primary" value="Yes" name="btnDelete"/>
-									<span onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='none'"  class="btn " type="submit">No</span>
-									</span>
-								</form>
-							</div>
-						</div>
-					</div>   	
-							
-							<div class="col-md-12 pagination">
-								<h4 class="page">
-									<?php 
-										// for pagination purpose
-										$function->doPages($offset, 'announce_cat.php', '', $total_records, $keyword);
-									?>
-								</h4>
-							</div>
-							</div>
-							<div class="col-md-12">
-			<div id="formatValidatorName" >
+							<div id="formatValidatorName" >
 									<div id="edit_<?php echo $data['cid']; ?>" class="edit-modal modal" >
 											<div class="modal-contentedit animate" >	
 											
@@ -490,9 +460,233 @@ include "db/announcementquery.php";
 										</div>
 									</div>
 								</div>
+							
+<!--Modal form for Category Deletion -->
+					<div id="formatValidatorName" >
+							<div id="delete_<?php echo $data['cid']; ?>" class="delete-modal modal" >
+								<div class="modal-contentdelete animate" >
+								
+								<span  onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
+
+								<h4 style="text-align: center;">Confirm Action</h4>
+								<hr />
+								<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+									<p style="font-size: 15px; text-align: center;">Are you sure want to <strong style="color: red;"> DELETE </strong>this category?</p>
+									<span style="float: right; padding: 15px 15px 15px 15px" >
+									<input type="submit" class="btn btn-primary" value="Yes" name="btnDelete"/>
+									<span onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='none'"  class="btn " type="submit">No</span>
+									</span>
+								</form>
+							</div>
 						</div>
+					</div>   	
+							
+							<div class="col-md-12 pagination">
+								<h4 class="page">
+									<?php 
+										// for pagination purpose
+										$function->doPages($offset, 'announce_cat.php', '', $total_records, $keyword);
+									?>
+								</h4>
+							</div>
+							</div>
+			
 							<div class="separator"></div>
 							</div>     
+
+<hr>									
+<!-- Menu -->
+				<div id="content" class="container col-md-12">
+					<?php 
+						// create object of functions class
+						$function = new functions;
+						
+						// create array variable to store data from database
+						$data = array();
+						
+						if(isset($_GET['keyword'])){	
+							// check value of keyword variable
+							$keyword = $function->sanitize($_GET['keyword']);
+							$bind_keyword = "%".$keyword."%";
+						}else{
+							$keyword = "";
+							$bind_keyword = $keyword;
+						}
+							
+						if(empty($keyword)){
+							$sql_query = "SELECT aid, announcement_heading, announcement_image, category_name, announcement_status, announcement_date 
+									FROM tbl_announcement m, announcement_category c
+									WHERE m.cat_id = c.cid  
+									ORDER BY m.aid DESC";
+						}else{
+							$sql_query = "SELECT aid, announcement_heading, announcement_image, category_name, announcement_status, announcement_date 
+									FROM tbl_announcement m, announcement_category c
+									WHERE m.cat_id = c.cid AND announcement_heading LIKE ? 
+									ORDER BY m.aid DESC";
+						}
+						
+						
+						$stmt = $connect->stmt_init();
+						if($stmt->prepare($sql_query)) {	
+							// Bind your variables to replace the ?s
+							if(!empty($keyword)){
+								$stmt->bind_param('s', $bind_keyword);
+							}
+							// Execute query
+							$stmt->execute();
+							// store result 
+							$stmt->store_result();
+							$stmt->bind_result($data['aid'], 
+									$data['announcement_heading'], 
+									$data['announcement_image'], 
+									$data['category_name'],
+									$data['announcement_status'], 
+									$data['announcement_date']
+									);
+							// get total records
+							$total_records = $stmt->num_rows;
+						}
+							
+						// check page parameter
+						if(isset($_GET['page'])){
+							$page = $_GET['page'];
+						}else{
+							$page = 1;
+						}
+										
+						// number of data that will be display per page		
+						$offset = 10;
+										
+						//lets calculate the LIMIT for SQL, and save it $from
+						if ($page){
+							$from 	= ($page * $offset) - $offset;
+						}else{
+							//if nothing was given in page request, lets load the first page
+							$from = 0;	
+						}	
+						
+						if(empty($keyword)){
+							$sql_query = "SELECT aid, announcement_heading, announcement_image, category_name, announcement_status, announcement_date 
+									FROM tbl_announcement m, announcement_category c
+									WHERE m.cat_id = c.cid  
+									ORDER BY m.aid DESC LIMIT ?, ?";
+						}else{
+							$sql_query = "SELECT aid, announcement_heading, announcement_image, category_name, announcement_status, announcement_date 
+									FROM tbl_announcement m, announcement_category c
+									WHERE m.cat_id = c.cid AND announcement_heading LIKE ? 
+									ORDER BY m.aid DESC LIMIT ?, ?";
+						}
+						
+						$stmt_paging = $connect->stmt_init();
+						if($stmt_paging ->prepare($sql_query)) {
+							// Bind your variables to replace the ?s
+							if(empty($keyword)){
+								$stmt_paging ->bind_param('ss', $from, $offset);
+							}else{
+								$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
+							}
+							// Execute query
+							$stmt_paging ->execute();
+							// store result 
+							$stmt_paging ->store_result();
+							$stmt_paging->bind_result($data['aid'], 
+									$data['announcement_heading'], 
+									$data['announcement_image'], 
+									$data['category_name'],
+									$data['announcement_status'], 
+									$data['announcement_date']
+									);
+							// for paging purpose
+							$total_records_paging = $total_records; 
+						}
+
+						// if no data on database show "No Reservation is Available"
+						if($total_records_paging == 0){
+					
+					?>
+					<h1>News Not Available
+						<a href="add-menu.php">
+							<button class="btn btn-danger">Add News</button>
+						</a>
+					</h1>
+					<hr />
+					<?php 
+						// otherwise, show data
+						}else{
+							$row_number = $from + 1;
+					?>
+
+					<!-- search form -->
+					<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+								</form>
+									<label class="select__select">
+										New Announce: 
+										<button class="page-scroll login" onclick="document.getElementById('').style.display='block'">
+											<i class="bx bx-plus-circle" style="font-size: 16px;"></i> Click to Add
+										</button>
+										<button style="background: none;"><i style="color: gray; font-size: 21px;" class="bx bx-help-circle bcircle"></i></button>
+									</label>
+							</div>
+							<br>						
+							<hr>
+					<!-- end of search form -->
+					
+					<br/>
+					<div class="col-md-12">
+					<table class='table table-hover'>
+						<tr>
+							<th>News heading</th>
+							<th>News Image</th>
+							<th>News Date</th>
+							<th>News Category</th>
+							<th>Action</th>
+						</tr>
+					<?php 
+						while ($stmt_paging->fetch()){ ?>
+							<tr>
+								<td><?php echo $data['announcement_heading'];?></td>
+								<td><img src="upload/thumbs/<?php echo $data['announcement_image']; ?>" width="50" height="50"/></td>
+								<td><?php echo $data['announcement_date'];?></td>
+								<td><?php echo $data['category_name'];?></td>
+								<td width="20%">
+									<a href="menu-detail.php?id=<?php echo $data['aid'];?>">
+										View
+									</a>&nbsp;
+
+									<a href="edit-menu.php?id=<?php echo $data['aid'];?>">
+										Edit
+									</a>&nbsp;
+
+									<a href="delete-menu.php?id=<?php echo $data['aid'];?>">
+										Delete
+									</a>
+								</td>
+							</tr>
+							</tr>
+						<?php 
+						} 
+					}
+				?>
+					</table>
+					</div>
+
+					<div class="col-md-12">
+						<h4>
+						<?php 
+							// for pagination purpose
+							$function->doPages($offset, 'news.php', '', $total_records, $keyword);?>
+						</h4>
+					</div>
+					<div class="separator"> </div>
+				</div> 
+
+				
 			</section>
 	
 			<script src="resident-js/barangay.js"></script>
