@@ -1,17 +1,33 @@
-
 <?php session_start();
-if(!isset($_SESSION["official_name"])){
-	header("location: captainlogin.php");
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: officials.php");
 }
 ?>
 
 <?php
-include "db/captain.php";
-include "db/users.php";
-include_once('db/conn.php'); 
-include_once('announcement_includes/functions.php'); 
-include "db/announcementquery.php";
+	$user = '';
 
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
+?>
+
+<?php
+	include "db/captain.php";
+	include "db/user.php";
+	include_once('db/conn.php'); 
+	include_once('announcement_includes/functions.php'); 
+	include "db/announcementquery.php";
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +55,6 @@ include "db/announcementquery.php";
      <title> Post - Announcement </title>
 	 
 	 <style>
-		 *{font-size: 13px;}
-
 		.announcement-modal, .edit-modal, .delete-modal{
             display: none; 
             position: absolute; 
@@ -95,7 +109,7 @@ include "db/announcementquery.php";
 		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
 		.topright:hover {text-align: right;color: red; cursor: pointer;}
 
-	  .submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+	  .submitbtn, .cattxtbox, .refreshbtn{
 			font-size: 14px;
 			height: 35px;
 			width: 84%;
@@ -112,12 +126,12 @@ include "db/announcementquery.php";
 		.select__select{margin-top: -32px; padding-left: 180px;}
 		.bcircle:hover{color: black}
 		.imgup{display: flex; justify-content: center; align-items: center;  padding: 5px 5px 5px 5px; margin-left: 20px; margin-right: 25px; }
-		
+		.btnpadding{margin-bottom:5px;}
 	 </style>
    </head>
 	<body onload="display_ct()" >
 		<!-- Side Navigation Bar-->
-		   <div class="sidebar captain_sidebar">
+		   <div class="sidebar captain_sidebar myDIV">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Captain</div>
@@ -125,38 +139,30 @@ include "db/announcementquery.php";
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar" href="captaindashboard.php">
+					<a class="side_bar btnhover activehover" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
 			 	</li>
-			  <li>
-					<a class="side_bar" href="adminmanagement.php">
+				 <li>
+					<a class="side_bar btnhover" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
-						<span class="links_name">Admin Management</span>
+						<span class="links_name">Contacts</span>
 					</a>
-					<span class="tooltip">Admin Management</span>
-			  </li>	
+					<span class="tooltip">Contacts</span>
+			  	</li>
 
-				<li>
-				  <a class="side_bar" href="employeemanagement.php">
+				  <li>
+				  <a class="side_bar btnhover" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
-					  <span class="links_name">Employee Management</span>
+					  <span class="links_name">User Management</span>
 					</a>
-					 <span class="tooltip">Employee Management</span>
+					 <span class="tooltip">User Management</span>
 				  </li>
 			 
 				<li>
-				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail official'></i>
-					  <span class="links_name">Brgy Official Management</span>
-					</a>
-					 <span class="tooltip">Brgy Official Management</span>
-				</li>
-
-				<li>
-				 <a class="side_bar" href="residentcensus.php">
+				 <a class="side_bar btnhover" href="residentcensus.php">
 					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
@@ -164,34 +170,25 @@ include "db/announcementquery.php";
 				</li>
 
 				<li>
-				 <a class="side_bar" href="postannouncement.php">
+				 <a class="side_bar btnhover" href="postannouncement.php">
 					  <i class='bx bx-news iannouncement'></i>
 					  <span class="links_name">Post Announcement</span>
 					</a>
 					 <span class="tooltip">Post Announcement</span>
 				</li>
-				
-				<li>
-				   <a class="side_bar" href="settings.php">
-					 <i class='bx bx-cog' ></i>
-					 <span class="links_name">Setting</span>
-				   </a>
-				   <span class="tooltip">Setting</span>
-				 </li>
 			 
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" >
-				   <div class="name_job">
-				    
-					 <div>Employee</div>
-					 <div class="job" id="">Employee</div>
-				   </div>
-				 </div>
-				 <a href="captainlogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
+				 <li class="profile">
+					<div class="profile-details">
+					<img class="profile_pic" >
+					<div class="name_job" style="font-size: 13px;">
+						<div><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						</div>
+					</div>
+					<a href="officiallogout.php">
+						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+					</a>
+			 	</li>
 			</ul>
 		  </div>
 		  
@@ -201,194 +198,42 @@ include "db/announcementquery.php";
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Post Announcement
+						<a href="postannouncement.php" style="text-decoration: none; color: white;">Post Announcement</a><label> >> </label><a href="#" style="text-decoration: underline; color: black;">Edit Category</a>
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
-					    </a>
-					    </h5>	  
+					    </a>  
 					</div>
 				  </div>
 			  </section>
-<div id="content" class="container col-md-12">
-<?php 
-		if(isset($_GET['id'])){
-			$ID = $_GET['id'];
-		}else{
-			$ID = "";
-		}
-		
-		// create array variable to store category data
-		$category_data = array();
-			
-		$sql_query = "SELECT category_image 
-				FROM announcement_category 
-				WHERE cid = ?";
-				
-		$stmt_category = $connect->stmt_init();
-		if($stmt_category->prepare($sql_query)) {	
-			// Bind your variables to replace the ?s
-			$stmt_category->bind_param('s', $ID);
-			// Execute query
-			$stmt_category->execute();
-			// store result 
-			$stmt_category->store_result();
-			$stmt_category->bind_result($previous_category_image);
-			$stmt_category->fetch();
-			$stmt_category->close();
-		}
-		
-			
-		if(isset($_POST['btnEdit'])){
-			$category_name = $_POST['category_name'];
-			
-			// get image info
-			$menu_image = $_FILES['category_image']['name'];
-			$image_error = $_FILES['category_image']['error'];
-			$image_type = $_FILES['category_image']['type'];
-				
-			// create array variable to handle error
-			$error = array();
-				
-			if(empty($category_name)){
-				$error['category_name'] = " <span class='label label-danger'>Must Insert!</span>";
-			}
-			
-			// common image file extensions
-			$allowedExts = array("gif", "jpeg", "jpg", "png");
-			
-			// get image file extension
-			error_reporting(E_ERROR | E_PARSE);
-			$extension = end(explode(".", $_FILES["category_image"]["name"]));
-			
-			if(!empty($menu_image)){
-				if(!(($image_type == "image/gif") || 
-					($image_type == "image/jpeg") || 
-					($image_type == "image/jpg") || 
-					($image_type == "image/x-png") ||
-					($image_type == "image/png") || 
-					($image_type == "image/pjpeg")) &&
-					!(in_array($extension, $allowedExts))){
-					
-					$error['category_image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
-				}
-			}
-				
-			if(!empty($category_name) && empty($error['category_image'])){
-					
-				if(!empty($menu_image)){
-					
-					// create random image file name
-					$string = '0123456789';
-					$file = preg_replace("/\s+/", "_", $_FILES['category_image']['name']);
-					$function = new functions;
-					$category_image = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
-				
-					// delete previous image
-					$delete = unlink('upload/category/'."$previous_category_image");
-					
-					// upload new image
-					$upload = move_uploaded_file($_FILES['category_image']['tmp_name'], 'upload/category/'.$category_image);
-	  
-					$sql_query = "UPDATE announcement_category 
-							SET category_name = ?, category_image = ?
-							WHERE cid = ?";
+				<div id="content" style="text-align: center;" class="container font-sizee col-md-12">
+					<hr/>
+					<div class="col-md-12" >
+						<h5>Edit Category</h5>
+						<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
+					</div>
+					<hr/>
+
+					<div>
+						<form method="post" enctype="multipart/form-data" class="font-sizee" action="">
+							<label>Category Name :</label>
+							<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
+							<input type="text" class="form-control font-sizee" name="category_name" value="<?php echo $data['category_name']; ?>"/>
+							<br/>
+							<label>Image :</label>
+							<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
+							<input type="file" class="form-control font-sizee fileimg" name="category_image" id="category_image" />
+							<br/>
 							
-					$upload_image = $category_image;
-					$stmt = $connect->stmt_init();
-					if($stmt->prepare($sql_query)) {	
-						// Bind your variables to replace the ?s
-						$stmt->bind_param('sss', 
-									$category_name, 
-									$upload_image,
-									$ID);
-						// Execute query
-						$stmt->execute();
-						// store result 
-						$update_result = $stmt->store_result();
-						$stmt->close();
-					}
-				}else{
-					
-					$sql_query = "UPDATE announcement_category 
-							SET category_name = ?
-							WHERE cid = ?";
-					
-					$stmt = $connect->stmt_init();
-					if($stmt->prepare($sql_query)) {	
-						// Bind your variables to replace the ?s
-						$stmt->bind_param('ss', 
-									$category_name, 
-									$ID);
-						// Execute query
-						$stmt->execute();
-						// store result 
-						$update_result = $stmt->store_result();
-						$stmt->close();
-					}
-				}
-				
-				// check update result
-				if($update_result){
-					$error['update_category'] = " <h4><div class='alert alert-success'>
-														* Category success updated.
-														<a href='category.php'>
-														<i class='fa fa-check fa-lg'></i>
-														</a></div>
-												  </h4>";
-				}else{
-					$error['update_category'] = " <span class='label label-danger'>Failed to update category.</span>";
-				}
-			}
-				
-		}
-			
-		// create array variable to store previous data
-		$data = array();
-		
-		$sql_query = "SELECT * 
-				FROM announcement_category 
-				WHERE cid = ?";
-		
-		$stmt = $connect->stmt_init();
-		if($stmt->prepare($sql_query)) {	
-			// Bind your variables to replace the ?s
-			$stmt->bind_param('s', $ID);
-			// Execute query
-			$stmt->execute();
-			// store result 
-			$stmt->store_result();
-			$stmt->bind_result($data['cid'], 
-					$data['category_name'],
-					$data['category_image'],
-					$data['status']
-					);
-			$stmt->fetch();
-			$stmt->close();
-		}
-	?>
-              <div class="col-md-12">
-		<h1>Edit Category</h1>
-		<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-		<hr />
-	</div>
-	
-	<div class="col-md-5">
-		<form method="post" enctype="multipart/form-data  ">
-			<label>Category Name :</label><?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-			<input type="text" class="form-control" name="category_name" value="<?php echo $data['category_name']; ?>"/>
-			<br/>
-			<label>Image :</label><?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-			<input type="file" name="category_image" id="category_image" /><br />
-			<img src="upload/category/<?php echo $data['category_image']; ?>" width="280" height="190"/>
-			<br/><br/>
-			<input type="submit" class="btn-primary btn" value="Update" name="btnEdit"/>
-		</form>
-	</div>
+							<img src="upload/category/<?php echo $data['category_image']; ?>" width="280" height="190"/>
+							
+							<br/><br/>
+							<input type="submit" class="btn-success font-sizee btn form-control btnpadding" value="Update" name="btnEdit"/>
+							<a class="btn-primary btn font-sizee form-control btnpadding" href="postannouncement.php">Back</a>
+						</form>
+					</div>
 
-	<div class="separator"> </div>
-</div>
-
-    
+					<div class="separator"> </div>
+				</div>
 			</section>
 			<script src="resident-js/barangay.js"></script>
 	</body>

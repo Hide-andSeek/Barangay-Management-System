@@ -202,25 +202,25 @@
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
                 <p class="footer-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					For any inquiries, please email us <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a> 
+                </p>
+				<p class="footer-text">
+					Visit our Facebook Page<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="bx bxl-facebook-circle"></i></a> 
                 </p>
                 <p>
-                   <span class="footer_dt" id="date-time"></span>
-                </p>
-            </div>
-           
-            <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
-                <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
-                </span>
+				    <span class="footer_dt" id="date-time"></span>
+                 </p>
+				<div class="footer-text">
+					<a>Terms of Service</a> | 
+					<a>Privacy and Policy</a>
+				</div>
             </div>
 
-            <div class="footer-text">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
+            <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
+                <span class="copyright">
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
+                </span>
             </div>
         </div>
     </footer>

@@ -8,7 +8,7 @@ if(isset($_POST["action"]))
     if($_POST["action"] == 'fetch')
     {
         $output = '';
-        $query = "SELECT * FROM user_details WHERE user_type = 'user' ORDER BY user_name ASC;";
+        $query = " ORDER BY user_naSELECT * FROM user_details WHERE user_type = 'user'me ASC;";
         $stmt = $db->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();

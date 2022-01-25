@@ -46,178 +46,173 @@ include "db/user.php";
 		.blotter {margin-top: 15px;}
 		.colu{margin: 15px 15px 15px 15px; background-color: black;}
 		
-		
-		
-		
-.section {
-    padding: 20px 20px;
-}
+            .section {
+                padding: 20px 20px;
+            }
 
-section#services {
-    /*background-image: url(../img/backgrounds/services-bg.jpg);*/
-	background-color: gray;
-    background-position: center;
-    background-size: cover;
-	font-family: 'Montserrat', sans-serif;
-}
+            section#services {
+                background-image: url(resident-img/backgrounds/services-bg.jpg);
+                background-position: center;
+                background-size: cover;
+            }
 
-section#services .section-subheading {
-    color:#fff !important;
-}
+            section#services .section-subheading {
+                color:#fff !important;
+            }
 
-section h2.section-heading {
-    font-size: 40px;
-    margin-top: 0;
-    text-align: center;
-    text-transform: uppercase !important;
-    color: #058BCE;
-    
-}
+            section h2.section-heading {
+                font-size: 40px;
+                margin-top: 0;
+                text-align: center;
+                text-transform: uppercase !important;
+                color: #058BCE;
+                
+            }
 
-section h3.section-subheading {
-    font-size: 15px;
-    line-height: 26px;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: none;
-    text-align: center;
-    font-weight: 400;
-    margin-bottom: 47px;
-    margin-top: 20px !important;
-    color: #222222;
-}
+            section h3.section-subheading {
+                font-size: 15px;
+                line-height: 26px;
+                font-family: 'Montserrat', sans-serif;
+                text-transform: none;
+                text-align: center;
+                font-weight: 400;
+                margin-bottom: 47px;
+                margin-top: 20px !important;
+                color: #222222;
+            }
 
 
-a.filled-button {
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: 300;
-	border-radius: 5px;
-	transition: all 0.3s;
-	cursor: pointer;
-}
+            a.filled-button {
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 300;
+                border-radius: 5px;
+                transition: all 0.3s;
+                cursor: pointer;
+            }
 
-a.filled-button:hover {
-	background-color: #7cfa66d7;
-	color: #fff;
-}
+            a.filled-button:hover {
+                background-color: #7cfa66d7;
+                color: #fff;
+            }
 
 
-@media all and (min-width:768px) {
-    section {
-        padding: 80px 0;
-    }
-    
-}
+            @media all and (min-width:768px) {
+                section {
+                    padding: 80px 0;
+                }
+                
+            }
 
-@media all and (max-width:480px) {
-    section h2.section-heading {
-        font-size: 25px;
-        margin-top: 0;
-        text-align: center;
-        text-transform: uppercase !important;
-        color: #058BCE;
-    }
-    
-    section h3.section-subheading {
-        font-size: 14px;
-        line-height: 26px;
-        font-family: 'Montserrat', sans-serif;
-        text-transform: none;
-        text-align: center;
-        font-weight: 400;
-        margin-bottom: 47px;
-        margin-top: 15px !important;
-        color: #000;
-    }
-    .u-description{
-        display: none;
-    }
-}
+            @media all and (max-width:480px) {
+                section h2.section-heading {
+                    font-size: 25px;
+                    margin-top: 0;
+                    text-align: center;
+                    text-transform: uppercase !important;
+                    color: #058BCE;
+                }
+                
+                section h3.section-subheading {
+                    font-size: 14px;
+                    line-height: 26px;
+                    font-family: 'Montserrat', sans-serif;
+                    text-transform: none;
+                    text-align: center;
+                    font-weight: 400;
+                    margin-bottom: 47px;
+                    margin-top: 15px !important;
+                    color: #000;
+                }
+                .u-description{
+                    display: none;
+                }
+            }
 
-.radius{
-	border-radius: 20px;
-}
+            .radius{
+                border-radius: 20px;
+            }
 
 
 
-.services_1 {
-	background-size: cover;
-	padding: 20px 0px;
-}
+            .services_1 {
+                background-size: cover;
+                padding: 20px 0px;
+            }
 
-.services_1 .service-item1 {
-	text-align: center;
+            .services_1 .service-item1 {
+                text-align: center;
 
-}
+            }
 
-.services_1 .service-item1 .icon {
-	background-color: #f7f7f7;
-	padding: 40px;
-    border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
+            .services_1 .service-item1 .icon {
+                background-color: #f7f7f7;
+                padding: 40px;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
 
-}
+            }
 
-.services_1 .service-item1 .icon i {
-	width: 80px;
-	height: 80px;
-	text-align: center;
-	line-height: 100px;
-	background-color: #52d673;
-	color: #fff;
-	font-size: 32px;
-	border-radius: 20px 20px 20px 20px;
-}
+            .services_1 .service-item1 .icon i {
+                width: 80px;
+                height: 80px;
+                text-align: center;
+                line-height: 100px;
+                background-color: #52d673;
+                color: #fff;
+                font-size: 32px;
+                border-radius: 20px 20px 20px 20px;
+            }
 
-.services_1 .service-item1 .down-content1 {
-	background-color: #fff;
-	padding: 20px 10px;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-}
+            .services_1 .service-item1 .down-content1 {
+                background-color: #fff;
+                padding: 20px 10px;
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
 
-.services_1 .service-item1 .down-content1 h4 {
-	font-size: 17px;
-	color: #1a6692;
-	margin-bottom: 20px;
-	
-}
+            .services_1 .service-item1 .down-content1 h4 {
+                font-size: 17px;
+                color: #1a6692;
+                margin-bottom: 20px;
+                
+            }
 
-.services_1 .service-item1 .down-content1 p {
-	margin-bottom: 25px;
-}
+            .services_1 .service-item1 .down-content1 p {
+                margin-bottom: 25px;
+            }
 
-.service{color: white;}
+            .service{color: white;}
 
-.announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
-.announce, .news{display: flex; justify-content: center; align-items: center;}
-.news{margin-top: 15px;}
-.see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
-.block-text{background-color: #d1d1d1;}
-.see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
+            .announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
+            .announce, .news{display: flex; justify-content: center; align-items: center;}
+            .news{margin-top: 15px;}
+            .see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
+            .block-text{background-color: #d1d1d1;}
+            .see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
 
-.news_heading{color: black; text-align: justify;}
-.news_heading:hover{color: blue; text-decoration: none;}
-div.announce{background-color: white; margin-top: 15px; float: center;}
-.pic{background-color: gray; margin: 50px 50px 50px 50px}
+            .news_heading{color: black; text-align: justify;}
+            .news_heading:hover{color: blue; text-decoration: none;}
+            div.announce{background-color: white; margin-top: 15px; float: center;}
+            .pic{background-color: gray; margin: 50px 50px 50px 50px}
 
-/*-- Mobile Device --*/
+            /*-- Mobile Device --*/
 
 
-@media all and (max-width: 700px){
-    .services_1 .service-item1 .icon i {
-        width: 100px;
-        height: 100px;
-    }
-}
+            @media all and (max-width: 700px){
+                .services_1 .service-item1 .icon i {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
 
-@media all and (max-width: 1200px){
-	.service-item1{
-		padding-bottom: 20px;
-	}
-}
+            @media all and (max-width: 1200px){
+                .service-item1{
+                    padding-bottom: 20px;
+                }
+            }
 
-a.login{cursor:pointer;};
+            a.login{cursor:pointer;};
 
 	</style>
 
@@ -289,12 +284,12 @@ a.login{cursor:pointer;};
 					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 						<div id="Login" class="login_container form">
 								<div class="information">
-									<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email"> 
+									<input class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email">
+                                    
 								</div>
 								
 								<div class="information">
-									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password"> 
-                                      
+									<input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password"> 
 								</div>
 							   
 								<div>
@@ -306,7 +301,7 @@ a.login{cursor:pointer;};
 									</button>  
 									<div>
 										<button class="log_button gmail">
-											<i class="bx bx-mail-send"></i>  Sign with Gmail
+                                             <i class="fa fa-google"></i>  Sign with Gmail
 										</button>
 									</div>
 								</div>
@@ -501,8 +496,8 @@ a.login{cursor:pointer;};
 				</div>
     </section>
    
-    <!-- Announcement Section-->
-    <section id="news_and_announcement">
+     <!-- Announcement Section-->
+     <section id="news_and_announcement">
         <div class="container-fluid wrapper">
             <div class="row">
                 <div class="col-sm-8 col-lg-12 text-left">
@@ -512,97 +507,78 @@ a.login{cursor:pointer;};
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
                 <!-- Wrapper for Slides -->
                 <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement1" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-									<div class="pic"></div>
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement2" class="col-md-6">
-									<a class="news_heading" href="#">
-										<h3 class="announcement_entry_text">Announcement Entry #2: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6 announce">
-                                <div class="block-text">
-								<div class="pic"></div>
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement3" class="col-md-6">
-									<a class="news_heading" href="#">
-										<h3 class="announcement_entry_text">Announcement Entry #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement4" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #4: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement5" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #5: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement6" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #6: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
+                        
+                                    <?php
+										include ('db/conn.php');
+										include ('db/captain.php');
+
+										$stmt = $db->prepare('SELECT * from tbl_announcement');
+										$stmt->execute();
+										$imagelist = $stmt->fetchAll();
+											if (count($imagelist) > 0) {
+												foreach ($imagelist as $image) {
+										?>
+													<div class="item active">
+														<div class="col-md-4 col-sm-6 announce">
+															<div class="block-text">
+                                                                        <a class="news_heading" href="announcement.php">
+                                                                            <img class="announcement_item col-md-6" src="upload/<?php echo $image['announcement_image']; ?>" style="width:300px; height:200px">
+
+                                                                            <strong><h3 class="announcement_entry_text"><?php echo $image['announcement_heading']; ?></h3></strong>
+																		</a>
+															</div>
+														</div>
+													</div>
+										<?php
+														}
+											} else {
+											echo "<div class='errormessage'>
+                                                    <i class='bx bx-error'></i>
+                                                    No announcement yet!
+                                                 </div>";
+										}
+										?> 
+                     
+<!-- 2nd Section of Announcement-->
+
 						</div>
 					</div>
 				</div>			
-			</div>
-			
+
 			<div class="announce">
 				<button class="see_announcement" onclick="document.location='announcement.php'" >See announcements</button>
 			</div>	
-			
-			
-	
 	</section >
 
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
-                <p class="footer-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					 
+                <p class="footer_dt">
+				    <span  id="date-time"></span>
                 </p>
+                <p class="footer-text">
+					For any inquiries, please Email us and visit our Facebook Page 
+                </p>
+				<p class="footer-text">
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
+                </p>
+				<div class="footer-text">
+					<a>Terms of Service</a> | 
+					<a>Privacy and Policy</a>
+				</div>
             </div>
-			<p>
-				<span class="footer_dt" id="date-time"></span>
-           </p>
+
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
                 </span>
             </div>
         </div>
     </footer>
-	
+
     <!-- Scroll-up -->
     <div class="scroll-up">
         <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
@@ -667,6 +643,8 @@ a.login{cursor:pointer;};
     <!-- Isotope -->
     <script src="resident-js/jquery.isotope.min.js"></script>
 
+    <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+
     <script>
 		document.querySelector('.button').onclick = function(){
 			var password = document.querySelector('.password').value,
@@ -684,6 +662,17 @@ a.login{cursor:pointer;};
 				}
 				return true
 		}
+
+        const togglePassword = document.querySelector('#togglePassword');
+				const password = document.querySelector('#logpassword');
+				
+				togglePassword.addEventListener('click', function (e) {
+					// toggle the type attribute
+					const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+					password.setAttribute('type', type);
+					// toggle the eye slash icon
+					this.classList.toggle('fa-eye-slash');
+				});
     </script>
 	
 

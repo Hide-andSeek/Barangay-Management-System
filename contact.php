@@ -375,22 +375,30 @@ include "db/user.php";
     </div>
   
   
-    <!-- Footer -->
-    <footer>
+   <!-- Footer -->
+   <footer>
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
+                <p class="footer_dt">
+				          <span  id="date-time"></span>
+                </p>
                 <p class="footer-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					        For any inquiries, please Email us and visit our Facebook Page 
                 </p>
-                <p>
-                  <span class="footer_dt" id="date-time"></span>
+				        <p class="footer-text">
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					          <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
+				<div class="footer-text">
+					<a>Terms of Service</a> | 
+					<a>Privacy and Policy</a>
+				</div>
             </div>
-           
+
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
                 </span>
             </div>
         </div>

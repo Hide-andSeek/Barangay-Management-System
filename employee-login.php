@@ -1,10 +1,7 @@
 <?php session_start();
 include "db/conn.php";
-include "db/users.php";
 include "db/user.php";
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -115,12 +112,12 @@ include "db/user.php";
 												<h5 class="txtalign">BCPC Department</h5>
 
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="bcpcemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="bcpcemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass ipass" id="bcpctogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 												
@@ -150,12 +147,12 @@ include "db/user.php";
 												<h5 class="txtalign">VAWC Department</h5>
 
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="vawcemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="vawcemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 												
@@ -185,12 +182,12 @@ include "db/user.php";
 												<h5 class="txtalign">Lupon Department</h5>
 
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="luponemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="luponemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass ipass" id="lupontogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 												
@@ -220,12 +217,12 @@ include "db/user.php";
 												<h5 class="txtalign">Accounting Department</h5>
 
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="accountingemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="accountingemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass ipass" id="accountingtogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
@@ -253,15 +250,16 @@ include "db/user.php";
 												<span onclick="document.getElementById('bpso').style.display='none'" class="topright">&times;</span>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
+													<input required class="inputtext control-label" id="username" name ="username" type="text"  placeholder="Employee ID"> 
 												</div>
 												
 												<div class="information">
-													<input class="inputtext control-label" id="department" name="department" type="hidden" value="BPSO">
+													<input class="inputtext control-label" id="bpsoemployeeno" name="user_no" type="hidden" value="BPSO">
+													<i class="bx bx-show showpass ipass" id="bpsotogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
 												<div class="information">   
-													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
+													<button type="submit" id="bpsobtn" name="bpsobtn" class="log_button sign_in">
 														Login
 													</button>  
 												</div>
@@ -287,12 +285,12 @@ include "db/user.php";
 
 												<h5 class="txtalign">Request Document Dept.</h5>
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="employeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="user_no" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass" id="togglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 											   
@@ -323,12 +321,12 @@ include "db/user.php";
 												<h5 class="txtalign">Complaints Department</h5>
 
 												<div class="information">
-													<input class="inputtext control-label" id="employee_uname" name="employee_uname" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputpass control-label" id="complaintsemployeeno" name ="employee_no" type="password"  placeholder="Employee No."> 
+													<input class="inputpass control-label" id="complaintsemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
 													<i class="bx bx-show showpass ipass" id="complaintstogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
@@ -345,7 +343,6 @@ include "db/user.php";
 					</div>
 			</div>
 		</main>
-		
 		<script src="js/loginmodalform.js"></script>
 		<script src="js/employee.js"></script>
 	</body>

@@ -8,6 +8,8 @@
   font-family: "Poppins" , sans-serif;
 }
 
+.font-sizee{font-size: 13px;}
+
 .sidebar{
   position: fixed;
   left: 0;
@@ -203,7 +205,7 @@
 }
 .sidebar li.profile{
   position: fixed;
-  height: 60px;
+  height: 50px;
   width: 85px;
   left: 0;
   bottom: -8px;
@@ -389,7 +391,8 @@ img.brgy_icon{
 table.content-table thead tr{
 	padding: 8px 12px 0px 0px;
     /* background-color: black; */
-    background-color: #009879;
+    /* background-color: #009879; #04AA6D */
+    background-color: #04AA6D;
     color: #ffffff;
     text-align: center;
     position: relative;
@@ -650,7 +653,7 @@ padding: 10px 25px;
 	
   i.ongoing{color: blue;}
   i.pending{color: gray;}
-  i.closed{color: red;}
+  i.closed, i.asterisk{color: red;}
   i.total{color: #d834eb}
 
   /* View and Approve btn from req documents*/
@@ -679,3 +682,15 @@ padding: 10px 25px;
 			padding:8px 16px;
 		}
 		.send-message{margin: 15px 15px 15px 15px;}
+
+    a.btnhover{color: black; background: gray;}
+    /* Style the active class (and buttons on mouse-over) */
+		a.activehover, a.btnhover:hover {
+      background-color: green;
+      color: black;
+    }
+
+    ::-webkit-scrollbar{ width: 8px; border-radius: 5px;}
+		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
+		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
+		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;}

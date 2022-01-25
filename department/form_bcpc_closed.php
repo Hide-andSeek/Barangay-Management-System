@@ -5,6 +5,20 @@ if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
+require 'db/conn.php';
+?>
+
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -117,9 +131,8 @@ if(!isset($_SESSION["type"]))
 				 <div class="profile-details">
 				   <img class="profile_pic" src="img/1.jpeg">
 				   <div class="name_job">
-				    
-					 <div><?php echo $_SESSION["employee_no"];?></div>
-					 <div class="job" id="">Employee</div>
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">

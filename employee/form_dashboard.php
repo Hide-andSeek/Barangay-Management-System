@@ -1,10 +1,25 @@
-<?php
-session_start();
+<?php session_start();
 
 if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
+?>
+
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +43,6 @@ if(!isset($_SESSION["type"]))
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -107,22 +121,13 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-				   	 <div class="job" id="">Employee Name</div>
-					 <div class="job" id="">Employee</div>
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">

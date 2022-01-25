@@ -1,8 +1,26 @@
-
 <?php session_start();
-if(!isset($_SESSION["official_name"])){
-	header("location: captain/barangayofficial_management.php");
+
+if(!isset($_SESSION["type"]))
+{
+    header("location: officials.php");
 }
+require_once('db/conn.php'); 
+?>
+
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
 ?>
 
 
@@ -62,7 +80,7 @@ if(!isset($_SESSION["official_name"])){
    </head>
 	<body onload="display_ct()">																
 		<!-- Side Navigation Bar-->
-		   <div class="sidebar captain_sidebar">
+		   <div class="sidebar captain_sidebar myDIV">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Commonwealth</div>
@@ -70,39 +88,31 @@ if(!isset($_SESSION["official_name"])){
 			</div>
 			<ul class="nav-list">
 			<li>
-					<a class="side_bar" href="captaindashboard.php">
+					<a class="side_bar btnhover activehover" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
 			 	</li>
 
-			  <li>
-					<a class="side_bar" href="adminmanagement.php">
+				 <li>
+					<a class="side_bar btnhover" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
-						<span class="links_name">Admin Management</span>
+						<span class="links_name">Contacts</span>
 					</a>
-					<span class="tooltip">Admin Management</span>
-			  </li>	
+					<span class="tooltip">Contacts</span>
+			  	</li>
 
-				<li>
-				  <a class="side_bar" href="employeemanagement.php">
+				  <li>
+				  <a class="side_bar btnhover" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
-					  <span class="links_name">Employee Management</span>
+					  <span class="links_name">User Management</span>
 					</a>
-					 <span class="tooltip">Employee Management</span>
+					 <span class="tooltip">User Management</span>
 				  </li>
-			 
-				<li>
-				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail official'></i>
-					  <span class="links_name">Brgy Official Management</span>
-					</a>
-					 <span class="tooltip">Brgy Official Management</span>
-				</li>
 
 				<li>
-				 <a class="side_bar" href="residentcensus.php">
+				 <a class="side_bar btnhover" href="residentcensus.php">
 					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
@@ -110,34 +120,25 @@ if(!isset($_SESSION["official_name"])){
 				</li>
 
 				<li>
-				 <a class="side_bar" href="postannouncement.php">
+				 <a class="side_bar btnhover" href="postannouncement.php">
 					  <i class='bx bx-news iannouncement'></i>
 					  <span class="links_name">Post Announcement</span>
 					</a>
 					 <span class="tooltip">Post Announcement</span>
 				</li>
-																						<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" >
-				   <div class="name_job">
-				    
-					 <div>Employee</div>
-					 <div class="job" id="">Employee</div>
-				   </div>
-				 </div>
-				 <a href="captainlogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
+				 <li class="profile">
+					<div class="profile-details">
+					<img class="profile_pic" >
+					<div class="name_job" style="font-size: 13px;">
+						<div><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						</div>
+					</div>
+					<a href="officiallogout.php">
+						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+					</a>
+			 	</li>
 			</ul>
 		  </div>
 		  
@@ -221,14 +222,17 @@ if(!isset($_SESSION["official_name"])){
 							include "db/conn.php";
 							include "db/users.php";
 							
-							$query = "SELECT * FROM brgy_captain";
+							$query = "SELECT * FROM brgyofficials";
 							$countbrgyofficials = $db->query($query)
 						?>
 						
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
-									<th>Brgy Official Name</th>
+									<th>Barangay Official ID</th>
+									<th width="30%">Official's Full Name</th>
+									<th width="10%">Lastname</th>
+									<th width="10%">Firstname</th>
+									<th width="10%">Middlename</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
@@ -238,8 +242,11 @@ if(!isset($_SESSION["official_name"])){
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['brgycaptain_id']; ?></td>
+									<td><?php echo $data ['brgyofficials_id']; ?></td>
 									<td><?php echo $data ['official_name']; ?></td>
+									<td><?php echo $data ['official_lname']; ?></td>
+									<td><?php echo $data ['official_fname']; ?></td>
+									<td><?php echo $data ['official_mname']; ?></td>
 									<td>Active</td>
 									<td>
 										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>

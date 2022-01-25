@@ -21,6 +21,7 @@ include "db/user.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    <link rel="stylesheet" href="resident-css/resident.css">
 	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
@@ -76,8 +77,30 @@ include "db/user.php";
                         <li>
                             <a class="page-scroll" href="index.php">Home</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="#news_section">Announcement</a>
+                        <li class="logdropdown">
+                          <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                          <span class="logdropdown-content">
+                          <?php
+                            include ('db/conn.php');
+                            include ('db/captain.php');
+                            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+                            $stmt = $db->prepare("SELECT * FROM announcement_category");
+                            $stmt->execute();
+                            $imagelist = $stmt->fetchAll();
+                            if (count($imagelist) > 0) {
+                            foreach ($imagelist as $data) {
+                          ?>
+                            <a class="page-scroll" href="residentreqdocu.php#barangayid"><?php echo $data['category_name']; ?> </a>
+                            <?php
+                              }
+                              } else {
+                                echo "<div class='errormessage'>
+                                    <i class='bx bx-error'></i>
+                                                No announcement yet!
+                                    </div>";
+                              }
+                            ?>
+                          </span>
                         </li>
                         <li>
                             <a class="page-scroll" href="contact.php">Contact Us</a>
@@ -166,212 +189,135 @@ include "db/user.php";
 
  
  
- <div class="sep_announcement">
+    <div class="sep_announcement">
  <!-- News section-->
-  <section>
+ <section>
     <div class="row announce_item" >
       <div class="col-lg-8 col-md-8 col-sm-8 first-section">
-
-	  <div class="col-md-12">
+		<div class="col-md-12">
           <div class="section-heading">
-			<h2 id="news_section">Announcement Section</h2>
+		 
+		  <?php
+				include ('db/conn.php');
+				include ('db/captain.php');
+				//Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '20'");
+				$stmt->execute();
+				$imagelist = $stmt->fetchAll();
+				if (count($imagelist) > 0) {
+				foreach ($imagelist as $data) {
+			?>
+			<h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
 			<span>
-				<a href="index.php">Home</a><label> >> <label><a>Announcement</a>
+				<a href="index.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
 			</span>
+			<?php
+				}
+				} else {
+					echo "<div class='errormessage'>
+						  <i class='bx bx-error'></i>
+                          No announcement yet!
+						  </div>";
+				}
+			?> 
           </div>
         </div>
+          <?php
+            include ('db/conn.php');
+            include ('db/captain.php');
+              //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '20'");
+            $stmt->execute();
+            $imagelist = $stmt->fetchAll();
+            if (count($imagelist) > 0) {
+            foreach ($imagelist as $image) {
+          ?>
         <div class="announcement-item">
-          <div class="announcementsingle_item"> <a href="#"><img class="spot" src="resident-img/backgrounds/spot.jpg" alt=""></a>
+          <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
             <div>
-              <h2><a href="#">Announcement Entry 1: Barangay Commonwealth Hall</a></h2>
-              <p>covid-19 public advisory: on the announcement of community quarantine</p>
+              <h4><?php echo $image['announcement_heading']; ?></h4>
+              <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
             </div>
-			<div>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-				</p>
-			</div>
+              <div>
+                <p style="text-align: justify">
+                   <?php echo $image['announcement_description']; ?>
+                </p>
+              </div>
           </div>
         </div>
+			<?php
+			}
+			} else {
+				echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No announcement yet!
+					  </div>";
+			}
+			?> 
       </div>
-	  
-	  
+
       <div class="col-lg-4 col-md-4 col-sm-4">
         <div class="newslatest_post section-heading">
-          <h2><span>Latest post</span></h2>
+          <h3><span>Related post</span></h3>
+          <?php
+            include ('db/conn.php');
+            include ('db/captain.php');
+              //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+            $stmt = $db->prepare("SELECT * FROM announcement_category");
+            $stmt->execute();
+            $sidelist = $stmt->fetchAll();
+            if (count($sidelist) > 0) {
+            foreach ($sidelist as $list) {
+          ?>
           <div class="newslatest_post_container">
             <ul class="newslatest_postnav">
               <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-
+                <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
+                  <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
                 </div>
               </li>
             </ul>
           </div>
+          <?php
+			}
+			} else {
+				echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No announcement yet!
+					  </div>";
+			}
+			?> 
         </div>
-      </div>
-	  <div class="col-lg-4 col-md-4 col-sm-4">
-        <div class="newslatest_post section-heading">
-          <h2><span>Latest post</span></h2>
-          <div class="newslatest_post_container">
-            <ul class="newslatest_postnav">
-              <li>
-                <div class="media"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media wow fadeInDown"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media wow fadeInDown"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+     </div>
     </div>
   </section>
- 
 </div>
-
- <div class="sep_announcement">
- <!-- News section-->
-  <section>
-    <div class="row announce_item" >
-      <div class="col-lg-8 col-md-8 col-sm-8 first-section">
-
-	  <div class="col-md-12">
-          <div class="section-heading">
-			<h2 id="news_section">News Section</h2>
-			<span>
-				<a href="index.php">Home</a><label> >> <label><a>News</a>
-			</span>
-          </div>
-        </div>
-        <div class="announcement-item">
-          <div class="announcementsingle_item"> <a href="#"><img class="spot" src="resident-img/backgrounds/spot.jpg" alt=""></a>
-            <div>
-              <h2><a href="#">News Entry 1: Barangay Commonwealth Hall</a></h2>
-              <p>covid-19 public advisory: on the announcement of community quarantine</p>
-            </div>
-			<div>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-				</p>
-			</div>
-          </div>
-        </div>
-      </div>
-	  
-	  
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <div class="newslatest_post section-heading">
-          <h2><span>Latest post</span></h2>
-          <div class="newslatest_post_container">
-            <ul class="newslatest_postnav">
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class=""> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-	  <div class="col-lg-4 col-md-4 col-sm-4">
-        <div class="newslatest_post section-heading">
-          <h2><span>Latest post</span></h2>
-          <div class="newslatest_post_container">
-            <ul class="newslatest_postnav">
-              <li>
-                <div class="media"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media wow fadeInDown"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-              <li>
-                <div class="media wow fadeInDown"> <a href="#" class="media-left"> <img alt="" src="resident-img/news/post_img1.jpg"> </a>
-                  <div class="media-body"> <a href="#" class="catg_title"> Put description right here</a> </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-</div>
-
   
   
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
+                <p class="footer_dt">
+				          <span  id="date-time"></span>
+                </p>
                 <p class="footer-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					          For any inquiries, please Email us and visit our Facebook Page 
                 </p>
-                <p>
-                  <span class="footer_dt" id="date-time"></span>
+				        <p class="footer-text">
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+				          	<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
+          <div class="footer-text">
+            <a>Terms of Service</a> | 
+            <a>Privacy and Policy</a>
+          </div>
             </div>
-           
+
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
                 </span>
             </div>
         </div>
@@ -399,7 +345,7 @@ include "db/user.php";
   <!-- Isotope -->
   <script src="resident-js/jquery.isotope.min.js"></script>
   
-  <script src="resident-js/accordions.js"></script>
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 
 </body>
 </html>

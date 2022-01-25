@@ -63,3 +63,17 @@ const togglePassword = document.querySelector('#togglePassword');
 				// toggle the eye slash icon
 				this.classList.toggle('fa-eye-slash');
 			});
+
+			const bpsotogglePassword = document.querySelector('#bpsotogglePassword');
+			const bpsoemployee_no = document.querySelector('#bpsoemployeeno');
+			
+			bpsotogglePassword.addEventListener('click', function (e) {
+				// toggle the type attribute
+				const type = accountingemployee_no.getAttribute('type') === 'password' ? 'text' : 'password';
+				bpsoemployee_no.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
+
+
+			

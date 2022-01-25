@@ -4,7 +4,13 @@ if(!isset($_SESSION['email'])){
 }
 
 ?>
+<?php
+	$user = '';
 
+	if(isset($_SESSION['email'])){
+		$user = $_SESSION['email'];
+	}
+?>
 <?php 
 
 include "db/conn.php";
@@ -54,179 +60,171 @@ include "db/users.php";
 		button.getstarted{margin-bottom: 55px;}
 		.blotter {margin-top: 15px;}
 		.colu{margin: 15px 15px 15px 15px; background-color: black;}
-		
-		
-		
-		
-.section {
-    padding: 20px 20px;
-}
 
-section#services {
-    /*background-image: url(../img/backgrounds/services-bg.jpg);*/
-	background-color: gray;
-    background-position: center;
-    background-size: cover;
-	font-family: 'Montserrat', sans-serif;
-}
+      .section {
+          padding: 20px 20px;
+      }
 
-section#services .section-subheading {
-    color:#fff !important;
-}
+      section#services {
+        background-image: url(resident-img/backgrounds/services-bg.jpg);
+        background-position: center;
+        background-size: cover;
+      }
 
-section h2.section-heading {
-    font-size: 40px;
-    margin-top: 0;
-    text-align: center;
-    text-transform: uppercase !important;
-    color: #058BCE;
-    
-}
+      section#services .section-subheading {
+          color:#fff !important;
+      }
 
-section h3.section-subheading {
-    font-size: 15px;
-    line-height: 26px;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: none;
-    text-align: center;
-    font-weight: 400;
-    margin-bottom: 47px;
-    margin-top: 20px !important;
-    color: #222222;
-}
+      section h2.section-heading {
+          font-size: 40px;
+          margin-top: 0;
+          text-align: center;
+          text-transform: uppercase !important;
+          color: #058BCE;
+          
+      }
+
+      section h3.section-subheading {
+          font-size: 15px;
+          line-height: 26px;
+          font-family: 'Montserrat', sans-serif;
+          text-transform: none;
+          text-align: center;
+          font-weight: 400;
+          margin-bottom: 47px;
+          margin-top: 20px !important;
+          color: #222222;
+      }
 
 
-a.filled-button {
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: 300;
-	border-radius: 5px;
-	transition: all 0.3s;
-	cursor: pointer;
-}
-
-a.filled-button:hover {
-	background-color: #7cfa66d7;
-	color: #fff;
-}
-
-
-@media all and (min-width:768px) {
-    section {
-        padding: 80px 0;
-    }
-    
-}
-
-@media all and (max-width:480px) {
-    section h2.section-heading {
-        font-size: 25px;
-        margin-top: 0;
-        text-align: center;
-        text-transform: uppercase !important;
-        color: #058BCE;
-    }
-    
-    section h3.section-subheading {
+      a.filled-button {
+        text-decoration: none;
         font-size: 14px;
-        line-height: 26px;
-        font-family: 'Montserrat', sans-serif;
-        text-transform: none;
+        font-weight: 300;
+        border-radius: 5px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      a.filled-button:hover {
+        background-color: #7cfa66d7;
+        color: #fff;
+      }
+
+
+      @media all and (min-width:768px) {
+          section {
+              padding: 80px 0;
+          }
+          
+      }
+
+      @media all and (max-width:480px) {
+          section h2.section-heading {
+              font-size: 25px;
+              margin-top: 0;
+              text-align: center;
+              text-transform: uppercase !important;
+              color: #058BCE;
+          }
+          
+          section h3.section-subheading {
+              font-size: 14px;
+              line-height: 26px;
+              font-family: 'Montserrat', sans-serif;
+              text-transform: none;
+              text-align: center;
+              font-weight: 400;
+              margin-bottom: 47px;
+              margin-top: 15px !important;
+              color: #000;
+          }
+          .u-description{
+              display: none;
+          }
+      }
+      .radius{
+        border-radius: 20px;
+      }
+
+      .services_1 {
+        background-size: cover;
+        padding: 20px 0px;
+      }
+
+      .services_1 .service-item1 {
         text-align: center;
-        font-weight: 400;
-        margin-bottom: 47px;
-        margin-top: 15px !important;
-        color: #000;
-    }
-    .u-description{
-        display: none;
-    }
-}
 
-.radius{
-	border-radius: 20px;
-}
+      }
 
+      .services_1 .service-item1 .icon {
+        background-color: #f7f7f7;
+        padding: 40px;
+          border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
 
+      }
 
-.services_1 {
-	background-size: cover;
-	padding: 20px 0px;
-}
+      .services_1 .service-item1 .icon i {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        line-height: 100px;
+        background-color: #52d673;
+        color: #fff;
+        font-size: 32px;
+        border-radius: 20px 20px 20px 20px;
+      }
 
-.services_1 .service-item1 {
-	text-align: center;
+      .services_1 .service-item1 .down-content1 {
+        background-color: #fff;
+        padding: 20px 10px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
 
-}
+      .services_1 .service-item1 .down-content1 h4 {
+        font-size: 17px;
+        color: #1a6692;
+        margin-bottom: 20px;
+        
+      }
 
-.services_1 .service-item1 .icon {
-	background-color: #f7f7f7;
-	padding: 40px;
-    border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
+      .services_1 .service-item1 .down-content1 p {
+        margin-bottom: 25px;
+      }
 
-}
+      .service{color: white;}
 
-.services_1 .service-item1 .icon i {
-	width: 80px;
-	height: 80px;
-	text-align: center;
-	line-height: 100px;
-	background-color: #52d673;
-	color: #fff;
-	font-size: 32px;
-	border-radius: 20px 20px 20px 20px;
-}
+      .announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
+      .announce, .news{display: flex; justify-content: center; align-items: center;}
+      .news{margin-top: 15px;}
+      .see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
+      .block-text{background-color: #d1d1d1;}
+      .see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
 
-.services_1 .service-item1 .down-content1 {
-	background-color: #fff;
-	padding: 20px 10px;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
-}
+      .news_heading{color: black; text-align: justify;}
+      .news_heading:hover{color: blue; text-decoration: none;}
+      div.announce{background-color: white; margin-top: 15px; float: center;}
+      .pic{background-color: gray; margin: 50px 50px 50px 50px}
 
-.services_1 .service-item1 .down-content1 h4 {
-	font-size: 17px;
-	color: #1a6692;
-	margin-bottom: 20px;
-	
-}
-
-.services_1 .service-item1 .down-content1 p {
-	margin-bottom: 25px;
-}
-
-.service{color: white;}
-
-.announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
-.announce, .news{display: flex; justify-content: center; align-items: center;}
-.news{margin-top: 15px;}
-.see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
-.block-text{background-color: #d1d1d1;}
-.see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
-
-.news_heading{color: black; text-align: justify;}
-.news_heading:hover{color: blue; text-decoration: none;}
-div.announce{background-color: white; margin-top: 15px; float: center;}
-.pic{background-color: gray; margin: 50px 50px 50px 50px}
-
-/*-- Mobile Device --*/
+      /*-- Mobile Device --*/
 
 
-@media all and (max-width: 700px){
-    .services_1 .service-item1 .icon i {
-        width: 100px;
-        height: 100px;
-    }
-}
+      @media all and (max-width: 700px){
+          .services_1 .service-item1 .icon i {
+              width: 100px;
+              height: 100px;
+          }
+      }
 
-@media all and (max-width: 1200px){
-	.service-item1{
-		padding-bottom: 20px;
-	}
-}
+      @media all and (max-width: 1200px){
+        .service-item1{
+          padding-bottom: 20px;
+        }
+      }
 
-a.login{cursor:pointer;};
+      a.login{cursor:pointer;};
 	</style>
 
 </head>
@@ -261,23 +259,23 @@ a.login{cursor:pointer;};
                         <li>
                             <a class="page-scroll" href="residentannouncement.php">Announcement</a>
                         </li>
-						<li class="logdropdown">
-							<a class="page-scroll logout" href="javascript:void(0)">Services</a>
-							<span class="logdropdown-content">
-								<a class="page-scroll" href="residentreqdocu.php#barangayid">Barangay ID</a>
-								<a class="page-scroll" href="residentreqdocu.php#permit">Business Permit</a>
-								<a class="page-scroll" href="residentreqdocu.php#indigency">Certificate of Indigency</a>
-								<a class="page-scroll" href="residentreqdocu.php#clearance">Barangay Clearance</a>
-								<a class="page-scroll" href="residentreqdocu.php#blotter">Blotter</a>
-							</span>
-						</li>
+                          <li class="logdropdown">
+                            <a class="page-scroll logout" href="javascript:void(0)">Services</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="residentreqdocu.php#barangayid">Barangay ID</a>
+                              <a class="page-scroll" href="residentreqdocu.php#permit">Business Permit</a>
+                              <a class="page-scroll" href="residentreqdocu.php#indigency">Certificate of Indigency</a>
+                              <a class="page-scroll" href="residentreqdocu.php#clearance">Barangay Clearance</a>
+                              <a class="page-scroll" href="residentreqdocu.php#blotter">Blotter</a>
+                            </span>
+                          </li>
                         <li>
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">
-                            <?php if(isset($_SESSION['email']))?>
-                             Email Address
+                            <?php echo $user; ?>
+                             
                              </a>
 
 							<span class="logdropdown-content">
@@ -452,8 +450,8 @@ a.login{cursor:pointer;};
 				</div>
     </section>
    
-    <!-- Announcement Section-->
-    <section id="news_and_announcement">
+     <!-- Announcement Section-->
+     <section id="news_and_announcement">
         <div class="container-fluid wrapper">
             <div class="row">
                 <div class="col-sm-8 col-lg-12 text-left">
@@ -468,7 +466,7 @@ a.login{cursor:pointer;};
 										include ('db/conn.php');
 										include ('db/captain.php');
 
-										$stmt = $db->prepare('SELECT * from announcement');
+										$stmt = $db->prepare('SELECT * from tbl_announcement');
 										$stmt->execute();
 										$imagelist = $stmt->fetchAll();
 											if (count($imagelist) > 0) {
@@ -477,10 +475,10 @@ a.login{cursor:pointer;};
 													<div class="item active">
 														<div class="col-md-4 col-sm-6 announce">
 															<div class="block-text">
-																		<img class="announcement_item col-md-6" src="<?=$image['announcement_image']?>" title="<?=$image['announcement_imgname'] ?>" le="<?=$image['announcement_imgname'] ?>" style="width:300px; height:200px">
+                                                                        <a class="news_heading" href="residentannouncement.php">
+                                                                            <img class="announcement_item col-md-6" src="upload/<?php echo $image['announcement_image']; ?>" style="width:300px; height:200px">
 
-																		<a class="news_heading" href="postannouncement.php">
-																			<h3 class="announcement_entry_text"><?=$image ['description']?></h3>
+                                                                            <strong><h3 class="announcement_entry_text"><?php echo $image['announcement_heading']; ?></h3></strong>
 																		</a>
 															</div>
 														</div>
@@ -497,58 +495,40 @@ a.login{cursor:pointer;};
                      
 <!-- 2nd Section of Announcement-->
 
-                        <div class="item">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement4" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #4: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement5" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #5: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
-							 <div class="col-md-4 col-sm-6">
-                                <div class="block-text">
-								<div class="pic"></div>
-									<a class="news_heading" href="#">
-                                    <img class="announcement_item" src="resident-img/sett.png" alt="announcement6" class="col-md-6">
-										<h3 class="announcement_entry_text">Announcement Entry #6: Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-									</a>
-                                </div>
-                            </div>
 						</div>
 					</div>
 				</div>			
-			</div>
-			
+
 			<div class="announce">
 				<button class="see_announcement" onclick="document.location='residentannouncement.php'" >See announcements</button>
 			</div>	
-			
-			
-	
 	</section >
+                     
+
 
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
-        
-			<p>
-				<span class="footer_dt" id="date-time"></span>
-           </p>
+            <div class="col-lg-12 footer-info">
+                <p class="footer-text">
+					For any inquiries, please email us <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a> 
+                </p>
+				<p class="footer-text">
+					Visit our Facebook Page<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="bx bxl-facebook-circle"></i></a> 
+                </p>
+                <p class="footer-text">
+				    <span class="footer_dt" id="date-time"></span>
+                 </p>
+				<div class="footer-text">
+					<a>Terms of Service</a> | 
+					<a>Privacy and Policy</a>
+				</div>
+            </div>
+
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
                 </span>
             </div>
         </div>

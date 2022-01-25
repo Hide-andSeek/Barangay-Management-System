@@ -241,8 +241,8 @@ if(!isset($_SESSION["type"]))
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
-				   <div class="name_job">
-					 <div class="job" id="">Employee</div>
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">
@@ -369,10 +369,10 @@ if(!isset($_SESSION["type"]))
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							$mquery = "SELECT * FROM blotterdb";
-							$countn = $db->query($mquery);
+							$mquery = $db->prepare("SELECT * FROM blotterdb");
+							$mquery ->execute();
+							$countn = $mquery->fetchAll();
 							?>
-
 							<thead>
 								<tr class="t_head">
 									<th>Complaint ID</th>
@@ -412,9 +412,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['witnesses']; ?></td>
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><?php echo $data ['id_type']; ?></td>
-									<td><?php echo $data ['id_name']; ?></td>
-									<td><a class="view_approvebtn"><img src="img/fileupload_blotter/<?php echo $data['id_image']; ?>" width="90" height="90"></a></td>
-									
+									<td><?php echo '<img src="upload/'.$data ['id_image'].'" width="90px" height="90px" title="" />'?></td>
+									<td><img src="upload/<?php echo $data ['id_image']; ?>" width="90px" height="90px" title="" /></td>
 									<td>
 										<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
 									</td>
@@ -422,18 +421,15 @@ if(!isset($_SESSION["type"]))
 						
 										<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
 											
-													<div class="modal-contentemployee animate displayflex" >
+													<div class="modal-contentemployee animate displayflex">
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 														
 															
 															<div>
 															<div class="information col">
 																	<label class="employee-label"> Valid ID </label>
+																	<img src="<?php echo $data['id_image']?>" width="90" height="90" title="<?=$data['id_name'] ?>" name="id_image"/>
 
-										
-																	<img src="img/fileupload_blotter/<?php echo $data['id_image']; ?>" width="90" height="90" name="id_image"/>
-
-																	
 																</div>
 															</div>
 															<div id="Complainant">

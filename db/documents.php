@@ -287,7 +287,7 @@ if(isset($_POST['blotterbtn'])){
 		// File name
 		$filename = $_FILES['files']['name'][$i];
 		// Location
-		$target_file = 'img/fileupload_blotter/'.$filename;
+		$target_file = 'upload/'.$filename;
 		// File Path
 		$file_extension = pathinfo(
 			$target_file, PATHINFO_EXTENSION);
@@ -300,10 +300,7 @@ if(isset($_POST['blotterbtn'])){
 		if(in_array($file_extension, $valid_extension)) {
 
 			// Upload file
-			if(move_uploaded_file(
-				$_FILES['files']['tmp_name'][$i],
-				$target_file)
-			) {
+			if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_file)) {
 				// Execute query
 				$stmt->execute(
 					array($n_complainant, $comp_age, $comp_gender, $comp_address, $inci_address, $n_violator, $violator_age, $violator_gender, $relationship, $violator_address, $witnesses, $complaints, $id_type, $filename, $target_file));

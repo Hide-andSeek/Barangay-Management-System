@@ -9,16 +9,24 @@ if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
-
-$employee_uname = '';
-$employee_no = '';
-
-if(isset($_SESSION['employee_uname']))
-{
-	$employee_uname = $_SESSION['employee_uname'];
-	$employee_no = $_SESSION['employee_no'];
-}
 ?>
+
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
+?>
+
 
 
 
@@ -129,28 +137,19 @@ if(isset($_SESSION['employee_uname']))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-			 									
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
-			 
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
-				   <div class="name_job">
-				   	 <div><?php echo $employee_uname; ?></div>
-					 <div class="job" id="">Employee</div>
-				   </div>
-				 </div>
-				 <a href="../emplogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
+
+				<li class="profile">
+					<div class="profile-details">
+					<img class="profile_pic" src="../img/1.jpeg">
+					<div class="name_job">
+						<div><?php echo $employee_uname; ?></div>
+						<div class="job" id="">Employee</div>
+					</div>
+					</div>
+					<a href="../emplogout.php">
+						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+					</a>
+				</li>
 			</ul>
 		  </div>
 		  

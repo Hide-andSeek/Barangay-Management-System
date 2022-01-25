@@ -1,9 +1,26 @@
-
 <?php session_start();
 
-if(!isset($_SESSION["official_name"])){
-	header("location: captain/admin_management.php");
+if(!isset($_SESSION["type"]))
+{
+    header("location: officials.php");
 }
+require 'db/conn.php';
+?>
+
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +78,7 @@ if(!isset($_SESSION["official_name"])){
    </head>
 	<body onload="display_ct()">
 		<!-- Side Navigation Bar-->
-		   <div class="sidebar captain_sidebar">
+		   <div class="sidebar captain_sidebar myDIV">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
 				<div class="logo_name">Barangay Captain</div>
@@ -69,39 +86,31 @@ if(!isset($_SESSION["official_name"])){
 			</div>
 			<ul class="nav-list">
 			<li>
-					<a class="side_bar" href="captaindashboard.php">
+					<a class="side_bar btnhover activehover" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					 <span class="tooltip">Dashboard</span>
 			 	</li>
 
-			  <li>
-					<a class="side_bar" href="adminmanagement.php">
+				 <li>
+					<a class="side_bar btnhover" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
-						<span class="links_name">Admin Management</span>
+						<span class="links_name">Contacts</span>
 					</a>
-					<span class="tooltip">Admin Management</span>
-			  </li>	
+					<span class="tooltip">Contacts</span>
+			  	</li>	
 
-				<li>
-				  <a class="side_bar" href="employeemanagement.php">
+				  <li>
+				  <a class="side_bar btnhover" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
-					  <span class="links_name">Employee Management</span>
+					  <span class="links_name">User Management</span>
 					</a>
-					 <span class="tooltip">Employee Management</span>
+					 <span class="tooltip">User Management</span>
 				  </li>
-			 
-				<li>
-				 <a class="side_bar" href="brgyofficialsmanagement.php">
-					  <i class='bx bxs-user-detail official'></i>
-					  <span class="links_name">Brgy Official Management</span>
-					</a>
-					 <span class="tooltip">Brgy Official Management</span>
-				</li>
 
 				<li>
-				 <a class="side_bar" href="residentcensus.php">
+				 <a class="side_bar btnhover" href="residentcensus.php">
 					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
@@ -109,34 +118,25 @@ if(!isset($_SESSION["official_name"])){
 				</li>
 
 				<li>
-				 <a class="side_bar" href="postannouncement.php">
+				 <a class="side_bar btnhover" href="postannouncement.php">
 					  <i class='bx bx-news iannouncement'></i>
 					  <span class="links_name">Post Announcement</span>
 					</a>
 					 <span class="tooltip">Post Announcement</span>
 				</li>
-				
-				<li>
-				   <a class="side_bar" href="settings.php">
-					 <i class='bx bx-cog' ></i>
-					 <span class="links_name">Setting</span>
-				   </a>
-				   <span class="tooltip">Setting</span>
-				 </li>
 			 
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" >
-				   <div class="name_job">
-				    
-					 <div>Employee</div>
-					 <div class="job" id="">Employee</div>
-				   </div>
-				 </div>
-				 <a href="captainlogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
+				 <li class="profile">
+					<div class="profile-details">
+					<img class="profile_pic" >
+					<div class="name_job" style="font-size: 13px;">
+						<div><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						</div>
+					</div>
+					<a href="officiallogout.php">
+						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+					</a>
+			 	</li>
 			</ul>
 		  </div>
 		  
@@ -155,40 +155,7 @@ if(!isset($_SESSION["official_name"])){
 				  </div>
 			  </section>
 			
-				<div>
-					<div><button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'"><i class="bx bx-plus"></i>Add Admin</button></div>
-									<!--Modal form for Login-->
-					<div id="formatValidatorName" >
-						  <div id="id01" class="adminmanagement-modal modal">
-								<div class="modal-contentadmin  animate" >
-								
-									  
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="Login" class="login_container form">
-												<div class="information">
-													<input required class="form-control inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
-												</div>
-												
-												<div class="information">
-													<input required class="form-control inputtext control-label" id="email" name ="email" type="text"  placeholder="Employee ID"> 
-												</div>
-												
-												<div class="information">
-													<input required class="form-control inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
-												</div>
-											  
-
-												<div class="information">   
-													<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
-														Login
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-					</div>
-				</div>
+				
 			</section>
 			<script src="resident-js/barangay.js"></script>
 	</body>

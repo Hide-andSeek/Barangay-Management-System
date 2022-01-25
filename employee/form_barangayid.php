@@ -8,6 +8,23 @@ if(!isset($_SESSION["type"]))
 ?>
 
 <?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
+?>
+
+
+<?php
 
 // require '../vendor/autoload.php';
 
@@ -219,15 +236,6 @@ if(!isset($_SESSION["type"]))
 				 <span class="tooltip">Business Permit</span>
 			  </li>
 			
-																											<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
-			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
