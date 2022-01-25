@@ -337,14 +337,17 @@ require 'db/conn.php';
 					<div class="reg_table emp_tbl">
 						<table class="content-table">
 						
+				
 						<?php
-							include "db/conn.php";
-							include "db/users.php";
+						include "db/conn.php";
+	                    include "db/user.php";
 							
-							$mquery = "SELECT * FROM employeedb";
-							$countemployee = $db->query($mquery)
+						$mquery = "SELECT * FROM usersdb";
+						$countemployee = $db->query($mquery)
 						?>
-						
+
+
+
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
@@ -364,19 +367,15 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['employee_no']; ?></td>
-									<td><?php echo $data ['employee_lname']; ?></td>
-									<td><?php echo $data ['employee_fname']; ?></td>
-									<td><?php echo $data ['employee_mname']; ?></td>
+									<td><?php echo $data ['user_no']; ?></td>
+									<td><?php echo $data ['user_lname']; ?></td>
+									<td><?php echo $data ['user_fname']; ?></td>
+									<td><?php echo $data ['user_mname']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>
 									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
-									</td>
+										
 								</tr>	
 							
 							<?php
