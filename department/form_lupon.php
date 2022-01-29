@@ -337,14 +337,25 @@ require 'db/conn.php';
 					<div class="reg_table emp_tbl">
 						<table class="content-table">
 						
+				
 						<?php
+<<<<<<< HEAD
 							include "db/conn.php";
 							include "db/user.php";
 							
 							$mquery = "SELECT * FROM usersdb";
 							$countemployee = $db->query($mquery)
+=======
+						include "db/conn.php";
+	                    include "db/user.php";
+							
+						$mquery = "SELECT * FROM usersdb";
+						$countemployee = $db->query($mquery)
+>>>>>>> 5c23b8bc8959fe95f6e99f6addc8fdc27ffedd55
 						?>
-						
+
+
+
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
@@ -372,11 +383,7 @@ require 'db/conn.php';
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>
 									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
-									</td>
+										
 								</tr>	
 							
 							<?php
