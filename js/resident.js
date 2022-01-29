@@ -67,6 +67,15 @@ function myFunction(hidedocument5) {
                 }
             }
 
+function myFunction(monday) {
+        var x = document.getElementById(monday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                     x.className = x.className.replace(" document-show", "");
+                }
+                }
+
     let date_issue = new Date().toISOString().param(0,10);
 		document.querySelector("#date_issue").value = date_issue;
 
