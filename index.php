@@ -3,7 +3,6 @@
 include "db/conn.php";
 include "db/user.php";
 
-
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +23,7 @@ include "db/user.php";
     <!-- Custom CSS -->
 
     <link rel="stylesheet" href="resident-css/style.css">
+    <link rel="stylesheet" href="resident-css/resident.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
@@ -41,11 +41,11 @@ include "db/user.php";
     <link rel="stylesheet" href="resident-css/animate.css">
 	
 	<style>
-		.guidelines{font-size: 11px; color: #808080; padding-left: 25px; padding-right:25px; text-align: justify; padding-bottom: 15px;}
-		button.getstarted{margin-bottom: 55px;}
-		.blotter {margin-top: 15px;}
-		.colu{margin: 15px 15px 15px 15px; background-color: black;}
-		
+            .guidelines{font-size: 11px; color: #808080; padding-left: 25px; padding-right:25px; text-align: justify; padding-bottom: 15px;}
+            button.getstarted{margin-bottom: 55px;}
+            .blotter {margin-top: 15px;}
+            .colu{margin: 15px 15px 15px 15px; background-color: black;}
+            
             .section {
                 padding: 20px 20px;
             }
@@ -70,9 +70,8 @@ include "db/user.php";
             }
 
             section h3.section-subheading {
-                font-size: 15px;
+                font-size: 13px;
                 line-height: 26px;
-                font-family: 'Montserrat', sans-serif;
                 text-transform: none;
                 text-align: center;
                 font-weight: 400;
@@ -92,7 +91,7 @@ include "db/user.php";
             }
 
             a.filled-button:hover {
-                background-color: #7cfa66d7;
+                background: #7cfa66d7;
                 color: #fff;
             }
 
@@ -148,8 +147,6 @@ include "db/user.php";
             .services_1 .service-item1 .icon {
                 background-color: #f7f7f7;
                 padding: 40px;
-                border-top-right-radius: 20px;
-                border-top-left-radius: 20px;
 
             }
 
@@ -157,23 +154,23 @@ include "db/user.php";
                 width: 80px;
                 height: 80px;
                 text-align: center;
-                line-height: 100px;
-                background-color: #52d673;
+                line-height: 80px;
+                background-color: #1ADA93;
                 color: #fff;
                 font-size: 32px;
-                border-radius: 20px 20px 20px 20px;
             }
 
             .services_1 .service-item1 .down-content1 {
-                background-color: #fff;
+                background-color: white;
+                /* background-color: #04AA6D; */
+                /* background-color: #1ADA93; */
                 padding: 20px 10px;
-                border-bottom-right-radius: 20px;
-                border-bottom-left-radius: 20px;
+                
             }
 
             .services_1 .service-item1 .down-content1 h4 {
                 font-size: 17px;
-                color: #1a6692;
+                color: black;
                 margin-bottom: 20px;
                 
             }
@@ -198,7 +195,6 @@ include "db/user.php";
 
             /*-- Mobile Device --*/
 
-
             @media all and (max-width: 700px){
                 .services_1 .service-item1 .icon i {
                     width: 100px;
@@ -213,12 +209,10 @@ include "db/user.php";
             }
 
             a.login{cursor:pointer;};
-
+            .center{text-align: center;}
 	</style>
 
 </head>
-
-
 
 <body onload="display_ct()" id="home">
     <!-- HEADER -->
@@ -248,8 +242,15 @@ include "db/user.php";
                         <li>
                             <a class="page-scroll" href="#home">Home</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="announcement.php">Announcement</a>
+                        <li class="logdropdown">
+                            <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="academic-related.php">Academic Related</a>
+                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="#">Latest Announcement</a>
+                              <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                            </span>
                         </li>
                         <li>
                             <a class="page-scroll" href="contact.php">Contact Us</a>
@@ -269,11 +270,12 @@ include "db/user.php";
     <!--Modal form for Login-->
 	<div id="formatValidatorName" >
           <div id="id01" class="modal">
-                <div class="modal-content animate " >
+                <div class="modal-content animate">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="topright">&times;</span>	
                     <span class="imgcontainer">
-						<label>
+						          <label>
                             <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
-						</label>
+						          </label>
                     </span>
         
                     <div class="form-bar">
@@ -281,7 +283,8 @@ include "db/user.php";
                         <button class="form-bar-item form-button tablink create_account" onclick="openForm(event.preventDefault(),'CreateAcc')">Create Account</button>
                       </div>
 					  
-					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            					
 						<div id="Login" class="login_container form">
 								<div class="information">
 									<input class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email">
@@ -391,13 +394,13 @@ include "db/user.php";
             
             <div class="col-md-6">
               <div class="right-content">
-                <h4 class="mv_heading section-heading">Misyon</h4>
+                <h3 class="mv_heading section-heading ">Misyon</h3>
                 <p class="mv_content section-subheading "><blockquote class="section-subheading">Upang maglingkod ng lubusan sa barangay sa paghahatid ng serbisyo sa pagsulong ng kagalingan na may pantay na pagtingin at kasiguruhan ng daynamiko, maunlad at payapang pamayanan.</blockquote></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="left-content">
-                <h4 class="mv_heading section-heading">Adhikain</h4>
+                <h3 class="mv_heading section-heading ">Adhikain</h3>
                 <p class="mv_content section-subheading"><blockquote class="section-subheading">Upang makabuo ng isang pamayanang binigkis ng layunin para sa mabuting buhay sa diwa ng pagkakaisa, paninindigan ng paglilingkod sa kapwa na may paggalang sa dignidad at karangalan ng iba, na ginagabayan ng higit sa lahat ng pagmamahal sa diyos at bayan.</blockquote></p>
               </div>
             </div>
@@ -486,7 +489,7 @@ include "db/user.php";
 							<i class="fa fa-gear"></i>
 						  </div>
 						  <div class="down-content1">
-							<h4>Others</h4>
+							<h4>Instructions</h4>
 						  </div>
 						</div>
 						</a>
@@ -494,9 +497,9 @@ include "db/user.php";
 					</div>
 				  </div>
 				</div>
-    </section>
+</section>
    
-     <!-- Announcement Section-->
+<!--      
      <section id="news_and_announcement">
         <div class="container-fluid wrapper">
             <div class="row">
@@ -505,7 +508,7 @@ include "db/user.php";
                 </div>
             </div>
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
-                <!-- Wrapper for Slides -->
+           
                 <div class="carousel-inner">
                         
                                     <?php
@@ -538,8 +541,6 @@ include "db/user.php";
                                                  </div>";
 										}
 										?> 
-                     
-<!-- 2nd Section of Announcement-->
 
 						</div>
 					</div>
@@ -548,7 +549,7 @@ include "db/user.php";
 			<div class="announce">
 				<button class="see_announcement" onclick="document.location='announcement.php'" >See announcements</button>
 			</div>	
-	</section >
+	</section > -->
 
     <!-- Footer -->
     <footer>
@@ -579,11 +580,11 @@ include "db/user.php";
         </div>
     </footer>
 
-    <!-- Scroll-up -->
+       <!-- Scroll-up -->
     <div class="scroll-up">
         <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-    <div id="theme-settings">
+    <!-- <div id="theme-settings">
         <div id="settings-button">
 			<img src="resident-img/options.png"></img>
         </div>
@@ -591,47 +592,18 @@ include "db/user.php";
             <span class="settings-title">Theme color selector</span>
             <ul class="gradients">
                 <li>
-                    <div class="gradient1">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient2">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient3">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient4">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient5">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient6">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient7">
-                    </div>
-                </li>
-                <li>
-                    <div class="gradient8">
-                    </div>
+                    <a href="contact.php">Contact</a>
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
    
+   <!-- Color Settings script -->
+   <script src="resident-js/settings-script.js"></script>
     <!-- jQuery -->
     <script src="resident-js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="resident-js/bootstrap.min.js"></script>
-    <!-- Color Settings script -->
-    <script src="resident-js/settings-script.js"></script>
     <!-- Plugin JavaScript -->
     <script src="resident-js/jquery.easing.min.js"></script>
     <!-- Contact Form JavaScript -->
@@ -642,9 +614,10 @@ include "db/user.php";
     <script src="resident-js/barangay.js"></script>
     <!-- Isotope -->
     <script src="resident-js/jquery.isotope.min.js"></script>
+    
 
     <script src="https://use.fontawesome.com/f7721642f4.js"></script>
-
+    <script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
     <script>
 		document.querySelector('.button').onclick = function(){
 			var password = document.querySelector('.password').value,

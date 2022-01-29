@@ -103,16 +103,6 @@ require 'db/conn.php';
 			   </a>
 			   <span class="tooltip">Violators</span>
 			 </li>
-			   
-
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
@@ -148,7 +138,7 @@ require 'db/conn.php';
 <div>
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
+			<div class="w3-container w3-teal w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
@@ -168,7 +158,7 @@ require 'db/conn.php';
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
+			<div class="w3-container w3-teal w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
@@ -207,7 +197,7 @@ require 'db/conn.php';
 			</div>
 			</div>
 			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+			<div class="w3-container w3-teal w3-text-white w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
@@ -323,9 +313,9 @@ require 'db/conn.php';
 						
 						<?php
 							include "db/conn.php";
-							include "db/users.php";
+							include "db/user.php";
 							
-							$mquery = "SELECT * FROM employeedb";
+							$mquery = "SELECT * FROM usersdb";
 							$countemployee = $db->query($mquery)
 						?>
 						
@@ -348,10 +338,10 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['employee_no']; ?></td>
-									<td><?php echo $data ['employee_lname']; ?></td>
-									<td><?php echo $data ['employee_fname']; ?></td>
-									<td><?php echo $data ['employee_mname']; ?></td>
+									<td><?php echo $data ['user_no']; ?></td>
+									<td><?php echo $data ['user_lname']; ?></td>
+									<td><?php echo $data ['user_fname']; ?></td>
+									<td><?php echo $data ['user_mname']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>

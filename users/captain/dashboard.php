@@ -5,6 +5,7 @@ if(!isset($_SESSION["type"]))
     header("location: officials.php");
 }
 require 'db/conn.php';
+include('db/barcharts.php');
 ?>
 
 <?php
@@ -39,6 +40,8 @@ require 'db/conn.php';
     <link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/captain.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Signika&display=swap" rel="stylesheet">
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -213,13 +216,13 @@ require 'db/conn.php';
 			</div>
 			<br>
 			<div style="text-align: center; padding: 15px;">
-				<h2>Welcome to Barangay Official Dashboard!</h2>
+				<h4>Welcome to Barangay Official Dashboard! <?php echo $user;?></h4>
 			</div>
 <fieldset>
 	<legend>Department</legend>
 			<div class="w3-quarter w3padd ">
 				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3-blue  w3bord w3back w3bordertop">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>ACCOUNTING</h3>
@@ -229,8 +232,8 @@ require 'db/conn.php';
 			</div>
 
 			<div class="w3-quarter w3padd ">
-				<a href="">
-					<div class="w3-container w3-blue w3bord w3back w3bordertop">
+				<a href="bpso.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>BPSO</h3>
@@ -241,7 +244,7 @@ require 'db/conn.php';
 
 			<div class="w3-quarter w3padd ">
 				<a href="includes/dashboard.php">
-					<div class="w3-container w3-blue w3bord w3back w3bordertop">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>DOC REQ</h3>
@@ -252,7 +255,7 @@ require 'db/conn.php';
 
 			<div class="w3-quarter w3padd">
 				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3-blue  w3bord w3back w3bordertop">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>COMPLAINTS</h3>
@@ -264,7 +267,7 @@ require 'db/conn.php';
 
 			<div class="w3-quarter">
 				<a href="">
-					<div class="w3-container w3-blue  w3bord w3back w3point w3borderbot">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>BCPC</h3>
@@ -274,8 +277,8 @@ require 'db/conn.php';
 			</div>
 
 			<div class="w3-quarter">
-				<a href="department/vawdashboard.php">
-					<div class="w3-container w3-blue  w3bord w3back w3point w3borderbot">
+				<a href="includes/vawcdashboard.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>VAWC</h3>
@@ -286,7 +289,7 @@ require 'db/conn.php';
 
 			<div class="w3-quarter">
 				<a href="lupon.php">
-					<div class="w3-container w3-blue w3padd w3bord w3back w3point w3borderbot">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
 						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
 						<div class="w3-right">
 							<h3>LUPON</h3>
@@ -295,6 +298,39 @@ require 'db/conn.php';
 				</a>
 			</div>
 		</fieldset>
+		
+		<!-- <h2 class="text-center">Chart for Census</h2>
+
+					<div id="regions_div" style="width: 900px; height: 500px;"></div>
+
+					<script type="text/javascript">
+					google.charts.load('current', {
+						'packages':['imagebarchart'],
+						'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+					});
+					google.charts.setOnLoadCallback(drawRegionsMap);
+
+					function drawRegionsMap() {
+						var data = google.visualization.arrayToDataTable([
+							['username', 'email', 'department'],
+							<?php
+							$chartQuery = "SELECT * FROM usersdb";
+							$chartQueryRecords = mysqli_query($connect,$chartQuery);
+
+								while($row = mysqli_fetch_assoc($chartQueryRecords)){
+									echo "['".$row['username']."',".$row['email'].",".$row['department']."],";
+								}
+							?>
+						]);
+
+						var options = {
+						};
+
+						var chart = new google.visualization.ImageBarChart(document.getElementById('regions_div'));
+
+						chart.draw(data, options);
+					}
+    		</script> -->
 			</section>
 			<script src="resident-js/barangay.js"></script>
 	</body>

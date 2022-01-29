@@ -4,32 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6bae7d80016c1acf5f33b5d7b6cd04ad
+class ComposerStaticInit136878d7458db1959617829108382025
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'P' => 
         array (
-            'SMSGatewayMe\\Client\\' => 20,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'SMSGatewayMe\\Client\\' => 
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/smsgatewayme/client/lib',
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-    );
-
-    public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6bae7d80016c1acf5f33b5d7b6cd04ad::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6bae7d80016c1acf5f33b5d7b6cd04ad::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6bae7d80016c1acf5f33b5d7b6cd04ad::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit136878d7458db1959617829108382025::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit136878d7458db1959617829108382025::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

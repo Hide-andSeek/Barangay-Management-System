@@ -3,12 +3,19 @@ if(!isset($_SESSION['email'])){
 	header("location: resident-defaultpage.php");
 }
 ?>
+<?php
+	$user = '';
+
+	if(isset($_SESSION['email'])){
+		$user = $_SESSION['email'];
+	}
+?>
 
 <?php 
 
 include "db/conn.php";
 include "db/documents.php";
-include "db/users.php";
+include "db/user.php";
 
 ?>
 
@@ -48,26 +55,18 @@ include "db/users.php";
 		.documentbtn{font-size: 15px;width: 200px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
 		.documentbtn:hover{background-color: gray;color: white;}
 		.document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
-
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
 		.document-section{margin-top:16px!important;margin-bottom:16px!important}
-		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;background-color:#f1f1f1!important}
+		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;}
 
+		.bgcolor{background-color:#ccc!important; }
 		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
 		.document-block{display:block;width:100%}
 		.document-hide{display:none!important}
 		.document-show{display:block!important}
 		p.content{width: 450px; height: 300px;}
 
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button{
-			-webkit-appearance: none;
-			margin: 0;
-		}
-
-		input[type=number]{
-			-moz-appearance: textfield;
-		}
+		
 
 		.detailid{padding-top: 50px; color: #19c410;}
 		.form-text-desc{font-size: 10px;margin: 3px 3px; color:black;}
@@ -158,6 +157,168 @@ include "db/users.php";
 		display: table;
 		clear: both;
 		}
+
+		:root {
+        --primary-color: rgb(11, 78, 179);
+        }
+
+        /* Global Stylings */
+        label {
+        display: block;
+        margin-bottom: 0.5rem;
+        }
+
+        input {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        }
+  
+
+        .ml-auto {
+        margin-left: auto;
+        }
+
+        .text-center {
+        text-align: center;
+        }
+
+        /* Progressbar */
+        .progressbar {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        counter-reset: step;
+        margin: 2rem 0 4rem;
+        }
+
+        .progressbar::before,
+        .progress {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 4px;
+        width: 100%;
+        background-color: #dcdcdc;
+        z-index: -1;
+        }
+
+        .progress {
+        background-color: var(--primary-color);
+        width: 0%;
+        transition: 0.3s;
+        }
+
+        .progress-step {
+        width: 2.1875rem;
+        height: 2.1875rem;
+        background-color: #dcdcdc;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .progress-step::before {
+        counter-increment: step;
+        content: counter(step);
+        }
+
+        .progress-step::after {
+        content: attr(data-title);
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        font-size: 0.85rem;
+        color: #666;
+        }
+
+        .progress-step-active {
+        background-color: var(--primary-color);
+        color: #f3f3f3;
+        }
+
+        /* Form */
+        .form {
+        width: clamp(320px, 30%, 430px);
+        margin: 0 auto;
+        border-radius: 0.35rem;
+        padding: 1.5rem;
+        }
+
+        .form-step {
+        display: none;
+        transform-origin: top;
+        animation: animate 0.5s;
+        }
+
+        .form-step-active {
+        display: block;
+        }
+
+        .input-group {
+        margin: 2rem 0;
+        }
+
+        @keyframes animate {
+        from {
+            transform: scale(1, 0);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1, 1);
+            opacity: 1;
+        }
+        }
+
+        /* Button */
+        .btns-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        }
+
+        .btn {
+        padding: 0.75rem;
+        display: block;
+        text-decoration: none;
+        background-color: var(--primary-color);
+        color: #f3f3f3;
+        text-align: center;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+        .btn:hover {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+        }
+
+        .left_userpersonal_info{display: flex;}
+
+		@media only screen and (max-width: 700px) {
+		.left_userpersonal_info {
+			display: none;
+		}
+		}
+
+		@media only screen and (max-width: 500px) {
+		.left_userpersonal_info {
+			display: none;
+		}
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type=number]{
+			-moz-appearance: textfield;
+		}
+		.left_userpersonal_info1{margin-bottom: 30px;}
 	</style>
 </head>
 
@@ -190,8 +351,15 @@ include "db/users.php";
                         <li>
                             <a class="page-scroll" href="resident-defaultpage.php">Home</a>
                         </li>
-						<li>
-                            <a class="page-scroll" href="announcement.php">Announcement</a>
+						<li class="logdropdown">
+                            <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="residentacademic.php">Academic Related</a>
+                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
+                              <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
+                            </span>
                         </li>
 						<li>
                             <a class="page-scroll" href="#reqdocu">Services</a>
@@ -200,7 +368,7 @@ include "db/users.php";
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
-							<a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
+							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
 							<span class="logdropdown-content">
 								<a class="page-scroll" href="resident_logout.php">Logout</a>
 								<a href="#">View Profile</a>
@@ -217,165 +385,207 @@ include "db/users.php";
 	<!--Document Section-->
 <div class="document_section">
 	<section>
-
-		<!-- Instructions: For request document!-->
-		<h5 style="text-align: center;" id="reqdocu">Request Document Instructions</h5>
-		<br>
-		
-		<div class="process">
-			<div class="processgallery">
-				<a target="_blank" href="img_5terre.jpg">
-				<img src="#" alt="Process 1" width="600" height="400">
-				</a>
-				<div class="description">1. </div>
-			</div>
-			</div>
-
-			<div class="process">
-			<div class="processgallery">
-				<a target="_blank" href="img_forest.jpg">
-				<img src="#" alt="Process 2" width="600" height="400">
-				</a>
-				<div class="description">2. </div>
-			</div>
-			</div>
-
-			<div class="process">
-			<div class="processgallery">
-				<a target="_blank" href="img_lights.jpg">
-				<img src="#" alt="Process 3" width="600" height="400">
-				</a>
-				<div class="description">3. </div>
-			</div>
-			</div>
-
-			<div class="process">
-			<div class="processgallery">
-				<a target="_blank" href="img_mountains.jpg">
-				<img src="#" alt="Process 3" width="600" height="400">
-				</a>
-				<div class="description">4</div>
-			</div>
-			</div>
-
-			<div class="clearfix"></div>
-
+	<div class="document-light-grey document-section">
+			<button onclick="myFunction('hidedocument5')" id="instructions" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+					<h5>General Instruction/ Panuto</h5></button>
+						<div id="hidedocument5" class="document-hide">
+							<div class="preview" >
+							<fieldset class="left_userpersonal_info">
+																<div>
+																	<label>Tagalog Translation - Sundin ang mga sumusunod, sa pag proseso ng dokumento</label>
+																	<ol style="padding: 15px 15px 15px 15px">
+																		<li>Siguraduhin na ang iyong impormasyon ay tugma.</li>
+																		<li>Kuhanan ng litrato ang harap at likod ng iyong ID. Siguraduhin na ang iyong Scanned Photo ay malinaw at nababasa.</li>
+																		<li>Lagyan ng pangalan ang iyong file. Halimbawa <strong style="color: red">DICARPIOLEONARDO - BarangayID.docx </strong></li>
+																		<li>I-save ang iyong file sa <strong style="color: red">docx and pdf </strong> format.</li>
+																		<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
+																	</ol>
+																	<label>Listahan ng mga ipapasang dokumento <a href="residentreqdocu.php#barangayid"> (Barangay ID)</a></label>
+																		<ol style="padding: 15px 15px 15px 15px">
+																		<li>Valid ID (Likod at harap ng iyong ID)- Ito ay magsisilbing kumpirmasyon ng iyong pagkakakilanlan</li>
+																	</ol>
+																	</div>
+																	<div>
+																	<label>Romanized Translation Color Coded CHAROT HAHAHA- Please follow the process of document</label>
+																	<ol style="padding: 15px 15px 15px 15px">
+																		<li>Make sure your information is accurate and precise</em></strong></li>
+																		<li>Take a photo of your ID (Front and Back). Please make sure your Scanned Photo is clear and easy to read.</li>
+																		<li>Put your name inline with your file. Example <strong style="color: red">DICARPIOLEONARDO - BarangayID.docx </strong>  </li>
+																		<li>Save your file in <strong style="color: red">docx and pdf </strong> format.</li>
+																		<li>Please wait for the announcement of Berengey. For more inquiry visit our webpage. <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
+																	</ol>
+																	<label>List of documents to be submitted  <a href="residentreqdocu.php#barangayid"> (Barangay ID)</a></label>
+																		<ol style="padding: 15px 15px 15px 15px">
+																		<li>Valid ID (Front and Back Portion of your ID)- This will serve as confirmation of your Identity</li>
+																	</ol>
+																	
+																	</div>
+																
+														</fieldset>
+										
+							</div>
+						</div>
+		</div>
+														
 		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;" id="barangayid" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-id-card"></i>
-					Barangay ID</button>
+			<button onclick="myFunction('hidedocument')"  id="barangayid" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+			<h5><i class="bx bx-id-card"></i>
+					Barangay ID</h5></button>
 						<div id="hidedocument" class="document-hide">
 								<div class="preview">
 										<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
+										<div class="right_userpersonal_info">
+														<fieldset class="left_userpersonal_info1">
+																
+														</fieldset>		
+											    <!-- Progress bar -->
+												<div class="progressbar">
+												<div class="progress" id="progress"></div>
+											
+												<div
+												class="progress-step progress-step-active"
+												data-title="Information"
+												></div>
+												<div class="progress-step" data-title="Contact"></div>
+												<div class="progress-step" data-title="Payment"></div>
+												<div class="progress-step" data-title="Submission"></div>
+											</div>
+
+											<!-- Steps -->
+											<div class="form-step form-step-active">
+												<div class="input-group">
+												<div >
+														<fieldset class="field_set">
+															<legend style="text-align: center;">Personal Information</legend>
+															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
 																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname">
-																</div><br/>
-																
+																</div><br/><br/>
+																							
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
 																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname">
-																	<!--
-																	<i aria-details="detail-id" class="detailid">This field is optional</i>
-																	-->
-																</div><br>
-																
+																</div><br><br/>
+																							
 																<div class="form-group">
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname">
-																</div><br>
-																
-																 <div class="form-group">
+																</div><br><br/>
+																							
+																<div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text form-text-desc" id="address" name="address">
-																</div></br>
-																
+																</div></br><br/>
+															</div>	
+															<div class="left_userpersonal_info left_userpersonal_info1">						
 																<div class="form-group">
-																		<label for="birthday">Birthday: <i class="red">*</i></label>
-																		<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
-																</div><br>
-																
+																	<label for="birthday">Birthday: <i class="red">*</i></label>
+																	<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
+																</div><br><br/>
+																							
 																<div class="form-group">
-																	<label for="pob">Place of Birth: </label><i class="red">*</i>
+																	<label for="pob">Place of Birth: <i class="red">*</i></label>
 																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
-																</div><br>
-																
+																</div><br><br/>
+																							
 																<div class="form-group">
 																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no">
-																</div><br>
-															</fieldset>
-														</div>
-													
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>In Case of Emergency</legend>
-																<div class="form-group">
-																	<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
-																</div><br>
-																
-																<div class="form-group">
-																	<label for="reladdress">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress">
-																</div><br>
-																
-																<div class="form-group">
-																	<label>Date Issued: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
-																</div><br>
+																	<input type="number" class="form-control number form-text form-text-desc" id="contact_no" placeholder="Ex. 09123456789" name="contact_no" onKeyPress="if(this.value.length==11) return false;">
+																</div><br><br/>
 
-																
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
-																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
-																	<input type='file' name='files[]' required aria-details="detail-id"/>
-																	
-																	<!--
-																	<i aria-details="detail-id" class="detailid">This field is optional</i>
-																	-->
-																</div>
+																	<input type="email" class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
+																</div><br/><br/>
+																
+															</div>
 														</fieldset>
-													</div>
+													</div> <br>
+												<a class="btn btn-next width-50 ml-auto">Next</a>
+												</div>
+											</div>
 
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set" >
-																<legend>Guidelines/ Panuto (Barangay ID)</legend>
-																<div class="form-group">
-																	<label>Sundin ang mga sumunod, sa pag proseso ng Barangay ID:</label>
-																	<ol style="padding: 15px 15px 15px 15px">
-																		<li>Siguraduhin na ang iyong impormasyon ay tugma. </li>
-																		<li>Kuhaan ng litrato ang harap at likod ng iyong ID</li>
-																		<li>Lagyan ng pangalan ang iyong file at pangalanan ito. Halimbawa <strong style="color: red">[Your name]-FrontID.jpg </strong>  </li>
-																		<li>I-save ang iyong file sa <strong style="color: red">png, jpeg and jpg </strong> format.</li>
-																		<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;">see more</a></li>
-																	</ol>
-																</div>
-														</fieldset>
+											<div class="form-step">
+											<fieldset class="field_set">
+													<legend style="text-align: center;">In Case of Emergency</legend>
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
+															<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname">
+														</div><br>
+																							
+														<div class="form-group">
+															<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
+															<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact">
+														</div><br>
+																							
+														<div class="form-group">
+															<label for="reladdress">Address: <i class="red">*</i></label>
+															<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress">
+														</div><br>
+																							
+														<div class="form-group">
+															<label>Date Issued: <i class="red">*</i></label>
+															<input type="date" class="form-control form-text form-text-desc" id="dateissue" name="dateissue">
+														</div><br>
 													</div>
-												</section>
-												<button type="submit" id="brgyidbtn" name="brgyidbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
+													
+													</fieldset>
+													<br>
+												<div class="btns-group">
+												<a class="btn btn-prev">Previous</a>
+												<a class="btn btn-next">Next</a>
+												</div>
+											</div>
+											<div class="form-step">
+												<fieldset class="field_set">
+												<legend style="text-align: center;">Files</legend>
+												<div class="left_userpersonal_info left_userpersonal_info1">
+													<div>
+														<div class="form-group ">
+															<label for="file">Attach Your Files: <i class="red">*</i></label>
+															<input required type='file' class="form-control" name='files[]' />
+														</div><br>
+														<div class="form-group">
+															<label>Status: </label>
+															<select class="form-control" name="status">
+																<option disabled>--Select--</option>
+																<option value="SINGLE">SINGLE</option>
+																<option value="MARRIED">MARRIED</option>
+															</select>
+														</div><br>
+													</div>
+													<div style="text-align: center;">
+														<div class="form-group">
+															<label>GCash QR Code</label>
+															<img width="120" height="120" src="resident-img/barcode_1.png" alt="">
+															<label >Scan to Pay</label>
+														</div>
+													</div>
+													</div>
+													<br>
+													<div class="btns-group">
+													<a class="btn btn-prev">Previous</a>
+													<a class="btn btn-next">Next</a>
+													</div>
+												</fieldset>
+											</div>
+											<div class="form-step">
+												<label>Kindly check your information first: Before submitting (Just to avoid typo error)</label>
+												<div class="btns-group">
+												<a class="btn btn-prev">Previous</a>
+												<input type="submit" name="brgyidbtn" value="Submit" class="btn" />
+												</div>
+											</div>
+											</form>
 								</div>
 						</div>
 		</div>
 		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument1')" id="permit" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-receipt"></i>
-					Business Permit</button>
+			<button onclick="myFunction('hidedocument1')" id="permit" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Business Permit</h5></button>
 						<div id="hidedocument1" class="document-hide">
 							<div class="preview">
 								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -440,9 +650,9 @@ include "db/users.php";
 						</div>
 		</div>
 		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument2')" id="indigency" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bxs-file"></i>
-					Certificate of Indigency</button>
+			<button onclick="myFunction('hidedocument2')" id="indigency" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bxs-file"></i>
+					Certificate of Indigency</h5></button>
 						<div id="hidedocument2" class="document-hide">
 							<div class="preview">
 									<form method="POST" enctype='multipart/form-data' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -481,11 +691,9 @@ include "db/users.php";
 																</div><br>
 
 																<div class="form-group">
-																	<label for="file">Attach Valid ID: </label>
+																	<label for="file">Attach your files here: </label>
 																	<input type='file' name='files[]'/>
 																</div>
-																
-																
 															</fieldset>
 														</div>
 												</section>
@@ -495,9 +703,9 @@ include "db/users.php";
 						</div>
 		</div>
 		<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument3')" id="clearance" style="border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-copy"></i>
-					Barangay Clearance</button>
+			<button onclick="myFunction('hidedocument3')" id="clearance"  class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-copy"></i>
+					Barangay Clearance</h5></button>
 						<div id="hidedocument3" class="document-hide">
 							<div class="preview">
 								<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -592,9 +800,9 @@ include "db/users.php";
 						</div>
 				</div>
 				<div class="document-light-grey document-section">
-			<button onclick="myFunction('hidedocument4')" id="blotter" class="document-button document-block documentbtn form-control documentbtn">
-				<i class="bx bx-receipt"></i>
-					Online Blottering</button>
+			<button onclick="myFunction('hidedocument4')" style="border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;" id="blotter" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Online Blottering</h5></button>
 						<div id="hidedocument4" class="document-hide">
 							<div class="preview">
 							<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -692,8 +900,7 @@ include "db/users.php";
 																		<option value="PhilHealth">PhilHealth</option>
 																		<option value="Passport ID">Passport ID</option>
 																		<option value="Barangay Clearance">Barangay Clearance</option>
-																		<option value="Barangay ID">Barangay ID</option>
-																		<option value="Barangay ID">Barangay ID</option>
+				
 																	</select>
 																</div><br>
 																<div class="form-group">
@@ -712,19 +919,20 @@ include "db/users.php";
 	</section>
 </div>
 
-  <!-- Footer -->
-  <footer>
+   <!-- Footer -->
+   <footer>
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
+                <p class="footer_dt">
+				    <span  id="date-time"></span>
+                </p>
                 <p class="footer-text">
-					For any inquiries, please email us <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a> 
+					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-					Visit our Facebook Page<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="bx bxl-facebook-circle"></i></a> 
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
-                <p class="footer-text">
-				    <span class="footer_dt" id="date-time"></span>
-                 </p>
 				<div class="footer-text">
 					<a>Terms of Service</a> | 
 					<a>Privacy and Policy</a>
@@ -763,12 +971,61 @@ include "db/users.php";
   <script src="resident-js/jquery.isotope.min.js"></script>
    <!-- Accordion -->
   <script src="js/resident.js"></script>
-
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 			<script>
 				 document.querySelector("#date_issued").valueAsDate = new Date();
 				 document.querySelector("#date_issue").valueAsDate = new Date();
 				 document.querySelector("#dateissue").valueAsDate = new Date();
 				 document.querySelector("#dateissued").valueAsDate = new Date();
+			</script>
+			<script>
+				 const prevBtns = document.querySelectorAll(".btn-prev");
+                        const nextBtns = document.querySelectorAll(".btn-next");
+                        const progress = document.getElementById("progress");
+                        const formSteps = document.querySelectorAll(".form-step");
+                        const progressSteps = document.querySelectorAll(".progress-step");
+
+                        let formStepsNum = 0;
+
+                        nextBtns.forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            formStepsNum++;
+                            updateFormSteps();
+                            updateProgressbar();
+                        });
+                        });
+
+                        prevBtns.forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            formStepsNum--;
+                            updateFormSteps();
+                            updateProgressbar();
+                        });
+                        });
+
+                        function updateFormSteps() {
+                        formSteps.forEach((formStep) => {
+                            formStep.classList.contains("form-step-active") &&
+                            formStep.classList.remove("form-step-active");
+                        });
+
+                        formSteps[formStepsNum].classList.add("form-step-active");
+                        }
+
+                        function updateProgressbar() {
+                        progressSteps.forEach((progressStep, idx) => {
+                            if (idx < formStepsNum + 1) {
+                            progressStep.classList.add("progress-step-active");
+                            } else {
+                            progressStep.classList.remove("progress-step-active");
+                            }
+                        });
+
+                        const progressActive = document.querySelectorAll(".progress-step-active");
+
+                        progress.style.width =
+                            ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+                        }
 			</script>
 </body>
 </html>

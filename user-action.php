@@ -45,11 +45,16 @@ if(isset($_POST["action"]))
             // if(isset($_POST['filterstat'])){
             //     $filter = $_POST["filterstat"];
 
-            //     $filterqry = "SELECT * FROM employeedb WHERE status='$filter' ORDER BY 	employee_id";
+            //     $filterqry = "SELECT * FROM usersdb WHERE status='$filter' ORDER BY user_id";
             // }else{
-            //     $filterqry = "SELECT * FROM employeedb WHERE status='active' ORDER BY employee_id";
+            //     $filterqry = "SELECT * FROM usersdb WHERE status='active' ORDER BY user_id";
             // }
             // $result = $db->query($filterqry);
+
+            // if($_POST['action' == 'active']){
+            //     $query = "SELECT * FROM usersdb WHERE action='active'";
+            // }
+            // elseif($_POST['action'] == 'inactive') 
 
         foreach($result as $data)
         {

@@ -34,26 +34,6 @@ include "db/user.php";
 			box-sizing: border-box;
 		 }
 
-		 main.employee-main{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-wrap: wrap;
-			padding-top: 100px;
-			border-radius: none;
-		}
-
-		.btn-size{
-			flex: 25%;
-			font-size: 15px;
-		}
-
-		.btn-box{
-			flex: 50%;
-			padding: 15px 10px;
-
-		}
-
 		span.topright{
 			display: flex;
 			float: right;
@@ -91,7 +71,7 @@ include "db/user.php";
 	 
    </head>
 	<body>	
-		<h2 style="text-align: center;">Login Forms</h2>
+		<h2 style="text-align: center;">Department</h2>
 		<main class="employee-main">
 		
 			<div class="employee-logform">
@@ -244,18 +224,23 @@ include "db/user.php";
 					<div id="formatValidatorName" >
 						  <div id="bpso" class="docureq-modal">
 								<div class="modal-contentdocreq animate" >
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
+								<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
 										<div id="Login" class="login_container form">
 
-												<span onclick="document.getElementById('bpso').style.display='none'" class="topright">&times;</span>
+										<span onclick="document.getElementById('bpso').style.display='none'" class="topright">&times;</span>
+												
+												<img class="center" src="resident-img/Brgy-Commonwealth_1.png">
+
+												<h5 class="txtalign">Accounting Department</h5>
 
 												<div class="information">
-													<input required class="inputtext control-label" id="username" name ="username" type="text"  placeholder="Employee ID"> 
+													<input class="inputtext control-label" id="username" name="username" type="text" placeholder="Username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+													<i class="bx bx-user-circle" style="margin-left: -20px;"></i>
 												</div>
 												
 												<div class="information">
-													<input class="inputtext control-label" id="bpsoemployeeno" name="user_no" type="hidden" value="BPSO">
-													<i class="bx bx-show showpass ipass" id="bpsotogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
+													<input class="inputpass control-label" id="accountingemployeeno" name ="user_no" type="password"  placeholder="Employee No."> 
+													<i class="bx bx-show showpass ipass" id="accountingtogglePassword" style="margin-left: -20px; cursor: pointer;"></i>
 												</div>
 
 												<div class="information">   
@@ -345,5 +330,6 @@ include "db/user.php";
 		</main>
 		<script src="js/loginmodalform.js"></script>
 		<script src="js/employee.js"></script>
+		<script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
 	</body>
 </html> 

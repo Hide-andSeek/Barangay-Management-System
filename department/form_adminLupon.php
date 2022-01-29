@@ -5,7 +5,7 @@ if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
-require 'db/conn.php';
+require '../db/conn.php';
 ?>
 
 <?php
@@ -36,7 +36,7 @@ require 'db/conn.php';
     <link rel="stylesheet" href="../css/styles.css">
 	
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
@@ -128,7 +128,7 @@ require 'db/conn.php';
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-			  <li>
+			<li>
 			  <a class="side_bar" href="compAdmin_dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
@@ -138,7 +138,7 @@ require 'db/conn.php';
 			  
 			  <li>
 			   <a class="side_bar" href="compAdmin_Lupon.php">
-				 <i class='bx bx-user-circle'></i>
+				 <i class='bx bx-user-circle lupon'></i>
 				 <span class="links_name">Lupon</span>
 			   </a>
 			   <span class="tooltip">Lupon</span>
@@ -146,7 +146,7 @@ require 'db/conn.php';
 			 
 			 <li>
 			   <a class="side_bar" href="compAdmin_BPSO.php">
-				 <i class='bx bx-user'></i>
+				 <i class='bx bx-user bpso'></i>
 				 <span class="links_name">BPSO</span>
 			   </a>
 			   <span class="tooltip">BPSO</span>
@@ -154,7 +154,7 @@ require 'db/conn.php';
 
 			 <li>
 			   <a class="side_bar" href="compAdmin_Vawc.php">
-				 <i class='bx bx-user-check'></i>
+				 <i class='bx bx-user-check vawc'></i>
 				 <span class="links_name">VAWC</span>
 			   </a>
 			   <span class="tooltip">VAWC</span>
@@ -162,12 +162,11 @@ require 'db/conn.php';
 
 			 <li>
 			   <a class="side_bar" href="compAdmin_BCPC.php">
-				 <i class='bx bx-user-pin'></i>
+				 <i class='bx bx-user-pin bcpc'></i>
 				 <span class="links_name">BCPC</span>
 			   </a>
 			   <span class="tooltip">BCPC</span>
 			 </li>
-			  
 			  
 			 <li>
 			   <a class="side_bar" href="vawc_sms.php">
@@ -176,15 +175,7 @@ require 'db/conn.php';
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
+											
 			 
 			 <li class="profile">
 				 <div class="profile-details">

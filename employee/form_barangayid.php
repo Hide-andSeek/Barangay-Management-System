@@ -76,7 +76,7 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="refresh" content="120">
 
-     <title> Barangay ID </title>
+     <title> Req Document Dept. - Barangay ID </title>
 	 
 	 
 	 <style>
@@ -189,7 +189,7 @@ if(!isset($_SESSION["type"]))
 	 </style>
    </head>
 	<body>
-																							<!-- Side Navigation Bar-->
+	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
@@ -240,8 +240,8 @@ if(!isset($_SESSION["type"]))
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
-				     <div class="job" id="">Employee Name</div>
-					 <div class="job" id="">Employee</div>
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -286,7 +286,7 @@ if(!isset($_SESSION["type"]))
 							
 							<?php
 							include "../db/conn.php";
-							include "../db/users.php";
+							include "../db/user.php";
 							
 							$myquery = "SELECT * FROM barangayid";
 							$countnum = $db->query($myquery);
@@ -333,7 +333,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $_SESSION["employee_no"];?>"></td>
+									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $user;?>"></td>
 
 									<td><button class="view_approvebtn">Approve</button>
 									<button class="view_approvebtn view_declinebtn">Decline</button></td>

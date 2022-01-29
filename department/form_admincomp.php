@@ -6,6 +6,18 @@ if(!isset($_SESSION["type"]))
     header("location: 0index.php");
 }
 ?>
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
+?>
 
 <?php
 	include ("../db/conn.php");
@@ -78,7 +90,6 @@ if(!isset($_SESSION["type"]))
 
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -102,14 +113,6 @@ if(!isset($_SESSION["type"]))
 			align-items: center;
 
 		}
-		
-			 i.menu{color: #fff}
-			 i.id, i.lupon{color: #a809b0}
-			 i.clearance, i.bpso{color: #1cb009}
-			 i.sms{color: #478eff}
-			 i.blotter-com, i.vawc{color: #9e0202}
-			 i.indigency, i.bcpc{color: #0218bd}
-			 i.permit{color: #e0149c}
 
 			.employeemanagement-modal{
 			display: none; 
@@ -118,7 +121,7 @@ if(!isset($_SESSION["type"]))
 			left: 0;
 			top: 0;
 			width: 100%; 
-			height: 125%; 
+			height: 100%; 
 			background-color: rgb(0,0,0); 
 			background-color: rgba(0,0,0,0.4); 
 			padding-top: 5px; 
@@ -228,19 +231,11 @@ if(!isset($_SESSION["type"]))
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
+				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
 						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
@@ -271,8 +266,8 @@ if(!isset($_SESSION["type"]))
 	 <div>
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -291,8 +286,8 @@ if(!isset($_SESSION["type"]))
 			</div>
 
 			<div class="w3-quarter">
-				<div class="w3-container w3-blue w3-padding-16">
-					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-container w3-teal w3-padding-16">
+					<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
 					<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
@@ -312,7 +307,7 @@ if(!isset($_SESSION["type"]))
 
 			<div class="w3-quarter">
 				<div class="w3-container w3-teal w3-padding-16">
-					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
 					<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
@@ -330,8 +325,8 @@ if(!isset($_SESSION["type"]))
 				</div>
 			</div>
 			<div class="w3-quarter">
-				<div class="w3-container w3-orange w3-text-white w3-padding-16">
-					<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-container w3-teal w3-text-white w3-padding-16">
+					<div class="w3-left"><i class="bx bxs-building w3-xxxlarge"></i></div>
 					<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
@@ -352,9 +347,8 @@ if(!isset($_SESSION["type"]))
 			<br>
 			<br>
 			<br>
-		
 			<div class="reg_table">
-			<h5 style="text-align: center;">All Complaints</h5>
+			<h3 style="text-align: center;">Welcome to Admin Complaints Dashboard!</h3>
 			<?php 
                 if(isset($_SESSION['message'])){
                     ?>
@@ -369,7 +363,7 @@ if(!isset($_SESSION["type"]))
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							$mquery = $db->prepare("SELECT * FROM blotterdb");
+							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id DESC");
 							$mquery ->execute();
 							$countn = $mquery->fetchAll();
 							?>
@@ -412,8 +406,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['witnesses']; ?></td>
 									<td><?php echo $data ['complaints']; ?></td>
 									<td><?php echo $data ['id_type']; ?></td>
-									<td><?php echo '<img src="upload/'.$data ['id_image'].'" width="90px" height="90px" title="" />'?></td>
-									<td><img src="upload/<?php echo $data ['id_image']; ?>" width="90px" height="90px" title="" /></td>
+									<td><img src="upload/<?php echo $data ['id_image']; ?>" title="<?php echo $data ['id_name']; ?>" width="90" height="90"/></td>
 									<td>
 										<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
 									</td>
@@ -428,7 +421,7 @@ if(!isset($_SESSION["type"]))
 															<div>
 															<div class="information col">
 																	<label class="employee-label"> Valid ID </label>
-																	<img src="<?php echo $data['id_image']?>" width="90" height="90" title="<?=$data['id_name'] ?>" name="id_image"/>
+																	<img src="upload/<?php echo $data['id_image']?>" width="90" height="90" title="<?=$data['id_name'] ?>" name="id_image"/>
 
 																</div>
 															</div>
@@ -555,11 +548,7 @@ if(!isset($_SESSION["type"]))
 										                	</div>
 													</form>
 												</div>
-											</div>
-									
-
-						
-							
+											</div>					
 							<?php
 							}
 							?>

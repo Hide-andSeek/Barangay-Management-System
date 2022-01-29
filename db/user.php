@@ -20,7 +20,7 @@ Create Account
 2.0 Official Create Account
 2.1 User Create Account
 2.2 Contact Us Account
-2.3  Resident: Blotter
+2.3 Resident: Blotter
 ----------------------------------------------------------------
 */
 
@@ -626,48 +626,91 @@ if(isset($_POST['contactusbtn'])){
 	}	
 }
 
-// 2.3 Resident: Blotter Prepared Statement
+// // 2.3 Resident: Blotter Prepared Statement
 
-if(isset($_POST['blotterbtn'])){
+// if(isset($_POST[''])){
 	
-	$n_complainant = $_POST['n_complainant'];
-	$comp_age = $_POST['comp_age'];
-	$comp_gender = $_POST['comp_gender'];
-	$comp_address = $_POST['comp_address'];
-	$inci_address = $_POST['inci_address'];
-	$n_violator = $_POST['n_violator'];
-	$violator_age = $_POST['violator_age'];
-	$violator_gender = $_POST['violator_gender'];
-	$relationship = $_POST['relationship'];
-	$violator_address = $_POST['violator_address'];
-	$witnesses = $_POST['witnesses'];
-	$complaints = $_POST['complaints'];
+// 	$n_complainant = $_POST['n_complainant'];
+// 	$comp_age = $_POST['comp_age'];
+// 	$comp_gender = $_POST['comp_gender'];
+// 	$comp_address = $_POST['comp_address'];
+// 	$inci_address = $_POST['inci_address'];
+// 	$n_violator = $_POST['n_violator'];
+// 	$violator_age = $_POST['violator_age'];
+// 	$violator_gender = $_POST['violator_gender'];
+// 	$relationship = $_POST['relationship'];
+// 	$violator_address = $_POST['violator_address'];
+// 	$witnesses = $_POST['witnesses'];
+// 	$complaints = $_POST['complaints'];
 		
-		$stmt = $db->prepare("INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints) VALUES (:n_complainant, :comp_age, :comp_gender, :comp_address, :inci_address, :n_violator, :violator_age, :violator_gender, :relationship, :violator_address, :witnesses, :complaints)");
-		$stmt->bindParam(':n_complainant', $n_complainant);
-		$stmt->bindParam(':comp_age', $comp_age);
-		$stmt->bindParam(':comp_gender', $comp_gender);
-		$stmt->bindParam(':comp_address', $comp_address);
-		$stmt->bindParam(':inci_address', $n_complainant);
-		$stmt->bindParam(':n_violator', $n_violator);
-		$stmt->bindParam(':violator_age', $violator_age);
-		$stmt->bindParam(':violator_gender', $violator_gender);
-		$stmt->bindParam(':relationship', $relationship);
-		$stmt->bindParam(':violator_address', $violator_address);
-		$stmt->bindParam(':witnesses', $witnesses);
-		$stmt->bindParam(':complaints', $complaints);
+// 		$stmt = $db->prepare("INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints) VALUES (:n_complainant, :comp_age, :comp_gender, :comp_address, :inci_address, :n_violator, :violator_age, :violator_gender, :relationship, :violator_address, :witnesses, :complaints)");
+// 		$stmt->bindParam(':n_complainant', $n_complainant);
+// 		$stmt->bindParam(':comp_age', $comp_age);
+// 		$stmt->bindParam(':comp_gender', $comp_gender);
+// 		$stmt->bindParam(':comp_address', $comp_address);
+// 		$stmt->bindParam(':inci_address', $n_complainant);
+// 		$stmt->bindParam(':n_violator', $n_violator);
+// 		$stmt->bindParam(':violator_age', $violator_age);
+// 		$stmt->bindParam(':violator_gender', $violator_gender);
+// 		$stmt->bindParam(':relationship', $relationship);
+// 		$stmt->bindParam(':violator_address', $violator_address);
+// 		$stmt->bindParam(':witnesses', $witnesses);
+// 		$stmt->bindParam(':complaints', $complaints);
+		
+// 	if($stmt->execute()){
+// 		echo "<script>
+// 				alert('Submitted Successfully!');
+// 				window.location.href='residentreqdocu.php';
+// 			 </script>";
+// 	}else{
+// 		echo '<script>
+// 				alert("An error occured! Please try again!");
+// 				window.location.href="usermanagement.php";
+// 			</script>';
+// 	}	
+// }
+
+
+// 2.4 Create Account (Resident) Prepared Statement
+if(isset($_POST['regbtn'])){
+	
+	$uname = $_POST['uname'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$policy = $_POST['policy'];
+	
+	$password = password_hash($password, PASSWORD_BCRYPT);
+
+	$sql_create_acc = "SELECT COUNT(email) AS num FROM accreg_resident WHERE email = :email";
+	$stmt = $db->prepare($sql_create_acc);
+	$stmt->bindValue(':email', $email);
+	$stmt->execute();
+	
+	$count_row = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	if($count_row['num']>0){
+		echo "<script>
+				alert('Email already exist. Please choose unique email address!');
+				window.location.href='index.php';
+			</script>";
+	
+	}else{
+		
+		$stmt = $db->prepare("INSERT INTO accreg_resident (uname, email, password, policy) VALUES (:uname, :email, :password, :policy)");
+		$stmt->bindParam(':uname', $uname);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':password', $password);
+		$stmt->bindParam(':policy', $policy);
 		
 	if($stmt->execute()){
 		echo "<script>
-				alert('Submitted Successfully!');
-				window.location.href='residentreqdocu.php';
+				alert('You are registered');
+				window.location.href='index.php';
 			 </script>";
 	}else{
-		echo '<script>
-				alert("An error occured! Please try again!");
-				window.location.href="usermanagement.php";
-			</script>';
-	}	
+		echo '<script>alert("An error occured")</script>';
+		}	
+	}
 }
 ?>
 

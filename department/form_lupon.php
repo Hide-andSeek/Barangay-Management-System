@@ -339,9 +339,9 @@ require 'db/conn.php';
 						
 						<?php
 							include "db/conn.php";
-							include "db/users.php";
+							include "db/user.php";
 							
-							$mquery = "SELECT * FROM employeedb";
+							$mquery = "SELECT * FROM usersdb";
 							$countemployee = $db->query($mquery)
 						?>
 						
@@ -364,10 +364,10 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['employee_no']; ?></td>
-									<td><?php echo $data ['employee_lname']; ?></td>
-									<td><?php echo $data ['employee_fname']; ?></td>
-									<td><?php echo $data ['employee_mname']; ?></td>
+									<td><?php echo $data ['user_no']; ?></td>
+									<td><?php echo $data ['user_lname']; ?></td>
+									<td><?php echo $data ['user_fname']; ?></td>
+									<td><?php echo $data ['user_mname']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>

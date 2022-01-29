@@ -142,8 +142,8 @@ if(!isset($_SESSION["type"]))
 					<div class="profile-details">
 					<img class="profile_pic" src="../img/1.jpeg">
 					<div class="name_job">
-						<div><?php echo $employee_uname; ?></div>
-						<div class="job" id="">Employee</div>
+						<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 					</div>
 					</div>
 					<a href="../emplogout.php">
@@ -187,7 +187,7 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table "  id="table">
 							<?php
 								include "../db/conn.php";
-								include "../db/users.php";
+								include "../db/user.php";
 								
 								$mquery = "SELECT * FROM barangayclearance";
 								$countn = $db->query($mquery);

@@ -394,7 +394,7 @@ include "db/announcementquery.php";
 												
 												<div style="margin-top: 10px;">
 
-													<span  onclick="document.getElementById('add_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
+													<span onclick="document.getElementById('add_<?php echo $data['cid']; ?>').style.display='none'" class="topright">&times;</span>
 													
 													<br>
 													<br>

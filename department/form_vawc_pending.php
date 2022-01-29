@@ -5,7 +5,7 @@ if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
-require 'db/conn.php';
+require '../db/conn.php';
 ?>
 
 <?php
@@ -123,15 +123,6 @@ require 'db/conn.php';
 			   </a>
 			   <span class="tooltip">SMS</span>
 			 </li>
-												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
@@ -176,7 +167,7 @@ require 'db/conn.php';
 						
 							<?php
 							include "../db/conn.php";
-							include "../db/users.php";
+							include "../db/user.php";
 							
 							$mquery = "SELECT * FROM certificateindigency";
 							$countn = $db->query($mquery);

@@ -49,7 +49,7 @@ if(!isset($_SESSION["type"]))
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Request Document Dashboard </title>
+     <title> Dashboard:  Request Document </title>
 	 
 	 
 	 <style>
@@ -66,12 +66,15 @@ if(!isset($_SESSION["type"]))
 		}
 		
 		 i.menu{color: #fff}
-			 i.id{color: #a809b0}
-			 i.clearance{color: #1cb009}
-			 i.sms{color: #478eff}
-			 i.blotter-com{color: #9e0202}
-			 i.indigency{color: #0218bd}
-			 i.permit{color: #e0149c}
+		 i.id{color: #a809b0}
+		 i.clearance{color: #1cb009}
+		 i.sms{color: #478eff}
+		 i.blotter-com{color: #9e0202}
+		 i.indigency{color: #0218bd}
+		 i.permit{color: #e0149c}
+		 i.ikon{color: red;}
+
+		.w3borderbot{ border-bottom-left-radius: 15px;  border-bottom-right-radius: 15px; margin-bottom: 20px;}
 	 </style>
    </head>
 	<body>
@@ -142,7 +145,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard
+						<h5>Document Request Dashboard
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -153,28 +156,31 @@ if(!isset($_SESSION["type"]))
 
 			  			
 	<div>
-		<div class="w3-row-padding w3-margin-bottom">
-			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Total of Residents</h4>
+			<div  style="margin-left: 15px;font-size:14px;">
+				<h4> Pending Request </h4>
 			</div>
+		<div class="w3-row-padding w3-margin-bottom">
+			<div class="w3-quarter ">
+				<div class="w3-container w3-teal w3-padding-16 w3borderbot">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+						$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
+
+						echo "<h3>$pdoexecute</h3>"
+						?>
+					</div>
+					<div class="w3-clear"></div>
+					<h4>Total of Residents</h4>
+				</div>
 			</div>
 		
 			<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-padding-16 w3borderbot">
+				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -193,8 +199,8 @@ if(!isset($_SESSION["type"]))
 			</div>
 	
 			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-padding-16 w3borderbot">
+				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -213,8 +219,8 @@ if(!isset($_SESSION["type"]))
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-text-white w3-padding-16 w3borderbot">
+				<div class="w3-left"><i class="bx bxs-bell-ring w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -230,10 +236,15 @@ if(!isset($_SESSION["type"]))
 				<h4>Barangay Clearance</h4>
 			</div>
 			</div>
+		</div>
+			<!-- <span style="text-align: center;">
+				<h2>Welcome to Document Request Department! <?php echo $user;?></h2>
+			</span> -->
 
+		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-padding-16" w3borderbot>
+				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -252,8 +263,8 @@ if(!isset($_SESSION["type"]))
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -272,8 +283,8 @@ if(!isset($_SESSION["type"]))
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+			<div class="w3-container w3-teal w3-padding-16">
+				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -288,7 +299,26 @@ if(!isset($_SESSION["type"]))
 				<h4>Approved Indigency</h4>
 			</div>
 			</div>
-		</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-red w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+ 
+					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Approved Clearance</h4>
+			</div>
+			</div>
+
 	</div>		
 			</section>
 			<script href="test.js"></script>

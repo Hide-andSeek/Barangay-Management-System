@@ -18,11 +18,11 @@ include "db/user.php";
     <link href="resident-css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-
     <link rel="stylesheet" href="resident-css/style.css">
-	
-	<!-- Icon -->
-	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
+    <link rel="stylesheet" href="resident-css/resident.css">
+    
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
 
     <!-- Custom Fonts -->
 
@@ -36,7 +36,9 @@ include "db/user.php";
 	<style>
 		.body{background: #ebebeb}
 		.navnav{background:#35363A; opacity: 0.9;}
-		
+		.container{padding: 50px 50px 50px 50px;}
+    .contact_block-text{width:100%}
+    .cntctbtn{margin-bottom: 15px;}
 	</style>
 </head>
 
@@ -69,8 +71,15 @@ include "db/user.php";
                         <li>
                             <a class="page-scroll" href="index.php">Home</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="announcement.php">Announcement</a>
+                        <li class="logdropdown">
+                            <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="academic-related.php">Academic Related</a>
+                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="#">Latest Announcement</a>
+                              <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                            </span>
                         </li>
                         <li>
                             <a class="page-scroll" href="#contact">Contact Us</a>
@@ -144,7 +153,7 @@ include "db/user.php";
 							</div>
 
 							<div class="guidelines">
-              <input type="checkbox" value="yes" id="policy" name="policy">
+              <input required type="checkbox" value="yes" id="policy" name="policy">
 								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
 								<span class="checkmark"></span>	
 							</div>
@@ -181,92 +190,29 @@ include "db/user.php";
     </div>
   </div>
 
-  <!-- Contact Official Section-->
-  <section id="contact_officials">
+   <!-- Contact Official Section-->
+   <section id="contact_officials">
     <div class="container-fluid wrapper">
-        <div id="myCarousel-three" class="carousel-testimonials slide" data-ride="carousel">
-            <!-- Wrapper for Slides -->
-            <div class="carousel-inner">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="block-text contact_block-text">
-                                <span>
-                                  <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan Street</h5>
-                                </span>
-                                <span>
-                                  <h5 class="contact_officials_text">                                  
-								  <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								  </h5>
-                                </span>
-                                <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="block-text contact_block-text">
-                              <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan Street</h5>
-                              </span>
-                              <span>
-                                <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
-                              </span>
-                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="block-text contact_block-text">
-                              <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan St</h5>
-                              </span>
-                              <span>
-                                <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
-                              </span>
-                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="block-text contact_block-text">
-                              <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan St</h5>
-                              </span>
-                              <span>
-                                <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
-                              </span>
-                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="w3-bar w3-black">
+      <button class="form-control cntctbtn" onclick="openContact('Contact1')">Contact1</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact2')">Contact2</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact3')">Contact3</button>
     </div>
-    
-
-    <!-- New Contact-->
-
-    <div class="container-fluid wrapper">
-        <div id="myCarousel-three" class="carousel-testimonials slide" data-ride="carousel">
+        <div id="myCarousel-three" class="carousel-testimonials slide" >
             <!-- Wrapper for Slides -->
             <div class="carousel-inner">
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="col-md-6 col-sm-6">
+                      <div class="contactlist" id="Contact1">
+                        <div class="col-md-6 col-sm-6 " >
                             <div class="block-text contact_block-text">
                                 <span>
-                                  <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan Street</h5>
+                                  <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
                                 </span>
                                 <span>
-                                  <h5 class="contact_officials_text">                                  
-								  <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								  </h5>
+                                  <h5 class="contact_officials_text">                                
+                                  <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                  </h5>
                                 </span>
                                 <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
                             </div>
@@ -274,27 +220,83 @@ include "db/user.php";
                         <div class="col-md-6 col-sm-6">
                             <div class="block-text contact_block-text">
                               <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan Street</h5>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
                               </span>
                               <span>
                                 <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="contactlist" id="Contact2" style="display:none">
+                        <div class="col-md-6 col-sm-6 " >
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 2nd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 2nd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 2nd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 2nd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
                               </span>
                               <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
                           </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="col-md-6 col-sm-6">
+					<div class="contactlist" id="Contact3" style="display:none">
+                        <div class="col-md-6 col-sm-6 " >
                             <div class="block-text contact_block-text">
                               <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan St</h5>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 3rd Ave. Katuparan Street</h5>
                               </span>
                               <span>
                                 <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
                               </span>
                               <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
                           </div>
@@ -302,12 +304,38 @@ include "db/user.php";
                         <div class="col-md-6 col-sm-6">
                             <div class="block-text contact_block-text">
                               <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> Commonwealth Ave. Katuparan St</h5>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 3rd Ave. Katuparan Street</h5>
                               </span>
                               <span>
                                 <h5 class="contact_officials_text">                                  
-								<i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-								</h5>
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 3rd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> 3rd Ave. Katuparan Street</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                </h5>
                               </span>
                               <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
                           </div>
@@ -322,7 +350,7 @@ include "db/user.php";
 
       <div class="send-message">
         <div class="container">
-          <div class="row" style="background: #ebebeb">
+          <div class="row" style="background: #ebebeb; padding: 20px 20px 20px 20px;">
             <div class="col-md-12">
               <div class="section-heading">
                 <h2>Contact Us</h2>
@@ -337,12 +365,12 @@ include "db/user.php";
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <fieldset>
-                        <input name="username" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                        <input name="username" type="text" class="form-control" id="name" placeholder="Name" required="">
                       </fieldset>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <fieldset>
-                        <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                        <input name="email" type="text" class="form-control" id="email" placeholder="Your email" required="">
                       </fieldset>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -357,7 +385,7 @@ include "db/user.php";
                     </div>
                     <div class="col-lg-12">
                       <fieldset>
-                        <button type="submit" id="form-submit" name="contactusbtn" class="filled-button">Send Message</button>
+                        <button type="submit" id="form-submit" name="contactusbtn" class="filled-button form-control">Send Message</button>
                       </fieldset>
                     </div>
                   </div>
@@ -429,6 +457,16 @@ include "db/user.php";
   <script src="https://use.fontawesome.com/f7721642f4.js"></script>
   
   <script src="resident-js/accordions.js"></script>
+  <script>
+    function openContact(contactName) {
+      var i;
+      var x = document.getElementsByClassName("contactlist");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      document.getElementById(contactName).style.display = "block";  
+    }
+  </script>
 
 </body>
 </html>

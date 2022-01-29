@@ -3,6 +3,13 @@ include "db/conn.php";
 include "db/user.php";
 
 ?>
+<?php
+	$user = '';
+
+	if(isset($_SESSION['email'])){
+		$user = $_SESSION['email'];
+	}
+?>
 
 
 <!DOCTYPE html>
@@ -78,29 +85,13 @@ include "db/user.php";
                             <a class="page-scroll" href="resident-defaultpage.php">Home</a>
                         </li>
                         <li class="logdropdown">
-                          <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
-                          <span class="logdropdown-content">
-                          <?php
-                            include ('db/conn.php');
-                            include ('db/captain.php');
-                            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-                            $stmt = $db->prepare("SELECT * FROM announcement_category");
-                            $stmt->execute();
-                            $imagelist = $stmt->fetchAll();
-                            if (count($imagelist) > 0) {
-                            foreach ($imagelist as $data) {
-                          ?>
-                            <a class="page-scroll" href="residentreqdocu.php#barangayid"><?php echo $data['category_name']; ?> </a>
-                            <?php
-                              }
-                              } else {
-                                echo "<div class='errormessage'>
-                                    <i class='bx bx-error'></i>
-                                                No announcement yet!
-                                    </div>";
-                              }
-                            ?>
-                          </span>
+                            <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="residentacademic.php">Academic Related</a>
+                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
+                            </span>
                         </li>
                           <li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
@@ -116,7 +107,7 @@ include "db/user.php";
                               <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                           </li>
                           <li class="logdropdown">
-                            <a style="color: green" class="page-scroll logout" href="javascript:void(0)">Email address</a>
+                            <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="resident_logout.php">Logout</a>
                               <a href="#">View Profile</a>
@@ -131,78 +122,6 @@ include "db/user.php";
 
     </header>
 
-    <!--Modal form for Login-->
-<div id="formatValidatorName" >
-          <div id="id01" class="modal">
-                <div class="modal-content animate " >
-                    <span class="imgcontainer">
-						<label>
-                            <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
-						</label>
-                    </span>
-                    
-					
-                    <div class="form-bar">
-                        <button class="form-bar-item form-button tablink form-active log_in" onclick="openForm(event.preventDefault(),'Login')">Login</button>
-                        <button class="form-bar-item form-button tablink create_account" onclick="openForm(event.preventDefault(),'CreateAcc')">Create Account</button>
-                      </div>
-					  
-					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-						<div id="Login" class="login_container form">
-								<div class="information">
-									<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email"> 
-								</div>
-								
-								<div class="information">
-									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
-								</div>
-							   
-								<div>
-									<a href="#" class="fp">Forgot password?</a>
-								</div>
-								<div class="information">   
-									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
-										Sign in
-									</button>  
-									<div>
-										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div>
-								</div>
-						</div> 	
-					</form>
-<!-- Create an Account-->
-					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-						<div id="CreateAcc" class="login_container form" style="display: none;">
-            <div class="information">
-								  <input required class="inputtext" type="text" name="uname" placeholder="Username" >
-							</div>
-							<div class="information">
-								<input required class="inputtext" type="email" id="" name ="email" placeholder="Email" >
-							</div>
-							<div class="information controls">
-								<input required class="inputpass" type="password" id="" name ="password"" placeholder="Password">
-							</div>
-
-							<div class="guidelines">
-              <input type="checkbox" value="yes" id="policy" name="policy">
-								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
-								<span class="checkmark"></span>	
-							</div>
-							<div class="information">   
-								<button type="submit" name="regbtn" class="log_button sign_in getstarted popup_mess">
-									Get Started
-								</button>  
-							</div>
-						</div>
-					</form>
-              </div>
-        </div>
-    </div>
-
- 
- 
     <div class="sep_announcement">
  <!-- News section-->
  <section>
@@ -215,7 +134,7 @@ include "db/user.php";
 				include ('db/conn.php');
 				include ('db/captain.php');
 				//Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '20'");
+				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '23'");
 				$stmt->execute();
 				$imagelist = $stmt->fetchAll();
 				if (count($imagelist) > 0) {
@@ -240,7 +159,7 @@ include "db/user.php";
             include ('db/conn.php');
             include ('db/captain.php');
               //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '20'");
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '23'");
             $stmt->execute();
             $imagelist = $stmt->fetchAll();
             if (count($imagelist) > 0) {
@@ -308,19 +227,20 @@ include "db/user.php";
 </div>
   
   
-    <!-- Footer -->
-    <footer>
+   <!-- Footer -->
+   <footer>
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
+                <p class="footer_dt">
+				    <span  id="date-time"></span>
+                </p>
                 <p class="footer-text">
-					For any inquiries, please email us <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a> 
+					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-					Visit our Facebook Page<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="bx bxl-facebook-circle"></i></a> 
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
-                <p>
-				    <span class="footer_dt" id="date-time"></span>
-                 </p>
 				<div class="footer-text">
 					<a>Terms of Service</a> | 
 					<a>Privacy and Policy</a>
@@ -329,8 +249,8 @@ include "db/user.php";
 
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
-                    Copyright &copy; Barangay Commonwealth Hall - 2021 Created By 
-                    <a href="http://betaencorp" target="_blank">Beta Encorp</a>
+                    Copyright &copy; Barangay Commonwealth - 2022 Created By 
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
                 </span>
             </div>
         </div>
@@ -359,6 +279,7 @@ include "db/user.php";
   <script src="resident-js/jquery.isotope.min.js"></script>
   
   <script src="resident-js/accordions.js"></script>
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 
 </body>
 </html>

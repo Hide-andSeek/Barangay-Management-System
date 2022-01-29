@@ -98,7 +98,7 @@ include "db/user.php";
                                     <h1 class="intro-lead-in animated bounceInRight u-description">Commonwealth</h1>
                                     <h2 class="intro-heading animated bounceInLeft u-description">Barangay Official</h2>
                                 </div>
-                                
+                                s
                             </div>
                         </div>
                     </div>
@@ -118,17 +118,8 @@ include "db/user.php";
 			 	<!-- <h5>Put some description right here!</h5> -->
                  <h1>
                      <blockquote>
-                         <em>
-                             <strong>
-                                <p> Welcome to Barangay Official Homepage</p>
-                                <p> (Put some description right here!) </p>
-                                <div id="clockdate">
-                                    <div class="clockdate-wrapper">
-                                        
-                                    </div>
-                                </div>
-                            </strong>
-                        </em>
+                     <em> Life is so good. So start here! HAHAHAHA</em>
+                     <em> (Put some description right here!) </em>
                     </blockquote>
                  </h1>
               </div>
@@ -165,10 +156,11 @@ include "db/user.php";
         <div class="container-fluid wrapper">
             <div class="col-lg-12 footer-info">
                 <p class="footer-text">
-					For any inquiries, please email us <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a> 
+					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-					Visit our Facebook Page<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="bx bxl-facebook-circle"></i></a> 
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">
 					<a>Terms of Service</a> | 
@@ -198,7 +190,11 @@ include "db/user.php";
     <script src="resident-js/barangay.js"></script>
     <!-- Isotope -->
     <script src="resident-js/jquery.isotope.min.js"></script>
+    
+    <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 
+    <script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
+    
 	<script>
         const togglePassword = document.querySelector('#togglePassword');
 				const password = document.querySelector('#user_no');

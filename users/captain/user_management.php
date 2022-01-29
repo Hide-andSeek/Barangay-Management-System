@@ -256,18 +256,18 @@ include "db/user.php";
 				  </div>
 			  </section>
 
-			  <!-- <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			  <div class="search_content">
 						<label class="select__select" for="">Filter by: 
                             <select class="selection" name="filterstat">
                                 <option disabled>--Select--</option>
-                                <option value="active">active</option>
-                                <option value="inactive">inactive</option>
+                                <option name="action" value="active">active</option>
+                                <option name="action" value="inactive">inactive</option>
                             </select>
 								<button class="filterbtn"><i class='bx bx-sort filter'></i></button>
                         </label>
                 </div>
-			</form>	 -->
+			</form>	
 			
 			<div class="container">
            

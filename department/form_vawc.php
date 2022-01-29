@@ -5,7 +5,7 @@ if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
-require 'db/conn.php';
+require '../db/conn.php';
 ?>
 <?php
 	$user = '';
@@ -128,15 +128,6 @@ require 'db/conn.php';
 			   <span class="tooltip">SMS</span>
 			 </li>
 												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
-			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">

@@ -78,29 +78,13 @@ include "db/user.php";
                             <a class="page-scroll" href="index.php">Home</a>
                         </li>
                         <li class="logdropdown">
-                          <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
-                          <span class="logdropdown-content">
-                          <?php
-                            include ('db/conn.php');
-                            include ('db/captain.php');
-                            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-                            $stmt = $db->prepare("SELECT * FROM announcement_category");
-                            $stmt->execute();
-                            $imagelist = $stmt->fetchAll();
-                            if (count($imagelist) > 0) {
-                            foreach ($imagelist as $data) {
-                          ?>
-                            <a class="page-scroll" href="residentreqdocu.php#barangayid"><?php echo $data['category_name']; ?> </a>
-                            <?php
-                              }
-                              } else {
-                                echo "<div class='errormessage'>
-                                    <i class='bx bx-error'></i>
-                                                No announcement yet!
-                                    </div>";
-                              }
-                            ?>
-                          </span>
+                        <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="academic-ralated.php">Academic Related</a>
+                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="barangayprogram.php">Barangay Programs</a>
+                            </span>
                         </li>
                         <li>
                             <a class="page-scroll" href="contact.php">Contact Us</a>
@@ -201,7 +185,7 @@ include "db/user.php";
 				include ('db/conn.php');
 				include ('db/captain.php');
 				//Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '20'");
+				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '23'");
 				$stmt->execute();
 				$imagelist = $stmt->fetchAll();
 				if (count($imagelist) > 0) {
@@ -226,7 +210,7 @@ include "db/user.php";
             include ('db/conn.php');
             include ('db/captain.php');
               //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '20'");
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '23'");
             $stmt->execute();
             $imagelist = $stmt->fetchAll();
             if (count($imagelist) > 0) {

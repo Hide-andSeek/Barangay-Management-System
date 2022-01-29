@@ -92,8 +92,6 @@ require 'db/conn.php';
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
-			  
-              
 
 			 <li>
 			   <a class="side_bar" href="bpso_violators.php">
@@ -101,16 +99,6 @@ require 'db/conn.php';
 				 <span class="links_name">Violators</span>
 			   </a>
 			   <span class="tooltip">Violators</span>
-			 </li>
-			   
-
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
 			 </li>
 			 
 			 <li class="profile">
@@ -238,9 +226,9 @@ require 'db/conn.php';
 						
 						<?php
 							include "db/conn.php";
-							include "db/users.php";
+							include "db/user.php";
 							
-							$mquery = "SELECT * FROM employeedb";
+							$mquery = "SELECT * FROM usersdb";
 							$countemployee = $db->query($mquery)
 						?>
 						
@@ -263,10 +251,10 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['employee_no']; ?></td>
-									<td><?php echo $data ['employee_lname']; ?></td>
-									<td><?php echo $data ['employee_fname']; ?></td>
-									<td><?php echo $data ['employee_mname']; ?></td>
+									<td><?php echo $data ['user_no']; ?></td>
+									<td><?php echo $data ['user_lname']; ?></td>
+									<td><?php echo $data ['user_fname']; ?></td>
+									<td><?php echo $data ['user_mname']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['contact']; ?></td>
