@@ -50,6 +50,20 @@ require '../db/conn.php';
 	 
 	 
 	 <style>
+		.documentbtn{font-size: 15px;width: 200px; height: 100px; padding: 40px 40px 40px 40px; margin-bottom: 25px}
+		.documentbtn:hover{background-color: gray;color: white;}
+		.document_section{margin-top: 105px;margin-left: 35px; margin-right: 35px;}
+		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
+		.document-section{margin-top:16px!important;margin-bottom:16px!important}
+		.document-light-grey,.document-hover-light-grey:hover{border-top-right-radius: 20px;border-top-left-radius: 20px; border-bottom-right-radius: 20px;border-bottom-left-radius: 20px; color:#000!important;}
+
+		.bgcolor{background-color:#ccc!important; }
+		.document-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
+		.document-block{display:block;width:100%}
+		.document-hide{display:none!important}
+		.document-show{display:block!important}
+		p.content{width: 450px; height: 300px;}
+		 
 		div.align-box{padding-top: 23px; display: flex; align-item: center;}
 		.box-report{
 			width: 300px;
@@ -161,6 +175,7 @@ require '../db/conn.php';
 			 
 	 <div>
 		<div class="w3-row-padding w3-margin-bottom">
+			<a href="vawc_total.php">
 			<div class="w3-quarter">
 			<div class="w3-container w3-red w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
@@ -178,8 +193,11 @@ require '../db/conn.php';
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Total Cases</h4>
+
 			</div>
 			</div>
+	
+	</a>
 
 			<div class="w3-quarter">
 			<div class="w3-container w3-blue w3-padding-16">
@@ -241,7 +259,86 @@ require '../db/conn.php';
 			</div>
 		</div>
 	</div>
-				
+
+
+	<div class="document-light-grey document-section">
+			<button onclick="myFunction('monday')" id="monday1" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Monday</h5></button>
+						<div id="monday" class="document-hide">
+							<div class="preview">
+								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+											  <section class="userpersonal_form">
+														<div class="left_userpersonal_info">
+															<fieldset class="field_set">
+																<legend>For Business</legend>
+																<div class="form-group">
+																	<label for="dateissued">Date issued: </label>
+																	<input required type="date" class="form-control form-text" id="dateissued" name="dateissued">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="selection">Please Select:</label>
+																	<span>
+																		Renewal <input required type="radio" value="renewal" id="renewal" name="selection">
+																		New <input required type="radio" value="new"  id="new" name="selection">
+																	</span>
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="ownername">Owner's Name: </label>
+																	<input required type="text" class="form-control form-text" id="ownername" name="ownername" placeholder="Please write your Full name">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="businessname">Business Name: </label>
+																	<input required type="text" class="form-control form-text" id="businessname" name="businessname">
+																</div><br>	
+																
+																 <div class="form-group">
+																	<label for="businessaddress">Business Address: </label>
+																	<input required type="text" class="form-control form-text" id="businessaddress" name="businessaddress">
+																</div></br>
+																
+																<div class="form-group">
+																	<label for="plateno">Plate No.: </label>
+																	<input type="number" class="form-control number form-text" id="plateno" name="plateno">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="contactno">Contact No.: </label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
+																	<input type='file' name='files[]' required/>
+																</div>
+
+															</fieldset>
+														</div>
+												</section>
+													<button type="submit" name="permitBtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+										  </form> 
+							</div>
+						</div>
+		</div>
+		<script src="js/resident.js"></script>	
+		
+		
+		<script>function myFunction(monday) {
+        var x = document.getElementById(monday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                     x.className = x.className.replace(" document-show", "");
+                }
+                }</script>
 			</section>
 	</body>
 </html>
