@@ -60,7 +60,9 @@ if(!isset($_SESSION["type"]))
 			$stmt->bindParam(':dept', $dept);
 			$stmt->bindParam(':app_date', $app_date);
 			$stmt->bindParam(':app_by', $app_by);
-			
+				if(isset($_POST['approvebtn'])){
+					$stmt = $db->prepare("DELETE INTO admin_complaints");
+				}
 		if($stmt->execute()){
 			echo "<script>
 					alert('Successfully added!');
@@ -134,7 +136,7 @@ if(!isset($_SESSION["type"]))
 			background-color: #fefefe;
 			margin: 5% auto 2% auto;
 			border: 1px solid #888;
-			height: 82%;
+			height: 92%;
 			width: 72%; 
 		
 		}
@@ -538,7 +540,7 @@ if(!isset($_SESSION["type"]))
 
 																<div class="information col">
 																<label class="employee-label"> Approved By </label>
-																<input class="form-control inputtext control-label" id="app_by" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+																<input class="form-control inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 															</div>
 																<div class="information">   
 																<button type="submit" id="approvebtn" name="approvebtn" value="empBtn" class="inputtext submtbtn approvebtn"><i class="bx bx-check"></i>Approve

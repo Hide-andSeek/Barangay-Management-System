@@ -88,7 +88,7 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="residentreqdocu.php#permit">Barangay Funds</a>
-                              <a class="page-scroll" href="residentreqdocu.php#indigency">Latest Announcement</a>
+                              <a class="page-scroll" href="announcement.php">Latest Announcement</a>
                               <a class="page-scroll" href="vaccine.php">Vaccine</a>
                               <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
                             </span>

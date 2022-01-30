@@ -317,7 +317,6 @@ if(!isset($_SESSION["type"]))
 							foreach($countnum as $data) 
 							{
 							?>
-		
 
 								<tr class="table-row">
 									<td><?php echo $data ['barangay_id']; ?></td>

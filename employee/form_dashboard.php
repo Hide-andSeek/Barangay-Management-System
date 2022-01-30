@@ -237,9 +237,9 @@ if(!isset($_SESSION["type"]))
 			</div>
 			</div>
 		</div>
-			<!-- <span style="text-align: center;">
-				<h2>Welcome to Document Request Department! <?php echo $user;?></h2>
-			</span> -->
+			<span style="text-align: center;">
+				<h3>Welcome to Document Request Department! <?php echo $user;?></h3>
+			</span>
 
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">

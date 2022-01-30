@@ -426,7 +426,7 @@ include "db/user.php";
 							</div>
 						</div>
 		</div>
-														
+												
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')"  id="barangayid" class="document-button document-block documentbtn form-control documentbtn bgcolor">
 			<h5><i class="bx bx-id-card"></i>
@@ -582,6 +582,8 @@ include "db/user.php";
 								</div>
 						</div>
 		</div>
+
+	<!-- 1.0 Drop Button with content -->			
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument1')" id="permit" class="document-button document-block documentbtn form-control documentbtn bgcolor">
 				<h5><i class="bx bx-receipt"></i>
