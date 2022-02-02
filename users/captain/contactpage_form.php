@@ -260,12 +260,12 @@ require 'db/conn.php';
 
 						<div class="information col">
 							<label class="employee-label"> Email: </label>
-							<input required class="form-control inputtext email em" id="email" name="email" type="text">
+							<input required class="form-control inputtext usersel email em" id="email" name="email" type="text">
 						</div>
 
 						<div class="information col">
 							<label class="employee-label">Subject:  </label>
-							<input required class="form-control inputtext email" id="subject" name ="subject" type="text"> 
+							<input required class="form-control inputtext email" id="subject" id="subject" name="subject" type="text"> 
 						</div>
 						
 						<div class="information col textarea">
@@ -286,25 +286,24 @@ require 'db/conn.php';
 			</section>
 			<script src="resident-js/barangay.js"></script>
 			<script language="javascript" type="text/javascript">
-			function limitText(limitField, limitCount, limitNum) {
-				if (limitField.value.length > limitNum) {
-					limitField.value = limitField.value.substring(0, limitNum);
-				} else {
-					limitCount.value = limitNum - limitField.value.length;
+				function limitText(limitField, limitCount, limitNum) {
+					if (limitField.value.length > limitNum) {
+						limitField.value = limitField.value.substring(0, limitNum);
+					} else {
+						limitCount.value = limitNum - limitField.value.length;
+					}
 				}
-			}
-
-			var table = document.getElementById('table');
-				for (var i = 1; i < table.rows.length; i++)
-				{
-					table.rows[i].onclick = function()
+				var table = document.getElementById('table');
+					for (var i = 1; i < table.rows.length; i++)
 					{
-						document.getElementById("id").value = this.cells[0].innerHTML;
-						document.getElementById("username").value = this.cells[1].innerHTML;
-						document.getElementById("email").value = this.cells[2].innerHTML;
-					};
-				}
-				
+						table.rows[i].onclick = function()
+						{
+							document.getElementById("id").value = this.cells[0].innerHTML;
+							document.getElementById("username").value = this.cells[1].innerHTML;
+							document.getElementById("email").value = this.cells[2].innerHTML;
+							document.getElementById("subject").value = this.cells[3].innerHTML;
+						};
+					}
 			</script>
 	</body>
 </html>

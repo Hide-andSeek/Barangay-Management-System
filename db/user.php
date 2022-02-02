@@ -602,6 +602,8 @@ if(isset($_POST['userbtn'])){
 
 if(isset($_POST['contactusbtn'])){
 	
+	$errormsg = "";
+	
 	$username = $_POST['username'];
 	$email = $_POST['email'];
 	$subject = $_POST['subject'];

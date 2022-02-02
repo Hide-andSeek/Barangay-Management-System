@@ -118,7 +118,7 @@ include "db/user.php";
 			 	<!-- <h5>Put some description right here!</h5> -->
                  <h1>
                      <blockquote>
-                     <em> Life is so good. So start here! HAHAHAHA</em>
+                     <em> (Put some description right here!) </em>
                      <em> (Put some description right here!) </em>
                     </blockquote>
                  </h1>

@@ -55,6 +55,9 @@ include "db/announcementquery.php";
 	 <style>
          .detailwidth{width: 45%;}
          .btnmargin{margin-bottom: 5px;}
+		 .widthinp{width: 50%}
+		 .widthinput{width: 85%}
+		 .disp{display: flex;}
 	 </style>
    </head>
 	<body onload="display_ct()" >
@@ -126,7 +129,7 @@ include "db/announcementquery.php";
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-                        <a href="postannouncement.php" style="text-decoration: none; color: white;">Employee Management</a><label> >> </label><a href="#" style="text-decoration: underline; color: black;">Edit Employees</a>
+                        <a href="postannouncement.php" style="text-decoration: none; color: white;">User Management</a><label> >> </label><a href="#" style="text-decoration: underline; color: black;">Edit User</a>
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>	  
@@ -207,7 +210,7 @@ include "db/announcementquery.php";
 							<div style="text-align: center;">
 								<hr>
 									<h6>
-										Edit Employee
+										Edit User
 									</h6>
 								<hr>
 							</div>
@@ -216,13 +219,31 @@ include "db/announcementquery.php";
                         
                         <form method="post" action="" class="font-sizee">
                         <div>
-                            <div>
-                                <label>Employee ID :</label>
-                                <input type="text" name="employee_id" class="form-control font-sizee" value=""/>
-                            </div>
+							<div class="disp">
+								<div>
+									<label>Employee ID :</label>
+									<input type="text" name="employee_id" class="form-control font-sizee widthinput" value=""/>
+								</div>
+								<div>
+									<label>Username :</label>
+									<input type="text" name="username" class="form-control font-sizee widthinput" value=""/>
+								</div>
+							</div>
 							<div>
                                 <label>Email Address :</label>
-                                <input type="text" name="employee_id" class="form-control font-sizee" value=""/>
+                                <input type="text" name="employee_id" class="form-control font-sizee widthinput" value=""/>
+                            </div>
+							<div>
+                                <label>Last Name :</label>
+                                <input type="text" name="username" class="form-control font-sizee widthinp" value=""/>
+                            </div>
+							<div>
+                                <label>First Name :</label>
+                                <input type="text" name="username" class="form-control font-sizee widthinp" value=""/>
+                            </div>
+							<div>
+                                <label>Middle Name :</label>
+                                <input type="text" name="username" class="form-control font-sizee widthinp" value=""/>
                             </div>
 							<div>
                                 <label>Birthday :</label>
@@ -237,11 +258,25 @@ include "db/announcementquery.php";
                                 <input type="text" name="employee_id" class="form-control font-sizee" value=""/>
                             </div>
 							<div>
-								<label>Category :</label>
+								<label>User Type :</label>
 								<select name="cid" class="form-control font-sizee">
-								<option value="" >Admin</option>
+									<option value="" >Official</option>
 									<option value="" selected="">Employee</option>
 									<option value="" >Admin</option>
+								</select>  
+							</div>
+							<div>
+								<label>Department :</label>
+								<select name="cid" class="form-control font-sizee">
+									<option value="" >BRGY OFFICIAL</option>
+									<option value="" >ADMIN</option>
+									<option value="" >BCPC</option>
+									<option value="" >VAWC</option>
+									<option value="" >LUPON</option>
+									<option value="" >ACCOUNTING</option>
+									<option value="" >BPSO</option>
+									<option value="" >REQUEST DOCUMENT</option>
+									<option value="" >COMPLAINT</option>
 								</select>  
 							</div>
 
@@ -259,7 +294,7 @@ include "db/announcementquery.php";
 							<br/>
                             <div>
                                 <input type="submit" class="btn-success btn form-control font-sizee btnmargin" value="Update" name="btnEditDetails" />
-                                <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="postannouncement.php">Back</a>
+                                <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="usermanagement.php">Back</a>
                             </div>
                         </form>
 		</div>

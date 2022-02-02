@@ -210,6 +210,19 @@ include "db/user.php";
 
             a.login{cursor:pointer;};
             .center{text-align: center;}
+
+            span.topright{
+			display: flex;
+			float: right;
+			padding:8px 24px;
+			font-size: 25px;
+            }
+            .topright:hover {
+                color: red;
+                cursor: pointer;
+                float: right;
+                padding:8px 24px;
+            }
 	</style>
 
 </head>
@@ -272,6 +285,7 @@ include "db/user.php";
           <div id="id01" class="modal">
                 <div class="modal-content animate">
                     <span onclick="document.getElementById('id01').style.display='none'" class="topright">&times;</span>	
+                    
                     <span class="imgcontainer">
 						          <label>
                             <img src="resident-img/Brgy-Commonwealth_1.png" alt="">

@@ -131,7 +131,7 @@ if(!isset($_SESSION["type"]))
 			left: 0;
 			top: 0;
 			width: 100%; 
-			height: 120%; 
+			height: 100%; 
 			background-color: rgb(0,0,0); 
 			background-color: rgba(0,0,0,0.4); 
 			padding-top: 5px; 
@@ -185,10 +185,9 @@ if(!isset($_SESSION["type"]))
 			padding:8px 16px;
 		}
 		.send-message{margin: 15px 15px 15px 15px;}
-		
+		.viewbtn{width: 65px; height: 35px;}
+		.mrgn{margin-left: 65%; max-width: 70%}
 	 </style>
-   </head>
-	<body>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
@@ -250,9 +249,9 @@ if(!isset($_SESSION["type"]))
 			 </li>
 			</ul>
 		  </div>
-																						<!-- Middle Section -->
+			<!-- Middle Section -->
 		  <section class="home-section">
-																						<!-- Top Section -->
+			<!-- Top Section -->
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
@@ -264,24 +263,15 @@ if(!isset($_SESSION["type"]))
 					</div>
 				  </div>
 			  </section>
-			  <div class="search_content">
-                        <label for="">Search: 
-                            <input class="r_search" type="search">
-							<i class='bx bx-search'></i>
-                        </label>
-                        <label class="select__select" for="">Filter by: 
-                            <select class="selection">
-                                <option disabled>--Select--</option>
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="decline">Decline</option>
-                            </select>
-								<i class='bx bx-sort'></i>
-                        </label>
-                </div> 
 				
 																					<!-- Table-->
 				<div class="reg_table " >
+					<div style="text-align: center;">
+						<hr>
+							<h6>Barangay ID: Pending Request</h6>
+						<hr>
+					</div>
+				
 						<table class="content-table" id="table">
 							
 							<?php
@@ -317,7 +307,7 @@ if(!isset($_SESSION["type"]))
 							foreach($countnum as $data) 
 							{
 							?>
-
+							<tbody>
 								<tr class="table-row">
 									<td><?php echo $data ['barangay_id']; ?></td>
 									<td><?php echo $data ['fname']; ?></td>
@@ -331,14 +321,14 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['emrgncycontact']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
-									<td><a class="view_approvebtn"><?php echo $data ['id_image']; ?></a></td>
+									<td><img src="img/fileupload_barangayid/<?php echo $data ['id_image']; ?>" width="90" height="90"></td>
 									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $user;?>"></td>
 
 									<td><button class="view_approvebtn">Approve</button>
-									<button class="view_approvebtn view_declinebtn">Decline</button></td>
+									<button class="view_approvebtn view_declinebtn">Deny</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
-							
+							</tbody>
 								<div id="id2" class="employeemanagement-modal modal" >
 													<div class="modal-contentemployee animate" >
 														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -392,115 +382,15 @@ if(!isset($_SESSION["type"]))
 							?>
 						</table>
 				</div>
-					
-<!-- Barangay ID PRINT -->
-					
-			<div class="document-light-grey document-section">
-						<button onclick="myFunction('hidedocument3')" class="document-button document-block documentbtn">Show more</button>
-						
-				<div id="hidedocument3"	 class="document-hide">
-					<div class="barangayid_print">
-						<div class="id_dashed">
-								<fieldset>
-									<legend class="legend_brgyID">Barangay ID </legend>
-									<section>
-										<div class="background_id" style="padding-top: 15px; width: 965px;  height: 344px;">
-											<div style="display: flex;">
-												<img style="float: left; width: 80px; height: 70px; margin-left: 15px;" src="../img/QCSealnew.png">
-													<div>
-														<p class="center_description" style="font-size: 15px; padding-left: 75px;">Republika ng Pilipinas</p>
-														<p class="center_description" style="color: #1700cd; padding-left: 35px;">BARANGAY COMMONWEALTH</p>
-														<p class="center_description" style="font-size: 13px; padding-left: 55px">Lungsod Quezon, Metro Manila</p>
-														<p class="center_description">Tel. No.: 427-9210/ TeleFax No.: 951-7912</p>
-													</div>
-												<img style=" display: flex; float: right; width: 80px; height: 80px;" class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
-												
-												<div style=" padding-left: 45px; padding-right: 45px;">
-													<div style="position: absolute; padding-left: 5px; border: 2px solid; width: 430px; height: 100px; font-size: 15px;">
-														In case of emergency pls. notify:  <input type="text" name="guardianname" id="guardianname" class="form-control borderstyle" style="position: absolute; width: 325px; height: 24px; margin-left: 65px; background:#C8CB58;"><br>
-														Name:  <input type="text" name="reladdress" id="reladdress" class="form-control borderstyle" style="position: absolute; width: 325px; height: 24px; margin-left: 65px; background:#C8CB58;"><br>
-														Address: <input type="text" name="emrgncycontact" id="emrgncycontact" class="form-control borderstyle" style="position: absolute; width: 325px; height: 24px; margin-left: 65px; background:#C8CB58;"><br>
-														Tel no.:
-														
-														<div style="position: absolute; padding-left: 5px; border: 2px solid; width: 100px; height: 100px; font-size: 15px; margin-top: -90px; margin-left: 323px; background: #ffffff; font-size: 10px; padding-top: 60px; text-align: center;">
-														Bearer's Right Thumb Mark
-														</div>
-													</div>
-												</div>
-													
-											</div>
-											<div>
-											<hr style="border: 1px solid #000000; border-radius: 5px; margin: 0; width: 490px;"> 
-										</div>
-											<div style="display: flex;">
-												<div style="background: white; width: 115px; height: 115px; margin-top: 8px; margin-left: 8px;">
-													<p style="padding-top: 130px">ID NO.: <input type="text" name="residentid" id="residentid" class="form-control borderstyle" style="width: 80px; height: 24px; background:#C8CB58;"></p>
-													<div style="background: #f9232c; width: 250px; color: white;">
-													BARANGAY RESIDENT ID CARD
-													</div>
-													
-												</div>
-												
-												<div style="display: flex; padding-top: 10px; font-size: 13px;">
-													<div style="line-height: 0.3;">
-														<p class="personal_information" style="color: #1700cd;">LAST NAME</p>
-														<input type="text" name="lname" id="lname" class="form-control borderstyle" style="width: 100px; height: 24px; margin-left: 25px; background:#C8CB58;">
-														<p class="personal_information" style="padding-top: 9px; color: #1700cd;">ADDRESS</p>
-														<input type="text" name="address" id="address" class="form-control borderstyle" style="position: absolute; width: 325px; height: 24px; margin-left: 25px; background:#C8CB58;">
-														<p class="personal_information" style="color: #1700cd; padding-top: 35px; line-height: none;">BIRTHDATE</p>
-														<input type="text" name="birthday" id="birthday" class="form-control borderstyle" style="width: 100px; height: 24px; margin-left: 25px; background:#C8CB58;">
-													</div>
-													<div style="line-height: 0.3;">
-														<p class="personal_information" style="color: #1700cd;">FIRST NAME</p>
-														<input type="text" name="fname" id="fname" class="form-control borderstyle" style="width: 90px; height: 24px; margin-left: 25px; background:#C8CB58;">
-														<p style="padding-left: 8px; color: #1700cd;  padding-top: 62px;">PLACE OF BIRTH</p>
-														<input type="text" name="placeofbirth" id="placeofbirth" class="form-control borderstyle" style="width: 90px; height: 24px; margin-left: 25px; background:#C8CB58;">
-
-													</div>
-													
-													<div style="line-height: 0.3;">
-														<p class="personal_information" style="color: #1700cd;">MIDDLE INITIAL</p>
-														<input type="text" name="mname" id="mname" class="form-control borderstyle" style="width: 85px; height: 24px; margin-left: 35px; background:#C8CB58;">
-														<div style="position: absolute; width: 450px; height: 100px; line-height: 1.5; margin-left: 180px; text-align: center; padding-right: 150px; margin-top:-25px; ">
-														This certifies that the person whose name, signature and picture on the reverse side of this card is a registered voter and bonafide resident of BARANGAY COMMONWEALTH
-														</div>
-														<div style="position: absolute;  width: 450px; height: 100px; line-height: 1.5; margin-left: 180px; text-align: center; padding-right: 150px; margin-top:55px;">
-														This ID is issued granting the Bearer for what legal purposes it may serve.
-														</div>
-														
-														<p class="personal_information" style="color: #1700cd; padding-top: 62px;">PRECINT NO.</p>
-														<input type="text" name="lname" id="lname" class="form-control borderstyle" style="width: 90px; height: 24px; margin-left: 25px; background:#C8CB58;">
-														<span style="margin-right: 15px;">
-															<p style="margin-top: 25px; margin-left: 10px; line-height: 0.5;">____________</p>
-															<p style="position: absolute; margin-top: 5px;  inline-block: none; font-size: 12px;">BEARER'S SIGNATURE</p>
-														</span>
-														
-														<div style="margin-left: 200px; font-size: 12px; margin-top: -45px; color: #1700cd;">
-															DATE ISSUED: 
-															<input type="date" name="dateissue" id="dateissue" class="form-control" style="width: 150px; height: 24px; margin-left: -15px; margin-top: 5px; background:#C8CB58; font-size: 12px;">
-														</div>
-														<div style="margin-left: 340px; font-size: 12px; margin-top: -33px; color: #1700cd;">
-															EXPIRED AT YEAR END:
-															<input type="date" name="dateissued" id="dateissued" class="form-control" style="width: 150px; height: 24px; margin-top: 5px; background:#C8CB58; font-size: 12px; border: none;">
-
-														</div>
-														<div style="margin-left: 430px; font-size: 12px; margin-top: 5px; text-align: center;">
-															<h5> MANUEL A. CO</h5>
-															<p>Barangay Chairman</p>
-														</div>
-													</div>
-												</div>
-											</div>
-									</section>
-								</fieldset>
-							</div>
-						</div>
+				<div style="display: flex;" class="mrgn document-section">
+					<div>
+						<label style="font-size: 14px;">Approved: </label>
+						<button class="btn btn-success viewbtn" onclick="window.location.href='barangayidapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>
 					</div>
-	
-
-						<button class="permitbtn" style="float: right; padding: 5px 5px 5px 5px;" onclick="window.print(); ">
-							<i class="bx bx-save saveicon"></i>
-						</button>
+					<div>
+						<label style="font-size: 14px;">Deny: </label>
+						<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayidapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+					</div>
 				</div>
 			</div>
 	</section>	
