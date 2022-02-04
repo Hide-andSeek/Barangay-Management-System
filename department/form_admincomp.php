@@ -40,6 +40,7 @@ if(!isset($_SESSION["type"]))
 		$ex_complaints = $_POST['ex_complaints'];
 		$dept = $_POST['dept'];
 		$app_date = $_POST['app_date'];
+		$status = $_POST['status'];
 		$app_by = $_POST['app_by'];
 
 		// $stmt = $db->prepare("INSERT INTO admin_complaints(blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by) SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, id_name, id_image FROM blotterdb");
@@ -64,14 +65,9 @@ if(!isset($_SESSION["type"]))
 			$stmt->bindParam(':dept', $dept);
 			$stmt->bindParam(':app_date', $app_date);
 			$stmt->bindParam(':app_by', $app_by);
+
+
 				
-<<<<<<< HEAD
-=======
-			$stmt = $db->prepare("DELETE blotter_id FROM blotterdb WHERE blotter_id IN (SELECT TOP 1 blotter_id FROM blotterdb ORDER BY blotter_id ASC)");
-			// $stmt = $db->prepare("DELETE FROM blotterdb
-			// 						WHERE blotter_id = ?");
-				
->>>>>>> 1474665cc84701e8cce547f9eb9e20bbd5199a58
 		if($stmt->execute()){
 			echo "<script>
 					alert('Successfully added!');
@@ -84,6 +80,13 @@ if(!isset($_SESSION["type"]))
 		}	
 	}
 	?>
+
+
+	<!-- <?php
+	//  if(isset($_POST['approvebtn'])){
+	// 	$stmt = $db->prepare("UPDATE blotterdb SET status ='Done' WHERE blotter_id = :blotter_id");
+		 
+	?>  -->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -283,7 +286,7 @@ if(!isset($_SESSION["type"]))
 				<?php 
 					require '../db/conn.php';
 
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -303,7 +306,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 
-						$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+						$query = "SELECT * FROM admin_complaints Where dept='BPSO' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -323,7 +326,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query = "SELECT * FROM admin_complaints Where dept='VAWC' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -342,7 +345,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query = "SELECT * FROM admin_complaints Where dept='BCPC' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -374,7 +377,7 @@ if(!isset($_SESSION["type"]))
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id ASC");
+							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE status='Pending' ORDER BY blotter_id ASC");
 							$mquery ->execute();
 							$countn = $mquery->fetchAll();
 							?>
@@ -519,7 +522,7 @@ if(!isset($_SESSION["type"]))
 
 															<div class="information col">
 																<label class="employee-label"> Complaints </label>
-																<textarea name="ex_complaints" class="form-control inputtext inputele " id="ex_complaints" ><?php echo $data['complaints']; ?></textarea>
+																<textarea name="ex_complaints" class="form-control inputtext " id="ex_complaints" ><?php echo $data['complaints']; ?></textarea>
 															</div>
 															</div>
 															
@@ -551,10 +554,21 @@ if(!isset($_SESSION["type"]))
 																<label class="employee-label"> Approved By </label>
 																<input class="form-control inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 															</div>
+																<div class="form-group">
+																<input required type="hidden" class="form-control form-text form-text-desc" id="status" name="status" value="Done">
+																</div>
+																<br>
+
 																<div class="information">   
 																<button type="submit" id="approvebtn" name="approvebtn" value="empBtn" class="inputtext submtbtn approvebtn"><i class="bx bx-check"></i>Approve
-																</button>  
+																
+															</button>  
 															</div>
+
+															
+															<div class="information">   
+																<button type="submit" id="donebtn" name="donebtn" value="empBtn" class="inputtext submtbtn donebtn"><i class="bx bx-check"></i>DONE
+															</button> 
 															</div>
 										                	</div>
 													</form>
