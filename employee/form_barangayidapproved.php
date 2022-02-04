@@ -277,7 +277,7 @@ if(!isset($_SESSION["type"]))
                             <input class="r_search" type="search">
 							<i class='bx bx-search'></i>
                         </label>
-                        <label class="select__select" for="">Filter by: 
+                        <!-- <label class="select__select" for="">Filter by: 
                             <select class="selection">
                                 <option disabled>--Select--</option>
                                 <option value="pending">Pending</option>
@@ -285,7 +285,7 @@ if(!isset($_SESSION["type"]))
                                 <option value="decline">Decline</option>
                             </select>
 								<i class='bx bx-sort'></i>
-                        </label>
+                        </label> -->
                 </div> 
 				
 																					<!-- Table-->
@@ -296,7 +296,7 @@ if(!isset($_SESSION["type"]))
 							include "../db/conn.php";
 							include "../db/user.php";
 	
-							$stmt = $db->prepare("SELECT * FROM barangayid ORDER BY barangay_id DESC");
+							$stmt = $db->prepare("SELECT * FROM approved_brgyids ORDER BY app_brgyid DESC");
 							$stmt->execute();
 							$datalist = $stmt->fetchAll();
 							if (count($datalist) > 0) {
@@ -326,20 +326,21 @@ if(!isset($_SESSION["type"]))
 							foreach ($datalist as $data) {
 							?>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
+									<td><?php echo $data ['app_brgyid']; ?></td>
 									<td><?php echo $data ['fname']; ?></td>
 									<td><?php echo $data ['mname']; ?></td>
 									<td><?php echo $data ['lname']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['placeofbirth']; ?></td>
+									<td><?php echo $data ['contact_no']; ?></td>
 									<td><?php echo $data ['guardianname']; ?></td>
-									<td><?php echo $data ['reladdress']; ?></td>
 									<td><?php echo $data ['emrgncycontact']; ?></td>
+									<td><?php echo $data ['reladdress']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
-									<td><img  src="img/fileupload_barangayid/<?php echo $data['id_image'];?>" width="90" height="90"/></td>
-									<td>Employee</td>
+									<td><?php echo $data ['emailadd']; ?></td>
+									<!-- <td><img  src="img/fileupload_barangayid/<?php echo $data['id_image'];?>" width="90" height="90"/></td> -->
+									<td><?php echo $data ['approvedby']; ?></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('reply_<?php echo $data['barangay_id'];?>').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
 							
@@ -394,7 +395,7 @@ if(!isset($_SESSION["type"]))
 							<?php
 							}
 							} else {
-								echo "<div class='errormessage'>
+								echo "<div style='text-align: center;' class='errormessage'>
 									  <i class='bx bx-error'></i>
 									  No data to be shown!
 									  </div>";

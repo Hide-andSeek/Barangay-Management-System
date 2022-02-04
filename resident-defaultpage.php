@@ -279,8 +279,7 @@ include "db/user.php";
                         <li class="logdropdown">
                           <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user;?></a>
                           <span class="logdropdown-content">
-                              <a class="page-scroll" href="resident_logout.php">Logout</a>
-                              <a href="#">View Profile</a>
+                              <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
                           </span>
 						            </li>
                     </ul>

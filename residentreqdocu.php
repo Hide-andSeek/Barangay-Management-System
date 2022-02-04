@@ -1,7 +1,27 @@
-<?php session_start();
+<?php 
+session_start();
+
+include "db/conn.php";
+include "db/documents.php";
+include "db/user.php";
+
+// // set time for session timeout
+// $currentTime = time() + 25200;
+// $expired = 3600;
+
 if(!isset($_SESSION['email'])){
 	header("location: resident-defaultpage.php");
 }
+
+// // if current time is more than session timeout back to login page
+// if($currentTime > $_SESSION['timeout']){
+// 	session_destroy();
+// 	header("location:index.php");
+// }
+
+// // destroy previous session timeout and create new one
+// unset($_SESSION['timeout']);
+// $_SESSION['timeout'] = $currentTime + $expired;
 ?>
 <?php
 	$user = '';
@@ -11,13 +31,6 @@ if(!isset($_SESSION['email'])){
 	}
 ?>
 
-<?php 
-
-include "db/conn.php";
-include "db/documents.php";
-include "db/user.php";
-
-?>
 
 
 <!DOCTYPE html>
@@ -183,7 +196,7 @@ include "db/user.php";
         }
 
         /* Progressbar */
-        .progressbar {
+        .progressbar, .progressbar0 {
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -202,14 +215,25 @@ include "db/user.php";
         background-color: #dcdcdc;
         z-index: -1;
         }
+		.progressbar0::before,
+        .progress0 {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 4px;
+        width: 100%;
+        background-color: #dcdcdc;
+        z-index: -1;
+        }
 
-        .progress {
+        .progress, .progress0{
         background-color: var(--primary-color);
         width: 0%;
         transition: 0.3s;
         }
 
-        .progress-step {
+        .progress-step, .progress-step0 {
         width: 2.1875rem;
         height: 2.1875rem;
         background-color: #dcdcdc;
@@ -224,7 +248,19 @@ include "db/user.php";
         content: counter(step);
         }
 
+		.progress-step0::before {
+        counter-increment: step;
+        content: counter(step);
+        }
+
         .progress-step::after {
+        content: attr(data-title);
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        font-size: 0.85rem;
+        color: #666;
+        }
+		.progress-step0::after {
         content: attr(data-title);
         position: absolute;
         top: calc(100% + 0.5rem);
@@ -237,21 +273,26 @@ include "db/user.php";
         color: #f3f3f3;
         }
 
-        /* Form */
-        .form {
+		.progress-step-active0 {
+        background-color: var(--primary-color);
+        color: #f3f3f3;
+        }
+
+        /* Form 
+        .form, .form0 {
         width: clamp(320px, 30%, 430px);
         margin: 0 auto;
         border-radius: 0.35rem;
         padding: 1.5rem;
-        }
+        }*/
 
-        .form-step {
+        .form-step, .form-step0 {
         display: none;
         transform-origin: top;
         animation: animate 0.5s;
         }
 
-        .form-step-active {
+        .form-step-active, .form-step-active0 {
         display: block;
         }
 
@@ -271,13 +312,13 @@ include "db/user.php";
         }
 
         /* Button */
-        .btns-group {
+        .btns-group, .btns-group0 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
         }
 
-        .btn {
+        .btn, .btn0 {
         padding: 0.75rem;
         display: block;
         text-decoration: none;
@@ -289,6 +330,9 @@ include "db/user.php";
         transition: 0.3s;
         }
         .btn:hover {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+        }
+		.btn0:hover {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
         }
 
@@ -318,7 +362,7 @@ include "db/user.php";
 		}
 		.left_userpersonal_info1{margin-bottom: 30px;}
 		.imgback{width: 60%; height: 60%;}
-		.reminder{background: #FCF8F2; padding: 20px 20px 20px 20px;}
+		.reminder{background: #FCF8F2; padding: 5px 5px 5px 5px;}
         .reminder-heading{color: #EEA236}
         .blockqoute-color{border-left-color: #EEA236;}
 		#fade { transition: all 1s; }
@@ -329,12 +373,13 @@ include "db/user.php";
 		opacity: 0;
 		height: 0; /* OPTIONAL */
 		}
+
+		.flexi{display: flex;}
+		.hideinp{pointer-events: none;}
 	</style>
 </head>
 
 <body onload="display_ct()" id="#documents">
-    
-
     <header id="header">
          <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top navnav">
@@ -380,8 +425,7 @@ include "db/user.php";
                         <li class="logdropdown">
 							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
 							<span class="logdropdown-content">
-								<a class="page-scroll" href="resident_logout.php">Logout</a>
-								<a href="#">View Profile</a>
+								<a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
 							</span>
 						</li>
                     </ul>
@@ -391,17 +435,12 @@ include "db/user.php";
             <!-- /.container-fluid -->
         </nav>
     </header>
-	
 	<!--Document Section-->
 <div class="document_section">
 	<section>
 		<h2>Request Document</h2>
 		<label>Read the Instruction -> <a href="instructions.php">Here </a></label>
-		<!-- <blockquote class="blockqoute-color">
-			<p class="reminder"><label class="reminder-heading">Reminder/ Paalala: </label>Upon requesting your document, please fill out the information below. (Your information will reflect to documents you are requesting. <strong> Kindly check first before submitting,</strong> in order to avoid typo error).
-			</p>
-			<a value="Toggle" onclick="toggle()"> Show Tagalog Translation</a> <br> <span id="fade">Sa paghiling ng iyong dokumento, mangyaring punan ang impormasyon sa ibaba. (Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago isumite. Upang maiwasan ang typo error).</span>
-		</blockquote> -->
+		
 		<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument')" style="border-top-right-radius: 20px;border-top-left-radius: 20px;"  id="barangayid" class="document-button document-block documentbtn form-control documentbtn bgcolor">
 			<h5><i class="bx bx-id-card"></i>
@@ -410,18 +449,19 @@ include "db/user.php";
 								<div class="preview">
 										<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 										<div class="right_userpersonal_info">
+												
 											    <!-- Progress bar -->
 												<div class="progressbar">
 												<div class="progress" id="progress"></div>
 											
 												<div
 												class="progress-step progress-step-active"
-												data-title="Information"
+												data-title="Personal Information"
 												></div>
-												<div class="progress-step" data-title="Contact"></div>
+												<div class="progress-step" data-title="Emergency Contact Information"></div>
 												<div class="progress-step" data-title="Submission"></div>
 											</div>
-
+											
 											<!-- Steps -->
 											<div class="form-step form-step-active">
 												<div class="input-group">
@@ -431,22 +471,22 @@ include "db/user.php";
 															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname" placeholder="First Name">
+																	<input required type="text" class="form-control form-text form-text-desc" id="fname" name="fname" placeholder="Please write your First name">
 																</div><br/><br/>
 																							
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
-																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" placeholder="Middle Name">
+																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" placeholder="Please write your Middle Name">
 																</div><br><br/>
 																							
 																<div class="form-group">
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname" placeholder="Last Name">
+																	<input required type="text" class="form-control form-text form-text-desc" id="lname" name="lname" placeholder="Please write your Last Name">
 																</div><br><br/>
 																							
 																<div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="address" name="address">
+																	<input required type="text" class="form-control form-text form-text-desc" id="address" name="address" placeholder="#Blk No. Street City/Town">
 																</div></br><br/>
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">						
@@ -457,12 +497,12 @@ include "db/user.php";
 																							
 																<div class="form-group">
 																	<label for="pob">Place of Birth: <i class="red">*</i></label>
-																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth">
+																	<input required type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth" placeholder="Please write your Place of Birth">
 																</div><br><br/>
 																							
 																<div class="form-group">
 																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
-																	<input type="tel" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" placeholder="Ex. 09123456789" name="contact_no" onKeyPress="if(this.value.length==11) return false;">
+																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
 																</div><br><br/>
 
 																<div class="form-group">
@@ -473,7 +513,7 @@ include "db/user.php";
 															</div>
 														</fieldset>
 													</div> <br>
-												<a class="btn btn-next width-50 ml-auto" type="submit">Next</a>
+												<a class="btn btn-next width-50 ml-auto">Next</a>
 												</div>
 											</div>
 
@@ -483,7 +523,7 @@ include "db/user.php";
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-															<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname">
+															<input required type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname" placeholder="Ex. Your Relative">
 														</div><br>
 																							
 														<div class="form-group">
@@ -493,7 +533,7 @@ include "db/user.php";
 																							
 														<div class="form-group">
 															<label for="reladdress">Address: <i class="red">*</i></label>
-															<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress" placeholder="# Street City/Town">
+															<input required type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress" placeholder="#Blk No. Street City/Town">
 														</div><br>
 																							
 														<div class="form-group">
@@ -504,10 +544,11 @@ include "db/user.php";
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group ">
 															<label for="file">Attach Your Files: <i class="red">*</i></label>
-															<input required type='file' class="form-control" name='files[]' />
+															<input required type='file' class="form-control" name='files[]'/>
 														</div><br>
+													
 													</div>
-
+													
 													</fieldset>
 													<br>
 												<div class="btns-group">
@@ -546,11 +587,21 @@ include "db/user.php";
 												</fieldset>
 											</div> -->
 											<div class="form-step">
-												<label>Kindly check your information first: Before submitting (Just to avoid typo error)</label>
-												<div class="btns-group">
-												<a class="btn btn-prev">Previous</a>
-												<input type="submit" name="brgyidbtn" value="Submit" class="btn" />
-												</div>
+												<fieldset class="field_set">
+													<legend style="text-align: center;">Submission</legend>
+													<blockquote class="blockqoute-color">
+														<p class="reminder"><label class="reminder-heading">Reminder/ Paalala: </label>Upon requesting your document, please fill out the information below. (Your information will display to documents you are requesting. <strong> Kindly check first before submitting,</strong> in order to avoid typographical error).
+														</p>
+														<!-- <a value="Toggle" onclick="toggle()"> Show Tagalog Translation</a> <br> <span id="fade">Sa paghiling ng iyong dokumento, mangyaring punan ang impormasyon sa ibaba. (Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago isumite. Upang maiwasan ang typo error).</span> -->
+													</blockquote>
+														<div class="form-group">
+															<input required type="hidden" class="form-control form-text form-text-desc" id="status" name="status" value="Pending">
+														</div><br>
+													<div class="btns-group">
+													<a class="btn btn-prev">Previous</a>
+													<input type="submit" name="brgyidbtn" value="Submit" class="btn" />
+													</div>
+												</fieldset>
 											</div>
 											</form>
 								</div>
@@ -714,7 +765,7 @@ include "db/user.php";
 
 																<div class="form-group">
 																	<label>Status: </label>
-																	<select class="form-control" name="status">
+																	<select class="form-control" name="status" type="hidden">
 																		<option disabled>--Select--</option>
 																		<option value="SINGLE">SINGLE</option>
 																		<option value="MARRIED">MARRIED</option>
@@ -794,12 +845,28 @@ include "db/user.php";
 					Online Blottering</h5></button>
 						<div id="hidedocument4" class="document-hide">
 							<div class="preview">
-							<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-											  <section class="userpersonal_form">
-														<div class="left_userpersonal_info">
-															<fieldset class="field_set">
-																<legend>Personal Information</legend>
-																<div class="form-group">
+							<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+										<div class="right_userpersonal_info">
+											    <!-- Progress bar -->
+												<div class="progressbar0">
+												<div class="progress0" id="progress0"></div>
+											
+												<div
+												class="progress-step0 progress-step-active0"
+												data-title="Complainant's Information"
+												></div>
+												<div class="progress-step0" data-title="Violator's Information"></div>
+												<div class="progress-step0" data-title="Submission"></div>
+											</div>
+
+											<!-- Steps -->
+											<div class="form-step0 form-step-active0">
+												<div class="input-group">
+												<div >
+														<fieldset class="field_set">
+															<legend style="text-align: center;">Complainant's Information</legend>
+															<div class="left_userpersonal_info left_userpersonal_info1">
+															<div class="form-group">
 																	<label for="n_complainant">Name of Complainant: </label>
 																	<input required type="text" class="form-control form-text" id="n_complainant" name="n_complainant">
 																</div><br>
@@ -822,8 +889,9 @@ include "db/user.php";
 																	<label for="comp_address">Address: </label>
 																	<input required type="text" class="form-control form-text" id="comp_address" name="comp_address">
 																</div><br>	
-
-																<div class="form-group">
+															</div>	
+															<div class="left_userpersonal_info left_userpersonal_info1">						
+															<div class="form-group">
 																	<label for="inci_address">Incident Address: </label>
 																	<input required type="text" class="form-control form-text" id="inci_address" name="inci_address">
 																</div><br>
@@ -832,80 +900,139 @@ include "db/user.php";
 																	<label for="contactno">Contact No.: <i class="red">*</i></label>
 																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" onKeyPress="if(this.value.length==11) return false;">
 																</div><br>
-															</fieldset>
-														</div>
-													
-													<div class="right_userpersonal_info">
-														<fieldset class="field_set">
-																<legend>Other Information</legend>
-
-																<div class="form-group">
-																	<label for="n_violator">Name of Violator: </label>
-																	<input required type="text" class="form-control form-text" id="n_violator" name="n_violator">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="violator_age">Age: </label>
-																	<input required type="number" class="form-control form-text age" id="violator_age" name="violator_age" >
-																</div><br>
-
-																<div class="form-group">
-																	<label>Gender: </label>
-																	<select class="form-control" name="violator_gender">
-																		<option disabled>--Select--</option>
-																		<option value="Male">Male</option>
-																		<option value="Female">Female</option>
-																	</select>
-																</div><br>
-
-																<div class="form-group">
-																	<label for="relationship">Relationship: </label>
-																	<select class="form-control" name="relationship">
-																		<option disabled>--Select--</option>
-																		<option value="Relative/Family">Relative/Family</option>
-																		<option value="Others">Others</option>
-																	</select>
-																</div><br>
-
-																<div class="form-group">
-																	<label for="violator_address">Address: </label>
-																	<input required type="text" class="form-control form-text" id="violator_address" name="violator_address">
-																</div><br>
-														</fieldset>
-														<div>
-																<div class="form-group">
-																	<label for="witnesses">Witnesses: </label>
-																	<input required type="text" class="form-control form-text" id="witnesses" name="witnesses">
-																</div><br>
-
-																<div class="form-group">
-																	<label for="complaints">Complaints: </label>
-																	<textarea name="complaints" id="complaints" cols="30" rows="10" class="form-group"></textarea>
-																</div><br>
-														</div>
-														<div>
 																
-																<div class="form-group">
-																	<label for="id_type">ID Type: </label>
-																	<select class="form-control form-text" name="id_type">
-																		<option disabled>--Select--</option>
-																		<option value="Barangay ID">Barangay ID</option>
-																		<option value="SSS">SSS</option>
-																		<option value="PhilHealth">PhilHealth</option>
-																		<option value="Passport ID">Passport ID</option>
-																		<option value="Barangay Clearance">Barangay Clearance</option>
-				
-																	</select>
-																</div><br>
-																<div class="form-group">
-																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
-																	<input type='file' name='files[]' required/>
-																</div>
+															</div>
+														</fieldset>
+													</div> <br>
+												<a class="btn0 btn-next0 width-50 ml-auto" type="submit">Next</a>
+												</div>
+											</div>
+
+											<div class="form-step0">
+											<fieldset class="field_set">
+													<legend style="text-align: center;">Violator's Information</legend>
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="n_violator">Name of Violator: </label>
+															<input required type="text" class="form-control form-text" id="n_violator" name="n_violator">
+														</div><br>
+
+														<div class="form-group">
+															<label for="violator_age">Age: </label>
+															<input required type="number" class="form-control form-text age" id="violator_age" name="violator_age" >
+														</div><br>
+
+														<div class="form-group">
+															<label>Gender: </label>
+															<select class="form-control" name="violator_gender">
+																<option disabled>--Select--</option>
+																<option value="Male">Male</option>
+																<option value="Female">Female</option>
+															</select>
+														</div><br>
+
+														<div class="form-group">
+															<label for="relationship">Relationship: </label>
+															<select class="form-control" name="relationship">
+																<option disabled>--Select--</option>
+																<option value="Relative/Family">Relative/Family</option>
+																<option value="Others">Others</option>
+															</select>
+														</div><br>
+
+													</div>
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="violator_address">Address: </label>
+															<input required type="text" class="form-control form-text" id="violator_address" name="violator_address">
+														</div><br>
+
+														<div class="form-group">
+															<label for="witnesses">Witnesses: </label>
+															<input required type="text" class="form-control form-text" id="witnesses" name="witnesses">
+														</div><br>
+
+														<div class="form-group">
+															<label for="complaints">Complaints: </label>
+															<textarea name="complaints" id="complaints" cols="38"></textarea>
+														</div><br>
+
+														<div class="form-group">
+															<input required type="hidden" class="form-control form-text" id="status" name="status" value="Pending">
+														</div><br>
+													</div>
+													</fieldset>
+													<br>
+												<div class="btns-group0">
+												<a class="btn0 btn-prev0">Previous</a>
+												<a class="btn0 btn-next0">Next</a>
+												</div>
+											</div>
+											<!-- <div class="form-step">
+												<fieldset class="field_set">
+												<legend style="text-align: center;">Files</legend>
+												<div class="left_userpersonal_info left_userpersonal_info1">
+													<div>
+														
+														<div class="form-group">
+															<label>Status: </label>
+															<select class="form-control" name="status">
+																<option disabled>--Select--</option>
+																<option value="SINGLE">SINGLE</option>
+																<option value="MARRIED">MARRIED</option>
+															</select>
+														</div><br>
+													</div>
+													<div style="text-align: center;">
+														<div class="form-group">
+															<label>GCash QR Code</label>
+															<img width="120" height="120" src="resident-img/barcode_1.png" alt="">
+															<label >Scan to Pay</label>
 														</div>
-													
-												</section>
-													<button type="submit" name="blotterbtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
-										  </form> 
+													</div>
+													</div>
+													<br>
+													<div class="btns-group">
+													<a class="btn btn-prev">Previous</a>
+													<a class="btn btn-next">Next</a>
+													</div>
+												</fieldset>
+											</div> -->
+											<div class="form-step0">
+											<!-- <label>Kindly check your information first: Before submitting (Just to avoid typo error)</label> -->
+											<fieldset class="field_set">
+												<legend style="text-align: center;">Submission</legend>
+												<!-- <blockquote class="blockqoute-color">
+													<p class="reminder"><label class="reminder-heading">Reminder/ Paalala: </label><strong> Kindly check first before submitting,</strong> in order to avoid typographical error.
+													</p>
+													<a value="Toggle" onclick="toggle()"> Show Tagalog Translation</a> <br> <span id="fade">Sa paghiling ng iyong dokumento, mangyaring punan ang impormasyon sa ibaba. (Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago isumite. Upang maiwasan ang typo error).</span>
+												</blockquote> -->
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="file">Attach Files Here: <i class="red">*</i></label>
+															<input type='file' name='files[]' required/>
+														</div>
+
+														
+														<div class="form-group">
+															<label for="id_type">ID Type: </label>
+																<select class="form-control form-text" name="id_type">
+																	<option disabled>--Select--</option>
+																	<option value="Barangay ID">Barangay ID</option>
+																	<option value="SSS">SSS</option>
+																	<option value="PhilHealth">PhilHealth</option>
+																	<option value="Passport ID">Passport ID</option>
+																	<option value="Barangay Clearance">Barangay Clearance</option>
+																</select>
+														</div><br>
+													</div>
+												</fieldset>
+												<div class="btns-group0">
+													<a class="btn0 btn-prev0">Previous</a>
+													<input type="submit" name="blotterbtn" value="Submit" class="btn0" />
+												</div>
+											</div>
+											</form>
 							</div>
 						</div>
 				</div>
@@ -970,55 +1097,106 @@ include "db/user.php";
 				 document.querySelector("#date_issue").valueAsDate = new Date();
 				 document.querySelector("#dateissue").valueAsDate = new Date();
 				 document.querySelector("#dateissued").valueAsDate = new Date();
-			</script>
-			<script>
-				const prevBtns = document.querySelectorAll(".btn-prev");
-                const nextBtns = document.querySelectorAll(".btn-next");
-                const progress = document.getElementById("progress");
-                const formSteps = document.querySelectorAll(".form-step");
-                const progressSteps = document.querySelectorAll(".progress-step");
 
-                let formStepsNum = 0;
+				 // For progress bar
+				 const prevBtns = document.querySelectorAll(".btn-prev");
+        const nextBtns = document.querySelectorAll(".btn-next");
+        const progress = document.getElementById("progress");
+        const formSteps = document.querySelectorAll(".form-step");
+        const progressSteps = document.querySelectorAll(".progress-step");
 
-                nextBtns.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    formStepsNum++;
-                    updateFormSteps();
-                    updateProgressbar();
-                    });
-                });
+        let formStepsNum = 0;
 
-                prevBtns.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    formStepsNum--;
-                    updateFormSteps();
-                    updateProgressbar();
-                	});
-                });
+        nextBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            formStepsNum++;
+            updateFormSteps();
+            updateProgressbar();
+            });
+        });
 
-                function updateFormSteps() {
-                formSteps.forEach((formStep) => {
-                    formStep.classList.contains("form-step-active") &&
-                    formStep.classList.remove("form-step-active");
-                });
+        prevBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            formStepsNum--;
+            updateFormSteps();
+            updateProgressbar();
+            });
+        });
 
-                formSteps[formStepsNum].classList.add("form-step-active");
-                }
+        function updateFormSteps() {
+        formSteps.forEach((formStep) => {
+            formStep.classList.contains("form-step-active") &&
+            formStep.classList.remove("form-step-active");
+        });
 
-                function updateProgressbar() {
-                progressSteps.forEach((progressStep, idx) => {
-                    if (idx < formStepsNum + 1) {
-                    progressStep.classList.add("progress-step-active");
-                    } else {
-                    progressStep.classList.remove("progress-step-active");
-                    }
-                });
+        formSteps[formStepsNum].classList.add("form-step-active");
+        }
 
-                const progressActive = document.querySelectorAll(".progress-step-active");
+        function updateProgressbar() {
+        progressSteps.forEach((progressStep, idx) => {
+            if (idx < formStepsNum + 1) {
+            progressStep.classList.add("progress-step-active");
+            } else {
+            progressStep.classList.remove("progress-step-active");
+            }
+        });
 
-                progress.style.width =
-                    ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
-                }
+        const progressActive = document.querySelectorAll(".progress-step-active");
+
+        progress.style.width =
+            ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+        }
+
+        // 
+        const prevBtns0 = document.querySelectorAll(".btn-prev0");
+        const nextBtns0 = document.querySelectorAll(".btn-next0");
+        const progress0 = document.getElementById("progress0");
+        const formSteps0 = document.querySelectorAll(".form-step0");
+        const progressSteps0 = document.querySelectorAll(".progress-step0");
+
+        let formStepsNum0 = 0;
+
+        nextBtns0.forEach((btn0) => {
+        btn0.addEventListener("click", () => {
+            formStepsNum0++;
+            updateFormSteps0();
+            updateProgressbar0();
+            });
+        });
+
+        prevBtns0.forEach((btn0) => {
+        btn0.addEventListener("click", () => {
+            formStepsNum0--;
+            updateFormSteps0();
+            updateProgressbar0();
+            });
+        });
+
+        function updateFormSteps0() {
+        formSteps0.forEach((formStep) => {
+            formStep.classList.contains("form-step-active0") &&
+            formStep.classList.remove("form-step-active0");
+        });
+
+        formSteps0[formStepsNum0].classList.add("form-step-active0");
+        }
+
+        function updateProgressbar0() {
+        progressSteps0.forEach((progressStep, idx) => {
+            if (idx < formStepsNum0 + 1) {
+            progressStep.classList.add("progress-step-active0");
+            } else {
+            progressStep.classList.remove("progress-step-active0");
+            }
+        });
+
+        const progressActive0 = document.querySelectorAll(".progress-step-active0");
+
+        progress0.style.width =
+            ((progressActive0.length - 1) / (progressSteps0.length - 1)) * 100 + "%";
+        }
+
+
 			</script>
 			<script>
 				function toggle () {

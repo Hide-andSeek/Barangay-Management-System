@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+include "../db/conn.php";
+include "../db/documents.php";
+
+
 if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
@@ -187,6 +191,7 @@ if(!isset($_SESSION["type"]))
 		.send-message{margin: 15px 15px 15px 15px;}
 		.viewbtn{width: 65px; height: 35px;}
 		.mrgn{margin-left: 65%; max-width: 70%}
+		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -278,9 +283,10 @@ if(!isset($_SESSION["type"]))
 							include "../db/conn.php";
 							include "../db/user.php";
 							
-							$myquery = "SELECT * FROM barangayid";
-							$countnum = $db->query($myquery);
-							
+							$stmt = $db->prepare("SELECT * FROM barangayid ORDER BY barangay_id DESC");
+							$stmt->execute();
+							$datalist = $stmt->fetchAll();
+							if (count($datalist) > 0) {
 							?>
 							
 							<thead>
@@ -292,41 +298,46 @@ if(!isset($_SESSION["type"]))
 									<th>Address</th>
 									<th>Birthday</th>
 									<th>Place of Birth</th>
+									<th>Contact no</th>
 									<th>Guardian's Name</th>
-									<th>Relative Address</th>
 									<th>Emergency Contact</th>
+									<th>Relative Address</th>
 									<th>Date of Request</th>
-									<th>Date of Validity</th>
-									<th>Valid ID</th>
-									<th>Approved by</th>
+									<th>Email Address</th>
+									<th>Facilitate by</th>
 									<th>Action</th>
 									<th>Message</th>
 								</tr>                       
 							</thead>
 							<?php
-							foreach($countnum as $data) 
+							foreach($datalist as $data) 
 							{
 							?>
+							
 							<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['mname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['placeofbirth']; ?></td>
-									<td><?php echo $data ['guardianname']; ?></td>
-									<td><?php echo $data ['reladdress']; ?></td>
-									<td><?php echo $data ['emrgncycontact']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
-									<td><img src="img/fileupload_barangayid/<?php echo $data ['id_image']; ?>" width="90" height="90"></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" value="<?php echo $user;?>"></td>
+									<form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+									<td><input type="text" class="tblinput" name="app_brgyid" value="<?php echo $data ['barangay_id']; ?>"></td>
+									<td><input type="text" class="tblinput" name="fname" value="<?php echo $data ['fname']; ?>"></td>
+									<td><input type="text" class="tblinput" name="mname" value="<?php echo $data ['mname']; ?>"></td>
+									<td><input type="text" class="tblinput" name="lname" value="<?php echo $data ['lname']; ?>"></td>
+									<td><input type="text" class="tblinput" name="address" value="<?php echo $data ['address']; ?>"></td>
+									<td><input type="text" class="tblinput" name="birthday" value="<?php echo $data ['birthday']; ?>"></td>
+									<td><input type="text" class="tblinput" name="placeofbirth" value="<?php echo $data ['placeofbirth']; ?>"></td>
+									<td><input type="text" class="tblinput" name="contact_no" value="<?php echo $data ['contact_no']; ?>"></td>
+									<td><input type="text" class="tblinput" name="guardianname" value="<?php echo $data ['guardianname']; ?>"></td>
+									<td><input type="text" class="tblinput" name="emrgncycontact" value="<?php echo $data ['emrgncycontact']; ?>"></td>
+									<td><input type="text" class="tblinput" name="reladdress" value="<?php echo $data ['reladdress']; ?>"></td>
+									<td><input type="text" class="tblinput" name="dateissue" value="<?php echo $data ['dateissue']; ?>"></td>
+									<td><input type="text" class="tblinput" name="emailadd" value="<?php echo $data ['emailadd']; ?>"></td>
+									<!-- <td name="birthday"><img src="img/fileupload_barangayid/<?php echo $data ['id_image']; ?>" width="90" height="90"></td> -->
+									<td><input class="form-control" style="width: 135px; font-size: 13px; user-select: none;" name="approvedby" value="<?php echo $user;?>"></td>
 
-									<td><button class="view_approvebtn">Approve</button>
+									<td><button class="view_approvebtn" name="brgyidappbtn">Approve</button>
+									</form>
 									<button class="view_approvebtn view_declinebtn">Deny</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
+									
 								</tr>	
 							</tbody>
 								<div id="id2" class="employeemanagement-modal modal" >
@@ -378,6 +389,12 @@ if(!isset($_SESSION["type"]))
 											</div>
 							
 							<?php
+							}
+							} else {
+								echo "<div style='text-align: center;' class='errormessage'>
+									  <i class='bx bx-error'></i>
+									  No data to be shown!
+									  </div>";
 							}
 							?>
 						</table>

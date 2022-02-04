@@ -68,14 +68,15 @@ if(isset($_POST['clearancebtn'])){
 		$birthday = $_POST['birthday'];
 		$placeofbirth = $_POST['placeofbirth'];
 		$contact_no = $_POST['contact_no'];
+		$emailadd = $_POST['emailadd'];
 		$guardianname = $_POST['guardianname'];
 		$emrgncycontact = $_POST['emrgncycontact'];
 		$reladdress = $_POST['reladdress'];
 		$dateissue = $_POST['dateissue'];
-		$emailadd = $_POST['emailadd'];
+		$status = $_POST['status'];
 		$countfiles = count($_FILES['files']['name']);
-		
-		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, contact_no, guardianname, emrgncycontact, reladdress, dateissue, emailadd, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		$query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 		$stmt = $db->prepare($query);
 	
@@ -103,7 +104,7 @@ if(isset($_POST['clearancebtn'])){
 				) {
 					// Execute query
 					$stmt->execute(
-						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $contact_no, $guardianname, $emrgncycontact, $reladdress, $dateissue, $emailadd, $filename, $target_file));
+						array($fname,$mname, $lname, $address, $birthday, $placeofbirth, $contact_no, $emailadd,$guardianname, $emrgncycontact, $reladdress, $dateissue, $status, $filename, $target_file));
 				}
 			}
 		}
@@ -268,6 +269,7 @@ if(isset($_POST['blotterbtn'])){
 	$comp_gender = $_POST['comp_gender'];
 	$comp_address = $_POST['comp_address'];
 	$inci_address = $_POST['inci_address'];
+	$contactno = $_POST['contactno'];
 	$n_violator = $_POST['n_violator'];
 	$violator_age = $_POST['violator_age'];
 	$violator_gender = $_POST['violator_gender'];
@@ -276,9 +278,10 @@ if(isset($_POST['blotterbtn'])){
 	$witnesses = $_POST['witnesses'];
 	$complaints = $_POST['complaints'];
 	$id_type = $_POST['id_type'];
+	$status = $_POST['status'];
 	$countfiles = count($_FILES['files']['name']);
 		
-	$query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address, contactno, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, status, id_name, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	$stmt = $db->prepare($query);
 
@@ -303,7 +306,7 @@ if(isset($_POST['blotterbtn'])){
 			if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_file)) {
 				// Execute query
 				$stmt->execute(
-					array($n_complainant, $comp_age, $comp_gender, $comp_address, $inci_address, $n_violator, $violator_age, $violator_gender, $relationship, $violator_address, $witnesses, $complaints, $id_type, $filename, $target_file));
+					array($n_complainant, $comp_age, $comp_gender, $comp_address, $inci_address, $contactno, $n_violator, $violator_age, $violator_gender, $relationship, $violator_address, $witnesses, $complaints, $id_type, $status, $filename, $target_file));
 			}
 		}
 	}
@@ -313,5 +316,51 @@ if(isset($_POST['blotterbtn'])){
 			</script>";
 }
 
-
 ?>
+
+<?php
+if(isset($_POST['brgyidappbtn'])){
+	
+	$app_brgyid = $_POST['app_brgyid'];
+	$fname = $_POST['fname'];
+	$mname = $_POST['mname'];
+	$lname = $_POST['lname'];
+	$address = $_POST['address'];
+	$birthday = $_POST['birthday'];
+	$placeofbirth = $_POST['placeofbirth'];
+	$contact_no = $_POST['contact_no'];
+	$guardianname = $_POST['guardianname'];
+	$emrgncycontact = $_POST['emrgncycontact'];
+	$reladdress = $_POST['reladdress'];
+	$dateissue = $_POST['dateissue'];
+	$emailadd = $_POST['emailadd'];
+	$approvedby = $_POST['approvedby'];
+
+		$stmt = $db->prepare("INSERT INTO approved_brgyids (app_brgyid, fname, mname, lname, address, birthday, placeofbirth, contact_no, guardianname, emrgncycontact, reladdress, dateissue, emailadd, approvedby) VALUES (:app_brgyid, :fname, :mname, :lname, :address, :birthday, :placeofbirth, :contact_no, :guardianname, :emrgncycontact, :reladdress, :dateissue, :emailadd, :approvedby)");
+
+		$stmt->bindParam(':app_brgyid', $app_brgyid);
+		$stmt->bindParam(':fname', $fname);
+		$stmt->bindParam(':mname', $mname);
+		$stmt->bindParam(':lname', $lname);
+		$stmt->bindParam(':address', $address);
+		$stmt->bindParam(':birthday', $birthday);
+		$stmt->bindParam(':placeofbirth', $placeofbirth);
+		$stmt->bindParam(':contact_no', $contact_no);
+		$stmt->bindParam(':guardianname', $guardianname);
+		$stmt->bindParam(':emrgncycontact', $emrgncycontact);
+		$stmt->bindParam(':reladdress', $reladdress);
+		$stmt->bindParam(':dateissue', $dateissue);
+		$stmt->bindParam(':emailadd', $emailadd);
+		$stmt->bindParam(':approvedby', $approvedby);
+			
+	if($stmt->execute()){
+		echo "<script>
+				alert('Successfully added!');
+				window.location.href='barangayidapproval.php';
+			 </script>";
+	}else{
+		echo '<script>
+				alert("An error occured")
+			</script>';
+	}	
+}

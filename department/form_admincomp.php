@@ -60,9 +60,7 @@ if(!isset($_SESSION["type"]))
 			$stmt->bindParam(':dept', $dept);
 			$stmt->bindParam(':app_date', $app_date);
 			$stmt->bindParam(':app_by', $app_by);
-				if(isset($_POST['approvebtn'])){
-					$stmt = $db->prepare("DELETE INTO admin_complaints");
-				}
+				
 		if($stmt->execute()){
 			echo "<script>
 					alert('Successfully added!');
