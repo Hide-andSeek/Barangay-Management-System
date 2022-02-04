@@ -99,11 +99,17 @@ require 'db/conn.php';
 			 <li>
 			   <a class="side_bar" href="bpso_violators.php">
 				 <i class='bx bx-error'></i>
-				 <span class="links_name">Violators</span>
+				 <span class="links_name">Violations</span>
 			   </a>
-			   <span class="tooltip">Violators</span>
+			   <span class="tooltip">Violations</span>
 			 </li>
-			 
+			 <li>
+			   <a class="side_bar" href="bpso_patrols.php">
+				 <i class='bx bx-walk'></i>
+				 <span class="links_name">Night Patrol</span>
+			   </a>
+			   <span class="tooltip">Night Patrol</span>
+			 </li>
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="img/1.jpeg">
@@ -228,83 +234,7 @@ require 'db/conn.php';
 			  </form>
 
 			  
-				<div>
-					<div><button type="button" class="btn btn-primary addbtn" onclick="document.getElementById('id1').style.display='block'"><i class="bx bx-user-plus"></i>Add New</button></div>
-<!--Modal form for Add Employee-->
-				<div id="formatValidatorName" >
-					<div >
-						  <div id="id1" class="employeemanagement-modal modal" >
-								<div class="modal-contentemployee animate" >
-									<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">						
-										<div id="employee_form" class="container">
-												<div class="form-control inputtext information" style="text-align:center; color: white; background: blue; border-top-right-radius: 20px; border-top-left-radius: 20px;">
-												Add Employee
-												</div>
-												
-												
-												<div class="information">
-													<label class="employee-label"> Username </label>
-													<input required class="form-control inputtext control-label" id="employee_uname" name ="employee_uname" type="text"  placeholder="Employee Username"> 
-												</div>
-												
-												<div class="row align-items-start">
-													<div class="information col">
-														<label class="employee-label"> Last Name </label>
-														<input required class="form-control inputtext lname" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> First Name </label> 
-														<input required class="form-control inputtext fname" id="employee_fname" name ="employee_fname" type="text"  placeholder="First Name"> 
-													</div>
-													
-													<div class="information col">
-														<label class="employee-label"> Middle Name </label>
-														<input required class="form-control inputtext mname" id="employee_mname" name ="employee_mname" type="text"  placeholder="Middle Name"> 
-													</div>
-												</div>
-												<div class="information">
-													<label class="employee-label"> Birthday </label>
-													<input required class="form-control inputtext control-label" id="birthday" name ="birthday" type="date"  placeholder="Birthday"> 
-												</div>
-												
-												<div class="information">
-													<label class="employee-label"> Address </label>
-													<input required class="form-control inputtext control-label" id="address" name ="address" type="text"  placeholder="Address"> 
-												</div>
-												
-												<div class="information">
-													<label class="employee-label"> Contact No </label>
-													<input required class="form-control inputtext control-label" id="contact" name ="contact" type="number"  placeholder="Contact#"> 
-												</div>
-												
-												<div>
-													<label class="employee-label"> Department </label>
-													<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
-													5px;" id="department" name="department">
-														<option disabled>--Select--</option>
-														<option value="KAPITAN">KAPITAN</option>
-														<option value="BCPC">BCPC</option>
-														<option value="BAWC">BAWC</option>
-														<option value="LUPON">LUPON</option>
-														<option value="ACCOUNTING">ACCOUNTING</option>
-														<option value="BPSO">BPSO</option>
-														<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
-														<option value="COMPLAINT">COMPLAINT</option>
-													</select>
-												</div>
-
-
-												<div class="information">   
-													<button type="submit" id="empBtn" name="empBtn" value="empBtn" class="inputtext submtbtn">
-														<i class="bx bx-t67check"></i>Submit
-													</button>  
-												</div>
-										</div> 	
-									</form>
-							  </div>
-						</div>
-					</div>
+				
 					
 									
 					

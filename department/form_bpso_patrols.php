@@ -93,7 +93,7 @@ require 'db/conn.php';
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 
-			  <li>
+              <li>
 			   <a class="side_bar" href="bpso_violators.php">
 				 <i class='bx bx-error'></i>
 				 <span class="links_name">Violations</span>
@@ -128,7 +128,7 @@ require 'db/conn.php';
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>VIOLATORS
+						<h5>NIGHT PATROL (RONDA'S)
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -138,95 +138,14 @@ require 'db/conn.php';
 			  </section>
 
 
-	<form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
-                        </label>
-                </div> 
-			  </form>
+
 
 			  
 				
 					
-									
 					
-					<div class="reg_table emp_tbl">
-						<table class="content-table">
-						
-						<?php
-							include "db/conn.php";
-							include "db/user.php";
-							
-							$mquery = "SELECT * FROM usersdb";
-							$countemployee = $db->query($mquery)
-						?>
-						
-							<thead>
-								<tr class="t_head">
-									<th>Employee No.</th>
-									<th>Complainant</th>
-									<th>Accused</th>
-									<th>Respondent</th>
-									<th>Tirahan</th>
-									<th>Oras at Petsa</th>
-									<th>Contact No.</th>
-									<th>Attested By:</th>
-									<th>Status</th>
-									<th>Action</th>
-								</tr>                       
-							</thead>
-							<?php
-							foreach($countemployee as $data) 
-							{
-							?>
-							<tr class="table-row">
-									<td><?php echo $data ['user_no']; ?></td>
-									<td><?php echo $data ['user_lname']; ?></td>
-									<td><?php echo $data ['user_fname']; ?></td>
-									<td><?php echo $data ['user_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
-									</td>
-								</tr>	
-							
-							<?php
-							}
-							?>
-						
-						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
-						</div>
-					</div>
-				</div>
-				
-			</section>
 			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-
-			<script>
-			
-			 /*-- Fuction for Login Modal Form --*/
-			var modal = document.getElementById('id1');
-				window.onclick = function (event) {
-					if (event.target == modal) {
-					modal.style.display = "none";
-				}
-			}  
-			</script>
+		
 			
 			</section>
 	</body>
