@@ -267,6 +267,276 @@ require '../db/conn.php';
 					Monday</h5></button>
 						<div id="monday" class="document-hide">
 							<div class="preview">
+							<table class="content-table table_indigency"  id="table">
+						
+						<?php
+						$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id ASC");
+						$mquery ->execute();
+						$countn = $mquery->fetchAll();
+						?>
+						<thead>
+							<tr class="t_head">
+								<th>Complaint ID</th>
+								<th>Fullname</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th>Address</th>
+								<th>Incident Address</th>
+								<th>Name of violaters</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th>Relationship</th>
+								<th>Address</th>
+								<th>Witnesses</th>
+								<th>Complaints</th>
+								<th>ID Type</th>
+								<th>ID Image</th>
+								<th>Action</th>
+							</tr>                       
+						</thead>
+						<?php
+						foreach($countn as $data) 
+						{
+						?>
+							<tr class="table-row">
+								<td><?php echo $data ['blotter_id']; ?></td>
+								<td><?php echo $data ['n_complainant']; ?></td>
+								<td><?php echo $data ['comp_age']; ?></td>
+								<td><?php echo $data ['comp_gender']; ?></td>
+								<td><?php echo $data ['comp_address']; ?></td>
+								<td><?php echo $data ['inci_address']; ?></td>
+								<td><?php echo $data ['n_violator']; ?></td>
+								<td><?php echo $data ['violator_age']; ?></td>
+								<td><?php echo $data ['violator_gender']; ?></td>
+								<td><?php echo $data ['relationship']; ?></td>
+								<td><?php echo $data ['violator_address']; ?></td>
+								<td><?php echo $data ['witnesses']; ?></td>
+								<td><?php echo $data ['complaints']; ?></td>
+								<td><?php echo $data ['id_type']; ?></td>
+								<td><img src="upload/<?php echo $data ['id_image']; ?>" title="<?php echo $data ['id_name']; ?>" width="90" height="90"/></td>
+								<td>
+									<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
+								</td>
+							</tr>	
+					
+												
+						<?php
+						}
+						?>
+					</table>
+							</div>
+						</div>
+		</div>
+
+		<div class="document-light-grey document-section">
+			<button onclick="myFunction('tuesday')" id="tuesday1" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Tuesday</h5></button>
+						<div id="tuesday" class="document-hide">
+							<div class="preview">
+							<table class=" table_indigency"  id="table">
+						
+						<?php
+						$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id ASC");
+						$mquery ->execute();
+						$countn = $mquery->fetchAll();
+						?>
+						<thead>
+							<tr class="t_head">
+								<th>Complaint ID</th>
+								<th>Fullname</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th>Address</th>
+								<th>Incident Address</th>
+								<th>Name of violaters</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th>Relationship</th>
+								<th>Address</th>
+								<th>Witnesses</th>
+								<th>Complaints</th>
+								<th>ID Type</th>
+								<th>ID Image</th>
+								<th>Action</th>
+							</tr>                       
+						</thead>
+						<?php
+						foreach($countn as $data) 
+						{
+						?>
+							<tr class="table-row">
+								<td><?php echo $data ['blotter_id']; ?></td>
+								<td><?php echo $data ['n_complainant']; ?></td>
+								<td><?php echo $data ['comp_age']; ?></td>
+								<td><?php echo $data ['comp_gender']; ?></td>
+								<td><?php echo $data ['comp_address']; ?></td>
+								<td><?php echo $data ['inci_address']; ?></td>
+								<td><?php echo $data ['n_violator']; ?></td>
+								<td><?php echo $data ['violator_age']; ?></td>
+								<td><?php echo $data ['violator_gender']; ?></td>
+								<td><?php echo $data ['relationship']; ?></td>
+								<td><?php echo $data ['violator_address']; ?></td>
+								<td><?php echo $data ['witnesses']; ?></td>
+								<td><?php echo $data ['complaints']; ?></td>
+								<td><?php echo $data ['id_type']; ?></td>
+								<td><img src="upload/<?php echo $data ['id_image']; ?>" title="<?php echo $data ['id_name']; ?>" width="90" height="90"/></td>
+								<td>
+									<a class="btn btn-success btn-sm" data-toggle="modal" style="font-size: 13px; width: 100px;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>Process</a>
+								</td>
+							</tr>	
+					
+												
+						<?php
+						}
+						?>
+					</table>
+							</div>
+						</div>
+		</div>
+
+		<div class="document-light-grey document-section">
+			<button onclick="myFunction('wednesday')" id="wednesday1" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Wednesday</h5></button>
+						<div id="wednesday" class="document-hide">
+							<div class="preview">
+							<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+											  <section class="userpersonal_form">
+														<div class="left_userpersonal_info">
+															<fieldset class="field_set">
+																<legend>For Business</legend>
+																<div class="form-group">
+																	<label for="dateissued">Date issued: </label>
+																	<input required type="date" class="form-control form-text" id="dateissued" name="dateissued">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="selection">Please Select:</label>
+																	<span>
+																		Renewal <input required type="radio" value="renewal" id="renewal" name="selection">
+																		New <input required type="radio" value="new"  id="new" name="selection">
+																	</span>
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="ownername">Owner's Name: </label>
+																	<input required type="text" class="form-control form-text" id="ownername" name="ownername" placeholder="Please write your Full name">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="businessname">Business Name: </label>
+																	<input required type="text" class="form-control form-text" id="businessname" name="businessname">
+																</div><br>	
+																
+																 <div class="form-group">
+																	<label for="businessaddress">Business Address: </label>
+																	<input required type="text" class="form-control form-text" id="businessaddress" name="businessaddress">
+																</div></br>
+																
+																<div class="form-group">
+																	<label for="plateno">Plate No.: </label>
+																	<input type="number" class="form-control number form-text" id="plateno" name="plateno">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="contactno">Contact No.: </label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
+																	<input type='file' name='files[]' required/>
+																</div>
+
+															</fieldset>
+														</div>
+												</section>
+													<button type="submit" name="permitBtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+										  </form> 
+							</div>
+						</div>
+		</div>
+
+		<div class="document-light-grey document-section">
+			<button onclick="myFunction('thursday')" id="thursday1" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Thursday</h5></button>
+						<div id="thursday" class="document-hide">
+							<div class="preview">
+								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+											  <section class="userpersonal_form">
+														<div class="left_userpersonal_info">
+															<fieldset class="field_set">
+																<legend>For Business</legend>
+																<div class="form-group">
+																	<label for="dateissued">Date issued: </label>
+																	<input required type="date" class="form-control form-text" id="dateissued" name="dateissued">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="selection">Please Select:</label>
+																	<span>
+																		Renewal <input required type="radio" value="renewal" id="renewal" name="selection">
+																		New <input required type="radio" value="new"  id="new" name="selection">
+																	</span>
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="ownername">Owner's Name: </label>
+																	<input required type="text" class="form-control form-text" id="ownername" name="ownername" placeholder="Please write your Full name">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="businessname">Business Name: </label>
+																	<input required type="text" class="form-control form-text" id="businessname" name="businessname">
+																</div><br>	
+																
+																 <div class="form-group">
+																	<label for="businessaddress">Business Address: </label>
+																	<input required type="text" class="form-control form-text" id="businessaddress" name="businessaddress">
+																</div></br>
+																
+																<div class="form-group">
+																	<label for="plateno">Plate No.: </label>
+																	<input type="number" class="form-control number form-text" id="plateno" name="plateno">
+																</div><br>
+																
+																<div class="form-group">
+																	<label for="contactno">Contact No.: </label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno">
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd">
+																</div><br>
+
+																<div class="form-group">
+																	<label for="file">Attach Valid ID: <i class="red">*</i></label>
+																	<input type='file' name='files[]' required/>
+																</div>
+
+															</fieldset>
+														</div>
+												</section>
+													<button type="submit" name="permitBtn" class="btn btn-primary btn-block"><i class='bx bx-save'></i> Submit</button>
+										  </form> 
+							</div>
+						</div>
+		</div>
+
+		<div class="document-light-grey document-section">
+			<button onclick="myFunction('friday')" id="friday1" class="document-button document-block documentbtn form-control documentbtn bgcolor">
+				<h5><i class="bx bx-receipt"></i>
+					Friday</h5></button>
+						<div id="monday" class="document-hide">
+							<div class="preview">
 								<form method="POST" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 											  <section class="userpersonal_form">
 														<div class="left_userpersonal_info">
@@ -331,14 +601,50 @@ require '../db/conn.php';
 		<script src="js/resident.js"></script>	
 		
 		
-		<script>function myFunction(monday) {
+				<script>
+				 //For Vawc
+
+				 function myFunction(monday) {
         var x = document.getElementById(monday);
             if (x.className.indexOf("document-show") == -1) {
                 x.className += " document-show";
                 } else { 
-                     x.className = x.className.replace(" document-show", "");
+                    x.className = x.className.replace(" document-show", "");
                 }
-                }</script>
+                }
+    function myFunction(tuesday) {
+        var x = document.getElementById(tuesday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                    x.className = x.className.replace(" document-show", "");
+                }
+                }
+    function myFunction(wednesday) {
+        var x = document.getElementById(wednesday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                    x.className = x.className.replace(" document-show", "");
+                }
+                }
+    function myFunction(thursday) {
+        var x = document.getElementById(thursday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                    x.className = x.className.replace(" document-show", "");
+                }
+                }
+    function myFunction(friday) {
+        var x = document.getElementById(friday);
+            if (x.className.indexOf("document-show") == -1) {
+                x.className += " document-show";
+                } else { 
+                    x.className = x.className.replace(" document-show", "");
+                }
+                }
+				</script>
 			</section>
 	</body>
 </html>
