@@ -41,6 +41,10 @@ if(!isset($_SESSION["type"]))
 		$dept = $_POST['dept'];
 		$app_date = $_POST['app_date'];
 		$app_by = $_POST['app_by'];
+
+		// $stmt = $db->prepare("INSERT INTO admin_complaints(blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by) SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, id_name, id_image FROM blotterdb");
+
+		// $stmt = $db->prepare("DELETE FROM blotterdb WHERE blotter_id = blotter_id");
 			
 			$stmt = $db->prepare("INSERT INTO admin_complaints (blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by) VALUES (:blotterID, :complainant, :c_age, :c_gender, :c_address, :incident_add, :violators, :v_age, :v_gender, :v_rel, :v_address, :witness, :ex_complaints, :dept, :app_date, :app_by)");
 	
@@ -61,6 +65,13 @@ if(!isset($_SESSION["type"]))
 			$stmt->bindParam(':app_date', $app_date);
 			$stmt->bindParam(':app_by', $app_by);
 				
+<<<<<<< HEAD
+=======
+			$stmt = $db->prepare("DELETE blotter_id FROM blotterdb WHERE blotter_id IN (SELECT TOP 1 blotter_id FROM blotterdb ORDER BY blotter_id ASC)");
+			// $stmt = $db->prepare("DELETE FROM blotterdb
+			// 						WHERE blotter_id = ?");
+				
+>>>>>>> 1474665cc84701e8cce547f9eb9e20bbd5199a58
 		if($stmt->execute()){
 			echo "<script>
 					alert('Successfully added!');
@@ -363,7 +374,7 @@ if(!isset($_SESSION["type"]))
 						<table class="content-table table_indigency"  id="table">
 						
 							<?php
-							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id DESC");
+							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE blotter_id ORDER BY blotter_id ASC");
 							$mquery ->execute();
 							$countn = $mquery->fetchAll();
 							?>
@@ -533,7 +544,7 @@ if(!isset($_SESSION["type"]))
 																
 																<div class="information">
 																	<label class="employee-label ">Approval Date </label>
-																	<input type="date" class="form-control inputtext control-label" id="app_date" name="app_date">
+																	<input type="date" class="form-control inputtext control-label" id="approvedate" name="app_date">
 																</div>
 
 																<div class="information col">
@@ -563,6 +574,7 @@ if(!isset($_SESSION["type"]))
 			
 			<script>
 				document.querySelector("#approvedate").valueAsDate = new Date();
+
 			</script>
 	</body>
 </html>
