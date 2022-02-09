@@ -75,6 +75,26 @@ if(!isset($_SESSION["type"]))
 		 i.ikon{color: red;}
 
 		.w3borderbot{ border-bottom-left-radius: 15px;  border-bottom-right-radius: 15px; margin-bottom: 20px;}
+
+		.notification {
+		color: white;
+		text-decoration: none;
+		padding: 15px 26px;
+		position: relative;
+		display: inline-block;
+		border-radius: 2px;
+		}
+
+
+		.notification .badge {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		padding: 5px 10px;
+		border-radius: 50%;
+		background-color: red;
+		color: white;
+		}
 	 </style>
    </head>
 	<body>
@@ -156,9 +176,6 @@ if(!isset($_SESSION["type"]))
 
 			  			
 	<div>
-			<div  style="margin-left: 15px;font-size:14px;">
-				<h4> Pending Request </h4>
-			</div>
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter ">
 				<div class="w3-container w3-teal w3-padding-16 w3borderbot">
@@ -184,8 +201,7 @@ if(!isset($_SESSION["type"]))
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
-
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+					$query = "SELECT * FROM barangayid WHERE status = 'Pending' ORDER BY barangay_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -197,7 +213,7 @@ if(!isset($_SESSION["type"]))
 				<h4>Barangay ID (Request)</h4>
 			</div>
 			</div>
-	
+		
 			<div class="w3-quarter">
 			<div class="w3-container w3-teal w3-padding-16 w3borderbot">
 				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
@@ -215,6 +231,7 @@ if(!isset($_SESSION["type"]))
 				</div>
 				<div class="w3-clear"></div>
 				<h4>Certificate of Indigency</h4>
+				
 			</div>
 			</div>
 
@@ -225,7 +242,7 @@ if(!isset($_SESSION["type"]))
 				<?php 
 					require '../db/conn.php';
  
-					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
+					$query = "SELECT * FROM barangayclearance WHERE clearance_status = 'Pending' ORDER BY clearance_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -243,33 +260,37 @@ if(!isset($_SESSION["type"]))
 
 		<div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16" w3borderbot>
-				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
+			<a href="barangayidapproval.php">
+				<div class="w3-container w3-teal w3-padding-16" w3borderbot>
+					<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+	
+						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
 
-					echo "<h3>$pdoexecute</h3>"
-					?>
-				
+						echo "<h3>$pdoexecute</h3>"
+						
+						?>
+					
+					</div>
+					<div class="w3-clear"></div>
+					<h4>Approved Barangay ID</h4>
 				</div>
-				<div class="w3-clear"></div>
-				<h4>Approved Barangay ID</h4>
+			</a>
 			</div>
-			</div>
-
+			
 			<div class="w3-quarter">
+			<a href="">
 			<div class="w3-container w3-teal w3-text-white w3-padding-16">
 				<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
  
-					$query = "SELECT clearance_id FROM barangayclearance ORDER BY clearance_id";
+					$query = "SELECT * FROM barangayclearance WHERE clearance_status = 'Approved' ORDER BY clearance_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -280,9 +301,11 @@ if(!isset($_SESSION["type"]))
 				<div class="w3-clear"></div>
 				<h4>Approved Clearance</h4>
 			</div>
+			</a>
 			</div>
-
+			
 			<div class="w3-quarter">
+			<a href="indigencyapproval.php">
 			<div class="w3-container w3-teal w3-padding-16">
 				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
@@ -298,8 +321,11 @@ if(!isset($_SESSION["type"]))
 				<div class="w3-clear"></div>
 				<h4>Approved Indigency</h4>
 			</div>
+			<a>
 			</div>
+						
 			<div class="w3-quarter">
+			<a href="">
 			<div class="w3-container w3-red w3-text-white w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
 				<div class="w3-right">
@@ -317,8 +343,9 @@ if(!isset($_SESSION["type"]))
 				<div class="w3-clear"></div>
 				<h4>Approved Clearance</h4>
 			</div>
+			<a>
 			</div>
-
+			
 	</div>		
 			</section>
 			<script href="test.js"></script>

@@ -1,7 +1,7 @@
 <?php
 
 //Barangay Clearance
-if(isset($_POST['clearancebtn'])){
+if(isset($_POST[''])){
 	
 	$full_name = $_POST['full_name'];
 	$age = $_POST['age'];
@@ -16,8 +16,9 @@ if(isset($_POST['clearancebtn'])){
 	$issued_at = $_POST['issued_at'];
 	$precint_no = $_POST['precint_no'];
 	$countfiles = count($_FILES['files']['name']);
+	$clearance_status = $_POST['clearance_status'];
 		
-	$query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, frontid_name, frontid_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, frontid_name, frontid_image, clearance_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	$stmt = $db->prepare($query);
 
@@ -45,7 +46,7 @@ if(isset($_POST['clearancebtn'])){
 			) {
 				// Execute query
 				$stmt->execute(
-					array($full_name, $age, $status, $nationality, $address, $contactno, $emailadd, $purpose, $date_issued, $ctc_no, $issued_at, $precint_no, $filename, $target_file));
+					array($full_name, $age, $status, $nationality, $address, $contactno, $emailadd, $purpose, $date_issued, $ctc_no, $issued_at, $precint_no, $filename, $target_file, $clearance_status));
 			}
 		}
 	}
@@ -59,7 +60,7 @@ if(isset($_POST['clearancebtn'])){
 
 <?php
 	//Barangay ID Form
-	if(isset($_POST['brgyidbtn'])){
+	if(isset($_POST[''])){
 	
 		$fname = $_POST['fname'];
 		$mname = $_POST['mname'];
@@ -85,7 +86,7 @@ if(isset($_POST['clearancebtn'])){
 			// File name
 			$filename = $_FILES['files']['name'][$i];
 			// Location
-			$target_file = 'img/fileupload_barangayid/'.$filename;
+			$target_file = 'img/'.$filename;
 			// File Path
 			$file_extension = pathinfo(
 				$target_file, PATHINFO_EXTENSION);
@@ -113,11 +114,12 @@ if(isset($_POST['clearancebtn'])){
 					window.location.href='residentreqdocu.php';
 				</script>";
 	}
+	
 ?>
 
 <?php
 //Barangay Permit
-if(isset($_POST['permitBtn'])){
+if(isset($_POST[''])){
 	
 	$dateissued = $_POST['dateissued'];
 	$selection = $_POST['selection'];
@@ -171,7 +173,7 @@ if(isset($_POST['permitBtn'])){
 <?php
 
 //Indigency
-if(isset($_POST['indigencybtn'])){
+if(isset($_POST[''])){
    
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
@@ -262,7 +264,7 @@ if(isset($_POST[''])){
 }
 
 
-if(isset($_POST['blotterbtn'])){
+if(isset($_POST[''])){
 	
 	$n_complainant = $_POST['n_complainant'];
 	$comp_age = $_POST['comp_age'];
