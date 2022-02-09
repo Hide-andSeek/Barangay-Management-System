@@ -76,7 +76,7 @@ require '../db/conn.php';
 			left: 0;
 			top: 0;
 			width: 100%; 
-			height: 120%; 
+			height: 100%; 
 			background-color: rgb(0,0,0); 
 			background-color: rgba(0,0,0,0.4); 
 			padding-top: 5px; 
@@ -197,7 +197,7 @@ require '../db/conn.php';
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Ongoing Case
+						<h5>LUPON DEPARTMENT
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -222,7 +222,7 @@ require '../db/conn.php';
 							include "../db/conn.php";
 							include "../db/user.php";
 							
-							$mquery = "SELECT * FROM blotterdb";
+							$mquery = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
 							$countn = $db->query($mquery);
 							
 							?>
@@ -252,29 +252,29 @@ require '../db/conn.php';
 							{
 							?>
 								<tr class="table-row">
-									<td><?php echo $data ['blotter_id']; ?></td>
-									<td><?php echo $data ['n_complainant']; ?></td>
-									<td><?php echo $data ['comp_age']; ?></td>
-									<td><?php echo $data ['comp_gender']; ?></td>
-									<td><?php echo $data ['comp_address']; ?></td>
-									<td><?php echo $data ['inci_address']; ?></td>
-									<td><?php echo $data ['n_violator']; ?></td>
-									<td><?php echo $data ['violator_age']; ?></td>
-									<td><?php echo $data ['violator_gender']; ?></td>
-									<td><?php echo $data ['relationship']; ?></td>
-									<td><?php echo $data ['violator_address']; ?></td>
-									<td><?php echo $data ['witnesses']; ?></td>
-									<td><?php echo $data ['complaints']; ?></td>
+									<td><?php echo $data ['blotterID']; ?></td>
+									<td><?php echo $data ['complainant']; ?></td>
+									<td><?php echo $data ['c_age']; ?></td>
+									<td><?php echo $data ['c_gender']; ?></td>
+									<td><?php echo $data ['c_address']; ?></td>
+									<td><?php echo $data ['incident_add']; ?></td>
+									<td><?php echo $data ['violators']; ?></td>
+									<td><?php echo $data ['v_age']; ?></td>
+									<td><?php echo $data ['v_gender']; ?></td>
+									<td><?php echo $data ['v_rel']; ?></td>
+									<td><?php echo $data ['v_address']; ?></td>
+									<td><?php echo $data ['witness']; ?></td>
+									<td><?php echo $data ['ex_complaints']; ?></td>
 									<td><a class="view_approvebtn">Valid Id</a></td>
 
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='block'"><i class="bx bx-edit"></i>View Details</button></td>
+									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('process_<?php echo $data['blotterID']; ?>').style.display='block'"><i class="bx bx-edit"></i>View Details</button></td>
 									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 								</tr>	
 							
-								<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
+								<div id="process_<?php echo $data['blotterID']; ?>" class="employeemanagement-modal modal">
 											
 											<div class="modal-contentemployee animate displayflex" >
-												<form method="POST" action="process.php?blotter_id=<?php echo $data['blotter_id'];?>">
+												<form method="POST" action="process.php?blotterID=<?php echo $data['blotterID'];?>">
 												
 													
 
@@ -284,40 +284,39 @@ require '../db/conn.php';
 															
 																<div class="information col">
 																	<label class="employee-label"> Complainant's ID </label>
-																	<input class="form-control inputtext inputele"  id="blotter_id" name ="blotter_id" type="text" value="<?php echo $data['blotter_id'];?>">
+																	<input class="form-control inputtext inputele"  id="blotterID" name ="blotterID" type="text" value="<?php echo $data['blotterID'];?>">
 																</div>
 																
 																<div class="information col">
 																	<label class="employee-label"> Complainant's  name </label>
 																	
-																	<input class="form-control inputtext inputele" id="n_complainant" name ="n_complainant" type="text" value="<?php echo $data['n_complainant'];?>">
+																	<input class="form-control inputtext inputele" id="complainant" name ="complainant" type="text" value="<?php echo $data['complainant'];?>">
 																</div>
 															
 
 																
 																	<div class="information col">
 																		<label class="employee-label"> Complainant's  Age </label>
-																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
-																		<input class="form-control inputtext inputele" id="comp_age" name ="comp_age" type="text" value="<?php echo $data['comp_age'];?>"> 
+																		<input class="form-control inputtext inputele" id="c_age" name ="c_age" type="text" value="<?php echo $data['c_age'];?>"> 
 																	</div>
 																	
 																	<div class="information col">
 																		<label class="employee-label"> Complainant's  Gender </label> 
 												
-																		<input class="form-control inputtext inputele" id="comp_gender" name ="comp_gender" type="text" value="<?php echo $data['comp_gender'];?>"> 
+																		<input class="form-control inputtext inputele" id="c_gender" name ="c_gender" type="text" value="<?php echo $data['c_gender'];?>"> 
 																	</div>	
 															
 																		<div class="information col">
 																			<label class="employee-label">Complainant's  Address </label>
-																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
-																			<input  class="form-control inputtext inputele" id="comp_address" name ="comp_address" type="text"  
-																			value="<?php echo $data['comp_address']; ?>"> 
+																			<?php echo isset($error['c_address']) ? $error['c_address'] : '';?>
+																			<input  class="form-control inputtext inputele" id="c_address" name ="c_address" type="text"  
+																			value="<?php echo $data['c_address']; ?>"> 
 																		</div>
 																	
 																	
 																		<div class="information col">
 																			<label class="employee-label">Incident Address </label>
-																			<input class="form-control inputtext inputele" id="" name ="" type="text"  value="<?php echo $data['inci_address']; ?>"> 
+																			<input class="form-control inputtext inputele" id="incident_add" name ="incident_add" type="text"  value="<?php echo $data['incident_add']; ?>"> 
 																		</div>
 															</div>
 														
@@ -327,76 +326,63 @@ require '../db/conn.php';
 															<hr>
 															<div class="information col">
 																<label class="employee-label"> Violator's name </label>
-																<input class="form-control inputtext inputele" id="n_violator" name ="n_violator" type="text" value="<?php echo $data['n_violator']; ?>">
+																<input class="form-control inputtext inputele" id="violators" name ="violators" type="text" value="<?php echo $data['violators']; ?>">
 															</div>
 
 															
 																<div class="information col">
 																	<label class="employee-label">Violator's Age </label>
-																	<input class="form-control inputtext lname  inputele" id="employee_lname" name ="employee_lname" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
+																	<input class="form-control inputtext lname  inputele" id="v_age" name ="v_age" type="text" value="<?php echo $data['v_age']; ?>"> 
 																</div>
 																
 																<div class="information col">
 																	<label class="employee-label"> Violator's Gender </label> 
-																	<input class="form-control inputtext fname  inputele" id="violator_gender" name ="violator_gender" type="text"
-																	value="<?php echo $data['violator_gender']; ?>"> 
+																	<input class="form-control inputtext fname  inputele" id="v_gender" name ="v_gender" type="text"
+																	value="<?php echo $data['v_gender']; ?>"> 
 																</div>
 
 
 															<div class="information">
 																<label class="employee-label"> Relationship </label>
-																<input class="form-control inputtext fname inputele" id="relationship" name ="relationship" type="text" value="<?php echo $data['relationship']; ?>"> 
+																<input class="form-control inputtext fname inputele" id="v_rel" name ="v_rel" type="text" value="<?php echo $data['v_rel']; ?>"> 
 															</div>
 
 															<div class="information col">
 																<label class="employee-label"> Violator's Address </label>
-																<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
-																<input  class="form-control inputtext control-label address inputele" id="violator_address" name ="violator_address" type="text" value="<?php echo $data['violator_address']; ?>"> 
+															
+																<input  class="form-control inputtext control-label address inputele" id="v_address" name ="v_address" type="text" value="<?php echo $data['v_address']; ?>"> 
 															</div>
 
 															<div class="information col">
 																<label class="employee-label"> Witnesses </label>
-																<input class="form-control inputtext inputele" id="witnesses" name ="witnesses" type="text" value="<?php echo $data['witnesses']; ?>">
+																<input class="form-control inputtext inputele" id="witness" name ="witness" type="text" value="<?php echo $data['witness']; ?>">
 															</div>
 
 															<div class="information col">
 																<label class="employee-label"> Complaints </label>
-																<textarea name="complaints" class="form-control inputtext inputele " id="complaints" ><?php echo $data['complaints']; ?></textarea>
+																<textarea name="ex_complaints" class="form-control inputtext inputele " id="ex_complaints" ><?php echo $data['ex_complaints']; ?></textarea>
 															</div>
 															</div>
 															
 															<div id="Approval" >
-															<span onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='none'" class="topright">&times;</span>
+															<span onclick="document.getElementById('process_<?php echo $data['blotterID']; ?>').style.display='none'" class="topright">&times;</span>
 															
 																
 																<div class="information col">
 																	<label class="employee-label"> Department </label>
-																	<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
-																	5px; " id="department" name="department">
-																		<option disabled>--Select--</option>
-																		<option value="BCPC">BCPC</option>
-																		<option value="VAWC">VAWC</option>
-																		<option value="LUPON">LUPON</option>
-																		
-																		<option value="BPSO">BPSO</option>
-																		
-																		<option style="color: red;" value="DENY">DENY</option>
-																	</select>
+																	<input class="form-control inputtext inputele" id="dept" name ="dept" type="text" value="<?php echo $data['dept']; ?>">
 																</div>
 																
 																<div class="information">
 																	<label class="employee-label ">Approval Date </label>
-																	<input type="date" class="form-control inputtext control-label" id="approvedate" name="approvedate">
+																	<input class="form-control inputtext inputele" id="app_date" name ="app_date" type="text" value="<?php echo $data['app_date']; ?>">
 																</div>
 
 																<div class="information col">
 																<label class="employee-label"> Approved By </label>
-																<input class="form-control inputtext control-label" id="" name ="" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+																<input class="form-control inputtext inputele" id="app_by" name ="app_by" type="text" value="<?php echo $data['app_by']; ?>">
 															</div>
-																<div class="information">   
-																<button type="submit" id="approvebtn" name="approvebtn" value="empBtn" class="inputtext submtbtn approvebtn"><i class="bx bx-check"></i>Approve
-																</button>  
-															</div>
+																
 															</div>
 										                	</div>
 													</form>

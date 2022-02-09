@@ -25,7 +25,71 @@ if(!isset($_SESSION["type"]))
 	include('../announcement_includes/functions.php'); 
 
 	
+<<<<<<< HEAD
+=======
+		$blotterID = $_POST['blotterID'];
+		$complainant = $_POST['complainant'];
+		$c_age = $_POST['c_age'];
+		$c_gender = $_POST['c_gender'];
+		$c_address = $_POST['c_address'];
+		$incident_add = $_POST['incident_add'];
+		$violators = $_POST['violators'];
+		$v_age = $_POST['v_age'];
+		$v_gender = $_POST['v_gender'];
+		$v_rel = $_POST['v_rel'];
+		$v_address = $_POST['v_address'];
+		$witness = $_POST['witness'];
+		$ex_complaints = $_POST['ex_complaints'];
+		$dept = $_POST['dept'];
+		$app_date = $_POST['app_date'];
+		$status = $_POST['status'];
+		$app_by = $_POST['app_by'];
+
+		// $stmt = $db->prepare("INSERT INTO admin_complaints(blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by) SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, id_name, id_image FROM blotterdb");
+
+		// $stmt = $db->prepare("DELETE FROM blotterdb WHERE blotter_id = blotter_id");
+			
+			$stmt = $db->prepare("INSERT INTO admin_complaints (blotterID, complainant, c_age, c_gender, c_address, incident_add, violators, v_age, v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by) VALUES (:blotterID, :complainant, :c_age, :c_gender, :c_address, :incident_add, :violators, :v_age, :v_gender, :v_rel, :v_address, :witness, :ex_complaints, :dept, :app_date, :app_by)");
+	
+			$stmt->bindParam(':blotterID', $blotterID);
+			$stmt->bindParam(':complainant', $complainant);
+			$stmt->bindParam(':c_age', $c_age);
+			$stmt->bindParam(':c_gender', $c_gender);
+			$stmt->bindParam(':c_address', $c_address);
+			$stmt->bindParam(':incident_add', $incident_add);
+			$stmt->bindParam(':violators', $violators);
+			$stmt->bindParam(':v_age', $v_age);
+			$stmt->bindParam(':v_gender', $v_gender);
+			$stmt->bindParam(':v_rel', $v_rel);
+			$stmt->bindParam(':v_address', $v_address);
+			$stmt->bindParam(':witness', $witness);
+			$stmt->bindParam(':ex_complaints', $ex_complaints);
+			$stmt->bindParam(':dept', $dept);
+			$stmt->bindParam(':app_date', $app_date);
+			$stmt->bindParam(':app_by', $app_by);
+
+
+				
+		if($stmt->execute()){
+			echo "<script>
+					alert('Successfully added!');
+					window.location.href='compAdmin_dashboard.php';
+				 </script>";
+		}else{
+			echo '<script>
+					alert("An error occured")
+				</script>';
+		}	
+	}
+>>>>>>> b2b077d2ae4859e2c93a98e25f81e8db883d1887
 	?>
+
+
+	<!-- <?php
+	//  if(isset($_POST['approvebtn'])){
+	// 	$stmt = $db->prepare("UPDATE blotterdb SET status ='Done' WHERE blotter_id = :blotter_id");
+		 
+	?>  -->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -194,7 +258,7 @@ if(!isset($_SESSION["type"]))
 				<?php 
 					require '../db/conn.php';
 
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -214,7 +278,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 
-						$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+						$query = "SELECT * FROM admin_complaints Where dept='BPSO' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -234,7 +298,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query = "SELECT * FROM admin_complaints Where dept='VAWC' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -253,7 +317,7 @@ if(!isset($_SESSION["type"]))
 					<?php 
 						require '../db/conn.php';
 	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query = "SELECT * FROM admin_complaints Where dept='BCPC' ORDER BY blotterID";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -393,6 +457,7 @@ if(!isset($_SESSION["type"]))
 		$total_records_paging = $total_records; 
 	}
 
+<<<<<<< HEAD
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
 		echo "
@@ -444,6 +509,42 @@ if(!isset($_SESSION["type"]))
 							<?php 
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
+=======
+                    unset($_SESSION['message']);
+                }
+            ?>
+						<table class="content-table table_indigency"  id="table">
+						
+							<?php
+							$mquery = $db->prepare("SELECT * FROM blotterdb WHERE status='Pending' ORDER BY blotter_id ASC");
+							$mquery ->execute();
+							$countn = $mquery->fetchAll();
+							?>
+							<thead>
+								<tr class="t_head">
+									<th>Complaint ID</th>
+									<th>Fullname</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Address</th>
+									<th>Incident Address</th>
+									<th>Name of violaters</th>
+									<th>Age</th>
+									<th>Gender</th>
+									<th>Relationship</th>
+									<th>Address</th>
+									<th>Witnesses</th>
+									<th>Complaints</th>
+									<th>ID Type</th>
+									<th>ID Image</th>
+									<th>Action</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countn as $data) 
+							{
+							?>
+>>>>>>> b2b077d2ae4859e2c93a98e25f81e8db883d1887
 								<tr class="table-row">
 									<td><?php echo $data ['blotter_id']; ?></td>
 									<td><?php echo $data ['n_complainant']; ?></td>
@@ -461,9 +562,162 @@ if(!isset($_SESSION["type"]))
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 				
 								</tr>	
+<<<<<<< HEAD
 								</tbody>
 								<?php 
 								} 
+=======
+						
+										<div id="process_<?php echo $data['blotter_id']; ?>" class="employeemanagement-modal modal">
+											
+													<div class="modal-contentemployee animate displayflex">
+														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+														
+															
+															<div>
+															<div class="information col">
+																	<label class="employee-label"> Valid ID </label>
+																	<img src="upload/<?php echo $data['id_image']?>" width="90" height="90" title="<?=$data['id_name'] ?>" name="id_image"/>
+
+																</div>
+															</div>
+															<div id="Complainant">
+																<h5 style="text-align: center;">Complainant</h5>
+																<hr>
+															
+																<div class="information col">
+																	<label class="employee-label"> Complainant's ID </label>
+																	<input class="form-control inputtext inputele"  id="blotterID" name ="blotterID" type="text" value="<?php echo $data['blotter_id'];?>">
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Complainant's  name </label>
+																	
+																	<input class="form-control inputtext inputele" id="complainant" name ="complainant" type="text" value="<?php echo $data['n_complainant'];?>">
+																</div>
+															
+
+																
+																	<div class="information col">
+																		<label class="employee-label"> Complainant's  Age </label>
+																		<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
+																		<input class="form-control inputtext inputele" id="c_age" name ="c_age" type="text" value="<?php echo $data['comp_age'];?>"> 
+																	</div>
+																	
+																	<div class="information col">
+																		<label class="employee-label"> Complainant's  Gender </label> 
+												
+																		<input class="form-control inputtext inputele" id="c_gender" name ="c_gender" type="text" value="<?php echo $data['comp_gender'];?>"> 
+																	</div>	
+															
+																		<div class="information col">
+																			<label class="employee-label">Complainant's  Address </label>
+																			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																			<input  class="form-control inputtext inputele" id="c_address" name ="c_address" type="text"  
+																			value="<?php echo $data['comp_address']; ?>"> 
+																		</div>
+																	
+																	
+																		<div class="information col">
+																			<label class="employee-label">Incident Address </label>
+																			<input class="form-control inputtext inputele" id="incident_add" name ="incident_add" type="text"  value="<?php echo $data['inci_address']; ?>"> 
+																		</div>
+															</div>
+														
+															<div id="Violator" >
+															<h5 style="text-align: center;">Violator</h5>
+
+															<hr>
+															<div class="information col">
+																<label class="employee-label"> Violator's name </label>
+																<input class="form-control inputtext inputele" id="violators" name ="violators" type="text" value="<?php echo $data['n_violator']; ?>">
+															</div>
+
+															
+																<div class="information col">
+																	<label class="employee-label">Violator's Age </label>
+																	<input class="form-control inputtext lname  inputele" id="v_age" name ="v_age" type="text"  placeholder="Last Name" value="<?php echo $data['violator_age']; ?>"> 
+																</div>
+																
+																<div class="information col">
+																	<label class="employee-label"> Violator's Gender </label> 
+																	<input class="form-control inputtext fname  inputele" id="v_gender" name ="v_gender" type="text"
+																	value="<?php echo $data['violator_gender']; ?>"> 
+																</div>
+
+
+															<div class="information">
+																<label class="employee-label"> Relationship </label>
+																<input class="form-control inputtext fname inputele" id="v_rel" name ="v_rel" type="text" value="<?php echo $data['relationship']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Violator's Address </label>
+																<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+																<input  class="form-control inputtext control-label address inputele" id="v_address" name ="v_address" type="text" value="<?php echo $data['violator_address']; ?>"> 
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Witnesses </label>
+																<input class="form-control inputtext inputele" id="witness" name ="witness" type="text" value="<?php echo $data['witnesses']; ?>">
+															</div>
+
+															<div class="information col">
+																<label class="employee-label"> Complaints </label>
+																<textarea name="ex_complaints" class="form-control inputtext " id="ex_complaints" ><?php echo $data['complaints']; ?></textarea>
+															</div>
+															</div>
+															
+															<div id="Approval" >
+															<span onclick="document.getElementById('process_<?php echo $data['blotter_id']; ?>').style.display='none'" class="topright">&times;</span>
+															
+																
+																<div class="information col">
+																	<label class="employee-label"> Department </label>
+																	<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 
+																	5px; " id="dept" name="dept">
+																		<option disabled>--Select--</option>
+																		<option value="BCPC">BCPC</option>
+																		<option value="VAWC">VAWC</option>
+																		<option value="LUPON">LUPON</option>
+																		
+																		<option value="BPSO">BPSO</option>
+																		
+																		<option style="color: red;" value="DENY">DENY</option>
+																	</select>
+																</div>
+																
+																<div class="information">
+																	<label class="employee-label ">Approval Date </label>
+																	<input type="date" class="form-control inputtext control-label" id="approvedate" name="app_date">
+																</div>
+
+																<div class="information col">
+																<label class="employee-label"> Approved By </label>
+																<input class="form-control inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+															</div>
+																<div class="form-group">
+																<input required type="hidden" class="form-control form-text form-text-desc" id="status" name="status" value="Done">
+																</div>
+																<br>
+
+																<div class="information">   
+																<button type="submit" id="approvebtn" name="approvebtn" value="empBtn" class="inputtext submtbtn approvebtn"><i class="bx bx-check"></i>Approve
+																
+															</button>  
+															</div>
+
+															
+															<div class="information">   
+																<button type="submit" id="donebtn" name="donebtn" value="empBtn" class="inputtext submtbtn donebtn"><i class="bx bx-check"></i>DONE
+															</button> 
+															</div>
+										                	</div>
+													</form>
+												</div>
+											</div>					
+							<?php
+>>>>>>> b2b077d2ae4859e2c93a98e25f81e8db883d1887
 							}
 						?>
 							</table>
