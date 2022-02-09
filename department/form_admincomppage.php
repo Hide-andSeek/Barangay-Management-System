@@ -289,12 +289,12 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
 				FROM blotterdb WHERE status = 'Pending'
-				ORDER BY blotter_id DESC";
+				ORDER BY blotter_id ASC";
 	}else{
 		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
 				FROM blotterdb
 				WHERE n_complainant LIKE ? 
-				ORDER BY blotter_id DESC";
+				ORDER BY blotter_id ASC";
 	}
 	
 	
