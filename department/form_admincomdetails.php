@@ -432,8 +432,7 @@ if(!isset($_SESSION["type"]))
 					</div>
                     <br>
                     <div id="option_menu">
-                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="approvebtn">Approve</button></a>
-                        <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="submitbtn">Submit</button></a>
                         <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="compAdmin_dashboard.php">Back</a>
                     </div>
 

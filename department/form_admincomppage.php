@@ -351,12 +351,12 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
 				FROM blotterdb WHERE status = 'Pending'
-				ORDER BY blotter_id DESC LIMIT ?, ?";
+				ORDER BY blotter_id ASC LIMIT ?, ?";
 	}else{
 		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
 				FROM blotterdb 
 				WHERE n_complainant LIKE ? 
-				ORDER BY blotter_id DESC LIMIT ?, ?";
+				ORDER BY blotter_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -435,7 +435,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5">Address</th>
 										<th width="15%">Incident Address</th>
 										<th width="5%">Contact No</th>
-										<th width="5%">Status</th>
 										<th width="5%">Action</th>
 										<th width="5%">View Details</th>
 										<!-- <th width="5%">Message</th> -->
@@ -452,7 +451,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['comp_address']?></td>
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 
 									<td><button class="view_approvebtn">Mark as Done</button></td>
 									
