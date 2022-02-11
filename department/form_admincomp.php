@@ -194,7 +194,7 @@ if(!isset($_SESSION["type"]))
 				<?php 
 					require '../db/conn.php';
 
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
+					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
