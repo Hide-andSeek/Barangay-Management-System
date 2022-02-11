@@ -77,9 +77,9 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
+	 <!-- <meta http-equiv="refresh" content="120"> -->
 
-     <title> Req Document Dept. - Barangay ID </title>
+     <title> Barangay ID </title>
 	 
 	 
 	 <style>
@@ -171,6 +171,7 @@ if(!isset($_SESSION["type"]))
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 		.viewbtn{width: 45px; height: 35px;}
+		.transact{margin-left: 65%; }
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -269,12 +270,12 @@ if(!isset($_SESSION["type"]))
 		if(empty($keyword)){
 			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
 					FROM barangayid WHERE status = 'Pending'
-					ORDER BY barangay_id DESC";
+					ORDER BY barangay_id ASC";
 		}else{
 			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
 					FROM barangayid
 					WHERE fname LIKE ? 
-					ORDER BY barangay_id DESC";
+					ORDER BY barangay_id ASC";
 		}
 		
 		
@@ -329,12 +330,12 @@ if(!isset($_SESSION["type"]))
 		if(empty($keyword)){
 			$sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
 					FROM barangayid WHERE status = 'Pending'
-					ORDER BY barangay_id DESC LIMIT ?, ?";
+					ORDER BY barangay_id ASC LIMIT ?, ?";
 		}else{
 			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
 					FROM barangayid 
 					WHERE fname LIKE ? 
-					ORDER BY barangay_id DESC LIMIT ?, ?";
+					ORDER BY barangay_id ASC LIMIT ?, ?";
 		}
 		
 		$stmt_paging = $connect->stmt_init();
@@ -371,7 +372,11 @@ if(!isset($_SESSION["type"]))
 
 		// if no data on database show "No Reservation is Available"
 		if($total_records_paging == 0){
-	
+			echo "
+			<h1 style='text-align: center;'>404 Not Found</h1>
+			<div class='alert alert-warning cattxtbox'>
+				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			</div>";
 	?>
 
 	<?php 
@@ -420,9 +425,7 @@ if(!isset($_SESSION["type"]))
 										<th width="10%">Email Address</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
-										<th width="5%">Action</th>
 										<th width="5%">Details</th>
-										<th width="5%">Message</th>
 									</tr>
 								</thead>
 							<?php 
@@ -439,13 +442,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['emailadd']; ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
-
-									<td><button class="view_approvebtn">Mark as Done</button></td>
 									
 									<td><button class="view_approvebtn" onclick="location.href='barangayidviewdetails.php?id=<?php echo $data['barangay_id'];?>'">View Details</button></td>
-									
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
-				
 								</tr>	
 								</tbody>
 								<?php 
@@ -453,32 +451,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<!-- Edit Category -->
-							<div id="formatValidatorName" >
-								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
-										<div class="modal-contentedit animate">	
-										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
-										<br>
-										<br>
-										<h4 style="text-align: center;"><br> Edit Category </h4>
-										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-										<hr />
-										<form method="post" action="" enctype="multipart/form-data">
-											<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-											</span>
-											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-											<span class="imgup">
-												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-											</span>
-											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-										</form>
-										</div>
-								</div>
-							</div>
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">
@@ -487,7 +459,12 @@ if(!isset($_SESSION["type"]))
 										$function->doPages($offset, 'barangayid_page.php', '', $total_records, $keyword);
 									?>
 								</h4>
+								<div class="transact">
+									<label style="font-size: 14px;">Transaction History: </label>
+									<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+								</div>
 							</div>
+							
 	</div>
 							<div class="separator"></div>
 </div>     

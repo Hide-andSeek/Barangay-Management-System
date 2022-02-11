@@ -206,7 +206,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Clearance
+						<h5>Business Permit
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -232,14 +232,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
-				FROM barangayclearance WHERE clearance_status = 'Approved'
-				ORDER BY clearance_id DESC";
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit WHERE status = 'Approved'
+				ORDER BY businesspermit_id ASC";
 	}else{
-		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
-				FROM barangayclearance
-				WHERE full_name LIKE ? 
-				ORDER BY clearance_id DESC";
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM firstname
+				WHERE firstname LIKE ? 
+				ORDER BY businesspermit_id ASC";
 	}
 	
 	
@@ -253,21 +253,19 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['clearance_id'], 
-				$data['full_name'],
-				$data['age'],
-				$data['status'],
-				$data['nationality'],
-				$data['address'],
+		$stmt->bind_result($data['businesspermit_id'], 
+				$data['dateissued'],
+				$data['selection'],
+				$data['firstname'],
+				$data['middlename'],
+				$data['lastname'],
 				$data['contactno'],
-				$data['emailadd'],
-				$data['purpose'],
-				$data['date_issued'],
-				$data['ctc_no'],
-				$data['issued_at'],
-				$data['precint_no'],
-				$data['clearanceid_image'],
-				$data['clearance_status']
+				$data['businessname'],
+				$data['businessaddress'],
+				$data['plateno'],
+				$data['email_add'],
+				$data['businessid_image'],
+				$data['status']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -292,14 +290,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
-				FROM barangayclearance WHERE clearance_status = 'Approved'
-				ORDER BY clearance_id DESC LIMIT ?, ?";
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		FROM businesspermit WHERE status = 'Approved'
+				ORDER BY businesspermit_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
-				FROM barangayclearance 
-				WHERE full_name LIKE ? 
-				ORDER BY clearance_id DESC LIMIT ?, ?";
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit 
+				WHERE firstname LIKE ? 
+				ORDER BY businesspermit_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -314,21 +312,19 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging ->execute();
 		// store result 
 		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['clearance_id'], 
-				$data['full_name'],
-				$data['age'],
-				$data['status'],
-				$data['nationality'],
-				$data['address'],
+		$stmt_paging->bind_result($data['businesspermit_id'], 
+				$data['dateissued'],
+				$data['selection'],
+				$data['firstname'],
+				$data['middlename'],
+				$data['lastname'],
 				$data['contactno'],
-				$data['emailadd'],
-				$data['purpose'],
-				$data['date_issued'],
-				$data['ctc_no'],
-				$data['issued_at'],
-				$data['precint_no'],
-				$data['clearanceid_image'],
-				$data['clearance_status']
+				$data['businessname'],
+				$data['businessaddress'],
+				$data['plateno'],
+				$data['email_add'],
+				$data['businessid_image'],
+				$data['status']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -350,7 +346,7 @@ if(!isset($_SESSION["type"]))
 	?>
 		<div style="text-align: center;">
 			<hr>
-			<h5>Approved: Barangay Clearance</h5>
+			<h5>Approved: Business Permit</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -364,7 +360,7 @@ if(!isset($_SESSION["type"]))
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
 									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='businesspermit.php'"></i> Back</button>
 									</div>
 								</div>
 							</div>						
@@ -374,18 +370,18 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table" id="table">
 								<thead>
 									<tr class="t_head">
-										<th width="5%">Clearance ID</th>
-										<th width="5%">Fullname</th>
-										<th width="5%">Age</th>
-										<th width="5%">Status</th>
-										<th width="5%">Nationality</th>
-										<th width="5">Address</th>
-										<th width="10%">Purpose</th>
-										<!-- <th width="5%">Identification Card</th> -->
+										<th width="5%"> Permit ID</th>
 										<th width="5%">Date Issued</th>
-										<th width="5%">CTC no</th>
-										<th width="5%">Issued at</th>
-										<th width="5%">Precint no</th>
+										<th width="5%">Selection</th>
+										<th width="5%">Firstname</th>
+										<th width="5%">Middlename</th>
+										<th width="5">Lastname</th>
+										<th width="10%">Contact no</th>
+										<!-- <th width="5%">Identification Card</th> -->
+										<th width="5%">Business name</th>
+										<th width="5%">Business Address</th>
+										<th width="5%">Plate no</th>
+										<th width="5%">Email</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Certificate Status</th>
 										<th width="5%"></th>
@@ -396,22 +392,23 @@ if(!isset($_SESSION["type"]))
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['clearance_id']; ?></td>
-									<td><?php echo $data ['full_name']; ?></td>
-									<td><?php echo $data ['age']; ?></td>
-									<td><?php echo $data ['status']; ?></td>
-									<td><?php echo $data ['nationality']; ?></td>
-									<td><?php echo $data ['address']?></td>
-									<td><?php echo $data ['purpose']; ?></td>
-									<td><?php echo $data ['date_issued']; ?></td>
-									<td><?php echo $data ['ctc_no']; ?></td>
-									<td><?php echo $data ['issued_at']; ?></td>
-									<td><?php echo $data ['precint_no']; ?></td>
+									<td><?php echo $data ['businesspermit_id']; ?></td>
+									<td><?php echo $data ['dateissued']; ?></td>
+									<td><?php echo $data ['selection']; ?></td>
+									<td><?php echo $data ['firstname']; ?></td>
+									<td><?php echo $data ['middlename']; ?></td>
+									<td><?php echo $data ['lastname']?></td>
+									<td><?php echo $data ['contactno']; ?></td>
+									<td><?php echo $data ['businessname']; ?></td>
+									<td><?php echo $data ['businessaddress']; ?></td>
+									<td><?php echo $data ['plateno']; ?></td>
+									<td><?php echo $data ['email_add']; ?></td>
+									
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<td>
-										<a class="view_approvebtn" style="width: 110px; height:40px;" href="print_clearance.php?id=<?php echo $data['clearance_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print </a>
+										<a class="view_approvebtn" style="width: 110px; height:40px;" href="print_permit.php?id=<?php echo $data['businesspermit_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print </a>
 									</td>
 									<td><button class="replybtn" data-toggle="modal" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 				

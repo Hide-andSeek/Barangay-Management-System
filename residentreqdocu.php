@@ -533,7 +533,8 @@ if(!isset($_SESSION['email'])){
 																</div></br><br/>
 																
 															</div>	
-															<div class="left_userpersonal_info left_userpersonal_info1">						
+															<div class="left_userpersonal_info left_userpersonal_info1">
+
 																<div class="form-group">
 																	<label for="birthday">Birthday: <i class="red">*</i></label>
 																	<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
@@ -545,20 +546,24 @@ if(!isset($_SESSION['email'])){
 																	<input type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth" placeholder="Please write your Place of Birth">
 																	<?php echo isset($error['placeofbirth']) ? $error['placeofbirth'] : '';?>	
 																</div><br><br/>
-																							
+
+																<div class="form-group">
+																	<label for="precintno">Precint no: <i class="red">*</i></label>
+																	<input type="number"  class="form-control form-text form-text-desc" id="precintno" name="precintno">
+																</div><br><br/>	
+
 																<div class="form-group">
 																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
 																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
 																	<?php echo isset($error['contact_no']) ? $error['contact_no'] : '';?>
 																</div><br><br/>
-
+															</div>
+															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
 																	<input type="email" class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
 																	<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
 																</div><br/><br/>
-																
-																
 															</div>
 														</fieldset>
 													</div> <br>
@@ -601,8 +606,17 @@ if(!isset($_SESSION['email'])){
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group ">
 															<label for="file">Attach Your Files: <i class="red">*</i></label>
-															<input type='file' class="form-control" name='id_image' id="id_image" multiple/>
+															<input type='file' class="form-control" name='id_image' id="id_image"/>
 															<?php echo isset($error['id_image']) ? $error['id_image'] : '';?>
+														</div><br>
+														<div class="form-group">
+															<label>Document type, please choose<i class="red">*</i></label>
+															<select class="form-control" name="brgyidfilechoice">
+																<option disabled>--Select--</option>
+																<option value="Hardcopy">Hardcopy</option>
+																<option value="Softcopy">Softcopy</option>
+																<option value="Both">Both</option>
+															</select>
 														</div><br>
 													</div>
 													
@@ -743,6 +757,16 @@ if(!isset($_SESSION['email'])){
 																</div>
 
 																<div class="form-group">
+																	<label>Document type, please choose<i class="red">*</i></label>
+																	<select class="form-control" name="permitfilechoice">
+																		<option disabled>--Select--</option>
+																		<option value="Hardcopy">Hardcopy</option>
+																		<option value="Softcopy">Softcopy</option>
+																		<option value="Both">Both</option>
+																	</select>
+																</div><br>
+
+																<div class="form-group">
 																	<input type="hidden" class="form-control form-text form-text-desc" id="status" name="status" value="Pending">
 																</div><br>
 															</div>
@@ -821,8 +845,18 @@ if(!isset($_SESSION['email'])){
 																	<input type='file' name='indigencyid_image'/>
 																	<?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : '';?>
 																</div>
+																
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">	
+																<div class="form-group">
+																	<label>Document type, please choose<i class="red">*</i></label>
+																	<select class="form-control" name="indigencyfilechoice">
+																		<option disabled>--Select--</option>
+																		<option value="Hardcopy">Hardcopy</option>
+																		<option value="Softcopy">Softcopy</option>
+																		<option value="Both">Both</option>
+																	</select>
+																</div><br>
 																<div class="form-group">
 																	<input type="hidden" class="form-control form-text form-text-desc" id="status" name="status" value="Pending">
 																</div><br>
@@ -861,10 +895,15 @@ if(!isset($_SESSION['email'])){
 												<div>
 														<fieldset class="field_set">
 															<legend style="text-align: center;">Personal Information</legend>
+															<blockquote class="blockqoute-color">
+																<p class="reminder"><label class="reminder-heading">Reminder/ Paalala: </label> Please fill out the information below. 
+																</p>
+																<!-- <a value="Toggle" onclick="toggle()"> Show Tagalog Translation</a> <br> <span id="fade">Sa paghiling ng iyong dokumento, mangyaring punan ang impormasyon sa ibaba. (Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago isumite. Upang maiwasan ang typo error).</span> -->
+															</blockquote>
 															<div class="left_userpersonal_info left_userpersonal_info1">
 															<div class="form-group">
 																	<label for="full_name">Full Name: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Please Specify your Fullname">
+																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Please Specify your Fullname" title="This must be capitalize">
 																	<?php echo isset($error['full_name']) ? $error['full_name'] : '';?>
 																</div><br>
 																
@@ -887,14 +926,14 @@ if(!isset($_SESSION['email'])){
 
 																 <div class="form-group">
 																	<label for="nationality">Nationality: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Filipino">
+																	<input type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Filipino" title="This must be capitalize">
 																	<?php echo isset($error['nationality']) ? $error['nationality'] : '';?>
 																</div></br>
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">						
 															<div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="address" name="address" placeholder="#Blk No. Street City/Town">
+																	<input type="text" class="form-control form-text" id="address" name="address" placeholder="#Blk No. Street City/Town" title="Required Address">
 																	<?php echo isset($error['address']) ? $error['address'] : '';?>
 																</div><br>
 
@@ -935,34 +974,20 @@ if(!isset($_SESSION['email'])){
 
 														<div class="form-group">
 															<label for="emrgncycontact">CTC No.: </label>
-															<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no" placeholder="Place your CTC no. (If you have any)">
-															<?php echo isset($error['ctc_no']) ? $error['ctc_no'] : '';?>
+															<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no" placeholder="This is optional." title="Place your Precint no. If you have any">
 														</div><br>
 
 														<div class="form-group">
 															<label for="issued_at">Issued at: </label>
-															<input type="text" min="12" class="form-control form-text" id="issued_at" name="issued_at" placeholder="#Blk No. Street City/Town">
+															<input type="text" min="12" class="form-control form-text" id="issued_at" name="issued_at" placeholder="#Blk No. Street City/Town" value="Barangay Commonwealth">
 															<?php echo isset($error['issued_at']) ? $error['issued_at'] : '';?>
 														</div><br>
 													</div>
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="precint_no">Precint No.: </label>
-															<input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no" placeholder="Place your Precint no. (If you have any)">
-															<?php echo isset($error['precint_no']) ? $error['precint_no'] : '';?>
+															<input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no" placeholder="This is optional." title="Place your Precint no. If you have any">
 														</div><br>
-
-														<div class="form-group">
-															<label for="file">Attach Your Files: </label>
-															<input type='file' name='clearanceid_image'/>
-															<?php echo isset($error['clearanceid_image']) ? $error['clearanceid_image'] : '';?>
-														</div>
-
-														<div class="form-group">
-															<input type="hidden" class="form-control form-text form-text-desc" id="clearance_status" name="clearance_status" value="Pending">
-															<?php echo isset($error['clearance_status']) ? $error['clearance_status'] : '';?>
-														</div><br>
-														
 													</div>
 													</fieldset>
 													<br>
@@ -1010,7 +1035,30 @@ if(!isset($_SESSION['email'])){
 														</p>
 														<!-- <a value="Toggle" onclick="toggle()"> Show Tagalog Translation</a> <br> <span id="fade">Sa paghiling ng iyong dokumento, mangyaring punan ang impormasyon sa ibaba. (Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago isumite. Upang maiwasan ang typo error).</span> -->
 													</blockquote>
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="file">Attach Your Files: <i class="red">*</i></label>
+															<input type='file' name='clearanceid_image' multiple/>
+															<?php echo isset($error['clearanceid_image']) ? $error['clearanceid_image'] : '';?>
+														</div>
+
+														<div class="form-group">
+																	<label>Document type, Please choose<i class="red">*</i></label>
+																	<select class="form-control" name="filechoice">
+																		<option disabled>--Select--</option>
+																		<option value="Hardcopy">Hardcopy</option>
+																		<option value="Softcopy">Softcopy</option>
+																		<option value="Both">Both</option>
+																	</select>
+																	<?php echo isset($error['filechoice']) ? $error['filechoice'] : '';?>
+														</div><br>
+
+														<div class="form-group">
+															<input type="hidden" class="form-control form-text form-text-desc" id="clearance_status" name="clearance_status" value="Pending">
+															<?php echo isset($error['clearance_status']) ? $error['clearance_status'] : '';?>
+														</div><br>
 														
+													</div>
 													<div class="btns-group1">
 													<a class="btn1 btn-prev1">Previous</a>
 													<input type="submit" name="clearancebtn" value="Submit" class="btn1" />
@@ -1021,6 +1069,7 @@ if(!isset($_SESSION['email'])){
 							</div>
 						</div>
 				</div>
+				<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
 				<div class="document-light-grey document-section">
 			<button onclick="myFunction('hidedocument4')" style="border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;" id="blotter" class="document-button document-block documentbtn form-control documentbtn bgcolor">
 				<h5><i class="bx bx-receipt"></i>
@@ -1050,7 +1099,7 @@ if(!isset($_SESSION['email'])){
 															<div class="left_userpersonal_info left_userpersonal_info1">
 															<div class="form-group">
 																	<label for="n_complainant">Name of Complainant: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="n_complainant" name="n_complainant" placeholder="Please Specify your Fullname">
+																	<input type="text" class="form-control form-text" id="n_complainant" name="n_complainant" placeholder="Please Specify your Fullname" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
 																</div><br>
 																
@@ -1072,21 +1121,27 @@ if(!isset($_SESSION['email'])){
 																
 																<div class="form-group">
 																	<label for="comp_address">Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="comp_address" name="comp_address" placeholder="#Blk No. Street City/Town">
+																	<input type="text" class="form-control form-text" id="comp_address" name="comp_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
 																</div><br>	
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">						
 															<div class="form-group">
 																	<label for="inci_address">Incident Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="inci_address" name="inci_address" placeholder="#Blk No. Street City/Town">
+																	<input type="text" class="form-control form-text" id="inci_address" name="inci_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['inci_address']) ? $error['inci_address'] : '';?>
 																</div><br>
 
 																<div class="form-group">
 																	<label for="contactno">Contact No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789">
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
+																</div><br>
+
+																<div class="form-group">
+																	<label>Email Address: <i class="red">*</i></label>
+																	<input type="email" class="form-control form-text form-text-desc" id="bemailadd" name="bemailadd" placeholder="example@gmail.com">
+																	<?php echo isset($error['bemailadd']) ? $error['bemailadd'] : '';?>
 																</div><br>
 																
 															</div>
@@ -1102,7 +1157,7 @@ if(!isset($_SESSION['email'])){
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="n_violator">Name of Violator: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="n_violator" name="n_violator" placeholder="You can specify multiple names here">
+															<input type="text" class="form-control form-text" id="n_violator" name="n_violator" placeholder="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?>
 														</div><br>
 
@@ -1136,13 +1191,13 @@ if(!isset($_SESSION['email'])){
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="violator_address">Address: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="violator_address" name="violator_address" placeholder="#Blk No. Street City/Town">
+															<input type="text" class="form-control form-text" id="violator_address" name="violator_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['violator_address']) ? $error['violator_address'] : '';?>
 														</div><br>
 
 														<div class="form-group">
 															<label for="witnesses">Witnesses: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="witnesses" name="witnesses">
+															<input type="text" class="form-control form-text" id="witnesses" name="witnesses" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['witnesses']) ? $error['witnesses'] : '';?>
 														</div><br>
 
@@ -1204,10 +1259,8 @@ if(!isset($_SESSION['email'])){
 														<div class="form-group">
 															<label for="file">Attach Files Here: <i class="red">*</i></label>
 															<input type='file' name='blotterid_image'/>
-															<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
 														</div>
 
-														
 														<div class="form-group">
 															<label for="id_type">ID Type: </label>
 																<select class="form-control form-text" name="id_type">

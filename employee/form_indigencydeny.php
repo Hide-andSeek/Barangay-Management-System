@@ -80,7 +80,7 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <!-- <meta http-equiv="refresh" content="120"> -->
 
-     <title> Req Document Dept. - Barangay ID </title>
+     <title> Denied: Barangay Indigency </title>
 	 
 	 
 	 <style>
@@ -242,7 +242,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay ID
+						<h5>Barangay Indigency
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -270,14 +270,14 @@ if(!isset($_SESSION["type"]))
 		}
 			
 		if(empty($keyword)){
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Deny'
-					ORDER BY barangay_id ASC";
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+            FROM certificateindigency WHERE status = 'Approved'
+					ORDER BY indigency_id ASC";
 		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC";
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+					FROM certificateindigency
+					WHERE fullname LIKE ? 
+					ORDER BY indigency_id ASC";
 		}
 		
 		
@@ -291,21 +291,16 @@ if(!isset($_SESSION["type"]))
 			$stmt->execute();
 			// store result 
 			$stmt->store_result();
-			$stmt->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+			$stmt->bind_result($data['indigency_id'], 
+					$data['fullname'],
+                    $data['address'],
+                    $data['purpose'],
+                    $data['contactnum'],
+                    $data['emailaddress'],
+                    $data['id_type'],
+                    $data['date_issue'],
+                    $data['status'],
+                    $data['indigencyid_image']
 					);
 			// get total records
 			$total_records = $stmt->num_rows;
@@ -330,14 +325,14 @@ if(!isset($_SESSION["type"]))
 		}	
 		
 		if(empty($keyword)){
-			$sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Deny'
-					ORDER BY barangay_id ASC LIMIT ?, ?";
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+            FROM certificateindigency WHERE status = 'Approved'
+					ORDER BY indigency_id ASC LIMIT ?, ?";
 		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC LIMIT ?, ?";
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+					FROM certificateindigency
+					WHERE fullname LIKE ? 
+					ORDER BY indigency_id ASC LIMIT ?, ?";
 		}
 		
 		$stmt_paging = $connect->stmt_init();
@@ -352,21 +347,16 @@ if(!isset($_SESSION["type"]))
 			$stmt_paging ->execute();
 			// store result 
 			$stmt_paging ->store_result();
-			$stmt_paging->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+			$stmt_paging->bind_result($data['indigency_id'], 
+					$data['fullname'],
+                    $data['address'],
+                    $data['purpose'],
+                    $data['contactnum'],
+                    $data['emailaddress'],
+                    $data['id_type'],
+                    $data['date_issue'],
+                    $data['status'],
+                    $data['indigencyid_image']
 					);
 			// for paging purpose
 			$total_records_paging = $total_records; 
@@ -388,7 +378,7 @@ if(!isset($_SESSION["type"]))
 	?>
 		<div style="text-align: center;">
 			<hr>
-			<h5>Denied: Barangay ID Request</h5>
+			<h5>Denied: Barangay Indigency</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -403,7 +393,7 @@ if(!isset($_SESSION["type"]))
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
 									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayid.php'"></i> Back</button>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='certificateofindigency.php'"></i> Back</button>
 									</div>
 								</div>
 							</div>						
@@ -413,15 +403,15 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table" id="table">
 								<thead>
 									<tr class="t_head">
-										<th width="5%">Barangay ID</th>
-										<th width="5%">Firstname</th>
-										<th width="5%">Middlename</th>
-										<th width="5%">Lastname</th>
+                                        <th width="5%">Indigency ID</th>
+										<th width="5%">Fullname</th>
 										<th width="5%">Address</th>
-										<th width="10%">Contact no</th>
+										<th width="5%">Purpose</th>
+										<th width="5">Contact</th>
+										<th width="15%">Email</th>
+										<th width="5%">ID Type</th>
+										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
-										<th width="5%">Email</th>
-										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Status</th>
 									</tr>
 								</thead>
@@ -429,15 +419,15 @@ if(!isset($_SESSION["type"]))
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['mname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
+                                <td><?php echo $data ['indigency_id']; ?></td>
+									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact_no']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
+									<td><?php echo $data ['purpose']; ?></td>
+									<td><?php echo $data ['contactnum']; ?></td>
+									<td><?php echo $data ['emailaddress']?></td>
+									<td><?php echo $data ['id_type']; ?></td>
+									<td><?php echo $data ['date_issue']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 								</tr>	
 								</tbody>

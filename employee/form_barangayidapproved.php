@@ -79,7 +79,7 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
+	 <!-- <meta http-equiv="refresh" content="120"> -->
 
      <title> Barangay ID - Approved Documents </title>
 	 

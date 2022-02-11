@@ -388,9 +388,7 @@ if(!isset($_SESSION["type"]))
 										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
-										<th width="5%">Action</th>
 										<th width="5%">View Details</th>
-										<th width="5%">SMS</th>
 									</tr>
 								</thead>
 							<?php 
@@ -407,13 +405,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['date_issue']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><img src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" width="210" height="100"></td> -->
-
-									<td><button class="view_approvebtn" name="btnEdit">Mark as Done</button></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='indigencyviewdet.php?id=<?php echo $data['indigency_id'];?>'">View Details</button></td>
-									
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Send SMS</button></td>
-				
+									<td><button class="view_approvebtn" onclick="location.href='indigencyviewdet.php?id=<?php echo $data['indigency_id'];?>'">View Details</button></td>			
 								</tr>	
 								</tbody>
 								<?php 

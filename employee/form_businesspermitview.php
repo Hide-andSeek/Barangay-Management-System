@@ -80,7 +80,7 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="refresh" content="120">
 
-     <title> View: Barangay Indigency </title>
+     <title> View: Business Permit </title>
 	 
 	 
 	 <style>
@@ -249,7 +249,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Indigecy >> View Barangay Indigency Detail
+						<h5> Business Permit >> View  Business Permit Detail
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -270,9 +270,9 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-                            FROM certificateindigency
-                            WHERE indigency_id = ?";
+                    $sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+                            FROM businesspermit
+                            WHERE businesspermit_id = ?";
                     
                     $stmt = $connect->stmt_init();
                     if($stmt->prepare($sql_query)) {	
@@ -282,16 +282,19 @@ if(!isset($_SESSION["type"]))
                         $stmt->execute();
                         // store result 
                         $stmt->store_result();
-                        $stmt->bind_result($data['indigency_id'], 
-                                $data['fullname'],
-                                $data['address'],
-                                $data['purpose'],
-                                $data['contactnum'],
-                                $data['emailaddress'],
-                                $data['id_type'],
-                                $data['date_issue'],
-                                $data['status'],
-                                $data['indigencyid_image']
+                        $stmt->bind_result($data['businesspermit_id'], 
+                                $data['dateissued'],
+                                $data['selection'],
+                                $data['firstname'],
+                                $data['middlename'],
+                                $data['lastname'],
+                                $data['contactno'],
+                                $data['businessname'],
+                                $data['businessaddress'],
+                                $data['plateno'],
+                                $data['email_add'],
+                                $data['businessid_image'],
+                                $data['status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
@@ -303,7 +306,7 @@ if(!isset($_SESSION["type"]))
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: Barangay Indigency Detail
+                    View: Business Permit Detail
                     </h5>
                 </div>
                 <hr>
@@ -312,31 +315,49 @@ if(!isset($_SESSION["type"]))
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['indigency_id']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Fullname</th>
-                            <td><strong><?php echo $data['fullname']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Purpose</th>
-                            <td><strong><?php echo $data['purpose']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Contact</th>
-                            <td><strong><?php echo $data['contactnum']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Email</th>
-                            <td><?php echo $data['emailaddress']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">ID Type</th>
-                            <td ><?php echo $data['id_type']; ?></td>
+                            <td><?php echo $data['businesspermit_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Date Issued</th>
-                            <td ><?php echo $data['date_issue']; ?></td>
+                            <td><strong><?php echo $data['dateissued']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Selection</th>
+                            <td><strong><?php echo $data['selection']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Firstname</th>
+                            <td><strong><?php echo $data['firstname']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Middlename</th>
+                            <td><?php echo $data['middlename']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Lastname</th>
+                            <td ><?php echo $data['lastname']; ?></td>
+                        </tr>
+                 </table>
+                    <table id="viewdetails" class="font-sizee">
+                        <tr>
+                            <th width="30%">Date Issued</th>
+                            <td ><?php echo $data['contactno']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Business name</th>
+                            <td ><?php echo $data['businessname']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Business Address</th>
+                            <td ><?php echo $data['businessaddress']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Plate no</th>
+                            <td ><?php echo $data['plateno']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Email</th>
+                            <td ><?php echo $data['email_add']; ?></td>
                         </tr>
                     </table>
                     </div>
@@ -344,10 +365,10 @@ if(!isset($_SESSION["type"]))
                     <h6>Identification Card (Click to Zoom): </h6>
                     <div id="myModal" class="modal" style="display: absolute;">
                         <span class="close">&times;</span>
-                        <img src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
+                        <img src="../img/fileupload_permit/<?php echo $data['businessid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
-                        <img id="myImg" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
+                        <img id="myImg" src="../img/fileupload_permit/<?php echo $data['businessid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
                     </div>
                 </form>
                 <br>
@@ -363,7 +384,7 @@ if(!isset($_SESSION["type"]))
                       </div>
                         <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
                         <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="certificateofindigency.php">Back</a>
+                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="businesspermit.php">Back</a>
                 </div>
                 
                 </div>

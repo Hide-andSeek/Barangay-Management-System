@@ -108,8 +108,6 @@ if(!isset($_SESSION["type"]))
         #viewdetails tr:hover {background-color: #ddd;}
 
         #viewdetails th {
-          padding-top: 12px;
-          padding-bottom: 12px;
           text-align: left;
           background-color: #D6EACA;
           color: black;
@@ -270,7 +268,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
+                    $sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, brgyidfilechoice, id_image
                             FROM barangayid
                             WHERE barangay_id = ?";
                     
@@ -289,6 +287,7 @@ if(!isset($_SESSION["type"]))
                                 $data['address'],
                                 $data['birthday'],
                                 $data['placeofbirth'],
+                                $data['precintno'],
                                 $data['contact_no'],
                                 $data['emailadd'],
                                 $data['guardianname'],
@@ -296,6 +295,7 @@ if(!isset($_SESSION["type"]))
                                 $data['reladdress'],
                                 $data['dateissue'],
                                 $data['status'],
+                                $data['brgyidfilechoice'],
                                 $data['id_image']
                                 );
                         $stmt->fetch();
@@ -315,24 +315,22 @@ if(!isset($_SESSION["type"]))
                 <form method="post">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">Personal Information</th>
-                        </tr>
+                        <span><strong> Personal Information</strong></span>
                         <tr>
                             <th width="30%">ID No.</th>
                             <td><?php echo $data['barangay_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">First Name</th>
-                            <td><strong><?php echo $data['fname']; ?></strong></td>
+                            <td><?php echo $data['fname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Middle Name</th>
-                            <td><strong><?php echo $data['mname']; ?></strong></td>
+                            <td><?php echo $data['mname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Last Name</th>
-                            <td><strong><?php echo $data['lname']; ?></strong></td>
+                            <td><?php echo $data['lname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Address</th>
@@ -348,20 +346,26 @@ if(!isset($_SESSION["type"]))
                             <td><?php echo $data['placeofbirth']; ?></td>
                         </tr>
                         <tr>
+                            <th width="30%">Precint no.</th>
+                            <td><?php echo $data['precintno']; ?></td>
+                        </tr>
+                        <tr>
                             <th width="30%">Contact</th>
-                            <td><strong><?php echo $data['contact_no']; ?></strong></td>
+                            <td><?php echo $data['contact_no']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Email Address</th>
-                            <td><strong><?php echo $data['emailadd']; ?></strong></td>
+                            <td><?php echo $data['emailadd']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Document Type</th>
+                            <td><?php echo $data['brgyidfilechoice']; ?></td>
                         </tr>
                     </table>
                     <br>
-                    
+                    <div><strong> In case of Emergency:</strong></div>
+                    <br>
                     <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">In case of Emergency: </th>
-                        </tr>
                         <tr>
                             <th width="30%">Guardian name</th>
                             <td><?php echo $data['guardianname']; ?></td>
@@ -392,6 +396,15 @@ if(!isset($_SESSION["type"]))
                 </form>
                 <br>
                 <div id="option_menu">
+                    <div class="information col">
+						<label class="employee-label ">Approval Date </label>
+							<input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
+					</div>
+
+			        <div class="information col">
+						<label class="employee-label"> Approved By </label>
+							<input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+					</div>
                         <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
                         <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
                         <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="barangayid.php">Back</a>
@@ -424,6 +437,9 @@ if(!isset($_SESSION["type"]))
         modal.style.display = "none";
         }
 
+    </script>
+    <script>
+	    document.querySelector("#approvedate").valueAsDate = new Date();
     </script>
 	</body>
 </html>

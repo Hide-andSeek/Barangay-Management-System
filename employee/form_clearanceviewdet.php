@@ -80,7 +80,7 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="refresh" content="120">
 
-     <title> Req Document Dept. - Barangay Clearance </title>
+     <title> Details: Barangay Clearance </title>
 	 
 	 
 	 <style>
@@ -348,6 +348,8 @@ if(!isset($_SESSION["type"]))
                             <th width="30%">Email</th>
                             <td><strong><?php echo $data['emailadd']; ?></strong></td>
                         </tr>
+                    </table>
+                        <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">Purpose</th>
                             <td><strong><?php echo $data['purpose']; ?></strong></td>
@@ -382,6 +384,15 @@ if(!isset($_SESSION["type"]))
                 </form>
                 <br>
                 <div id="option_menu">
+                    <div class="information col">
+						<label class="employee-label ">Approval Date </label>
+							<input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
+					</div>
+
+			        <div class="information col">
+						<label class="employee-label"> Approved By </label>
+							<input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+					</div>
                         <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
                         <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
                         <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="barangayclearance.php">Back</a>
@@ -414,6 +425,9 @@ if(!isset($_SESSION["type"]))
         modal.style.display = "none";
         }
 
+    </script>
+     <script>
+	    document.querySelector("#approvedate").valueAsDate = new Date();
     </script>
 	</body>
 </html>

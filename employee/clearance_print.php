@@ -4,6 +4,7 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include('../qr_code/phpqrcode/qrlib.php'); 
 
 if(!isset($_SESSION["type"]))
 {
@@ -26,7 +27,44 @@ if(!isset($_SESSION["type"]))
 		$dept = $_SESSION['type'];
 	}
 ?>
+	<?php
 
+// if(isset($_POST['generate'])){
+//     $qr = '';
+
+//     $link = $_POST['link'];
+//     $id = $_POST['barangay_id'];
+//     $fname = $_POST['fname'];
+//     $mname = $_POST['mname'];
+//     $lname = $_POST['lname'];
+//     $filename = $id;
+
+//     $qr = "
+//     <div style='margin-top: -61px; margin-left: -6px; margin-right: 25px;'>
+//       <img width='98' height='97' style='border: 1px solid black;'  src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$link/$id/$fname/$mname/$lname&choe=UTF-8'>
+//     </div>
+//       ";
+//     }else{
+//     $qr = "<span style='font-weight: 600;'>Click Generate QR Code!</span>";
+//     }
+
+
+if(isset($_POST['generate']) ) {
+
+$message = ''; 
+
+$tempDir = '../img/'; 
+$link = $_POST['link'];
+$id = $_POST['clearance_id'];
+$full_name = $_POST['full_name'];
+$add = $_POST['address'];
+$filename = ($full_name);
+$codeContents = ''.$link.'/'.urlencode($full_name).''.urlencode($add).'/'.urlencode($id).'/$verification.php'; 
+QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
+}else{
+$message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generate QR Code!</span>";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +85,8 @@ if(!isset($_SESSION["type"]))
         .inp{border: none; }
 		.borderb{border-bottom: 1px solid black}
 		.offic{font-size:13px;}
-        
+        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+		.viewbtn:hover{ background-color: #008CBA;color: white;}
     </style>
 </head>
 <body>
@@ -97,7 +136,13 @@ if(!isset($_SESSION["type"]))
                 ?>
 
     <div id="indigency_file" style="display: auto; ">
+	<?php
+			if(!isset($filename)){
+				$filename = "author";
+			}
+			?>
     <br>
+								<form action="" method="post">
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
@@ -205,7 +250,7 @@ if(!isset($_SESSION["type"]))
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="purpose" name="purpose" width="auto" placeholder="PURPOSE" value="<?php echo $data['purpose']; ?>"></p>
 												<br>
 												
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp borderb" type="text" id="date_issue" name="date_issue" placeholder="DAY" style="width:35px; padding-left: 5px;"> day of <input class="inp  borderb" style="padding-left: 10px; width:105px;" type="text" id="date_issue" name="date_issue" placeholder="MONTH"> <input class="inp  borderb" style="padding-left: 10px; width:55px;" type="text" id="demo" name="date_issue" placeholder="YEAR">, Quezon City.</p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this day of <input class="inp  borderb" style="padding-left: 10px; width:95px;" value="<?php echo $data['date_issued']; ?>" type="text" id="demo" name="date_issue" placeholder="YEAR">, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
 												<br>
 												<div style="display: auto; float: left; text-align:center; padding-left: 290px;" class="side_information">
@@ -214,7 +259,7 @@ if(!isset($_SESSION["type"]))
 													
 													<div style="text-align: left; margin-top: 45px;"> 
 														CTC NO.: <input class="inp  borderb" style="width: 75px;" name="ctc_no" id="ctc_no" value="<?php echo $data['ctc_no']; ?>"><br>
-														Issued AT: <input class="inp  borderb" style="width: 215px;" name="issued_at" id="issued_at" value="<?php echo $data['issued_at']; ?>" ><br>
+														ISSUED AT: <input class="inp  borderb" style="width: 215px;" name="issued_at" id="issued_at" value="<?php echo $data['issued_at']; ?>" ><br>
 														ISSUED ON: <input class="inp  borderb"  style="width: 215px;" name="date_issued" id="date_issued" value="<?php echo $data['date_issued']; ?>"><br>
 														PRECINT NO.: <input class="inp  borderb" style="width: 75px;" name="precint_no" id="precint_no" value="<?php echo $data['precint_no']; ?>"><br>
 													</div>
@@ -235,15 +280,17 @@ if(!isset($_SESSION["type"]))
 												<br>
 												<br>
 												<br>
-												<br>
-												<br>
 												<div >
 													<div style="margin-left: 255px; font-size: 13px;">
 														<div style="float: right; text-align: center; padding-right: 95px; margin-top: -45px;">
 															<h5>MANUEL A. CO</h5>
 															<p>Punong Barangay</p>
 														</div>
-														<em>Not valid without Barangay Seal</em>
+														<div style="margin-top: 20px; margin-left: 55px;">
+                                                        <?php echo '<img src="../img/'. @$filename.'.png" style="width:110px; height: 110px;"><br>'; ?>
+                                                        <span style="margin-left: -20px;"><?php echo $message;?></span>
+                                                         </div>
+														<em>Not valid without QR Code</em>
 														<p>CONTACT PERSON. MARK LEAN CRUZ</p>
 														<br>
 														<p>NOTE: This clearance is valid for a period of <br> Six (6) months from date of issue.</p>
@@ -257,6 +304,22 @@ if(!isset($_SESSION["type"]))
 												</div>
 											</div>
 										</div>
+										<input type="hidden" name="link" id="link" value="http://localhost:4000/Updated-Barangay-System">
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+                                            <div class="generatebtn" style="margin-top: 50px;">
+                                                <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
+												<button>
+                                                <a class="btn btn-primary form-control viewbtn" style="width:210px; margin:5px 0;" href="downloadqr.php?file=<?php echo $filename; ?>.png "> Download QR Code</a>
+												</button>
+                                            </div>
+                                        </form>
 									</section>
 <script>
 	const year = new Date();

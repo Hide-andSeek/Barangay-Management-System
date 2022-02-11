@@ -1,6 +1,27 @@
 <?php
+// Welcome to Request Document Query
+
+/* 
+----------------------------------------------------------------
+			TABLE OF CONTENTS: PREPARED STATEMENT
+----------------------------------------------------------------
+Insertion of Data with Image and Files
+1.0 Barangay ID
+2.0 Business Permit
+3.0 Barangay Indigency
+4.0 Barangay Clearance
+5.0 File Blottering
+6.0 Admin Blotter
+
+----------------------------------------------------------------
+*/
+?>
+
+<?php
 include('announcement_includes/functions.php');
 
+
+// 1.0 Prepared Statement for Barangay ID: Req Documents
 if(isset($_POST['brgyidbtn'])){
 	
 	$fname = $_POST['fname'];
@@ -9,12 +30,14 @@ if(isset($_POST['brgyidbtn'])){
 	$address = $_POST['address'];
 	$birthday = $_POST['birthday'];
 	$placeofbirth = $_POST['placeofbirth'];
+    $precintno = $_POST['precintno'];
 	$contact_no = $_POST['contact_no'];
 	$emailadd = $_POST['emailadd'];
 	$guardianname = $_POST['guardianname'];
 	$emrgncycontact = $_POST['emrgncycontact'];
 	$reladdress = $_POST['reladdress'];
 	$dateissue = $_POST['dateissue'];
+    $brgyidfilechoice = $_POST['brgyidfilechoice'];
 	$status = $_POST['status'];
 													
 	// get image info
@@ -100,28 +123,29 @@ if(isset($_POST['brgyidbtn'])){
 	$upload = move_uploaded_file($_FILES['id_image']['tmp_name'], 'img/fileupload_barangayid/'.$barangayid_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image)
-	VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $barangayid_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('ssssssssssssss', 
+	$stmt->bind_param('ssssssssssssssss', 
 	$fname,
 	$mname,
 	$lname,
 	$address,
 	$birthday,
 	$placeofbirth,
+    $precintno,
 	$contact_no,
 	$emailadd,
 	$guardianname,
 	$emrgncycontact,
 	$reladdress,
 	$dateissue,
-	$status,
-	$upload_image
+    $upload_image,
+	$brgyidfilechoice,
+    $status
 	);
 	// Execute query
 	$stmt->execute();
@@ -144,6 +168,8 @@ if(isset($_POST['brgyidbtn'])){
 	}
 
 
+    
+// 2.0 Prepared Statement for Business Permit: Req Documents
 if(isset($_POST['permitBtn'])){
 	
 	$dateissued = $_POST['dateissued'];
@@ -155,6 +181,7 @@ if(isset($_POST['permitBtn'])){
 	$businessaddress = $_POST['businessaddress'];
 	$plateno = $_POST['plateno'];
 	$email_add = $_POST['email_add'];
+    $permitfilechoice = $_POST['permitfilechoice'];
     $status = $_POST['status'];
 													
 	// get image info
@@ -234,14 +261,14 @@ if(isset($_POST['permitBtn'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], 'img/fileupload_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO businesspermit (dateissued, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, status, businessid_image)
-	VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO businesspermit (dateissued, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, status)
+	VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('sssssssssss', 
+	$stmt->bind_param('ssssssssssss', 
 	$dateissued,
 	$firstname,
     $middlename,
@@ -251,8 +278,9 @@ if(isset($_POST['permitBtn'])){
 	$businessaddress,
 	$plateno,
 	$email_add,
-    $status,
-	$upload_image
+	$upload_image,
+    $permitfilechoice,
+    $status
 	);
 	// Execute query
 	$stmt->execute();
@@ -274,6 +302,7 @@ if(isset($_POST['permitBtn'])){
 		}
 	}
 
+// 3.0 Prepared Statement for Barangay Indigency: Req Documents
     if(isset($_POST['indigencybtn'])){
 	
         $fullname = $_POST['fullname'];
@@ -283,6 +312,7 @@ if(isset($_POST['permitBtn'])){
         $emailaddress = $_POST['emailaddress'];
         $id_type = $_POST['id_type'];
         $date_issue = $_POST['date_issue'];
+        $indigencyfilechoice = $_POST['indigencyfilechoice'];
         $status = $_POST['status'];
                                                         
         // get image info
@@ -355,14 +385,14 @@ if(isset($_POST['permitBtn'])){
         $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], 'img/fileupload_indigency/'.$indigency_image);
                                                     
         // insert new data to menu table
-        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, id_type, date_issue,indigencyid_image, status)
-        VALUES(?,?,?,?,?,?,?,?,?)";
+        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, id_type, date_issue,indigencyid_image, indigencyfilechoice, status)
+        VALUES(?,?,?,?,?,?,?,?,?,?)";
                                                             
         $upload_image = $indigency_image;
         $stmt = $connect->stmt_init();
         if($stmt->prepare($sql_query)) {	
         // Bind your variables to replace the ?s
-        $stmt->bind_param('sssssssss', 
+        $stmt->bind_param('ssssssssss', 
         $fullname,
         $address,
         $purpose,
@@ -371,7 +401,8 @@ if(isset($_POST['permitBtn'])){
         $id_type,
         $date_issue,
         $upload_image,
-        $status,
+        $indigencyfilechoice,
+        $status
         );
         // Execute query
         $stmt->execute();
@@ -392,7 +423,8 @@ if(isset($_POST['permitBtn'])){
                 }
             }
         }
-        
+
+  // 4.0 Prepared Statement for Barangay Clearance: Req Documents      
         if(isset($_POST['clearancebtn'])){
 	
             $full_name = $_POST['full_name'];
@@ -407,11 +439,13 @@ if(isset($_POST['permitBtn'])){
             $ctc_no = $_POST['ctc_no'];
             $issued_at = $_POST['issued_at'];
             $precint_no = $_POST['precint_no'];
-            $clearance_status = $_POST['clearance_status'];                                      
             // get image info
             $clearance_image = $_FILES['clearanceid_image']['name'];
             $image_error = $_FILES['clearanceid_image']['error'];
             $image_type = $_FILES['clearanceid_image']['type'];
+ 
+            $filechoice = $_POST['filechoice'];    
+            $clearance_status = $_POST['clearance_status'];                                 
                                                             
             // create array variable to handle error
             $error = array();
@@ -443,15 +477,18 @@ if(isset($_POST['permitBtn'])){
             if(empty($date_issued)){
             $error['date_issued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
             }
-            if(empty($ctc_no)){
-            $error['ctc_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-            }
+            // if(empty($ctc_no)){
+            // $error['ctc_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            // }
             if(empty($issued_at)){
             $error['issued_at'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
             }
-            if(empty($precint_no)){
-            $error['precint_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-            }
+            // if(empty($precint_no)){
+            // $error['precint_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            // }
+            if(empty($filechoice)){
+                $error['filechoice'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                }
         
             // common image file extensions
             $allowedExts = array("jpeg", "jpg", "png");
@@ -481,10 +518,12 @@ if(isset($_POST['permitBtn'])){
                 !empty($emailadd) && 
                 !empty($purpose) && 
                 !empty($date_issued) && 
-                !empty($ctc_no) && 
+                // !empty($ctc_no) && 
                 !empty($issued_at) && 
-                !empty($precint_no) && 
-                empty($error['clearanceid_image'])){
+                // !empty($precint_no) &&
+                empty($error['clearanceid_image']) && 
+                !empty($filechoice) && 
+                !empty($clearance_status)){
                                                                 
             // create random image file name
             $string = '0123456789';
@@ -496,14 +535,14 @@ if(isset($_POST['permitBtn'])){
             $upload = move_uploaded_file($_FILES['clearanceid_image']['tmp_name'], 'img/fileupload_clearance/'.$clearance_image);
                                                         
             // insert new data to menu table
-            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, clearance_status)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                 
             $upload_image = $clearance_image;
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
             // Bind your variables to replace the ?s
-            $stmt->bind_param('ssssssssssssss', 
+            $stmt->bind_param('sssssssssssssss', 
             $full_name,
             $age,
             $status,
@@ -517,7 +556,8 @@ if(isset($_POST['permitBtn'])){
             $issued_at,
             $precint_no,
             $upload_image,
-            $clearance_status,
+            $filechoice,
+            $clearance_status
             );
             // Execute query
             $stmt->execute();
@@ -539,6 +579,7 @@ if(isset($_POST['permitBtn'])){
                 }
             }
 
+// 5.0 Prepared Statement for File Blottering: Req Documents
             if(isset($_POST['blotterbtn'])){
 	
                 $n_complainant = $_POST['n_complainant'];
@@ -547,6 +588,7 @@ if(isset($_POST['permitBtn'])){
                 $comp_address = $_POST['comp_address'];
                 $inci_address = $_POST['inci_address'];
                 $contactno = $_POST['contactno'];
+                $bemailadd = $_POST['bemailadd'];
                 $n_violator = $_POST['n_violator'];
                 $violator_age = $_POST['violator_age'];
                 $violator_gender = $_POST['violator_gender'];
@@ -582,6 +624,9 @@ if(isset($_POST['permitBtn'])){
                 if(empty($contactno)){
                 $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
                 }
+                if(empty($bemailadd)){
+                    $error['bemailadd'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                    }
                 if(empty($n_violator)){
                 $error['n_violator'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
                 }
@@ -615,9 +660,8 @@ if(isset($_POST['permitBtn'])){
                 $extension = end(explode(".", $_FILES["blotterid_image"]["name"]));
                                                                         
                 if($image_error > 0){
-                $error['blotterid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-                }else if(!(($image_type == "docx") || 
-                ($image_type == "pdf")) &&
+                $error['blotterid_image'] = "<span class='label label-danger cattxtbox errormsg'> You must insert file here! </span>";
+                }else if(!(($image_type == "pdf")) &&
                 !(in_array($extension, $allowedExts))){
                                                                 
                 $error['blotterid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
@@ -629,6 +673,7 @@ if(isset($_POST['permitBtn'])){
                     !empty($comp_address) && 
                     !empty($inci_address) && 
                     !empty($contactno) && 
+                    !empty($bemailadd) && 
                     !empty($n_violator) && 
                     !empty($violator_age) && 
                     !empty($violator_gender) && 
@@ -650,20 +695,21 @@ if(isset($_POST['permitBtn'])){
                 $upload = move_uploaded_file($_FILES['blotterid_image']['tmp_name'], 'img/fileupload_blotter/'.$blotter_image);
                                                             
                 // insert new data to menu table
-                $sql_query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql_query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                     
                 $upload_image = $blotter_image;
                 $stmt = $connect->stmt_init();
                 if($stmt->prepare($sql_query)) {	
                 // Bind your variables to replace the ?s
-                $stmt->bind_param('ssssssssssssssss', 
+                $stmt->bind_param('sssssssssssssssss', 
                 $n_complainant,
                 $comp_age,
                 $comp_gender,
                 $comp_address,
                 $inci_address,
                 $contactno,
+                $bemailadd,
                 $n_violator,
                 $violator_age,
                 $violator_gender,
@@ -696,6 +742,7 @@ if(isset($_POST['permitBtn'])){
                 }
 
 
+// 6.0 Prepared Statement for Admin Complaints: Req Documents
                 if(isset($_POST['submitbtn'])){
 	
                     $blotterID = $_POST['blotterID'];
@@ -822,22 +869,22 @@ if(isset($_POST['permitBtn'])){
                     if($stmt->prepare($sql_query)) {	
                     // Bind your variables to replace the ?s
                     $stmt->bind_param('ssssssssssssss', 
-                    $blotterID
-                    $complainant
-                    $c_age
-                    $c_gender
-                    $c_address
-                    $incident_add
-                    $violators
-                    $v_age
-                    $v_gender
-                    $v_rel
-                    $v_address
-                    $witness
-                    $ex_complaints
-                    $dept
-                    $app_date
-                    $app_by
+                    $blotterID,
+                    $complainant,
+                    $c_age,
+                    $c_gender,
+                    $c_address,
+                    $incident_add,
+                    $violators,
+                    $v_age,
+                    $v_gender,
+                    $v_rel,
+                    $v_address,
+                    $witness,
+                    $ex_complaints,
+                    $dept,
+                    $app_date,
+                    $app_by,
                     $document
                     );
                     // Execute query

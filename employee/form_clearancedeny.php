@@ -80,7 +80,7 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <!-- <meta http-equiv="refresh" content="120"> -->
 
-     <title> Req Document Dept. - Barangay ID </title>
+     <title> Denied: Barangay Clearance </title>
 	 
 	 
 	 <style>
@@ -242,7 +242,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay ID
+						<h5>Barangay Clearance
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -270,14 +270,14 @@ if(!isset($_SESSION["type"]))
 		}
 			
 		if(empty($keyword)){
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Deny'
-					ORDER BY barangay_id ASC";
+			$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+            FROM barangayclearance WHERE clearance_status = 'Deny'
+					ORDER BY clearance_id ASC";
 		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC";
+			$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+					FROM barangayclearance
+					WHERE full_name LIKE ? 
+					ORDER BY clearance_id ASC";
 		}
 		
 		
@@ -291,21 +291,21 @@ if(!isset($_SESSION["type"]))
 			$stmt->execute();
 			// store result 
 			$stmt->store_result();
-			$stmt->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+			$stmt->bind_result($data['clearance_id'], 
+					$data['full_name'],
+                    $data['age'],
+                    $data['status'],
+                    $data['nationality'],
+                    $data['address'],
+                    $data['contactno'],
+                    $data['emailadd'],
+                    $data['purpose'],
+                    $data['date_issued'],
+                    $data['ctc_no'],
+                    $data['issued_at'],
+                    $data['precint_no'],
+                    $data['clearanceid_image'],
+                    $data['clearance_status']
 					);
 			// get total records
 			$total_records = $stmt->num_rows;
@@ -330,14 +330,14 @@ if(!isset($_SESSION["type"]))
 		}	
 		
 		if(empty($keyword)){
-			$sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Deny'
-					ORDER BY barangay_id ASC LIMIT ?, ?";
+			$sql_query = "SELECT  clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+            FROM barangayclearance WHERE clearance_status = 'Deny'
+					ORDER BY clearance_id ASC LIMIT ?, ?";
 		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC LIMIT ?, ?";
+			$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+					FROM barangayclearance
+					WHERE full_name LIKE ? 
+					ORDER BY clearance_id ASC LIMIT ?, ?";
 		}
 		
 		$stmt_paging = $connect->stmt_init();
@@ -352,21 +352,21 @@ if(!isset($_SESSION["type"]))
 			$stmt_paging ->execute();
 			// store result 
 			$stmt_paging ->store_result();
-			$stmt_paging->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+			$stmt_paging->bind_result($data['clearance_id'], 
+					$data['full_name'],
+                    $data['age'],
+                    $data['status'],
+                    $data['nationality'],
+                    $data['address'],
+                    $data['contactno'],
+                    $data['emailadd'],
+                    $data['purpose'],
+                    $data['date_issued'],
+                    $data['ctc_no'],
+                    $data['issued_at'],
+                    $data['precint_no'],
+                    $data['clearanceid_image'],
+                    $data['clearance_status']
 					);
 			// for paging purpose
 			$total_records_paging = $total_records; 
@@ -388,7 +388,7 @@ if(!isset($_SESSION["type"]))
 	?>
 		<div style="text-align: center;">
 			<hr>
-			<h5>Denied: Barangay ID Request</h5>
+			<h5>Denied: Barangay Clearance</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -403,7 +403,7 @@ if(!isset($_SESSION["type"]))
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
 									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayid.php'"></i> Back</button>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
 									</div>
 								</div>
 							</div>						
@@ -413,31 +413,39 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table" id="table">
 								<thead>
 									<tr class="t_head">
-										<th width="5%">Barangay ID</th>
-										<th width="5%">Firstname</th>
-										<th width="5%">Middlename</th>
-										<th width="5%">Lastname</th>
-										<th width="5%">Address</th>
-										<th width="10%">Contact no</th>
-										<!-- <th width="5%">Identification Card</th> -->
-										<th width="5%">Email</th>
-										<!-- <th width="5%">ID Picture</th> -->
+                                        <th width="5%">Clearance ID</th>
+										<th width="5%">Fullname</th>
+										<th width="5%">Age</th>
 										<th width="5%">Status</th>
+										<th width="5%">Nationality</th>
+										<th width="5">Address</th>
+										<th width="10%">Purpose</th>
+										<!-- <th width="5%">Identification Card</th> -->
+										<th width="5%">Date Issued</th>
+										<th width="5%">CTC no</th>
+										<th width="5%">Issued at</th>
+										<th width="5%">Precint no</th>
+										<!-- <th width="5%">ID Picture</th> -->
+										<th width="5%">Certificate Status</th>
 									</tr>
 								</thead>
 							<?php 
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['mname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact_no']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
+                                    <td><?php echo $data ['clearance_id']; ?></td>
+									<td><?php echo $data ['full_name']; ?></td>
+									<td><?php echo $data ['age']; ?></td>
+									<td><?php echo $data ['status']; ?></td>
+									<td><?php echo $data ['nationality']; ?></td>
+									<td><?php echo $data ['address']?></td>
+									<td><?php echo $data ['purpose']; ?></td>
+									<td><?php echo $data ['date_issued']; ?></td>
+									<td><?php echo $data ['ctc_no']; ?></td>
+									<td><?php echo $data ['issued_at']; ?></td>
+									<td><?php echo $data ['precint_no']; ?></td>
+									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 								</tr>	
 								</tbody>

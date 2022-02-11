@@ -378,7 +378,7 @@ if(!isset($_SESSION["type"]))
 									</div>
 									<div>
 										<label style="font-size: 14px;">Deny: </label>
-										<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='clearancedenied.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
 									</div>
 								</div>
 							</div>						
@@ -399,9 +399,7 @@ if(!isset($_SESSION["type"]))
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Date Issued</th>
 										<th width="5%">Certificate Status</th>
-										<th width="5%">Action</th>
 										<th width="5%">View Details</th>
-										<th width="5%">Message</th>
 									</tr>
 								</thead>
 							<?php 
@@ -419,12 +417,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['date_issued']; ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
-
-									<td><button class="view_approvebtn">Mark as Done</button></td>
 									
 									<td><button class="view_approvebtn" onclick="location.href='clearanceviewdet.php?id=<?php echo $data['clearance_id'];?>'">View Details</button></td>
-									
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 				
 								</tr>	
 								</tbody>
