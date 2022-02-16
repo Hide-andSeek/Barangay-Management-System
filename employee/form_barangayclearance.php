@@ -3,6 +3,7 @@ session_start();
 include "../db/conn.php";
 include "../db/user.php";
 include "../db/documents.php";
+include('../announcement_includes/functions.php'); 
 
 
 if(!isset($_SESSION["type"]))
@@ -42,7 +43,7 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-	<link rel="stylesheet" href="../css/documentprint_styles.css">
+	<link rel="stylesheet" href="../announcement_css/custom.css">
 
 	<!--Font Styles-->
 	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
@@ -52,42 +53,96 @@ if(!isset($_SESSION["type"]))
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Barangay Clearance </title>
+     <title>Pending: Barangay Clearance </title>
 
 	 <style>
-	.preview{font-size:13px; padding-left:50px; inline-block: none;}
-		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
-		.preview_txtbx{width: 350px; margin-bottom: 15px;}
+		*{font-size: 13px;}
+		 .home-section{
+			min-height: 95vh;''
+			}
+
+		.announcement-modal, .edit-modal, .delete-modal, .addannouncement-modal{
+            display: none; 
+            position: absolute; 
+            z-index: 999; 
+            left: 0;
+            top: 30;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 5px; 
+        }
 		
-		.respersonal_inf{border-radius: 5px; user-select:none; background:#b5f5c6; padding: 50px 50px 50px 50px}
-		.personal_inf{padding-bottom: 5px;}
-		.viewdetail{user-select: auto}
+		.modal-contentannouncement, .modal-contentaddannouncement{
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #888;
+		    height: 32%;
+            width: 37%;
+            border-radius: 5px;
+        }
+
+		.modal-contentaddannouncement{
+			margin-top: 30%;
+			width: 70%;
+			height: 43%;
+		}
+
+		.modal-contentdelete{height: 32%; }
+		.modal-contentedit{height: 68%;  overflow-x: hidden;}
+
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}	
+		input.edit, input.del{width: 80;}
 		
-		.w3-section{margin-top:16px!important;margin-bottom:16px!important}
-		.w3-light-grey,.w3-hover-light-grey:hover{color:#000!important;background-color:#f1f1f1!important}
-		
-		.w3-button:hover{color:#000!important;background-color:#ccc!important; width:100%;}
-		.w3-block{display:block;width:100%}
-		.w3-hide{display:none!important}
-		.w3-show{display:block!important}
-		 p.content{width: 450px; height: 300px;}
-		 
-		p.center_description{line-height: 0.2;}
-		div.side_information{line-height: 0.1;}
-		.offic{font-size:13px;}
-		
-		.documentbtn{font-size: 15px;width: 250px; height: 40px; padding: 12px 12px 12px 12px; }
-		.documentbtn:hover{background-color: gray;color: white;}
-	
-		.document-section{padding-left: 100px; margin-top:356px!important;margin-bottom:16px!important}
-		.document-light-grey,.document-hover-light-grey:hover{color:#000!important; background-color:#f1f1f1!important;}
-		
-		.document-button:hover{color:#000!important;background-color:orange!important; width:85%;}
-		.document-block{display:block;width:85%}
-		.document-hide{display:none!important; max-height: 300px; overflow-y: scroll; width:85%;}
-		.document-show{display:block!important}
-		.inp{border: none; }
-		.borderb{border-bottom: 1px solid black}
+		.closebtn{margin-right: 15px; font-stretch: expanded;}
+		.closebtn:hover{color:red; }
+		.description{ height: 50px; font-size: 13px;}
+
+		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.fileupload{font-size: 13px; margin-left: 15px;}
+		.pagination{margin-top: 32%}
+		.page{margin-left: 15px; }
+		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
+		.topright:hover {text-align: right;color: red; cursor: pointer;}
+
+	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+			font-size: 14px;
+			height: 35px;
+			width: 84%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
+		.edit{width: 40%; color: #9f6000; background: #feef83; margin-bottom: 5px; border-radius: 5px;}
+		.del{width: 40%;}
+		.select__select{margin-top: -32px; padding-left: 180px;}
+
+		.bcircle:hover{color: black}
+		.imgup{display: flex; justify-content: center; align-items: center;  padding: 5px 5px 5px 5px; margin-left: 20px; margin-right: 25px; }
+		.btnwidth{width: 70%; margin-bottom: 5px;}
+		.announcedesc{margin-left: 20px;}
+		.btnmargin{margin-bottom: 5px;}
+		.hoverbtn:hover{background: orange;}
+		.btnwidths{width: 40%}
+		.descriptionStyle{overflow:auto; resize:none;}
+		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
+		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
+		.viewbtn{width: 45px; height: 35px;}
 	 </style>
    </head>
 	<body>
@@ -167,284 +222,252 @@ if(!isset($_SESSION["type"]))
 					</div>
 				  </div>
 			  </section>
-			  <div class="search_content">
-                        <label for="">Search: 
-                            <input class="r_search" type="search">
-							<i class='bx bx-search'></i>
-                        </label>
-                        <label class="select__select" for="">Filter by: 
-                            <select class="selection">
-                                <option disabled>--Select--</option>
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="decline">Decline</option>
-                            </select>
-								<i class='bx bx-sort'></i>
-                        </label>
-                </div> 
+			 
+<div id="content" class="container col-md-12">
+	<?php 
+	// create object of functions class
+	$function = new functions;
+		
+	// create array variable to store data from database
+	$data = array();
+	
+	if(isset($_GET['keyword'])){	
+		// check value of keyword variable
+		$keyword = $function->sanitize($_GET['keyword']);
+		$bind_keyword = "%".$keyword."%";
+	}else{
+		$keyword = "";
+		$bind_keyword = $keyword;
+	}
+		
+	if(empty($keyword)){
+		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+				FROM barangayclearance WHERE clearance_status = 'Pending'
+				ORDER BY clearance_id DESC";
+	}else{
+		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+				FROM barangayclearance
+				WHERE full_name LIKE ? 
+				ORDER BY clearance_id DESC";
+	}
+	
+	
+	$stmt = $connect->stmt_init();
+	if($stmt->prepare($sql_query)) {	
+		// Bind your variables to replace the ?s
+		if(!empty($keyword)){
+			$stmt->bind_param('s', $bind_keyword);
+		}
+		// Execute query
+		$stmt->execute();
+		// store result 
+		$stmt->store_result();
+		$stmt->bind_result($data['clearance_id'], 
+				$data['full_name'],
+				$data['age'],
+				$data['status'],
+				$data['nationality'],
+				$data['address'],
+				$data['contactno'],
+				$data['emailadd'],
+				$data['purpose'],
+				$data['date_issued'],
+				$data['ctc_no'],
+				$data['issued_at'],
+				$data['precint_no'],
+				$data['clearanceid_image'],
+				$data['clearance_status']
+				);
+		// get total records
+		$total_records = $stmt->num_rows;
+	}
+		
+	// check page parameter
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}else{
+		$page = 1;
+	}
+					
+	// number of data that will be display per page		
+	$offset = 5;
+					
+	//lets calculate the LIMIT for SQL, and save it $from
+	if ($page){
+		$from 	= ($page * $offset) - $offset;
+	}else{
+		//if nothing was given in page request, lets load the first page
+		$from = 0;	
+	}	
+	
+	if(empty($keyword)){
+		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+				FROM barangayclearance WHERE clearance_status = 'Pending'
+				ORDER BY clearance_id DESC LIMIT ?, ?";
+	}else{
+		$sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+				FROM barangayclearance 
+				WHERE full_name LIKE ? 
+				ORDER BY clearance_id DESC LIMIT ?, ?";
+	}
+	
+	$stmt_paging = $connect->stmt_init();
+	if($stmt_paging ->prepare($sql_query)) {
+		// Bind your variables to replace the ?s
+		if(empty($keyword)){
+			$stmt_paging ->bind_param('ss', $from, $offset);
+		}else{
+			$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
+		}
+		// Execute query
+		$stmt_paging ->execute();
+		// store result 
+		$stmt_paging ->store_result();
+		$stmt_paging->bind_result($data['clearance_id'], 
+				$data['full_name'],
+				$data['age'],
+				$data['status'],
+				$data['nationality'],
+				$data['address'],
+				$data['contactno'],
+				$data['emailadd'],
+				$data['purpose'],
+				$data['date_issued'],
+				$data['ctc_no'],
+				$data['issued_at'],
+				$data['precint_no'],
+				$data['clearanceid_image'],
+				$data['clearance_status']
+				);
+		// for paging purpose
+		$total_records_paging = $total_records; 
+	}
 
-			  <div class="reg_table">
-							<table class="content-table "  id="table">
-							<?php
-								include "../db/conn.php";
-								include "../db/user.php";
-								
-								$mquery = "SELECT * FROM barangayclearance";
-								$countn = $db->query($mquery);
-							?>
+	// if no data on database show "No Reservation is Available"
+	if($total_records_paging == 0){
+		echo "
+		<h1 style='text-align: center;'>404 Not Found</h1>
+		<div class='alert alert-warning cattxtbox'>
+			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+		</div>";
+	?>
+
+	<?php 
+		// otherwise, show data
+		}else{
+			$row_number = $from + 1;
+	?>
+		<div style="text-align: center;">
+			<hr>
+			<h5>Pending: Barangay Clearance</h5>
+			<hr /> 
+		</div>
+<!-- Search -->
+							<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+								</form>
+								<div style="display: flex;" class="mrgn document-section select__select">
+									<div>
+										<label style="font-size: 14px;">Approved: </label>
+										<button class="btn btn-success viewbtn" onclick="window.location.href='clearanceapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>
+									</div>
+									<div>
+										<label style="font-size: 14px;">Deny: </label>
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='clearancedenied.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+									</div>
+								</div>
+							</div>						
+<!-- end of search form -->
+							
+					<div class="col-md-12">
+							<table class="content-table">
 								<thead>
 									<tr class="t_head">
-										<th>File No</th>
-										<th>Full name</th>
-										<th>Age</th>
-										<th>Status</th>
-										<th>Nationality</th>
-										<th>Address</th>
-										<th>Purpose</th>
-										<th>Date Issued</th>
-										<th>CTC no</th>
-										<th>Issued at</th>
-										<th>Issued on</th>
-										<th>Precint no</th>
-										<th>ID</th>
-										<th>Approved by</th>
-										<th>Action</th>
-									</tr>                       
+										<th width="5%">Clearance ID</th>
+										<th width="5%">Fullname</th>
+										<th width="5%">Age</th>
+										<th width="5%">Status</th>
+										<th width="5">Address</th>
+										<th width="15%">Contact No</th>
+										<th width="5%">Email</th>
+										<th width="10%">Purpose</th>
+										<!-- <th width="5%">Identification Card</th> -->
+										<th width="5%">Date Issued</th>
+										<th width="5%">Certificate Status</th>
+										<th width="5%">View Details</th>
+									</tr>
 								</thead>
-								<?php
-								foreach($countn as $data2) 
-								{
-								?>
+							<?php 
+								while ($stmt_paging->fetch()){ ?>
+								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data2 ['clearance_id']; ?></td>
-									<td><?php echo $data2 ['full_name']; ?></td>
-									<td><?php echo $data2 ['age']; ?></td>
-									<td><?php echo $data2 ['status']; ?></td>
-									<td><?php echo $data2 ['nationality']; ?></td>
-									<td><?php echo $data2 ['address']; ?></td>
-									<td><?php echo $data2 ['purpose']; ?></td>
-									<td><?php echo $data2 ['date_issued']; ?></td>
-									<td><?php echo $data2 ['ctc_no']; ?></td>
-									<td><?php echo $data2 ['issued_at']; ?></td>
-									<td><?php echo $data2 ['date_issued']; ?></td>
-									<td><?php echo $data2 ['precint_no']; ?></td>
-									<td><a style="color: blue;">view id</a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
-									<td><button>Approve</button></td>
+									<td><?php echo $data ['clearance_id']; ?></td>
+									<td><?php echo $data ['full_name']; ?></td>
+									<td><?php echo $data ['age']; ?></td>
+									<td><?php echo $data ['status']; ?></td>
+									<td><?php echo $data ['address']?></td>
+									<td><?php echo $data ['contactno']; ?></td>
+									<td><?php echo $data ['emailadd']; ?></td>
+									<td><?php echo $data ['purpose']; ?></td>
+									<td><?php echo $data ['date_issued']; ?></td>
+									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
+									
+									<td><button class="view_approvebtn" onclick="location.href='clearanceviewdet.php?id=<?php echo $data['clearance_id'];?>'">View Details</button></td>
+				
 								</tr>	
-							
-							<?php
+								</tbody>
+								<?php 
+								} 
 							}
-							?>
+						?>
 							</table>
-						</div>
+							<!-- Edit Category -->
+							<div id="formatValidatorName" >
+								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
+										<div class="modal-contentedit animate">	
+										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
+										<br>
+										<br>
+										<h4 style="text-align: center;"><br> Edit Category </h4>
+										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
+										<hr />
+										<form method="post" action="" enctype="multipart/form-data">
+											<span>
+												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
+												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
+											</span>
+											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
+											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
 
-						<div class="document-light-grey document-section">
-						<button onclick="myFunction('hidedocument')" class="document-button document-block documentbtn">Show more</button>
-						<div id="hidedocument"	 class="document-hide">
-							<div id="indigency_file" style="display: auto; ">
-								<fieldset >
-									<legend class="indigency">Barangay Clearance</legend>
-									<section class="barangay_indigency">
-										<div style="padding-top: 15px; width: 965px;  height: 344px;">
-											<div style="display: flex;">
-												<img style="float: left; width: 130px; height: 125px; margin-left: 35px;" src="../img/QCSeal.png">
-													<div style="margin-left: 120px;">
-														<p class="center_description" style="font-size: 17px; padding-left: 75px;">Republic of the Philippines</p>
-														<p class="center_description" style="font-size: 15px; padding-left: 95px;">District II, Quezon City</p>
-														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px; ">BARANGAY COMMONWEALTH</p>
-														<p class="center_description" style="font-size: 20px; color: red;">OFFICE OF THE BARANGAY CAPTAIN</p>
-													</div>
-												<img style=" display: flex; float: right;  margin-left: 135px; " class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
-											</div>
-											<div>
-												<div style="margin-top:5px; border-top: 2px solid #000000; width: 1220px; width: calc(100%  - 70px); transition: all 0.5s ease;"></div>
-												<div style="border-left: 2px solid #000000; height: 1100px; margin-left: 245px;"></div>
-													<div  style="position: inherit; margin-top: -1075px;">
-														<p style="font-size: 21px; line-height: 0.5;">MANUEL A. CO</p>
-														<em>Punong Barangay</em>
-														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="clearance_id" id="clearance_id" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
-														<br>
-														<div class="side_information">
-															<p>PRESY C. BAQUIRING</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Barangay Justice and</p>
-															<p class="offic">Rules, Human Rights and Ethics,</p>
-															<p class="offic">VAWC, BCPC, PWD, Women</p>
-															<p class="offic">Affairs, Senior Citizen, Finance</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>ELMER M. BUENA</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Peace and Order and</p>
-															<p class="offic">Public Order and Safety</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>ROWENA E. LUCAS</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Education, Cultural</p>
-															<p class="offic">and Tourism, Appropriation, Ways</p>
-															<p class="offic">and Means</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>REYNALDO O. SEVILLA</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Health,</p>
-															<p class="offic">Environmental, Sanitation and</p>
-															<p class="offic">Beautification, Bids and Awards</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>JULIUS C. DELA CRUZ</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Transportation and</p>
-															<p class="offic">Communication</p>
-															<p class="offic">in, Bids and Awards Inspection</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>IMELDA Q. CAJEDA</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Cooperation</p>
-															<p class="offic">Livelihood, Socio-Cultural and</p>
-															<p class="offic">Religious Affair</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>HARUN W. DATU TAHIL</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Public Works,</p>
-															<p class="offic">Infrastructure, HOA/PO's and</p>
-															<p class="offic">Community Development</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>RAYMART S. GARCIA</p>
-															<p style="font-size: 14px;">SK CHAIRMAN</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>CEFERINO C. CRISOSTOMO</p>
-															<p style="font-size: 14px;">BARANGAY SECRETARY</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>CHONA A. PINCA</p>
-															<p style="font-size: 14px;">BARANGAY TREASURER</p>
-														</div>
-														
-														
-													</div>
-											</div>
+											<span class="imgup">
+												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
+											</span>
+											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
+										</form>
 										</div>
-										<div style="display: flex; ">
-											<div style="display: auto;">
-												<div style="margin-left: 50px;">
-													<h4 style="margin-top: -115px; margin-left: 420px; color: red;">BARANGAY CLEARANCE</h4>
-												</div>
-												<br>
-												<br>
-												<p style="display: auto; margin-top: -10px; margin-left: 280px; text-align: justify; text-indent: 50px; padding-right: 95px; word-spacing: 3.5px;">This is to certify that <strong>CLEARANCE</strong> is granted to <input class="inp borderb" style="width: 100%; padding-left: 15px;" type="text" id="full_name" name="full_name" width="auto" placeholder="FULL A. NAME"><input class="inp borderb" style="width: 10%; padding-left: 15px;" type="text" id="age" name="age" width="auto" placeholder="AGE"> years old <input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="status" name="status" width="auto" placeholder="STATUS">,<input class="inp borderb" style="width: 20%; padding-left: 25px;" type="text" id="nationality" name="nationality" width="auto" placeholder="NATIONALITY"> and a bonafide resident at No. <input class="inp borderb" style="width: 90%; padding-left: 25px;" type="text" id="address" name="address" width="auto" placeholder="ADDRESS">, Barangay Commonwealth, Quezon City, possesses with good moral character has no derogatory record in this office, law abiding citizen and reliable.</p>
-												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="purpose" name="purpose" width="auto" placeholder="PURPOSE"></p>
-												<br>
-												
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp borderb" type="text" id="date_issue" name="date_issue" placeholder="DAY" style="width:35px; padding-left: 5px;"> day of <input class="inp  borderb" style="padding-left: 10px; width:105px;" type="text" id="date_issue" name="date_issue" placeholder="MONTH"> <input class="inp  borderb" style="padding-left: 10px; width:55px;" type="text" id="date_issue" name="date_issue" placeholder="YEAR">, Quezon City.</p>
-												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
-												<br>
-												<div style="display: auto; float: left; text-align:center; padding-left: 290px;" class="side_information">
-													<p><input class="inp  borderb"></p>
-													<p>Signature of Applicant</p>
-													
-													<div style="text-align: left; margin-top: 45px;"> 
-														CTC NO.: <input class="inp  borderb" style="width: 75px;" name="ctc_no" id="ctc_no"><br>
-														Issued AT: <input class="inp  borderb" style="width: 215px;" name="issued_at" id="issued_at"><br>
-														ISSUED ON: <input class="inp  borderb"  style="width: 215px;" name="date_issued" id="date_issued"><br>
-														PRECINT NO.: <input class="inp  borderb" style="width: 75px;" name="precint_no" id="precint_no"><br>
-													</div>
-												</div>
-												
-												<div style="padding-right: 105px;">
-												<img src="../img/1.jpeg" style="width: 140px; height: 140px; float: right; ">
-												</div>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<div >
-													<div style="margin-left: 255px; font-size: 13px;">
-														<div style="float: right; text-align: center; padding-right: 95px; margin-top: -45px;">
-															<h5>MANUEL A. CO</h5>
-															<p>Punong Barangay</p>
-														</div>
-														<em>Not valid without Barangay Seal</em>
-														<p>CONTACT PERSON. MARK LEAN CRUZ</p>
-														<br>
-														<p>NOTE: This clearance is valid for a period of <br> Six (6) months from date of issue.</p>
-													</div>
-													<div style="margin-top: -70px; margin-left: 655px; font-size: 13px; margin-right: 65px; text-align: right;" class="side_information">
-														<p> www.brgycommonwealth.com.ph</p>
-														<p> @maningningnacommonwealth</p>
-														<p> @BrgyCommonwealth</p>
-														<p> maningning.commonwealth@gmail.com</p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</fieldset>
+								</div>
 							</div>
-						</div>
-						<button class="permitbtn" style="float: right; padding: 5px 5px 5px 5px;" onclick="window.print(); ">
-							<i class="bx bx-save saveicon"></i>
-						</button>
-				</div>
+					</div>
+							<div class="col-md-12 pagination">
+								<h4 class="page">
+									<?php 
+										// for pagination purpose
+										$function->doPages($offset, 'clearance_page.php', '', $total_records, $keyword);
+									?>
+								</h4>
+							</div>
+	</div>
+							<div class="separator"></div>
+</div>     
+			
 			</section>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-			
-			<script>
-				function myFunction(hidedocument) {
-				var x = document.getElementById(hidedocument);
-					if (x.className.indexOf("document-show") == -1) {
-					x.className += " document-show";
-					} else { 
-						x.className = x.className.replace(" document-show", "");
-					}
-				}
-
-				var table = document.getElementById('table');
-				
-				for (var i = 1; i < table.rows.length; i++)
-				{
-					table.rows[i].onclick = function()
-					{
-						document.getElementById("clearance_id").value = this.cells[0].innerHTML;
-						document.getElementById("full_name").value = this.cells[1].innerHTML;
-						document.getElementById("age").value = this.cells[2].innerHTML;
-						document.getElementById("status").value = this.cells[3].innerHTML;
-						document.getElementById("nationality").value = this.cells[4].innerHTML;
-						document.getElementById("address").value = this.cells[5].innerHTML;
-						document.getElementById("purpose").value = this.cells[6].innerHTML;
-						document.getElementById("ctc_no").value = this.cells[8].innerHTML;
-						document.getElementById("issued_at").value = this.cells[9].innerHTML;
-						document.getElementById("date_issued").value = this.cells[10].innerHTML;
-						document.getElementById("precint_no").value = this.cells[11].innerHTML;						
-					};
-				}
-			</script>
 	</body>
 </html>

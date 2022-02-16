@@ -36,7 +36,7 @@ if(isset($_POST['send'])){
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
         $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'barangaycommonwealth001';             
+        $mail->Password = 'barangaycommonwealth0001';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,

@@ -16,7 +16,8 @@
   top: 0;
   height: 100%;
   width: 85px;
-  background: linear-gradient(to bottom left, #134e5e 5%, #71b280 50%);
+  /* background: linear-gradient(to bottom left, #134e5e 5%, #71b280 50%); */
+  background: #71b280;
   padding: 6px 0px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -660,8 +661,8 @@ padding: 10px 25px;
   /* View and Approve btn from req documents*/
 
   
-  button.view_approvebtn{width: 150px; margin-bottom: 5px;}
-  button.view_approvebtn:hover{color: green; background: orange;}
+  button.view_approvebtn, a.view_approvebtn{width: 160px; height: 34px;margin-bottom: 5px;  background-color: white; color: black; border: 1px solid #4CAF50;}
+  button.view_approvebtn:hover, a.view_approvebtn:hover{ background-color: #4CAF50; color: white;}
   button.view_declinebtn{background: #c24c44}
   button.view_declinebtn:hover{color: white; background: #d9534a;}
 
@@ -690,8 +691,8 @@ padding: 10px 25px;
       background-color: green;
       color: black;
     }
-
+/* 
     ::-webkit-scrollbar{ width: 8px; border-radius: 5px;}
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
 		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
-		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;}
+		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;} */

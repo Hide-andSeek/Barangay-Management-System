@@ -80,11 +80,8 @@ function myFunction(monday) {
 		document.querySelector("#date_issue").value = date_issue;
 
 
-<<<<<<< HEAD
-=======
    
 
->>>>>>> 1474665cc84701e8cce547f9eb9e20bbd5199a58
 
        
 

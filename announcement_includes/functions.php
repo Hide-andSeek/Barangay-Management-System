@@ -173,7 +173,7 @@
 			//if nothing passed to method or zero, then dont print result, else print the total count below:       
 			if ($total != 0){
 				//prints the total result count just below the paging
-				echo '<p><br>( total '.$total.' )</p></div>';
+				echo '<p><br> Total of <strong>'.$total.'</strong> results </p></div>';
 			}else {
 				echo '</div>';
 			};

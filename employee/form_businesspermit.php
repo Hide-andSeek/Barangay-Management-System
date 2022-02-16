@@ -1,5 +1,10 @@
 <?php
 session_start();
+include "../db/conn.php";
+include "../db/user.php";
+include "../db/documents.php";
+include('../announcement_includes/functions.php'); 
+
 
 if(!isset($_SESSION["type"]))
 {
@@ -24,6 +29,8 @@ if(!isset($_SESSION["type"]))
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -36,48 +43,109 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/documentprint_styles.css">
-	
+	<link rel="stylesheet" href="../announcement_css/custom.css">
+
 	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Business Permit </title>
-	 
-	 
-	 <style>
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
+     <title>Pending: Business Permit </title>
 
+	 <style>
+		*{font-size: 13px;}
+		 .home-section{
+			min-height: 95vh;
+			}
+
+		.announcement-modal, .edit-modal, .delete-modal, .addannouncement-modal{
+            display: none; 
+            position: absolute; 
+            z-index: 999; 
+            left: 0;
+            top: 30;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 5px; 
+        }
+		
+		.modal-contentannouncement, .modal-contentaddannouncement{
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #888;
+		    height: 32%;
+            width: 37%;
+            border-radius: 5px;
+        }
+
+		.modal-contentaddannouncement{
+			margin-top: 30%;
+			width: 70%;
+			height: 43%;
 		}
+
+		.modal-contentdelete{height: 32%; }
+		.modal-contentedit{height: 68%;  overflow-x: hidden;}
+
+		.inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width: 94%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}	
+		input.edit, input.del{width: 80;}
 		
-		.content-table{max-height: 300px;}
-		
-		
-		.preview{font-size:13px; padding-left:50px; inline-block: none;}
-		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
-		.preview_txtbx{width: 350px; margin-bottom: 15px;}
-		
-		.respersonal_inf{border-radius: 5px; user-select:none; background:#b5f5c6; padding: 25px 25px 25px 25px; margin-top: 25px;}
-		.personal_inf{width: 300px; padding-bottom: 5px; border: none;}
-		.viewdetail{user-select: auto;}
-	
-		 p.content{width: 450px; height: 300px;}
+		.closebtn{margin-right: 15px; font-stretch: expanded;}
+		.closebtn:hover{color:red; }
+		.description{ height: 50px; font-size: 13px;}
+
+		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.fileupload{font-size: 13px; margin-left: 15px;}
+		.pagination{margin-top: 32%}
+		.page{margin-left: 15px; }
+		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
+		.topright:hover {text-align: right;color: red; cursor: pointer;}
+
+	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+			font-size: 14px;
+			height: 35px;
+			width: 84%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
+		.edit{width: 40%; color: #9f6000; background: #feef83; margin-bottom: 5px; border-radius: 5px;}
+		.del{width: 40%;}
+		.select__select{margin-top: -32px; padding-left: 180px;}
+
+		.bcircle:hover{color: black}
+		.imgup{display: flex; justify-content: center; align-items: center;  padding: 5px 5px 5px 5px; margin-left: 20px; margin-right: 25px; }
+		.btnwidth{width: 70%; margin-bottom: 5px;}
+		.announcedesc{margin-left: 20px;}
+		.btnmargin{margin-bottom: 5px;}
+		.hoverbtn:hover{background: orange;}
+		.btnwidths{width: 40%}
+		.descriptionStyle{overflow:auto; resize:none;}
+		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
+		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
+		.viewbtn{width: 45px; height: 35px;}
 	 </style>
    </head>
-	<body class="body">
+	<body>
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
@@ -124,25 +192,25 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
-						 								
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
-				   <div class="name_job">
-				   		<div class="job"><strong><?php echo $user;?></strong></div>
+
+				<li class="profile">
+					<div class="profile-details">
+					<img class="profile_pic" src="../img/1.jpeg">
+					<div class="name_job">
+						<div class="job"><strong><?php echo $user;?></strong></div>
 						<div class="job" id="">User Type: <?php echo $dept; ?></div>
-				   </div>
-				 </div>
-				 <a href="../emplogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
+					</div>
+					</div>
+					<a href="../emplogout.php">
+						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+					</a>
+				</li>
 			</ul>
 		  </div>
 		  
-				<!-- Middle Section -->
+																						<!-- Middle Section -->
 		  <section class="home-section">
-					<!-- Top Section -->
+																						<!-- Top Section -->
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
@@ -154,149 +222,245 @@ if(!isset($_SESSION["type"]))
 					</div>
 				  </div>
 			  </section>
-			  
-			  <div class="search_content">
-                        <label for="">Search: 
-                            <input class="r_search" type="search">
-							<i class='bx bx-search'></i>
-                        </label>
-                        <label class="select__select" for="">Filter by: 
-                            <select class="selection">
-                                <option disabled>--Select--</option>
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="decline">Decline</option>
-                            </select>
-								<i class='bx bx-sort'></i>
-                        </label>
-                </div> 
-			
-			<div class="reg_table">
-						<table class="content-table"  id="table">
-						
-							<?php
-							include "../db/conn.php";
-							include "../db/user.php";
-							
-							$miquery = "SELECT * FROM businesspermit";
-							$countnu = $db->query($miquery);
-							
-							?>
+			 
+<div id="content" class="container col-md-12">
+	<?php 
+	// create object of functions class
+	$function = new functions;
+		
+	// create array variable to store data from database
+	$data = array();
+	
+	if(isset($_GET['keyword'])){	
+		// check value of keyword variable
+		$keyword = $function->sanitize($_GET['keyword']);
+		$bind_keyword = "%".$keyword."%";
+	}else{
+		$keyword = "";
+		$bind_keyword = $keyword;
+	}
+		
+	if(empty($keyword)){
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit WHERE status = 'Pending'
+				ORDER BY businesspermit_id DESC";
+	}else{
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit
+				WHERE firstname LIKE ?
+				ORDER BY businesspermit_id DESC";
+	}
+	
+	
+	$stmt = $connect->stmt_init();
+	if($stmt->prepare($sql_query)) {	
+		// Bind your variables to replace the ?s
+		if(!empty($keyword)){
+			$stmt->bind_param('s', $bind_keyword);
+		}
+		// Execute query
+		$stmt->execute();
+		// store result 
+		$stmt->store_result();
+		$stmt->bind_result($data['businesspermit_id'], 
+				$data['dateissued'],
+				$data['selection'],
+				$data['firstname'],
+				$data['middlename'],
+				$data['lastname'],
+				$data['contactno'],
+				$data['businessname'],
+				$data['businessaddress'],
+				$data['plateno'],
+				$data['email_add'],
+				$data['businessid_image'],
+				$data['status']
+				);
+		// get total records
+		$total_records = $stmt->num_rows;
+	}
+		
+	// check page parameter
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}else{
+		$page = 1;
+	}
+					
+	// number of data that will be display per page		
+	$offset = 5;
+					
+	//lets calculate the LIMIT for SQL, and save it $from
+	if ($page){
+		$from 	= ($page * $offset) - $offset;
+	}else{
+		//if nothing was given in page request, lets load the first page
+		$from = 0;	
+	}	
+	
+	if(empty($keyword)){
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit WHERE status = 'Pending'
+				ORDER BY businesspermit_id DESC LIMIT ?, ?";
+	}else{
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+				FROM businesspermit 
+				WHERE firstname LIKE ?
+				ORDER BY businesspermit_id DESC LIMIT ?, ?";
+	}
+	
+	$stmt_paging = $connect->stmt_init();
+	if($stmt_paging ->prepare($sql_query)) {
+		// Bind your variables to replace the ?s
+		if(empty($keyword)){
+			$stmt_paging ->bind_param('ss', $from, $offset);
+		}else{
+			$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
+		}
+		// Execute query
+		$stmt_paging ->execute();
+		// store result 
+		$stmt_paging ->store_result();
+		$stmt_paging->bind_result($data['businesspermit_id'], 
+				$data['dateissued'],
+				$data['selection'],
+				$data['firstname'],
+				$data['middlename'],
+				$data['lastname'],
+				$data['contactno'],
+				$data['businessname'],
+				$data['businessaddress'],
+				$data['plateno'],
+				$data['email_add'],
+				$data['businessid_image'],
+				$data['status']
+				);
+		// for paging purpose
+		$total_records_paging = $total_records; 
+	}
 
-							<thead>
-								<tr class="t_head">
-									<th>Permit ID</th>
-									<th>Date</th>
-									<th>Selection</th>
-									<th>Owner's name</th>
-									<th>Business Name</th>
-									<th>Business Address</th>
-									<th>Plate No</th>
-									<th>Contact no</th>
-									<th>Front ID</th>
-									<th>Back ID</th>
-									<th>Approved by</th>
-									<th>Action</th>
-								</tr>                       
-							</thead>
-							<?php
-							foreach($countnu as $data1) 
-							{
-							?>
+	// if no data on database show "No Reservation is Available"
+	if($total_records_paging == 0){
+	// echo '<div> No data shown</div>';
+	?>
+
+	<?php 
+		// otherwise, show data
+		}else{
+			$row_number = $from + 1;
+	?>
+		<div style="text-align: center;">
+			<hr>
+			<h5>Pending: Business Permit</h5>
+			<hr /> 
+		</div>
+<!-- Search -->
+							<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+								</form>
+								<div style="display: flex;" class="mrgn document-section select__select">
+									<div>
+										<label style="font-size: 14px;">Approved: </label>
+										<button class="btn btn-success viewbtn" onclick="window.location.href='businesspermitapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>
+									</div>
+									<div>
+										<label style="font-size: 14px;">Deny: </label>
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='businesspermitdenied.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+									</div>
+								</div>
+							</div>						
+<!-- end of search form -->
+							
+					<div class="col-md-12">
+							<table class="content-table">
+								<thead>
+									<tr class="t_head">
+										<th width="5%">Permit ID</th>
+										<th width="5%">Date Issued</th>
+										<th width="5%">Selection</th>
+										<th width="5%">Firstname</th>
+										<th width="5">Middlename</th>
+										<th width="15%">Lastname No</th>
+										<th width="5%">Contact no</th>
+										<th width="10%">Business Address</th>
+										<!-- <th width="5%">Identification Card</th> -->
+										<th width="5%">Plate no</th>
+										<th width="5%">Email</th>
+										<th width="5%">Status</th>
+										<th width="5%">View Details</th>
+									</tr>
+								</thead>
+							<?php 
+								while ($stmt_paging->fetch()){ ?>
+								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data1 ['businesspermit_id']; ?></td>
-									<td><?php echo $data1 ['dateissued']; ?></td>
-									<td><?php echo $data1 ['selection']; ?></td>
-									<td><?php echo $data1 ['ownername']; ?></td>
-									<td><?php echo $data1 ['businessname']; ?></td>
-									<td><?php echo $data1 ['businessaddress']; ?></td>
-									<td><?php echo $data1 ['plateno']; ?></td>
-									<td><?php echo $data1 ['contactno']; ?></td>
-									<td><a style="color: blue;">view id</a></td>
-									<td><a style="color: blue;">view id</a></td>
-									<td><input class="form-control" style="width: 135px; font-size: 13px;" placeholder="Approved by.."></input></td>
-									<td><button>Approve</button></td>
+									<td><?php echo $data ['businesspermit_id']; ?></td>
+									<td><?php echo $data ['dateissued']; ?></td>
+									<td><?php echo $data ['selection']; ?></td>
+									<td><?php echo $data ['firstname']; ?></td>
+									<td><?php echo $data ['middlename']?></td>
+									<td><?php echo $data ['lastname']; ?></td>
+									<td><?php echo $data ['contactno']; ?></td>
+									<td><?php echo $data ['businessaddress']; ?></td>
+									<td><?php echo $data ['plateno']; ?></td>
+									<td><?php echo $data ['email_add']; ?></td>
+									<!-- <td><img src="../img/fileupload_bpermit/<?php echo $data['businessid_image']; ?>" width="210" height="100"></td> -->
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
+									
+									<td><button class="view_approvebtn" onclick="location.href='businesspermitviewdet.php?id=<?php echo $data['businesspermit_id'];?>'">View Details</button></td>
 								</tr>	
-							
-							<?php
+								</tbody>
+								<?php 
+								} 
 							}
-							?>
-						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
-			</div>
-							
-						<div class="user-information print_businesspermit" >
-							<div>
-								<fieldset class="respersonal_inf">
-									<legend>For Business </legend>
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<div>
-													<label class="col-lg-3 col-md-3 col-sm-3">Business Permit ID:</label> 
-													<input type="text" name="businesspermit_id" id="businesspermit_id" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Resident ID">
-											</div>
-											<div>	
-													Date: 
-													<input type="text" name="dateissued" id="dateissued" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Date">
-											</div>
-											<div>
-													Please Check: 
-													<input type="text" name="selection" id="selection" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Selection">
-											</div>
-											<div>
-													Owners Name: 
-													<input type="text" name="ownername" id="ownername" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Owner's Name">
-											</div>
-											<div>
-													Business Name:
-													<input type="text" name="businessname" id="businessname" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Business Name" >
-											</div>
-											<div>
-												<div>
-														Business Address: 
-														<input type="text" name="businessaddress" id="businessaddress" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Business Address">
-												</div>	
-												<div>
-														Plate No: 
-														<input type="text" name="plateno" id="plateno" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="_________">
-												</div>	
-												<div>
-														Amount: 
-														<input type="number" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="_________">
-												</div>	
-												<div>
-														Contact No: 
-														<input type="text" name="contactno" id="contactno" class="personal_inf col-lg-9 col-md-9 col-sm-9 form-control" placeholder="Contact No">
-												</div>
-											</div>
+						?>
+							</table>
+							<!-- Edit Category -->
+							<div id="formatValidatorName" >
+								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
+										<div class="modal-contentedit animate">	
+										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
+										<br>
+										<br>
+										<h4 style="text-align: center;"><br> Edit Category </h4>
+										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
+										<hr />
+										<form method="post" action="" enctype="multipart/form-data">
+											<span>
+												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
+												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
+											</span>
+											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
+											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
+
+											<span class="imgup">
+												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
+											</span>
+											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
+										</form>
 										</div>
-								</fieldset>
+								</div>
 							</div>
-						</div>
-						<button class="permitbtn" style="margin-left: 50px; margin-top: 5px;" onclick="window.print(); ">
-							<i class="bx bx-save"></i>
-							Print
-						</button>
-										
+					</div>
+							<div class="col-md-12 pagination">
+								<h4 class="page">
+									<?php 
+										// for pagination purpose
+										$function->doPages($offset, 'businesspermitpage.php', '', $total_records, $keyword);
+									?>
+								</h4>
+							</div>
+	</div>
+							<div class="separator"></div>
+</div>     
+			
 			</section>
-			<script>
-				var table = document.getElementById('table');
-				
-				for (var i = 1; i < table.rows.length; i++)
-				{
-					table.rows[i].onclick = function()
-					{
-						document.getElementById("businesspermit_id").value = this.cells[0].innerHTML;
-						document.getElementById("dateissued").value = this.cells[1].innerHTML;
-						document.getElementById("selection").value = this.cells[2].innerHTML;
-						document.getElementById("ownername").value = this.cells[3].innerHTML;
-						document.getElementById("businessname").value = this.cells[4].innerHTML;
-						document.getElementById("businessaddress").value = this.cells[5].innerHTML;
-						document.getElementById("plateno").value = this.cells[6].innerHTML;
-						document.getElementById("contactno").value = this.cells[7].innerHTML;				
-					};
-				}
-			</script>
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</body>
 </html>
