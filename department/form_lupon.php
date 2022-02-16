@@ -91,7 +91,7 @@ require 'db/conn.php';
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="">
+			   <a class="side_bar" href="form_lupon_printdocs.php">
 				 <i class='bx bx-file'></i>
 				 <span class="links_name">Summon Letter</span>
 			   </a>
@@ -164,16 +164,13 @@ require 'db/conn.php';
 			<div class="w3-container w3-red w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
-
-					$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					
-					?>
+				<?php
+	include "db/conn.php";
+	include "db/user.php";
+							
+	$mquery = "SELECT * FROM usersdb";
+	$countemployee = $db->query($mquery)
+?>
 					<a href= "lupon_active.php">
 				</div>
 				
@@ -261,12 +258,12 @@ require 'db/conn.php';
 						<table class="content-table">
 						
 						<?php
-							include "db/conn.php";
-							include "db/user.php";
+	include "db/conn.php";
+	include "db/user.php";
 							
-							$mquery = "SELECT * FROM usersdb";
-							$countemployee = $db->query($mquery)
-						?>
+	$mquery = "SELECT * FROM usersdb";
+	$countemployee = $db->query($mquery)
+?>
 						
 							<thead>
 								<tr class="t_head">

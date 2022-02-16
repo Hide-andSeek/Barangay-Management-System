@@ -94,7 +94,7 @@ require 'db/conn.php';
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs.php">
+			   <a class="side_bar" href="lupon_printdocs.php">
 				 <i class='fa fa-print'></i>
 				 <span class="links_name">Print Document</span>
 			   </a>
