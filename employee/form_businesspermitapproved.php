@@ -206,7 +206,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Business Permit
+						<h5>Business Permit >> Approved Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -232,14 +232,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
-				FROM businesspermit WHERE status = 'Approved'
-				ORDER BY businesspermit_id ASC";
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status
+				FROM approved_bpermits WHERE status = 'Approved'
+				ORDER BY approved_bpermitid ASC";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
-				FROM firstname
-				WHERE firstname LIKE ? 
-				ORDER BY businesspermit_id ASC";
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status
+				FROM approved_bpermits
+				WHERE fullname LIKE ? 
+				ORDER BY approved_bpermitid ASC";
 	}
 	
 	
@@ -253,18 +253,19 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['businesspermit_id'], 
+		$stmt->bind_result($data['approved_bpermitid'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
 				$data['plateno'],
 				$data['email_add'],
 				$data['businessid_image'],
+				$data['permitfilechoice'],
+				$data['approvedby'],
+				$data['app_date'],
 				$data['status']
 				);
 		// get total records
@@ -290,14 +291,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
-		FROM businesspermit WHERE status = 'Approved'
-				ORDER BY businesspermit_id ASC LIMIT ?, ?";
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status
+		FROM approved_bpermits WHERE status = 'Approved'
+				ORDER BY approved_bpermitid ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
-				FROM businesspermit 
-				WHERE firstname LIKE ? 
-				ORDER BY businesspermit_id ASC LIMIT ?, ?";
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status
+				FROM approved_bpermits 
+				WHERE fullname LIKE ? 
+				ORDER BY approved_bpermitid ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -315,15 +316,16 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging->bind_result($data['businesspermit_id'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
 				$data['plateno'],
 				$data['email_add'],
 				$data['businessid_image'],
+				$data['permitfilechoice'],
+				$data['approvedby'],
+				$data['app_date'],
 				$data['status']
 				);
 		// for paging purpose
@@ -332,10 +334,13 @@ if(!isset($_SESSION["type"]))
 
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
-	echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
+		echo "
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 		<div class='alert alert-warning cattxtbox'>
 			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			<div style='display: flex; justify-content: center; align-items: center; margin-left: 90px; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
 		</div>";
 	?>
 
@@ -359,8 +364,13 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
-									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='businesspermit.php'"></i> Back</button>
+									<!-- <div>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+									<div style="float: right;">
+										<a href="businesspermit.php">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: -50px; cursor: pointer;" alt="Back?">
+										</a>
 									</div>
 								</div>
 							</div>						
@@ -373,9 +383,7 @@ if(!isset($_SESSION["type"]))
 										<th width="5%"> Permit ID</th>
 										<th width="5%">Date Issued</th>
 										<th width="5%">Selection</th>
-										<th width="5%">Firstname</th>
-										<th width="5%">Middlename</th>
-										<th width="5">Lastname</th>
+										<th width="5%">Full name</th>
 										<th width="10%">Contact no</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Business name</th>
@@ -385,7 +393,6 @@ if(!isset($_SESSION["type"]))
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Certificate Status</th>
 										<th width="5%"></th>
-										<th width="5%">Message</th>
 									</tr>
 								</thead>
 							<?php 
@@ -395,9 +402,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['businesspermit_id']; ?></td>
 									<td><?php echo $data ['dateissued']; ?></td>
 									<td><?php echo $data ['selection']; ?></td>
-									<td><?php echo $data ['firstname']; ?></td>
-									<td><?php echo $data ['middlename']; ?></td>
-									<td><?php echo $data ['lastname']?></td>
+									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									<td><?php echo $data ['businessname']; ?></td>
 									<td><?php echo $data ['businessaddress']; ?></td>
@@ -408,9 +413,8 @@ if(!isset($_SESSION["type"]))
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<td>
-										<a class="view_approvebtn" style="width: 110px; height:40px;" href="print_permit.php?id=<?php echo $data['businesspermit_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print </a>
+										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_permit.php?id=<?php echo $data['businesspermit_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td>
-									<td><button class="replybtn" data-toggle="modal" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
 				
 								</tr>	
 								</tbody>

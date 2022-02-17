@@ -611,7 +611,7 @@ if(!isset($_SESSION['email'])){
 														</div><br>
 														<div class="form-group">
 															<label>Document type, please choose<i class="red">*</i></label>
-															<select class="form-control" name="brgyidfilechoice">
+															<select class="form-control" name="brgyidfilechoice" id="brgyidfilechoice">
 																<option disabled>--Select--</option>
 																<option value="Hardcopy">Hardcopy</option>
 																<option value="Softcopy">Softcopy</option>
@@ -701,38 +701,27 @@ if(!isset($_SESSION['email'])){
 																	
 																	<div class="form-group">
 																		<label>First Name: <i class="red">*</i></label>
-																		<input type="text" class="form-control form-text" id="firstname" name="firstname" placeholder="Please write your First name">
-																		<?php echo isset($error['firstname']) ? $error['firstname'] : '';?>
+																		<input type="text" class="form-control form-text" id="fullname" name="fullname" placeholder="Please write your First name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																		<?php echo isset($error['fullname']) ? $error['fullname'] : '';?>
 																	</div><br>
-																	
 																	<div class="form-group">
-																		<label>Middle Name: </label>
-																		<input type="text" class="form-control form-text" id="middlename" name="middlename" placeholder="Please write your Middle name">
-																	</div><br>
-
-																	<div class="form-group">
-																		<label>Last Name: <i class="red">*</i></label>
-																		<input type="text" class="form-control form-text" id="lastname" name="lastname" placeholder="Please write your Lastname">
-																		<?php echo isset($error['lastname']) ? $error['lastname'] : '';?>
-																	</div><br>
-
-																</div>
-																<div class="left_userpersonal_info left_userpersonal_info1">
-																<div class="form-group">
 																		<label for="contactno">Contact No.: <i class="red">*</i></label>
 																		<input type="number" class="form-control number form-text" id="contactno" name="contactno" placeholder="Ex. 09123456789" onKeyPress="if(this.value.length==11) return false;">
 																		<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
-																</div><br>
+																	</div><br>
 
-																<div class="form-group">
-																	<label for="businessname">Business Name: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="businessname" name="businessname" placeholder="Your Business Name">
-																	<?php echo isset($error['businessname']) ? $error['businessname'] : '';?>
-																</div><br>	
+																	<div class="form-group">
+																		<label for="businessname">Business Name: <i class="red">*</i></label>
+																		<input type="text" class="form-control form-text" id="businessname" name="businessname" placeholder="Your Business Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																		<?php echo isset($error['businessname']) ? $error['businessname'] : '';?>
+																	</div><br>	
+																</div>
+																<div class="left_userpersonal_info left_userpersonal_info1">
+																
 																
 																 <div class="form-group">
 																	<label for="businessaddress">Business Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="businessaddress" name="businessaddress" placeholder="Your Business Address">
+																	<input type="text" class="form-control form-text" id="businessaddress" name="businessaddress" placeholder="Your Business Address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['businessaddress']) ? $error['businessaddress'] : '';?>
 																</div></br>
 																
@@ -741,9 +730,6 @@ if(!isset($_SESSION['email'])){
 																	<input type="number" class="form-control number form-text" id="plateno" name="plateno" placeholder="Your Business Plate No.">
 																	<?php echo isset($error['plateno']) ? $error['plateno'] : '';?>
 																</div><br>
-																
-															</div>
-															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
 																	<input type="email" class="form-control form-text form-text-desc" id="email_add" name="email_add" placeholder="example@gmail.com">
@@ -755,7 +741,8 @@ if(!isset($_SESSION['email'])){
 																	<input type='file' name='businessid_image' class="form-control form-text"/>
 																	<?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?>
 																</div>
-
+															</div>
+															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Document type, please choose<i class="red">*</i></label>
 																	<select class="form-control" name="permitfilechoice">

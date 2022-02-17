@@ -5,6 +5,7 @@ include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
 include('../qr_code/phpqrcode/qrlib.php'); 
+include('../send_email.php');
 
 if(!isset($_SESSION["type"]))
 {
@@ -55,7 +56,7 @@ if(isset($_POST['generate']) ) {
 
 	$tempDir = '../img/'; 
     $link = $_POST['link'];
-    $id = $_POST['barangay_id'];
+    $id = $_POST['app_brgyid'];
 	$fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
@@ -75,6 +76,8 @@ if(isset($_POST['generate']) ) {
 
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/documentprint_styles.css">
+    <link rel="stylesheet" href="../css/documentprint.css">
+    <link rel="stylesheet" href="../css/print.css">
     <!-- <link rel="stylesheet" type="text/css" href="../qr_code/css/bootstrap.min.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Font Styles-->
@@ -91,7 +94,45 @@ if(isset($_POST['generate']) ) {
 		 .borderstyle{border: none; font-size: 15px;}
 		 .id_dashed{border: 3px dashed gray; padding: 10px 10px 10px 10px; width: 990px;}
          .container{position: relative;}
-         .generatebtn{display: flex; justify-content: center; align-items: center;}
+
+
+         .inp{border: none; }
+		.borderb{border-bottom: 1px solid black}
+		.offic{font-size:13px;}
+        .borderstyle{border: none; font-size: 15px;}  
+        .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
+        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .done{width: 30%; font-size: 11px;}
+        .inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 14px;
+			height: 35px;
+			width:  96%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		.messcompose, .send{top: 0; display: flex;justify-content: center; align-items: center;  border: 1px solid #D8D8D8; padding: 10px;border-radius: 5px; font-size: 11px; text-transform: uppercase; background-color: rgb(236, 255, 216); color: green; text-align: center; margin-bottom: 25px;}
+		.submtbtn{height: 40px;}
+		.submtbtn:hover{
+			background: #04AA6D;
+			color: orange;
+			height: 40px;
+		}
+		.user, .email{width:87.5%}
+		.textareaa{width: 94%; margin-left: 25px;}
+		span.topright{margin-left: -50px; margin-top: -15px; text-align: right; font-size: 25px;}
+		span.topright:hover {text-align: right;color: red; cursor: pointer;}
+		.display{display: flex;}
+		.usersel{pointer-events: none; border: 1px solid orange}
+
+		.textarea{padding-left: 40px; padding-right: 40px; padding-top: 10px; margin-bottom: 15px;}
+        .body{background: #ebebeb; padding: 50px; margin-right: 100px;}
+        .sendi{margin-top: 20px;}
          
     </style>
 </head>
@@ -107,9 +148,9 @@ if(isset($_POST['generate']) ) {
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-                            FROM barangayid
-                            WHERE barangay_id = ?";
+                    $sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+                            FROM approved_brgyids
+                            WHERE app_brgyid = ?";
                     
                     $stmt = $connect->stmt_init();
                     if($stmt->prepare($sql_query)) {	
@@ -119,7 +160,7 @@ if(isset($_POST['generate']) ) {
                         $stmt->execute();
                         // store result 
                         $stmt->store_result();
-                        $stmt->bind_result($data['barangay_id'], 
+                        $stmt->bind_result($data['app_brgyid'], 
                                 $data['fname'],
                                 $data['mname'],
                                 $data['lname'],
@@ -133,20 +174,62 @@ if(isset($_POST['generate']) ) {
                                 $data['emrgncycontact'],
                                 $data['reladdress'],
                                 $data['dateissue'],
-                                $data['status'],
-                                $data['id_image']
+                                $data['id_image'],
+                                $data['brgyidfilechoice'],
+                                $data['approvedby'],
+                                $data['app_date'],
+                                $data['status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
                     
+                    if(isset($_POST['btnEdit'])){
+                    
+                        $status	= $_POST['status'];
+                        $app_brgyid	= $_POST['app_brgyid'];
+
+                        $sql = "UPDATE approved_brgyids SET status = 'Done' WHERE app_brgyid = $app_brgyid";
+
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Mark as Done! Successfully!');
+                                    window.location.href='barangayidapproval.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
                 ?>
 <div class="barangayid_print">
-<?php
-			if(!isset($filename)){
-				$filename = "author";
-			}
-			?>
+                <?php
+                if(!isset($filename)){
+                    $filename = "author";
+                }
+                ?>
+                <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                ?>
+                   
+                        <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                               
+                                <input type="hidden" name="app_brgyid" id="app_brgyid" value="<?php echo $data['app_brgyid']; ?>">
+                                <input type="hidden" name="status" id="status" value="Done">
+                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEdit">Mark as done</button>
+                            </div>
+                        </form>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['result']);
+                        unset($_SESSION['status']);
+                        }
+                    ?>
                 <div class="id_dashed">
 									<section>
                                     <form action="" method="post">
@@ -184,9 +267,9 @@ if(isset($_POST['generate']) ) {
 										</div>
 											<div style="display: flex;">
 												<div style="background: white; width: 115px; height: 115px; margin-top: 8px; margin-left: 8px;">
-                                                    <img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" style="width: 125px; height: 125px;" alt="">
+                                                    <img src="../img/approved_barangayid/<?php echo $data['id_image']; ?>" style="width: 125px; height: 125px;" alt="">
 													<p style="color: #1700cd;">ID NO.: 
-                                                    <input type="text" name="barangay_id" id="barangay_id" class="form-control borderstyle" style="width: 80px; height: 24px; background:#C8CB58;" value="BD-<?php echo $data['barangay_id']; ?>"></p>
+                                                    <input type="text" name="app_brgyid" id="app_brgyid" class="form-control borderstyle" style="width: 80px; height: 24px; background:#C8CB58;" value="BD-<?php echo $data['app_brgyid']; ?>"></p>
 													<div style="background: #f9232c; width: 300px; color: white; font-weight: bold; padding: 5px 5px; letter-spacing: 2px; font-stretch: expanded;" >
 													BARANGAY RESIDENT ID CARD
 													</div>
@@ -248,9 +331,13 @@ if(isset($_POST['generate']) ) {
 												</div>
 											</div>
                                             <input type="hidden" name="link" id="link" value="http://localhost:4000/Updated-Barangay-System">
-                                            <div class="generatebtn" style="margin-top: 50px;">
-                                                <button type="submit" style="cursor: pointer; " class="form-control generate" name="generate">Generate</button>
-                                                <a class="btn btn-primary form-control submitBtn" style="width:210px; margin:5px 0;" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                            <div class="generatebtn" style="margin-top: 50px; width: 90%;">
+                                            <hr>
+                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 15px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
+                                                <br>
+                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div>
                                             </div>
                                             </form>
 									</section>
@@ -281,6 +368,47 @@ if(isset($_POST['generate']) ) {
                     </ul>
                     
                 </div>
+                <form method="POST" action="" class="body" enctype="multipart/form-data">
+                                        <div class="main-content-email">
+                                           
+
+                                            <div class="information col">
+                                                <p> Fullname: </p>
+                                                <input class="form-control inputtext usersel" id="fullname" name="fullname" type="text"  value="<?php echo $data['fname']; ?> <?php echo $data['mname']; ?> <?php echo $data['lname']; ?>">
+                                            </div>
+
+                                            <div class="information col">
+                                                <p> To: </p>
+                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $data['emailadd']; ?>">
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Subject:  </p>
+                                                <input required class="form-control inputtext" id="subject" name="subject" type="text" value="Photocopy of your Request (Barangay ID)"> 
+                                            </div>
+                                        
+
+                                            <div class="information col">
+                                                <p>Attachment: </p>
+                                                <input required class="form-control inputtext" style="background: white; height: 50px;" id="fileattach" name="fileattach" type="file" value=""> 
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Body: </p>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day <?php echo $data['fname']; ?>  <?php echo $data['mname']; ?>  <?php echo $data['lname']; ?>!. Here is the pdf file of your Document Request <br><br> <br>  Website: comm-bms.com/index.php <br>
+                                                FB Fan Page: @maningningnacommonwealth <br>
+                                                Twitter Account: @BrgyCommonwealth</textarea>
+                                                <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
+                                                <script type="text/javascript">                        
+                                                    CKEDITOR.replace( 'message' );
+                                                </script>
+                                            </div>
+
+                                            <div class="sendi">
+                                                <button name="barangayidsendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
 									</section>
                                    
                                        

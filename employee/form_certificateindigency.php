@@ -141,7 +141,6 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 45px; height: 35px;}
 		
 	 </style>
    </head>
@@ -214,7 +213,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Indigency
+						<h5>Barangay Indigency >> Pending Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -336,9 +335,12 @@ if(!isset($_SESSION["type"]))
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
 		echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 		<div class='alert alert-warning cattxtbox'>
 			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			<div style='display: flex; justify-content: center; align-items: center; margin-left: 90px; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
 		</div>";
 	?>
 
@@ -383,7 +385,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Address</th>
 										<th width="5%">Purpose</th>
 										<th width="5">Contact</th>
-										<th width="15%">Email</th>
 										<th width="5%">ID Type</th>
 										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
@@ -400,7 +401,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['contactnum']?></td>
-									<td><?php echo $data ['emailaddress']; ?></td>
 									<td><?php echo $data ['id_type']; ?></td>
 									<td><?php echo $data ['date_issue']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>

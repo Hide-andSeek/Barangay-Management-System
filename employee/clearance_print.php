@@ -5,6 +5,7 @@ include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
 include('../qr_code/phpqrcode/qrlib.php'); 
+include('../send_email.php');
 
 if(!isset($_SESSION["type"]))
 {
@@ -53,9 +54,9 @@ if(isset($_POST['generate']) ) {
 
 $message = ''; 
 
-$tempDir = '../img/'; 
+$tempDir = '../img/qrcode_clearance'; 
 $link = $_POST['link'];
-$id = $_POST['clearance_id'];
+$id = $_POST['approved_clearanceids'];
 $full_name = $_POST['full_name'];
 $add = $_POST['address'];
 $filename = ($full_name);
@@ -74,6 +75,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/documentprint_styles.css">
+	
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -82,11 +84,8 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
     <title>Printed: Barangay Clearance</title>
 
     <style>
-        .inp{border: none; }
-		.borderb{border-bottom: 1px solid black}
-		.offic{font-size:13px;}
-        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-		.viewbtn:hover{ background-color: #008CBA;color: white;}
+      
+		
     </style>
 </head>
 <body>
@@ -101,9 +100,9 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
-                            FROM barangayclearance
-                            WHERE clearance_id = ?";
+                    $sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+                            FROM approved_clearance
+                            WHERE approved_clearanceids = ?";
                     
                     $stmt = $connect->stmt_init();
                     if($stmt->prepare($sql_query)) {	
@@ -113,26 +112,45 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                         $stmt->execute();
                         // store result 
                         $stmt->store_result();
-                        $stmt->bind_result($data['clearance_id'], 
-                            $data['full_name'],
-                            $data['age'],
-                            $data['status'],
-                            $data['nationality'],
-                            $data['address'],
-                            $data['contactno'],
-                            $data['emailadd'],
-                            $data['purpose'],
-                            $data['date_issued'],
-                            $data['ctc_no'],
-                            $data['issued_at'],
-                            $data['precint_no'],
-                            $data['certificate_image'],
-                            $data['clearance_status']
+                        $stmt->bind_result($data['approved_clearanceids'], 
+								$data['full_name'],
+								$data['age'],
+								$data['status'],
+								$data['nationality'],
+								$data['address'],
+								$data['contactno'],
+								$data['emailadd'],
+								$data['purpose'],
+								$data['date_issued'],
+								$data['ctc_no'],
+								$data['issued_at'],
+								$data['precint_no'],
+								$data['clearanceid_image'],
+								$data['filechoice'],
+								$data['approvedby'],
+								$data['app_date'],
+								$data['clearance_status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
                     
+					if(isset($_POST['btnEdit'])){
+                    
+                        $clearance_status	= $_POST['clearance_status'];
+                        $approved_clearanceids	= $_POST['approved_clearanceids'];
+
+                        $sql = "UPDATE approved_clearance SET clearance_status = 'Done' WHERE approved_clearanceids = $approved_clearanceids";
+
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Mark as Done! Successfully!');
+                                    window.location.href='clearanceapproval.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
                 ?>
 
     <div id="indigency_file" style="display: auto; ">
@@ -142,6 +160,27 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 			}
 			?>
     <br>
+					<?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                    ?>
+					 <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailadd']; ?>
+                           <input type="hidden" name="approved_clearanceids" id="approved_clearanceids" value="<?php echo $data['approved_clearanceids']; ?>">
+                            <input type="hidden" name="clearance_status" id="clearance_status" value="Done">
+                            <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEdit">Mark as done</button>
+							</div>
+                        </form>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['result']);
+                        unset($_SESSION['status']);
+                        }
+                    ?>
 								<form action="" method="post">
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
@@ -161,7 +200,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 													<div  style="position: inherit; margin-top: -1075px;">
 														<p style="font-size: 21px; line-height: 0.5;">MANUEL A. CO</p>
 														<em>Punong Barangay</em>
-														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="clearance_id" id="clearance_id" value="BC-<?php echo $data['clearance_id']; ?>" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
+														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="approved_clearanceids" id="approved_clearanceids" value="BC-<?php echo $data['approved_clearanceids']; ?>" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
 														<br>
 														<div class="side_information">
 															<p>PRESY C. BAQUIRING</p>
@@ -266,7 +305,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 												</div>
 												
 												<div style="padding-right: 105px;">
-												<img src="../img/fileupload_clearance/<?php echo $data['certificate_image']; ?>" style="width: 140px; height: 140px; float: right; ">
+												<img src="../img/approved_clearance/<?php echo $data['clearanceid_image']; ?>" style="width: 140px; height: 140px; float: right; ">
 												</div>
 												<br>
 												<br>
@@ -287,7 +326,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 															<p>Punong Barangay</p>
 														</div>
 														<div style="margin-top: 20px; margin-left: 55px;">
-                                                        <?php echo '<img src="../img/'. @$filename.'.png" style="width:110px; height: 110px;"><br>'; ?>
+                                                        <?php echo '<img src="../img/qrcode_clearance'. @$filename.'.png" style="width:110px; height: 110px;"><br>'; ?>
                                                         <span style="margin-left: -20px;"><?php echo $message;?></span>
                                                          </div>
 														<em>Not valid without QR Code</em>
@@ -315,11 +354,53 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 										<br>
                                             <div class="generatebtn" style="margin-top: 50px;">
                                                 <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
-												<button>
-                                                <a class="btn btn-primary form-control viewbtn" style="width:210px; margin:5px 0;" href="downloadqr.php?file=<?php echo $filename; ?>.png "> Download QR Code</a>
-												</button>
+												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div>
                                             </div>
                                         </form>
+
+										<form method="POST" action="" class="body" enctype="multipart/form-data">
+                                        <div class="main-content-email">
+                                           
+
+                                            <div class="information col">
+                                                <p> Fullname: </p>
+                                                <input class="form-control inputtext usersel" id="fullname" name="fullname" type="text"  value="<?php echo $data['full_name']; ?>">
+                                            </div>
+
+                                            <div class="information col">
+                                                <p> To: </p>
+                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $data['emailadd']; ?>">
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Subject:  </p>
+                                                <input required class="form-control inputtext" id="subject" name="subject" type="text" value="Photocopy of your Request (Barangay Clearance)"> 
+                                            </div>
+                                        
+
+                                            <div class="information col">
+                                                <p>Attachment: </p>
+                                                <input required class="form-control inputtext" style="background: white; height: 50px;" id="fileattach" name="fileattach" type="file" value=""> 
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Body: </p>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day <?php echo $data['full_name']; ?>!. Here is the pdf file of your Document Request <br><br> <br>  Website: comm-bms.com/index.php <br>
+                                                FB Fan Page: @maningningnacommonwealth <br>
+                                                Twitter Account: @BrgyCommonwealth</textarea>
+                                                <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
+                                                <script type="text/javascript">                        
+                                                    CKEDITOR.replace( 'message' );
+                                                </script>
+                                            </div>
+
+                                            <div class="sendi">
+                                                <button name="clearancesendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
 									</section>
 <script>
 	const year = new Date();

@@ -57,9 +57,7 @@ if(!isset($_SESSION["type"]))
 
 	 <style>
 		*{font-size: 13px;}
-		 .home-section{
-			min-height: 95vh;''
-			}
+	
 
 		.announcement-modal, .edit-modal, .delete-modal, .addannouncement-modal{
             display: none; 
@@ -119,12 +117,12 @@ if(!isset($_SESSION["type"]))
 	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
 			font-size: 14px;
 			height: 35px;
-			width: 84%;
+			width: 100%;
 			padding: 10px 10px;
-			margin: 4px 25px;
 			display: inline-block;
 			border: 1px solid #ccc;
 			box-sizing: border-box;
+			text-align: center;
 		}
 
 		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
@@ -142,7 +140,8 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 45px; height: 35px;}
+		.viewbtn1{width: 100%; height: 35px; padding: 10px 10px; margin-right: 50px; text-decoration: none;  }
+        .viewbtn1:hover{color: orange;}
 	 </style>
    </head>
 	<body>
@@ -214,7 +213,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Clearance
+						<h5>Barangay Clearance >> Pending Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -346,10 +345,18 @@ if(!isset($_SESSION["type"]))
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
 		echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 		<div class='alert alert-warning cattxtbox'>
 			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-		</div>";
+			<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
+		</div>
+		<div style='text-align: center; margin-top: 5%'>
+			<a href='clearanceapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+			<a href='clearancedenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+		</div>
+		";
 	?>
 
 	<?php 
@@ -378,7 +385,7 @@ if(!isset($_SESSION["type"]))
 									</div>
 									<div>
 										<label style="font-size: 14px;">Deny: </label>
-										<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='clearancedenied.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
 									</div>
 								</div>
 							</div>						
@@ -394,8 +401,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Status</th>
 										<th width="5">Address</th>
 										<th width="15%">Contact No</th>
-										<th width="5%">Email</th>
-										<th width="10%">Purpose</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Date Issued</th>
 										<th width="5%">Certificate Status</th>
@@ -412,8 +417,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['status']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['contactno']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
-									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['date_issued']; ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
@@ -427,32 +430,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<!-- Edit Category -->
-							<div id="formatValidatorName" >
-								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
-										<div class="modal-contentedit animate">	
-										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
-										<br>
-										<br>
-										<h4 style="text-align: center;"><br> Edit Category </h4>
-										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-										<hr />
-										<form method="post" action="" enctype="multipart/form-data">
-											<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-											</span>
-											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-											<span class="imgup">
-												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-											</span>
-											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-										</form>
-										</div>
-								</div>
-							</div>
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">

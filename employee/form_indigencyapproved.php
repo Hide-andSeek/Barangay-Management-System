@@ -232,14 +232,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-				FROM certificateindigency WHERE status = 'Approved'
-				ORDER BY indigency_id DESC";
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+				FROM approved_indigency WHERE status = 'Approved'
+				ORDER BY approvedindigency_id ASC";
 	}else{
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-				FROM certificateindigency
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+				FROM approved_indigency
 				WHERE fullname LIKE ? 
-				ORDER BY indigency_id DESC";
+				ORDER BY approvedindigency_id ASC";
 	}
 	
 	
@@ -253,7 +253,7 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['indigency_id'], 
+		$stmt->bind_result($data['approvedindigency_id'], 
 				$data['fullname'],
 				$data['address'],
 				$data['purpose'],
@@ -261,8 +261,11 @@ if(!isset($_SESSION["type"]))
 				$data['emailaddress'],
 				$data['id_type'],
 				$data['date_issue'],
-				$data['status'],
-				$data['indigencyid_image']
+				$data['indigencyid_image'],
+				$data['indigencyfilechoice'],
+				$data['approvedby'],
+				$data['app_date'],
+				$data['status']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -287,14 +290,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-				FROM certificateindigency WHERE status = 'Approved'
-				ORDER BY indigency_id DESC LIMIT ?, ?";
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+				FROM approved_indigency WHERE status = 'Approved'
+				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-				FROM certificateindigency 
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+				FROM approved_indigency 
 				WHERE fullname LIKE ? 
-				ORDER BY indigency_id DESC LIMIT ?, ?";
+				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -309,7 +312,7 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging ->execute();
 		// store result 
 		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['indigency_id'], 
+		$stmt_paging->bind_result($data['approvedindigency_id'], 
 				$data['fullname'],
 				$data['address'],
 				$data['purpose'],
@@ -317,8 +320,11 @@ if(!isset($_SESSION["type"]))
 				$data['emailaddress'],
 				$data['id_type'],
 				$data['date_issue'],
-				$data['status'],
-				$data['indigencyid_image']
+				$data['indigencyid_image'],
+				$data['indigencyfilechoice'],
+				$data['approvedby'],
+				$data['app_date'],
+				$data['status']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -326,11 +332,19 @@ if(!isset($_SESSION["type"]))
 
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
-	echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
-		<div class='alert alert-warning cattxtbox'>
-			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-		</div>";
+		echo "
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+			<div class='alert alert-warning cattxtbox'>
+				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			<div style='text-align: center; margin-top: 5%'>
+				<a href='certificateofindigency.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> pending page?</strong></a>
+				<a href='indigencydenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+			</div>
+			";
 	?>
 
 	<?php 
@@ -353,8 +367,13 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
-									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='certificateofindigency.php'"></i> Back</button>
+									<!-- <div>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+									<div style="float: right;">
+										<a href="certificateofindigency.php">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: -50px; cursor: pointer;" alt="Back?">
+										</a>
 									</div>
 								</div>
 							</div>						
@@ -375,14 +394,13 @@ if(!isset($_SESSION["type"]))
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
 										<th width="5%"></th>
-										<th width="5%">Message</th>
 									</tr>
 								</thead>
 							<?php 
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['indigency_id']; ?></td>
+									<td><?php echo $data ['approvedindigency_id']; ?></td>
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
@@ -393,10 +411,8 @@ if(!isset($_SESSION["type"]))
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<td>
-										<a class="view_approvebtn" style="width: 110px; height:40px;" href="print_indigency.php?id=<?php echo $data['indigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print </a>
-									</td>
-									<td><button class="replybtn" data-toggle="modal" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
-				
+										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_indigency.php?id=<?php echo $data['approvedindigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
+									</td>		
 								</tr>	
 								</tbody>
 								<?php 

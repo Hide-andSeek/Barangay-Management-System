@@ -37,13 +37,15 @@ if(isset($_POST['brgyidbtn'])){
 	$emrgncycontact = $_POST['emrgncycontact'];
 	$reladdress = $_POST['reladdress'];
 	$dateissue = $_POST['dateissue'];
-    $brgyidfilechoice = $_POST['brgyidfilechoice'];
-	$status = $_POST['status'];
-													
 	// get image info
 	$barangayid_image = $_FILES['id_image']['name'];
 	$image_error = $_FILES['id_image']['error'];
 	$image_type = $_FILES['id_image']['type'];
+
+    $brgyidfilechoice = $_POST['brgyidfilechoice'];
+	$status = $_POST['status'];
+													
+
 													
 	// create array variable to handle error
 	$error = array();
@@ -82,7 +84,7 @@ if(isset($_POST['brgyidbtn'])){
 		$error['dateissue'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
 	// common image file extensions
-	$allowedExts = array("jpeg", "jpg", "png");
+	$allowedExts = array("docx", "pdf");
 													
 	// get image file extension
 	error_reporting(E_ERROR | E_PARSE);
@@ -90,11 +92,8 @@ if(isset($_POST['brgyidbtn'])){
 															
 	if($image_error > 0){
 	$error['id_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-	}else if(!(($image_type == "image/jpeg") || 
-	($image_type == "image/jpg") || 
-	($image_type == "image/x-png") ||
-	($image_type == "image/png") || 
-	($image_type == "image/pjpeg")) &&
+	}else if(!(($image_type == "docx") || 
+	($image_type == "pdf")) &&
 	!(in_array($extension, $allowedExts))){
 													
 	$error['id_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
@@ -173,9 +172,7 @@ if(isset($_POST['brgyidbtn'])){
 if(isset($_POST['permitBtn'])){
 	
 	$dateissued = $_POST['dateissued'];
-	$firstname	= $_POST['firstname'];
-    $middlename	= $_POST['middlename'];
-    $lastname	= $_POST['lastname'];
+	$fullname	= $_POST['fullname'];
     $contactno = $_POST['contactno'];
 	$businessname = $_POST['businessname'];
 	$businessaddress = $_POST['businessaddress'];
@@ -195,14 +192,8 @@ if(isset($_POST['permitBtn'])){
 	if(empty($dateissued)){
 	$error['dateissued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
-	if(empty($firstname)){
-	$error['firstname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-    if(empty($middlename)){
-	$error['middlename'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-    if(empty($lastname)){
-	$error['lastname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	if(empty($fullname)){
+	$error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
     if(empty($contactno)){
 	$error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
@@ -240,9 +231,7 @@ if(isset($_POST['permitBtn'])){
 	}
 													
 	if( !empty($dateissued) &&  
-		!empty($firstname) && 
-        !empty($middlename) && 
-        !empty($lastname) && 
+		!empty($fullname) && 
         !empty($contactno) && 
 		!empty($businessname) && 
 		!empty($businessaddress) && 
@@ -261,18 +250,16 @@ if(isset($_POST['permitBtn'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], 'img/fileupload_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO businesspermit (dateissued, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, status)
-	VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO businesspermit (dateissued, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, status)
+	VALUES(?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('ssssssssssss', 
+	$stmt->bind_param('ssssssssss', 
 	$dateissued,
-	$firstname,
-    $middlename,
-    $lastname,
+	$fullname,
     $contactno,
 	$businessname,
 	$businessaddress,
@@ -743,167 +730,4 @@ if(isset($_POST['permitBtn'])){
 
 
 // 6.0 Prepared Statement for Admin Complaints: Req Documents
-                if(isset($_POST['submitbtn'])){
-	
-                    $blotterID = $_POST['blotterID'];
-                    $complainant = $_POST['complainant'];
-                    $c_age	= $_POST['c_age'];
-                    $c_gender = $_POST['c_gender'];
-                    $c_address = $_POST['c_address'];
-                    $incident_add = $_POST['incident_add'];
-                    $violators = $_POST['violators'];
-                    $v_age = $_POST['v_age'];
-                    $v_gender = $_POST['v_gender'];
-                    $v_rel = $_POST['v_rel'];
-                    $v_address = $_POST['v_address'];
-                    $witness = $_POST['witness'];
-                    $ex_complaints = $_POST['ex_complaints'];
-                    $dept = $_POST['dept'];
-                    $app_date = $_POST['app_date'];
-                    $app_by = $_POST['app_by'];
-                                                                    
-                    // get image info
-                    $docu = $_FILES['document']['name'];
-                    $image_error = $_FILES['document']['error'];
-                    $image_type = $_FILES['document']['type'];
-                                                                    
-                    // create array variable to handle error
-                    $error = array();
-                                                                    
-                    if(empty($blotterID)){
-                    $error['blotterID'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($complainant)){
-                        $error['complainant'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($c_age)){
-                    $error['c_age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($c_gender)){
-                        $error['c_gender'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($c_address)){
-                        $error['c_address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($incident_add)){
-                        $error['incident_add'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($violators)){
-                        $error['violators'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($v_age)){
-                        $error['v_age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($v_gender)){
-                        $error['v_gender'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($v_rel)){
-                        $error['v_rel'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($v_address)){
-                        $error['v_address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($ex_complaints)){
-                        $error['ex_complaints'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($dept)){
-                        $error['dept'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($app_date)){
-                        $error['app_date'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($app_by)){
-                        $error['app_by'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    if(empty($document)){
-                        $error['document'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                    }
-                    // common image file extensions
-                    $allowedExts = array("pdf");
-                                                                    
-                    // get image file extension
-                    error_reporting(E_ERROR | E_PARSE);
-                    $extension = end(explode(".", $_FILES["document"]["name"]));
-                                                                            
-                    if($image_error > 0){
-                    $error['document'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-                    }else if(!(($image_type == "pdf") ||  
-                    ($image_type == "pdf")) &&
-                    !(in_array($extension, $allowedExts))){
-                                                                    
-                    $error['document'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
-                    }
-                                                                    
-                    if( !empty($blotterID) &&  
-                        !empty($complainant) && 
-                        !empty($c_age) && 
-                        !empty($c_gender) && 
-                        !empty($c_address) && 
-                        !empty($incident_add) && 
-                        !empty($violators) && 
-                        !empty($v_age) && 
-                        !empty($v_gender) && 
-                        !empty($v_rel) && 
-                        !empty($v_address) && 
-                        !empty($ex_complaints) && 
-                        !empty($dept) && 
-                        !empty($app_date) && 
-                        !empty($app_by) && 
-                        empty($error['document'])){
-                                                                        
-                    // create random image file name
-                    $string = '0123456789';
-                    $file = preg_replace("/\s+/", "_", $_FILES['document']['name']);
-                    $function = new functions;
-                    $docu = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
-                                                                            
-                    // upload new image
-                    $upload = move_uploaded_file($_FILES['document']['tmp_name'], 'img/fileupload_admin/'.$docu);
-                                                                
-                    // insert new data to menu table
-                    $sql_query = "INSERT INTO admin_complaints (blotterID, complainant, c_age, c_gender, c_address,incident_add, violators, v_age,v_gender, v_rel, v_address, witness, ex_complaints, dept, app_date, app_by, document )
-                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                                                                        
-                    $upload_image = $docu;
-                    $stmt = $connect->stmt_init();
-                    if($stmt->prepare($sql_query)) {	
-                    // Bind your variables to replace the ?s
-                    $stmt->bind_param('ssssssssssssss', 
-                    $blotterID,
-                    $complainant,
-                    $c_age,
-                    $c_gender,
-                    $c_address,
-                    $incident_add,
-                    $violators,
-                    $v_age,
-                    $v_gender,
-                    $v_rel,
-                    $v_address,
-                    $witness,
-                    $ex_complaints,
-                    $dept,
-                    $app_date,
-                    $app_by,
-                    $document
-                    );
-                    // Execute query
-                    $stmt->execute();
-                    // store result 
-                    $result = $stmt->store_result();
-                    $stmt->close();
-                    }
-                                                                        
-                    if($result){
-                    $error['add_barangayid'] = " 
-                        <div class='alert alert-success cattxtbox'>
-                            <h6> * Submitted Successfully. <a href='ompAdmin_dashboard.php'>
-                            <i class='fa fa-check fa-lg'></i>
-                            </a></h6>
-                        </div>";
-                    }else{
-                        $error['add_barangayid'] = " <span class='label label-danger'>Failed Submission! </span>";
-                            }
-                        }
-                    }
-                
+      

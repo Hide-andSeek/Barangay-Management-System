@@ -142,7 +142,6 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 45px; height: 35px;}
 	 </style>
    </head>
 	<body>
@@ -214,7 +213,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Business Permit
+						<h5>Business Permit >> Pending Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -241,11 +240,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
 				ORDER BY businesspermit_id DESC";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit
 				WHERE firstname LIKE ?
 				ORDER BY businesspermit_id DESC";
@@ -265,9 +264,7 @@ if(!isset($_SESSION["type"]))
 		$stmt->bind_result($data['businesspermit_id'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
@@ -299,11 +296,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
 				ORDER BY businesspermit_id DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit 
 				WHERE firstname LIKE ?
 				ORDER BY businesspermit_id DESC LIMIT ?, ?";
@@ -324,9 +321,7 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging->bind_result($data['businesspermit_id'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
@@ -341,7 +336,14 @@ if(!isset($_SESSION["type"]))
 
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
-	// echo '<div> No data shown</div>';
+		echo "
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+		<div class='alert alert-warning cattxtbox'>
+			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			<div style='display: flex; justify-content: center; align-items: center; margin-left: 90px; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
+		</div>";
 	?>
 
 	<?php 
@@ -370,7 +372,7 @@ if(!isset($_SESSION["type"]))
 									</div>
 									<div>
 										<label style="font-size: 14px;">Deny: </label>
-										<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='businesspermitdenied.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
 									</div>
 								</div>
 							</div>						
@@ -383,18 +385,14 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Permit ID</th>
 										<th width="5%">Date Issued</th>
 										<th width="5%">Selection</th>
-										<th width="5%">Firstname</th>
-										<th width="5">Middlename</th>
-										<th width="15%">Lastname No</th>
+										<th width="5%">Fullname</th>
 										<th width="5%">Contact no</th>
 										<th width="10%">Business Address</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Plate no</th>
 										<th width="5%">Email</th>
 										<th width="5%">Status</th>
-										<th width="5%">Action</th>
 										<th width="5%">View Details</th>
-										<th width="5%">Message</th>
 									</tr>
 								</thead>
 							<?php 
@@ -404,22 +402,15 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['businesspermit_id']; ?></td>
 									<td><?php echo $data ['dateissued']; ?></td>
 									<td><?php echo $data ['selection']; ?></td>
-									<td><?php echo $data ['firstname']; ?></td>
-									<td><?php echo $data ['middlename']?></td>
-									<td><?php echo $data ['lastname']; ?></td>
+									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									<td><?php echo $data ['businessaddress']; ?></td>
 									<td><?php echo $data ['plateno']; ?></td>
 									<td><?php echo $data ['email_add']; ?></td>
 									<!-- <td><img src="../img/fileupload_bpermit/<?php echo $data['businessid_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
-
-									<td><button class="view_approvebtn">Mark as Done</button></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='clearanceviewdet.php?id=<?php echo $data['clearance_id'];?>'">View Details</button></td>
-									
-									<td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
-				
+									<td><button class="view_approvebtn" onclick="location.href='businesspermitviewdet.php?id=<?php echo $data['businesspermit_id'];?>'">View Details</button></td>
 								</tr>	
 								</tbody>
 								<?php 

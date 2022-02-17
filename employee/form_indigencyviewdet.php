@@ -4,6 +4,7 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
 
 if(!isset($_SESSION["type"]))
 {
@@ -78,7 +79,6 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
 
      <title> View: Barangay Indigency </title>
 	 
@@ -181,6 +181,8 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
+        .viewbtn{width: 100%; height: 35px;  background-color: #91D9F1; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -249,7 +251,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Indigecy >> View Barangay Indigency Detail
+						<h5>Barangay Indigency >> View Details
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -270,7 +272,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+                    $sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image, indigencyfilechoice
                             FROM certificateindigency
                             WHERE indigency_id = ?";
                     
@@ -291,11 +293,48 @@ if(!isset($_SESSION["type"]))
                                 $data['id_type'],
                                 $data['date_issue'],
                                 $data['status'],
-                                $data['indigencyid_image']
+                                $data['indigencyid_image'],
+                                $data['indigencyfilechoice']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if(isset($_POST['btnDeny'])){
+                    
+                      $status	= $_POST['status'];
+                      $indigency_id = $_POST['indigency_id'];
+
+                      $sql = "UPDATE certificateindigency SET status = 'Deny' WHERE indigency_id = $indigency_id";
+
+                      if (mysqli_query($connect, $sql)) {
+                        echo "<script>
+                                  alert('Denied Request!');
+                                  window.location.href='certificateofindigency.php';
+                              </script>";
+                      } else {
+                        echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
+
+                  
+
+                  if(isset($_POST['markasdone'])){
+
+                      $status	= $_POST['status'];
+                      $indigency_id = $_POST['indigency_id'];
+
+                      $sql = "UPDATE certificateindigency SET status = 'Approved' WHERE indigency_id = $indigency_id";
+
+                      if (mysqli_query($connect, $sql)) {
+                      echo "<script>
+                                  alert('Mark as Done Successfully!');
+                                  window.location.href='certificateofindigency.php';
+                              </script>";
+                      } else {
+                      echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                     
                 ?>
 
@@ -303,67 +342,116 @@ if(!isset($_SESSION["type"]))
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: Barangay Indigency Detail
+                    Certificate of Indigency: View Details
                     </h5>
                 </div>
                 <hr>
-                <form method="post">
+                <div style="float: right;">
+                    <a href="certificateofindigency.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    </a>
+                </div>
+                <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['indigency_id']; ?></td>
+                            <td><input type="hidden" name="approvedindigency_id" value="<?php echo $data['indigency_id']; ?>"><?php echo $data['indigency_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Fullname</th>
-                            <td><strong><?php echo $data['fullname']; ?></strong></td>
+                            <td><input type="hidden" name="fullname" value="<?php echo $data['fullname']; ?>"><strong><?php echo $data['fullname']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Address</th>
+                            <td><input type="hidden" name="address" value="<?php echo $data['address']; ?>"><strong><?php echo $data['address']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Purpose</th>
-                            <td><strong><?php echo $data['purpose']; ?></strong></td>
+                            <td><input type="hidden" name="purpose" value="<?php echo $data['purpose']; ?>"><strong><?php echo $data['purpose']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Contact</th>
-                            <td><strong><?php echo $data['contactnum']; ?></strong></td>
+                            <td><input type="hidden" name="contactnum" value="<?php echo $data['contactnum']; ?>"><strong><?php echo $data['contactnum']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Email</th>
-                            <td><?php echo $data['emailaddress']; ?></td>
+                            <td><input type="hidden" name="emailaddress" value="<?php echo $data['emailaddress']; ?>"><?php echo $data['emailaddress']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">ID Type</th>
-                            <td ><?php echo $data['id_type']; ?></td>
+                            <td><input type="hidden" name="id_type" value="<?php echo $data['id_type']; ?>"><?php echo $data['id_type']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Date Issued</th>
-                            <td ><?php echo $data['date_issue']; ?></td>
+                            <td><input type="hidden" name="date_issue" value="<?php echo $data['date_issue']; ?>"><?php echo $data['date_issue']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Document Type</th>
+                            <td><input type="hidden" name="indigencyfilechoice" value="<?php echo $data['indigencyfilechoice']; ?>"><?php echo $data['indigencyfilechoice']; ?></td>
                         </tr>
                     </table>
                     </div>
                     <br>
-                    <h6>Identification Card (Click to Zoom): </h6>
+                    <!-- <h6>Identification Card (Click to Zoom): </h6>
                     <div id="myModal" class="modal" style="display: absolute;">
                         <span class="close">&times;</span>
                         <img src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
                         <img id="myImg" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div>
-                </form>
+                    </div> -->
                 <br>
                 <div id="option_menu">
+                      <div class="information col">
+                        <label class="employee-label"> Approved By </label>
+                          <input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                      </div>
+
                       <div class="information col">
                         <label class="employee-label ">Approval Date </label>
                           <input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
                       </div>
-
-                          <div class="information col">
-                        <label class="employee-label"> Approved By </label>
-                          <input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                     
+                      <div class="information col">
+                      <label class="employee-label ">Attach 2x2 Pic</label>
+                          <input type='file' class="form-control" name='indigencyid_image' id="indigencyid_image"/>
+                          <?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : '';?>
                       </div>
-                        <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
-                        <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="certificateofindigency.php">Back</a>
+                        <input type="hidden" name="status" id="status" value="Approved">
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertindigency">Approve</button></a>
+                  </form>
+                        <form action="" method="post">
+                                <input type="hidden" name="clearance_id" id="clearance_id" value="<?php echo $data['clearance_id']; ?>">
+                                <input type="hidden" name="clearance_status" id="clearance_status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+                            </div>
+                        </form>
+                        <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                            ?>
+                        
+                                <form action="" method="post">
+                                    <div>
+                                    
+                                        <input type="hidden" name="indigency_id" id="indigency_id" value="<?php echo $data['indigency_id']; ?>">
+                                        <input type="hidden" name="status" id="status" value="Approved">
+                                        <div style="text-align: center;"><?php echo $_SESSION['result']?> </div>
+                                        <button type="submit" style="cursor: pointer; margin-bottom: 5px;" class="form-control generate viewbtn done" id="markasdone" name="markasdone">Mark as done <i class="bx bx-check"></i></button>
+                                        
+                                    </div>
+                                </form>
+                            <?php
+                                }else{
+                            ?>
+                                <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                            <?php
+                                }
+                                unset($_SESSION['result']);
+                                unset($_SESSION['status']);
+                                }
+                            ?>
                 </div>
                 
                 </div>

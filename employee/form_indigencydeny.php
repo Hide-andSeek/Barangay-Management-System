@@ -242,7 +242,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Indigency
+						<h5>Barangay Indigency >> Denied Indigency
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -271,7 +271,7 @@ if(!isset($_SESSION["type"]))
 			
 		if(empty($keyword)){
 			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-            FROM certificateindigency WHERE status = 'Approved'
+            FROM certificateindigency WHERE status = 'Deny'
 					ORDER BY indigency_id ASC";
 		}else{
 			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
@@ -326,7 +326,7 @@ if(!isset($_SESSION["type"]))
 		
 		if(empty($keyword)){
 			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
-            FROM certificateindigency WHERE status = 'Approved'
+            FROM certificateindigency WHERE status = 'Deny'
 					ORDER BY indigency_id ASC LIMIT ?, ?";
 		}else{
 			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
@@ -365,10 +365,18 @@ if(!isset($_SESSION["type"]))
 		// if no data on database show "No Reservation is Available"
 		if($total_records_paging == 0){
 			echo "
-			<h1 style='text-align: center;'>404 Not Found</h1>
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 			<div class='alert alert-warning cattxtbox'>
 				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-			</div>";
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			<div style='text-align: center; margin-top: 5%'>
+				<a href='indigencyapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+				<a href='indigencydenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+			</div>
+			";
 	?>
 
 	<?php 
@@ -392,8 +400,13 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
-									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='certificateofindigency.php'"></i> Back</button>
+									<!-- <div>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+									<div style="float: right;">
+										<a href="certificateofindigency.php">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: 160px; cursor: pointer;" alt="Back?">
+										</a>
 									</div>
 								</div>
 							</div>						

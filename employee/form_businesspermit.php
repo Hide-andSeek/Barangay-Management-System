@@ -142,7 +142,6 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 45px; height: 35px;}
 	 </style>
    </head>
 	<body>
@@ -214,7 +213,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Business Permit
+						<h5>Business Permit >> Pending Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -241,11 +240,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
 				ORDER BY businesspermit_id DESC";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit
 				WHERE firstname LIKE ?
 				ORDER BY businesspermit_id DESC";
@@ -265,9 +264,7 @@ if(!isset($_SESSION["type"]))
 		$stmt->bind_result($data['businesspermit_id'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
@@ -299,11 +296,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
 				ORDER BY businesspermit_id DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit 
 				WHERE firstname LIKE ?
 				ORDER BY businesspermit_id DESC LIMIT ?, ?";
@@ -324,9 +321,7 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging->bind_result($data['businesspermit_id'], 
 				$data['dateissued'],
 				$data['selection'],
-				$data['firstname'],
-				$data['middlename'],
-				$data['lastname'],
+				$data['fullname'],
 				$data['contactno'],
 				$data['businessname'],
 				$data['businessaddress'],
@@ -341,7 +336,14 @@ if(!isset($_SESSION["type"]))
 
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
-	// echo '<div> No data shown</div>';
+		echo "
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+		<div class='alert alert-warning cattxtbox'>
+			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			<div style='display: flex; justify-content: center; align-items: center; margin-left: 90px; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
+		</div>";
 	?>
 
 	<?php 
@@ -383,9 +385,7 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Permit ID</th>
 										<th width="5%">Date Issued</th>
 										<th width="5%">Selection</th>
-										<th width="5%">Firstname</th>
-										<th width="5">Middlename</th>
-										<th width="15%">Lastname No</th>
+										<th width="5%">Fullname</th>
 										<th width="5%">Contact no</th>
 										<th width="10%">Business Address</th>
 										<!-- <th width="5%">Identification Card</th> -->
@@ -402,9 +402,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['businesspermit_id']; ?></td>
 									<td><?php echo $data ['dateissued']; ?></td>
 									<td><?php echo $data ['selection']; ?></td>
-									<td><?php echo $data ['firstname']; ?></td>
-									<td><?php echo $data ['middlename']?></td>
-									<td><?php echo $data ['lastname']; ?></td>
+									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									<td><?php echo $data ['businessaddress']; ?></td>
 									<td><?php echo $data ['plateno']; ?></td>

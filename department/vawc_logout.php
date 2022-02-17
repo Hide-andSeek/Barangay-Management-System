@@ -5,4 +5,3 @@ session_destroy();
 header("location: 0index.php");
 
 ?>
-

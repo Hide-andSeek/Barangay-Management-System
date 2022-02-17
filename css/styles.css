@@ -77,7 +77,7 @@
   line-height: 60px;
 }
 .sidebar .nav-list{
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: -px;
   height: 100%;
 }
@@ -340,7 +340,7 @@ img.brgy_icon{
 }
 .select__select{
 	position: absolute;
-	margin-left: 50%;
+	margin-left: 60%;
 	font-size: 13px;
 }
 .selection{
@@ -696,3 +696,5 @@ padding: 10px 25px;
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
 		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
 		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;} */
+
+    .hoverback:hover{background: orange; border-radius: 70%;}

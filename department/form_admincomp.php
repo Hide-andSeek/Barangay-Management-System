@@ -146,14 +146,6 @@ if(!isset($_SESSION["type"]))
 			   <span class="tooltip">BCPC</span>
 			 </li>
 			  
-			 <li>
-			   <a class="side_bar" href="vawc_sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
-			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
@@ -265,11 +257,51 @@ if(!isset($_SESSION["type"]))
 					<h4>BCPC</h4>
 				</div>
 			</div>
+			<div class="w3-quarter">
+				<a href="compAdmin_approved.php">
+				<div class="w3-container w3-teal w3-text-white w3-padding-16">
+					<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+	
+						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
 
-			<br>
-			<br>
-			<br>
-			<div id="content" class="container col-md-12">
+						echo "<h3>$pdoexecute</h3>"
+						?>
+					
+					</div>
+					<div class="w3-clear"></div>
+					<h4>Approve</h4>
+				</div>
+				</a>
+			</div>
+			<div class="w3-quarter">
+				<a href="compAdmin_denied.php">
+				<div class="w3-container w3-teal w3-text-white w3-padding-16">
+					<div class="w3-left"><i class="bx bx-x-circle w3-xxxlarge"></i></div>
+					<div class="w3-right">
+					<?php 
+						require '../db/conn.php';
+	
+						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+						$query_run = $db->query($query);
+						$pdoexecute = $query_run->rowCount();
+
+						echo "<h3>$pdoexecute</h3>"
+						?>
+					
+					</div>
+					<div class="w3-clear"></div>
+					<h4>Deny</h4>
+				</div>
+				</a>
+			</div>
+
+		
+			<div id="content" class="container col-md-12" style="margin-top: 280px;">
 	<?php 
 	// create object of functions class
 	$function = new functions;
@@ -407,13 +439,14 @@ if(!isset($_SESSION["type"]))
 		}else{
 			$row_number = $from + 1;
 	?>
-		<div style="text-align: center;">
 
+		<div style="text-align: center;">
+			<hr>
 			<h5>Admin Complaints</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
-							<div class="search_content">
+							<div class="search_content" >
 								<form class="list_header" method="get">
 									<label>
 										Search: 
@@ -435,7 +468,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5">Address</th>
 										<th width="15%">Incident Address</th>
 										<th width="5%">Contact No</th>
-										<th width="5%">Action</th>
 										<th width="5%">View Details</th>
 										<!-- <th width="5%">Message</th> -->
 									</tr>
@@ -451,8 +483,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['comp_address']?></td>
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
-
-									<td><button class="view_approvebtn">Mark as Done</button></td>
 									
 									<td><button class="view_approvebtn" onclick="location.href='compAdmin_dashdetails.php?id=<?php echo $data['blotter_id'];?>'">View Details</button></td>
 									

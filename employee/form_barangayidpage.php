@@ -144,15 +144,15 @@ if(!isset($_SESSION["type"]))
 		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
 		.topright:hover {text-align: right;color: red; cursor: pointer;}
 
-	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+		.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
 			font-size: 14px;
 			height: 35px;
-			width: 84%;
+			width: 100%;
 			padding: 10px 10px;
-			margin: 4px 25px;
 			display: inline-block;
 			border: 1px solid #ccc;
 			box-sizing: border-box;
+			text-align: center;
 		}
 
 		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
@@ -170,7 +170,7 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 45px; height: 35px;}
+
 		.transact{margin-left: 65%; }
 	 </style>
 	<!-- Side Navigation Bar-->
@@ -240,7 +240,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay ID
+						<h5>Barangay ID >> Pending Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -373,10 +373,18 @@ if(!isset($_SESSION["type"]))
 		// if no data on database show "No Reservation is Available"
 		if($total_records_paging == 0){
 			echo "
-			<h1 style='text-align: center;'>404 Not Found</h1>
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 			<div class='alert alert-warning cattxtbox'>
 				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-			</div>";
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			<div style='text-align: center; margin-top: 5%'>
+				<a href='barangayidapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+				<a href='barangayiddeny.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+			</div>
+			";
 	?>
 
 	<?php 
@@ -398,7 +406,7 @@ if(!isset($_SESSION["type"]))
 										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
 									</label>
 								</form>
-								<div style="display: flex;" class="mrgn document-section select__select">
+								<div style="display: flex;" class="  select__select">
 									<div>
 										<label style="font-size: 14px;">Approved: </label>
 										<button class="btn btn-success viewbtn" onclick="window.location.href='barangayidapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>
@@ -422,7 +430,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5">Contact No.</th>
 										<th width="15%">Address</th>
 										<th width="5%">Date of Request</th>
-										<th width="10%">Email Address</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
 										<th width="5%">Details</th>
@@ -439,7 +446,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['contact_no']?></td>
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									
@@ -459,10 +465,10 @@ if(!isset($_SESSION["type"]))
 										$function->doPages($offset, 'barangayid_page.php', '', $total_records, $keyword);
 									?>
 								</h4>
-								<div class="transact">
+								<!-- <div class="transact">
 									<label style="font-size: 14px;">Transaction History: </label>
 									<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
-								</div>
+								</div> -->
 							</div>
 							
 	</div>
