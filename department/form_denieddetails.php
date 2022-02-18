@@ -125,7 +125,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard >> Approved >> View Approved
+						<h5>Dashboard >> Denied >> View Denied
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -146,9 +146,9 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, created_on
-                            FROM admin_complaints
-                            WHERE admincomp_id = ?";
+                    $sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image
+                            FROM blotterdb
+                            WHERE blotter_id = ?";
                     
                     $stmt = $connect->stmt_init();
                     if($stmt->prepare($sql_query)) {	
@@ -158,8 +158,8 @@ if(!isset($_SESSION["type"]))
                         $stmt->execute();
                         // store result 
                         $stmt->store_result();
-                        $stmt->bind_result($data['admincomp_id'], 
-                            $data['n_complainant'],
+                        $stmt->bind_result($data['blotter_id'], 
+                           $data['n_complainant'],
                             $data['comp_age'],
                             $data['comp_gender'],
                             $data['comp_address'],
@@ -173,11 +173,7 @@ if(!isset($_SESSION["type"]))
                             $data['violator_address'],
                             $data['witnesses'],
                             $data['complaints'],
-                            $data['dept'],
-                            $data['app_date'],
-                            $data['app_by'],
-                            $data['blotterid_image'],
-                            $data['created_on']
+                            $data['blotterid_image']
                                 );
                         $stmt->fetch();
                         $stmt->close();
@@ -189,7 +185,7 @@ if(!isset($_SESSION["type"]))
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: Approved Details
+                    View: Denied Details
                     </h5>
                 </div>
                 <hr>
@@ -203,26 +199,6 @@ if(!isset($_SESSION["type"]))
                 <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
                 <br>
-                    <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">Assigned Department: </th>
-                            <td><strong><?php echo $data['dept']; ?> Dept.</strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Approved Date: </th>
-                            <td><strong><?php echo $data['app_date']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Facilitated by: </th>
-                            <td><strong><?php echo $data['app_by']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Created on </th>
-                            <td><strong><?php echo $data['created_on']; ?></strong></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <br>
                     <label><strong>Complaints: </strong></label>
                     <strong>
                         <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="7" ><?php echo $data['complaints']; ?></textarea>
@@ -233,7 +209,7 @@ if(!isset($_SESSION["type"]))
                     <table id="viewdetails" class="font-sizee" style="margin-right: 25px;">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['admincomp_id']; ?></td>
+                            <td><?php echo $data['blotter_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Complainant's Name</th>

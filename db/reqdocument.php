@@ -640,7 +640,7 @@ if(isset($_POST['permitBtn'])){
                 }
             
                 // common image file extensions
-                $allowedExts = array("pdf", "docx");
+                $allowedExts = array("pdf");
                                                                 
                 // get image file extension
                 error_reporting(E_ERROR | E_PARSE);

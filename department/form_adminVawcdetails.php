@@ -56,7 +56,6 @@ if(!isset($_SESSION["type"]))
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Admin Complaint Details </title>
-	 
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
@@ -125,7 +124,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard >> Approved >> View Approved
+						<h5>Lupon >> View VAWC Details
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -189,13 +188,13 @@ if(!isset($_SESSION["type"]))
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: Approved Details
+                    View: VAWC
                     </h5>
                 </div>
                 <hr>
         
                 <div style="float: right; display: block;">
-                    <a href="compAdmin_dashboard.php">
+                    <a href="compAdmin_Vawc.php">
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
                 </div>

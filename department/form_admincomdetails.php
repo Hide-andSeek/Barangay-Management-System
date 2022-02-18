@@ -69,7 +69,6 @@ if(!isset($_SESSION["type"]))
         #viewdetails {
           border-collapse: collapse;
           width: 100%;
-          box-shadow:  0 3px 10px rgba(0 0 0/ 0.2)
         }
 
         #viewdetails td, #viewdetails th {
@@ -155,7 +154,7 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
-        .emailwidth{width: 95%;}
+        .emailwidth{width: 95%; }
         .main-content{display:flex;}
         .main-content-email{padding: 20px;}
         span.topright{
@@ -171,7 +170,7 @@ if(!isset($_SESSION["type"]))
             }
             .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
         .viewbtn:hover{ background-color: #008CBA;color: white;}
-        
+        .usersel{pointer-events: none; border: 1px solid orange}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -313,11 +312,24 @@ if(!isset($_SESSION["type"]))
                           echo "Error updating record: " . mysqli_error($connect);
                         }
                     }
+
+                    if(isset($_POST['btnDeny'])){
+                    
+                        $status	= $_POST['status'];
+                        $blotter_id = $_POST['blotter_id'];
+  
+                        $sql = "UPDATE blotterdb SET status = 'Deny' WHERE blotter_id = $blotter_id";
+  
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Denied Request!');
+                                    window.location.href='compAdmin_dashboard.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
                 ?>
-           <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe> -->
-                <br>
-                
-                 <div>
                 <hr>
                 <div style="text-align: center;">
                     <h5>
@@ -326,17 +338,55 @@ if(!isset($_SESSION["type"]))
                 </div>
                 <hr>
                 <?php
-                if(!isset($filename)){
-                    $filename = "author";
-                }
-                ?>
-                    <?php
-                            if(ISSET($_SESSION['status'])){
-                            if($_SESSION['status'] == "ok"){
+                            if(ISSET($_SESSION['statusadmincomp'])){
+                            if($_SESSION['statusadmincomp'] == "ok"){
                     ?>
                    
-                   <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <i style="font-size:20px;" class="bx bx-checkbox-checked"></i>
+                   <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['resultadmincomp']?> <i style="font-size:20px;" class="bx bx-checkbox-checked"></i>
                     </div>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['resultadmincomp']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['resultadmincomp']);
+                        unset($_SESSION['statusadmincomp']);
+                        }
+                    ?>
+                <div style="float: right; display: inline-block;">
+                
+                    <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
+                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                    </button>
+   
+                    <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
+                        <img src="../img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                    </button>
+                    <a href="compAdmin_dashboard.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="margin-left: 5px;width: 50px; height: 50px; cursor: pointer;" alt="Back?">
+                    </a>
+
+                </div>
+                
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
+                <br>
+                
+                 <div>
+              
+                <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                    ?>
+                   
+                        <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                               
+                                <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Done">
+                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
+                            </div>
+                        </form>
                     <?php
                         }else{
                     ?>
@@ -347,21 +397,13 @@ if(!isset($_SESSION["type"]))
                         unset($_SESSION['status']);
                         }
                     ?>
-                <div style="float: right; display: block;">
-                    <a href="compAdmin_dashboard.php">
-                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
-                    </a>
-                    <br>
-                     <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 5px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-                    <br>
-                    <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
-                        <img src="../img/sms.png" title="Send a message" class="hoverback" style="margin-left: 5px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-
-                     
-                </div>
+                <?php
+                if(!isset($filename)){
+                    $filename = "author";
+                }
+                ?>
+                   
+              
                 <!--Modal form for Login-->
 	<div id="formatValidatorName" >
           <div id="eemail" class="modal">
@@ -370,7 +412,7 @@ if(!isset($_SESSION["type"]))
                     <form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
                                            
-                                            <div class="main-content">
+                                            <div class="main-content main-content1">
                                                 <div class="information col">
                                                     <p> Fullname: </p>
                                                     <input class="form-control emailwidth" id="fullname" name="fullname" value="<?php echo $data['n_complainant']; ?>" type="text" placeholder="Enter Fullname">
@@ -378,20 +420,20 @@ if(!isset($_SESSION["type"]))
 
                                                 <div class="information col">
                                                     <p> To: </p>
-                                                    <input required class="form-control emailwidth" id="email" name="email" value="<?php echo $data['bemailadd']; ?>" type="text" placeholder="Enter Email Address">
+                                                    <input required class="form-control emailwidth" id="email" name="email" style="width:100%" value="<?php echo $data['bemailadd']; ?>" type="text" placeholder="Enter Email Address">
                                                 </div>
                                             </div>
                                             <div class="main-content">
                                                 <div class="information col">
                                                     <p>Subject:  </p>
-                                                    <input required class="form-control emailwidth" id="subject" name="subject" type="text" placeholder="Subject"> 
+                                                    <input required class="form-control" style="width: 100%" id="subject" name="subject" type="text" placeholder="Subject"> 
                                                 </div>
                                             
 
-                                                <div class="information col">
+                                                <!-- <div class="information col">
                                                     <p>Attachment: </p>
                                                     <input class="form-control emailwidth" style="background: white;" id="fileattach" name="fileattach" type="file" value=""> 
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                             <div class="information col">
@@ -444,33 +486,14 @@ if(!isset($_SESSION["type"]))
               </div>
         </div>
     </div>
-
-                <?php
-                        if(ISSET($_SESSION['status'])){
-                        if($_SESSION['status'] == "ok"){
-                    ?>
-                   
-                        <form action="" method="post">
-                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
-                               
-                                <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
-                                <input type="hidden" name="status" id="status" value="Done">
-                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
-                            </div>
-                        </form>
-                    <?php
-                        }else{
-                    ?>
-                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
-                    <?php
-                        }
-                        unset($_SESSION['result']);
-                        unset($_SESSION['status']);
-                        }
-                    ?>
+                    <label><strong>Complaints: </strong></label>
+                    <strong>
+                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="5" ><?php echo $data['complaints']; ?></textarea>
+                    </strong>
+                    <br>
                  <form method="POST" action="" enctype="multipart/form-data">
                     <div style="display: flex;">
-                    <table id="viewdetails" class="font-sizee">
+                    <table id="viewdetails" class="font-sizee" style="margin-right: 20px;">
                         <tr>
                             <th width="30%">ID No.</th>
                             <td><input type="hidden" name="admincomp_id" value="<?php echo $data['blotter_id']; ?>"><?php echo $data['blotter_id']; ?></td>
@@ -531,50 +554,52 @@ if(!isset($_SESSION["type"]))
                             <th width="30%">Witnesses</th>
                             <td><input type="hidden" name="witnesses" value="<?php echo $data['witnesses']; ?>"><?php echo $data['witnesses']; ?></td>
                         </tr>
-                        <tr>
-                            <th width="30%">Complaints</th>
-                            <td><input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>"><?php echo $data['complaints']; ?></td>
-                        </tr>
+                        <input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>">
+                        
                     </table>
                     </div>
-                    <br>
-                    
+                   
                     <div class="information col">
 						<label class="employee-label"> Department </label>
-							<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 5px;" id="dept" name="dept">
+							<select class="form-control inputtext control-label" style="padding: 5px;"  id="dept" name="dept">
 							    <option disabled>--Select--</option>
 								<option value="BCPC">BCPC</option>
 								<option value="VAWC">VAWC</option>
 								<option value="LUPON">LUPON</option>
 								<option value="BPSO">BPSO</option>
-                                <option style="color: red;" value="DENY">DENY</option>
+
 							</select>
 					</div>
 																
 					<div class="information col">
 						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control inputtext control-label" id="app_date" name="app_date">
+							<input type="date" class="form-control inputtext control-label usersel" id="app_date"  style="padding: 5px;" name="app_date">
 					</div>
 
 			        <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control inputtext control-label" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+							<input class="form-control inputtext control-label usersel"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 					</div>
                     <div class="information col">
 						<label class="employee-label ">Attach File </label>
-							<input type="file" class="form-control inputtext control-label" id="blotterid_image" name="blotterid_image">
+							<input type="file" class="form-control inputtext control-label" id="blotterid_image"  style="padding: 5px;" name="blotterid_image">
                             <?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
 					</div>
                     <br>
                     <div id="option_menu">
                         <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertAdminComp">Submit</button></a>
                     </div>
-            
-                        
                 </div>
                 </form>      
 
-          
+                        <form action="" method="post">
+                                <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+                            </div>
+                        </form>
+
+                <br>
                 </div>
                 
                 </div>
@@ -582,28 +607,6 @@ if(!isset($_SESSION["type"]))
                 <div class="separator"> </div>
             </div>       
 	</section>	
-    <script>
-        var modal = document.getElementById("myModal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        img.onclick = function(){
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-        }
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() { 
-        modal.style.display = "none";
-        }
-
-    </script>
     <script>
         document.querySelector("#app_date").valueAsDate = new Date();
     </script>

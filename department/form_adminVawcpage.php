@@ -12,6 +12,7 @@ if(!isset($_SESSION["type"]))
 }
 ?>
 
+
 <?php
 	$user = '';
 
@@ -24,7 +25,6 @@ if(!isset($_SESSION["type"]))
 		$dept = $_SESSION['type'];
 	}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -65,6 +65,13 @@ if(!isset($_SESSION["type"]))
 
 		}
 		
+		 i.menu{color: #fff}
+			 i.id{color: #a809b0}
+			 i.clearance{color: #1cb009}
+			 i.sms{color: #478eff}
+			 i.blotter-com{color: #9e0202}
+			 i.indigency{color: #0218bd}
+			 i.permit{color: #e0149c}
 	 </style>
    </head>
 	<body>
@@ -114,8 +121,8 @@ if(!isset($_SESSION["type"]))
 				 <span class="links_name">BCPC</span>
 			   </a>
 			   <span class="tooltip">BCPC</span>
-			 </li>
-												
+			 </li>					
+			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
@@ -136,7 +143,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>BPSO DEPARMENT
+						<h5>VAWC DEPARTMENT
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -163,7 +170,7 @@ if(!isset($_SESSION["type"]))
 		
 	if(empty($keyword)){
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'BPSO'
+				FROM admin_complaints WHERE dept = 'VAWC'
 				ORDER BY admincomp_id ASC";
 	}else{
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
@@ -226,7 +233,7 @@ if(!isset($_SESSION["type"]))
 	
 	if(empty($keyword)){
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'BPSO'
+				FROM admin_complaints WHERE dept = 'VAWC'
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 	}else{
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
@@ -286,7 +293,7 @@ if(!isset($_SESSION["type"]))
 	?>
 		<div style="text-align: center;">
 			<hr />
-			<h5>BPSO</h5>
+			<h5>VAWC</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -333,7 +340,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='compAdmin_BPSOdetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='compAdmin_Vawcdetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
 									
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 				
@@ -350,7 +357,7 @@ if(!isset($_SESSION["type"]))
 								<h4 class="page">
 									<?php 
 										// for pagination purpose
-										$function->doPages($offset, 'compAdmin_BPSOpage.php', '', $total_records, $keyword);
+										$function->doPages($offset, 'compAdmin_Vawcpage.php', '', $total_records, $keyword);
 									?>
 								</h4>
 							</div>
@@ -361,4 +368,4 @@ if(!isset($_SESSION["type"]))
 				
 			</section>
 	</body>
-</html>
+</html> 

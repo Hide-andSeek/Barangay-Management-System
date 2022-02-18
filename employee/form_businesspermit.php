@@ -242,12 +242,12 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
-				ORDER BY businesspermit_id DESC";
+				ORDER BY businesspermit_id ASC";
 	}else{
 		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit
 				WHERE firstname LIKE ?
-				ORDER BY businesspermit_id DESC";
+				ORDER BY businesspermit_id ASC";
 	}
 	
 	
@@ -298,12 +298,12 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit WHERE status = 'Pending'
-				ORDER BY businesspermit_id DESC LIMIT ?, ?";
+				ORDER BY businesspermit_id ASC LIMIT ?, ?";
 	}else{
 		$sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
 				FROM businesspermit 
 				WHERE firstname LIKE ?
-				ORDER BY businesspermit_id DESC LIMIT ?, ?";
+				ORDER BY businesspermit_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();

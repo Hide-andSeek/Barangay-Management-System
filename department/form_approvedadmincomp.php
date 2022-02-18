@@ -166,7 +166,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Admin Complaints >> Approved
+						<h5>Dashboard >> Approved
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -382,7 +382,7 @@ if(!isset($_SESSION["type"]))
 								<h4 class="page">
 									<?php 
 										// for pagination purpose
-										$function->doPages($offset, 'compAdmin_dashpage.php', '', $total_records, $keyword);
+										$function->doPages($offset, 'compAdmin_approvedpage.php', '', $total_records, $keyword);
 									?>
 								</h4>
 							</div>

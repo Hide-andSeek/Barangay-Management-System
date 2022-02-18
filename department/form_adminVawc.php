@@ -340,7 +340,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='compAdmin_dashdetails.php?id=<?php echo $data['blotter_id'];?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='compAdmin_Vawcdetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
 									
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 				
@@ -357,7 +357,7 @@ if(!isset($_SESSION["type"]))
 								<h4 class="page">
 									<?php 
 										// for pagination purpose
-										$function->doPages($offset, 'compAdmin_dashpage.php', '', $total_records, $keyword);
+										$function->doPages($offset, 'compAdmin_Vawcpage.php', '', $total_records, $keyword);
 									?>
 								</h4>
 							</div>

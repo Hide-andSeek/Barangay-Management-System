@@ -1,5 +1,11 @@
 <?php
 session_start();
+include ("../db/conn.php");
+include ("../db/user.php");
+include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
+include('../send_email.php');
+
 
 if(!isset($_SESSION["type"]))
 {
@@ -18,14 +24,6 @@ if(!isset($_SESSION["type"]))
 		$dept = $_SESSION['type'];
 	}
 ?>
-
-<?php
-	include ("../db/conn.php");
-	include ("../db/user.php");
-	include('../announcement_includes/functions.php'); 
-
-	
-	?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -56,10 +54,7 @@ if(!isset($_SESSION["type"]))
 	 
 	 <style>
 		*{font-size: 13px;}
-		 .home-section{
-			min-height: 95vh;''
-			}
-
+		a{text-decoration: none;}
 
 		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
 		.fileupload{font-size: 13px; margin-left: 15px;}
@@ -95,6 +90,63 @@ if(!isset($_SESSION["type"]))
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 		.viewbtn{width: 45px; height: 35px;}
+		.cattxtbox{
+			font-size: 14px;
+			height: 35px;
+			width: 100%;
+			padding: 10px 10px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+			text-align: center;
+		}
+		.w3-quarter{margin-bottom: 10px;}
+
+		.w3back{background: #04AA6D}
+		.w3point:hover{cursor: pointer; background: orange; color: green}
+		.w3bord{border: 2px solid white;}
+		.w3borderbot{ border-bottom-left-radius: 15px;  border-bottom-right-radius: 15px; margin-left: 15px;}
+		.w3bordertop{border-top-left-radius: 15px;  border-top-right-radius: 15px;}
+
+		/* .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+} */
 	 </style>
    </head>
 	<body onload="display_ct()">
@@ -177,36 +229,38 @@ if(!isset($_SESSION["type"]))
 			  
 			 <br> 
 			 
-	 <div>
-		<div class="w3-row-padding w3-margin-bottom">
-			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
+	 <div style="margin-top: 0;">
+			<div class="w3-quarter w3padd ">
+				<a href="compAdmin_Lupon.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+						<?php 
+							require '../db/conn.php';
 
-					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
+							$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY admincomp_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
 
-					echo "<h3>$pdoexecute</h3>"
-					
-					?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>LUPON</h4>
+							echo "<h3>$pdoexecute</h3>"
+							
+							?>
+						</div>
+						<div class="w3-clear"></div>
+						<h4>LUPON</h4>
+					</div>
+				</a>
 			</div>
-			</div>
 
-			<div class="w3-quarter">
-				<div class="w3-container w3-teal w3-padding-16">
-					<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
-					<div class="w3-right">
+			<div class="w3-quarter w3padd ">
+				<a href="compAdmin_BPSO.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
 
-						$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+						$query = "SELECT * FROM admin_complaints WHERE dept = 'BPSO' ORDER BY admincomp_id";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -216,92 +270,100 @@ if(!isset($_SESSION["type"]))
 					</div>
 					<div class="w3-clear"></div>
 					<h4>BPSO</h4>
-				</div>
-			</div>
-
-			<div class="w3-quarter">
-				<div class="w3-container w3-teal w3-padding-16">
-					<div class="w3-left"><i class="bx bxs-building fa-fw w3-xxxlarge"></i></div>
-					<div class="w3-right">
-					<?php 
-						require '../db/conn.php';
-	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-						$query_run = $db->query($query);
-						$pdoexecute = $query_run->rowCount();
-
-						echo "<h3>$pdoexecute</h3>"
-						?>
-					
 					</div>
-					<div class="w3-clear"></div>
-					<h4>VAWC</h4>
-				</div>
+				</a>
 			</div>
-			<div class="w3-quarter">
-				<div class="w3-container w3-teal w3-text-white w3-padding-16">
-					<div class="w3-left"><i class="bx bxs-building w3-xxxlarge"></i></div>
-					<div class="w3-right">
-					<?php 
-						require '../db/conn.php';
-	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-						$query_run = $db->query($query);
-						$pdoexecute = $query_run->rowCount();
 
-						echo "<h3>$pdoexecute</h3>"
-						?>
-					
+			<div class="w3-quarter w3padd ">
+				<a href="compAdmin_Vawc.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+						<?php 
+							require '../db/conn.php';
+		
+							$query = "SELECT * FROM admin_complaints WHERE dept = 'VAWC' ORDER BY admincomp_id";
+							$query_run = $db->query($query);
+							$pdoexecute = $query_run->rowCount();
+
+							echo "<h3>$pdoexecute</h3>"
+							?>
+						
+						</div>
+						<div class="w3-clear"></div>
+						<h4>VAWC</h4>
 					</div>
-					<div class="w3-clear"></div>
-					<h4>BCPC</h4>
-				</div>
+				</a>
 			</div>
+
+			<div class="w3-quarter w3padd">
+				<a href="#">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<?php 
+								require '../db/conn.php';
+			
+								$query = "SELECT * FROM admin_complaints WHERE dept = 'BCPC' ORDER BY admincomp_id";
+								$query_run = $db->query($query);
+								$pdoexecute = $query_run->rowCount();
+
+								echo "<h3>$pdoexecute</h3>"
+								?>
+							
+							</div>
+							<div class="w3-clear"></div>
+							<h4>BCPC</h4>
+					</div>
+				</a>
+			</div>
+		
+
 			<div class="w3-quarter">
 				<a href="compAdmin_approved.php">
-				<div class="w3-container w3-teal w3-text-white w3-padding-16">
-					<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge"></i></div>
-					<div class="w3-right">
-					<?php 
-						require '../db/conn.php';
-	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-						$query_run = $db->query($query);
-						$pdoexecute = $query_run->rowCount();
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<?php 
+								require '../db/conn.php';
+			
+								$query = "SELECT admincomp_id FROM admin_complaints ORDER BY admincomp_id";
+								$query_run = $db->query($query);
+								$pdoexecute = $query_run->rowCount();
 
-						echo "<h3>$pdoexecute</h3>"
-						?>
-					
+								echo "<h3>$pdoexecute</h3>"
+								?>
+							
+							</div>
+							<div class="w3-clear"></div>
+							<h4>Approve</h4>
 					</div>
-					<div class="w3-clear"></div>
-					<h4>Approve</h4>
-				</div>
 				</a>
 			</div>
+
 			<div class="w3-quarter">
 				<a href="compAdmin_denied.php">
-				<div class="w3-container w3-teal w3-text-white w3-padding-16">
-					<div class="w3-left"><i class="bx bx-x-circle w3-xxxlarge"></i></div>
-					<div class="w3-right">
-					<?php 
-						require '../db/conn.php';
-	
-						$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-						$query_run = $db->query($query);
-						$pdoexecute = $query_run->rowCount();
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<?php 
+								require '../db/conn.php';
+			
+								$query = "SELECT * FROM blotterdb WHERE status = 'Deny' ORDER BY blotter_id";
+								$query_run = $db->query($query); 
+								$pdoexecute = $query_run->rowCount();
 
-						echo "<h3>$pdoexecute</h3>"
-						?>
-					
+								echo "<h3>$pdoexecute</h3>"
+								?>
+							
+							</div>
+							<div class="w3-clear"></div>
+							<h4>Deny</h4>
 					</div>
-					<div class="w3-clear"></div>
-					<h4>Deny</h4>
-				</div>
 				</a>
 			</div>
-
-		
-			<div id="content" class="container col-md-12" style="margin-top: 280px;">
+	</div>
+			<div id="content" class="container col-md-12" style="margin-top: 230px;">
 	<?php 
 	// create object of functions class
 	$function = new functions;
@@ -428,10 +490,14 @@ if(!isset($_SESSION["type"]))
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
 		echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
+		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 		<div class='alert alert-warning cattxtbox'>
-			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-		</div>";
+			<h6  style='margin-top: -7px;'> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+			<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+			</div>
+		</div>
+		";
 	?>
 
 	<?php 
@@ -440,11 +506,7 @@ if(!isset($_SESSION["type"]))
 			$row_number = $from + 1;
 	?>
 
-		<div style="text-align: center;">
-			<hr>
-			<h5>Admin Complaints</h5>
-			<hr /> 
-		</div>
+
 <!-- Search -->
 							<div class="search_content" >
 								<form class="list_header" method="get">
@@ -466,7 +528,7 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Age</th>
 										<th width="5%">Gender</th>
 										<th width="5">Address</th>
-										<th width="15%">Incident Address</th>
+										<th width="5%">Incident Address</th>
 										<th width="5%">Contact No</th>
 										<th width="5%">View Details</th>
 										<!-- <th width="5%">Message</th> -->
@@ -505,6 +567,7 @@ if(!isset($_SESSION["type"]))
 									?>
 								</h4>
 							</div>
+							<!-- <button class="button" style="vertical-align:middle"><span>Hover </span></button> -->
 	</div>
 							<div class="separator"></div>
 </div>     

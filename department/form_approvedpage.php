@@ -1,17 +1,11 @@
 <?php
 session_start();
 
-include "../db/conn.php";
-include "../db/documents.php";
-include('../announcement_includes/functions.php'); 
-include "../db/viewdetinsert.php";
-
 if(!isset($_SESSION["type"]))
 {
     header("location: 0index.php");
 }
 ?>
-
 <?php
 	$user = '';
 
@@ -25,6 +19,13 @@ if(!isset($_SESSION["type"]))
 	}
 ?>
 
+<?php
+	include ("../db/conn.php");
+	include ("../db/user.php");
+	include('../announcement_includes/functions.php'); 
+
+	
+	?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -38,36 +39,65 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-	<link rel="stylesheet" href="../css/admincomplaints.css" />
 	<link rel="stylesheet" href="../announcement_css/custom.css">
+
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Admin Complaints </title>
-	 
+     <title> Admin Complaints: Approved </title>
 	 
 	 <style>
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
+		*{font-size: 13px;}
+		 .home-section{
+			min-height: 95vh;''
+			}
 
+
+		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.fileupload{font-size: 13px; margin-left: 15px;}
+		.pagination{margin-top: 32%}
+		.page{margin-left: 15px; }
+		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
+		.topright:hover {text-align: right;color: red; cursor: pointer;}
+
+	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+			font-size: 14px;
+			height: 35px;
+			width: 84%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
 		}
-		
+
+		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
+		.edit{width: 40%; color: #9f6000; background: #feef83; margin-bottom: 5px; border-radius: 5px;}
+		.del{width: 40%;}
+		.select__select{margin-top: -32px; padding-left: 180px;}
+
+		.bcircle:hover{color: black}
+		.imgup{display: flex; justify-content: center; align-items: center;  padding: 5px 5px 5px 5px; margin-left: 20px; margin-right: 25px; }
+		.btnwidth{width: 70%; margin-bottom: 5px;}
+		.announcedesc{margin-left: 20px;}
+		.btnmargin{margin-bottom: 5px;}
+		.hoverbtn:hover{background: orange;}
+		.btnwidths{width: 40%}
+		.descriptionStyle{overflow:auto; resize:none;}
+		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
+		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
+		.viewbtn{width: 45px; height: 35px;}
 	 </style>
    </head>
-	<body>
+	<body onload="display_ct()">
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
@@ -76,7 +106,7 @@ if(!isset($_SESSION["type"]))
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-			<li>
+			  <li>
 			  <a class="side_bar" href="compAdmin_dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
@@ -115,7 +145,7 @@ if(!isset($_SESSION["type"]))
 			   </a>
 			   <span class="tooltip">BCPC</span>
 			 </li>
-												
+			  
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
@@ -136,7 +166,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>BPSO DEPARMENT
+						<h5>Admin Complaints >> Approved
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -145,7 +175,9 @@ if(!isset($_SESSION["type"]))
 				  </div>
 			  </section>
 			  
-			  <?php 
+			 <br> 
+		
+             <?php 
 	// create object of functions class
 	$function = new functions;
 		
@@ -163,7 +195,7 @@ if(!isset($_SESSION["type"]))
 		
 	if(empty($keyword)){
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'BPSO'
+				FROM admin_complaints
 				ORDER BY admincomp_id ASC";
 	}else{
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
@@ -226,7 +258,7 @@ if(!isset($_SESSION["type"]))
 	
 	if(empty($keyword)){
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'BPSO'
+				FROM admin_complaints
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 	}else{
 		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
@@ -286,7 +318,7 @@ if(!isset($_SESSION["type"]))
 	?>
 		<div style="text-align: center;">
 			<hr />
-			<h5>BPSO</h5>
+			<h5>Approved: Admin Complaints</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -333,7 +365,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='compAdmin_BPSOdetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='compAdmin_approveddetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
 									
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 				
@@ -350,7 +382,7 @@ if(!isset($_SESSION["type"]))
 								<h4 class="page">
 									<?php 
 										// for pagination purpose
-										$function->doPages($offset, 'compAdmin_BPSOpage.php', '', $total_records, $keyword);
+										$function->doPages($offset, 'compAdmin_approvedpage.php', '', $total_records, $keyword);
 									?>
 								</h4>
 							</div>
@@ -360,5 +392,12 @@ if(!isset($_SESSION["type"]))
 				</div>
 				
 			</section>
+			<script src="../bootstrap/jquery.min.js"></script>
+			<script src="../bootstrap/js/bootstrap.min.js"></script>
+			
+			<script>
+				document.querySelector("#approvedate").valueAsDate = new Date();
+
+			</script>
 	</body>
 </html>

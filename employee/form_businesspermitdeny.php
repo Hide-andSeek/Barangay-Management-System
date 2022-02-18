@@ -402,7 +402,7 @@ if(!isset($_SESSION["type"]))
 									</div> -->
 									<div style="float: right;">
 										<a href="businesspermit.php">
-											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: 30px; cursor: pointer;" alt="Back?">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: 150px; cursor: pointer;" alt="Back?">
 										</a>
 									</div>
 								</div>
@@ -420,11 +420,10 @@ if(!isset($_SESSION["type"]))
 										<th width="10%">Contact no</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Business name</th>
-										<th width="5%">Business Address</th>
-										<th width="5%">Plate no</th>
 										<th width="5%">Email</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Certificate Status</th>
+										<th width="5%">View Details</th>
 									</tr>
 								</thead>
 							<?php 
@@ -437,13 +436,12 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									<td><?php echo $data ['businessname']; ?></td>
-									<td><?php echo $data ['businessaddress']; ?></td>
-									<td><?php echo $data ['plateno']; ?></td>
 									<td><?php echo $data ['email_add']; ?></td>
 									
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<td><button class="view_approvebtn" onclick="location.href='bpermitdeniedviewdet.php?id=<?php echo $data['businesspermit_id'];?>'">View Details</button></td>
 								</tr>	
 								</tbody>
 								<?php 

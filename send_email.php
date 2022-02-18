@@ -332,11 +332,11 @@ if(isset($_POST['admincompsendemail'])){
     $message = $_POST['message'];
     // $attachfile = $_FILES['fileattach']['tmp_name'];
 
-	if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
-		$file = "../img/" . basename($_FILES['fileattach']['name']);
-		move_uploaded_file($_FILES['fileattach']['tmp_name'], $file);
-	} else
-		$file = "";
+	// if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
+	// 	$file = "../img/" . basename($_FILES['fileattach']['name']);
+	// 	move_uploaded_file($_FILES['fileattach']['tmp_name'], $file);
+	// } else
+	// 	$file = "";
    
     //Load composer's autoloader
 
@@ -365,7 +365,7 @@ if(isset($_POST['admincompsendemail'])){
         $mail->addAddress($email);              
         $mail->addReplyTo('barangaycommonwealth0@gmail.com');
         
-        $mail->addAttachment ($file, 'From: Admin Complaints Department');
+        // $mail->addAttachment ($file, 'From: Admin Complaints Department');
    
         //Content
         $mail->isHTML(true);        
@@ -375,14 +375,66 @@ if(isset($_POST['admincompsendemail'])){
 
         $mail->send();
 		
-       $_SESSION['result'] = 'Message successfully sent' ;
+       $_SESSION['resultadmincomp'] = 'Message successfully sent' ;
+	   $_SESSION['statusadmincomp'] = 'ok';
+    } catch (Exception $e) {
+	   $_SESSION['resultadmincomp'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
+	   $_SESSION['statusadmincomp'] = 'error';
+    }
+	
+	// unlink($file);
+
+}
+
+if(isset($_POST['denysendmail'])){
+
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    // $attachfile = $_FILES['fileattach']['tmp_name'];
+
+   
+    //Load composer's autoloader
+
+    $mail = new PHPMailer(true);                            
+    try {
+        //Server settings
+        $mail->isSMTP();                                     
+        $mail->Host = 'smtp.gmail.com';                      
+        $mail->SMTPAuth = true;                             
+        $mail->Username = 'barangaycommonwealth0@gmail.com';     
+        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+        );                         
+        $mail->SMTPSecure = 'ssl';                           
+        $mail->Port = 465;                                   
+
+        //Send Email
+        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        
+        //Recipients
+        $mail->addAddress($email);              
+        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        
+   
+        //Content
+        $mail->isHTML(true);        
+
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+
+        $mail->send();
+		
+       $_SESSION['result'] = 'Message has been sent';
 	   $_SESSION['status'] = 'ok';
     } catch (Exception $e) {
 	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
 	   $_SESSION['status'] = 'error';
     }
-	
-	unlink($file);
 
 }
-

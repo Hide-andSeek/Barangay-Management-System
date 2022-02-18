@@ -166,7 +166,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Admin Complaints >> Denied
+						<h5>Dashboard >> Denied
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -194,14 +194,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints
-				ORDER BY admincomp_id ASC";
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image
+				FROM blotterdb WHERE status = 'Deny'
+				ORDER BY blotter_id ASC";
 	}else{
-		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image
 				FROM admin_complaints
 				WHERE n_complainant LIKE ? 
-				ORDER BY admincomp_id ASC";
+				ORDER BY blotter_id ASC";
 	}
 	
 	
@@ -215,7 +215,7 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['admincomp_id'], 
+		$stmt->bind_result($data['blotter_id'], 
 				$data['n_complainant'],
 				$data['comp_age'],
 				$data['comp_gender'],
@@ -229,9 +229,6 @@ if(!isset($_SESSION["type"]))
 				$data['violator_address'],
 				$data['witnesses'],
 				$data['complaints'],
-				$data['dept'],
-				$data['app_date'],
-				$data['app_by'],
 				$data['blotterid_image']
 				);
 		// get total records
@@ -257,14 +254,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints
-				ORDER BY admincomp_id ASC LIMIT ?, ?";
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image
+				FROM blotterdb WHERE status = 'Deny'
+				ORDER BY blotter_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints 
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image
+				FROM blotterdb 
 				WHERE n_complainant LIKE ? 
-				ORDER BY admincomp_id ASC LIMIT ?, ?";
+				ORDER BY blotter_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -279,7 +276,7 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging ->execute();
 		// store result 
 		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['admincomp_id'], 
+		$stmt_paging->bind_result($data['blotter_id'], 
 				$data['n_complainant'],
 				$data['comp_age'],
 				$data['comp_gender'],
@@ -293,9 +290,6 @@ if(!isset($_SESSION["type"]))
 				$data['violator_address'],
 				$data['witnesses'],
 				$data['complaints'],
-				$data['dept'],
-				$data['app_date'],
-				$data['app_by'],
 				$data['blotterid_image']
 				);
 		// for paging purpose
@@ -357,7 +351,7 @@ if(!isset($_SESSION["type"]))
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['admincomp_id']; ?></td>
+									<td><?php echo $data ['blotter_id']; ?></td>
 									<td><?php echo $data ['n_complainant']; ?></td>
 									<td><?php echo $data ['comp_age']; ?></td>
 									<td><?php echo $data ['comp_gender']; ?></td>
@@ -365,7 +359,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									
-									<td><button class="view_approvebtn" onclick="location.href='compAdmin_approveddetails.php?id=<?php echo $data['admincomp_id'];?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='compAdmin_denieddetails.php?id=<?php echo $data['blotter_id'];?>'">View Details</button></td>
 									
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 				

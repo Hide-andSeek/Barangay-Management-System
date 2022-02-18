@@ -61,7 +61,7 @@ $full_name = $_POST['full_name'];
 $add = $_POST['address'];
 $filename = ($full_name);
 $codeContents = ''.$link.'/'.urlencode($full_name).''.urlencode($add).'/'.urlencode($id).'/$verification.php'; 
-QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
+QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L,5);
 }else{
 $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generate QR Code!</span>";
 }
