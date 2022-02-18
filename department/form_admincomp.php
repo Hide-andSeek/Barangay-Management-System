@@ -238,15 +238,9 @@ if(!isset($_SESSION["type"]))
 						<?php 
 							require '../db/conn.php';
 
-<<<<<<< HEAD
 							$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY admincomp_id";
 							$query_run = $db->query($query);
 							$pdoexecute = $query_run->rowCount();
-=======
-					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY admincomp_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
->>>>>>> 5130a297811966754d858ca7e36572123848b994
 
 							echo "<h3>$pdoexecute</h3>"
 							

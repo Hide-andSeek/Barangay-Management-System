@@ -90,13 +90,6 @@ require 'db/conn.php';
 			   <span class="tooltip">Ongoing Case</span>
 			 </li>
 
-			 <li>
-			   <a class="side_bar" href="bcpc_pending.php">
-				 <i class='bx bx-history pending'></i>
-				 <span class="links_name">Pending Case</span>
-			   </a>
-			   <span class="tooltip">Pending Case</span>
-			 </li>
 
 			 <li>
 			   <a class="side_bar" href="bcpc_closed.php">
@@ -114,22 +107,6 @@ require 'db/conn.php';
 			   <span class="tooltip">Total Complaints</span>
 			 </li>
 			  
-			 <li>
-			   <a class="side_bar" href="sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
-												
-			<!--Setting Section-->
-			 <li>
-			   <a class="side_bar" href="settings.php">
-				 <i class='bx bx-cog' ></i>
-				 <span class="links_name">Setting</span>
-			   </a>
-			   <span class="tooltip">Setting</span>
-			 </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
