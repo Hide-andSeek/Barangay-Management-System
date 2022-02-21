@@ -381,11 +381,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
 				FROM blotterdb WHERE status = 'Pending'
 				ORDER BY blotter_id ASC";
 	}else{
-		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
 				FROM blotterdb
 				WHERE n_complainant LIKE ? 
 				ORDER BY blotter_id ASC";
@@ -415,9 +415,8 @@ if(!isset($_SESSION["type"]))
 				$data['relationship'],
 				$data['violator_address'],
 				$data['witnesses'],
-				$data['complaints'],
-				$data['id_type'],
 				$data['blotterid_image'],
+				$data['complaints'],
 				$data['status']
 				);
 		// get total records
@@ -443,11 +442,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+		$sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
 				FROM blotterdb WHERE status = 'Pending'
 				ORDER BY blotter_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+		$sql_query = "SELECT blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
 				FROM blotterdb 
 				WHERE n_complainant LIKE ? 
 				ORDER BY blotter_id ASC LIMIT ?, ?";
@@ -478,9 +477,8 @@ if(!isset($_SESSION["type"]))
 				$data['relationship'],
 				$data['violator_address'],
 				$data['witnesses'],
-				$data['complaints'],
-				$data['id_type'],
 				$data['blotterid_image'],
+				$data['complaints'],
 				$data['status']
 				);
 		// for paging purpose

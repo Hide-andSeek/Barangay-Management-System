@@ -261,7 +261,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+                    $sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
                             FROM blotterdb
                             WHERE blotter_id = ?";
                     
@@ -287,9 +287,8 @@ if(!isset($_SESSION["type"]))
                             $data['relationship'],
                             $data['violator_address'],
                             $data['witnesses'],
-                            $data['complaints'],
-                            $data['id_type'],
                             $data['blotterid_image'],
+                            $data['complaints'],
                             $data['status']
                                 );
                         $stmt->fetch();

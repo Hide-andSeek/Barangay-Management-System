@@ -317,7 +317,7 @@ if(!isset($_SESSION["type"]))
 		}
 						
 		// number of data that will be display per page		
-		$offset = 5;
+		$offset = 10;
 						
 		//lets calculate the LIMIT for SQL, and save it $from
 		if ($page){

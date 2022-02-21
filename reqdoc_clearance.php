@@ -18,7 +18,7 @@ include "db/reqdocument.php";
 include "db/documents.php";
 include "db/user.php";
 
-$f = "resources/barangayid_visit.php";
+$f = "resources/clearance_visit.php";
 if(!file_exists($f)){
 	touch($f);
 	$handle =  fopen($f, "w" ) ;
@@ -33,7 +33,7 @@ if(!file_exists($f)){
 	$counter = ( int ) fread ($handle,20) ;
 	fclose ($handle) ;
 					
-	if(!isset($_POST["brgyidbtn"])){
+	if(!isset($_POST["clearancebtn"])){
 	$counter++ ;
 	}
 					
@@ -50,7 +50,7 @@ if(!file_exists($f)){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Barangay ID</title>
+    <title>Barangay Clearance</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -176,7 +176,6 @@ if(!file_exists($f)){
 		display: absolute;
 		border-radius: 4px;
 		background-color: #008CBA;
-		
 		border: none;
 		color: #FFFFFF;
 		width: 90%;
@@ -223,6 +222,42 @@ if(!file_exists($f)){
         .reminder-heading{color: #EEA236}
         .blockqoute-color{border-left-color: #EEA236;}
 		.linkpath:hover{color: orange;}
+        
+        .autocomplete {
+        position: relative;
+        display: inline-block;
+        }
+        .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding-top: 30px;
+        padding-left: 15px;
+        }
+
+        .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff; 
+        border-bottom: 1px solid #d4d4d4; 
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+        background-color: #e9e9e9; 
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+        background-color: DodgerBlue !important; 
+        color: #ffffff; 
+        }
 		.usersel{pointer-events: none; border: 1px solid orange}
 	</style>
 </head>
@@ -269,10 +304,10 @@ if(!file_exists($f)){
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+							  <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
+							  <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
-                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
-                              <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
+							  <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
                             </span>
                           </li>
                         <li>
@@ -295,22 +330,21 @@ if(!file_exists($f)){
         	<!--Document Section-->
 <div class="document_section">
 	<section>
-        <h2>Barangay ID</h2>
+        <h2>Barangay Clearance</h2>
         <p>
-			<a href="resident-defaultpage.php">Home </a>>> <a href="reqdoc_bpermit.php"><strong> Barangay ID </strong></a>
+			<a href="resident-defaultpage.php">Home </a>>> <a href="reqdoc_barangayid.php">Barangay ID</a> >> <a href="reqdoc_bpermit.php">Business Permit</a>>> <a href="reqdoc_indigency.php">Certificate of Indigency</a>>><a><strong> Barangay Clearance</strong></a>
 		</p>
 		<div>
-		<a href="resident-defaultpage.php">
-            <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i> <strong> Home </strong></p>
+		<a href="reqdoc_indigency.php">
+            <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i> <strong> Certificate of Indigency </strong></p>
     	</a>
-        <a href="reqdoc_bpermit.php">
-			<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Business Permit </strong><i class="bx bx-skip-next"></i></p>
+        <a href="reqdoc_blotter.php">
+			<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Online Blotter </strong><i class="bx bx-skip-next"></i></p>
         </a>
 		<br>
+        <br>
 		</div>
-		<?php echo isset($error['add_barangayid']) ? $error['add_barangayid'] : '';?>
-	
-		
+		<?php echo isset($error['add_brgyclearance']) ? $error['add_brgyclearance'] : '';?>
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
@@ -327,7 +361,7 @@ if(!file_exists($f)){
 																	<label>Listahan ng mga ipapasang dokumento <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
 																		<ol style="padding: 15px 15px 15px 15px">
 																		<li>Valid ID (Likod at harap ng iyong ID)- Ito ay magsisilbing kumpirmasyon ng iyong pagkakakilanlan</li>
-																		<li>Larawan: 2x2 ID Picture (Nakunan sa loob ng nakalipas na 1 taon) </li>
+																		<li>Larawan: 2x2 ID Picture (Nakunan sa loob ng nakalipas na taon) </li>
 																	</ol>
                                                                     <br>
                                                                     
@@ -346,7 +380,7 @@ if(!file_exists($f)){
 																	<label>List of documents to be submitted  <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
 																		<ol style="padding: 15px 15px 15px 15px">
 																		<li>Valid ID (Front and Back Portion of your ID)- This will serve as confirmation of your Identity</li>
-																		<li>Photo: 2x2 ID Picture (Taken within the last 1 year ago) </li>
+																		<li>Photo: 2x2 ID Picture (Taken within the a year ago) </li>
 																	</ol>
                                                                     <!-- <a href="">
 																	    <p style="float: right;">Online Blottering <i class="bx bx-skip-next"></i></p>
@@ -355,123 +389,121 @@ if(!file_exists($f)){
 														</fieldset>
 														<br>
 														<br>
-												<form method="POST" enctype="multipart/form-data" action="">
+												<form method="POST" autocomplete="off" enctype="multipart/form-data" action="">
                                                             <hr>
 															    <h5 style="text-align: center;" id="barangayid">Personal Information</h5>
 														    <hr>
 															<div class="left_userpersonal_info left_userpersonal_info1">
-																<div class="form-group">
-																	<label for="firstname">First Name:<i class="red">*</i> </label>
-																	<input type="text" class="form-control form-text form-text-desc" id="fname" name="fname" placeholder="Your First name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																	<?php echo isset($error['fname']) ? $error['fname'] : '';?>			
-																</div><br/><br/>
-																				
-																<div class="form-group">
-																	<label for="middlename">Middle Name:</label>
-																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" placeholder="Please write your Middle Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br><br/>
 																
-																							
-																<div class="form-group">
-																	<label for="lastname">Last Name:<i class="red">*</i></label>
-																	<input type="text" class="form-control form-text form-text-desc" id="lname" name="lname" placeholder="Please write your Last Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																	<?php echo isset($error['lname']) ? $error['lname'] : '';?>	
-																</div><br><br/>
-							
-																<div class="form-group">
-																	<label for="address">Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text form-text-desc" id="address" name="address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																	<?php echo isset($error['address']) ? $error['address'] : '';?>	
-																</div></br><br/>
+                                                            <div class="form-group">
+																	<label for="full_name">Full Name: <i class="red">*</i></label>
+																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Please Specify your Fullname" title="This must be capitalize">
+																	<?php echo isset($error['full_name']) ? $error['full_name'] : '';?>
+																</div><br>
 																
+																<div class="form-group">
+																	<label for="age">Age: <i class="red">*</i></label>
+																	<input type="number" class="form-control form-text age" id="age" name="age" placeholder="Your age">
+																	<?php echo isset($error['age']) ? $error['age'] : '';?>
+																</div><br>
+
+																<div class="form-group">
+																	<label>Status: <i class="red">*</i></label>
+																	<select class="form-control" name="status">
+																		<option disabled>--Select--</option>
+																		<option value="SINGLE">SINGLE</option>
+																		<option value="MARRIED">MARRIED</option>
+																		<option value="WIDOWED">WIDOWED</option>
+																	</select>
+																	<?php echo isset($error['status']) ? $error['status'] : '';?>
+																</div><br>
+
+																 <div class="form-group">
+																	<label for="nationality">Nationality: <i class="red">*</i></label>
+																	<input type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="FILIPINO" title="This must be capitalize">
+																	<?php echo isset($error['nationality']) ? $error['nationality'] : '';?>
+																</div></br>	
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">
 
-																<div class="form-group">
-																	<label for="birthday">Birthday: <i class="red">*</i></label>
-																	<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
-																	<?php echo isset($error['birthday']) ? $error['birthday'] : '';?>	
-																</div><br><br/>
-																							
-																<div class="form-group">
-																	<label for="pob">Place of Birth: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth" placeholder="Please write your Place of Birth" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																	<?php echo isset($error['placeofbirth']) ? $error['placeofbirth'] : '';?>	
-																</div><br><br/>
+                                                            <div class="form-group">
+																	<label for="address">Address: <i class="red">*</i></label>
+																	<input type="text" class="form-control form-text" id="address" name="address" placeholder="#Blk No. Street City/Town" title="Required Address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																	<?php echo isset($error['address']) ? $error['address'] : '';?>
+																</div><br>
 
 																<div class="form-group">
-																	<label for="precintno">Precint no: </label>
-																	<input type="number"  class="form-control form-text form-text-desc" id="precintno" name="precintno" placeholder="(Optional)">
-																</div><br><br/>	
+																	<label for="contactno">Contact No.: <i class="red">*</i></label>
+																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" title="Place your active Contact #">
+																	<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
+																</div><br>
 
-																<div class="form-group">
-																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
-																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
-																	<?php echo isset($error['contact_no']) ? $error['contact_no'] : '';?>
-																</div><br><br/>
-															</div>
-															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
-																	<input type="email" class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
+																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd" placeholder="example@gmail.com" title="Place your active Email">
 																	<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
-																</div><br/><br/>
-																<div class="form-group ">
-																	<label for="file">Attach Document: <i class="red">*</i></label>
-																	<input type='file' style="margin: 3px 3px;font-size: 12px;" class="form-control " name='id_image' id="id_image" aria-details="id_image"/>
-																	
-																	<i aria-details="id_image" class="detailid"><label> please attach the right format (.docx) <?php echo isset($error['id_image']) ? $error['id_image'] : '';?></label></i>
 																</div><br>
 
 																<div class="form-group">
-																	<label>Date Requested: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text form-text-desc usersel" id="date_issued" name="dateissue">
-																	<?php echo isset($error['dateissue']) ? $error['dateissue'] : '';?>
-																</div><br>
-																
-																<div class="form-group">
-																	<label>Document type, please choose<i class="red">*</i></label>
-																	<select class="form-control" style="font-size: 12px;" name="brgyidfilechoice" id="brgyidfilechoice" aria-details="brgyidfilechoice">
-																	<option disabled>--Select--</option>
-																	<option value="Hardcopy">Hardcopy</option>
-																	<option value="Softcopy">Softcopy</option>
-																	<option value="Both">Both</option>
-																	</select>
-																	<i aria-details="brgyidfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
-																</div><br>
+																	<label for="file">Attach Document: <i class="red">*</i></label>
+																	<input type='file' name='clearanceid_image' class="form-control  form-text" aria-details="clearanceid_image"/>
+
+																	<i aria-details="clearanceid_image" class="detailid"><label> please attach the right format (.docx)	<?php echo isset($error['clearanceid_image']) ? $error['clearanceid_image'] : '';?></label></i>
+																	
+																</div>
 															</div>
-													<br>
-                                                    <hr>
-                                                        <h5 style="text-align: center;">In Case of Emergency</h5>
+															<div class="left_userpersonal_info left_userpersonal_info1">
+															<div class="form-group">
+																	<label>Document type, Please choose<i class="red">*</i></label>
+																	<select class="form-control  form-text" name="filechoice" aria-details="filechoice" >
+																		<option disabled>--Select--</option>
+																		<option value="Hardcopy">Hardcopy</option>
+																		<option value="Softcopy">Softcopy</option>
+																		<option value="Both">Both</option>
+																	</select>
+																	<i aria-details="filechoice" class="detailid"><label> What type of document you want to receive?</label></i>
+															</div><br>
+															</div>
+															<br>
+															<hr>
+                                                        <h5 style="text-align: center;">Other Information</h5>
                                                     <hr>
 													<div class="left_userpersonal_info left_userpersonal_info1">
-														<div class="form-group">
-															<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-															<input type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname" placeholder="Ex. Your Relative" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-															<?php echo isset($error['guardianname']) ? $error['guardianname'] : '';?>	
+                                                    <div class="form-group">
+															<label for="purpose">Purpose: <i class="red">*</i></label>
+															<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Ex. PERSONAL IDENTIFICATION">
+															<?php echo isset($error['purpose']) ? $error['purpose'] : '';?>
 														</div><br>
-														
+
 
 														<div class="form-group">
-															<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-															<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789">
-															<?php echo isset($error['emrgncycontact']) ? $error['emrgncycontact'] : '';?>	
+															<label for="emrgncycontact">CTC No.: </label>
+															<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no" placeholder="(Optional)" title="Place your CTC no. If you have any">
 														</div><br>
-														
+
+														<div class="form-group autocomplete">
+															<label for="issued_at">Issued at: </label>
+															<input type="text" min="12" class="form-control form-text" id="myInput" name="issued_at" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+															<?php echo isset($error['issued_at']) ? $error['issued_at'] : '';?>
+														</div><br>
 
 														<div class="form-group">
-															<label for="reladdress">Address: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-															<?php echo isset($error['reladdress']) ? $error['reladdress'] : '';?>	
+                                                            <label for="precint_no">Precint No.: </label>
+                                                            <input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no" placeholder="(Optional)" title="Place your Precint no. If you have any">
+                                                        </div><br>
+													</div>
+													<div class="left_userpersonal_info left_userpersonal_info1">
+														<div class="form-group">
+															<label for="date_issued">Date Requested: <i class="red">*</i></label>
+															<input type="date" class="form-control form-text usersel" id="date_issued" name="date_issued">
+															<?php echo isset($error['date_issued']) ? $error['date_issued'] : '';?>
 														</div><br>
-														
-																							
-														
 													</div>
 													</div> 
 													<br>
+                                                
 													<div style="display: flex; justify-content: center; align-items: center;">
-														<button class="button form-control" name="brgyidbtn"><span>Submit </span>
+														<button class="button form-control" name="clearancebtn"><span>Submit </span>
 													</button>
 													</div>
 												</div>
@@ -479,11 +511,11 @@ if(!file_exists($f)){
                                             <br>
                                             <br>
 											
-                                            <a href="resident-defaultpage.php">
-                                                <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i><strong> Home</strong></p>
+                                            <a href="reqdoc_indigency.php">
+                                                <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i><strong> Certificate of Indigency</strong></p>
                                             </a>
-                                            <a href="reqdoc_bpermit.php">
-												<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Business Permit </strong><i class="bx bx-skip-next"></i></p>
+                                            <a href="reqdoc_blotter.php">
+												<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Online Blotter </strong><i class="bx bx-skip-next"></i></p>
                                             </a>
                                             <br>
                                             <br>
@@ -526,13 +558,117 @@ if(!file_exists($f)){
     <div class="scroll-up">
       <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-	
-    <!-- jQuery -->
-    <script src="resident-js/jquery.js"></script>
-	<script src="resident-js/barangay.js"></script>
-	<script src="https://use.fontawesome.com/f7721642f4.js"></script>
-	<script>
-		document.querySelector("#date_issued").valueAsDate = new Date();
-	</script>
+
+   <!-- jQuery -->
+  <script src="resident-js/jquery.js"></script>
+  <script src="resident-js/barangay.js"></script>
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+  <script>
+	document.querySelector("#date_issued").valueAsDate = new Date();
+  </script>
+  <script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["BARANGAY COMMONWEALTH"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+</script>
 </body>
 </html>

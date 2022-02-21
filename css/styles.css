@@ -650,6 +650,7 @@ padding: 10px 25px;
 	i.indigency, i.dash, i.bcpc{color: #0218bd}
 	i.permit, i.iannouncement{color: #e0149c}
 	i.saveicon:hover{color: blue;}
+	i.payment:hover{color: rgba(255, 136, 0, 0.801);}
 	
 	
   i.ongoing{color: blue;}

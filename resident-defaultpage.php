@@ -266,11 +266,11 @@ include "db/user.php";
                           <li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="residentreqdocu.php#barangayid">Barangay ID</a>
-                              <a class="page-scroll" href="residentreqdocu.php#permit">Business Permit</a>
-                              <a class="page-scroll" href="residentreqdocu.php#indigency">Certificate of Indigency</a>
-                              <a class="page-scroll" href="residentreqdocu.php#clearance">Barangay Clearance</a>
-                              <a class="page-scroll" href="residentreqdocu.php#blotter">Blotter</a>
+                              <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
+                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_.indigency.php">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
+                              <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
                             </span>
                           </li>
                         <li>
@@ -373,7 +373,7 @@ include "db/user.php";
 				  <div class="container">
 					<div class="row">
 					  <div class="col-md-2">
-					  <a class="filled-button" href="residentreqdocu.php#barangayid">
+					  <a class="filled-button" href="reqdoc_barangayid.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="bx bx-id-card"></i>
@@ -385,7 +385,7 @@ include "db/user.php";
 						</a>
 					  </div>
 					  <div class="col-md-2">
-					  <a class="filled-button" href="residentreqdocu.php#permit">
+					  <a class="filled-button" href="reqdoc_clearance.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="bx bx-receipt bx_icon"></i>
@@ -397,7 +397,7 @@ include "db/user.php";
 						</a>
 					  </div>
 					  <div class="col-md-2">
-					  <a class="filled-button" href="residentreqdocu.php#indigency">
+					  <a class="filled-button" href="reqdoc_indigency.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="bx bxs-file"></i>
@@ -409,7 +409,7 @@ include "db/user.php";
 						</a>
 					  </div>
 					  <div class="col-md-2">
-					    <a class="filled-button"  href="residentreqdocu.php#blotter">
+					    <a class="filled-button" href="reqdoc_blotter.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="bx bx-message-rounded"></i>
@@ -421,7 +421,7 @@ include "db/user.php";
 						</a>
 					  </div>
 					  <div class="col-md-2">
-					    <a class="filled-button" href="residentreqdocu.php#permit">
+					    <a class="filled-button" href="reqdoc_bpermit.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="bx bx-copy"></i>
@@ -433,7 +433,7 @@ include "db/user.php";
 						</a>
 					  </div>
 					  <div class="col-md-2">
-					    <a class="filled-button" href="residentreqdocu.php#instructions">
+					    <a class="filled-button" href="reqdoc_barangayid.php">
 						<div class="service-item1">
 						  <div class="icon">
 							<i class="fa fa-gear"></i>

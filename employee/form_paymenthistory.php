@@ -54,25 +54,6 @@ if(!isset($_SESSION["type"]))
 //         $sendMessageRequest2
 		
 //     ]);
-// }
-
-
-if(isset($_POST['btnverify'])){
-
-	$payment_status	= $_POST['payment_status'];
-	$app_brgyid = $_POST['app_brgyid'];
-
-	$sql = "UPDATE payment_brgyid SET payment_status = 'Paid' WHERE app_brgyid = $app_brgyid";
-
-	if (mysqli_query($connect, $sql)) {
-	echo "<script>
-				alert('Verified Successfully!');
-				window.location.href='barangayidapproval.php';
-			</script>";
-	} else {
-	echo "Error updating record: " . mysqli_error($connect);
-	}
-}
 ?>
 
 
@@ -99,7 +80,7 @@ if(isset($_POST['btnverify'])){
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <!-- <meta http-equiv="refresh" content="120"> -->
 
-     <title> Barangay ID - Approved Documents </title>
+     <title> Payment History </title>
 	 
 	 
 	 <style>
@@ -213,7 +194,8 @@ if(isset($_POST['btnverify'])){
         }
 		
 		.emailwidth{width: 40%;}
-		.mrgin{margin-right: 20px;}
+		.mrgin{margin-right: 40px;}
+        .usersel{pointer-events: none; border: 1px solid blue;}
 	 </style>
    </head>
 	<body>
@@ -292,7 +274,7 @@ if(isset($_POST['btnverify'])){
 			  <section class="top-section">
 			  <div class="top-content">
 					<div>
-						<h5>Barangay ID >> Approved Request
+						<h5>Payment History >> Payments
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -300,250 +282,8 @@ if(isset($_POST['btnverify'])){
 					</div>
 				  </div>
 			  </section>
-			  <div id="content" class="container col-md-12">
-	<?php 
-	// create object of functions class
-	$function = new functions;
-		
-	// create array variable to store data from database
-	$data = array();
-	
-	if(isset($_GET['keyword'])){	
-		// check value of keyword variable
-		$keyword = $function->sanitize($_GET['keyword']);
-		$bind_keyword = "%".$keyword."%";
-	}else{
-		$keyword = "";
-		$bind_keyword = $keyword;
-	}
-		
-	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
-					FROM approved_brgyids WHERE status = 'Approved'
-				ORDER BY app_brgyid DESC";
-	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
-				FROM approved_brgyids
-				WHERE fname LIKE ? 
-				ORDER BY app_brgyid DESC";
-	}
-	
-	
-	$stmt = $connect->stmt_init();
-	if($stmt->prepare($sql_query)) {	
-		// Bind your variables to replace the ?s
-		if(!empty($keyword)){
-			$stmt->bind_param('s', $bind_keyword);
-		}
-		// Execute query
-		$stmt->execute();
-		// store result 
-		$stmt->store_result();
-		$stmt->bind_result($data['app_brgyid'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['precintno'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['id_image'],
-					$data['brgyidfilechoice'],
-					$data['approvedby'],
-					$data['app_date'],
-					$data['status']
-				);
-		// get total records
-		$total_records = $stmt->num_rows;
-	}
-		
-	// check page parameter
-	if(isset($_GET['page'])){
-		$page = $_GET['page'];
-	}else{
-		$page = 1;
-	}
-					
-	// number of data that will be display per page		
-	$offset = 10;
-					
-	//lets calculate the LIMIT for SQL, and save it $from
-	if ($page){
-		$from 	= ($page * $offset) - $offset;
-	}else{
-		//if nothing was given in page request, lets load the first page
-		$from = 0;	
-	}	
-	
-	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
-				FROM approved_brgyids WHERE status = 'Approved'
-				ORDER BY app_brgyid DESC LIMIT ?, ?";
-	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
-				FROM approved_brgyids 
-				WHERE fname LIKE ? 
-				ORDER BY app_brgyid DESC LIMIT ?, ?";
-	}
-	
-	$stmt_paging = $connect->stmt_init();
-	if($stmt_paging ->prepare($sql_query)) {
-		// Bind your variables to replace the ?s
-		if(empty($keyword)){
-			$stmt_paging ->bind_param('ss', $from, $offset);
-		}else{
-			$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
-		}
-		// Execute query
-		$stmt_paging ->execute();
-		// store result 
-		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['app_brgyid'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['precintno'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['id_image'],
-					$data['brgyidfilechoice'],
-					$data['approvedby'],
-					$data['app_date'],
-					$data['status']
-					
-				);
-		// for paging purpose
-		$total_records_paging = $total_records; 
-	}
 
-	// if no data on database show "No Reservation is Available"
-	if($total_records_paging == 0){
-		echo "
-			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
-			<div class='alert alert-warning cattxtbox'>
-				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
-					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
-				</div>
-			</div>
-			<div style='text-align: center; margin-top: 5%'>
-				<a href='barangayidapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
-				<a href='barangayiddeny.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
-			</div>
-			";
-	?>
-
-	<?php 
-		// otherwise, show data
-		}else{
-			$row_number = $from + 1;
-	?>
-		<div style="text-align: center;">
-			<hr>
-			<h5>Approved: Barangay ID</h5>
-			<hr /> 
-		</div>
-<!-- Search -->
-							<div class="search_content">
-								<form class="list_header" method="get">
-									<label>
-										Search: 
-										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
-										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
-									</label>
-								</form>
-								<div style="display: flex;" class="mrgn document-section select__select">
-									<!-- <div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
-									</div> -->
-									<div style="float: right;">
-										<a href="barangayid.php">
-											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: -60px; cursor: pointer;" alt="Back?">
-										</a>
-									</div>
-								</div>
-							</div>						
-<!-- end of search form -->
-							
-					<div class="col-md-12">
-							<table class="content-table" id="table">
-								<thead>
-									<tr class="t_head">
-										<th width="5%">Barangay ID</th>
-										<th width="5%">Firstname</th>
-										<th width="5%">Lastname</th>
-										<th width="5%">Address</th>
-										<th width="5%">Email</th>
-										<th width="5%">Date Issued</th>
-										<th width="5%">Document Type</th>
-										<th width="5%">Verified by</th>
-										<!-- <th width="5%">ID Picture</th> -->
-										<!-- <th width="5%">Status</th> -->
-										<th width="5%"></th>
-										<th width="5%"></th>
-									</tr>
-								</thead>
-							<?php 
-								while ($stmt_paging->fetch()){ ?>
-								<tbody>
-								<tr class="table-row">
-									<td><?php echo $data ['app_brgyid']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
-									<td><?php echo $data ['brgyidfilechoice']; ?></td>
-									<td><?php echo $data ['approvedby']; ?></td>
-									<!-- <td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td> -->
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
-									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
-									<td>
-										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
-									</td>
-									<td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
-									</td>
-									<!-- <td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="../paymaya_barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
-									</td> -->
-								</tr>	
-								</tbody>
-								<?php 
-								} 
-							}
-						?>
-							</table>
-							
-					</div>
-							<div class="col-md-12 pagination">
-								<h4 class="page">
-									<?php 
-										// for pagination purpose
-										$function->doPages($offset, 'barangayid_approvedpage.php', '', $total_records, $keyword);
-									?>
-								</h4>
-								
-							</div>
-	</div>
-							<div class="separator"></div>
-
-</div>    
-
-<div id="content" class="container col-md-12">
+              <div id="content" class="container col-md-12">
 	<?php 
 	// create object of functions class
 	$function = new functions;
@@ -562,7 +302,7 @@ if(isset($_POST['btnverify'])){
 		
 	if(empty($keyword)){
 		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid WHERE payment_status = 'Approval'
+				FROM payment_brgyid
 				ORDER BY app_brgyid ASC";
 	}else{
 		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
@@ -614,7 +354,7 @@ if(isset($_POST['btnverify'])){
 	
 	if(empty($keyword)){
 		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid WHERE payment_status = 'Approval'
+				FROM payment_brgyid
 				ORDER BY app_brgyid ASC LIMIT ?, ?";
 	}else{
 		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
@@ -658,6 +398,7 @@ if(isset($_POST['btnverify'])){
 					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
 				</div>
 			</div>
+
 			";
 	?>
 
@@ -668,7 +409,7 @@ if(isset($_POST['btnverify'])){
 	?>
 		<div style="text-align: center;">
 			<hr>
-			<h5>Payment: Barangay ID</h5>
+			<h5>Payments</h5>
 			<hr /> 
 		</div>
 <!-- Search -->
@@ -697,14 +438,14 @@ if(isset($_POST['btnverify'])){
 							<table class="content-table" id="table">
 								<thead>
 									<tr class="t_head">
-										<th width="5%">Barangay ID</th>
-										<th width="5%">Fullname</th>
-										<th width="5%">Contact no</th>
-										<th width="5%">Reference No</th>
-										<th width="5%">Payment Method</th>
-										<th width="5">Added on</th>
-										<th width="5%">Payment Status</th>
-										<th width="5%"></th>
+										<th width="15%">Document ID</th>
+										<th width="15%">Name</th>
+										<th width="15%">Contact no</th>
+										<th width="15%">Reference No</th>
+										<th width="15%">Payment Method</th>
+										<th width="15">Added on</th>
+										<th width="15%">Payment Status</th>
+                                        <th width="15%">View Details</th>
 									</tr>
 								</thead>
 							<?php 
@@ -715,16 +456,12 @@ if(isset($_POST['btnverify'])){
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contact_no']; ?></td>
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
-									<td><?php echo $data ['payment_method']?></td>
+									<td><strong><?php echo $data ['payment_method']?></strong></td>
 									<td><?php echo $data ['added_on']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
-									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
-									<!-- <td>
-										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
-									</td> -->
-									<td>
-									<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" onclick="document.getElementById('edit_<?php echo $data['app_brgyid'];?>').style.display='block'"><i style="color: black;" class="" ></i> Verify</button>
+
+                                    <td>
+									<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" onclick="document.getElementById('edit_<?php echo $data['app_brgyid'];?>').style.display='block'"><i style="color: black;" class="" ></i> View</button>
 									</td>
 								</tr>	
 								</tbody>
@@ -737,54 +474,46 @@ if(isset($_POST['btnverify'])){
           <div id="edit_<?php echo $data['app_brgyid'];?>" class="modal">
                 <div class="modal-content animate">
                     <span onclick="document.getElementById('edit_<?php echo $data['app_brgyid'];?>').style.display='none'" class="topright">&times;</span>	
-                    <form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
                                             <div class="main-content main-content1">
 												<div style="display: flex;">
 													<div class="information col">
 														<p> Fullname: </p>
-														<input class="form-control mrgin" id="app_brgyid" name="app_brgyid" value="<?php echo $data['app_brgyid']; ?>" type="hidden">
+														<input class="form-control mrgin usersel" id="app_brgyid" name="app_brgyid" value="<?php echo $data['app_brgyid']; ?>" type="hidden">
 
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>" type="text" placeholder="Enter Fullname">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 
 													<div class="information col">
 														<p> Contact no: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['contact_no']; ?>" type="text" placeholder="Enter Fullname">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['contact_no']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 												</div>
 												<div style="display: flex;">
 													<div class="information col">
 														<p> Reference no: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['reference_no']; ?>" type="text" style="font-weight: 600;" placeholder="Reference No.">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['reference_no']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 													
 													<div class="information col">
 														<p> Payment Method: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['payment_method']; ?>" type="text" placeholder="Enter Fullname">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['payment_method']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 												</div>
 												<div style="display: flex;">
 													<div class="information col">
 														<p> Added on: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['added_on']; ?>" type="text" placeholder="Enter Fullname">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['added_on']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 													
 													<div class="information col">
 														<p> Status: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['payment_status']; ?>" type="text" placeholder="Enter Fullname">
+														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['payment_status']; ?>" type="text" placeholder="Enter Fullname">
 													</div>
 
-													<input class="form-control mrgin" name="payment_status" value="Paid" type="hidden">
 												</div>
                                             </div>
-
-                                    
-                                            <div class="sendi">
-                                                <button name="btnverify" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Verify <i class="bx bx-send"></i></button>
-                                            </div>
                                         </div>
-                                    </form>
               </div>
         </div>
     </div>
@@ -802,6 +531,7 @@ if(isset($_POST['btnverify'])){
 							<div class="separator"></div>
 
 </div>    
+
 	</section>	
 		
 	</body>

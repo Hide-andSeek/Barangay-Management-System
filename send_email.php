@@ -330,6 +330,8 @@ if(isset($_POST['admincompsendemail'])){
     $email = $_POST['email'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
+
+    // $config = parse_ini_file('resources/var/app/config.ini', true);
     // $attachfile = $_FILES['fileattach']['tmp_name'];
 
 	// if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
@@ -431,6 +433,59 @@ if(isset($_POST['denysendmail'])){
         $mail->send();
 		
        $_SESSION['result'] = 'Message has been sent';
+	   $_SESSION['status'] = 'ok';
+    } catch (Exception $e) {
+	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
+	   $_SESSION['status'] = 'error';
+    }
+
+}
+
+if(isset($_POST['sendlinkpayment'])){
+
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    // $attachfile = $_FILES['fileattach']['tmp_name'];
+
+   
+    //Load composer's autoloader
+
+    $mail = new PHPMailer(true);                            
+    try {
+        //Server settings
+        $mail->isSMTP();                                     
+        $mail->Host = 'smtp.gmail.com';                      
+        $mail->SMTPAuth = true;                             
+        $mail->Username = 'barangaycommonwealth0@gmail.com';     
+        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+        );                         
+        $mail->SMTPSecure = 'ssl';                           
+        $mail->Port = 465;                                   
+
+        //Send Email
+        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        
+        //Recipients
+        $mail->addAddress($email);              
+        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        
+   
+        //Content
+        $mail->isHTML(true);        
+
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+
+        $mail->send();
+		
+       $_SESSION['result'] = 'Message has been sent to';
 	   $_SESSION['status'] = 'ok';
     } catch (Exception $e) {
 	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;

@@ -192,8 +192,6 @@ include "db/user.php";
     <script src="resident-js/jquery.isotope.min.js"></script>
     
     <script src="https://use.fontawesome.com/f7721642f4.js"></script>
-
-    <script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
     
 	<script>
         const togglePassword = document.querySelector('#togglePassword');

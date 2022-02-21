@@ -100,7 +100,7 @@ if(isset($_POST['generate']) ) {
 		span.topright{margin-left: -50px; margin-top: -15px; text-align: right; font-size: 25px;}
 		span.topright:hover {text-align: right;color: red; cursor: pointer;}
 		.display{display: flex;}
-		.usersel{pointer-events: none; border: 1px solid orange}
+		.usersel{pointer-events: nne; border: 1px solid orange}
 
 		.textarea{padding-left: 40px; padding-right: 40px; padding-top: 10px; margin-bottom: 15px;}
         .body{background: #ebebeb; padding: 50px; margin-right: 100px;}

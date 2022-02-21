@@ -43,9 +43,7 @@ if(isset($_POST['brgyidbtn'])){
 	$image_type = $_FILES['id_image']['type'];
 
     $brgyidfilechoice = $_POST['brgyidfilechoice'];
-	$status = $_POST['status'];
 													
-
 													
 	// create array variable to handle error
 	$error = array();
@@ -84,19 +82,18 @@ if(isset($_POST['brgyidbtn'])){
 		$error['dateissue'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
 	// common image file extensions
-	$allowedExts = array("docx", "pdf");
+	$allowedExts = array("docx");
 													
 	// get image file extension
 	error_reporting(E_ERROR | E_PARSE);
 	$extension = end(explode(".", $_FILES["id_image"]["name"]));
 															
 	if($image_error > 0){
-	$error['id_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-	}else if(!(($image_type == "docx") || 
-	($image_type == "pdf")) &&
+	$error['id_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert file! </span>";
+	}else if(!(($image_type == "docx")) &&
 	!(in_array($extension, $allowedExts))){
 													
-	$error['id_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+	$error['id_image'] = " <span class='label label-danger errormsg'>File type must be docx!</span>";
 	}
 													
 	if( !empty($fname) &&  
@@ -122,13 +119,13 @@ if(isset($_POST['brgyidbtn'])){
 	$upload = move_uploaded_file($_FILES['id_image']['tmp_name'], 'img/fileupload_barangayid/'.$barangayid_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $barangayid_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('ssssssssssssssss', 
+	$stmt->bind_param('sssssssssssssss', 
 	$fname,
 	$mname,
 	$lname,
@@ -143,8 +140,7 @@ if(isset($_POST['brgyidbtn'])){
 	$reladdress,
 	$dateissue,
     $upload_image,
-	$brgyidfilechoice,
-    $status
+	$brgyidfilechoice
 	);
 	// Execute query
 	$stmt->execute();
@@ -155,16 +151,21 @@ if(isset($_POST['brgyidbtn'])){
 														
 	if($result){
 	$error['add_barangayid'] = " 
-		<div class='alert alert-success cattxtbox'>
-			<h6> * Submitted Successfully. <a href='residentreqdocu.php'>
-            <i class='fa fa-check fa-lg'></i>
-            </a></h6>
+		<div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+			<label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
+            <i style='18px;' class='bx bx-smile fa-lg'></i>
+            </a></label>
 		</div>";
 	}else{
-		$error['add_barangayid'] = " <span class='label label-danger'>Failed Submission! </span>";
-			}
-		}
-	}
+		$error['add_barangayid'] = " 
+            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                <i style='18px;' class='bx bx-sad fa-lg'></i>
+                </a></label>
+            </div>";
+                }
+            }
+        }
 
 
     
@@ -172,6 +173,7 @@ if(isset($_POST['brgyidbtn'])){
 if(isset($_POST['permitBtn'])){
 	
 	$dateissued = $_POST['dateissued'];
+    $selection = $_POST['selection'];
 	$fullname	= $_POST['fullname'];
     $contactno = $_POST['contactno'];
 	$businessname = $_POST['businessname'];
@@ -179,7 +181,6 @@ if(isset($_POST['permitBtn'])){
 	$plateno = $_POST['plateno'];
 	$email_add = $_POST['email_add'];
     $permitfilechoice = $_POST['permitfilechoice'];
-    $status = $_POST['status'];
 													
 	// get image info
 	$permit_image = $_FILES['businessid_image']['name'];
@@ -192,6 +193,9 @@ if(isset($_POST['permitBtn'])){
 	if(empty($dateissued)){
 	$error['dateissued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
+    if(empty($selection)){
+        $error['selection'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        }
 	if(empty($fullname)){
 	$error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
@@ -212,7 +216,7 @@ if(isset($_POST['permitBtn'])){
 	}
 
 	// common image file extensions
-	$allowedExts = array("jpeg", "jpg", "png");
+	$allowedExts = array("docx");
 													
 	// get image file extension
 	error_reporting(E_ERROR | E_PARSE);
@@ -220,24 +224,20 @@ if(isset($_POST['permitBtn'])){
 															
 	if($image_error > 0){
 	$error['businessid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-	}else if(!(($image_type == "image/jpeg") || 
-	($image_type == "image/jpg") || 
-	($image_type == "image/x-png") ||
-	($image_type == "image/png") || 
-	($image_type == "image/pjpeg")) &&
+	}else if(!(($image_type == "docx")) &&
 	!(in_array($extension, $allowedExts))){
 													
 	$error['businessid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
 	}
 													
-	if( !empty($dateissued) &&  
+	if( !empty($dateissued) && 
+        !empty($selection) && 
 		!empty($fullname) && 
         !empty($contactno) && 
 		!empty($businessname) && 
 		!empty($businessaddress) && 
 		!empty($plateno) && 
 		!empty($email_add) && 
-        !empty($status) && 
 		empty($error['businessid_image'])){
 														
 	// create random image file name
@@ -250,7 +250,7 @@ if(isset($_POST['permitBtn'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], 'img/fileupload_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO businesspermit (dateissued, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, status)
+	$sql_query = "INSERT INTO businesspermit (dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice)
 	VALUES(?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
@@ -259,6 +259,7 @@ if(isset($_POST['permitBtn'])){
 	// Bind your variables to replace the ?s
 	$stmt->bind_param('ssssssssss', 
 	$dateissued,
+    $selection,
 	$fullname,
     $contactno,
 	$businessname,
@@ -266,8 +267,7 @@ if(isset($_POST['permitBtn'])){
 	$plateno,
 	$email_add,
 	$upload_image,
-    $permitfilechoice,
-    $status
+    $permitfilechoice
 	);
 	// Execute query
 	$stmt->execute();
@@ -278,17 +278,21 @@ if(isset($_POST['permitBtn'])){
 														
 	if($result){
 	$error['add_brgypermit'] = " 
-		<div class='alert alert-success cattxtbox'>
-			<h6> * Submitted Successfully. <a href='residentreqdocu.php'>
-            <i class='fa fa-check fa-lg'></i>
-            </a></h6>	
-		</div>";
+            <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
+            <i style='18px;' class='bx bx-smile fa-lg'></i>
+            </a></label>
+        </div>";
 	}else{
-		$error['add_brgypermit'] = " <span class='label label-danger'>Failed Submission! </span>";
-			}
-		}
-	}
-
+		$error['add_brgypermit'] = " 
+            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                <i style='18px;' class='bx bx-sad fa-lg'></i>
+                </a></label>
+            </div>";
+                }
+            }
+        }
 // 3.0 Prepared Statement for Barangay Indigency: Req Documents
     if(isset($_POST['indigencybtn'])){
 	
@@ -297,10 +301,8 @@ if(isset($_POST['permitBtn'])){
         $purpose = $_POST['purpose'];
         $contactnum = $_POST['contactnum'];
         $emailaddress = $_POST['emailaddress'];
-        $id_type = $_POST['id_type'];
         $date_issue = $_POST['date_issue'];
         $indigencyfilechoice = $_POST['indigencyfilechoice'];
-        $status = $_POST['status'];
                                                         
         // get image info
         $indigency_image = $_FILES['indigencyid_image']['name'];
@@ -328,12 +330,9 @@ if(isset($_POST['permitBtn'])){
         if(empty($emailaddress)){
         $error['emailaddress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
         }
-        if(empty($id_type)){
-        $error['id_type'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
     
         // common image file extensions
-        $allowedExts = array("jpeg", "jpg", "png");
+        $allowedExts = array("docx");
                                                         
         // get image file extension
         error_reporting(E_ERROR | E_PARSE);
@@ -341,11 +340,7 @@ if(isset($_POST['permitBtn'])){
                                                                 
         if($image_error > 0){
         $error['indigencyid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-        }else if(!(($image_type == "image/jpeg") || 
-        ($image_type == "image/jpg") || 
-        ($image_type == "image/x-png") ||
-        ($image_type == "image/png") || 
-        ($image_type == "image/pjpeg")) &&
+        }else if(!(($image_type == "docx")) &&
         !(in_array($extension, $allowedExts))){
                                                         
         $error['indigencyid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
@@ -357,9 +352,7 @@ if(isset($_POST['permitBtn'])){
             !empty($date_issue) && 
             !empty($contactnum) && 
             !empty($emailaddress) && 
-            !empty($id_type) && 
             !empty($date_issue) && 
-            !empty($status) && 
             empty($error['indigencyid_image'])){
                                                             
         // create random image file name
@@ -372,24 +365,22 @@ if(isset($_POST['permitBtn'])){
         $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], 'img/fileupload_indigency/'.$indigency_image);
                                                     
         // insert new data to menu table
-        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, id_type, date_issue,indigencyid_image, indigencyfilechoice, status)
-        VALUES(?,?,?,?,?,?,?,?,?,?)";
+        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, date_issue,indigencyid_image, indigencyfilechoice)
+        VALUES(?,?,?,?,?,?,?,?)";
                                                             
         $upload_image = $indigency_image;
         $stmt = $connect->stmt_init();
         if($stmt->prepare($sql_query)) {	
         // Bind your variables to replace the ?s
-        $stmt->bind_param('ssssssssss', 
+        $stmt->bind_param('ssssssss', 
         $fullname,
         $address,
         $purpose,
         $contactnum,
         $emailaddress,
-        $id_type,
         $date_issue,
         $upload_image,
-        $indigencyfilechoice,
-        $status
+        $indigencyfilechoice
         );
         // Execute query
         $stmt->execute();
@@ -400,13 +391,18 @@ if(isset($_POST['permitBtn'])){
                                                             
         if($result){
         $error['add_brgyindigency'] = " 
-            <div class='alert alert-success cattxtbox'>
-                <h6> * Submitted Successfully. <a href='residentreqdocu.php'>
-                <i class='fa fa-check fa-lg'></i>
-                </a></h6>	
+            <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+                <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
+                <i style='18px;' class='bx bx-smile fa-lg'></i>
+                </a></label>
             </div>";
         }else{
-            $error['add_brgyindigency'] = " <span class='label label-danger'>Failed Submission! </span>";
+            $error['add_brgyindigency'] = " 
+            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                <i style='18px;' class='bx bx-sad fa-lg'></i>
+                </a></label>
+            </div>";
                 }
             }
         }
@@ -431,8 +427,7 @@ if(isset($_POST['permitBtn'])){
             $image_error = $_FILES['clearanceid_image']['error'];
             $image_type = $_FILES['clearanceid_image']['type'];
  
-            $filechoice = $_POST['filechoice'];    
-            $clearance_status = $_POST['clearance_status'];                                 
+            $filechoice = $_POST['filechoice'];                                
                                                             
             // create array variable to handle error
             $error = array();
@@ -478,7 +473,7 @@ if(isset($_POST['permitBtn'])){
                 }
         
             // common image file extensions
-            $allowedExts = array("jpeg", "jpg", "png");
+            $allowedExts = array("docx");
                                                             
             // get image file extension
             error_reporting(E_ERROR | E_PARSE);
@@ -486,11 +481,7 @@ if(isset($_POST['permitBtn'])){
                                                                     
             if($image_error > 0){
             $error['clearanceid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-            }else if(!(($image_type == "image/jpeg") || 
-            ($image_type == "image/jpg") || 
-            ($image_type == "image/x-png") ||
-            ($image_type == "image/png") || 
-            ($image_type == "image/pjpeg")) &&
+            }else if(!(($image_type == "docx")) &&
             !(in_array($extension, $allowedExts))){
                                                             
             $error['clearanceid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
@@ -509,8 +500,7 @@ if(isset($_POST['permitBtn'])){
                 !empty($issued_at) && 
                 // !empty($precint_no) &&
                 empty($error['clearanceid_image']) && 
-                !empty($filechoice) && 
-                !empty($clearance_status)){
+                !empty($filechoice)){
                                                                 
             // create random image file name
             $string = '0123456789';
@@ -522,14 +512,14 @@ if(isset($_POST['permitBtn'])){
             $upload = move_uploaded_file($_FILES['clearanceid_image']['tmp_name'], 'img/fileupload_clearance/'.$clearance_image);
                                                         
             // insert new data to menu table
-            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, clearance_status)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                 
             $upload_image = $clearance_image;
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
             // Bind your variables to replace the ?s
-            $stmt->bind_param('sssssssssssssss', 
+            $stmt->bind_param('ssssssssssssss', 
             $full_name,
             $age,
             $status,
@@ -543,8 +533,7 @@ if(isset($_POST['permitBtn'])){
             $issued_at,
             $precint_no,
             $upload_image,
-            $filechoice,
-            $clearance_status
+            $filechoice
             );
             // Execute query
             $stmt->execute();
@@ -555,16 +544,21 @@ if(isset($_POST['permitBtn'])){
                                                                 
             if($result){
             $error['add_brgyclearance'] = " 
-                <div class='alert alert-success cattxtbox'>
-                    <h6> * Submitted Successfully. <a href='residentreqdocu.php'>
-                    <i class='fa fa-check fa-lg'></i>
-                    </a></h6>	
+                <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+                    <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
+                    <i style='18px;' class='bx bx-smile fa-lg'></i>
+                    </a></label>
                 </div>";
             }else{
-                $error['add_brgyclearance'] = " <span class='label label-danger'>Failed Submission! </span>";
+                $error['add_brgyclearance'] = " 
+                    <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                        <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                        <i style='18px;' class='bx bx-sad fa-lg'></i>
+                        </a></label>
+                    </div>";
+                        }
                     }
                 }
-            }
 
 // 5.0 Prepared Statement for File Blottering: Req Documents
             if(isset($_POST['blotterbtn'])){
@@ -583,8 +577,7 @@ if(isset($_POST['permitBtn'])){
                 $violator_address = $_POST['violator_address'];
                 $witnesses = $_POST['witnesses'];
                 $complaints = $_POST['complaints'];
-                $id_type = $_POST['id_type'];
-                $status = $_POST['status'];                             
+
                 // get image info
                 $blotter_image = $_FILES['blotterid_image']['name'];
                 $image_error = $_FILES['blotterid_image']['error'];
@@ -635,9 +628,6 @@ if(isset($_POST['permitBtn'])){
                 if(empty($complaints)){
                 $error['complaints'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
                 }
-                if(empty($id_type)){
-                $error['id_type'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-                }
             
                 // common image file extensions
                 $allowedExts = array("pdf");
@@ -668,9 +658,7 @@ if(isset($_POST['permitBtn'])){
                     !empty($violator_address) && 
                     !empty($witnesses) && 
                     !empty($complaints) && 
-                    !empty($id_type) && 
-                    empty($error['blotterid_image']) &&
-                    !empty($status)){
+                    empty($error['blotterid_image'])){
                                                                     
                 // create random image file name
                 $string = '0123456789';
@@ -682,14 +670,14 @@ if(isset($_POST['permitBtn'])){
                 $upload = move_uploaded_file($_FILES['blotterid_image']['tmp_name'], 'img/fileupload_blotter/'.$blotter_image);
                                                             
                 // insert new data to menu table
-                $sql_query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql_query = "INSERT INTO blotterdb (n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, blotterid_image)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                     
                 $upload_image = $blotter_image;
                 $stmt = $connect->stmt_init();
                 if($stmt->prepare($sql_query)) {	
                 // Bind your variables to replace the ?s
-                $stmt->bind_param('sssssssssssssssss', 
+                $stmt->bind_param('sssssssssssssss', 
                 $n_complainant,
                 $comp_age,
                 $comp_gender,
@@ -703,10 +691,8 @@ if(isset($_POST['permitBtn'])){
                 $relationship,
                 $violator_address,
                 $witnesses,
-                $complaints, 
-                $id_type,
-                $upload_image,
-                $status,
+                $complaints,
+                $upload_image
                 );
                 // Execute query
                 $stmt->execute();
@@ -717,17 +703,22 @@ if(isset($_POST['permitBtn'])){
                                                                     
                 if($result){
                 $error['add_blotter'] = " 
-                    <div class='alert alert-success cattxtbox'>
-                        <h6> * Submitted Successfully. <a href='residentreqdocu.php'>
-                        <i class='fa fa-check fa-lg'></i>
-                        </a></h6>	
+                    <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+                        <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_blotter.php'>
+                        <i style='18px;' class='bx bx-smile fa-lg'></i>
+                        </a></label>
                     </div>";
                 }else{
-                    $error['add_blotter'] = " <span class='label label-danger'>Failed Submission! </span>";
+                    $error['add_blotter'] = " 
+                    <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                        <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                        <i style='18px;' class='bx bx-sad fa-lg'></i>
+                        </a></label>
+                    </div>";
                         }
                     }
                 }
 
 
-// 6.0 Prepared Statement for Admin Complaints: Req Documents
+// 6.0 Prepared Statement for Admin Complaints: Req Documents<span class='label label-danger'>Failed Submission! </span>
       
