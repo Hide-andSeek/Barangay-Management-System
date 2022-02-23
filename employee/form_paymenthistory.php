@@ -196,6 +196,9 @@ if(!isset($_SESSION["type"]))
 		.emailwidth{width: 40%;}
 		.mrgin{margin-right: 40px;}
         .usersel{pointer-events: none; border: 1px solid blue;}
+
+		.viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
 	 </style>
    </head>
 	<body>
@@ -259,7 +262,7 @@ if(!isset($_SESSION["type"]))
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -301,14 +304,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid
-				ORDER BY app_brgyid ASC";
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments
+				ORDER BY document_id ASC";
 	}else{
-		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid
-				WHERE fname LIKE ? 
-				ORDER BY app_brgyid ASC";
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments
+				WHERE fullname LIKE ? 
+				ORDER BY document_id ASC";
 	}
 	
 	
@@ -322,10 +325,11 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['app_brgyid'], 
+		$stmt->bind_result($data['document_id'], 
 					$data['fullname'],
 					$data['contact_no'],
 					$data['reference_no'],
+					$data['document_type'],
 					$data['payment_status'],
 					$data['payment_method'],
 					$data['added_on']
@@ -353,14 +357,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid
-				ORDER BY app_brgyid ASC LIMIT ?, ?";
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments
+				ORDER BY document_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT app_brgyid, fullname, contact_no, reference_no, payment_status, payment_method,added_on
-				FROM payment_brgyid 
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments 
 				WHERE fullname LIKE ? 
-				ORDER BY app_brgyid ASC LIMIT ?, ?";
+				ORDER BY document_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -375,10 +379,11 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging ->execute();
 		// store result 
 		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['app_brgyid'], 
+		$stmt_paging->bind_result($data['document_id'], 
 					$data['fullname'],
 					$data['contact_no'],
 					$data['reference_no'],
+					$data['document_type'],
 					$data['payment_status'],
 					$data['payment_method'],
 					$data['added_on']
@@ -438,31 +443,29 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table" id="table">
 								<thead>
 									<tr class="t_head">
-										<th width="15%">Document ID</th>
-										<th width="15%">Name</th>
-										<th width="15%">Contact no</th>
-										<th width="15%">Reference No</th>
-										<th width="15%">Payment Method</th>
-										<th width="15">Added on</th>
-										<th width="15%">Payment Status</th>
-                                        <th width="15%">View Details</th>
+										<th width="10%">Document ID</th>
+										<th width="10%">Name</th>
+										<th width="10%">Contact no</th>
+										<th width="10%">Reference No</th>
+										<th width="15%">Document Type</th>
+										<th width="10%">Payment Method</th>
+										<th width="5">Added on</th>
+										<th width="10%">Payment Status</th>
 									</tr>
 								</thead>
 							<?php 
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><strong><?php echo $data ['app_brgyid']; ?></strong></td>
+									<td><strong><?php echo $data ['document_id']; ?></strong></td>
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contact_no']; ?></td>
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
+									<td><?php echo $data ['document_type']; ?></td>
 									<td><strong><?php echo $data ['payment_method']?></strong></td>
 									<td><?php echo $data ['added_on']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
 
-                                    <td>
-									<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" onclick="document.getElementById('edit_<?php echo $data['app_brgyid'];?>').style.display='block'"><i style="color: black;" class="" ></i> View</button>
-									</td>
 								</tr>	
 								</tbody>
 								<?php 
@@ -470,50 +473,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<div id="formatValidatorName" >
-          <div id="edit_<?php echo $data['app_brgyid'];?>" class="modal">
-                <div class="modal-content animate">
-                    <span onclick="document.getElementById('edit_<?php echo $data['app_brgyid'];?>').style.display='none'" class="topright">&times;</span>	
-                                        <div class="main-content-email">
-                                            <div class="main-content main-content1">
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Fullname: </p>
-														<input class="form-control mrgin usersel" id="app_brgyid" name="app_brgyid" value="<?php echo $data['app_brgyid']; ?>" type="hidden">
-
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-
-													<div class="information col">
-														<p> Contact no: </p>
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['contact_no']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-												</div>
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Reference no: </p>
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['reference_no']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-													
-													<div class="information col">
-														<p> Payment Method: </p>
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['payment_method']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-												</div>
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Added on: </p>
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['added_on']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-													
-													<div class="information col">
-														<p> Status: </p>
-														<input class="form-control mrgin usersel" id="fullname" name="fullname" value="<?php echo $data['payment_status']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-
-												</div>
-                                            </div>
-                                        </div>
               </div>
         </div>
     </div>

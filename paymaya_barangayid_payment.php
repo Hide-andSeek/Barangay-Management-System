@@ -9,6 +9,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
 	$fullname = $_POST['fullname'];
     $contact_no = $_POST['contact_no'];
 	$reference_no = $_POST['reference_no'];
+    $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
 
@@ -26,12 +27,13 @@ if(isset($_POST['brgyidpaymentbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payment_brgyid (app_brgyid,fullname, contact_no, reference_no, payment_status, payment_method) VALUES (:app_brgyid, :fullname, :contact_no, :reference_no, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payment_brgyid (app_brgyid,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:app_brgyid, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
 
         $stmt->bindParam(':app_brgyid', $app_brgyid);
 		$stmt->bindParam(':fullname', $fullname);
         $stmt->bindParam(':contact_no', $contact_no);
 		$stmt->bindParam(':reference_no', $reference_no);
+        $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
 
@@ -75,7 +77,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
 </head>
 <body>
     <script>
-        swal("Reminder/ Paalala:","This is one time payment transaction, be sure you put an accurate reference number. Ito ay isang beses lamang na transaksyon sa pagbabayad, siguraduhin na tama ang iyong ilalagay na reference number");
+        swal("Reminder:","This is one time payment transaction, be sure you put an accurate reference number");
     </script>
     <?php
    if(isset($_GET['id'])){
@@ -145,18 +147,21 @@ if(isset($_POST['brgyidpaymentbtn'])){
                                     <input type="hidden" id="app_brgyid" value="<?php echo $data ['app_brgyid']; ?>" class="form-control inpmargin usersel" name="app_brgyid">
 
                                     <label for="refno">Name: </label>
-                                    <input type="text" id="fullname" class="form-control inpmargin usersel" name="fullname" placeholder="Your name" value="<?php echo $data ['fname']; ?> <?php echo $data ['mname']; ?> <?php echo $data ['lname']; ?>">
+                                    <input required type="text" id="fullname" class="form-control inpmargin usersel" name="fullname" placeholder="Your name" value="<?php echo $data ['fname']; ?> <?php echo $data ['mname']; ?> <?php echo $data ['lname']; ?>">
                                     <i aria-details="fullname" class="detailid">The name you registered in Document Request</i>
                                     <br>
                                     <label for="refno">Contact: </label>
-                                    <input required type="number" id="contact_no" class="form-control inpmargin" name="contact_no" placeholder="Your number" value="<?php echo $data ['contact_no']; ?>">
+                                    <input required type="number" id="contact_no" class="form-control inpmargin" name="contact_no" placeholder="Your number" onKeyPress="if(this.value.length==11) return false;"  value="<?php echo $data ['contact_no']; ?>">
                                     <i aria-details="contact_no" class="detailid">Enter a number you used for a payment</i>
                                 </div>
                                 <div class="margin">
                                     <label for="refno">Reference ID:</label>
                                     <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 
+                                    <input type="hidden" id="document_type" value="Barangay ID" class="form-control inpmargin usersel" name="document_type">
+
                                     <input type="hidden" id="payment_status " value="Approval" class="form-control inpmargin usersel" name="payment_status">
+
                                     <input type="hidden" id="payment_method" value="Paymaya" class="form-control inpmargin usersel" name="payment_method">
                                 </div>
                                 <div class="gen">

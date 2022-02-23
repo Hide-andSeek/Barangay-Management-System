@@ -19,9 +19,7 @@ if(!isset($_SESSION["type"]))
 	if(isset($_SESSION['user'])){
 		$user = $_SESSION['user'];
 	}
-?>
 
-<?php
 	$dept = '';
 
 	if(isset($_SESSION['type'])){
@@ -183,7 +181,9 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
-                .hoverback:hover{background: orange; border-radius: 70%;}
+        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; margin-bottom: 10px; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .hoverback:hover{background: orange; border-radius: 70%;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -231,13 +231,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+
+        <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -273,9 +281,9 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, brgyidfilechoice, id_image
-                            FROM barangayid
-                            WHERE barangay_id = ?";
+                    $sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+                            FROM approved_brgyids
+                            WHERE app_brgyid = ?";
                     
                     $stmt = $connect->stmt_init();
                     if($stmt->prepare($sql_query)) {	
@@ -285,7 +293,7 @@ if(!isset($_SESSION["type"]))
                         $stmt->execute();
                         // store result 
                         $stmt->store_result();
-                        $stmt->bind_result($data['barangay_id'], 
+                        $stmt->bind_result($data['app_brgyid'], 
                                 $data['fname'],
                                 $data['mname'],
                                 $data['lname'],
@@ -299,9 +307,11 @@ if(!isset($_SESSION["type"]))
                                 $data['emrgncycontact'],
                                 $data['reladdress'],
                                 $data['dateissue'],
-                                $data['status'],
+                                $data['id_image'],
                                 $data['brgyidfilechoice'],
-                                $data['id_image']
+                                $data['approvedby'],
+                                $data['app_date'],
+                                $data['status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
@@ -325,7 +335,7 @@ if(!isset($_SESSION["type"]))
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
                     ?>
-                        <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailadd']; ?></div>
+                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailadd']; ?>. <label>Back to <a href="barangayidapproval.php" style="text-decoration: none;"> Approval Page</a> </label></div>
                     <?php
                         }else{
                     ?>
@@ -362,14 +372,12 @@ if(!isset($_SESSION["type"]))
                                                 <textarea name="message" id="message" class="form-control inputtext" rows="16" placeholder="Your message">
                                                 Good Day! Mr/Ms. <strong style="text-transform: uppercase"><?php echo $data['fname']; ?> <?php echo $data['mname']; ?> <?php echo $data['lname']; ?></strong>    
                                                 <p>
-                                                Thanks for filling out the form. We received your request. You are already in approval.
-                                                We are issuing a payment for a document specifically (Barangay ID) with a total amount of 70 pesos bill.
-                                                For a payment we are accepting GCash and Paymaya! Here is the number:
+                                                Thanks for filling out the form. Your request has been approved. To proceed, we are issuing a payment for a document specifically (Barangay ID) with a total amount of <strong> ₱50 bill</strong>. For a payment we are accepting GCash and Paymaya! Here is the number:
                                                 <br>
                                                 <br>
                                                 Tagalog (Translation)
                                                 <br>
-                                                Salamat sa pagsagot sa form. Natanggap na namin ang iyong kahilingan. Nasa approval ka na. Kami ay humihingi ng danyos para sa dokumento partikular na sa (Barangay ID) na may kabuohang halaga na 70 pesos. Kami ay tumatanggap ng GCash at Paymaya! Narito ang numero:
+                                                Salamat sa pagsagot sa form. Natanggap na namin ang iyong request. Kami ay humihingi ng danyos para sa dokumento partikular na sa (Barangay ID) na may kabuohang halaga na <strong> ₱50</strong>. Para sa pagbabayad kami ay tumatanggap ng GCash at Paymaya! Narito ang numero:
                                                 <br>
                                                 <br>
                                                 For GCash: <strong>09123654789</strong>
@@ -377,15 +385,15 @@ if(!isset($_SESSION["type"]))
                                                 For Paymaya: <strong>09147258963</strong>
                                                 <br>
                                                 <br>
-                                                Kindly attach your reference number here. Visit this page, by simply clicking this link
+                                                Kindly attach your reference number here for verification. Visit this page, by simply clicking this link
                                                 <br>
                                                 <br>
-                                                Tagalog: Paki lagay ang iyong reference number. Bisitahin ang pahinang ito, sa pamamagitan lamang ng pag-click sa link
+                                                Tagalog: Paki lagay ang iyong reference number para sa beripekasyon. Bisitahin ang pahinang ito, sa pamamagitan lamang ng pag-click sa link
                                                 <br>
                                                 <br>
-                                                Paymaya: http://comm-bms.com/paymaya_barangayid_payment.php?id=<?php echo $data['barangay_id']; ?>
+                                                Paymaya: http://comm-bms.com/payment_link/paymaya_barangayid_payment.php?id=<?php echo $data['app_brgyid']; ?>
                                                 <br>
-                                                GCash: http://comm-bms.com/gcash_barangayid_payment.php?id=<?php echo $data['barangay_id']; ?>
+                                                GCash: http://comm-bms.com/payment_link/gcash_barangayid_payment.php?id=<?php echo $data['app_brgyid']; ?>
                                                 <br>
                                                 <br>
                                                 For more details/questions visit our website.
@@ -401,7 +409,7 @@ if(!isset($_SESSION["type"]))
                                             </div>
 
                                             <div class="sendi">
-                                                <button name="sendlinkpayment" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send Link<i class="bx bx-send"></i></button>
+                                                <button name="sendlinkpayment" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send Link <i class="bx bx-send"></i></button>
                                             </div>
                                         </div>
                                     </form>

@@ -192,12 +192,20 @@ if(!isset($_SESSION["type"]))
 				 <span class="tooltip">Business Permit</span>
 			  </li>
 
+			  <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
+
 				<li class="profile">
 					<div class="profile-details">
 					<img class="profile_pic" src="../img/1.jpeg">
 					<div class="name_job">
 						<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 					</div>
 					</div>
 					<a href="../emplogout.php">
@@ -240,14 +248,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, status 
 				FROM certificateindigency WHERE status = 'Pending'
-				ORDER BY indigency_id DESC";
+				ORDER BY indigency_id ASC";
 	}else{
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, status 
 				FROM certificateindigency
 				WHERE fullname LIKE ?
-				ORDER BY indigency_id DESC";
+				ORDER BY indigency_id ASC";
 	}
 	
 	
@@ -267,10 +275,10 @@ if(!isset($_SESSION["type"]))
 				$data['purpose'],
 				$data['contactnum'],
 				$data['emailaddress'],
-				$data['id_type'],
 				$data['date_issue'],
-				$data['status'],
-				$data['indigencyid_image']
+				$data['indigencyid_image'],
+				$data['indigencyfilechoice'],
+				$data['status']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -295,14 +303,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, status 
 				FROM certificateindigency WHERE status = 'Pending'
-				ORDER BY indigency_id DESC LIMIT ?, ?";
+				ORDER BY indigency_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+		$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, status 
 				FROM certificateindigency 
 				WHERE fullname LIKE ?
-				ORDER BY indigency_id DESC LIMIT ?, ?";
+				ORDER BY indigency_id ASC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -323,10 +331,10 @@ if(!isset($_SESSION["type"]))
 				$data['purpose'],
 				$data['contactnum'],
 				$data['emailaddress'],
-				$data['id_type'],
 				$data['date_issue'],
-				$data['status'],
-				$data['indigencyid_image']
+				$data['indigencyid_image'],
+				$data['indigencyfilechoice'],
+				$data['status']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -385,7 +393,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Address</th>
 										<th width="5%">Purpose</th>
 										<th width="5">Contact</th>
-										<th width="5%">ID Type</th>
 										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
@@ -401,7 +408,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['contactnum']?></td>
-									<td><?php echo $data ['id_type']; ?></td>
 									<td><?php echo $data ['date_issue']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><img src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" width="210" height="100"></td> -->

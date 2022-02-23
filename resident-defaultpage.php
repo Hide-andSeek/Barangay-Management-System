@@ -431,19 +431,7 @@ include "db/user.php";
 						  </div>
 						</div>
 						</a>
-					  </div>
-					  <div class="col-md-2">
-					    <a class="filled-button" href="reqdoc_barangayid.php">
-						<div class="service-item1">
-						  <div class="icon">
-							<i class="fa fa-gear"></i>
-						  </div>
-						  <div class="down-content1">
-							<h4>Instructions</h4>
-						  </div>
-						</div>
-						</a>
-					  </div>
+          </div>
 					</div>
 				  </div>
 				</div>

@@ -196,12 +196,13 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+			  
 			  <li>
-				<a class="side_bar" href="dummy.php">
-				   <i class='bx bx-news permit'></i>
-				  <span class="links_name">Dummy</span>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
 				</a>
-				 <span class="tooltip">Dummy</span>
+				 <span class="tooltip">Payment History</span>
 			  </li>
 			 
 			 <li class="profile">
@@ -209,7 +210,7 @@ if(!isset($_SESSION["type"]))
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -505,6 +506,8 @@ if(!isset($_SESSION["type"]))
 			<a>
 			</div>
 			 -->
+
+			 <h3 style="text-align: center;">Statistics: Using Bar Chart</h3>
 	</div>
 			</section>
 			<script href="test.js"></script>

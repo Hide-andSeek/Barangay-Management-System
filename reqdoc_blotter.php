@@ -175,7 +175,7 @@ if(!file_exists($f)){
 		.button {
 		display: absolute;
 		border-radius: 4px;
-		background-color: #f4511e;
+		background-color: #008CBA;
 		border: none;
 		color: #FFFFFF;
 		width: 90%;

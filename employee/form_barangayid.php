@@ -220,12 +220,20 @@ if(!isset($_SESSION["type"]))
 				 <span class="tooltip">Business Permit</span>
 			  </li>
 			
+			  <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
+			  
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -447,7 +455,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: black; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									
 									<td><button class="view_approvebtn" onclick="location.href='barangayidviewdetails.php?id=<?php echo $data['barangay_id'];?>'">View Details</button></td>
 								</tr>	
