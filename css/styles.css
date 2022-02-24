@@ -77,7 +77,7 @@
   line-height: 60px;
 }
 .sidebar .nav-list{
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: -px;
   height: 100%;
 }
@@ -295,7 +295,9 @@ img.brgy_icon{
 }
 .home-section .text{
   display: inline-block;
-  color: #11101d;
+  /* color: #11101d; */
+  /* color: #D0AEF2; light violet */
+  color: #EDF1F5;
   font-size: 25px;
   font-weight: 500;
   margin: 18px
@@ -340,7 +342,7 @@ img.brgy_icon{
 }
 .select__select{
 	position: absolute;
-	margin-left: 50%;
+	margin-left: 60%;
 	font-size: 13px;
 }
 .selection{
@@ -371,8 +373,6 @@ img.brgy_icon{
 	display: block;
 }
 
-
-
 .content-table, .table_indigency{
 	position: absolute;
 	margin-top: 25px;
@@ -390,7 +390,7 @@ img.brgy_icon{
 
 					
 table.content-table thead tr{
-	padding: 8px 12px 0px 0px;
+	 padding: 5px 7px 0px 0px;
     /* background-color: black; */
     /* background-color: #009879; #04AA6D */
     background-color: #04AA6D;
@@ -402,7 +402,7 @@ table.content-table thead tr{
 
 .content-table th,
 .content-table td{
-    padding: 20px 18px;
+    padding: 15px 13px;
 }
 
 table.content-table tbody tr{
@@ -650,6 +650,7 @@ padding: 10px 25px;
 	i.indigency, i.dash, i.bcpc{color: #0218bd}
 	i.permit, i.iannouncement{color: #e0149c}
 	i.saveicon:hover{color: blue;}
+	i.payment:hover{color: rgba(255, 136, 0, 0.801);}
 	
 	
   i.ongoing{color: blue;}
@@ -696,3 +697,5 @@ padding: 10px 25px;
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}
 		::-webkit-scrollbar-thumb{background: #71b280; border-radius: 5px;}
 		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;} */
+
+    .hoverback:hover{background: orange; border-radius: 70%;}

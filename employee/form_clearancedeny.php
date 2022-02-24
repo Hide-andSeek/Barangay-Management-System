@@ -174,6 +174,7 @@ if(!isset($_SESSION["type"]))
 		.viewbtn{width: 45px; height: 35px;}
 		.viewbtn{width: 65px; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
 		.viewbtn:hover{ background-color: #008CBA;color: white;}
+		.hoverback:hover{background: orange; border-radius: 70%;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -221,13 +222,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+
+			  <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -242,7 +251,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Barangay Clearance
+						<h5>Barangay Clearance >> Denied Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -375,10 +384,18 @@ if(!isset($_SESSION["type"]))
 		// if no data on database show "No Reservation is Available"
 		if($total_records_paging == 0){
 			echo "
-			<h1 style='text-align: center;'>404 Not Found</h1>
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
 			<div class='alert alert-warning cattxtbox'>
 				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-			</div>";
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			<div style='text-align: center; margin-top: 5%'>
+				<a href='clearanceapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+				<a href='clearancedenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+			</div>
+			";
 	?>
 
 	<?php 
@@ -402,8 +419,13 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
-									<div>
+									<!-- <div>
 										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+									<div style="float: right;">
+										<a href="barangayclearance.php">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: 250px; cursor: pointer;" alt="Back?">
+										</a>
 									</div>
 								</div>
 							</div>						

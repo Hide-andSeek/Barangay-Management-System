@@ -4,6 +4,7 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
 
 if(!isset($_SESSION["type"]))
 {
@@ -228,13 +229,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+
+              <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -270,7 +279,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT businesspermit_id, dateissued, selection, firstname, middlename, lastname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, status
+                    $sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, permitfilechoice, businessid_image, status
                             FROM businesspermit
                             WHERE businesspermit_id = ?";
                     
@@ -285,20 +294,55 @@ if(!isset($_SESSION["type"]))
                         $stmt->bind_result($data['businesspermit_id'], 
                                 $data['dateissued'],
                                 $data['selection'],
-                                $data['firstname'],
-                                $data['middlename'],
-                                $data['lastname'],
+                                $data['fullname'],
                                 $data['contactno'],
                                 $data['businessname'],
                                 $data['businessaddress'],
                                 $data['plateno'],
                                 $data['email_add'],
+                                $data['permitfilechoice'],
                                 $data['businessid_image'],
                                 $data['status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if(isset($_POST['btnDeny'])){
+                    
+                      $status	= $_POST['status'];
+                      $businesspermit_id = $_POST['businesspermit_id'];
+
+                      $sql = "UPDATE businesspermit SET status = 'Deny' WHERE businesspermit_id = $businesspermit_id";
+
+                      if (mysqli_query($connect, $sql)) {
+                        echo "<script>
+                                  alert('Denied Request!');
+                                  window.location.href='businesspermit.php';
+                              </script>";
+                      } else {
+                        echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
+
+                  
+
+                  if(isset($_POST['markasdone'])){
+
+                      $status	= $_POST['status'];
+                      $businesspermit_id = $_POST['businesspermit_id'];
+
+                      $sql = "UPDATE businesspermit SET status = 'Approved' WHERE businesspermit_id = $businesspermit_id";
+
+                      if (mysqli_query($connect, $sql)) {
+                      echo "<script>
+                                  alert('Mark as Done Successfully!');
+                                  window.location.href='businesspermit.php';
+                              </script>";
+                      } else {
+                      echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                     
                 ?>
 
@@ -310,67 +354,61 @@ if(!isset($_SESSION["type"]))
                     </h5>
                 </div>
                 <hr>
-                <form method="post">
+                <div style="float: right;">
+                    <a href="businesspermit.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    </a>
+                </div>
+                <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['businesspermit_id']; ?></td>
+                            <td><input type="hidden" name="approved_bpermitid" value="<?php echo $data['businesspermit_id']; ?>"><?php echo $data['businesspermit_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Date Issued</th>
-                            <td><strong><?php echo $data['dateissued']; ?></strong></td>
+                            <td><input type="hidden" name="dateissued" value="<?php echo $data['dateissued']; ?>"><strong><?php echo $data['dateissued']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Selection</th>
-                            <td><strong><?php echo $data['selection']; ?></strong></td>
+                            <td><input type="hidden" name="selection" value="<?php echo $data['selection']; ?>"><strong><?php echo $data['selection']; ?></strong></td>
                         </tr>
                         <tr>
-                            <th width="30%">Firstname</th>
-                            <td><strong><?php echo $data['firstname']; ?></strong></td>
+                            <th width="30%">Full name</th>
+                            <td><input type="hidden" name="fullname" value="<?php echo $data['fullname']; ?>"><strong><?php echo $data['fullname']; ?></strong></td>
                         </tr>
-                        <tr>
-                            <th width="30%">Middlename</th>
-                            <td><?php echo $data['middlename']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Lastname</th>
-                            <td ><?php echo $data['lastname']; ?></td>
-                        </tr>
+
                  </table>
                     <table id="viewdetails" class="font-sizee">
                         <tr>
-                            <th width="30%">Date Issued</th>
-                            <td ><?php echo $data['contactno']; ?></td>
+                            <th width="30%">Contact no</th>
+                            <td><input type="hidden" name="contactno" value="<?php echo $data['contactno']; ?>"><?php echo $data['contactno']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Business name</th>
-                            <td ><?php echo $data['businessname']; ?></td>
+                            <td><input type="hidden" name="businessname" value="<?php echo $data['businessname']; ?>"><?php echo $data['businessname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Business Address</th>
-                            <td ><?php echo $data['businessaddress']; ?></td>
+                            <td><input type="hidden" name="businessaddress" value="<?php echo $data['businessaddress']; ?>"><?php echo $data['businessaddress']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Plate no</th>
-                            <td ><?php echo $data['plateno']; ?></td>
+                            <td><input type="hidden" name="plateno" value="<?php echo $data['plateno']; ?>"><?php echo $data['plateno']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Email</th>
-                            <td ><?php echo $data['email_add']; ?></td>
+                            <td><input type="hidden" name="email_add" value="<?php echo $data['email_add']; ?>"><?php echo $data['email_add']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Document Type</th>
+                            <td><input type="hidden" name="permitfilechoice" value="<?php echo $data['permitfilechoice']; ?>"><?php echo $data['permitfilechoice']; ?></td>
                         </tr>
                     </table>
                     </div>
                     <br>
-                    <h6>Identification Card (Click to Zoom): </h6>
-                    <div id="myModal" class="modal" style="display: absolute;">
-                        <span class="close">&times;</span>
-                        <img src="../img/fileupload_permit/<?php echo $data['businessid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img id="myImg" src="../img/fileupload_permit/<?php echo $data['businessid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div>
-                </form>
+                
                 <br>
                 <div id="option_menu">
                       <div class="information col">
@@ -380,12 +418,47 @@ if(!isset($_SESSION["type"]))
 
                           <div class="information col">
                         <label class="employee-label"> Approved By </label>
-                          <input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                          <input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
                       </div>
-                        <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
-                        <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="businesspermit.php">Back</a>
-                </div>
+                      <div class="information col">
+                      <label class="employee-label ">Attach 2x2 Pic</label>
+                          <input type='file' class="form-control" name='businessid_image' id="businessid_image"/>
+                          <?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?>
+                      </div>
+                      <input type="hidden" name="status" id="status" value="Approved">
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertpermit">Approve</button></a>
+                </form>
+                      <form action="" method="post">
+                                <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+                            </div>
+                        </form>
+                        <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                            ?>
+                        
+                                <form action="" method="post">
+                                    <div>
+                                    
+                                        <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
+                                        <input type="hidden" name="status" id="status" value="Approved">
+                                        <div style="text-align: center;"><?php echo $_SESSION['result']?> </div>
+                                        <button type="submit" style="cursor: pointer; margin-bottom: 5px;" class="form-control generate viewbtn done" id="markasdone" name="markasdone">Mark as done <i class="bx bx-check"></i></button>
+                                        
+                                    </div>
+                                </form>
+                            <?php
+                                }else{
+                            ?>
+                                <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                            <?php
+                                }
+                                unset($_SESSION['result']);
+                                unset($_SESSION['status']);
+                                }
+                            ?>
                 
                 </div>
                             

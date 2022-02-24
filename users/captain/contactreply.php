@@ -111,7 +111,7 @@ include "db/announcementquery.php";
 					<img class="profile_pic" >
 					<div class="name_job" style="font-size: 13px;">
 						<div><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 						</div>
 					</div>
 					<a href="officiallogout.php">

@@ -1,4 +1,5 @@
 <?php session_start();
+include('../announcement_includes/functions.php'); 
 
 if(!isset($_SESSION["type"]))
 {
@@ -35,7 +36,7 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-
+	<link rel="stylesheet" href="../announcement_css/custom.css">
 	<!--Customize-->
 
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -53,6 +54,12 @@ if(!isset($_SESSION["type"]))
 	 
 	 
 	 <style>
+		  *{font-size: 13px;
+			font-family: "Poppins" , sans-serif;
+			}
+		 .home-section{
+			min-height: 95vh;
+			}
 		div.align-box{padding-top: 23px; display: flex; align-item: center;}
 		.box-report{
 			width: 300px;
@@ -65,16 +72,9 @@ if(!isset($_SESSION["type"]))
 
 		}
 		
-		 i.menu{color: #fff}
-		 i.id{color: #a809b0}
-		 i.clearance{color: #1cb009}
-		 i.sms{color: #478eff}
-		 i.blotter-com{color: #9e0202}
-		 i.indigency{color: #0218bd}
-		 i.permit{color: #e0149c}
-		 i.ikon{color: red;}
 
-		.w3borderbot{ border-bottom-left-radius: 15px;  border-bottom-right-radius: 15px; margin-bottom: 20px; background: #71b280;}
+
+		.w3borderbot{ margin-bottom: 20px; background: #04AA6D;border-bottom-left-radius: 15px;  border-bottom-right-radius: 15px; margin-left: 15px;} 
 
 		.notification {
 		color: white;
@@ -86,6 +86,9 @@ if(!isset($_SESSION["type"]))
 		width: 95%;
 		}
 
+		.w3borderbot:hover{cursor: pointer; background: orange; color: white}
+
+		.opac{opacity: 0.5;}
 
 		.notification .badge {
 		position: absolute;
@@ -95,10 +98,55 @@ if(!isset($_SESSION["type"]))
 		border-radius: 50%;
 		background-color: #ff4f4f;
 		color: white;
-		font-size: 16px;
+		font-size: 14px;
 		}
 		.w3top{margin-top: -30px;}
 
+		input.edit, input.del{width: 80;}
+		
+		.closebtn{margin-right: 15px; font-stretch: expanded;}
+		.closebtn:hover{color:red; }
+		.description{ height: 50px; font-size: 13px;}
+
+		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
+		.fileupload{font-size: 13px; margin-left: 15px;}
+		.pagination{margin-top: 32%}
+		.page{margin-left: 15px; }
+		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
+		.topright:hover {text-align: right;color: red; cursor: pointer;}
+
+		.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+			font-size: 14px;
+			height: 35px;
+			width: 100%;
+			padding: 10px 10px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
+		.edit{width: 40%; color: #9f6000; background: #feef83; margin-bottom: 5px; border-radius: 5px;}
+		.del{width: 40%;}
+		.select__select{margin-top: -32px; padding-left: 180px;}
+
+		.bcircle:hover{color: black}
+		.imgup{display: flex; justify-content: center; align-items: center;  padding: 5px 5px 5px 5px; margin-left: 20px; margin-right: 25px; }
+		.btnwidth{width: 70%; margin-bottom: 5px;}
+		.announcedesc{margin-left: 20px;}
+		.btnmargin{margin-bottom: 5px;}
+		.hoverbtn:hover{background: orange;}
+		.btnwidths{width: 40%}
+		.descriptionStyle{overflow:auto; resize:none;}
+		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
+		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
+
+		.transact{margin-left: 65%; }
+		.w3-quarter{margin-bottom: 10px;}
+
+		.w3back{background: #04AA6D}
+		.w3point:hover{cursor: pointer; background: orange; color: green}
 	 </style>
    </head>
 	<body>
@@ -148,13 +196,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+			  
+			  <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			 
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -186,7 +242,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="barangayid.php" class="notification">
 			<div class="w3-container w3-padding-16 w3borderbot">
-				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -207,7 +263,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="certificateofindigency.php" class="notification">
 			<div class="w3-container w3-padding-16 w3borderbot">
-				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -230,7 +286,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="barangayclearance.php" class="notification">
 			<div class="w3-container w3-padding-16 w3borderbot">
-				<div class="w3-left"><i class="bx bxs-bell-ring w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bxs-bell-ring w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -251,7 +307,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="businesspermit.php" class="notification">
 			<div class="w3-container w3-padding-16 w3borderbot">
-				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bxs-bell-ring fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -273,11 +329,11 @@ if(!isset($_SESSION["type"]))
 				<h3>Welcome to Document Request Department! <?php echo $user;?></h3>
 			</span> -->
 
-		<div class="w3-row-padding w3-margin-bottom w3top">
+		<!-- <div class="w3-row-padding w3-margin-bottom w3top">
 			<div class="w3-quarter">
 			<a href="barangayidapproval.php" class="notification">
 				<div class="w3-container w3borderbot w3-padding-16" w3borderbot>
-					<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
 					<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
@@ -300,7 +356,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="indigencyapproval.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -322,11 +378,11 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="clearanceapproval.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
-					$query = "SELECT * FROM barangayclearance WHERE clearance_status = 'Approved' ORDER BY clearance_id";
+					$query = "SELECT * FROM approved_clearance WHERE clearance_status = 'Done' ORDER BY approved_clearanceids";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -342,7 +398,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="businesspermitapproval.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -361,12 +417,12 @@ if(!isset($_SESSION["type"]))
 			<a>
 			</div>
 			
-	</div>		
-	<div class="w3-row-padding w3-margin-bottom w3top">
+	</div>		 -->
+	<!-- <div class="w3-row-padding w3-margin-bottom w3top">
 			<div class="w3-quarter">
 			<a href="barangayiddeny.php" class="notification">
 				<div class="w3-container w3borderbot w3-padding-16" w3borderbot>
-					<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
 					<div class="w3-right">
 					<?php 
 						require '../db/conn.php';
@@ -389,7 +445,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="indigencydenied.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-x-circle w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -411,7 +467,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="clearancedenied.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -431,7 +487,7 @@ if(!isset($_SESSION["type"]))
 			<div class="w3-quarter">
 			<a href="businesspermitdenied.php" class="notification">
 			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -449,8 +505,10 @@ if(!isset($_SESSION["type"]))
 			</div>
 			<a>
 			</div>
-			
-	</div>		
+			 -->
+
+			 <h3 style="text-align: center;">Statistics: Using Bar Chart</h3>
+	</div>
 			</section>
 			<script href="test.js"></script>
 	</body>

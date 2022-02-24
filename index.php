@@ -287,9 +287,9 @@ include "db/user.php";
                     <span onclick="document.getElementById('id01').style.display='none'" class="topright">&times;</span>	
                     
                     <span class="imgcontainer">
-						          <label>
+						<label>
                             <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
-						          </label>
+					    </label>
                     </span>
         
                     <div class="form-bar">

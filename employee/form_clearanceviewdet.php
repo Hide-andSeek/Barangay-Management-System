@@ -4,6 +4,7 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
 
 if(!isset($_SESSION["type"]))
 {
@@ -78,7 +79,6 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
 
      <title> Details: Barangay Clearance </title>
 	 
@@ -181,6 +181,10 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
+        .hoverback:hover{background: orange; border-radius: 70%;}
+        .usersel{pointer-events: none; border: 1px solid orange}
+        .viewbtn{width: 100%; height: 35px;  background-color: #91D9F1; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -228,13 +232,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+
+              <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -302,6 +314,41 @@ if(!isset($_SESSION["type"]))
                         $stmt->close();
                     }
                     
+                    if(isset($_POST['btnDeny'])){
+                    
+                        $clearance_status	= $_POST['clearance_status'];
+                        $clearance_id = $_POST['clearance_id'];
+
+                        $sql = "UPDATE barangayclearance SET clearance_status = 'Deny' WHERE clearance_id = $clearance_id";
+
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Denied Request!');
+                                    window.location.href='barangayclearance.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
+
+                    
+
+                    if(isset($_POST['markasdone'])){
+
+                        $clearance_status	= $_POST['clearance_status'];
+                        $clearance_id = $_POST['clearance_id'];
+
+                        $sql = "UPDATE barangayclearance SET clearance_status = 'Approved' WHERE clearance_id = $clearance_id";
+
+                        if (mysqli_query($connect, $sql)) {
+                        echo "<script>
+                                    alert('Mark as Done Successfully!');
+                                    window.location.href='barangayclearance.php';
+                                </script>";
+                        } else {
+                        echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
                 ?>
 
             <div>
@@ -312,90 +359,137 @@ if(!isset($_SESSION["type"]))
                     </h5>
                 </div>
                 <hr>
-                <form method="post">
+                <div style="float: right;">
+                    <a href="barangayclearance.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    </a>
+                </div>
+                <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe> -->
+                
+                <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['clearance_id']; ?></td>
+                            <td><input type="hidden" name="approved_clearanceids" value="<?php echo $data['clearance_id']; ?>"><?php echo $data['clearance_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Fullname</th>
-                            <td><strong><?php echo $data['full_name']; ?></strong></td>
+                            <td><input type="hidden" name="full_name" value="<?php echo $data['full_name']; ?>"><strong><?php echo $data['full_name']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Age</th>
-                            <td><strong><?php echo $data['age']; ?></strong></td>
+                            <td><input type="hidden" name="age" value="<?php echo $data['age']; ?>"><strong><?php echo $data['age']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Status</th>
-                            <td><strong><?php echo $data['status']; ?></strong></td>
+                            <td><input type="hidden" name="status" value="<?php echo $data['status']; ?>"><strong><?php echo $data['status']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Nationality</th>
-                            <td ><?php echo $data['nationality']; ?></td>
+                            <td><input type="hidden" name="nationality" value="<?php echo $data['nationality']; ?>"><?php echo $data['nationality']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Address</th>
-                            <td ><?php echo $data['address']; ?></td>
+                            <td><input type="hidden" name="address" value="<?php echo $data['address']; ?>"><?php echo $data['address']; ?></td>
                         </tr>
-                       
                         <tr>
                             <th width="30%">Contact No</th>
-                            <td><?php echo $data['contactno']; ?></td>
+                            <td><input type="hidden" name="contactno" value="<?php echo $data['contactno']; ?>"><?php echo $data['contactno']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Email</th>
-                            <td><strong><?php echo $data['emailadd']; ?></strong></td>
+                            <td><input type="hidden" name="emailadd" value="<?php echo $data['emailadd']; ?>"><strong><?php echo $data['emailadd']; ?></strong></td>
                         </tr>
                     </table>
                         <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">Purpose</th>
-                            <td><strong><?php echo $data['purpose']; ?></strong></td>
+                            <td><input type="hidden" name="purpose" value="<?php echo $data['purpose']; ?>"><strong><?php echo $data['purpose']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Date Issued</th>
-                            <td><?php echo $data['date_issued']; ?></td>
+                            <td><input type="hidden" name="date_issued" value="<?php echo $data['date_issued']; ?>"><?php echo $data['date_issued']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">CTC no</th>
-                            <td><?php echo $data['ctc_no']; ?></td>
+                            <td><input type="hidden" name="ctc_no" value="<?php echo $data['ctc_no']; ?>"><?php echo $data['ctc_no']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Issued at</th>
-                            <td><?php echo $data['issued_at']; ?></td>
+                            <td><input type="hidden" name="issued_at" value="<?php echo $data['issued_at']; ?>"><?php echo $data['issued_at']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Precint No</th>
-                            <td><?php echo $data['precint_no']; ?></td>
+                            <td><input type="hidden" name="precint_no" value="<?php echo $data['precint_no']; ?>"><?php echo $data['precint_no']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Document Type</th>
+                            <td><input type="hidden" name="filechoice" value="<?php echo $data['precint_no']; ?>"><?php echo $data['precint_no']; ?></td>
                         </tr>
                     </table>
                     </div>
                     <br>
-                    <h6>Identification Card (Click to Zoom): </h6>
+                    <!-- <h6>Identification Card (Click to Zoom): </h6>
                     <div id="myModal" class="modal" style="display: absolute;">
                         <span class="close">&times;</span>
                         <img src="../img/fileupload_clearance/<?php echo $data['certificate_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
                         <img id="myImg" src="../img/fileupload_clearance/<?php echo $data['certificate_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div>
-                </form>
+                    </div> -->
+                
                 <br>
                 <div id="option_menu">
-                    <div class="information col">
-						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
-					</div>
-
+                    
 			        <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+							<input class="form-control btnmargin inputtext control-label usersel" id="app_by" value="<?php echo $user; ?>" placeholder="Employee Name" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 					</div>
-                        <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
-                        <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="barangayclearance.php">Back</a>
+                    <div class="information col">
+						<label class="employee-label">Approval Date </label>
+							<input type="date" class="form-control btnmargin inputtext control-label usersel" id="approvedate" name="app_date">
+					</div>
+
+                    <div class="information col">
+						<label class="employee-label ">Attach 2x2 Pic</label>
+                        <input type='file' class="form-control" name='clearanceid_image' id="clearanceid_image"/>
+                        <?php echo isset($error['clearanceid_image']) ? $error['clearanceid_image'] : '';?>
+					</div>
+                    <input type="hidden" name="clearance_status" id="clearance_status" value="Approved">
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertclearance">Approve</button></a>
+                </form>
+                        <form action="" method="post">
+                                <input type="hidden" name="clearance_id" id="clearance_id" value="<?php echo $data['clearance_id']; ?>">
+                                <input type="hidden" name="clearance_status" id="clearance_status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+                            </div>
+                        </form>
+                        <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                            ?>
+                        
+                                <form action="" method="post">
+                                    <div>
+                                    
+                                        <input type="hidden" name="clearance_id" id="clearance_id" value="<?php echo $data['clearance_id']; ?>">
+                                        <input type="hidden" name="clearance_status" id="clearance_status" value="Approved">
+                                        <div style="text-align: center;"><?php echo $_SESSION['result']?> </div>
+                                        <button type="submit" style="cursor: pointer; margin-bottom: 5px;" class="form-control generate viewbtn done" id="markasdone" name="markasdone">Mark as done <i class="bx bx-check"></i></button>
+                                        
+                                    </div>
+                                </form>
+                            <?php
+                                }else{
+                            ?>
+                                <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                            <?php
+                                }
+                                unset($_SESSION['result']);
+                                unset($_SESSION['status']);
+                                }
+                            ?>
                 </div>
                 
                 </div>

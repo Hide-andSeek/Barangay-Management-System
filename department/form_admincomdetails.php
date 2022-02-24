@@ -4,6 +4,8 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
+include('../send_email.php');
 
 if(!isset($_SESSION["type"]))
 {
@@ -28,34 +30,7 @@ if(!isset($_SESSION["type"]))
 ?>
 
 
-<?php
 
-// require '../vendor/autoload.php';
-
-// use SMSGatewayMe\Client\ApiClient;
-// use SMSGatewayMe\Client\Configuration;
-// use SMSGatewayMe\Client\Api\MessageApi;
-// use SMSGatewayMe\Client\Model\SendMessageRequest;
-
-// // Configure client
-// $config = Configuration::getDefaultConfiguration();
-// $config->setApiKey('Authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTYzOTY1MTE0MCwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjkyMDA2LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.lPTgmVIR-RnDz2Z2OBr-lRcoy3Ppgi_5Nt-qQ_61eWE');
-// $apiClient = new ApiClient($config);
-// $messageClient = new MessageApi($apiClient);
-
-// if (isset($_POST["number"]) && isset($_POST["msg"])) {
-//     // Sending a SMS Message
-//     $sendMessageRequest2 = new SendMessageRequest([
-//         'phoneNumber' => $_POST["number"],
-//         'message' => $_POST["msg"],
-//         'deviceId' => 126644
-//     ]);
-//     $sendMessages = $messageClient->sendMessages([
-//         $sendMessageRequest2
-		
-//     ]);
-// }
-?>
 
 
 <!DOCTYPE html>
@@ -69,7 +44,7 @@ if(!isset($_SESSION["type"]))
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
-	<link rel="stylesheet/less" type="text/css" href="../css/animated.less" />
+
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -94,7 +69,6 @@ if(!isset($_SESSION["type"]))
         #viewdetails {
           border-collapse: collapse;
           width: 100%;
-          box-shadow:  0 3px 10px rgba(0 0 0/ 0.2)
         }
 
         #viewdetails td, #viewdetails th {
@@ -127,7 +101,7 @@ if(!isset($_SESSION["type"]))
         .modal {
         display: absolute; /* Hidden by default */
         z-index: 1; /* Sit on top */
-        padding-top: 120px; /* Location of the box */
+        padding-top: 50px; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%; /* Full width */
@@ -140,8 +114,8 @@ if(!isset($_SESSION["type"]))
         .modal-content {
         display: absolute;
         margin: auto;
-        width: 80%;
         max-width: 700px;
+        width: 60%;
         }
 
 
@@ -180,6 +154,23 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
+        .emailwidth{width: 95%; }
+        .main-content{display:flex;}
+        .main-content-email{padding: 20px;}
+        span.topright{
+			text-align: right;
+			padding:8px 24px;
+			font-size: 25px;
+            }
+            .topright:hover {
+                color: red;
+                cursor: pointer;
+                float: right;
+                padding:8px 24px;
+            }
+            .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .usersel{pointer-events: none; border: 1px solid orange}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -229,19 +220,12 @@ if(!isset($_SESSION["type"]))
 			   <span class="tooltip">BCPC</span>
 			 </li>
 			  
-			 <li>
-			   <a class="side_bar" href="vawc_sms.php">
-				 <i class='bx bx-mail-send sms'></i>
-				 <span class="links_name">SMS</span>
-			   </a>
-			   <span class="tooltip">SMS</span>
-			 </li>
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -277,7 +261,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, id_type, blotterid_image, status
+                    $sql_query = "SELECT  blotter_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, blotterid_image, complaints, status
                             FROM blotterdb
                             WHERE blotter_id = ?";
                     
@@ -296,178 +280,348 @@ if(!isset($_SESSION["type"]))
                             $data['comp_address'],
                             $data['inci_address'],
                             $data['contactno'],
+                            $data['bemailadd'],
                             $data['n_violator'],
                             $data['violator_age'],
                             $data['violator_gender'],
                             $data['relationship'],
                             $data['violator_address'],
                             $data['witnesses'],
-                            $data['complaints'],
-                            $data['id_type'],
                             $data['blotterid_image'],
+                            $data['complaints'],
                             $data['status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
-                    
-                ?>
 
-            <div>
+                    if(isset($_POST['btnEditt'])){
+                    
+                        $status	= $_POST['status'];
+                        $blotter_id	= $_POST['blotter_id'];
+
+                        $sql = "UPDATE blotterdb SET status = 'Done' WHERE blotter_id = $blotter_id";
+
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Mark as Done Successfully!');
+                                    window.location.href='compAdmin_dashboard.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
+
+                    if(isset($_POST['btnDeny'])){
+                    
+                        $status	= $_POST['status'];
+                        $blotter_id = $_POST['blotter_id'];
+  
+                        $sql = "UPDATE blotterdb SET status = 'Deny' WHERE blotter_id = $blotter_id";
+  
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Denied Request!');
+                                    window.location.href='compAdmin_dashboard.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
+                ?>
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: Admin Complaints Details
+                    View: Admin Complaints
                     </h5>
                 </div>
                 <hr>
+                <?php
+                            if(ISSET($_SESSION['statusadmincomp'])){
+                            if($_SESSION['statusadmincomp'] == "ok"){
+                    ?>
+                   
+                   <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['resultadmincomp']?> <i style="font-size:20px;" class="bx bx-checkbox-checked"></i>
+                    </div>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['resultadmincomp']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['resultadmincomp']);
+                        unset($_SESSION['statusadmincomp']);
+                        }
+                    ?>
+                <div style="float: right; display: inline-block;">
+                
+                    <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
+                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                    </button>
+   
+                    <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
+                        <img src="../img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                    </button>
+                    <a href="compAdmin_dashboard.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="margin-left: 5px;width: 50px; height: 50px; cursor: pointer;" alt="Back?">
+                    </a>
+
+                </div>
+                
                 <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
-                <form method="post">
+                
+                 <div>
+              
+                <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                    ?>
+                   
+                        <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                               
+                                <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Done">
+                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
+                            </div>
+                        </form>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['result']);
+                        unset($_SESSION['status']);
+                        }
+                    ?>
+                <?php
+                if(!isset($filename)){
+                    $filename = "author";
+                }
+                ?>
+                   
+              
+                <!--Modal form for Login-->
+	<div id="formatValidatorName" >
+          <div id="eemail" class="modal">
+                <div class="modal-content animate">
+                    <span onclick="document.getElementById('eemail').style.display='none'" class="topright">&times;</span>	
+                    <form method="POST" action="" class="body" enctype="multipart/form-data">
+                                        <div class="main-content-email">
+                                           
+                                            <div class="main-content main-content1">
+                                                <div class="information col">
+                                                    <p> Fullname: </p>
+                                                    <input class="form-control emailwidth" id="fullname" name="fullname" value="<?php echo $data['n_complainant']; ?>" type="text" placeholder="Enter Fullname">
+                                                </div>
+
+                                                <div class="information col">
+                                                    <p> To: </p>
+                                                    <input required class="form-control emailwidth" id="email" name="email" style="width:100%" value="<?php echo $data['bemailadd']; ?>" type="text" placeholder="Enter Email Address">
+                                                </div>
+                                            </div>
+                                            <div class="main-content">
+                                                <div class="information col">
+                                                    <p>Subject:  </p>
+                                                    <input required class="form-control" style="width: 100%" id="subject" name="subject" type="text" placeholder="Subject"> 
+                                                </div>
+                                            
+
+                                                <!-- <div class="information col">
+                                                    <p>Attachment: </p>
+                                                    <input class="form-control emailwidth" style="background: white;" id="fileattach" name="fileattach" type="file" value=""> 
+                                                </div> -->
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Body: </p>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
+                                                <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
+                                                <script type="text/javascript">                        
+                                                    CKEDITOR.replace( 'message' );
+                                                </script>
+                                            </div>
+
+                                            <div class="sendi">
+                                                <button name="admincompsendemail" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+              </div>
+        </div>
+    </div>
+<!-- SMS -->
+<div id="formatValidatorName" >
+          <div id="ssms" class="modal">
+                <div class="modal-content animate">
+                    <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>	
+                    <form method="POST" action="../send_sms.php" class="body">
+                                        <div class="main-content-email">
+                                           
+                                            <div class="main-content">
+                                                <div class="information col">
+                                                    <p> Fullname: </p>
+                                                    <input class="form-control emailwidth" id="fullname" name="fullname" value="<?php echo $data['n_complainant']; ?>" type="text" placeholder="Enter Fullname">
+                                                </div>
+
+                                                <div class="information col">
+                                                    <p> Contact Number: </p>
+                                                    <input required class="form-control emailwidth" id="number" name="number" value="<?php echo $data['contactno']; ?>" type="text" placeholder="Enter Contact No">
+                                                </div>
+                                            </div>
+
+                                            <div class="information col">
+                                                <p>Body: </p>
+                                                <textarea name="msg" id="msg" class="form-control inputtext" rows="16" placeholder="Your message"></textarea>
+                                            </div>
+
+                                            <div class="sendi">
+                                                <button name="sendSms" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+              </div>
+        </div>
+    </div>
+                    <label><strong>Complaints: </strong></label>
+                    <strong>
+                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="5" ><?php echo $data['complaints']; ?></textarea>
+                    </strong>
+                    <br>
+                 <form method="POST" action="" enctype="multipart/form-data">
                     <div style="display: flex;">
-                    <table id="viewdetails" class="font-sizee">
+                    <table id="viewdetails" class="font-sizee" style="margin-right: 20px;">
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['blotter_id']; ?></td>
+                            <td><input type="hidden" name="admincomp_id" value="<?php echo $data['blotter_id']; ?>"><?php echo $data['blotter_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Complainant's Name</th>
-                            <td><strong><?php echo $data['n_complainant']; ?></strong></td>
+                            <td><input type="hidden" name="n_complainant" value="<?php echo $data['n_complainant']; ?>"><strong><?php echo $data['n_complainant']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Complainant's Age</th>
-                            <td><strong><?php echo $data['comp_age']; ?></strong></td>
+                            <td><input type="hidden" name="comp_age" value="<?php echo $data['comp_age']; ?>"><strong><?php echo $data['comp_age']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Complainant's Gender</th>
-                            <td><strong><?php echo $data['comp_gender']; ?></strong></td>
+                            <td><input type="hidden" name="comp_gender" value="<?php echo $data['comp_gender']; ?>"><strong><?php echo $data['comp_gender']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Complainant's Name</th>
-                            <td ><?php echo $data['comp_address']; ?></td>
+                            <td><input type="hidden" name="comp_address" value="<?php echo $data['comp_address']; ?>"><?php echo $data['comp_address']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Incident Address</th>
-                            <td ><?php echo $data['inci_address']; ?></td>
+                            <td><input type="hidden" name="inci_address" value="<?php echo $data['inci_address']; ?>"><?php echo $data['inci_address']; ?></td>
                         </tr>
                        
                         <tr>
                             <th width="30%">Contact No</th>
-                            <td><?php echo $data['contactno']; ?></td>
+                            <td><input type="hidden" name="contactno" value="<?php echo $data['contactno']; ?>"><?php echo $data['contactno']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Email</th>
+                            <td><input type="hidden" name="bemailadd" value="<?php echo $data['bemailadd']; ?>"><?php echo $data['bemailadd']; ?></td>
                         </tr>
                      </div>                    
                     </table>
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">Name of Violator</th>
-                            <td><strong><?php echo $data['n_violator']; ?></strong></td>
+                            <td><input type="hidden" name="n_violator" value="<?php echo $data['n_violator']; ?>"><strong><?php echo $data['n_violator']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Violator's Age</th>
-                            <td><strong><?php echo $data['violator_age']; ?></strong></td>
+                            <td><input type="hidden" name="violator_age" value="<?php echo $data['violator_age']; ?>"><strong><?php echo $data['violator_age']; ?></strong></td>
                         </tr>
                         <tr>
                             <th width="30%">Violator's Gender</th>
-                            <td><?php echo $data['violator_gender']; ?></td>
+                            <td><input type="hidden" name="violator_gender" value="<?php echo $data['violator_gender']; ?>"><?php echo $data['violator_gender']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Relationship</th>
-                            <td><?php echo $data['relationship']; ?></td>
+                            <td><input type="hidden" name="relationship" value="<?php echo $data['relationship']; ?>"><?php echo $data['relationship']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Violator's Address</th>
-                            <td><?php echo $data['violator_address']; ?></td>
+                            <td><input type="hidden" name="violator_address" value="<?php echo $data['violator_address']; ?>"><?php echo $data['violator_address']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Witnesses</th>
-                            <td><?php echo $data['witnesses']; ?></td>
+                            <td><input type="hidden" name="witnesses" value="<?php echo $data['witnesses']; ?>"><?php echo $data['witnesses']; ?></td>
                         </tr>
-                        <tr>
-                            <th width="30%">Complaints</th>
-                            <td><?php echo $data['complaints']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">ID Type</th>
-                            <td><?php echo $data['id_type']; ?></td>
-                        </tr>
+                        <input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>">
+                        
                     </table>
                     </div>
-                    <br>
-                  
-                    <!-- <h6>Identification Card (Click to Zoom): </h6>
-                    <div id="myModal" class="modal" style="display: absolute;">
-                        <span class="close">&times;</span>
-                        <img src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
-                        
-                        <embed src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>" type="file" width="100%" height="600px;">
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img id="myImg" src="../img/fileupload_blotter/<?php echo $data['blotterid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div> -->
-                    
+                   
                     <div class="information col">
 						<label class="employee-label"> Department </label>
-							<select class="form-control inputtext control-label" style="padding: 0px 0px 0px 5px; " id="dept" name="dept">
+							<select class="form-control inputtext control-label" style="padding: 5px;"  id="dept" name="dept">
 							    <option disabled>--Select--</option>
 								<option value="BCPC">BCPC</option>
 								<option value="VAWC">VAWC</option>
 								<option value="LUPON">LUPON</option>
 								<option value="BPSO">BPSO</option>
-                                <option style="color: red;" value="DENY">DENY</option>
+
 							</select>
 					</div>
 																
 					<div class="information col">
 						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control inputtext control-label" id="approvedate" name="app_date">
+							<input type="date" class="form-control inputtext control-label usersel" id="app_date"  style="padding: 5px;" name="app_date">
 					</div>
 
 			        <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+							<input class="form-control inputtext control-label usersel"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 					</div>
                     <div class="information col">
 						<label class="employee-label ">Attach File </label>
-							<input type="file" class="form-control inputtext control-label" id="filereview" name="filereview">
+							<input type="file" class="form-control inputtext control-label" id="blotterid_image"  style="padding: 5px;" name="blotterid_image">
+                            <?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
 					</div>
                     <br>
                     <div id="option_menu">
-                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="submitbtn">Submit</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="compAdmin_dashboard.php">Back</a>
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertAdminComp">Submit</button></a>
                     </div>
+                </div>
+                </form>      
 
-                </form>
+                        <form action="" method="post">
+                                <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+                            </div>
+                        </form>
+
+                <br>
+                </div>
                 
                 </div>
                             
                 <div class="separator"> </div>
-            </div>
-			
+            </div>       
 	</section>	
     <script>
-        var modal = document.getElementById("myModal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        img.onclick = function(){
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-        }
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() { 
-        modal.style.display = "none";
-        }
-
+        document.querySelector("#app_date").valueAsDate = new Date();
     </script>
     <script>
-        document.querySelector("#approvedate").valueAsDate = new Date();
+     var modal = document.getElementById('eemail');
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }  
+        var modal = document.getElementById('ssms');
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }  
     </script>
 	</body>
 </html>

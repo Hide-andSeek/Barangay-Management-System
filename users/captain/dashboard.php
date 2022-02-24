@@ -119,7 +119,7 @@ include('db/barcharts.php');
 						<img class="profile_pic" >
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id="">User Type: <?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?></div>
 						</div>
 					</div>
 					<a href="officiallogout.php">

@@ -4,6 +4,7 @@ session_start();
 include "../db/conn.php";
 include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+include "../db/viewdetinsert.php";
 
 if(!isset($_SESSION["type"]))
 {
@@ -55,6 +56,8 @@ if(!isset($_SESSION["type"]))
 		
 //     ]);
 // }
+
+
 ?>
 
 
@@ -179,6 +182,7 @@ if(!isset($_SESSION["type"]))
         text-decoration: none;
         cursor: pointer;
         }
+                .hoverback:hover{background: orange; border-radius: 70%;}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -226,13 +230,21 @@ if(!isset($_SESSION["type"]))
 				</a>
 				 <span class="tooltip">Business Permit</span>
 			  </li>
+
+              <li>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
+				</a>
+				 <span class="tooltip">Payment History</span>
+			  </li>
 			
 			 <li class="profile">
 				 <div class="profile-details">
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -301,7 +313,42 @@ if(!isset($_SESSION["type"]))
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if(isset($_POST['btnEdit'])){
                     
+                        $status	= $_POST['status'];
+                        $barangay_id	= $_POST['barangay_id'];
+
+                        $sql = "UPDATE barangayid SET status = 'Deny' WHERE barangay_id = $barangay_id";
+
+                        if (mysqli_query($connect, $sql)) {
+                          echo "<script>
+                                    alert('Denied Request!');
+                                    window.location.href='barangayid.php';
+                                </script>";
+                        } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
+
+                    
+
+                    if(isset($_POST['btnEditt'])){
+
+                        $status	= $_POST['status'];
+                        $barangay_id = $_POST['barangay_id'];
+
+                        $sql = "UPDATE barangayid SET status = 'Approved' WHERE barangay_id = $barangay_id";
+
+                        if (mysqli_query($connect, $sql)) {
+                        echo "<script>
+                                    alert('Mark as Done Successfully!');
+                                    window.location.href='barangayid.php';
+                                </script>";
+                        } else {
+                        echo "Error updating record: " . mysqli_error($connect);
+                        }
+                    }
                 ?>
 
             <div>
@@ -312,55 +359,84 @@ if(!isset($_SESSION["type"]))
                     </h5>
                 </div>
                 <hr>
-                <form method="post">
+                <div style="float: right;">
+                    <a href="barangayid.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    </a>
+                </div>
+                <!-- <iframe src="https://docs.google.com/gview?url=http://remote.url.tld/path/to/document.doc&embedded=true" ></iframe> -->
+                <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://remote.url.tld/img/fileupload_barangayid/<?php echo $data['id_image']; ?>/to/document.doc' width='100%' height='100%' frameborder='0'></iframe> -->
+
+                <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe> -->
+                <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                    ?>
+                   
+                        <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                               
+                                <input type="hidden" name="barangay_id" id="barangay_id" value="<?php echo $data['barangay_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Approved">
+                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
+                            </div>
+                        </form>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['result']);
+                        unset($_SESSION['status']);
+                        }
+                    ?>
+                <form method="post" action="" enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
                         <span><strong> Personal Information</strong></span>
                         <tr>
                             <th width="30%">ID No.</th>
-                            <td><?php echo $data['barangay_id']; ?></td>
+                            <td><input type="hidden" name="app_brgyid" value="<?php echo $data['barangay_id']; ?>"><?php echo $data['barangay_id']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">First Name</th>
-                            <td><?php echo $data['fname']; ?></td>
+                            <td><input type="hidden" name="fname" value="<?php echo $data['fname']; ?>"><?php echo $data['fname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Middle Name</th>
-                            <td><?php echo $data['mname']; ?></td>
+                            <td><input type="hidden" name="mname" value="<?php echo $data['mname']; ?>"><?php echo $data['mname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Last Name</th>
-                            <td><?php echo $data['lname']; ?></td>
+                            <td><input type="hidden" name="lname" value="<?php echo $data['lname']; ?>"><?php echo $data['lname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Address</th>
-                            <td ><?php echo $data['address']; ?></td>
+                            <td><input type="hidden" name="address" value="<?php echo $data['address']; ?>"><?php echo $data['address']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Birthday</th>
-                            <td ><?php echo $data['birthday']; ?></td>
+                            <td><input type="hidden" name="birthday" value="<?php echo $data['birthday']; ?>"><?php echo $data['birthday']; ?></td>
                         </tr>
                        
                         <tr>
                             <th width="30%">Place of Birth</th>
-                            <td><?php echo $data['placeofbirth']; ?></td>
+                            <td><input type="hidden" name="placeofbirth" value="<?php echo $data['placeofbirth']; ?>"><?php echo $data['placeofbirth']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Precint no.</th>
-                            <td><?php echo $data['precintno']; ?></td>
+                            <td><input type="hidden" name="precintno" value="<?php echo $data['precintno']; ?>"><?php echo $data['precintno']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Contact</th>
-                            <td><?php echo $data['contact_no']; ?></td>
+                            <td><input type="hidden" name="contact_no" value="<?php echo $data['contact_no']; ?>"><?php echo $data['contact_no']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Email Address</th>
-                            <td><?php echo $data['emailadd']; ?></td>
+                            <td><input type="hidden" name="emailadd" value="<?php echo $data['emailadd']; ?>"><?php echo $data['emailadd']; ?></td>
                         </tr>
-                        <tr>
-                            <th width="30%">Document Type</th>
-                            <td><?php echo $data['brgyidfilechoice']; ?></td>
-                        </tr>
+                 
                     </table>
                     <br>
                     <div><strong> In case of Emergency:</strong></div>
@@ -368,46 +444,61 @@ if(!isset($_SESSION["type"]))
                     <table id="viewdetails" class="font-sizee">
                         <tr>
                             <th width="30%">Guardian name</th>
-                            <td><?php echo $data['guardianname']; ?></td>
+                            <td><input type="hidden" name="guardianname" value="<?php echo $data['guardianname']; ?>"><?php echo $data['guardianname']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Emergency Contact</th>
-                            <td><?php echo $data['emrgncycontact']; ?></td>
+                            <td><input type="hidden" name="emrgncycontact" value="<?php echo $data['emrgncycontact']; ?>"><?php echo $data['emrgncycontact']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Guardian Address</th>
-                            <td><?php echo $data['reladdress']; ?></td>
+                            <td><input type="hidden" name="reladdress" value="<?php echo $data['reladdress']; ?>"><?php echo $data['reladdress']; ?></td>
                         </tr>
                         <tr>
                             <th width="30%">Date Issued</th>
-                            <td><?php echo $data['dateissue']; ?></td>
+                            <td><input type="hidden" name="dateissue" value="<?php echo $data['dateissue']; ?>"><?php echo $data['dateissue']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Document Type</th>
+                            <td><input type="hidden" name="brgyidfilechoice" value="<?php echo $data['brgyidfilechoice']; ?>"><?php echo $data['brgyidfilechoice']; ?></td>
                         </tr>
                     </table>
                     </div>
                     <br>
-                    <h6>Identification Card (Click to Zoom): </h6>
-                    <div id="myModal" class="modal" style="display: absolute;">
+                    <!-- <div id="myModal" class="modal" style="display: absolute;">
                         <span class="close">&times;</span>
                         <img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
                         <img id="myImg" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div>
-                </form>
+                    </div> -->
+                
                 <br>
                 <div id="option_menu">
+                    <div class="information col">
+						<label class="employee-label"> Approved By </label>
+							<input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+					</div>
                     <div class="information col">
 						<label class="employee-label ">Approval Date </label>
 							<input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
 					</div>
-
-			        <div class="information col">
-						<label class="employee-label"> Approved By </label>
-							<input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="app_by" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                    <input type="hidden" name="status" id="status" value="Approved">
+                    <div class="information col">
+						<label class="employee-label ">Attach 2x2 Pic</label>
+                        <input type='file' class="form-control" name='id_image' id="id_image"/>
+                        <?php echo isset($error['id_image']) ? $error['id_image'] : '';?>
 					</div>
-                        <a><button class="btn btn-success font-sizee form-control btnmargin">Approve</button></a>
-                        <a href=announcement_delannouncement.php?id=<?php echo $ID; ?>"><button class="btn btn-danger font-sizee form-control btnmargin">Deny</button></a>
-                        <a class="btn-primary btn font-sizee form-control" style="margin-bottom: 30px;" href="barangayid.php">Back</a>
+                 
+                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertappbrgyid">Approve</button></a>
+                </form>
+
+                        <form action="" method="post">
+                                <input type="hidden" name="barangay_id" id="barangay_id" value="<?php echo $data['barangay_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Deny">
+                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnEdit">Deny</button></a>
+                            </div>
+                        </form>
                 </div>
                 
                 </div>

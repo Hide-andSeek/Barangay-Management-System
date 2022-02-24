@@ -156,7 +156,7 @@ require 'db/conn.php';
 						<img class="profile_pic" >
 						<div class="name_job" style="font-size: 13px;">
 							<div><strong><?php echo $user;?></strong></div>
-							<div class="job" id="">User Type: <?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?></div>
 							</div>
 						</div>
 						<a href="officiallogout.php">
@@ -228,7 +228,7 @@ require 'db/conn.php';
 							?>
 						</table>
 			</div>
-				<form method="POST" action="send_email.php">
+				<form method="POST" action="send_email.php" enctype="multipart/form-data">
 					<div class="main-content-email">
 					<fieldset>
 						<legend style=" text-align: center;">Compose Email</legend>	
@@ -260,14 +260,20 @@ require 'db/conn.php';
 
 						<div class="information col">
 							<label class="employee-label"> Email: </label>
-							<input required class="form-control inputtext usersel email em" id="email" name="email" type="text">
+							<input required class="form-control inputtext email em" id="email" name="email" type="text">
 						</div>
 
 						<div class="information col">
 							<label class="employee-label">Subject:  </label>
-							<input required class="form-control inputtext email" id="subject" id="subject" name="subject" type="text"> 
+							<input required class="form-control inputtext email" id="subject" name="subject" type="text"> 
 						</div>
-						
+					
+
+						<div class="information col">
+							<label class="employee-label">Attachment: </label>
+							<input required class="form-control inputtext email" id="fileattach" name="fileattach" type="file"> 
+						</div>
+
 						<div class="information col textarea">
 							<label>Body: </label>
 							<textarea name="message" id="message" class="form-control" rows="32">Hello Good Day!, we received your concern</textarea>

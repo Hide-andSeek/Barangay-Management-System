@@ -159,7 +159,7 @@ if(!isset($_SESSION["type"]))
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">
@@ -194,7 +194,7 @@ if(!isset($_SESSION["type"]))
 				<?php 
 					require '../db/conn.php';
 
-					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY blotterID";
+					$query = "SELECT * FROM admin_complaints Where dept='LUPON' ORDER BY admincomp_id";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 

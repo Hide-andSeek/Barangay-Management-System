@@ -55,6 +55,23 @@ if(!isset($_SESSION["type"]))
 		
 //     ]);
 // }
+
+
+if(isset($_POST['btnverify'])){
+
+	$payment_status	= $_POST['payment_status'];
+	$document_id = $_POST['document_id'];
+
+	$sql = "UPDATE payments SET payment_status = 'Paid' WHERE document_id = $document_id";
+
+	if (mysqli_query($connect, $sql)) {
+		$_SESSION['status'] ="Verified Successfully";
+        $_SESSION['status_code'] ="success";
+	} else {
+		$_SESSION['status'] ="Oh there's an Error";
+        $_SESSION['status_code'] ="errpr";
+	}
+}
 ?>
 
 
@@ -70,6 +87,8 @@ if(!isset($_SESSION["type"]))
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/documentprint_styles.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
+	<script src="../resident-js/sweetalert.min.js"></script>
+
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
@@ -79,7 +98,7 @@ if(!isset($_SESSION["type"]))
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
+	 <!-- <meta http-equiv="refresh" content="120"> -->
 
      <title> Barangay ID - Approved Documents </title>
 	 
@@ -89,24 +108,24 @@ if(!isset($_SESSION["type"]))
 		 .home-section{
 			min-height: 95vh;
 			}
-		
+
 
 		.addannounce{margin-top: 340px; margin-left: 25px; font-size: 13px;}
 		.fileupload{font-size: 13px; margin-left: 15px;}
 		.pagination{margin-top: 32%}
 		.page{margin-left: 15px; }
-		span.topright{margin-left: -50px; text-align: right; font-size: 25px;}
+		span.topright{text-align: right; font-size: 25px;}
 		.topright:hover {text-align: right;color: red; cursor: pointer;}
 
-	  	.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
+		.submitbtn, .cattxtbox, .refreshbtn, .fileimg{
 			font-size: 14px;
 			height: 35px;
-			width: 84%;
+			width: 100%;
 			padding: 10px 10px;
-			margin: 4px 25px;
 			display: inline-block;
 			border: 1px solid #ccc;
 			box-sizing: border-box;
+			text-align: center;
 		}
 
 		.errormsg, .del{color: #d8000c; background: #ffbaba; border-radius: 5px;}
@@ -162,9 +181,47 @@ if(!isset($_SESSION["type"]))
 		.borderb{border-bottom: 1px solid black}
 		.replybtn{ width: 110px; background-color: white;color: black;border: 1px solid #555555;}
 		.replybtn:hover{background-color: #555555;color: white;}
+		.hoverback:hover{background: orange; border-radius: 70%;}
+		
+		  /* The Modal (background) */
+		  .modal {
+			display: none; 
+			position: absolute; 
+			z-index: 9999; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 100%; 
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4); 
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+			font-family: 'Montserrat', sans-serif;
+			padding-top: 1%;
+			background-color: #fefefe;
+			margin: 5% auto 2% auto;
+			border: 1px solid #888;
+			width: 60%; 
+			padding:20px;
+			z-index: 9999;
+        }
+
+        /* Add Animation */
+        .modal-content, #caption {  
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+        }
+		
+		.emailwidth{width: 40%;}
+		.mrgin{margin-right: 20px;}
 	 </style>
    </head>
 	<body>
+		
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
@@ -213,11 +270,11 @@ if(!isset($_SESSION["type"]))
 			  </li>
 
 			  <li>
-				<a class="side_bar" href="businesspermit.php">
-				   <i class='bx bx-news permit'></i>
-				  <span class="links_name">Payment</span>
+				<a class="side_bar" href="payment_history.php">
+				   <i class='bx bx-data payment'></i>
+				  <span class="links_name">Payment History</span>
 				</a>
-				 <span class="tooltip">Payment</span>
+				 <span class="tooltip">Payment History</span>
 			  </li>
 			
 			 <li class="profile">
@@ -225,7 +282,7 @@ if(!isset($_SESSION["type"]))
 				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -238,9 +295,9 @@ if(!isset($_SESSION["type"]))
 		  <section class="home-section">
 																						<!-- Top Section -->
 			  <section class="top-section">
-				  <div class="top-content">
+			  <div class="top-content">
 					<div>
-						<a href="postannouncement.php" style="text-decoration: none; color: white;">Barangay ID</a><label> >> </label><a href="#" style="text-decoration: underline; color: black;">Approved Barangay ID Request</a>
+						<h5>Barangay ID >> Approved Request
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -266,14 +323,14 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Approved'
-				ORDER BY barangay_id DESC";
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+					FROM approved_brgyids WHERE status = 'Approved'
+				ORDER BY app_brgyid DESC";
 	}else{
-		$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-				FROM barangayid
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+				FROM approved_brgyids
 				WHERE fname LIKE ? 
-				ORDER BY barangay_id DESC";
+				ORDER BY app_brgyid DESC";
 	}
 	
 	
@@ -287,21 +344,25 @@ if(!isset($_SESSION["type"]))
 		$stmt->execute();
 		// store result 
 		$stmt->store_result();
-		$stmt->bind_result($data['barangay_id'], 
+		$stmt->bind_result($data['app_brgyid'], 
 					$data['fname'],
 					$data['mname'],
 					$data['lname'],
 					$data['address'],
 					$data['birthday'],
 					$data['placeofbirth'],
+					$data['precintno'],
 					$data['contact_no'],
 					$data['emailadd'],
 					$data['guardianname'],
 					$data['emrgncycontact'],
 					$data['reladdress'],
 					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+					$data['id_image'],
+					$data['brgyidfilechoice'],
+					$data['approvedby'],
+					$data['app_date'],
+					$data['status']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -315,7 +376,7 @@ if(!isset($_SESSION["type"]))
 	}
 					
 	// number of data that will be display per page		
-	$offset = 5;
+	$offset = 10;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
@@ -326,14 +387,14 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-				FROM barangayid WHERE status = 'Approved'
-				ORDER BY barangay_id DESC LIMIT ?, ?";
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+				FROM approved_brgyids WHERE status = 'Approved'
+				ORDER BY app_brgyid DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-				FROM barangayid 
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+				FROM approved_brgyids 
 				WHERE fname LIKE ? 
-				ORDER BY barangay_id DESC LIMIT ?, ?";
+				ORDER BY app_brgyid DESC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -348,21 +409,26 @@ if(!isset($_SESSION["type"]))
 		$stmt_paging ->execute();
 		// store result 
 		$stmt_paging ->store_result();
-		$stmt_paging->bind_result($data['barangay_id'], 
+		$stmt_paging->bind_result($data['app_brgyid'], 
 					$data['fname'],
 					$data['mname'],
 					$data['lname'],
 					$data['address'],
 					$data['birthday'],
 					$data['placeofbirth'],
+					$data['precintno'],
 					$data['contact_no'],
 					$data['emailadd'],
 					$data['guardianname'],
 					$data['emrgncycontact'],
 					$data['reladdress'],
 					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
+					$data['id_image'],
+					$data['brgyidfilechoice'],
+					$data['approvedby'],
+					$data['app_date'],
+					$data['status']
+					
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -370,11 +436,19 @@ if(!isset($_SESSION["type"]))
 
 	// if no data on database show "No Reservation is Available"
 	if($total_records_paging == 0){
-	echo "
-		<h1 style='text-align: center;'>404 Not Found</h1>
-		<div class='alert alert-warning cattxtbox'>
-			<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-		</div>";
+		echo "
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+			<div class='alert alert-warning cattxtbox'>
+				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			<div style='text-align: center; margin-top: 5%'>
+				<a href='barangayidapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+				<a href='barangayiddeny.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+			</div>
+			";
 	?>
 
 	<?php 
@@ -397,8 +471,13 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="mrgn document-section select__select">
-									<div>
-										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayid.php'"></i> Back</button>
+									<!-- <div>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+									<div style="float: right;">
+										<a href="barangayid.php">
+											<img src="../img/back.png" title="Back?" class="hoverback" style="width: 45px; height: 45px;margin-left: -60px; cursor: pointer;" alt="Back?">
+										</a>
 									</div>
 								</div>
 							</div>						
@@ -410,43 +489,43 @@ if(!isset($_SESSION["type"]))
 									<tr class="t_head">
 										<th width="5%">Barangay ID</th>
 										<th width="5%">Firstname</th>
-										<th width="5%">Middlename</th>
 										<th width="5%">Lastname</th>
 										<th width="5%">Address</th>
-										<th width="5">Birthday</th>
-										<th width="10%">Contact no</th>
-										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Email</th>
-										<th width="5%">Emergency No</th>
 										<th width="5%">Date Issued</th>
+										<th width="5%">Document Type</th>
+										<th width="5%">Verified by</th>
 										<!-- <th width="5%">ID Picture</th> -->
-										<th width="5%">Status</th>
+										<!-- <th width="5%">Status</th> -->
 										<th width="5%"></th>
-										<th width="5%">Message</th>
+										<th width="5%">Action</th>
 									</tr>
 								</thead>
 							<?php 
 								while ($stmt_paging->fetch()){ ?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
+									<td><?php echo $data ['app_brgyid']; ?></td>
 									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['mname']; ?></td>
 									<td><?php echo $data ['lname']; ?></td>
 									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['birthday']?></td>
-									<td><?php echo $data ['contact_no']; ?></td>
 									<td><?php echo $data ['emailadd']; ?></td>
-									<td><?php echo $data ['emrgncycontact']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
+									<td><?php echo $data ['brgyidfilechoice']; ?></td>
+									<td><?php echo $data ['approvedby']; ?></td>
+									<!-- <td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td> -->
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<td>
-										<a class="view_approvebtn" style="width: 110px; height:40px;" href="print_barangayid.php?id=<?php echo $data['barangay_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print </a>
+										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td>
-									<td><button class="replybtn" data-toggle="modal" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td>
-				
+									<td>
+									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
+									</td>
+								
+									<!-- <td>
+									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="../paymaya_barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
+									</td> -->
 								</tr>	
 								</tbody>
 								<?php 
@@ -454,32 +533,7 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<!-- Edit Category -->
-							<div id="formatValidatorName" >
-								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
-										<div class="modal-contentedit animate">	
-										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
-										<br>
-										<br>
-										<h4 style="text-align: center;"><br> Edit Category </h4>
-										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-										<hr />
-										<form method="post" action="" enctype="multipart/form-data">
-											<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-											</span>
-											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-											<span class="imgup">
-												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-											</span>
-											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-										</form>
-										</div>
-								</div>
-							</div>
+							
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">
@@ -488,11 +542,241 @@ if(!isset($_SESSION["type"]))
 										$function->doPages($offset, 'barangayid_approvedpage.php', '', $total_records, $keyword);
 									?>
 								</h4>
+								
 							</div>
 	</div>
 							<div class="separator"></div>
+
+</div>    
+
+<div id="content" class="container col-md-12">
+	<?php 
+	// create object of functions class
+	$function = new functions;
+		
+	// create array variable to store data from database
+	$data = array();
+	
+	if(isset($_GET['keyword'])){	
+		// check value of keyword variable
+		$keyword = $function->sanitize($_GET['keyword']);
+		$bind_keyword = "%".$keyword."%";
+	}else{
+		$keyword = "";
+		$bind_keyword = $keyword;
+	}
+		
+	if(empty($keyword)){
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Barangay ID'
+				ORDER BY document_id ASC";
+	}else{
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments
+				WHERE fname LIKE ? 
+				ORDER BY document_id ASC";
+	}
+	
+	
+	$stmt = $connect->stmt_init();
+	if($stmt->prepare($sql_query)) {	
+		// Bind your variables to replace the ?s
+		if(!empty($keyword)){
+			$stmt->bind_param('s', $bind_keyword);
+		}
+		// Execute query
+		$stmt->execute();
+		// store result 
+		$stmt->store_result();
+		$stmt->bind_result($data['document_id'], 
+					$data['fullname'],
+					$data['contact_no'],
+					$data['reference_no'],
+					$data['document_type'],
+					$data['payment_status'],
+					$data['payment_method'],
+					$data['added_on']
+				);
+		// get total records
+		$total_records = $stmt->num_rows;
+	}
+		
+	// check page parameter
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}else{
+		$page = 1;
+	}
+					
+	// number of data that will be display per page		
+	$offset = 10;
+					
+	//lets calculate the LIMIT for SQL, and save it $from
+	if ($page){
+		$from 	= ($page * $offset) - $offset;
+	}else{
+		//if nothing was given in page request, lets load the first page
+		$from = 0;	
+	}	
+	
+	if(empty($keyword)){
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Barangay ID'
+				ORDER BY document_id ASC LIMIT ?, ?";
+	}else{
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+				FROM payments
+				WHERE fullname LIKE ? 
+				ORDER BY document_id ASC LIMIT ?, ?";
+	}
+	
+	$stmt_paging = $connect->stmt_init();
+	if($stmt_paging ->prepare($sql_query)) {
+		// Bind your variables to replace the ?s
+		if(empty($keyword)){
+			$stmt_paging ->bind_param('ss', $from, $offset);
+		}else{
+			$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
+		}
+		// Execute query
+		$stmt_paging ->execute();
+		// store result 
+		$stmt_paging ->store_result();
+		$stmt_paging->bind_result($data['document_id'], 
+					$data['fullname'],
+					$data['contact_no'],
+					$data['reference_no'],
+					$data['document_type'],
+					$data['payment_status'],
+					$data['payment_method'],
+					$data['added_on']
+					
+				);
+		// for paging purpose
+		$total_records_paging = $total_records; 
+	}
+
+	// if no data on database show "No Reservation is Available"
+	if($total_records_paging == 0){
+		echo "
+			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+			<div class='alert alert-warning cattxtbox'>
+				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+				</div>
+			</div>
+			";
+	?>
+
+	<?php 
+		// otherwise, show data
+		}else{
+			$row_number = $from + 1;
+	?>
+		<div style="text-align: center;">
+			<hr>
+			<h5>Payment: Barangay ID</h5>
+			<hr /> 
+		</div>
+<!-- Search -->
+							<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+								</form>
+								<div style="display: flex;" class="mrgn document-section select__select">
+									<!-- <div>
+										<button style="" class="btn btn-success viewbtn" onclick="window.location.href='barangayclearance.php'"></i> Back</button>
+									</div> -->
+								</div>
+							</div>						
+<!-- end of search form -->
+							
+					<div class="col-md-12">
+							<table class="content-table" id="table">
+								<thead>
+									<tr class="t_head">
+										<th width="5%">Barangay ID</th>
+										<th width="15%">Fullname</th>
+										<th width="5%">Contact no</th>
+										<th width="15%">Reference No</th>
+										<th width="5%">Payment Method</th>
+										<th width="5">Added on</th>
+										<th width="5%">Payment Status</th>
+										<th width="5%"></th>
+										<th width="5%"></th>
+									</tr>
+								</thead>
+							<?php 
+								while ($stmt_paging->fetch()){ ?>
+								<tbody>
+								<tr class="table-row">
+									<td><strong><?php echo $data ['document_id']; ?></strong></td>
+									<td><?php echo $data ['fullname']; ?></td>
+									<td><?php echo $data ['contact_no']; ?></td>
+									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
+									<td><?php echo $data ['payment_method']?></td>
+									<td><?php echo $data ['added_on']; ?></td>
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
+									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
+									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<!-- <td>
+										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
+									</td> -->
+									<td>
+									<form method="POST" action="">
+										<input name="payment_status" id="payment_status" value="Paid" type="hidden">
+
+										<input name="document_id" id="document_id" value="<?php echo $data ['document_id']; ?>" type="hidden">
+
+										<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" name="btnverify"><i style="color: black;" class="" ></i> Verify</button>
+										</td>
+										</form>
+									<td>
+									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="barangayid_resubmit.php?id=<?php echo $data['document_id'];?>" target="_blank"> Resubmit</a>
+									</td>
+								</tr>	
+								</tbody>
+								<?php 
+								} 
+							}
+						?>
+							</table>
+					</div>
+							<div class="col-md-12 pagination">
+								<h4 class="page">
+									<?php 
+										// for pagination purpose
+										$function->doPages($offset, 'barangayid_approvedpage.php', '', $total_records, $keyword);
+									?>
+								</h4>
+								
+							</div>
+	</div>
+							<div class="separator"></div>
+
 </div>    
 	</section>	
+	<?php
+        if(isset($_SESSION['status']) && $_SESSION['status'] !='')
+        {
+        ?>
+        <script>
+            swal({
+            title: "<?php echo $_SESSION['status']; ?>",
+            text: "You can print the document",
+            icon: "<?php echo $_SESSION['status_code']; ?>",
+            button: "Ok Done!",
+            });
+        </script>
+        <?php
+        unset($_SESSION['status']);
+        }
+        ?>
 		
 	</body>
 </html>
