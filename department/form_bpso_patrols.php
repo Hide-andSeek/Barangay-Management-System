@@ -38,7 +38,7 @@ require 'db/conn.php';
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -137,6 +137,101 @@ require 'db/conn.php';
 				  </div>
 			  </section>
 
+			  <div class="w3-container">
+			
+<button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">Patrol Duties</button>
+<div id="Demo1" class="w3-hide w3-animate-zoom">
+  <a href="#" class="w3-button w3-block w3-left-align">Monday</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Tuesday</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Wednesday</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Thursday</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Friday</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Saturday</a>
+  </div>
+</div>
+
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+
+
+			  <fieldset>
+	<legend>SCHEDULE LIST</legend>
+			<div class="w3-quarter w3padd ">
+				<a href="includes/compAdmin_dashboard.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>MONDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="w3-quarter w3padd ">
+				<a href="bpso.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>TUESDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="w3-quarter w3padd ">
+				<a href="includes/dashboard.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>WEDNESDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="w3-quarter w3padd">
+				<a href="includes/compAdmin_dashboard.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>THURSDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+		
+
+			<div class="w3-quarter">
+				<a href="">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>FRIDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="w3-quarter">
+				<a href="includes/vawcdashboard.php">
+					<div class="w3-container w3bord w3back w3point w3borderbot">
+						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
+						<div class="w3-right">
+							<h3>SATURDAY</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+		</fieldset>
 
 
 

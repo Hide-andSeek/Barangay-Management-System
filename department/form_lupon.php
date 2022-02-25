@@ -8,17 +8,7 @@ if(!isset($_SESSION["type"]))
 require 'db/conn.php';
 ?>
 
-<?php
-	$user = '';
-	if(isset($_SESSION['user'])){
-		$user = $_SESSION['user'];
-	}
 
-	$dept = '';
-	if(isset($_SESSION['type'])){
-		$dept = $_SESSION['type'];
-	}
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -89,33 +79,14 @@ require 'db/conn.php';
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
-			  
-			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs.php">
-				 <i class='bx bx-file'></i>
-				 <span class="links_name">Summon Letter</span>
+			  <li>
+			   <a class="side_bar" href="form_lupon_tagapamayapa.php">
+				 <i class='fas fa-user-clock'></i>
+				 <span class="links_name">Tagapamayapa</span>
 			   </a>
-			   <span class="tooltip">Summon Letter</span>
+			   <span class="tooltip">Tagapamayapa</span>
 			 </li>
-
-			 <li>
-			   <a class="side_bar" href="">
-			   <i class='bx bx-file'></i>
-			   
-				 <span class="links_name">Sworn Statement</span>
-			   </a>
-			   <span class="tooltip">Sworn Statement</span>
-			 </li>
-			
-			 <li>
-			   <a class="side_bar" href="">
-			   <i class='bx bx-file'></i>
-			   
-				 <span class="links_name">Certification to File Action (CFA)</span>
-			   </a>
-			   <span class="tooltip">Certification to File Action (CFA)</span>
-			 </li>
-			   
+			 
 
 			<!--Setting Section-->
 			 <li>
@@ -164,22 +135,43 @@ require 'db/conn.php';
 			<div class="w3-container w3-red w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
 				<div class="w3-right">
-				<?php
-	include "db/conn.php";
-	include "db/user.php";
-							
-	$mquery = "SELECT * FROM usersdb";
-	$countemployee = $db->query($mquery)
-?>
-					<a href= "lupon_active.php">
+				<?php 
+					require 'db/conn.php';
+
+					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+					<a href= "lupon_ongoing.php">
 				</div>
 				
 				<div class="w3-clear"></div>
-				<h4>Active</h4>
+				<h4>Upcoming Hearing</h4>
 				
 			</div>
 			</div>
+			<div class="w3-quarter">
+			<div class="w3-container w3-orange w3-text-white w3-padding-16">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+ 
+					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
 
+					echo "<h3>$pdoexecute</h3>"
+					?>
+<a href= "lupon_active.php">				
+				</div>
+				<div class="w3-clear"></div>
+				<h4>Active</h4>
+			</div>
+			</div>
+			
 			<div class="w3-quarter">
 			<div class="w3-container w3-blue w3-padding-16">
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
@@ -193,8 +185,8 @@ require 'db/conn.php';
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-		<a href= "lupon_settled.php">
-				</div>
+		          <a href= "lupon_settled.php">
+				 </div>
 				<div class="w3-clear"></div>
 				<h4>Settled</h4>
 			</div>
@@ -219,52 +211,24 @@ require 'db/conn.php';
 				<h4>Mediation</h4>
 			</div>
 			</div>
-			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require 'db/conn.php';
- 
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-<a href= "lupon_ongoing.php">				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Upcoming Hearing</h4>
-			</div>
-			</div>
 		</div>
 	</div>
 
-	<form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
-                        </label>
-                </div> 
-			  </form>
+	
 
-			
-
-					
-					
-					<div class="reg_table emp_tbl">
+	<div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php
-	include "db/conn.php";
-	include "db/user.php";
+						include "db/conn.php";
+	                    include "db/user.php";
 							
-	$mquery = "SELECT * FROM usersdb";
-	$countemployee = $db->query($mquery)
-?>
-						
+						$mquery = "SELECT * FROM usersdb";
+						$countemployee = $db->query($mquery)
+						?>
+
+
+
 							<thead>
 								<tr class="t_head">
 									<th>Employee No.</th>
@@ -283,31 +247,16 @@ require 'db/conn.php';
 							foreach($countemployee as $data) 
 							{
 							?>
-							<tr class="table-row">
-									<td><?php echo $data ['user_no']; ?></td>
-									<td><?php echo $data ['user_lname']; ?></td>
-									<td><?php echo $data ['user_fname']; ?></td>
-									<td><?php echo $data ['user_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
-									</td>
-								</tr>	
+							
+									
 							
 							<?php
 							}
 							?>
 						
 						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
-						</div>
+
+				
 					</div>
 				</div>
 				

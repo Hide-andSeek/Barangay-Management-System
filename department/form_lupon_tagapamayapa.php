@@ -7,20 +7,21 @@ if(!isset($_SESSION["type"]))
 }
 require 'db/conn.php';
 ?>
-
 <?php
 	$user = '';
 
 	if(isset($_SESSION['user'])){
 		$user = $_SESSION['user'];
 	}
+?>
+
+<?php
 	$dept = '';
 
 	if(isset($_SESSION['type'])){
 		$dept = $_SESSION['type'];
 	}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -116,7 +117,7 @@ require 'db/conn.php';
 				   <img class="profile_pic" src="img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">
@@ -131,7 +132,7 @@ require 'db/conn.php';
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>UPCOMING HEARING
+						<h5>SETTLED CASES
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -153,6 +154,7 @@ require 'db/conn.php';
 			  </form>
 
 			  
+				
 					
 									
 					
@@ -198,8 +200,8 @@ require 'db/conn.php';
 									<td><?php echo $data ['department']; ?></td>
 									<td>Active</td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Done</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Deny</button>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
 									</td>	
 								</tr>
 							
@@ -223,7 +225,16 @@ require 'db/conn.php';
 			<br>
 			<br>
 
-		
+			<script>
+			
+			 /*-- Fuction for Login Modal Form --*/
+			var modal = document.getElementById('id1');
+				window.onclick = function (event) {
+					if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}  
+			</script>
 			
 			</section>
 	</body>
