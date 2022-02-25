@@ -163,15 +163,23 @@ if(!file_exists($f)){
 
 		@media only screen and (max-width: 700px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100%; padding: 5px;}
 		}
+		.form-text{width: 100%; padding: 5px;}
+		.selec{padding-bottom: 45px;}
 
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100; padding: 5px;}
 		}
+
+
 		.button {
 		display: absolute;
 		border-radius: 4px;
@@ -395,17 +403,17 @@ if(!file_exists($f)){
 														    <hr>
 															<div class="left_userpersonal_info left_userpersonal_info1">
 																
-                                                            <div class="form-group">
+                                                            <div class="form-group selec">
 																	<label for="full_name">Full Name: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Please Specify your Fullname" title="This must be capitalize">
 																	<?php echo isset($error['full_name']) ? $error['full_name'] : '';?>
-																</div><br>
+																</div>
 																
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="age">Age: <i class="red">*</i></label>
 																	<input type="number" class="form-control form-text age" id="age" name="age" placeholder="Your age">
 																	<?php echo isset($error['age']) ? $error['age'] : '';?>
-																</div><br>
+																</div>
 
 																<div class="form-group">
 																	<label>Status: <i class="red">*</i></label>
@@ -416,35 +424,35 @@ if(!file_exists($f)){
 																		<option value="WIDOWED">WIDOWED</option>
 																	</select>
 																	<?php echo isset($error['status']) ? $error['status'] : '';?>
-																</div><br>
+																</div>
 
-																 <div class="form-group">
+																 <div class="form-group selec">
 																	<label for="nationality">Nationality: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="FILIPINO" title="This must be capitalize">
 																	<?php echo isset($error['nationality']) ? $error['nationality'] : '';?>
-																</div></br>	
+																</div>
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">
 
-                                                            <div class="form-group">
+                                                            <div class="form-group selec">
 																	<label for="address">Address: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text" id="address" name="address" placeholder="#Blk No. Street City/Town" title="Required Address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['address']) ? $error['address'] : '';?>
-																</div><br>
+																</div>
 
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="contactno">Contact No.: <i class="red">*</i></label>
 																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" title="Place your active Contact #">
 																	<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
-																</div><br>
+																</div>
 
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label>Email Address: <i class="red">*</i></label>
 																	<input type="email" class="form-control form-text form-text-desc" id="emailadd" name="emailadd" placeholder="example@gmail.com" title="Place your active Email">
 																	<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
-																</div><br>
+																</div>
 
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="file">Attach Document: <i class="red">*</i></label>
 																	<input type='file' name='clearanceid_image' class="form-control  form-text" aria-details="clearanceid_image"/>
 
@@ -462,42 +470,42 @@ if(!file_exists($f)){
 																		<option value="Both">Both</option>
 																	</select>
 																	<i aria-details="filechoice" class="detailid"><label> What type of document you want to receive?</label></i>
-															</div><br>
+															</div>
 															</div>
 															<br>
 															<hr>
                                                         <h5 style="text-align: center;">Other Information</h5>
                                                     <hr>
 													<div class="left_userpersonal_info left_userpersonal_info1">
-                                                    <div class="form-group">
+                                                    <div class="form-group selec">
 															<label for="purpose">Purpose: <i class="red">*</i></label>
 															<input type="text" class="form-control form-text" id="purpose" name="purpose" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Ex. PERSONAL IDENTIFICATION">
 															<?php echo isset($error['purpose']) ? $error['purpose'] : '';?>
-														</div><br>
+														</div>
 
 
 														<div class="form-group">
 															<label for="emrgncycontact">CTC No.: </label>
 															<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no" placeholder="(Optional)" title="Place your CTC no. If you have any">
-														</div><br>
+														</div>
 
-														<div class="form-group autocomplete">
+														<div class="form-group autocomplete selec">
 															<label for="issued_at">Issued at: </label>
 															<input type="text" min="12" class="form-control form-text" id="myInput" name="issued_at" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 															<?php echo isset($error['issued_at']) ? $error['issued_at'] : '';?>
-														</div><br>
+														</div>
 
 														<div class="form-group">
                                                             <label for="precint_no">Precint No.: </label>
                                                             <input type="number" min="12" class="form-control number form-text" id="precint_no" name="precint_no" placeholder="(Optional)" title="Place your Precint no. If you have any">
-                                                        </div><br>
+                                                        </div>
 													</div>
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="date_issued">Date Requested: <i class="red">*</i></label>
 															<input type="date" class="form-control form-text usersel" id="date_issued" name="date_issued">
 															<?php echo isset($error['date_issued']) ? $error['date_issued'] : '';?>
-														</div><br>
+														</div>
 													</div>
 													</div> 
 													<br>

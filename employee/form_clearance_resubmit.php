@@ -320,19 +320,19 @@ if(!isset($_SESSION["type"]))
                     FROM payments
                     WHERE document_id = ?";
             
-            $stmt = $connect->stmt_init();
-            if($stmt->prepare($sql_query)) {	
-                // Bind your variables to replace the ?s
-                $stmt->bind_param('s', $ID);
-                // Execute query
-                $stmt->execute();
-                // store result 
-                $stmt->store_result();
-                $stmt->bind_result($data['reference_no'], 
-                        );
-                $stmt->fetch();
-                $stmt->close();
-            }
+                    $stmt = $connect->stmt_init();
+                    if($stmt->prepare($sql_query)) {	
+                        // Bind your variables to replace the ?s
+                        $stmt->bind_param('s', $ID);
+                        // Execute query
+                        $stmt->execute();
+                        // store result 
+                        $stmt->store_result();
+                        $stmt->bind_result($data['reference_no'], 
+                                );
+                        $stmt->fetch();
+                        $stmt->close();
+                    }
                 ?>
 
             <div>
@@ -399,7 +399,8 @@ if(!isset($_SESSION["type"]))
                                                 <!-- <br>
                                                 Paymaya: http://comm-bms.com/payment_link/paymaya_barangayid_payment.php?id=<?php echo $data['approved_clearanceids']; ?>
                                                 <br> -->
-                                                Link: http://comm-bms.com/payment_link/refno_resubmit_for_clearance.php?id=<?php echo $data['approved_clearanceids']; ?>
+                                                <br>
+                                                Link: http://comm-bms.com/resubmit_link/gcash_refno_resubmit_for_clearance.php?id=<?php echo $data['approved_clearanceids']; ?>
                                                 <br>
                                                 <br>
                                                 For more details/questions visit our website.

@@ -222,7 +222,8 @@ if(isset($_POST['barangayidsendemail'])){
     try {
         //Server settings
         $mail->isSMTP();                                     
-        $mail->Host = 'smtp.gmail.com';                      
+        // $mail->Host = 'smtp.gmail.com'; 
+        $mail->Host = 'smtp.gmail.com';                       
         $mail->SMTPAuth = true;                             
         $mail->Username = 'barangaycommonwealth0@gmail.com';     
         $mail->Password = 'gepalitanmopayungpasswordbuddy';             
@@ -377,7 +378,7 @@ if(isset($_POST['admincompsendemail'])){
 
         $mail->send();
 		
-       $_SESSION['resultadmincomp'] = 'Message successfully sent' ;
+       $_SESSION['resultadmincomp'] = 'Email successfully sent to' ;
 	   $_SESSION['statusadmincomp'] = 'ok';
     } catch (Exception $e) {
 	   $_SESSION['resultadmincomp'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;

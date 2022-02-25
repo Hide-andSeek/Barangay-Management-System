@@ -20,7 +20,7 @@ include "../db/e_payment.php";
     <!-- Icon -->
     <link rel="icon" type="image/png" href="../resident-img/Brgy-Commonwealth.png">
 
-    <title>Paymaya - Payment</title>
+    <title>Resubmit Ref No: Paymaya</title>
 
     
     <style>
@@ -32,7 +32,7 @@ include "../db/e_payment.php";
 </head>
 <body>
     <script>
-        swal("Reminder:","This is one time payment transaction, be sure you put an accurate reference number");
+        swal("Please Resubmit your Ref No","This is one time payment transaction (only happen at once), be sure you put an accurate reference number");
     </script>
    
     <main class="main">
@@ -50,7 +50,7 @@ include "../db/e_payment.php";
             $data = array();
                             
             // get all data from menu table and category table
-            $sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status FROM approved_indigency WHERE status = 'Approved' AND approvedindigency_id = ?";
+            $sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on FROM payments WHERE payment_status = 'Approval' AND document_type = 'Barangay Clearance' AND document_id = ?";
                             
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
@@ -60,18 +60,14 @@ include "../db/e_payment.php";
                 $stmt->execute();
                 // store result 
                 $stmt->store_result();
-                $stmt->bind_result($data['approvedindigency_id'], 
+                $stmt->bind_result($data['document_id'], 
                         $data['fullname'],
-                        $data['address'],
-                        $data['purpose'],
-                        $data['contactnum'],
-                        $data['emailaddress'],
-                        $data['date_issue'],
-                        $data['indigencyid_image'],
-                        $data['indigencyfilechoice'],
-                        $data['approvedby'],
-                        $data['app_date'],
-                        $data['status']
+                        $data['contact_no'],
+                        $data['reference_no'],
+                        $data['document_type'],
+                        $data['payment_status'],
+                        $data['payment_method'],
+                        $data['added_on']
                     );
                 $stmt->fetch();
                 $stmt->close();
@@ -79,7 +75,7 @@ include "../db/e_payment.php";
      ?>
             <div style="padding: 20px 20px; background: #04AA6D;" class="fontweight">
                 <label class="merchantname">BARANGAY COMMONWEALTH <i style="font-size: 20px;">online payment for </i></label> 
-                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;"> INDIGENCY</label> 
+                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;"> BRGY CLEARANCE</label> 
                     <div class="composition">
                             <img class="comlogo" src="../img/Brgy-Commonwealth.png" alt="Barangay Commonwealth Logo">  
                     </div>
@@ -92,25 +88,26 @@ include "../db/e_payment.php";
                         <form method="POST" action="">
                             <div class="margin" >
                                 <div>
-                                    <input type="hidden" id="document_id" value="<?php echo $data ['approvedindigency_id']; ?>" class="form-control inpmargin usersel" name="document_id">
+                                    <input type="hidden" id="document_id" value="<?php echo $data ['document_id']; ?>" class="form-control inpmargin usersel" name="document_id">
 
                                     <label for="refno">Name: </label>
-                                    <input required type="text" id="fullname" class="form-control inpmargin usersel" name="fullname" placeholder="Your name" value="<?php echo $data ['fullname']; ?> ">
+                                    <input required type="text" id="fullname" class="form-control inpmargin usersel" name="fullname" placeholder="Your name" value="<?php echo $data ['fullname']; ?>">
                                     <i aria-details="fullname" class="detailid">The name you registered in Document Request</i>
                                     <br>
                                     <label for="refno">Contact: </label>
-                                    <input required type="number" id="contact_no" class="form-control inpmargin" name="contact_no" placeholder="Your number" onKeyPress="if(this.value.length==11) return false;"  value="<?php echo $data ['contactnum']; ?>">
+                                    <input required type="number" id="contact_no" class="form-control inpmargin usersel" name="contact_no" placeholder="Your number" onKeyPress="if(this.value.length==11) return false;"  value="<?php echo $data ['contact_no']; ?>">
                                     <i aria-details="contact_no" class="detailid">Enter a number you used for a payment</i>
                                 </div>
                                 <div class="margin">
                                     <label for="refno">Reference ID:</label>
-                                    <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+                                    <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" tootip="Change it" value="<?php echo $data ['reference_no']; ?>" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 
-                                    <input type="hidden" id="document_type" value="Certificate of Indigency" class="form-control inpmargin usersel" name="document_type">
+                                    <i aria-details="reference_no" class="detailid">Change the reference number you send</i>
+                                    <!-- <input type="hidden" id="document_type" value="Certificate of Indigency" class="form-control inpmargin usersel" name="document_type">
 
                                     <input type="hidden" id="payment_status " value="Approval" class="form-control inpmargin usersel" name="payment_status">
 
-                                    <input type="hidden" id="payment_method" value="Paymaya" class="form-control inpmargin usersel" name="payment_method">
+                                    <input type="hidden" id="payment_method" value="Paymaya" class="form-control inpmargin usersel" name="payment_method"> -->
                                 </div>
                                 <div class="gen">
                                     <div style="margin-right: 20px;">
@@ -119,7 +116,7 @@ include "../db/e_payment.php";
                                     
                                     <div class="g-recaptcha" data-sitekey="6LdD7I0eAAAAADNiE6z_yE7QQEHlWsa9G3bFVTOy"></div>
                                 </div>
-                                <button class="button form-control" name="payamayaindigency"><span>Submit </span><button>
+                                <button class="button form-control" name="btnEdit"><span>Submit </span><button>
                                 
                                 
                             </div>
@@ -159,7 +156,7 @@ include "../db/e_payment.php";
         <script>
             swal({
             title: "<?php echo $_SESSION['status']; ?>",
-            // text: "You clicked the button!",
+            text: "You may close the window!",
             icon: "<?php echo $_SESSION['status_code']; ?>",
             button: "Ok Done!",
             });

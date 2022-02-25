@@ -389,9 +389,9 @@ if(!isset($_SESSION["type"]))
 								<thead>
 									<tr class="t_head">
 										<th width="5%">Indigency ID</th>
-										<th width="5%">Fullname</th>
+										<th width="15%">Fullname</th>
 										<th width="5%">Address</th>
-										<th width="5%">Purpose</th>
+										<th width="15%">Purpose</th>
 										<th width="5">Contact</th>
 										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
@@ -420,32 +420,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<!-- Edit Category -->
-							<div id="formatValidatorName" >
-								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
-										<div class="modal-contentedit animate">	
-										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
-										<br>
-										<br>
-										<h4 style="text-align: center;"><br> Edit Category </h4>
-										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-										<hr />
-										<form method="post" action="" enctype="multipart/form-data">
-											<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-											</span>
-											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-											<span class="imgup">
-												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-											</span>
-											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-										</form>
-										</div>
-								</div>
-							</div>
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">

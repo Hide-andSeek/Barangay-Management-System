@@ -32,7 +32,7 @@ include "../db/e_payment.php";
 </head>
 <body>
     <script>
-        swal("Please Resubmit your Ref No:","This is one time payment transaction (only happen at once), be sure you put an accurate reference number");
+        swal("Please Resubmit your Ref No","This is one time payment transaction (only happen at once), be sure you put an accurate reference number");
     </script>
    
     <main class="main">
@@ -95,12 +95,12 @@ include "../db/e_payment.php";
                                     <i aria-details="fullname" class="detailid">The name you registered in Document Request</i>
                                     <br>
                                     <label for="refno">Contact: </label>
-                                    <input required type="number" id="contact_no" class="form-control inpmargin" name="contact_no" placeholder="Your number" onKeyPress="if(this.value.length==11) return false;"  value="<?php echo $data ['contact_no']; ?>">
+                                    <input required type="number" id="contact_no" class="form-control inpmargin usersel" name="contact_no" placeholder="Your number" onKeyPress="if(this.value.length==11) return false;"  value="<?php echo $data ['contact_no']; ?>">
                                     <i aria-details="contact_no" class="detailid">Enter a number you used for a payment</i>
                                 </div>
                                 <div class="margin">
                                     <label for="refno">Reference ID:</label>
-                                    <input required type="number" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+                                    <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" tootip="Change it" value="<?php echo $data ['reference_no']; ?>" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 
                                     <i aria-details="reference_no" class="detailid">Change the reference number you send</i>
                                     <!-- <input type="hidden" id="document_type" value="Certificate of Indigency" class="form-control inpmargin usersel" name="document_type">
@@ -156,7 +156,7 @@ include "../db/e_payment.php";
         <script>
             swal({
             title: "<?php echo $_SESSION['status']; ?>",
-            // text: "You clicked the button!",
+            text: "You may close the window!",
             icon: "<?php echo $_SESSION['status_code']; ?>",
             button: "Ok Done!",
             });

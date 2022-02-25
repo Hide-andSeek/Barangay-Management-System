@@ -69,8 +69,8 @@ if(!isset($_SESSION["type"]))
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
-	<link rel="stylesheet" href="../announcement_css/custom.css">
-	<link rel="stylesheet/less" type="text/css" href="../css/animated.less" />
+    <link rel="stylesheet" href="../announcement_css/custom.css">
+    <link rel="stylesheet/less" type="text/css" href="../css/animated.less" />
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -183,6 +183,7 @@ if(!isset($_SESSION["type"]))
         }
         .viewbtn{width: 100%; height: 35px;  background-color: #91D9F1; color: black; border: 1px solid #008CBA;}
         .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .usersel{pointer-events: none; border: 1px solid orange}
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -280,7 +281,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image, indigencyfilechoice
+                    $sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, status, indigencyid_image, indigencyfilechoice
                             FROM certificateindigency
                             WHERE indigency_id = ?";
                     
@@ -298,7 +299,6 @@ if(!isset($_SESSION["type"]))
                                 $data['purpose'],
                                 $data['contactnum'],
                                 $data['emailaddress'],
-                                $data['id_type'],
                                 $data['date_issue'],
                                 $data['status'],
                                 $data['indigencyid_image'],
@@ -359,6 +359,9 @@ if(!isset($_SESSION["type"]))
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
                 </div>
+
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>">Here's the Document</iframe>
+
                 <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
@@ -387,10 +390,6 @@ if(!isset($_SESSION["type"]))
                             <td><input type="hidden" name="emailaddress" value="<?php echo $data['emailaddress']; ?>"><?php echo $data['emailaddress']; ?></td>
                         </tr>
                         <tr>
-                            <th width="30%">ID Type</th>
-                            <td><input type="hidden" name="id_type" value="<?php echo $data['id_type']; ?>"><?php echo $data['id_type']; ?></td>
-                        </tr>
-                        <tr>
                             <th width="30%">Date Issued</th>
                             <td><input type="hidden" name="date_issue" value="<?php echo $data['date_issue']; ?>"><?php echo $data['date_issue']; ?></td>
                         </tr>
@@ -401,24 +400,16 @@ if(!isset($_SESSION["type"]))
                     </table>
                     </div>
                     <br>
-                    <!-- <h6>Identification Card (Click to Zoom): </h6>
-                    <div id="myModal" class="modal" style="display: absolute;">
-                        <span class="close">&times;</span>
-                        <img src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" style=" width: 80%; height: 80%"  class="modal-content" id="img01"/>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img id="myImg" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>" alt="Snow" style="width:100%;max-width:300px">
-                    </div> -->
                 <br>
                 <div id="option_menu">
                       <div class="information col">
                         <label class="employee-label"> Approved By </label>
-                          <input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                          <input class="form-control btnmargin inputtext control-label usersel" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
                       </div>
 
                       <div class="information col">
                         <label class="employee-label ">Approval Date </label>
-                          <input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
+                          <input type="date" class="form-control btnmargin inputtext control-label usersel" id="approvedate" name="app_date">
                       </div>
                      
                       <div class="information col">

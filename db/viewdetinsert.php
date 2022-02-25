@@ -327,7 +327,6 @@ if(isset($_POST['insertindigency'])){
     $purpose = $_POST['purpose'];
     $contactnum = $_POST['contactnum'];
     $emailaddress = $_POST['emailaddress'];
-    $id_type = $_POST['id_type'];
     $date_issue = $_POST['date_issue'];
     $indigencyfilechoice = $_POST['indigencyfilechoice'];
     $approvedby = $_POST['approvedby'];
@@ -360,9 +359,6 @@ if(isset($_POST['insertindigency'])){
     if(empty($emailaddress)){
     $error['emailaddress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
     }
-    if(empty($id_type)){
-    $error['id_type'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-    }
 
     // common image file extensions
     $allowedExts = array("jpeg", "jpg", "png");
@@ -389,7 +385,6 @@ if(isset($_POST['insertindigency'])){
         !empty($date_issue) && 
         !empty($contactnum) && 
         !empty($emailaddress) && 
-        !empty($id_type) && 
         !empty($date_issue) && 
         !empty($status) && 
         empty($error['indigencyid_image'])){
@@ -404,21 +399,20 @@ if(isset($_POST['insertindigency'])){
     $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], '../img/approved_indigency/'.$indigency_image);
                                                 
     // insert new data to menu table
-    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_image, status)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_image, status)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                                                         
     $upload_image = $indigency_image;
     $stmt = $connect->stmt_init();
     if($stmt->prepare($sql_query)) {	
     // Bind your variables to replace the ?s
-    $stmt->bind_param('sssssssssssss', 
+    $stmt->bind_param('ssssssssssss', 
     $approvedindigency_id,
     $fullname,
     $address,
     $purpose,
     $contactnum,
     $emailaddress,
-    $id_type,
     $date_issue,
     $indigencyfilechoice,
     $approvedby,

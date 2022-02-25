@@ -29,7 +29,35 @@ if(!isset($_SESSION["type"]))
 	}
 
 
-?>
+	if(isset($_POST['btnverify'])){
+
+		$payment_status	= $_POST['payment_status'];
+		$document_id = $_POST['document_id'];
+	
+		$sql = "UPDATE payments SET payment_status = 'Paid' WHERE document_id = $document_id";
+	
+		if (mysqli_query($connect, $sql)) {
+			$_SESSION['status'] ="Verified Successfully";
+			$_SESSION['status_code'] ="success";
+		} else {
+			$_SESSION['status'] ="Oh there's an Error";
+			$_SESSION['status_code'] ="errpr";
+		}
+	}
+	
+	if(isset($_POST['btnverify'])){
+
+		$payment_stat	= $_POST['payment_stat'];
+		$approved_clearanceids = $_POST['approved_clearanceids'];
+	
+		$sql = "UPDATE approved_clearance SET payment_stat = 'Paid' WHERE approved_clearanceids = $approved_clearanceids";
+	
+		if (mysqli_query($connect, $sql)) {
+		} else {
+		  echo "Error updating record: " . mysqli_error($connect);
+		}
+	}
+	?>
 
 
 
@@ -100,8 +128,8 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 65px; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-		.viewbtn:hover{ background-color: #008CBA;color: white;}
+		.viewbtn{width: 65px; height: 35px; background-color: #17A4D3;color: white;  }
+		.viewbtn:hover{background-color: white;  color: black; border: 1px solid #008CBA; }
 
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -139,6 +167,9 @@ if(!isset($_SESSION["type"]))
 		.replybtn{ width: 110px; background-color: white;color: black;border: 1px solid #555555;}
 		.replybtn:hover{background-color: #555555;color: white;}
 		.hoverback:hover{background: orange; border-radius: 70%;}
+		.verify{color: white; border: 1px solid gray; border-radius: 20px;}
+		.verify:hover{color: black;}
+		.veri{color: black;}
 	 </style>
    </head>
 	<body>
@@ -244,11 +275,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
 				ORDER BY approved_clearanceids ASC";
 	}else{
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance
 				WHERE full_name LIKE ? 
 				ORDER BY approved_clearanceids ASC";
@@ -282,7 +313,8 @@ if(!isset($_SESSION["type"]))
 				$data['filechoice'],
 				$data['approvedby'],
 				$data['app_date'],
-				$data['clearance_status']
+				$data['clearance_status'],
+				$data['payment_stat']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -295,7 +327,7 @@ if(!isset($_SESSION["type"]))
 		$page = 1;
 	}
 					
-	// number of data that will be display per page		
+	// number of data that will be display per page
 	$offset = 5;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
@@ -307,11 +339,12 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
 				ORDER BY approved_clearanceids ASC LIMIT ?, ?";
+
 	}else{
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance 
 				WHERE full_name LIKE ? 
 				ORDER BY approved_clearanceids ASC LIMIT ?, ?";
@@ -346,7 +379,8 @@ if(!isset($_SESSION["type"]))
 				$data['filechoice'],
 				$data['approvedby'],
 				$data['app_date'],
-				$data['clearance_status']
+				$data['clearance_status'],
+				$data['payment_stat']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -367,6 +401,66 @@ if(!isset($_SESSION["type"]))
 				<a href='clearancedenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
 			</div>
 			";
+
+
+			// $sql_query = "SELECT payment_status, document_id
+			// 	FROM payments
+			// 	WHERE payment_status = 'Approval' AND document_id = ?";
+
+			// $stmt = $connect->stmt_init();
+			// if($stmt->prepare($sql_query)) {	
+			// // Bind your variables to replace the ?s
+			// $stmt->bind_param('s', $ID);
+			// // Execute query
+			// $stmt->execute();
+			// // store result 
+			// $stmt->store_result();
+			// $stmt->bind_result($data1['payment_status'], 
+			// 	$data1['document_id']
+			// 		);
+			// $stmt->fetch();
+			// $stmt->close();
+			// }
+
+			$data = array();
+                    
+			// get all data from menu table and category table
+			$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
+					FROM approved_clearance
+					WHERE approved_clearanceids = ?";
+			
+			$stmt = $connect->stmt_init();
+			if($stmt->prepare($sql_query)) {	
+				// Bind your variables to replace the ?s
+				$stmt->bind_param('s', $ID);
+				// Execute query
+				$stmt->execute();
+				// store result 
+				$stmt->store_result();
+				$stmt->bind_result($data['approved_clearanceids'], 
+				$data['full_name'],
+				$data['age'],
+				$data['status'],
+				$data['nationality'],
+				$data['address'],
+				$data['contactno'],
+				$data['emailadd'],
+				$data['purpose'],
+				$data['date_issued'],
+				$data['ctc_no'],
+				$data['issued_at'],
+				$data['precint_no'],
+				$data['clearanceid_image'],
+				$data['filechoice'],
+				$data['approvedby'],
+				$data['app_date'],
+				$data['clearance_status'],
+				$data['payment_stat']
+						);
+				$stmt->fetch();
+				$stmt->close();
+			}
+
 	?>
 
 	<?php 
@@ -411,13 +505,14 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Status</th>
 										<th width="5%">Nationality</th>
 										<th width="5">Address</th>
-										<th width="10%">Purpose</th>
+										<th width="5%">Purpose</th>
 										<!-- <th width="5%">Identification Card</th> -->
-										<th width="5%">Date Issued</th>
 										<th width="5%">Issued at</th>
+										<th width="5%">Date Issued</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%"></th>
 										<th width="5%"></th>
+										<th width="5%">Link for Payment</th>
 									</tr>
 								</thead>
 							<?php 
@@ -431,17 +526,19 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['nationality']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['purpose']; ?></td>
-									<td><?php echo $data ['date_issued']; ?></td>
 									<td><?php echo $data ['issued_at']; ?></td>
+									<td><?php echo $data ['date_issued']; ?></td>
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 
+									<td><input type="text" class="tblinput inpwidth" style=" border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
+
 									<td>
-										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_clearance.php?id=<?php echo $data['approved_clearanceids'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
+										<a style="text-decoration: none; width: 110px; height:30px; border-radius: 20px; border: 1px solid gray;" class="form-control generate viewbtn" href="print_clearance.php?id=<?php echo $data['approved_clearanceids'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td>
 
 									<td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="clearance_payment.php?id=<?php echo $data['approved_clearanceids'];?>" target="_blank"> Make a Payment</a>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="clearance_payment.php?id=<?php echo $data['approved_clearanceids'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Payment</a>
 									</td>
 								</tr>	
 								</tbody>
@@ -621,7 +718,6 @@ if(!isset($_SESSION["type"]))
 										<th width="15%">Reference No</th>
 										<th width="5%">Payment Method</th>
 										<th width="5">Added on</th>
-										<th width="5%">Payment Status</th>
 										<th width="5%"></th>
 										<th width="5%"></th>
 									</tr>
@@ -636,24 +732,31 @@ if(!isset($_SESSION["type"]))
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['payment_method']?></td>
 									<td><?php echo $data ['added_on']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
+
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<!-- <td>
 										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td> -->
 									<td>
+
+									
 									<form method="POST" action="">
 										<input name="payment_status" id="payment_status" value="Paid" type="hidden">
 
 										<input name="document_id" id="document_id" value="<?php echo $data ['document_id']; ?>" type="hidden">
 
-										<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" name="btnverify"><i style="color: black;" class="" ></i> Verify</button>
+										<input name="approved_clearanceids" id="approved_clearanceids" value="<?php echo $data ['document_id']; ?>" type="hidden">
+
+
+										<input name="payment_stat" id="payment_stat" value="Paid" type="hidden">
+
+										<button style="text-decoration: none; width: 90px; height:30px;" class="form-control generate viewbtn verify" name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600"></i> Verify</button>
 									</form>
 									</td>
 
 									<td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="clearance_resubmit.php?id=<?php echo $data['document_id'];?>" target="_blank"> Resubmit</a>
+									<a style="text-decoration: none; width: 100%; height:100%; border-radius: 5px; border: 1px solid gray;" class="viewbtn form-control" href="clearance_resubmit.php?id=<?php echo $data['document_id'];?>" target="_blank"> Resubmit</a>
 									</td>
 								</tr>	
 								</tbody>
@@ -682,7 +785,7 @@ if(!isset($_SESSION["type"]))
         <script>
             swal({
             title: "<?php echo $_SESSION['status']; ?>",
-            text: "You can print the document",
+            text: "You can now print the document",
             icon: "<?php echo $_SESSION['status_code']; ?>",
             button: "Ok Done!",
             });

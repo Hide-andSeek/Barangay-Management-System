@@ -72,6 +72,19 @@ if(isset($_POST['btnverify'])){
         $_SESSION['status_code'] ="errpr";
 	}
 }
+
+if(isset($_POST['btnverify'])){
+
+	$payment_stat	= $_POST['payment_stat'];
+	$app_brgyid = $_POST['app_brgyid'];
+
+	$sql = "UPDATE approved_brgyids SET payment_stat = 'Paid' WHERE app_brgyid = $app_brgyid";
+
+	if (mysqli_query($connect, $sql)) {
+	} else {
+	  echo "Error updating record: " . mysqli_error($connect);
+	}
+}
 ?>
 
 
@@ -143,8 +156,8 @@ if(isset($_POST['btnverify'])){
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 65px; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-		.viewbtn:hover{ background-color: #008CBA;color: white;}
+		.viewbtn{width: 65px; height: 35px; background-color: #008CBA;color: white;}
+		.viewbtn:hover{background-color: white; color: black; border: 1px solid #008CBA;}
 
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -323,11 +336,11 @@ if(isset($_POST['btnverify'])){
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 					FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC";
@@ -362,7 +375,8 @@ if(isset($_POST['btnverify'])){
 					$data['brgyidfilechoice'],
 					$data['approvedby'],
 					$data['app_date'],
-					$data['status']
+					$data['status'],
+					$data['payment_stat']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -387,11 +401,11 @@ if(isset($_POST['btnverify'])){
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids 
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
@@ -427,8 +441,8 @@ if(isset($_POST['btnverify'])){
 					$data['brgyidfilechoice'],
 					$data['approvedby'],
 					$data['app_date'],
-					$data['status']
-					
+					$data['status'],
+					$data['payment_stat']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -488,17 +502,14 @@ if(isset($_POST['btnverify'])){
 								<thead>
 									<tr class="t_head">
 										<th width="5%">Barangay ID</th>
-										<th width="5%">Firstname</th>
-										<th width="5%">Lastname</th>
-										<th width="5%">Address</th>
-										<th width="5%">Email</th>
-										<th width="5%">Date Issued</th>
+										<th width="10%">Fullname</th>
+										<th width="5%">Birthday</th>
+										<th width="8%">Date Issued</th>
 										<th width="5%">Document Type</th>
-										<th width="5%">Verified by</th>
-										<!-- <th width="5%">ID Picture</th> -->
-										<!-- <th width="5%">Status</th> -->
+										<th width="10%">Verified by</th>
+										<th width="5%">Payment Status</th>
 										<th width="5%"></th>
-										<th width="5%">Action</th>
+										<th width="5%">Link for Payment</th>
 									</tr>
 								</thead>
 							<?php 
@@ -506,26 +517,22 @@ if(isset($_POST['btnverify'])){
 								<tbody>
 								<tr class="table-row">
 									<td><?php echo $data ['app_brgyid']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['emailadd']; ?></td>
+									<td><?php echo $data ['fname']; ?> <?php echo $data ['lname']; ?></td>
+									<td><?php echo $data ['birthday']; ?></td>
 									<td><?php echo $data ['dateissue']; ?></td>
 									<td><?php echo $data ['brgyidfilechoice']; ?></td>
 									<td><?php echo $data ['approvedby']; ?></td>
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
 									<!-- <td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td> -->
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<td>
 										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td>
-									<td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
-									</td>
 								
-									<!-- <td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="../paymaya_barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"> Make a Payment</a>
-									</td> -->
+									<td>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="barangayid_payment.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Payment</a>
+									</td>
 								</tr>	
 								</tbody>
 								<?php 
@@ -705,8 +712,7 @@ if(isset($_POST['btnverify'])){
 										<th width="5%">Contact no</th>
 										<th width="15%">Reference No</th>
 										<th width="5%">Payment Method</th>
-										<th width="5">Added on</th>
-										<th width="5%">Payment Status</th>
+										<th width="15">Added on</th>
 										<th width="5%"></th>
 										<th width="5%"></th>
 									</tr>
@@ -721,7 +727,7 @@ if(isset($_POST['btnverify'])){
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['payment_method']?></td>
 									<td><?php echo $data ['added_on']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
+
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
 									<!-- <td>
@@ -733,9 +739,13 @@ if(isset($_POST['btnverify'])){
 
 										<input name="document_id" id="document_id" value="<?php echo $data ['document_id']; ?>" type="hidden">
 
-										<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" name="btnverify"><i style="color: black;" class="" ></i> Verify</button>
-										</td>
-										</form>
+										<input name="app_brgyid" id="app_brgyid" value="<?php echo $data ['document_id']; ?>" type="hidden">
+
+										<input name="payment_stat" id="payment_stat" value="Paid" type="hidden">
+
+										<button style="text-decoration: none; width: 90px; height:30px;" class="form-control generate viewbtn verify" name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600"></i> Verify</button>
+									</form>
+									</td>
 									<td>
 									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="barangayid_resubmit.php?id=<?php echo $data['document_id'];?>" target="_blank"> Resubmit</a>
 									</td>
@@ -768,7 +778,7 @@ if(isset($_POST['btnverify'])){
         <script>
             swal({
             title: "<?php echo $_SESSION['status']; ?>",
-            text: "You can print the document",
+            text: "You can now print the document",
             icon: "<?php echo $_SESSION['status_code']; ?>",
             button: "Ok Done!",
             });

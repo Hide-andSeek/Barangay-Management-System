@@ -50,7 +50,7 @@ include "../db/e_payment.php";
             $data = array();
                             
             // get all data from menu table and category table
-            $sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status FROM approved_indigency WHERE status = 'Approved' AND approvedindigency_id = ?";
+            $sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status FROM approved_indigency WHERE status = 'Approved' AND approvedindigency_id = ?";
                             
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
@@ -66,7 +66,6 @@ include "../db/e_payment.php";
                     $data['purpose'],
                     $data['contactnum'],
                     $data['emailaddress'],
-                    $data['id_type'],
                     $data['date_issue'],
                     $data['indigencyid_image'],
                     $data['indigencyfilechoice'],
@@ -82,7 +81,7 @@ include "../db/e_payment.php";
      
             <div style="padding: 20px 20px; background: #04AA6D;" class="fontweight">
                 <label class="merchantname">BARANGAY COMMONWEALTH <i style="font-size: 20px;">online payment for </i></label> 
-                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;">BRGY CLEARANCE</label> 
+                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;">INDIGENCY</label> 
                     <div class="composition">
                             <img class="comlogo" src="../img/Brgy-Commonwealth.png" alt="Barangay Commonwealth Logo">  
                     </div>
@@ -107,7 +106,7 @@ include "../db/e_payment.php";
                                 </div>
                                 <div class="margin">
                                     <label for="refno">Reference No.</label>
-                                    <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXX" onKeyPress="if(this.value.length==9) return false;" >
+                                    <input required type="number" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXXX" onKeyPress="if(this.value.length==13) return false;" >
 
                                     <input type="hidden" id="document_type" value="Certificate of Indigency" class="form-control inpmargin usersel" name="document_type">
 

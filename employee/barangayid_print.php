@@ -101,12 +101,12 @@ if(isset($_POST['generate']) ) {
 		.offic{font-size:13px;}
         .borderstyle{border: none; font-size: 15px;}  
         .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
-        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+        .viewbtn{ height: 35px;  background-color: white; color: black; border: 1px solid #008CBA; width: 100%;}
         .viewbtn:hover{ background-color: #008CBA;color: white;}
         .done{width: 30%; font-size: 11px;}
         .inputtext, .inputpass {
 			font-family: 'Montserrat', sans-serif;
-			font-size: 14px;
+			font-size: 13px;
 			height: 35px;
 			width:  96%;
 			padding: 10px 10px;
@@ -131,9 +131,12 @@ if(isset($_POST['generate']) ) {
 		.usersel{pointer-events: none; border: 1px solid orange}
 
 		.textarea{padding-left: 40px; padding-right: 40px; padding-top: 10px; margin-bottom: 15px;}
-        .body{background: #ebebeb; padding: 50px; margin-right: 100px;}
+        .body{ margin: 20px 170px; }
         .sendi{margin-top: 20px;}
-         
+         .draft1{position: absolute; z-index: 9999; margin-top: -20%; margin-left: 5%;}
+         img.draft{width: 70%; height: 70%; opacity: 0.7; }
+        .instruc{display: flex; justify-content: center; align-items: center;}
+        label{font-size: 14px;}
     </style>
 </head>
 <body>
@@ -230,9 +233,10 @@ if(isset($_POST['generate']) ) {
                         unset($_SESSION['status']);
                         }
                     ?>
-                <div class="id_dashed">
-									<section>
-                                    <form action="" method="post">
+                <div class="id_dashed"  style="margin-left: 13%;">
+									<section >
+                                      
+                                    <form action="" class="brgyform" method="post">
 										<div class="background_id" style="padding-top: 15px; width: 965px;  height: 344px;">
 											<div style="display: flex;">
 												<img style="float: left; width: 80px; height: 70px; margin-left: 15px;" src="../img/QCSealnew.png">
@@ -267,7 +271,7 @@ if(isset($_POST['generate']) ) {
 										</div>
 											<div style="display: flex;">
 												<div style="background: white; width: 115px; height: 115px; margin-top: 8px; margin-left: 8px;">
-                                                    <img src="../img/approved_barangayid/<?php echo $data['id_image']; ?>" style="width: 125px; height: 125px;" alt="">
+                                                    <img src="../img/approved_barangayid/<?php echo $data['id_image']; ?>" style="width: 115px; height: 115px;" alt="">
 													<p style="color: #1700cd;">ID NO.: 
                                                     <input type="text" name="app_brgyid" id="app_brgyid" class="form-control borderstyle" style="width: 80px; height: 24px; background:#C8CB58;" value="BD-<?php echo $data['app_brgyid']; ?>"></p>
 													<div style="background: #f9232c; width: 300px; color: white; font-weight: bold; padding: 5px 5px; letter-spacing: 2px; font-stretch: expanded;" >
@@ -276,7 +280,9 @@ if(isset($_POST['generate']) ) {
                                                     
 												</div>
 												
-												<div style="display: flex; padding-top: 10px; font-size: 13px;">
+												<div style="display: flex; padding-top: 10px; font-size: 13px;"> <div class="draft1"> 
+                                                            <img src="../resident-img/draft.png" class="draft"/>
+                                                        </div>
 													<div style="line-height: 0.9;">
 														<p class="personal_information" style="color: #1700cd;">LAST NAME</p>
 														<input type="text" name="lname" id="lname" class="form-control borderstyle" style="width: 100px; height: 24px; margin-left: 45px; background:#C8CB58; font-size: 16px;" value="<?php echo $data['lname']; ?>">
@@ -300,6 +306,8 @@ if(isset($_POST['generate']) ) {
 														<div style="position: absolute; width: 450px; height: 100px; line-height: 1.5; margin-left: 180px; text-align: center; padding-right: 150px; margin-top:-25px; ">
 														This certifies that the person whose name, signature and picture on the reverse side of this card is a registered voter and bonafide resident of BARANGAY COMMONWEALTH
 														</div>
+                                                       
+                                       
 														<div style="position: absolute;  width: 450px; height: 100px; line-height: 1.5; margin-left: 180px; text-align: center; padding-right: 150px; margin-top:55px;">
 														This ID is issued granting the Bearer for what legal purposes it may serve.
 														</div>
@@ -331,11 +339,11 @@ if(isset($_POST['generate']) ) {
 												</div>
 											</div>
                                             <input type="hidden" name="link" id="link" value="http://localhost:4000/Updated-Barangay-System">
-                                            <div class="generatebtn" style="margin-top: 50px; width: 90%;">
-                                            <hr>
-                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 15px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
+                                            <div class="generatebtn" style="margin-top: 50px;">
+
+                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
                                                 <br>
-                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div>
                                             </div>
@@ -344,11 +352,14 @@ if(isset($_POST['generate']) ) {
                                     
 							</div>
                 </div>
-                <div class="instruc" style="margin-top: 80px; margin-left: 50px;">
+
+
+                <div class="instruc" style="margin-top: 150px; margin-left: 50px; ">
+                        
+                        <ul>
                         <h4>
                             Instruction: For Barangay Employees
                         </h4>
-                        <ul>
                         <li>
                             <p style="font-size: 14px;"> Please generate and authenticate QR Code. </p>
                         </li>
@@ -368,36 +379,61 @@ if(isset($_POST['generate']) ) {
                     </ul>
                     
                 </div>
-                <form method="POST" action="" class="body" enctype="multipart/form-data">
+                <div class="instruc1">
+                    <form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
-                                           
-
+                                            <div  style="text-align: center; font-weight: 600">
+                                                <label>Send Attachment (Gmail)</label>
+                                            </div>
                                             <div class="information col">
-                                                <p> Fullname: </p>
+                                                <label> Fullname: </label>
                                                 <input class="form-control inputtext usersel" id="fullname" name="fullname" type="text"  value="<?php echo $data['fname']; ?> <?php echo $data['mname']; ?> <?php echo $data['lname']; ?>">
                                             </div>
 
                                             <div class="information col">
-                                                <p> To: </p>
+                                                <label> To: </label>
                                                 <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $data['emailadd']; ?>">
                                             </div>
 
                                             <div class="information col">
-                                                <p>Subject:  </p>
+                                                <label>Subject:  </label>
                                                 <input required class="form-control inputtext" id="subject" name="subject" type="text" value="Photocopy of your Request (Barangay ID)"> 
                                             </div>
                                         
 
                                             <div class="information col">
-                                                <p>Attachment: </p>
+                                                <label>Attachment: </label>
                                                 <input required class="form-control inputtext" style="background: white; height: 50px;" id="fileattach" name="fileattach" type="file" value=""> 
                                             </div>
 
                                             <div class="information col">
-                                                <p>Body: </p>
-                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day <?php echo $data['fname']; ?>  <?php echo $data['mname']; ?>  <?php echo $data['lname']; ?>!. Here is the pdf file of your Document Request <br><br> <br>  Website: comm-bms.com/index.php <br>
-                                                FB Fan Page: @maningningnacommonwealth <br>
-                                                Twitter Account: @BrgyCommonwealth</textarea>
+                                                <label>Body: </label>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day Ms/Mr. <?php echo $data['fname']; ?>  <?php echo $data['mname']; ?>  <?php echo $data['lname']; ?>, here is the pdf file of your Document Request <strong> (Barangay ID)</strong>
+                                                <br>
+                                                <br>
+                                                Reminder: This is confidential document and intended for the specified recipient in message only. It is strictly forbidden to share, without a consent from the owner.
+                                                <br>
+                                                <br>
+                                                Paalala: Ito ay kumpidensyal na dokumento at inilalaaan lamang sa tatanggap ng mensahe. Mahigpit na ipinagbabawal ang pagbabahagi, nang walang pahintulot mula sa may-ari.
+                                                <br>
+                                                <br>
+                                                Best Regards,
+                                                <br>
+                                                Barangay Commonwealth
+                                                <br>
+                                                <br>
+                                                For more details visit our: 
+
+                                                <br>
+                                                <br> 
+                                                Website: http://comm-bms.com/index.php 
+                                                <br>
+                                                FB Fan Page: @maningningnacommonwealth 
+                                                <br>
+                                                Twitter Account: @BrgyCommonwealth
+                                                <br>
+                                                Contact us: http://comm-bms.com/contact.php
+                                                </textarea>
                                                 <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
                                                 <script type="text/javascript">                        
                                                     CKEDITOR.replace( 'message' );
@@ -405,19 +441,13 @@ if(isset($_POST['generate']) ) {
                                             </div>
 
                                             <div class="sendi">
-                                                <button name="barangayidsendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                                <button name="barangayidsendemail" class="form-control viewbtn" style="width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
                                             </div>
                                         </div>
                                     </form>
+                        <div>
 									</section>
-                                   
-                                       
-                                   
-                                   
-<script>
-	const year = new Date();
-	document.getElementById("#demo").innerHTML = year.getFullYear();
-</script>
+                                
 
 </body>
 </html>

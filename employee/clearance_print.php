@@ -85,7 +85,46 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 
     <style>
       
-		
+	  .inp{border: none; }
+		.borderb{border-bottom: 1px solid black}
+		.offic{font-size:11.5px;}
+        .borderstyle{border: none; font-size: 15px;}  
+        .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
+        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
+        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .done{width: 30%; font-size: 11px;}
+        .inputtext, .inputpass {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 13px;
+			height: 35px;
+			width:  96%;
+			padding: 10px 10px;
+			margin: 4px 25px;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		.messcompose, .send{top: 0; display: flex;justify-content: center; align-items: center;  border: 1px solid #D8D8D8; padding: 10px;border-radius: 5px; font-size: 11px; text-transform: uppercase; background-color: rgb(236, 255, 216); color: green; text-align: center; margin-bottom: 25px;}
+		.submtbtn{height: 40px;}
+		.submtbtn:hover{
+			background: #04AA6D;
+			color: orange;
+			height: 40px;
+		}
+		.user, .email{width:87.5%}
+		.textareaa{width: 94%; margin-left: 25px;}
+		span.topright{margin-left: -50px; margin-top: -15px; text-align: right; font-size: 25px;}
+		span.topright:hover {text-align: right;color: red; cursor: pointer;}
+		.display{display: flex;}
+		.usersel{pointer-events: nne; border: 1px solid orange}
+
+		.textarea{padding-left: 40px; padding-right: 40px; padding-top: 10px; margin-bottom: 15px;}
+        .body{background: #ebebeb;  padding: 20px 170px; }
+        .sendi{margin-top: 20px;}
+		.draft1{position: absolute; z-index: 9999; margin-top: -20%; margin-left: 30%; background: none; }
+        img.draft{width: 70%; height: 70%; z-index: 9999;  opacity: 0.7; }
+		.inp{font-size: 14px;}
     </style>
 </head>
 <body>
@@ -181,6 +220,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                         unset($_SESSION['status']);
                         }
                     ?>
+					<div style="margin-top: -15px;">
 								<form action="" method="post">
 									<section class="barangay_indigency">
 										<div style="padding-top: 15px; width: 965px;  height: 344px;">
@@ -189,7 +229,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 													<div style="margin-left: 120px;">
 														<p class="center_description" style="font-size: 17px; padding-left: 75px;">Republic of the Philippines</p>
 														<p class="center_description" style="font-size: 15px; padding-left: 95px;">District II, Quezon City</p>
-														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px; ">BARANGAY COMMONWEALTH</p>
+														<p class="center_description" style=" font-size: 19px; padding-left: 35px; padding-bottom: 15px; font-weight: 600">BARANGAY COMMONWEALTH</p>
 														<p class="center_description" style="font-size: 20px; color: red;">OFFICE OF THE BARANGAY CAPTAIN</p>
 													</div>
 												<img style=" display: flex; float: right;  margin-left: 135px; " class="commonwealthlogo" src="../img/Brgy-Commonwealth.png">
@@ -198,48 +238,39 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 												<div style="margin-top:5px; border-top: 2px solid #000000; width: 1220px; width: calc(100%  - 70px); transition: all 0.5s ease;"></div>
 												<div style="border-left: 2px solid #000000; height: 1100px; margin-left: 245px;"></div>
 													<div  style="position: inherit; margin-top: -1075px;">
-														<p style="font-size: 21px; line-height: 0.5;">MANUEL A. CO</p>
-														<em>Punong Barangay</em>
+														<p style="font-size: 21px; line-height: 0.1; font-weight: 600">MANUEL A. CO</p>
+														<em style="font-size: 12px;">Punong Barangay</em>
 														<p style="margin-left: 730px; margin-top: -45px;">FILE NO.: <input class="inp" name="approved_clearanceids" id="approved_clearanceids" value="BC-<?php echo $data['approved_clearanceids']; ?>" style="padding-left: 15px; width: 155px; font-size: 14px" placeholder="File no."></p>
 														<br>
 														<div class="side_information">
 															<p>PRESY C. BAQUIRING</p>
 															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Barangay Justice and</p>
-															<p class="offic">Rules, Human Rights and Ethics,</p>
-															<p class="offic">VAWC, BCPC, PWD, Women</p>
-															<p class="offic">Affairs, Senior Citizen, Finance</p>
+															<p class="offic">Committee on Barangay Justice and Rules,</p>
+															<p class="offic">VAWC, BCPC, PWD, Women Affairs,</p>
+															<p class="offic">Senior Citizen</p>
 														</div>
 														<br>
 														<div class="side_information">
 															<p>ELMER M. BUENA</p>
 															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Peace and Order and</p>
+															<p class="offic">Committee on Peace and Order</p>
 															<p class="offic">Public Order and Safety</p>
 														</div>
 														<br>
 														<div class="side_information">
 															<p>ROWENA E. LUCAS</p>
 															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Education, Cultural</p>
-															<p class="offic">and Tourism, Appropriation, Ways</p>
-															<p class="offic">and Means</p>
+															<p class="offic">Committee on Education, Cultural and </p>
+															<p class="offic">Tourism, Appropriation, Ways and Means</p>
+															
 														</div>
 														<br>
 														<div class="side_information">
 															<p>REYNALDO O. SEVILLA</p>
 															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Health,</p>
-															<p class="offic">Environmental, Sanitation and</p>
-															<p class="offic">Beautification, Bids and Awards</p>
-														</div>
-														<br>
-														<div class="side_information">
-															<p>JULIUS C. DELA CRUZ</p>
-															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
-															<p class="offic">Committee on Transportation and</p>
-															<p class="offic">Communication</p>
-															<p class="offic">in, Bids and Awards Inspection</p>
+															<p class="offic">Committee on Health, Environmental,</p>
+															<p class="offic"> Sanitation and Beautification,</p>
+															<p class="offic"> Bids and Awards</p>
 														</div>
 														<br>
 														<div class="side_information">
@@ -256,6 +287,14 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 															<p class="offic">Committee on Public Works,</p>
 															<p class="offic">Infrastructure, HOA/PO's and</p>
 															<p class="offic">Community Development</p>
+														</div>
+														<br>
+														<div class="side_information">
+															<p>JULIUS C. DELA CRUZ</p>
+															<p style="font-size: 14px;">BARANGAY KAGAWAD</p>
+															<p class="offic">Committee on Transportation and</p>
+															<p class="offic">Communication Bids and Awards</p>
+															<p class="offic">Inspection</p>
 														</div>
 														<br>
 														<div class="side_information">
@@ -280,7 +319,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 										<div style="display: flex; ">
 											<div style="display: auto;">
 												<div style="margin-left: 50px;">
-													<h4 style="margin-top: -115px; margin-left: 420px; color: red;">BARANGAY CLEARANCE</h4>
+													<p style="margin-top: -115px; margin-left: 420px; color: red; font-size: 25px;">BARANGAY CLEARANCE</p>
 												</div>
 												<br>
 												<br>
@@ -288,7 +327,11 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 												<br>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 95px;">This certification is issued upon the request of the above-named party for <input class="inp borderb" style="width: 80%; padding-left: 55px;" type="text" id="purpose" name="purpose" width="auto" placeholder="PURPOSE" value="<?php echo $data['purpose']; ?>"></p>
 												<br>
-												
+												<div class="draft1"> 
+                                                    <img src="../resident-img/draft.png" class="draft"/>
+                                                </div>
+												<div style="margin-top: -310px; margin-left: 370px; position: absolute;"><img src="../img/Brgy-Commonwealth150x150.png" style="width: 290%; height: 290%; opacity: 0.1" alt="">
+												</div>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this day of <input class="inp  borderb" style="padding-left: 10px; width:95px;" value="<?php echo $data['date_issued']; ?>" type="text" id="demo" name="date_issue" placeholder="YEAR">, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
 												<br>
@@ -322,7 +365,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 												<div >
 													<div style="margin-left: 255px; font-size: 13px;">
 														<div style="float: right; text-align: center; padding-right: 95px; margin-top: -45px;">
-															<h5>MANUEL A. CO</h5>
+															<p style="font-size: 18px; font-weight: 500">MANUEL A. CO</p>
 															<p>Punong Barangay</p>
 														</div>
 														<div style="margin-top: 20px; margin-left: 55px;">
@@ -334,6 +377,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 														<br>
 														<p>NOTE: This clearance is valid for a period of <br> Six (6) months from date of issue.</p>
 													</div>
+													<div style=" position: absolute; margin-top: -220px; margin-left: 690px;"><img src="../img/starlogo.png" alt="" style="width: 280px; height: 151px;"></div>
 													<div style="margin-top: -70px; margin-left: 655px; font-size: 13px; margin-right: 65px; text-align: right;" class="side_information">
 														<p> www.brgycommonwealth.com.ph</p>
 														<p> @maningningnacommonwealth</p>
@@ -359,7 +403,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                                                 </div>
                                             </div>
                                         </form>
-
+									<div >
 										<form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
                                            
@@ -387,9 +431,32 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 
                                             <div class="information col">
                                                 <p>Body: </p>
-                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day <?php echo $data['full_name']; ?>!. Here is the pdf file of your Document Request <br><br> <br>  Website: comm-bms.com/index.php <br>
-                                                FB Fan Page: @maningningnacommonwealth <br>
-                                                Twitter Account: @BrgyCommonwealth</textarea>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day Ms/ Mr. <?php echo $data['full_name']; ?>, here is the pdf file of your Document Request <strong> (Barangay Clearance)</strong>
+												<br>
+                                                <br>
+                                                Reminder: This is confidential document and intended for the specified recipient in message only. It is strictly forbidden to share, without a consent from the owner.
+                                                <br>
+                                                <br>
+                                                Paalala: Ito ay kumpidensyal na dokumento at inilalaaan lamang sa tatanggap ng mensahe. Mahigpit na ipinagbabawal ang pagbabahagi, nang walang pahintulot mula sa may-ari.
+                                                <br>
+                                                <br>
+                                                Best Regards,
+                                                <br>
+                                                Barangay Commonwealth
+                                                <br>
+                                                <br>
+                                                For more details visit our: 
+
+                                                <br>
+                                                <br> 
+                                                Website: http://comm-bms.com/index.php 
+                                                <br>
+                                                FB Fan Page: @maningningnacommonwealth 
+                                                <br>
+                                                Twitter Account: @BrgyCommonwealth
+                                                <br>
+                                                Contact us: http://comm-bms.com/contact.php
+												</textarea>
                                                 <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
                                                 <script type="text/javascript">                        
                                                     CKEDITOR.replace( 'message' );
@@ -401,6 +468,8 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                                             </div>
                                         </div>
                                     </form>
+								</div>
+					</div>
 									</section>
 <script>
 	const year = new Date();

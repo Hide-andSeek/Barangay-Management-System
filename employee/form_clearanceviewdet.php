@@ -307,7 +307,7 @@ if(!isset($_SESSION["type"]))
                             $data['ctc_no'],
                             $data['issued_at'],
                             $data['precint_no'],
-                            $data['certificate_image'],
+                            $data['clearanceid_image'],
                             $data['clearance_status']
                                 );
                         $stmt->fetch();
@@ -364,7 +364,7 @@ if(!isset($_SESSION["type"]))
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
                 </div>
-                <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe> -->
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>">Here's the Document</iframe>
                 
                 <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">

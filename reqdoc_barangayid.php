@@ -163,15 +163,22 @@ if(!file_exists($f)){
 
 		@media only screen and (max-width: 700px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100%; padding: 5px;}
 		}
+		.form-text{width: 100%; padding: 5px;}
 
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100; padding: 5px;}
 		}
+		.form-text{width: 100%;  padding: 5px;}
+
 		.button {
 		display: absolute;
 		border-radius: 4px;
@@ -224,6 +231,8 @@ if(!file_exists($f)){
         .blockqoute-color{border-left-color: #EEA236;}
 		.linkpath:hover{color: orange;}
 		.usersel{pointer-events: none; border: 1px solid orange}
+
+
 	</style>
 </head>
 
@@ -364,25 +373,23 @@ if(!file_exists($f)){
 																	<label for="firstname">First Name:<i class="red">*</i> </label>
 																	<input type="text" class="form-control form-text form-text-desc" id="fname" name="fname" placeholder="Your First name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['fname']) ? $error['fname'] : '';?>			
-																</div><br/><br/>
+																</div><br/>
 																				
 																<div class="form-group">
 																	<label for="middlename">Middle Name:</label>
 																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" placeholder="Please write your Middle Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-																</div><br><br/>
-																
-																							
+																</div>
 																<div class="form-group">
 																	<label for="lastname">Last Name:<i class="red">*</i></label>
 																	<input type="text" class="form-control form-text form-text-desc" id="lname" name="lname" placeholder="Please write your Last Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['lname']) ? $error['lname'] : '';?>	
-																</div><br><br/>
+																</div><br>
 							
 																<div class="form-group">
 																	<label for="address">Address: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text form-text-desc" id="address" name="address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['address']) ? $error['address'] : '';?>	
-																</div></br><br/>
+																</div><br>
 																
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">
@@ -391,31 +398,31 @@ if(!file_exists($f)){
 																	<label for="birthday">Birthday: <i class="red">*</i></label>
 																	<input type="date"  class="form-control form-text form-text-desc" id="birthday" name="birthday">
 																	<?php echo isset($error['birthday']) ? $error['birthday'] : '';?>	
-																</div><br><br/>
+																</div><br>
 																							
 																<div class="form-group">
 																	<label for="pob">Place of Birth: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth" placeholder="Please write your Place of Birth" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['placeofbirth']) ? $error['placeofbirth'] : '';?>	
-																</div><br><br/>
+																</div><br>
 
 																<div class="form-group">
 																	<label for="precintno">Precint no: </label>
 																	<input type="number"  class="form-control form-text form-text-desc" id="precintno" name="precintno" placeholder="(Optional)">
-																</div><br><br/>	
+																</div>
 
 																<div class="form-group">
 																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
 																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
 																	<?php echo isset($error['contact_no']) ? $error['contact_no'] : '';?>
-																</div><br><br/>
+																</div><br>
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
 																	<input type="email" class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
 																	<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
-																</div><br/><br/>
+																</div><br/>
 																<div class="form-group ">
 																	<label for="file">Attach Document: <i class="red">*</i></label>
 																	<input type='file' style="margin: 3px 3px;font-size: 12px;" class="form-control " name='id_image' id="id_image" aria-details="id_image"/>
@@ -427,7 +434,7 @@ if(!file_exists($f)){
 																	<label>Date Requested: <i class="red">*</i></label>
 																	<input type="date" class="form-control form-text form-text-desc usersel" id="date_issued" name="dateissue">
 																	<?php echo isset($error['dateissue']) ? $error['dateissue'] : '';?>
-																</div><br>
+																</div>
 																
 																<div class="form-group">
 																	<label>Document type, please choose<i class="red">*</i></label>
@@ -438,7 +445,7 @@ if(!file_exists($f)){
 																	<option value="Both">Both</option>
 																	</select>
 																	<i aria-details="brgyidfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
-																</div><br>
+																</div>
 															</div>
 													<br>
                                                     <hr>

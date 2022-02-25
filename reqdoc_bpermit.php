@@ -148,15 +148,24 @@ if(!file_exists($f)){
 
 		@media only screen and (max-width: 700px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100%; padding: 5px;}
 		}
+		.form-text{width: 100%; padding: 5px;}
+		.selec{padding-bottom: 50px;}
 
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100; padding: 5px;}
 		}
+		.form-text{width: 100%;  padding: 5px;}
+		.selec{padding-bottom: 50px;}
+
 		.button {
 		display: absolute;
 		border-radius: 4px;
@@ -385,10 +394,10 @@ if(!file_exists($f)){
 																	<input type='file' name='businessid_image' class="form-control form-text" aria-details="businessid_image"/>
 																
 
-																	<i aria-details="businessid_image" class="detailid"><label> please attach the right format (.docx)	<?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?></label></i>
-																</div>
+																	<i aria-details="businessid_image" class="detailid" style="color: red"><label> please attach the right format (.docx)	<?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?></label></i>
+																</div><br>
 																
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label>Document type, please choose<i class="red">*</i></label>
 																	<select class="form-control" name="permitfilechoice" aria-details="permitfilechoice">
 																		<option disabled>--Select--</option>
@@ -396,8 +405,8 @@ if(!file_exists($f)){
 																		<option value="Softcopy">Softcopy</option>
 																		<option value="Both">Both</option>
 																	</select>
-																	<i aria-details="permitfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
-																</div><br>
+																	<i aria-details="permitfilechoice" class="detailid" style="color: red"><label> What type of document you want to receive?</label></i>
+																</div>
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">
                                                                
@@ -410,13 +419,13 @@ if(!file_exists($f)){
 																		<option value="new">New</option>
 																	</select>
                                                                     <?php echo isset($error['selection']) ? $error['selection'] : '';?>
-																</div><br>
+																</div>
 													
 																<div class="form-group">
 																		<label for="dateissued">Date Requested: <i class="red">*</i></label>
 																		<input type="date" class="form-control form-text usersel" id="date_issued" name="dateissued">
 																		<?php echo isset($error['dateissued']) ? $error['dateissued'] : '';?>
-																	</div><br>
+																	</div>
 																
 															</div>
 													<br>

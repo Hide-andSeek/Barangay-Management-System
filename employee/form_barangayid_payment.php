@@ -388,7 +388,7 @@ if(!isset($_SESSION["type"]))
                                                 Kindly attach your reference number here for verification. Visit this page, by simply clicking this link
                                                 <br>
                                                 <br>
-                                                Tagalog: Paki lagay ang iyong reference number para sa beripekasyon. Bisitahin ang pahinang ito, sa pamamagitan lamang ng pag-click sa link
+                                                Tagalog: Paki lagay ang iyong reference number para sa beripekasyon. Bisitahin ang pahinang ito, sa pamamagitan lamang ng pag click sa link
                                                 <br>
                                                 <br>
                                                 Paymaya: http://comm-bms.com/payment_link/paymaya_barangayid_payment.php?id=<?php echo $data['app_brgyid']; ?>

@@ -26,6 +26,37 @@ if(!isset($_SESSION["type"]))
 	if(isset($_SESSION['type'])){
 		$dept = $_SESSION['type'];
 	}
+
+
+	
+	if(isset($_POST['btnverify'])){
+
+		$payment_status	= $_POST['payment_status'];
+		$document_id = $_POST['document_id'];
+
+		$sql = "UPDATE payments SET payment_status = 'Paid' WHERE document_id = $document_id";
+
+		if (mysqli_query($connect, $sql)) {
+			$_SESSION['status'] ="Verified Successfully";
+			$_SESSION['status_code'] ="success";
+		} else {
+			$_SESSION['status'] ="Oh there's an Error";
+			$_SESSION['status_code'] ="errpr";
+		}
+	}
+
+	if(isset($_POST['btnverify'])){
+
+		$payment_stat	= $_POST['payment_stat'];
+		$approvedindigency_id = $_POST['approvedindigency_id'];
+	
+		$sql = "UPDATE approved_indigency SET payment_stat = 'Paid' WHERE approvedindigency_id = $approvedindigency_id";
+	
+		if (mysqli_query($connect, $sql)) {
+		} else {
+		  echo "Error updating record: " . mysqli_error($connect);
+		}
+	}
 ?>
 
 
@@ -45,7 +76,8 @@ if(!isset($_SESSION["type"]))
     <link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../css/documentprint_styles.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
-
+	<script src="../resident-js/sweetalert.min.js"></script>
+	
 	<!--Font Styles-->
 	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
 	
@@ -96,8 +128,8 @@ if(!isset($_SESSION["type"]))
 		.descriptionStyle{overflow:auto; resize:none;}
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
-		.viewbtn{width: 65px; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-		.viewbtn:hover{ background-color: #008CBA;color: white;}
+		.viewbtn{width: 65px; height: 35px; background-color: #008CBA;color: white; }
+		.viewbtn:hover{  background-color: white; color: black; border: 1px solid #008CBA;}
 
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -240,11 +272,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_indigency WHERE status = 'Approved'
 				ORDER BY approvedindigency_id ASC";
 	}else{
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_indigency
 				WHERE fullname LIKE ? 
 				ORDER BY approvedindigency_id ASC";
@@ -272,7 +304,8 @@ if(!isset($_SESSION["type"]))
 				$data['indigencyfilechoice'],
 				$data['approvedby'],
 				$data['app_date'],
-				$data['status']
+				$data['status'],
+				$data['payment_stat']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -297,11 +330,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_indigency WHERE status = 'Approved'
 				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_indigency 
 				WHERE fullname LIKE ? 
 				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
@@ -330,7 +363,8 @@ if(!isset($_SESSION["type"]))
 				$data['indigencyfilechoice'],
 				$data['approvedby'],
 				$data['app_date'],
-				$data['status']
+				$data['status'],
+				$data['payment_stat']
 				);
 		// for paging purpose
 		$total_records_paging = $total_records; 
@@ -394,11 +428,13 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Address</th>
 										<th width="5%">Purpose</th>
 										<th width="5">Contact</th>
-										<th width="15%">Email</th>
 										<th width="10%">Date Issued</th>
+										<th width="10%">Facilitated By</th>
+										<th width="15%">Document Type</th>
+										<th width="5%"></th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%"></th>
-										<th width="5%"></th>
+										<th width="5%">Link of Payment</th>
 									</tr>
 								</thead>
 							<?php 
@@ -410,14 +446,17 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['contactnum']; ?></td>
-									<td><?php echo $data ['emailaddress']?></td>
 									<td><?php echo $data ['date_issue']; ?></td>
-									<td>
-										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_indigency.php?id=<?php echo $data['approvedindigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
-									</td>		
+									<td><?php echo $data ['approvedby']; ?></td>
+									<td><?php echo $data ['indigencyfilechoice']?></td>
+									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
 
 									<td>
-									<a style="text-decoration: none; width: 100%; height:100%" class="viewbtn form-control" href="indigency_payment.php?id=<?php echo $data['approvedindigency_id'];?>" target="_blank"> Make a Payment</a>
+										<a style="text-decoration: none; width: 110px; height:30px; border-radius: 20px; border: 1px solid gray;" class="form-control generate viewbtn" href="print_indigency.php?id=<?php echo $data['approvedindigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
+									</td>
+
+									<td>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="indigency_payment.php?id=<?php echo $data['approvedindigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Payment</a>
 									</td>
 								</tr>	
 								</tbody>
@@ -426,32 +465,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<!-- Edit Category -->
-							<div id="formatValidatorName" >
-								<div id="edit/<?php echo $data['barangay_id']; ?>" class="edit-modal modal" >
-										<div class="modal-contentedit animate">	
-										<span  onclick="document.getElementById('edit/<?php echo $data['barangay_id']; ?>').style.display='none'" class="topright">&times;</span>
-										<br>
-										<br>
-										<h4 style="text-align: center;"><br> Edit Category </h4>
-										<?php echo isset($error['update_category']) ? $error['update_category'] : '';?>
-										<hr />
-										<form method="post" action="" enctype="multipart/form-data">
-											<span>
-												<input type="text" style="outline: 1px solid orange;" class="form-control cattxtbox " name="category_name" value="<?php echo $data['fname']; ?>"/>
-												<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
-											</span>
-											<input type="file" class="form-control fileimg" name="category_image" id="category_image" />
-											<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
-
-											<span class="imgup">
-												<img  src="upload/category/<?php echo $data['category_image']; ?>" width="260" height="170"/>
-											</span>
-											<input type="submit" class="btn-primary btn submitbtn" value="Update" name="btnEdit"/>
-										</form>
-										</div>
-								</div>
-							</div>
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">
@@ -622,7 +635,7 @@ if(!isset($_SESSION["type"]))
 										<th width="15%">Reference No</th>
 										<th width="5%">Payment Method</th>
 										<th width="5">Added on</th>
-										<th width="5%">Payment Status</th>
+										<th width="5%"></th>
 										<th width="5%"></th>
 									</tr>
 								</thead>
@@ -636,14 +649,23 @@ if(!isset($_SESSION["type"]))
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['payment_method']?></td>
 									<td><?php echo $data ['added_on']; ?></td>
-									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
-									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
-									<!-- <td>
-										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
-									</td> -->
 									<td>
-									<button style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" onclick="document.getElementById('<?php echo $data['document_id'];?>').style.display='block'"><i style="color: black;" class="" ></i> Verify</button>
+									<form method="POST" action="">
+										<input name="payment_status" id="payment_status" value="Paid" type="hidden">
+
+										<input name="document_id" id="document_id" value="<?php echo $data ['document_id']; ?>" type="hidden">
+
+										<input name="approvedindigency_id" id="approvedindigency_id" value="<?php echo $data ['document_id']; ?>" type="hidden">
+
+
+										<input name="payment_stat" id="payment_stat" value="Paid" type="hidden">
+
+										<button style="text-decoration: none; width: 90px; height:30px;" class="form-control generate viewbtn verify" name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600"></i> Verify</button>
+									</form>
+									</td>
+
+									<td>
+									<a style="text-decoration: none; width: 100%; height:100%; border-radius: 5px; border: 1px solid gray;" class="viewbtn form-control" href="clearance_resubmit.php?id=<?php echo $data['document_id'];?>" target="_blank"> Resubmit</a>
 									</td>
 								</tr>	
 								</tbody>
@@ -652,61 +674,6 @@ if(!isset($_SESSION["type"]))
 							}
 						?>
 							</table>
-							<div id="formatValidatorName" >
-          <div id="<?php echo $data['document_id'];?>" class="modal">
-                <div class="modal-content animate">
-                    <span onclick="document.getElementById('<?php echo $data['document_id'];?>').style.display='none'" class="topright">&times;</span>	
-                    <form method="POST" action="" class="body" enctype="multipart/form-data">
-                                        <div class="main-content-email">
-                                            <div class="main-content main-content1">
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Fullname: </p>
-														<input class="form-control mrgin" id="app_brgyid" name="app_brgyid" value="<?php echo $data['app_brgyid']; ?>" type="hidden">
-
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-
-													<div class="information col">
-														<p> Contact no: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['contact_no']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-												</div>
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Reference no: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['reference_no']; ?>" type="text" style="font-weight: 600;" placeholder="Reference No.">
-													</div>
-													
-													<div class="information col">
-														<p> Payment Method: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['payment_method']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-												</div>
-												<div style="display: flex;">
-													<div class="information col">
-														<p> Added on: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['added_on']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-													
-													<div class="information col">
-														<p> Status: </p>
-														<input class="form-control mrgin" id="fullname" name="fullname" value="<?php echo $data['payment_status']; ?>" type="text" placeholder="Enter Fullname">
-													</div>
-
-													<input class="form-control mrgin" name="payment_status" value="Paid" type="hidden">
-												</div>
-                                            </div>
-
-                                    
-                                            <div class="sendi">
-                                                <button name="btnverify" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Verify <i class="bx bx-send"></i></button>
-                                            </div>
-                                        </div>
-                                    </form>
-              </div>
-        </div>
-    </div>
 					</div>
 							<div class="col-md-12 pagination">
 								<h4 class="page">
@@ -718,7 +685,22 @@ if(!isset($_SESSION["type"]))
 								
 							</div>
 	</div>
-	
+	<?php
+        if(isset($_SESSION['status']) && $_SESSION['status'] !='')
+        {
+        ?>
+        <script>
+            swal({
+            title: "<?php echo $_SESSION['status']; ?>",
+            text: "You can now print the document",
+            icon: "<?php echo $_SESSION['status_code']; ?>",
+            button: "Ok Done!",
+            });
+        </script>
+        <?php
+        unset($_SESSION['status']);
+        }
+        ?>
 </section>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -223,11 +223,11 @@ if(isset($_POST['permitBtn'])){
 	$extension = end(explode(".", $_FILES["businessid_image"]["name"]));
 															
 	if($image_error > 0){
-	$error['businessid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
+	$error['businessid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert file! </span>";
 	}else if(!(($image_type == "docx")) &&
 	!(in_array($extension, $allowedExts))){
 													
-	$error['businessid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+	$error['businessid_image'] = " <span class='label label-danger errormsg'>File type must docx!</span>";
 	}
 													
 	if( !empty($dateissued) && 
@@ -339,11 +339,11 @@ if(isset($_POST['permitBtn'])){
         $extension = end(explode(".", $_FILES["indigencyid_image"]["name"]));
                                                                 
         if($image_error > 0){
-        $error['indigencyid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
+        $error['indigencyid_image'] = " <span class='label label-danger cattxtbox errormsg'>You must insert file! </span>";
         }else if(!(($image_type == "docx")) &&
         !(in_array($extension, $allowedExts))){
                                                         
-        $error['indigencyid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+        $error['indigencyid_image'] = " <span class='label label-danger errormsg'>File type must docx!</span>";
         }
                                                         
         if( !empty($fullname) &&  
@@ -480,11 +480,11 @@ if(isset($_POST['permitBtn'])){
             $extension = end(explode(".", $_FILES["clearanceid_image"]["name"]));
                                                                     
             if($image_error > 0){
-            $error['clearanceid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
+            $error['clearanceid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert file! </span>";
             }else if(!(($image_type == "docx")) &&
             !(in_array($extension, $allowedExts))){
                                                             
-            $error['clearanceid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+            $error['clearanceid_image'] = " <span class='label label-danger errormsg'>File type must docx!</span>";
             }
                                                             
             if( !empty($full_name) &&  
@@ -637,11 +637,11 @@ if(isset($_POST['permitBtn'])){
                 $extension = end(explode(".", $_FILES["blotterid_image"]["name"]));
                                                                         
                 if($image_error > 0){
-                $error['blotterid_image'] = "<span class='label label-danger cattxtbox errormsg'> You must insert file here! </span>";
+                $error['blotterid_image'] = "<span class='label label-danger cattxtbox errormsg'> You must insert file! </span>";
                 }else if(!(($image_type == "pdf")) &&
                 !(in_array($extension, $allowedExts))){
                                                                 
-                $error['blotterid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+                $error['blotterid_image'] = " <span class='label label-danger errormsg'>File type must pdf!</span>";
                 }
                                                                 
                 if( !empty($n_complainant) &&  

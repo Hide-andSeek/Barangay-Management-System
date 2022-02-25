@@ -29,12 +29,11 @@ if(!isset($_SESSION["type"]))
 	}
 ?>
 <?php
-
 if(isset($_POST['generate']) ) {
 
     $message = ''; 
 
-	$tempDir = '../img/'; 
+	$tempDir = '../img/qrcode_bpermit'; 
     $link = $_POST['link'];
     $id = $_POST['plateno'];
 	$fname = $_POST['fullname'];
@@ -48,10 +47,6 @@ if(isset($_POST['generate']) ) {
 }
 ?>
 
-<?php
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,7 +262,7 @@ if(isset($_POST['generate']) ) {
                                                 <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 15px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
                                                 <br>
                                                 <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
-                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?bpermitfile=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div>
                                         </div>
                                         </form>

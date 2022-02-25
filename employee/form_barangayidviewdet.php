@@ -367,7 +367,8 @@ if(!isset($_SESSION["type"]))
                 <!-- <iframe src="https://docs.google.com/gview?url=http://remote.url.tld/path/to/document.doc&embedded=true" ></iframe> -->
                 <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://remote.url.tld/img/fileupload_barangayid/<?php echo $data['id_image']; ?>/to/document.doc' width='100%' height='100%' frameborder='0'></iframe> -->
 
-                <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe> -->
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe>
+                
                 <?php
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){

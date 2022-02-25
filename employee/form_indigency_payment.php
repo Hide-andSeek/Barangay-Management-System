@@ -385,9 +385,9 @@ if(!isset($_SESSION["type"]))
                                                 Tagalog: Paki lagay ang iyong reference number para sa beripekasyon. Bisitahin ang pahinang ito, sa pamamagitan lamang ng pag-click sa link
                                                 <br>
                                                 <br>
-                                                Paymaya: http://comm-bms.com/payment_link/paymaya_clearance_payment.php?id=<?php echo $data['approvedindigency_id']; ?>
+                                                Paymaya: http://comm-bms.com/payment_link/paymaya_indigency_payment.php?id=<?php echo $data['approvedindigency_id']; ?>
                                                 <br>
-                                                GCash: http://comm-bms.com/payment_link/gcash_clearance_payment.php?id=<?php echo $data['approvedindigency_id']; ?>
+                                                GCash: http://comm-bms.com/payment_link/gcash_indigency_payment.php?id=<?php echo $data['approvedindigency_id']; ?>
                                                 <br>
                                                 <br>
                                                 For more details/questions visit our website.

@@ -326,7 +326,7 @@ if(!isset($_SESSION["type"]))
                 </div>
                 <hr>
                 <div style="float: right;">
-                    <a href="clearanceapproval.php.php">
+                    <a href="clearanceapproval.php">
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
                 </div>

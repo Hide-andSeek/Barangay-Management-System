@@ -4,15 +4,18 @@
 			 margin: 0;
 			 padding: 0;
 			}
+
 		
-			.sidebar, .reg_table, .footer, .top-section, .search_content, button.documentbtn, .document-button, .permitbtn, div.id_dashed, button.document-light-grey, .home-section, legend.legend_brgyID, legend.indigency, div.instruc{
+			.sidebar, .reg_table, .footer, .top-section, .search_content, button.documentbtn, .document-button, .permitbtn, div.id_dashed, button.document-light-grey, .home-section, legend.legend_brgyID, legend.indigency, div.instruc, .viewbtn, form.brgyform{
 				visibility: hidden;
 			}
-			.print_businesspermit, .print_businesspermit, .barangayid_print *{
+			.print_businesspermit, .print_businesspermit, .barangayid_print{
 				visibility: visible;
 			}
 			
 			.barangay_indigency *{visibility: visible;}
+
+			form.body{visibility: hidden;}
 			
 			.print_businesspermit, .barangayid_print {
 				position: absolute;
