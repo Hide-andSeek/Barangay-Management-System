@@ -157,7 +157,7 @@ include "db/user.php";
 		}
 
 
-		.addemployee{margin-top: 340px; margin-left: 25px; font-size: 13px; }
+		.addemployee{margin-top: 390px; margin-left: 25px; font-size: 13px; }
 
 
 		.select__select{
@@ -173,8 +173,9 @@ include "db/user.php";
 		.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
 		.panel-default{margin-top: 60px;}
 
-	
-		
+		.viewbtn{ height: 35px; background-color: #008CBA;color: white;  width: 150px; font-size: 12px;}
+        .viewbtn:hover{background-color: white; color: black; border: 1px solid #008CBA;}
+		.editbtn{width: 90px;}
 	 </style>
    </head>
 	<body onload="display_ct()">
@@ -187,7 +188,7 @@ include "db/user.php";
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar btnhover activehover" href="captaindashboard.php">
+					<a class="side_bar nav-button" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
@@ -195,7 +196,7 @@ include "db/user.php";
 			 	</li>
 
 				 <li>
-					<a class="side_bar btnhover" href="contactmodule.php">
+					<a class="side_bar nav-button" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
 						<span class="links_name">Contacts</span>
 					</a>
@@ -203,7 +204,7 @@ include "db/user.php";
 			  	</li>
 
 				<li>
-				  <a class="side_bar btnhover" href="usermanagement.php">
+				  <a class="side_bar nav-button nav-active" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">User Management</span>
 					</a>
@@ -211,7 +212,7 @@ include "db/user.php";
 				  </li>
 			 
 					<li>
-					<a class="side_bar btnhover" href="residentcensus.php">
+					<a class="side_bar nav-button" href="residentcensus.php">
 						<i class='bx bxs-group census'></i>
 						<span class="links_name">Resident Census</span>
 						</a>
@@ -219,7 +220,7 @@ include "db/user.php";
 					</li>
 
 					<li>
-					<a class="side_bar btnhover" href="postannouncement.php">
+					<a class="side_bar nav-button" href="postannouncement.php">
 						<i class='bx bx-news iannouncement'></i>
 						<span class="links_name">Post Announcement</span>
 						</a>
@@ -228,7 +229,6 @@ include "db/user.php";
 			 
 				 <li class="profile">
 					<div class="profile-details">
-					<img class="profile_pic" >
 					<div class="name_job" style="font-size: 13px;">
 						<div><strong><?php echo $user;?></strong></div>
 						<div class="job" id=""><?php echo $dept; ?></div>
@@ -406,8 +406,9 @@ include "db/user.php";
 													5px;" id="user_type" name="user_type">
 														<option disabled>--Select--</option>
 														<option value="Official">Brgy Official</option>
-														<option value="Employee">Employee</option>
-														<option value="Admin">Admin</option>
+														<option value="Regular Employee">Regular Employee</option>
+														<option value="Administrator">Administrator</option>
+														<option value="Contractual Employee">Contractual Employee</option>
 													</select>
 												</div>
 
@@ -425,6 +426,7 @@ include "db/user.php";
 														<option value="BPSO">BPSO</option>
 														<option value="REQUESTDOCUMENT">REQUESTDOCUMENT</option>
 														<option value="COMPLAINT">COMPLAINT</option>
+														<option value="NONE">NONE</option>
 													</select>
 												</div>
 

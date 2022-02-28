@@ -446,7 +446,7 @@ div.a_u_d_buttons{
 
 #footer{
 	display: auto;
-	background: linear-gradient(to bottom left, gray 5%, #009879 100%);
+	background: #252525;
 	color: #fff;
 	opacity: 0.5px;
 	font-size: 13px;
@@ -699,3 +699,11 @@ padding: 10px 25px;
 		::-webkit-scrollbar-thumb:hover{background: #555; border-radius: 5px;} */
 
     .hoverback:hover{background: orange; border-radius: 70%;}
+
+    .nav-active{
+      background-color:#55cf71!important;
+     }
+     .nav-button:hover{
+       color:#000!important;
+       background-color:#ccc!important
+     }

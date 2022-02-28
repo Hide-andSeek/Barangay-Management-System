@@ -54,7 +54,7 @@ if(isset($_POST['generate']) ) {
 
     $message = ''; 
 
-	$tempDir = '../img/'; 
+	$tempDir = '../img/qrcode_barangayid'; 
     $link = $_POST['link'];
     $id = $_POST['app_brgyid'];
 	$fname = $_POST['fname'];
@@ -62,7 +62,7 @@ if(isset($_POST['generate']) ) {
     $lname = $_POST['lname'];
 	$filename = ($fname);
 	$codeContents = ''.$link.'/'.urlencode($fname).''.urlencode($mname).'/'.urlencode($lname).'/'.urlencode($id); 
-	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
+	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L,5);
 }else{
     $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generate QR Code!</span>";
 }
@@ -75,7 +75,7 @@ if(isset($_POST['generate']) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/documentprint_styles.css">
+
     <link rel="stylesheet" href="../css/documentprint.css">
     <link rel="stylesheet" href="../css/print.css">
     <!-- <link rel="stylesheet" type="text/css" href="../qr_code/css/bootstrap.min.css"> -->
@@ -344,7 +344,7 @@ if(isset($_POST['generate']) ) {
                                                 <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
                                                 <br>
                                                 <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
-                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?barangayidfile=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div>
                                             </div>
                                             </form>

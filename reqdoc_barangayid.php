@@ -161,24 +161,26 @@ if(!file_exists($f)){
 
         .left_userpersonal_info{display: flex;}
 
-		@media only screen and (max-width: 700px) {
+		@media only screen and (max-width: 720px) {
+
+		*{font-size: 18px;}
 		.left_userpersonal_info {
 			display: block;
 		}
+	
 		.form-group{margin-bottom: 35px; margin-left: 15px;}
-		input{width:100%; padding: 5px;}
+		
+		.form-text{width: 90%; padding: 5px;}
 		}
-		.form-text{width: 100%; padding: 5px;}
-
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
 			display: block;
 		}
 		.form-group{margin-bottom: 35px; margin-left: 15px;}
 		input{width:100; padding: 5px;}
-		}
+		
 		.form-text{width: 100%;  padding: 5px;}
-
+	}
 		.button {
 		display: absolute;
 		border-radius: 4px;
@@ -231,7 +233,9 @@ if(!file_exists($f)){
         .blockqoute-color{border-left-color: #EEA236;}
 		.linkpath:hover{color: orange;}
 		.usersel{pointer-events: none; border: 1px solid orange}
-
+		.containter-messnotif{text-align: center;}
+		span.messnotif{padding-bottom:10px;}
+		.cattxtbox{margin-bottom: 10px;}
 
 	</style>
 </head>
@@ -317,8 +321,26 @@ if(!file_exists($f)){
         </a>
 		<br>
 		</div>
+		
 		<?php echo isset($error['add_barangayid']) ? $error['add_barangayid'] : '';?>
-	
+		<div class="containter-messnotif">
+			<div style="margin-top: 20px;">
+				<span class="messnotif"><?php echo isset($error['fname']) ? $error['fname'] : '';?>	</span>
+				<span class="messnotif"><?php echo isset($error['lname']) ? $error['lname'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['address']) ? $error['address'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['birthday']) ? $error['birthday'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['placeofbirth']) ? $error['placeofbirth'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['contact_no']) ? $error['contact_no'] : '';?></span>
+			</div>
+			<div>
+				<span class="messnotif"><?php echo isset($error['id_image']) ? $error['id_image'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['dateissue']) ? $error['dateissue'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['guardianname']) ? $error['guardianname'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['emrgncycontact']) ? $error['emrgncycontact'] : '';?></span>
+				<span class="messnotif"><?php echo isset($error['reladdress']) ? $error['reladdress'] : '';?></span>
+			</div>
+		</div>
 		
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
@@ -364,23 +386,25 @@ if(!file_exists($f)){
 														</fieldset>
 														<br>
 														<br>
-												<form method="POST" enctype="multipart/form-data" action="">
+												<form method="POST" enctype="multipart/form-data" autocomplete="on" id="removeval" action="">
                                                             <hr>
 															    <h5 style="text-align: center;" id="barangayid">Personal Information</h5>
 														    <hr>
 															<div class="left_userpersonal_info left_userpersonal_info1">
-																<div class="form-group">
-																	<label for="firstname">First Name:<i class="red">*</i> </label>
+																
+																<div class="form-group lname">
+																	<label for="fname">First Name:<i class="red">*</i> </label>
 																	<input type="text" class="form-control form-text form-text-desc" id="fname" name="fname" placeholder="Your First name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['fname']) ? $error['fname'] : '';?>			
 																</div><br/>
 																				
-																<div class="form-group">
-																	<label for="middlename">Middle Name:</label>
-																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" placeholder="Please write your Middle Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																<div class="form-group mname">
+																	<label for="mname">Middle Name:</label>
+																	<input type="text" placeholder="(Optional)" class="form-control form-text form-text-desc" id="mname" name="mname" autocomplete="mname" placeholder="Please write your Middle Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																</div>
+																
 																<div class="form-group">
-																	<label for="lastname">Last Name:<i class="red">*</i></label>
+																	<label for="lname">Last Name:<i class="red">*</i></label>
 																	<input type="text" class="form-control form-text form-text-desc" id="lname" name="lname" placeholder="Please write your Last Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['lname']) ? $error['lname'] : '';?>	
 																</div><br>
@@ -401,28 +425,43 @@ if(!file_exists($f)){
 																</div><br>
 																							
 																<div class="form-group">
-																	<label for="pob">Place of Birth: <i class="red">*</i></label>
+																	<label for="placeofbirth">Place of Birth: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text form-text-desc" id="placeofbirth" name="placeofbirth" placeholder="Please write your Place of Birth" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['placeofbirth']) ? $error['placeofbirth'] : '';?>	
 																</div><br>
 
 																<div class="form-group">
 																	<label for="precintno">Precint no: </label>
-																	<input type="number"  class="form-control form-text form-text-desc" id="precintno" name="precintno" placeholder="(Optional)">
+																	<input type="number" class="form-control form-text form-text-desc" id="precintno" name="precintno" placeholder="(Optional)">
 																</div>
 
 																<div class="form-group">
 																	<label for="contact_no">Contact No.: <i class="red">*</i></label>
-																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
+																	<input type="number" inputmode="numeric" class="form-control number form-text form-text-desc" autocomplete="contact_no" id="contact_no" name="contact_no" placeholder="Ex. 09123456789"  onKeyPress="if(this.value.length==11) return false;">
 																	<?php echo isset($error['contact_no']) ? $error['contact_no'] : '';?>
 																</div><br>
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
-																	<label>Email Address: <i class="red">*</i></label>
-																	<input type="email" class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
+																	<label for="emailadd">Email Address: <i class="red">*</i></label>
+																	<input type="email" autocomplete="off"  class="form-control form-text form-text-desc" placeholder="example@gmail.com" id="emailadd" name="emailadd">
 																	<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
 																</div><br/>
+
+																<div class="form-group">
+																		<label>ID type, please choose<i class="red">*</i></label>
+																		<select class="form-control" style="font-size: 12px;" name="barangayid_type" id="barangayid_type">
+																		<option disabled>--Select--</option>
+																		<option value="SSS">SSS</option>
+																		<option value="PhilHealth">PhilHealth</option>
+																		<option value="Passport">Passport</option>
+																		<option value="National ID">National ID</option>
+																		<option value="Pag-ibig ID">Pag-ibig ID</option>
+																		<option value="School ID">School ID</option>
+																		</select>
+							
+																</div>
+
 																<div class="form-group ">
 																	<label for="file">Attach Document: <i class="red">*</i></label>
 																	<input type='file' style="margin: 3px 3px;font-size: 12px;" class="form-control " name='id_image' id="id_image" aria-details="id_image"/>
@@ -432,19 +471,22 @@ if(!file_exists($f)){
 
 																<div class="form-group">
 																	<label>Date Requested: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text form-text-desc usersel" id="date_issued" name="dateissue">
+																	<input type="date" class="form-control form-text form-text-desc" id="date_issued" name="dateissue" readonly>
 																	<?php echo isset($error['dateissue']) ? $error['dateissue'] : '';?>
 																</div>
 																
+																
+															</div>
+															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
-																	<label>Document type, please choose<i class="red">*</i></label>
-																	<select class="form-control" style="font-size: 12px;" name="brgyidfilechoice" id="brgyidfilechoice" aria-details="brgyidfilechoice">
-																	<option disabled>--Select--</option>
-																	<option value="Hardcopy">Hardcopy</option>
-																	<option value="Softcopy">Softcopy</option>
-																	<option value="Both">Both</option>
-																	</select>
-																	<i aria-details="brgyidfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
+																		<label>Document type, please choose<i class="red">*</i></label>
+																		<select class="form-control" style="font-size: 12px;" name="brgyidfilechoice" id="brgyidfilechoice" aria-details="brgyidfilechoice" >
+																		<option disabled>--Select--</option>
+																		<option value="Hardcopy">Hardcopy</option>
+																		<option value="Softcopy">Softcopy</option>
+																		<option value="Both">Both</option>
+																		</select>
+																		<i aria-details="brgyidfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
 																</div>
 															</div>
 													<br>
@@ -454,21 +496,21 @@ if(!file_exists($f)){
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="guardianname">Guardian's Name:<i class="red">*</i> </label>
-															<input type="text" class="form-control form-text form-text-desc" id="guardianname" name="guardianname" placeholder="Ex. Your Relative" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+															<input type="text" class="form-control form-text form-text-desc" autocomplete="on"  id="guardianname" name="guardianname" placeholder="Ex. Your Relative" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 															<?php echo isset($error['guardianname']) ? $error['guardianname'] : '';?>	
 														</div><br>
 														
 
 														<div class="form-group">
 															<label for="emrgncycontact">Emergency Contact No.: <i class="red">*</i></label>
-															<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789">
+															<input type="number" class="form-control number form-text form-text-desc" id="emrgncycontact" name="emrgncycontact" autocomplete="on"  onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789">
 															<?php echo isset($error['emrgncycontact']) ? $error['emrgncycontact'] : '';?>	
 														</div><br>
 														
 
 														<div class="form-group">
 															<label for="reladdress">Address: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+															<input type="text" class="form-control form-text form-text-desc" id="reladdress" name="reladdress" autocomplete="on" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 															<?php echo isset($error['reladdress']) ? $error['reladdress'] : '';?>	
 														</div><br>
 														
@@ -478,8 +520,9 @@ if(!file_exists($f)){
 													</div> 
 													<br>
 													<div style="display: flex; justify-content: center; align-items: center;">
-														<button class="button form-control" name="brgyidbtn"><span>Submit </span>
+														<button class="button form-control"  name="brgyidbtn" ><span>Submit </span>
 													</button>
+													
 													</div>
 												</div>
 											</div>
@@ -540,6 +583,23 @@ if(!file_exists($f)){
 	<script src="https://use.fontawesome.com/f7721642f4.js"></script>
 	<script>
 		document.querySelector("#date_issued").valueAsDate = new Date();
+	</script>
+	<script>
+		fname.value = localStorage.getItem('fname');
+		mname.value = localStorage.getItem('mname');
+		lname.value = localStorage.getItem('lname');
+		fname.oninput = () =>{
+			localStorage.setItem('fname', fname.value)
+		};
+		mname.oninput = () =>{
+			localStorage.setItem('mname', mname.value)
+		};
+		lname.oninput = () =>{
+			localStorage.setItem('lname', lname.value)
+		};
+
+		
+
 	</script>
 </body>
 </html>

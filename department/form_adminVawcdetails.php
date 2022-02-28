@@ -73,7 +73,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-			   <a class="side_bar" href="compAdmin_Lupon.php">
+			   <a class="side_bar nav-button" href="compAdmin_Lupon.php">
 				 <i class='bx bx-user-circle lupon'></i>
 				 <span class="links_name">Lupon</span>
 			   </a>
@@ -81,7 +81,7 @@ if(!isset($_SESSION["type"]))
 			 </li>
 			 
 			 <li>
-			   <a class="side_bar" href="compAdmin_BPSO.php">
+			   <a class="side_bar nav-button" href="compAdmin_BPSO.php">
 				 <i class='bx bx-user bpso'></i>
 				 <span class="links_name">BPSO</span>
 			   </a>
@@ -89,7 +89,7 @@ if(!isset($_SESSION["type"]))
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="compAdmin_Vawc.php">
+			   <a class="side_bar nav-button nav-active" href="compAdmin_Vawc.php">
 				 <i class='bx bx-user-check vawc'></i>
 				 <span class="links_name">VAWC</span>
 			   </a>
@@ -97,7 +97,7 @@ if(!isset($_SESSION["type"]))
 			 </li>
 
 			 <li>
-			   <a class="side_bar" href="compAdmin_BCPC.php">
+			   <a class="side_bar nav-button" href="compAdmin_BCPC.php">
 				 <i class='bx bx-user-pin bcpc'></i>
 				 <span class="links_name">BCPC</span>
 			   </a>
@@ -106,10 +106,9 @@ if(!isset($_SESSION["type"]))
 			  
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+                        <div class="job" id=""><?php echo $dept; ?>|| Online</div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">

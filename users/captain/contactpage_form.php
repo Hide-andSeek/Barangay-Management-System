@@ -112,7 +112,7 @@ require 'db/conn.php';
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar btnhover btnhover activehover" href="captaindashboard.php">
+					<a class="side_bar nav-button" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
@@ -120,7 +120,7 @@ require 'db/conn.php';
 			 	</li>
 
 				 <li>
-					<a class="side_bar btnhover" href="contactmodule.php">
+					<a class="side_bar nav-button nav-active" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
 						<span class="links_name">Contacts</span>
 					</a>
@@ -128,7 +128,7 @@ require 'db/conn.php';
 			  	</li>	
 
 				  <li>
-				  <a class="side_bar btnhover" href="usermanagement.php">
+				  <a class="side_bar nav-button" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">User Management</span>
 					</a>
@@ -136,7 +136,7 @@ require 'db/conn.php';
 				  </li>
 
 					<li>
-					<a class="side_bar btnhover" href="residentcensus.php">
+					<a class="side_bar nav-button" href="residentcensus.php">
 						<i class='bx bxs-group census'></i>
 						<span class="links_name">Resident Census</span>
 						</a>
@@ -144,7 +144,7 @@ require 'db/conn.php';
 					</li>
 
 					<li>
-					<a class="side_bar btnhover" href="postannouncement.php">
+					<a class="side_bar nav-button" href="postannouncement.php">
 						<i class='bx bx-news iannouncement'></i>
 						<span class="links_name">Post Announcement</span>
 						</a>
@@ -153,7 +153,6 @@ require 'db/conn.php';
 			 
 					<li class="profile">
 						<div class="profile-details">
-						<img class="profile_pic" >
 						<div class="name_job" style="font-size: 13px;">
 							<div><strong><?php echo $user;?></strong></div>
 							<div class="job" id=""><?php echo $dept; ?></div>

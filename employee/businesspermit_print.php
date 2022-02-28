@@ -41,7 +41,7 @@ if(isset($_POST['generate']) ) {
     $address = $_POST['businessaddress'];
 	$filename = ($fname);
 	$codeContents = ''.$link.'/'.urlencode($fname).''.urlencode($business).'/'.urlencode($address).'/'.urlencode($id); 
-	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
+	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L,5);
 }else{
     $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generate QR Code!</span>";
 }
@@ -225,7 +225,7 @@ if(isset($_POST['generate']) ) {
                                         <div style="margin-left: 50px; text-align: justify;"><label for="">Date Issued:</label> <input type="text" name="" id="" class="borderstyle" style="border-bottom: 1px solid black; width: 14%;padding-left: 20px;" value="<?php echo $data['dateissued']; ?>"> <label style="float: right;  margin-right: 280px; font-size: 16px;"><strong> MANUEL A. CO</strong></label></div>
                                         <div style="margin-left: 50px; text-align: justify;"><label for="">Place Issued:  <input type="text" name="" id="" class="borderstyle" style="border-bottom: 1px solid black; width: 13%;"><label  style="float: right; margin-right: 280px; font-size: 13px; "> Punong Barangay</label></label></div>
                                         <div style="margin-top: 20px; margin-left: 55px;">
-                                                        <?php echo '<img style=" margin-top: 30px; position: absolute; width: 110px; height: 110px;" src="../img/'. @$filename.'.png" ><br>'; ?>
+                                                        <?php echo '<img style=" margin-top: 30px; position: absolute; width: 110px; height: 110px;" src="../img/qrcode_bpermit'. @$filename.'.png" ><br>'; ?>
                                                         <span style="margin-left: -20px;"><?php echo $message;?></span>
                                         </div>
                                         <div style="font-size: 13px; margin-top: 100px;"><p>NOT VALID WITHOUT QR CODE </p><p> CONTACT PERSON: <strong> MARIE LEAN CRUZ</strong></p>
@@ -293,9 +293,32 @@ if(isset($_POST['generate']) ) {
 
                                             <div class="information col">
                                                 <p>Body: </p>
-                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day <?php echo $data['fullname']; ?>!. Here is the pdf file of your Document Request <br><br> <br>  Website: comm-bms.com/index.php <br>
-                                                FB Fan Page: @maningningnacommonwealth <br>
-                                                Twitter Account: @BrgyCommonwealth</textarea>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day Ms/ Mr. <strong><?php echo $data['fullname']; ?></strong>, here is the pdf file of your Document Request <strong> (Business Permit)</strong>
+												<br>
+                                                <br>
+                                                Reminder: This is confidential document and intended for the specified recipient in message only. It is strictly forbidden to share, without a consent from the owner.
+                                                <br>
+                                                <br>
+                                                Paalala: Ito ay kumpidensyal na dokumento at inilalaaan lamang sa tatanggap ng mensahe. Mahigpit na ipinagbabawal ang pagbabahagi, nang walang pahintulot mula sa may-ari.
+                                                <br>
+                                                <br>
+                                                Best Regards,
+                                                <br>
+                                                Barangay Commonwealth
+                                                <br>
+                                                <br>
+                                                For more details visit our: 
+
+                                                <br>
+                                                <br> 
+                                                Website: http://comm-bms.com/index.php 
+                                                <br>
+                                                FB Fan Page: @maningningnacommonwealth 
+                                                <br>
+                                                Twitter Account: @BrgyCommonwealth
+                                                <br>
+                                                Contact us: http://comm-bms.com/contact.php
+												</textarea>
                                                 <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
                                                 <script type="text/javascript">                        
                                                     CKEDITOR.replace( 'message' );

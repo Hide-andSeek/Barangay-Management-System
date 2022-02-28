@@ -15,6 +15,7 @@
             $precintno = $_POST['precintno'];
             $contact_no = $_POST['contact_no'];
             $emailadd = $_POST['emailadd'];
+            $barangayid_type = $_POST['barangayid_type'];
             $guardianname = $_POST['guardianname'];
             $emrgncycontact = $_POST['emrgncycontact'];
             $reladdress = $_POST['reladdress'];
@@ -115,13 +116,13 @@
             $upload = move_uploaded_file($_FILES['id_image']['tmp_name'], '../img/approved_barangayid/'.$barangayid_image);
                                                         
             // insert new data to menu table
-            $sql_query = "INSERT INTO approved_brgyids (app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, brgyidfilechoice, approvedby, app_date,status, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql_query = "INSERT INTO approved_brgyids (app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, brgyidfilechoice, approvedby, app_date,status, id_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                 
             $upload_image = $barangayid_image;
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
             // Bind your variables to replace the ?s
-            $stmt->bind_param('sssssssssssssssssss',
+            $stmt->bind_param('ssssssssssssssssssss',
             $app_brgyid, 
             $fname,
             $mname,
@@ -132,6 +133,7 @@
             $precintno,
             $contact_no,
             $emailadd,
+            $barangayid_type,
             $guardianname,
             $emrgncycontact,
             $reladdress,
@@ -177,6 +179,7 @@
         $issued_at = $_POST['issued_at'];
         $precint_no = $_POST['precint_no'];
         $filechoice = $_POST['filechoice'];   
+        $clearanceid_type = $_POST['clearanceid_type'];  
         // get image info
         $clearance_image = $_FILES['clearanceid_image']['name'];
         $image_error = $_FILES['clearanceid_image']['error'];
@@ -274,14 +277,14 @@
         $upload = move_uploaded_file($_FILES['clearanceid_image']['tmp_name'], '../img/approved_clearance/'.$clearance_image);
                                                     
         // insert new data to menu table
-        $sql_query = "INSERT INTO approved_clearance (approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, filechoice, clearanceid_image, approvedby, app_date, clearance_status)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql_query = "INSERT INTO approved_clearance (approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, filechoice,clearanceid_type, clearanceid_image, approvedby, app_date, clearance_status)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                             
         $upload_image = $clearance_image;
         $stmt = $connect->stmt_init();
         if($stmt->prepare($sql_query)) {	
         // Bind your variables to replace the ?s
-        $stmt->bind_param('ssssssssssssssssss', 
+        $stmt->bind_param('sssssssssssssssssss', 
         $approved_clearanceids,
         $full_name,
         $age,
@@ -296,6 +299,7 @@
         $issued_at,
         $precint_no,
         $filechoice,
+        $clearanceid_type,
         $upload_image,
         $approvedby,
         $app_date,
@@ -335,6 +339,7 @@ if(isset($_POST['insertindigency'])){
     $indigency_image = $_FILES['indigencyid_image']['name'];
     $image_error = $_FILES['indigencyid_image']['error'];
     $image_type = $_FILES['indigencyid_image']['type'];               
+    $indigencyid_type = $_POST['indigencyid_type'];
     $status = $_POST['status'];
                                                     
     
@@ -399,14 +404,14 @@ if(isset($_POST['insertindigency'])){
     $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], '../img/approved_indigency/'.$indigency_image);
                                                 
     // insert new data to menu table
-    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_image, status)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_image, indigencyid_type, status)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                         
     $upload_image = $indigency_image;
     $stmt = $connect->stmt_init();
     if($stmt->prepare($sql_query)) {	
     // Bind your variables to replace the ?s
-    $stmt->bind_param('ssssssssssss', 
+    $stmt->bind_param('sssssssssssss', 
     $approvedindigency_id,
     $fullname,
     $address,
@@ -418,6 +423,7 @@ if(isset($_POST['insertindigency'])){
     $approvedby,
     $app_date,
     $upload_image,
+    $indigencyid_type,
     $status
     );
     // Execute query
@@ -458,6 +464,7 @@ if(isset($_POST['insertpermit'])){
 	$permit_image = $_FILES['businessid_image']['name'];
 	$image_error = $_FILES['businessid_image']['error'];
 	$image_type = $_FILES['businessid_image']['type'];
+    $bpermitid_type = $_POST['bpermitid_type'];
 
     $status = $_POST['status'];
 													
@@ -525,14 +532,14 @@ if(isset($_POST['insertpermit'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], '../img/approved_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO approved_bpermits (approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add,permitfilechoice, app_date, approvedby, businessid_image, status)
-	VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO approved_bpermits (approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add,permitfilechoice, app_date, approvedby, businessid_image, bpermitid_type, status)
+	VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('ssssssssssssss', 
+	$stmt->bind_param('sssssssssssssss', 
     $approved_bpermitid,
 	$dateissued,
     $selection,
@@ -546,6 +553,7 @@ if(isset($_POST['insertpermit'])){
     $app_date,
     $approvedby,
     $upload_image,
+    $bpermitid_type,
     $status
 	);
 	// Execute query

@@ -244,10 +244,9 @@ if(!isset($_SESSION["type"]))
 			
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+                        <div class="job" id=""><?php echo $dept; ?> || Online </div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">

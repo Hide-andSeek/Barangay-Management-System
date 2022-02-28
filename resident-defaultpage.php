@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION['email'])){
-    header("location: index.php");
+    header("location: resident-defaultpage.php");
 }
 
 ?>
@@ -280,6 +280,7 @@ include "db/user.php";
                           <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user;?></a>
                           <span class="logdropdown-content">
                               <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+                              <a href="resident_viewprofile.php">View Profile</a>
                           </span>
 						            </li>
                     </ul>
@@ -293,11 +294,6 @@ include "db/user.php";
     <!-- Slider -->
     <section id="slider">
       <div id="myCarousel-one" class="carousel slide">
-
-       <ol class="carousel-indicators">
-            <li data-target="#myCarousel-one" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel-one" data-slide-to="1"></li>
-        </ol>
 
             <div class="carousel-inner">
                 <div class="item active"> 
@@ -316,24 +312,7 @@ include "db/user.php";
                     </div>
                     <img class="munisipyo" src="resident-img/backgrounds/commonwealth_1.jpg" alt="slider-image"/>
                 </div>
-               
-                <div class="item"> 
-                
-                    <div class="carousel-caption wrapper">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth Hall</h1>
-                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Services</h2>
-                                    <p class="intro-paragraph animated bounceInRight"> </p>
-                                </div>
-                                <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
-                            </div>
-                        </div>
-                    </div>
-                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth.jpg" alt="slider-image"/>
-                </div>				
-            </div>
+
         </div>
     </section>
 

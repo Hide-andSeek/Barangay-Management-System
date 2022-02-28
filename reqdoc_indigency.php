@@ -314,6 +314,15 @@ if(!file_exists($f)){
         <br>
 		</div>
 		<?php echo isset($error['add_brgyindigency']) ? $error['add_brgyindigency'] : '';?>
+		<div style="text-align: center;">
+		<?php echo isset($error['fullname']) ? $error['fullname'] : '';?>
+		<?php echo isset($error['address']) ? $error['address'] : '';?>
+		<?php echo isset($error['purpose']) ? $error['purpose'] : '';?>
+		<?php echo isset($error['contactnum']) ? $error['contactnum'] : '';?>
+		<?php echo isset($error['emailaddress']) ? $error['emailaddress'] : '';?>
+		<?php echo isset($error['date_issue']) ? $error['date_issue'] : '';?>
+		<?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : '';?>
+		</div>
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
@@ -400,7 +409,7 @@ if(!file_exists($f)){
 
 																<div class="form-group">
 																	<label for="date_issue">Date Requested: <i class="red">*</i></label>
-																	<input type="date" class="form-control form-text" id="date_issued" name="date_issue">
+																	<input type="date" class="form-control form-text" id="date_issued" name="date_issue" readonly="readonly">
 																	<?php echo isset($error['date_issue']) ? $error['date_issue'] : '';?>
 																</div>
 
@@ -410,7 +419,22 @@ if(!file_exists($f)){
 																	
                                                                     <i aria-details="indigencyid_image" class="detailid" style="color: red"><label> please attach the right format (.docx) <?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : '';?></label></i>
 																</div>
-
+																
+																<div class="form-group">
+																		<label>ID type, please choose<i class="red">*</i></label>
+																		<select class="form-control form-text" style="font-size: 12px;" name="indigencyid_type" id="indigencyid_type">
+																		<option disabled>--Select--</option>
+																		<option value="SSS">SSS</option>
+																		<option value="PhilHealth">PhilHealth</option>
+																		<option value="Passport">Passport</option>
+																		<option value="National ID">National ID</option>
+																		<option value="Pag-ibig ID">Pag-ibig ID</option>
+																		<option value="School ID">School ID</option>
+																		<option value="Barangay ID">Barangay ID</option>
+																		</select>
+																</div>
+															</div>
+															<div class="left_userpersonal_info left_userpersonal_info1">
 																<div class="form-group">
 																	<label>Document type, please choose<i class="red">*</i></label>
 																	<select class="form-control" name="indigencyfilechoice" aria-details="indigencyfilechoice">
@@ -421,7 +445,7 @@ if(!file_exists($f)){
 																	</select>
                                                                     <i aria-details="indigencyfilechoice" class="detailid" style="color: red"><label> What type of document you want to receive?</label></i>
 																</div>
-															</div>
+																</div>
 													<br>
 													<br>
 													<div style="display: flex; justify-content: center; align-items: center;">

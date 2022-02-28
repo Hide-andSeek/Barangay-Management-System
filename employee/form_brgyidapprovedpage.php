@@ -244,14 +244,14 @@ if(isset($_POST['btnverify'])){
 			</div>
 			<ul class="nav-list">
 			 <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar nav-button" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="barangayid.php">
+				<a class="side_bar nav-button nav-active" href="barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -259,7 +259,7 @@ if(isset($_POST['btnverify'])){
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="barangayclearance.php">
+				<a class="side_bar nav-button" href="barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -267,7 +267,7 @@ if(isset($_POST['btnverify'])){
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="certificateofindigency.php">
+				<a class="side_bar nav-button" href="certificateofindigency.php">
 				   <i class='bx bx-file indigency'></i>
 				  <span class="links_name">Certificate of Indigency</span>
 				</a>
@@ -275,7 +275,7 @@ if(isset($_POST['btnverify'])){
 			  </li>			  
 			  
 			  <li>
-				<a class="side_bar" href="businesspermit.php">
+				<a class="side_bar nav-button" href="businesspermit.php">
 				   <i class='bx bx-news permit'></i>
 				  <span class="links_name">Business Permit</span>
 				</a>
@@ -283,7 +283,7 @@ if(isset($_POST['btnverify'])){
 			  </li>
 
 			  <li>
-				<a class="side_bar" href="payment_history.php">
+				<a class="side_bar nav-button" href="payment_history.php">
 				   <i class='bx bx-data payment'></i>
 				  <span class="links_name">Payment History</span>
 				</a>
@@ -292,10 +292,9 @@ if(isset($_POST['btnverify'])){
 			
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?> || Online </div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -336,11 +335,11 @@ if(isset($_POST['btnverify'])){
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 					FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC";
@@ -367,6 +366,7 @@ if(isset($_POST['btnverify'])){
 					$data['precintno'],
 					$data['contact_no'],
 					$data['emailadd'],
+					$data['barangayid_type'],
 					$data['guardianname'],
 					$data['emrgncycontact'],
 					$data['reladdress'],
@@ -390,7 +390,7 @@ if(isset($_POST['btnverify'])){
 	}
 					
 	// number of data that will be display per page		
-	$offset = 10;
+	$offset = 20;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
@@ -401,11 +401,11 @@ if(isset($_POST['btnverify'])){
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
 				FROM approved_brgyids 
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
@@ -433,6 +433,7 @@ if(isset($_POST['btnverify'])){
 					$data['precintno'],
 					$data['contact_no'],
 					$data['emailadd'],
+					$data['barangayid_type'],
 					$data['guardianname'],
 					$data['emrgncycontact'],
 					$data['reladdress'],

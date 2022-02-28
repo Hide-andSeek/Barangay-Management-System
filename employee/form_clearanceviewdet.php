@@ -195,14 +195,14 @@ if(!isset($_SESSION["type"]))
 			</div>
 			<ul class="nav-list">
 			 <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar nav-button" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="barangayid.php">
+				<a class="side_bar nav-button" href="barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -210,7 +210,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="barangayclearance.php">
+				<a class="side_bar nav-button nav-active" href="barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -218,7 +218,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="certificateofindigency.php">
+				<a class="side_bar nav-button" href="certificateofindigency.php">
 				   <i class='bx bx-file indigency'></i>
 				  <span class="links_name">Certificate of Indigency</span>
 				</a>
@@ -226,7 +226,7 @@ if(!isset($_SESSION["type"]))
 			  </li>			  
 			  
 			  <li>
-				<a class="side_bar" href="businesspermit.php">
+				<a class="side_bar nav-button" href="businesspermit.php">
 				   <i class='bx bx-news permit'></i>
 				  <span class="links_name">Business Permit</span>
 				</a>
@@ -234,7 +234,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 
               <li>
-				<a class="side_bar" href="payment_history.php">
+				<a class="side_bar nav-button" href="payment_history.php">
 				   <i class='bx bx-data payment'></i>
 				  <span class="links_name">Payment History</span>
 				</a>
@@ -243,10 +243,9 @@ if(!isset($_SESSION["type"]))
 			
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+                        <div class="job" id=""><?php echo $dept; ?> || Online </div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -282,7 +281,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearance_status
+                    $sql_query = "SELECT clearance_id, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearanceid_type, filechoice
                             FROM barangayclearance
                             WHERE clearance_id = ?";
                     
@@ -308,7 +307,8 @@ if(!isset($_SESSION["type"]))
                             $data['issued_at'],
                             $data['precint_no'],
                             $data['clearanceid_image'],
-                            $data['clearance_status']
+                            $data['clearanceid_type'],
+                            $data['filechoice']
                                 );
                         $stmt->fetch();
                         $stmt->close();
@@ -425,7 +425,11 @@ if(!isset($_SESSION["type"]))
                         </tr>
                         <tr>
                             <th width="30%">Document Type</th>
-                            <td><input type="hidden" name="filechoice" value="<?php echo $data['precint_no']; ?>"><?php echo $data['precint_no']; ?></td>
+                            <td><input type="hidden" name="filechoice" value="<?php echo $data['filechoice']; ?>"><?php echo $data['filechoice']; ?></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Submitted ID</th>
+                            <td><input type="hidden" name="clearanceid_type" value="<?php echo $data['clearanceid_type']; ?>"><?php echo $data['clearanceid_type']; ?></td>
                         </tr>
                     </table>
                     </div>

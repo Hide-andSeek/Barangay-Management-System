@@ -28,17 +28,17 @@ if(isset($_POST["action"]))
         <table class="content-table">
             <thead>
                 <tr>
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Birthday</th>
-                    <th>Address</th>
-                    <th>Contact No.</th>   
-                    <th>User Type</th>  
-                    <th>Department</th>
-                    <th>Added On</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th width="5%">User ID</th>
+                    <th width="5%">Username</th>
+                    <th width="5%">Birthday</th>
+                    <th width="5%">Address</th>
+                    <th width="5%">Contact No.</th>   
+                    <th width="5%">User Type</th>  
+                    <th width="5%">Department</th>
+                    <th width="5%">Added On</th>
+                    <th width="5%">Status</th>
+                    <th width="5%"></th>
+                    <th width="5%"></th>
                 </tr>                       
             </thead>
         ';
@@ -72,7 +72,6 @@ if(isset($_POST["action"]))
             <tr>
                 <td>'.$data["user_id"].'</td>
                 <td>'.$data["username"].'</td>
-                <td>'.$data["emailadd"].'</td>
                 <td>'.$data["birthday"].'</td>
                 <td>'.$data["address"].'</td>
                 <td>'.$data["contact"].'</td>
@@ -81,10 +80,11 @@ if(isset($_POST["action"]))
                 <td>'.$data["added_on"].'</td>
                 <td>'.$istatus.'</td>
                 <td>
-					<button type="button" name="action" class="btn btn-info btnwidth action"  data-user_id="'.$data["user_id"].'"" data-status="'.$data["status"].'""><i class="bx bx-edit"></i>Change Status</button>
-                    
-                    <a href="employeeeditacc.php?id=<?php echo $data["user_id"]; class="btn btn-primary btnwidth"?><i class="bx bx-edit"></i>Edit</a>
+					<button type="button" name="action" class="btn btn-info btnwidth action viewbtn"  data-user_id="'.$data["user_id"].'"" data-status="'.$data["status"].'""><i class="bx bx-edit"></i>Change Status</button>
 				</td>
+                <td>
+                    <a href="employeeeditacc.php?id=<?php echo $data["user_id"]; class="btn btn-primary btnwidth viewbtn editbtn"><i class="bx bx-edit"></i>Edit</a>
+                </td>
             </tr>
             ';
         }

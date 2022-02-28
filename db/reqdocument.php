@@ -33,54 +33,53 @@ if(isset($_POST['brgyidbtn'])){
     $precintno = $_POST['precintno'];
 	$contact_no = $_POST['contact_no'];
 	$emailadd = $_POST['emailadd'];
-	$guardianname = $_POST['guardianname'];
-	$emrgncycontact = $_POST['emrgncycontact'];
-	$reladdress = $_POST['reladdress'];
-	$dateissue = $_POST['dateissue'];
-	// get image info
-	$barangayid_image = $_FILES['id_image']['name'];
+    $barangayid_type = $_POST['barangayid_type'];
+
+    $barangayid_image = $_FILES['id_image']['name'];
 	$image_error = $_FILES['id_image']['error'];
 	$image_type = $_FILES['id_image']['type'];
 
+    $dateissue = $_POST['dateissue'];
     $brgyidfilechoice = $_POST['brgyidfilechoice'];
-													
+	$guardianname = $_POST['guardianname'];
+	$emrgncycontact = $_POST['emrgncycontact'];
+	$reladdress = $_POST['reladdress'];
+										
 													
 	// create array variable to handle error
 	$error = array();
 													
 	if(empty($fname)){
-	$error['fname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['fname'] = "<span class='label label-danger cattxtbox errormsg'>First name is required field!</span>";
 	}
 	if(empty($lname)){
-		$error['lname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['lname'] = "<span class='label label-danger cattxtbox errormsg'>Last name is required field!</span>";
 	}
 	if(empty($address)){
-	$error['address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['address'] = "<span class='label label-danger cattxtbox errormsg'>Address is required field!</span>";
 	}
 	if(empty($birthday)){
-		$error['birthday'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['birthday'] = "<span class='label label-danger cattxtbox errormsg'>Birthday is required field!</span>";
 	}
 	if(empty($placeofbirth)){
-		$error['placeofbirth'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['placeofbirth'] = "<span class='label label-danger cattxtbox errormsg'>Place of Birth is required field!</span>";
 	}
 	if(empty($contact_no)){
-		$error['contact_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['contact_no'] = "<span class='label label-danger cattxtbox errormsg'>Contact no is required field!</span>";
 	}
 	if(empty($emailadd)){
-		$error['emailadd'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['emailadd'] = "<span class='label label-danger cattxtbox errormsg'>Email address is required field!</span>";
 	}
 	if(empty($guardianname)){
-		$error['guardianname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['guardianname'] = "<span class='label label-danger cattxtbox errormsg'>Guardian name is required field!</span>";
 	}
 	if(empty($emrgncycontact)){
-		$error['emrgncycontact'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['emrgncycontact'] = "<span class='label label-danger cattxtbox errormsg'>Emergency Contact no. is required field!</span>";
 	}
 	if(empty($reladdress)){
-		$error['reladdress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['reladdress'] = "<span class='label label-danger cattxtbox errormsg'>Relative Address is required field!</span>";
 	}
-	if(empty($dateissue)){
-		$error['dateissue'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
+
 	// common image file extensions
 	$allowedExts = array("docx");
 													
@@ -105,8 +104,7 @@ if(isset($_POST['brgyidbtn'])){
 		!empty($emailadd) && 
 		!empty($guardianname) && 
 		!empty($emrgncycontact) && 
-		!empty($reladdress) && 
-		!empty($dateissue) && 
+		!empty($reladdress) &&
 		empty($error['id_image'])){
 														
 	// create random image file name
@@ -119,13 +117,13 @@ if(isset($_POST['brgyidbtn'])){
 	$upload = move_uploaded_file($_FILES['id_image']['tmp_name'], 'img/fileupload_barangayid/'.$barangayid_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO barangayid (fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd, barangayid_type, id_image, dateissue, brgyidfilechoice, guardianname, emrgncycontact, reladdress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $barangayid_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('sssssssssssssss', 
+	$stmt->bind_param('ssssssssssssssss', 
 	$fname,
 	$mname,
 	$lname,
@@ -135,12 +133,13 @@ if(isset($_POST['brgyidbtn'])){
     $precintno,
 	$contact_no,
 	$emailadd,
+    $barangayid_type,
+    $upload_image,
+    $dateissue,
+    $brgyidfilechoice,
 	$guardianname,
 	$emrgncycontact,
-	$reladdress,
-	$dateissue,
-    $upload_image,
-	$brgyidfilechoice
+	$reladdress
 	);
 	// Execute query
 	$stmt->execute();
@@ -186,6 +185,8 @@ if(isset($_POST['permitBtn'])){
 	$permit_image = $_FILES['businessid_image']['name'];
 	$image_error = $_FILES['businessid_image']['error'];
 	$image_type = $_FILES['businessid_image']['type'];
+
+    $bpermitid_type = $_POST['bpermitid_type'];
 													
 	// create array variable to handle error
 	$error = array();
@@ -194,25 +195,25 @@ if(isset($_POST['permitBtn'])){
 	$error['dateissued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
     if(empty($selection)){
-        $error['selection'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['selection'] = "<span class='label label-danger cattxtbox errormsg'>Selection is required field!</span>";
         }
 	if(empty($fullname)){
-	$error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>Fullname is required field!</span>";
 	}
     if(empty($contactno)){
-	$error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Contact no. is required field!</span>";
 	}
 	if(empty($businessname)){
-	$error['businessname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['businessname'] = "<span class='label label-danger cattxtbox errormsg'>Business name is required field!</span>";
 	}
     if(empty($businessaddress)){
-	$error['businessaddress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['businessaddress'] = "<span class='label label-danger cattxtbox errormsg'>Business address is required field!</span>";
 	}
 	if(empty($plateno)){
-	$error['plateno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['plateno'] = "<span class='label label-danger cattxtbox errormsg'>Plate no is required field!</span>";
 	}
 	if(empty($email_add)){
-	$error['email_add'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	$error['email_add'] = "<span class='label label-danger cattxtbox errormsg'>Email address is required field! </span>";
 	}
 
 	// common image file extensions
@@ -250,14 +251,14 @@ if(isset($_POST['permitBtn'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], 'img/fileupload_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO businesspermit (dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice)
-	VALUES(?,?,?,?,?,?,?,?,?,?)";
+	$sql_query = "INSERT INTO businesspermit (dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice)
+	VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
 	$stmt = $connect->stmt_init();
 	if($stmt->prepare($sql_query)) {	
 	// Bind your variables to replace the ?s
-	$stmt->bind_param('ssssssssss', 
+	$stmt->bind_param('sssssssssss', 
 	$dateissued,
     $selection,
 	$fullname,
@@ -267,6 +268,7 @@ if(isset($_POST['permitBtn'])){
 	$plateno,
 	$email_add,
 	$upload_image,
+    $bpermitid_type,
     $permitfilechoice
 	);
 	// Execute query
@@ -308,27 +310,29 @@ if(isset($_POST['permitBtn'])){
         $indigency_image = $_FILES['indigencyid_image']['name'];
         $image_error = $_FILES['indigencyid_image']['error'];
         $image_type = $_FILES['indigencyid_image']['type'];
+
+        $indigencyid_type = $_POST['indigencyid_type'];
                                                         
         // create array variable to handle error
         $error = array();
                                                         
         if(empty($fullname)){
-        $error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>Full name is required field!</span>";
         }
         if(empty($address)){
-        $error['address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['address'] = "<span class='label label-danger cattxtbox errormsg'>Address is required field!</span>";
         }
         if(empty($purpose)){
-        $error['purpose'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['purpose'] = "<span class='label label-danger cattxtbox errormsg'>Purpose is required field!</span>";
         }
         if(empty($date_issue)){
         $error['date_issue'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
         }
         if(empty($contactnum)){
-        $error['contactnum'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['contactnum'] = "<span class='label label-danger cattxtbox errormsg'>Contact no. is required field!</span>";
         }
         if(empty($emailaddress)){
-        $error['emailaddress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        $error['emailaddress'] = "<span class='label label-danger cattxtbox errormsg'>Email address is required field!</span>";
         }
     
         // common image file extensions
@@ -365,14 +369,14 @@ if(isset($_POST['permitBtn'])){
         $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], 'img/fileupload_indigency/'.$indigency_image);
                                                     
         // insert new data to menu table
-        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, date_issue,indigencyid_image, indigencyfilechoice)
-        VALUES(?,?,?,?,?,?,?,?)";
+        $sql_query = "INSERT INTO certificateindigency (fullname, address, purpose, contactnum, emailaddress, date_issue,indigencyid_image, indigencyid_type, indigencyfilechoice)
+        VALUES(?,?,?,?,?,?,?,?,?)";
                                                             
         $upload_image = $indigency_image;
         $stmt = $connect->stmt_init();
         if($stmt->prepare($sql_query)) {	
         // Bind your variables to replace the ?s
-        $stmt->bind_param('ssssssss', 
+        $stmt->bind_param('sssssssss', 
         $fullname,
         $address,
         $purpose,
@@ -380,6 +384,7 @@ if(isset($_POST['permitBtn'])){
         $emailaddress,
         $date_issue,
         $upload_image,
+        $indigencyid_type,
         $indigencyfilechoice
         );
         // Execute query
@@ -426,35 +431,36 @@ if(isset($_POST['permitBtn'])){
             $clearance_image = $_FILES['clearanceid_image']['name'];
             $image_error = $_FILES['clearanceid_image']['error'];
             $image_type = $_FILES['clearanceid_image']['type'];
- 
+            $clearanceid_type = $_POST['clearanceid_type'];
+
             $filechoice = $_POST['filechoice'];                                
                                                             
             // create array variable to handle error
             $error = array();
                                                             
             if(empty($full_name)){
-            $error['full_name'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['full_name'] = "<span class='label label-danger cattxtbox errormsg'>Full name is required field!</span>";
             }
             if(empty($age)){
-            $error['age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['age'] = "<span class='label label-danger cattxtbox errormsg'>Age is required field!</span>";
             }
             if(empty($status)){
-            $error['status'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['status'] = "<span class='label label-danger cattxtbox errormsg'>Status is required field!</span>";
             }
             if(empty($nationality)){
-            $error['nationality'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['nationality'] = "<span class='label label-danger cattxtbox errormsg'>Nationality is required field!</span>";
             }
             if(empty($address)){
-            $error['address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['address'] = "<span class='label label-danger cattxtbox errormsg'>Address is required field!</span>";
             }
             if(empty($contactno)){
-            $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Contact no. is required field!</span>";
             }
             if(empty($emailadd)){
-            $error['emailadd'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['emailadd'] = "<span class='label label-danger cattxtbox errormsg'>Email address is required field!</span>";
             }
             if(empty($purpose)){
-            $error['purpose'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+            $error['purpose'] = "<span class='label label-danger cattxtbox errormsg'>Purpose is required field!</span>";
             }
             if(empty($date_issued)){
             $error['date_issued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
@@ -462,14 +468,12 @@ if(isset($_POST['permitBtn'])){
             // if(empty($ctc_no)){
             // $error['ctc_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
             // }
-            if(empty($issued_at)){
-            $error['issued_at'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-            }
+          
             // if(empty($precint_no)){
             // $error['precint_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
             // }
             if(empty($filechoice)){
-                $error['filechoice'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['filechoice'] = "<span class='label label-danger cattxtbox errormsg'>File choice is required field!</span>";
                 }
         
             // common image file extensions
@@ -497,7 +501,7 @@ if(isset($_POST['permitBtn'])){
                 !empty($purpose) && 
                 !empty($date_issued) && 
                 // !empty($ctc_no) && 
-                !empty($issued_at) && 
+          
                 // !empty($precint_no) &&
                 empty($error['clearanceid_image']) && 
                 !empty($filechoice)){
@@ -512,14 +516,14 @@ if(isset($_POST['permitBtn'])){
             $upload = move_uploaded_file($_FILES['clearanceid_image']['tmp_name'], 'img/fileupload_clearance/'.$clearance_image);
                                                         
             // insert new data to menu table
-            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql_query = "INSERT INTO barangayclearance (full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, clearanceid_image, clearanceid_type, filechoice)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                                 
             $upload_image = $clearance_image;
             $stmt = $connect->stmt_init();
             if($stmt->prepare($sql_query)) {	
             // Bind your variables to replace the ?s
-            $stmt->bind_param('ssssssssssssss', 
+            $stmt->bind_param('sssssssssssssss', 
             $full_name,
             $age,
             $status,
@@ -533,6 +537,7 @@ if(isset($_POST['permitBtn'])){
             $issued_at,
             $precint_no,
             $upload_image,
+            $clearanceid_type,
             $filechoice
             );
             // Execute query

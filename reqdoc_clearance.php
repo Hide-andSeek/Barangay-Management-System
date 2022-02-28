@@ -266,7 +266,6 @@ if(!file_exists($f)){
         background-color: DodgerBlue !important; 
         color: #ffffff; 
         }
-		.usersel{pointer-events: none; border: 1px solid orange}
 	</style>
 </head>
 
@@ -353,6 +352,20 @@ if(!file_exists($f)){
         <br>
 		</div>
 		<?php echo isset($error['add_brgyclearance']) ? $error['add_brgyclearance'] : '';?>
+
+		
+		<div style="text-align: center;">
+		<?php echo isset($error['full_name']) ? $error['full_name'] : '';?>
+		<?php echo isset($error['age']) ? $error['age'] : '';?>
+		<?php echo isset($error['status']) ? $error['status'] : '';?>
+		<?php echo isset($error['nationality']) ? $error['nationality'] : '';?>
+		<?php echo isset($error['address']) ? $error['address'] : '';?>
+		<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
+		<?php echo isset($error['emailadd']) ? $error['emailadd'] : '';?>
+		<?php echo isset($error['clearanceid_image']) ? $error['clearanceid_image'] : '';?>
+		<?php echo isset($error['purpose']) ? $error['purpose'] : '';?>
+		<?php echo isset($error['date_issued']) ? $error['date_issued'] : '';?>
+		</div>
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
@@ -405,7 +418,7 @@ if(!file_exists($f)){
 																
                                                             <div class="form-group selec">
 																	<label for="full_name">Full Name: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Please Specify your Fullname" title="This must be capitalize">
+																	<input type="text" class="form-control form-text clearance" id="full_name" name="full_name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="Fullname" title="This must be capitalize">
 																	<?php echo isset($error['full_name']) ? $error['full_name'] : '';?>
 																</div>
 																
@@ -426,9 +439,9 @@ if(!file_exists($f)){
 																	<?php echo isset($error['status']) ? $error['status'] : '';?>
 																</div>
 
-																 <div class="form-group selec">
+																 <div class="form-group autocomplete selec">
 																	<label for="nationality">Nationality: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="nationality" name="nationality" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="FILIPINO" title="This must be capitalize">
+																	<input type="text" class="form-control form-text" name="nationality" id="myInput" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" placeholder="FILIPINO" title="This must be capitalize">
 																	<?php echo isset($error['nationality']) ? $error['nationality'] : '';?>
 																</div>
 															</div>	
@@ -461,6 +474,20 @@ if(!file_exists($f)){
 																</div>
 															</div>
 															<div class="left_userpersonal_info left_userpersonal_info1">
+																
+															<div class="form-group">
+																		<label>ID type, please choose<i class="red">*</i></label>
+																		<select class="form-control form-text" style="font-size: 12px;" name="clearanceid_type" id="clearanceid_type">
+																		<option disabled>--Select--</option>
+																		<option value="SSS">SSS</option>
+																		<option value="PhilHealth">PhilHealth</option>
+																		<option value="Passport">Passport</option>
+																		<option value="National ID">National ID</option>
+																		<option value="Pag-ibig ID">Pag-ibig ID</option>
+																		<option value="School ID">School ID</option>
+																		</select>
+															</div>
+
 															<div class="form-group">
 																	<label>Document type, Please choose<i class="red">*</i></label>
 																	<select class="form-control  form-text" name="filechoice" aria-details="filechoice" >
@@ -471,6 +498,7 @@ if(!file_exists($f)){
 																	</select>
 																	<i aria-details="filechoice" class="detailid"><label> What type of document you want to receive?</label></i>
 															</div>
+
 															</div>
 															<br>
 															<hr>
@@ -489,10 +517,10 @@ if(!file_exists($f)){
 															<input type="number" min="12" class="form-control number form-text" id="ctc_no" name="ctc_no" placeholder="(Optional)" title="Place your CTC no. If you have any">
 														</div>
 
-														<div class="form-group autocomplete selec">
+														<div class="form-group  selec">
 															<label for="issued_at">Issued at: </label>
-															<input type="text" min="12" class="form-control form-text" id="myInput" name="issued_at" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
-															<?php echo isset($error['issued_at']) ? $error['issued_at'] : '';?>
+															<input type="text" min="12" class="form-control form-text" name="issued_at" placeholder="(Optional)" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+															
 														</div>
 
 														<div class="form-group">
@@ -503,7 +531,7 @@ if(!file_exists($f)){
 													<div class="left_userpersonal_info left_userpersonal_info1">
 														<div class="form-group">
 															<label for="date_issued">Date Requested: <i class="red">*</i></label>
-															<input type="date" class="form-control form-text usersel" id="date_issued" name="date_issued">
+															<input type="date" class="form-control form-text usersel" id="date_issued" name="date_issued" readonly>
 															<?php echo isset($error['date_issued']) ? $error['date_issued'] : '';?>
 														</div>
 													</div>
@@ -673,7 +701,7 @@ function autocomplete(inp, arr) {
 }
 
 /*An array containing all the country names in the world:*/
-var countries = ["BARANGAY COMMONWEALTH"];
+var countries = ["FILIPINO"];
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), countries);

@@ -216,7 +216,8 @@ if(!file_exists($f)){
         .reminder-heading{color: #EEA236}
         .blockqoute-color{border-left-color: #EEA236;}
 		.linkpath:hover{color: orange;}
-		.usersel{pointer-events: none; border: 1px solid orange}
+		.form-group{margin-bottom: 35px;}
+		
 	</style>
 </head>
 
@@ -303,6 +304,17 @@ if(!file_exists($f)){
         <br>
 		</div>
 		<?php echo isset($error['add_brgypermit']) ? $error['add_brgypermit'] : '';?>
+		<div style="text-align: center;">
+			<?php echo isset($error['fullname']) ? $error['fullname'] : '';?>
+			<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
+			<?php echo isset($error['businessname']) ? $error['businessname'] : '';?>
+			<?php echo isset($error['businessaddress']) ? $error['businessaddress'] : '';?>
+			<?php echo isset($error['plateno']) ? $error['plateno'] : '';?>
+			<?php echo isset($error['email_add']) ? $error['email_add'] : '';?>
+			<?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?>
+			<?php echo isset($error['selection']) ? $error['selection'] : '';?>
+			<?php echo isset($error['dateissued']) ? $error['dateissued'] : '';?>
+		</div>
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
@@ -347,7 +359,7 @@ if(!file_exists($f)){
 														</fieldset>
 														<br>
 														<br>
-												<form method="POST" enctype="multipart/form-data" action="">
+												<form method="POST" enctype="multipart/form-data" action="" autocomplete="on">
                                                             <hr>
 															    <h5 style="text-align: center;" id="barangayid">For Business</h5>
 														    <hr>
@@ -355,7 +367,7 @@ if(!file_exists($f)){
 																
 																	<div class="form-group">
 																		<label>Full Name: <i class="red">*</i></label>
-																		<input type="text" class="form-control form-text" id="fullname" name="fullname" placeholder="Please write your name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																		<input type="text" class="form-control form-text" id="fullname" name="fullname" placeholder="Please write your name"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																		<?php echo isset($error['fullname']) ? $error['fullname'] : '';?>
 																	</div><br>
 																	<div class="form-group">
@@ -397,9 +409,27 @@ if(!file_exists($f)){
 																	<i aria-details="businessid_image" class="detailid" style="color: red"><label> please attach the right format (.docx)	<?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?></label></i>
 																</div><br>
 																
+																<div class="form-group">
+																		<label>ID type, please choose<i class="red">*</i></label>
+																		<select class="form-control form-text" style="font-size: 12px;" name="bpermitid_type" id="bpermitid_type">
+																		<option disabled>--Select--</option>
+																		<option value="SSS">SSS</option>
+																		<option value="PhilHealth">PhilHealth</option>
+																		<option value="Passport">Passport</option>
+																		<option value="National ID">National ID</option>
+																		<option value="Pag-ibig ID">Pag-ibig ID</option>
+																		<option value="School ID">School ID</option>
+																		<option value="Barangay ID">Barangay ID</option>
+																		</select>
+																</div>
+
+																
+															</div>
+															<div class="left_userpersonal_info left_userpersonal_info1">
+                                                               
 																<div class="form-group selec">
 																	<label>Document type, please choose<i class="red">*</i></label>
-																	<select class="form-control" name="permitfilechoice" aria-details="permitfilechoice">
+																	<select class="form-control form-text" name="permitfilechoice" aria-details="permitfilechoice">
 																		<option disabled>--Select--</option>
 																		<option value="Hardcopy">Hardcopy</option>
 																		<option value="Softcopy">Softcopy</option>
@@ -407,13 +437,11 @@ if(!file_exists($f)){
 																	</select>
 																	<i aria-details="permitfilechoice" class="detailid" style="color: red"><label> What type of document you want to receive?</label></i>
 																</div>
-															</div>
-															<div class="left_userpersonal_info left_userpersonal_info1">
-                                                               
+																<br>
                                                                 <div class="form-group">
 																	<label for="selection">Please Select</label>
                                                                     <br>
-																	<select class="form-control" name="selection">
+																	<select class="form-control form-text" name="selection">
 																		<option disabled>--Select--</option>
 																		<option value="renewal">Renewal</option>
 																		<option value="new">New</option>
@@ -423,7 +451,7 @@ if(!file_exists($f)){
 													
 																<div class="form-group">
 																		<label for="dateissued">Date Requested: <i class="red">*</i></label>
-																		<input type="date" class="form-control form-text usersel" id="date_issued" name="dateissued">
+																		<input type="date" class="form-control form-text usersel" id="date_issued" name="dateissued"  readonly>
 																		<?php echo isset($error['dateissued']) ? $error['dateissued'] : '';?>
 																	</div>
 																
