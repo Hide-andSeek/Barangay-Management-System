@@ -193,14 +193,14 @@ if(!isset($_SESSION["type"]))
 			</div>
 			<ul class="nav-list">
 			 <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar nav-button" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="barangayid.php">
+				<a class="side_bar nav-button nav-active" href="barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -208,7 +208,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="barangayclearance.php">
+				<a class="side_bar nav-button" href="barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -216,7 +216,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="certificateofindigency.php">
+				<a class="side_bar nav-button" href="certificateofindigency.php">
 				   <i class='bx bx-file indigency'></i>
 				  <span class="links_name">Certificate of Indigency</span>
 				</a>
@@ -224,7 +224,7 @@ if(!isset($_SESSION["type"]))
 			  </li>			  
 			  
 			  <li>
-				<a class="side_bar" href="businesspermit.php">
+				<a class="side_bar nav-button" href="businesspermit.php">
 				   <i class='bx bx-news permit'></i>
 				  <span class="links_name">Business Permit</span>
 				</a>
@@ -232,7 +232,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 
               <li>
-				<a class="side_bar" href="payment_history.php">
+				<a class="side_bar nav-button" href="payment_history.php">
 				   <i class='bx bx-data payment'></i>
 				  <span class="links_name">Payment History</span>
 				</a>
@@ -241,10 +241,9 @@ if(!isset($_SESSION["type"]))
 			
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+                        <div class="job" id=""><?php echo $dept; ?> || Online </div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -280,7 +279,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, brgyidfilechoice, id_image
+                    $sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, precintno, contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, status, brgyidfilechoice, id_image
                             FROM barangayid
                             WHERE barangay_id = ?";
                     
@@ -302,6 +301,7 @@ if(!isset($_SESSION["type"]))
                                 $data['precintno'],
                                 $data['contact_no'],
                                 $data['emailadd'],
+                                $data['barangayid_type'],
                                 $data['guardianname'],
                                 $data['emrgncycontact'],
                                 $data['reladdress'],
@@ -367,30 +367,9 @@ if(!isset($_SESSION["type"]))
                 <!-- <iframe src="https://docs.google.com/gview?url=http://remote.url.tld/path/to/document.doc&embedded=true" ></iframe> -->
                 <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://remote.url.tld/img/fileupload_barangayid/<?php echo $data['id_image']; ?>/to/document.doc' width='100%' height='100%' frameborder='0'></iframe> -->
 
-                <!-- <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe> -->
-                <?php
-                        if(ISSET($_SESSION['status'])){
-                        if($_SESSION['status'] == "ok"){
-                    ?>
-                   
-                        <form action="" method="post">
-                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
-                               
-                                <input type="hidden" name="barangay_id" id="barangay_id" value="<?php echo $data['barangay_id']; ?>">
-                                <input type="hidden" name="status" id="status" value="Approved">
-                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
-                            </div>
-                        </form>
-                    <?php
-                        }else{
-                    ?>
-                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
-                    <?php
-                        }
-                        unset($_SESSION['result']);
-                        unset($_SESSION['status']);
-                        }
-                    ?>
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>">Here's the Document</iframe>
+                
+               
                 <form method="post" action="" enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
@@ -436,6 +415,10 @@ if(!isset($_SESSION["type"]))
                             <th width="30%">Email Address</th>
                             <td><input type="hidden" name="emailadd" value="<?php echo $data['emailadd']; ?>"><?php echo $data['emailadd']; ?></td>
                         </tr>
+                        <tr>
+                            <th width="30%">ID Type</th>
+                            <td><input type="hidden" name="barangayid_type" value="<?php echo $data['barangayid_type']; ?>"><?php echo $data['barangayid_type']; ?></td>
+                        </tr>
                  
                     </table>
                     <br>
@@ -477,11 +460,11 @@ if(!isset($_SESSION["type"]))
                 <div id="option_menu">
                     <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+							<input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" readonly="readonly" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
 					</div>
                     <div class="information col">
 						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
+							<input type="date" readonly="readonly" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
 					</div>
                     <input type="hidden" name="status" id="status" value="Approved">
                     <div class="information col">
@@ -499,6 +482,29 @@ if(!isset($_SESSION["type"]))
                                  <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnEdit">Deny</button></a>
                             </div>
                         </form>
+                        <?php
+                        if(ISSET($_SESSION['status'])){
+                        if($_SESSION['status'] == "ok"){
+                        ?>
+                   
+                        <form action="" method="post">
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                               
+                                <input type="hidden" name="barangay_id" id="barangay_id" value="<?php echo $data['barangay_id']; ?>">
+                                <input type="hidden" name="status" id="status" value="Approved">
+                                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>
+                            </div>
+                        </form>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+                    <?php
+                        }
+                        unset($_SESSION['result']);
+                        unset($_SESSION['status']);
+                        }
+                    ?>
                 </div>
                 
                 </div>

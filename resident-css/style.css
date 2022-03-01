@@ -21,10 +21,17 @@
 
 
 /* 1.0 --- Body CSS + basic theme controls --- */
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*{  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;}
 
 body {
     overflow-x: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -96,7 +103,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "lato";
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-weight: 900;
 
@@ -118,7 +125,7 @@ h6 {
     color: #fff;
     background-color: #058BCE;
     border-color: #058BCE;
-    font-family: "lato";
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-weight: 700
 }
@@ -166,7 +173,7 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl {
     color: #fff;
     background-color: #058BCE;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-weight: 700;
     border-radius: 0;
@@ -229,7 +236,7 @@ fieldset[disabled] .btn-xl.active {
 /* 2.0 --- Navigation bar --- */
 
 .navbar{
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
 }
 
 nav.navnav{
@@ -293,7 +300,7 @@ nav.navnav{
 }
 
 .navbar-default .nav li a {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-weight: 300;
     color: #fff;
@@ -429,7 +436,7 @@ nav.navnav{
         }
 
         .modal-content {
-		    font-family: 'Montserrat', sans-serif;
+		    font-family: "Poppins" , sans-serif;
 		    padding-top: 2%;
             background-color: #fefefe;
             margin: 5% auto 15% auto;
@@ -482,7 +489,7 @@ nav.navnav{
         }
 
         .inputtext, .inputpass {
-		    font-family: 'Montserrat', sans-serif;
+		    font-family: "Poppins" , sans-serif;
 			height: 35px;
             width: 87%;
             padding: 10px 10px;
@@ -504,7 +511,7 @@ nav.navnav{
         }
         
 		.log_heading{
-			font-family: 'Montserrat', sans-serif;
+			font-family: "Poppins" , sans-serif;
 			user-select: none;
 		}
 		
@@ -775,7 +782,7 @@ nav.navnav{
 }
 
 .intro-text .intro-lead-in {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 20px;
@@ -784,7 +791,7 @@ nav.navnav{
 }
 
 .intro-text .intro-heading {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     text-transform: uppercase;
     font-size: 70px;
     line-height: 0px;
@@ -793,7 +800,7 @@ nav.navnav{
 
 .intro-text .intro-paragraph {
     font-size: 21px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     margin-top: 70px;
 }
 
@@ -1053,7 +1060,7 @@ section#barangay_officials .section-subheading, section#contact_officials .secti
     line-height: 21px;
     text-decoration: none;
     text-transform: none;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     padding-top: 7px;
     font-weight: 300;
 }
@@ -1101,7 +1108,7 @@ footer {
 }
 .footer-text {
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     font-size: 14px;
     line-height: 21px;
     text-align: center;
@@ -1120,7 +1127,7 @@ div.copyright-bottom {
     padding-top: 25px;
 }
 footer span.copyright {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     text-transform: none;
     color: #757575;
     float: left;
@@ -1211,7 +1218,7 @@ ul.social-buttons li a:active {
     width: 250px;
     height: 185px;
     display: block;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins" , sans-serif;
     background: #FFF;
     float: left;
     position: fixed;

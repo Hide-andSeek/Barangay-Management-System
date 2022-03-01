@@ -96,12 +96,66 @@ include "db/user.php";
             }
 
 
-            @media all and (min-width:768px) {
+            @media only screen and (max-width: 455px) {
+                *{font-family: "Poppins" , sans-serif;}
+                img.munisipyo{height: 690px;}
+                h3.mv_content_heading{font-size: 18px; }
+                blockqoute.mv_content_subheading{font-size: 13px; }
+                .section-subheading{text-align: justify; font-size: 16px;}
+                .service-item1{padding: 30px;}
+           
+                .modal-content{ height:400px;width: 370px; font-size: 14px;}
+                img.logcomm{width: 110px; height: 110px;}
+                button.create_account, button.log_in{width: 40%; font-size: 13px;}
+            }
+
+            @media only screen and (max-width: 720px) {
+                section {
+                    padding: 80px 0;
+                }
+
+                .services_1 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                
+                .services_1 .service-item1 .icon i {
+                    width: 100px;
+                    height: 100px;
+                }
+                h1.subscripthead{font-size: 30px;}
+                .subscript{visibility: hidden;}
+                .service{font-size: 14px;}
+            }
+            
+            @media only screen and (max-width: 1445px) {
+                section {
+                    padding: 80px 0;
+                }
+                .slider{margin-top: -100px}
+                img.munisipyo{width: 1440px; height: 490px;}
+            }
+
+            @media only screen and (max-width: 1685px) {
                 section {
                     padding: 80px 0;
                 }
                 
+                img.munisipyo{width: 1685px; height: 490px;}
             }
+
+            /* @media only screen and (max-width: 1945px;) {
+                section {
+                    padding: 80px 0;
+                }
+                h3.mv_content_heading{font-size: 50px}
+                
+                img.munisipyo{width: 1920px; height: 1080px;}
+
+                section.slider{margin: 20px;}
+            } */
 
             @media all and (max-width:480px) {
                 section h2.section-heading {
@@ -115,7 +169,6 @@ include "db/user.php";
                 section h3.section-subheading {
                     font-size: 14px;
                     line-height: 26px;
-                    font-family: 'Montserrat', sans-serif;
                     text-transform: none;
                     text-align: center;
                     font-weight: 400;
@@ -195,13 +248,7 @@ include "db/user.php";
 
             /*-- Mobile Device --*/
 
-            @media all and (max-width: 700px){
-                .services_1 .service-item1 .icon i {
-                    width: 100px;
-                    height: 100px;
-                }
-            }
-
+           
             @media all and (max-width: 1200px){
                 .service-item1{
                     padding-bottom: 20px;
@@ -223,6 +270,8 @@ include "db/user.php";
                 float: right;
                 padding:8px 24px;
             }
+
+          
 	</style>
 
 </head>
@@ -288,7 +337,7 @@ include "db/user.php";
                     
                     <span class="imgcontainer">
 						<label>
-                            <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
+                            <img class="logcomm" src="resident-img/Brgy-Commonwealth_1.png" alt="">
 					    </label>
                     </span>
         
@@ -316,11 +365,11 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<div>
+									<!-- <div>
 										<button class="log_button gmail">
                                              <i class="fa fa-google"></i>  Sign with Gmail
 										</button>
-									</div>
+									</div> -->
 								</div>
 						</div> 	
 					</form>
@@ -354,23 +403,18 @@ include "db/user.php";
     </div>
 
     <!-- Slider -->
-    <section id="slider">
+    <section id="slider" class="slider">
       <div id="myCarousel-one" class="carousel slide">
-
-       <ol class="carousel-indicators">
-            <li data-target="#myCarousel-one" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel-one" data-slide-to="1"></li>
-        </ol>
 
             <div class="carousel-inner">
                 <div class="item active"> 
                 
-                    <div class="carousel-caption wrapper">
+                    <div class="carousel-caption wrapper wrapper_content">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth</h1>
-                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Management</h2>
+                                    <h1 class="intro-lead-in animated bounceInRight u-description subscripthead">Barangay Commonwealth</h1>
+                                    <h2 class="intro-heading animated bounceInLeft u-description subscript">Barangay Management</h2>
                                     <p class="intro-paragraph animated bounceInRight"> </p>
                                 </div>
                                 <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
@@ -378,25 +422,7 @@ include "db/user.php";
                         </div>
                     </div>
                     <img class="munisipyo" src="resident-img/backgrounds/commonwealth_1.jpg" alt="slider-image"/>
-                </div>
-               
-                <div class="item"> 
-                
-                    <div class="carousel-caption wrapper">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth Hall</h1>
-                                    <h2 class="intro-heading animated bounceInLeft u-description">Barangay Services</h2>
-                                    <p class="intro-paragraph animated bounceInRight"> </p>
-                                </div>
-                                <a href="#services" class="page-scroll btn btn-xl slider-button animated bounceInUp radius service_size">Services</a>
-                            </div>
-                        </div>
-                    </div>
-                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth.jpg" alt="slider-image"/>
-                
-                </div>				
+                </div>	
             </div>
         </div>
     </section>
@@ -408,14 +434,14 @@ include "db/user.php";
             
             <div class="col-md-6">
               <div class="right-content">
-                <h3 class="mv_heading section-heading ">Misyon</h3>
-                <p class="mv_content section-subheading "><blockquote class="section-subheading">Upang maglingkod ng lubusan sa barangay sa paghahatid ng serbisyo sa pagsulong ng kagalingan na may pantay na pagtingin at kasiguruhan ng daynamiko, maunlad at payapang pamayanan.</blockquote></p>
+                <h3 class="mv_heading section-heading mv_content_heading">Misyon</h3>
+                <p class="mv_content section-subheading mv_content_subheading"><blockquote class="section-subheading">Upang maglingkod ng lubusan sa barangay sa paghahatid ng serbisyo sa pagsulong ng kagalingan na may pantay na pagtingin at kasiguruhan ng daynamiko, maunlad at payapang pamayanan.</blockquote></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="left-content">
-                <h3 class="mv_heading section-heading ">Adhikain</h3>
-                <p class="mv_content section-subheading"><blockquote class="section-subheading">Upang makabuo ng isang pamayanang binigkis ng layunin para sa mabuting buhay sa diwa ng pagkakaisa, paninindigan ng paglilingkod sa kapwa na may paggalang sa dignidad at karangalan ng iba, na ginagabayan ng higit sa lahat ng pagmamahal sa diyos at bayan.</blockquote></p>
+                <h3 class="mv_heading section-heading mv_content_heading">Adhikain</h3>
+                <p class="mv_content section-subheading mv_content_subheading"><blockquote class="section-subheading">Upang makabuo ng isang pamayanang binigkis ng layunin para sa mabuting buhay sa diwa ng pagkakaisa, paninindigan ng paglilingkod sa kapwa na may paggalang sa dignidad at karangalan ng iba, na ginagabayan ng higit sa lahat ng pagmamahal sa diyos at bayan.</blockquote></p>
               </div>
             </div>
           </div>
@@ -631,7 +657,6 @@ include "db/user.php";
     
 
     <script src="https://use.fontawesome.com/f7721642f4.js"></script>
-    <script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
     <script>
 		document.querySelector('.button').onclick = function(){
 			var password = document.querySelector('.password').value,

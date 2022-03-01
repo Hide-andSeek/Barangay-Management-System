@@ -75,7 +75,7 @@ include('db/barcharts.php');
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar btnhover btnhover activehover" href="captaindashboard.php">
+					<a class="side_bar nav-button nav-active" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
@@ -83,7 +83,7 @@ include('db/barcharts.php');
 			 	</li>
 
 				 <li>
-					<a class="side_bar btnhover" href="contactmodule.php">
+					<a class="side_bar nav-button" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
 						<span class="links_name">Contacts</span>
 					</a>
@@ -91,7 +91,7 @@ include('db/barcharts.php');
 			  	</li>
 
 				  <li>
-				  <a class="side_bar btnhover" href="usermanagement.php">
+				  <a class="side_bar nav-button" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">User Management</span>
 					</a>
@@ -99,7 +99,7 @@ include('db/barcharts.php');
 				  </li>
 			 
 				<li>
-				 <a class="side_bar btnhover" href="residentcensus.php">
+				 <a class="side_bar nav-button" href="residentcensus.php">
 					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
@@ -107,7 +107,7 @@ include('db/barcharts.php');
 				</li>
 
 				<li>
-				 <a class="side_bar btnhover" href="postannouncement.php">
+				 <a class="side_bar nav-button" href="postannouncement.php">
 					  <i class='bx bx-news iannouncement'></i>
 					  <span class="links_name">Post Announcement</span>
 					</a>
@@ -116,7 +116,6 @@ include('db/barcharts.php');
 			 
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" >
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
 							<div class="job" id=""><?php echo $dept; ?></div>
@@ -153,7 +152,7 @@ include('db/barcharts.php');
 					<div class="w3-right">
 					<?php 
 
-						$query = "SELECT user_id FROM usersdb WHERE user_type = 'Admin' ORDER BY user_id";
+						$query = "SELECT user_id FROM usersdb WHERE user_type = 'Administrator' ORDER BY user_id";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -172,7 +171,7 @@ include('db/barcharts.php');
 					<div class="w3-right">
 					<?php 
 
-						$query = "SELECT user_id FROM usersdb WHERE user_type = 'Employee' ORDER BY user_id";
+						$query = "SELECT user_id FROM usersdb WHERE user_type = 'Regular Employee' ORDER BY user_id";
 						$query_run = $db->query($query);
 						$pdoexecute = $query_run->rowCount();
 
@@ -208,10 +207,17 @@ include('db/barcharts.php');
 				<div class="w3-container w3-teal w3borderbot w3-text-white w3-padding-16">
 					<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
 					<div class="w3-right">
-						<h3>0</h3>
+					<?php 
+	
+					$query = "SELECT user_id FROM usersdb WHERE user_type = 'Contractual Employee' ORDER BY user_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
 					</div>
 					<div class="w3-clear"></div>
-					<h4>CENSUS</h4>
+					<h4>CON. EMPLOYEE</h4>
 				</div>
 			</div>
 			<br>

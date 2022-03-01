@@ -112,7 +112,7 @@ include "../db/e_payment.php";
                                 </div>
                                 <div class="margin">
                                     <label for="refno">Reference No.</label>
-                                    <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXX" onKeyPress="if(this.value.length==9) return false;" >
+                                    <input required type="number" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXXX" onKeyPress="if(this.value.length==13) return false;" >
 
                                     <input type="hidden" id="document_type" value="Barangay Clearance" class="form-control inpmargin usersel" name="document_type">
 

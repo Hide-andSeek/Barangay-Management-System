@@ -79,7 +79,7 @@ include "../db/e_payment.php";
      ?>
             <div style="padding: 20px 20px; background: #04AA6D;" class="fontweight">
                 <label class="merchantname">BARANGAY COMMONWEALTH <i style="font-size: 20px;">online payment for </i></label> 
-                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;"> =INDIGENCY</label> 
+                <label class="merchantname sub_headmerchant" style="color: white; font-size: 35px; margin-left: 45px;"> INDIGENCY</label> 
                     <div class="composition">
                             <img class="comlogo" src="../img/Brgy-Commonwealth.png" alt="Barangay Commonwealth Logo">  
                     </div>

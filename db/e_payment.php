@@ -490,18 +490,18 @@ if(isset($_POST['btnEdit'])){
 	$reference_no = $_POST['reference_no'];
     $document_id = $_POST['document_id'];
     
-	// $sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
-	// $stmt = $db->prepare($sql_create_acc);
-	// $stmt->bindValue(':document_id', $document_id);
-	// $stmt->execute();
+	$sql_create_acc = "SELECT COUNT(reference_no) AS num FROM payments WHERE reference_no = :reference_no";
+	$stmt = $db->prepare($sql_create_acc);
+	$stmt->bindValue(':reference_no', $reference_no);
+	$stmt->execute();
 	
-	// $count_row = $stmt->fetch(PDO::FETCH_ASSOC);
+	$count_row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	// if($count_row['num']>0){
-    //     $_SESSION['status'] ="Session Expired!";
-    //     $_SESSION['status_code'] ="warning";
+	if($count_row['num']>0){
+        $_SESSION['status'] ="Session Expired!";
+        $_SESSION['status_code'] ="warning";
 
-	// }else{
+	}else{
 		
 		$stmt = $db->prepare("UPDATE payments SET reference_no = :reference_no
         WHERE document_id = :document_id");
@@ -518,3 +518,5 @@ if(isset($_POST['btnEdit'])){
         $_SESSION['status_code'] ="error";
 		}	
 	}
+}
+

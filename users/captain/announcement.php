@@ -154,7 +154,7 @@ include "db/announcementquery.php";
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar btnhover activehover" href="captaindashboard.php">
+					<a class="side_bar nav-button" href="captaindashboard.php">
 						<i class='bx bx-category-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
@@ -162,7 +162,7 @@ include "db/announcementquery.php";
 			 	</li>
 
 				<li>
-					<a class="side_bar btnhover" href="contactmodule.php">
+					<a class="side_bar nav-button" href="contactmodule.php">
 						<i class='bx bx-user-circle admin'></i>
 						<span class="links_name">Contacts</span>
 					</a>
@@ -170,7 +170,7 @@ include "db/announcementquery.php";
 			  	</li>
 
 				  <li>
-				  <a class="side_bar btnhover" href="usermanagement.php">
+				  <a class="side_bar nav-button" href="usermanagement.php">
 					  <i class='bx bx-group employee'></i>
 					  <span class="links_name">User Management</span>
 					</a>
@@ -178,7 +178,7 @@ include "db/announcementquery.php";
 				  </li>
 
 				<li>
-				 <a class="side_bar btnhover" href="residentcensus.php">
+				 <a class="side_bar nav-button" href="residentcensus.php">
 					  <i class='bx bxs-group census'></i>
 					  <span class="links_name">Resident Census</span>
 					</a>
@@ -186,7 +186,7 @@ include "db/announcementquery.php";
 				</li>
 
 				<li>
-				 <a class="side_bar btnhover" href="postannouncement.php">
+				 <a class="side_bar nav-button nav-active" href="postannouncement.php">
 					  <i class='bx bx-news iannouncement'></i>
 					  <span class="links_name">Post Announcement</span>
 					</a>
@@ -195,7 +195,6 @@ include "db/announcementquery.php";
 			 
 				 <li class="profile">
 					<div class="profile-details">
-					<img class="profile_pic" >
 					<div class="name_job" style="font-size: 13px;">
 						<div><strong><?php echo $user;?></strong></div>
 						<div class="job" id=""><?php echo $dept; ?></div>
@@ -466,7 +465,8 @@ include "db/announcementquery.php";
 										<th width="5%">Category ID</th>
 										<th width="5%">Category Name</th>
 										<th width="15%">Category Image</th>
-										<th width="5%">Action</th>
+										<th width="5%"></th>
+										<th width="5%"></th>
 									</tr>
 								</thead>
 							<?php 
@@ -477,18 +477,10 @@ include "db/announcementquery.php";
 										<td><?php echo $data['category_name'];?></td>
 										<td width="20%"><img src="upload/category/<?php echo $data['category_image']; ?>" width="90" height="60"/></td>
 										<td>
-											<!-- <button onclick="document.getElementById('edit_<?php echo $data['cid']; ?>').style.display='block'" class="edit"> Edit</button> -->
-											<span>
-												<input class="btn btn-primary btnwidth" type="button" onclick="location.href='announcement_edit.php?id=<?php echo $data['cid'];?>'" value="Edit">
-											</span>
-											<!-- <button onclick="document.getElementById('delete_<?php echo $data['cid']; ?>').style.display='block'" class="del"></i> Delete
-											</button> -->
-											<!-- <button class="edit">
-												<a href="announcement_delete.php?id=<?php echo $data['cid'];?>"><i class="bx bxs-delete"></i>Delete
-												</a>
-											</button> -->
+											<input class="btn btn-primary btnwidth" type="button" onclick="location.href='announcement_edit.php?id=<?php echo $data['cid'];?>'" value="Edit">
+										</td>
+										<td>
 											<input class="btn btn-danger btnwidth" type="button" onclick="location.href='announcement_delete.php?id=<?php echo $data['cid'];?>'" value="Delete">
-
 										</td>
 									</tr>
 								</tbody>
@@ -835,7 +827,7 @@ include "db/announcementquery.php";
 										<button class="hoverbtn addcat" onclick="document.getElementById('addannounce_<?php echo $data['aid']; ?>').style.display='block'">
 											<i class="bx bx-plus-circle" style="font-size: 16px;"></i> Click to Add
 										</button>
-										<button style="background: none;"><i style="color: gray; font-size: 21px;" class="bx bx-help-circle bcircle"></i></button>
+										
 									</label>
 					</div>						
 					<!-- end of search form -->

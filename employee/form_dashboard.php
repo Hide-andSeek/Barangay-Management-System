@@ -159,14 +159,14 @@ if(!isset($_SESSION["type"]))
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="dashboard.php">
+			  <a class="side_bar nav-button nav-active" href="dashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-				<a class="side_bar" href="barangayid.php">
+				<a class="side_bar nav-button" href="barangayid.php">
 				   <i class='bx bx-id-card id'></i>
 				  <span class="links_name">Barangay ID</span>
 				</a>
@@ -174,7 +174,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="barangayclearance.php">
+				<a class="side_bar nav-button" href="barangayclearance.php">
 				   <i class='bx bx-receipt clearance'></i>
 				  <span class="links_name">Barangay Clearance</span>
 				</a>
@@ -182,7 +182,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="certificateofindigency.php">
+				<a class="side_bar nav-button" href="certificateofindigency.php">
 				   <i class='bx bx-file indigency'></i>
 				  <span class="links_name">Certificate of Indigency</span>
 				</a>
@@ -190,7 +190,7 @@ if(!isset($_SESSION["type"]))
 			  </li>			  
 			  
 			  <li>
-				<a class="side_bar" href="businesspermit.php">
+				<a class="side_bar nav-button" href="businesspermit.php">
 				   <i class='bx bx-news permit'></i>
 				  <span class="links_name">Business Permit</span>
 				</a>
@@ -198,7 +198,7 @@ if(!isset($_SESSION["type"]))
 			  </li>
 			  
 			  <li>
-				<a class="side_bar" href="payment_history.php">
+				<a class="side_bar nav-button" href="payment_history.php">
 				   <i class='bx bx-data payment'></i>
 				  <span class="links_name">Payment History</span>
 				</a>
@@ -207,10 +207,10 @@ if(!isset($_SESSION["type"]))
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="../img/1.jpeg">
+				   
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						   <div class="job" id=""><?php echo $dept; ?> || Online </div>
 				   </div>
 				 </div>
 				 <a href="../emplogout.php">
@@ -511,5 +511,6 @@ if(!isset($_SESSION["type"]))
 	</div>
 			</section>
 			<script href="test.js"></script>
+	
 	</body>
 </html>

@@ -90,23 +90,23 @@ include "db/user.php";
                             </span>
                         </li>
                         <li class="logdropdown">
-                          <a class="page-scroll logout" href="javascript:void(0)">Services</a>
-                          <span class="logdropdown-content">
-                            <a class="page-scroll" href="residentreqdocu.php#barangayid">Barangay ID</a>
-                            <a class="page-scroll" href="residentreqdocu.php#permit">Business Permit</a>
-                            <a class="page-scroll" href="residentreqdocu.php#indigency">Certificate of Indigency</a>
-                            <a class="page-scroll" href="residentreqdocu.php#clearance">Barangay Clearance</a>
-                            <a class="page-scroll" href="residentreqdocu.php#blotter">Blotter</a>
-                          </span>
-                        </li>
+                            <a class="page-scroll logout" href="javascript:void(0)">Services</a>
+                            <span class="logdropdown-content">
+                              <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
+                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_.indigency.php">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
+                              <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
+                            </span>
+                          </li>
                         <li>
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
                         <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
                         <span class="logdropdown-content">
-                          <a class="page-scroll" href="resident_logout.php">Logout</a>
-                          <a href="#">View Profile</a>
+                          <a class="page-scroll" href="resident_logout.php"> <i class="bx bx-log-out"></i>Logout</a>
+                          <a href="resident_viewprofile.php">View Profile</a>
                         </span>
 						</li>
                     </ul>

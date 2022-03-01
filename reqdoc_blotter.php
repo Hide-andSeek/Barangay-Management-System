@@ -155,6 +155,7 @@ if(!file_exists($f)){
         cursor: pointer;
         transition: 0.3s;
         }
+		
         .btn:hover {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
         }
@@ -163,15 +164,24 @@ if(!file_exists($f)){
 
 		@media only screen and (max-width: 700px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100%; padding: 5px;}
 		}
+		.form-text{width: 100%; padding: 5px;}
+		.selec{padding-bottom: 45px;}
+		.selecu{padding-bottom: 60px}
+		textarea{width: 100%;}
 
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
-			display: none;
+			display: block;
 		}
+		.form-group{margin-bottom: 35px; margin-left: 15px;}
+		input{width:100; padding: 5px;}
 		}
+		
 		.button {
 		display: absolute;
 		border-radius: 4px;
@@ -258,6 +268,7 @@ if(!file_exists($f)){
         background-color: DodgerBlue !important; 
         color: #ffffff; 
         }
+
 	</style>
 </head>
 
@@ -391,17 +402,17 @@ if(!file_exists($f)){
 														    <hr>
 															<div class="left_userpersonal_info left_userpersonal_info1">
 																
-                                                            <div class="form-group">
+                                                            <div class="form-group selec">
 																	<label for="n_complainant">Name of Complainant: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text" id="n_complainant" name="n_complainant" placeholder="Fullname" title="Please specify your name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
-																</div><br>
+																</div>
 																
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="comp_age">Age: <i class="red">*</i></label>
 																	<input type="number" class="form-control form-text age" id="comp_age" title="Please specify your age" name="comp_age" placeholder="Your Age">
 																	<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
-																</div><br>
+																</div>
 
 																<div class="form-group">
 																	<label>Gender: <i class="red">*</i></label>
@@ -411,40 +422,40 @@ if(!file_exists($f)){
 																		<option value="Female">Female</option>
 																	</select>
 																	<?php echo isset($error['comp_gender']) ? $error['comp_gender'] : '';?>
-																</div><br>
+																</div>
 																
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="comp_address">Address: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text" id="comp_address" name="comp_address" title="Please specify your address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
-																</div><br>	
+																</div>
 															</div>	
 															<div class="left_userpersonal_info left_userpersonal_info1">
 
-                                                            <div class="form-group">
+                                                            <div class="form-group selec selecu">
 																	<label for="inci_address">Incident Address: <i class="red">*</i></label>
 																	<input type="text" class="form-control form-text" id="inci_address" name="inci_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" aria-details="inci_address" >
 																	
 																	<i aria-details="inci_address" class="detailid"><label> where incident happened (Kung saan nangyari ang insidente)	<?php echo isset($error['inci_address']) ? $error['inci_address'] : '';?></label></i>
-																</div><br>
+																</div>
 
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label for="contactno">Contact No.: <i class="red">*</i></label>
 																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" title="Please specify your Contact #" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
-																</div><br>
+																</div>
 
-																<div class="form-group">
+																<div class="form-group selec">
 																	<label>Email Address: <i class="red">*</i></label>
 																	<input type="email" class="form-control form-text form-text-desc" id="bemailadd" name="bemailadd" title="Please specify your Email" placeholder="example@gmail.com">
 																	<?php echo isset($error['bemailadd']) ? $error['bemailadd'] : '';?>
-																</div><br>
+																</div>
 
 																<div class="form-group">
 																	<label for="file">Attach Files Here: <i class="red">*</i></label>
 																	<input type='file' class="form-control form-text" name='blotterid_image' aria-details="blotterid_image"/>
 
-																	<i aria-details="blotterid_image" class="detailid"><label> please attach the right format (.docx)	<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?></label></i>
+																	<i aria-details="blotterid_image" class="detailid"><label> please attach the right format (.pdf)	<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?></label></i>
 																</div>
 															</div>
 															<br>
@@ -453,17 +464,17 @@ if(!file_exists($f)){
                                                         <h5 style="text-align: center;">Other Information</h5>
                                                     <hr>
 													<div class="left_userpersonal_info left_userpersonal_info1">
-                                                    <div class="form-group">
+                                                    <div class="form-group selec">
 															<label for="n_violator">Name of Violator: <i class="red">*</i></label>
 															<input type="text" class="form-control form-text" id="n_violator" name="n_violator" placeholder=" Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?>
-														</div><br>
+														</div>
 
-														<div class="form-group">
+														<div class="form-group selec">
 															<label for="violator_age">Violator's Age: <i class="red">*</i></label>
 															<input type="text" class="form-control form-text age" id="violator_age" name="violator_age" placeholder="Ex. Around 30's of age">
 															<?php echo isset($error['violator_age']) ? $error['violator_age'] : '';?>
-														</div><br>
+														</div>
 
 														<div class="form-group">
 															<label>Gender: <i class="red">*</i></label>
@@ -473,7 +484,7 @@ if(!file_exists($f)){
 																<option value="Female">Female</option>
 															</select>
 															<?php echo isset($error['violator_gender']) ? $error['violator_gender'] : '';?>
-														</div><br>
+														</div>
 
 														<div class="form-group">
 															<label for="relationship">Relationship: <i class="red">*</i></label>
@@ -483,20 +494,20 @@ if(!file_exists($f)){
 																<option value="Others">Others</option>
 															</select>
 															<?php echo isset($error['relationship']) ? $error['relationship'] : '';?>
-														</div><br>
+														</div>
 													</div>
 													<div class="left_userpersonal_info left_userpersonal_info1">
-                                                        <div class="form-group">
+                                                        <div class="form-group selec">
 															<label for="violator_address">Violator's Address: <i class="red">*</i></label>
 															<input type="text" class="form-control form-text" id="violator_address" name="violator_address" placeholder="#Blk No. Street City/Town" title="Please specify address"onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['violator_address']) ? $error['violator_address'] : '';?>
-														</div><br>
+														</div>
 
-														<div class="form-group">
+														<div class="form-group selec">
 															<label for="witnesses">Witnesses: <i class="red">*</i></label>
 															<input type="text" class="form-control form-text" id="witnesses" name="witnesses" placeholder="Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['witnesses']) ? $error['witnesses'] : '';?>
-														</div><br>
+														</div>
 
                             
 													</div>
@@ -677,6 +688,8 @@ var countries = ["Barangay Commonwealth"];
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), countries);
+
 </script>
+
 </body>
 </html>
