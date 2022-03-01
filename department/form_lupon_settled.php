@@ -158,57 +158,32 @@ require 'db/conn.php';
 					
 									
 					
-					<div class="reg_table emp_tbl">
+					
+			  <div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php
 						include "db/conn.php";
 	                    include "db/user.php";
 							
-						$mquery = "SELECT * FROM usersdb";
+						$mquery = "SELECT * FROM lupondb";
 						$countemployee = $db->query($mquery)
 						?>
 
-
-
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
+									<th>Case No.</th>
 									<th>Complainant</th>
-									<th>Accused</th>
-									<th>Respondent</th>
-									<th>Tirahan</th>
-									<th>Oras at Petsa</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
 									<th>Contact No.</th>
-									<th>Attested By:</th>
+									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
 							</thead>
-							<?php
-							foreach($countemployee as $data) 
-							{
-							?>
-							<tr class="table-row">
-									<td><?php echo $data ['user_no']; ?></td>
-									<td><?php echo $data ['user_lname']; ?></td>
-									<td><?php echo $data ['user_fname']; ?></td>
-									<td><?php echo $data ['user_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Edit</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Delete</button>
-									</td>	
-								</tr>
 							
-							<?php
-							}
-							?>
-						
 						</table>
 							<!--
 								<input type="button" id="tst" value="ok" onclick="fnselect()"/>

@@ -80,7 +80,7 @@ require 'db/conn.php';
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-			   <a class="side_bar" href="form_lupon_tagapamayapa.php">
+			   <a class="side_bar" href="lupon_tagapamayapa.php">
 				 <i class='fas fa-user-clock'></i>
 				 <span class="links_name">Tagapamayapa</span>
 			   </a>
@@ -138,7 +138,7 @@ require 'db/conn.php';
 				<?php 
 					require 'db/conn.php';
 
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+					$query = "SELECT CaseId FROM hearing ORDER BY CaseId";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -159,7 +159,7 @@ require 'db/conn.php';
 				<?php 
 					require 'db/conn.php';
  
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query = "SELECT CaseNo FROM lupondb ORDER BY CaseNo";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -179,7 +179,7 @@ require 'db/conn.php';
 				<?php 
 					require 'db/conn.php';
 
-					$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
+					$query = "SELECT CaseId FROM settled ORDER BY CaseId";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -199,7 +199,7 @@ require 'db/conn.php';
 				<?php 
 					require 'db/conn.php';
  
-					$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
+					$query = "SELECT CaseId FROM mediation ORDER BY CaseId";
 					$query_run = $db->query($query);
 					$pdoexecute = $query_run->rowCount();
 
@@ -214,6 +214,7 @@ require 'db/conn.php';
 		</div>
 	</div>
 
+
 	
 
 	<div class="reg_table emp_tbl">
@@ -223,22 +224,19 @@ require 'db/conn.php';
 						include "db/conn.php";
 	                    include "db/user.php";
 							
-						$mquery = "SELECT * FROM usersdb";
+						$mquery = "SELECT * FROM lupondb";
 						$countemployee = $db->query($mquery)
 						?>
 
-
-
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
+									<th>Case No.</th>
 									<th>Complainant</th>
-									<th>Accused</th>
-									<th>Respondent</th>
-									<th>Tirahan</th>
-									<th>Oras at Petsa</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
 									<th>Contact No.</th>
-									<th>Attested By:</th>
+									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
@@ -247,37 +245,29 @@ require 'db/conn.php';
 							foreach($countemployee as $data) 
 							{
 							?>
-							
-									
+							<tr class="table-row">
+									<td><?php echo $data ['CaseNo']; ?></td>
+									<td><?php echo $data ['Complainant']; ?></td>
+									<td><?php echo $data ['Accussed']; ?></td>
+									<td><?php echo $data ['Address']; ?></td>
+									<td><?php echo $data ['DateandTime']; ?></td>
+									<td><?php echo $data ['ContactNo']; ?></td>
+									<td><?php echo $data ['Complaint']; ?></td>
+									<td>Active</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="fa fa-check-circle"></i>Done</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="fa fa-ban"></i>Deny</button>
+									</td>	
+								</tr>
 							
 							<?php
 							}
 							?>
-						
 						</table>
 
 				
-					</div>
-				</div>
-				
-			</section>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-
-			<script>
-			
-			 /*-- Fuction for Login Modal Form --*/
-			var modal = document.getElementById('id1');
-				window.onclick = function (event) {
-					if (event.target == modal) {
-					modal.style.display = "none";
-				}
-			}  
-			</script>
+					
+	
 			
 			</section>
 	</body>

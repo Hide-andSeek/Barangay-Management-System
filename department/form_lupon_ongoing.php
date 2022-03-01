@@ -55,6 +55,52 @@ require 'db/conn.php';
 	 
 	 
 	 <style>
+
+
+
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+
+
+
 		div.align-box{padding-top: 23px; display: flex; align-item: center;}
 		.box-report{
 			width: 300px;
@@ -139,11 +185,60 @@ require 'db/conn.php';
 					</div>
 				  </div>
 			  </section>
-			    <br>
-			  <div>
-			
+			  <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">MONDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 1</a>
+    <a href="#about">MR. 2</a>
+    <a href="#contact">MR. 3</a>
+  </div>
+</div>
 
-	<form action="user.php" method="POST">
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">TUESDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">WEDNESDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">THURSDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">FRIDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">SATURDAY</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+
+			  <div>
+			  <form action="user.php" method="POST">
 				<div class="search_content">
                         <label>Search: 
                             <input type="text" class="r_search" name="keyword">
@@ -152,61 +247,31 @@ require 'db/conn.php';
                 </div> 
 			  </form>
 
-			  
-					
-									
-					
-					<div class="reg_table emp_tbl">
+			  <div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php
 						include "db/conn.php";
 	                    include "db/user.php";
 							
-						$mquery = "SELECT * FROM usersdb";
+						$mquery = "SELECT * FROM lupondb";
 						$countemployee = $db->query($mquery)
 						?>
 
-
-
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
+									<th>Case No.</th>
 									<th>Complainant</th>
-									<th>Accused</th>
-									<th>Respondent</th>
-									<th>Tirahan</th>
-									<th>Oras at Petsa</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
 									<th>Contact No.</th>
-									<th>Attested By:</th>
+									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
 							</thead>
-							<?php
-							foreach($countemployee as $data) 
-							{
-							?>
-							<tr class="table-row">
-									<td><?php echo $data ['user_no']; ?></td>
-									<td><?php echo $data ['user_lname']; ?></td>
-									<td><?php echo $data ['user_fname']; ?></td>
-									<td><?php echo $data ['user_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
-									<td>Active</td>
-									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Done</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Deny</button>
-									</td>	
-								</tr>
 							
-							<?php
-							}
-							?>
-						
 						</table>
 							<!--
 								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
@@ -223,7 +288,27 @@ require 'db/conn.php';
 			<br>
 			<br>
 
-		
+			<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 			
 			</section>
 	</body>
