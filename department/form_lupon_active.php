@@ -139,41 +139,38 @@ require 'db/conn.php';
 					</div>
 				  </div>
 			  </section>
-			    <br>
 			  <div>
-
-			  <form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
-                        </label>
-                </div> 
-			  </form>
+			  <<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+										
+								</form>
+							</div>
 			
-			  <div class="reg_table emp_tbl">
+							<div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php
 						include "db/conn.php";
 	                    include "db/user.php";
 							
-						$mquery = "SELECT * FROM usersdb";
+						$mquery = "SELECT * FROM lupondb";
 						$countemployee = $db->query($mquery)
 						?>
 
-
-
 							<thead>
 								<tr class="t_head">
-									<th>Employee No.</th>
+									<th>Case No.</th>
 									<th>Complainant</th>
-									<th>Accused</th>
-									<th>Respondent</th>
-									<th>Tirahan</th>
-									<th>Oras at Petsa</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
 									<th>Contact No.</th>
-									<th>Attested By:</th>
+									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>                       
@@ -183,26 +180,27 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['user_no']; ?></td>
-									<td><?php echo $data ['user_lname']; ?></td>
-									<td><?php echo $data ['user_fname']; ?></td>
-									<td><?php echo $data ['user_mname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['contact']; ?></td>
-									<td><?php echo $data ['department']; ?></td>
+									<td><?php echo $data ['CaseNo']; ?></td>
+									<td><?php echo $data ['Complainant']; ?></td>
+									<td><?php echo $data ['Accussed']; ?></td>
+									<td><?php echo $data ['Address']; ?></td>
+									<td><?php echo $data ['DateandTime']; ?></td>
+									<td><?php echo $data ['ContactNo']; ?></td>
+									<td><?php echo $data ['Complaint']; ?></td>
 									<td>Active</td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="bx bx-edit"></i>Done</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="bx bx-trash"></i>Deny</button>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><a href="lupon_ongoing.php"><i class="fa fa-check-circle"></i>Done</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><a href="lupon_mediation.php"><i class="fa fa-ban"></i>Deny</button>
+							</a>
 									</td>	
+
 								</tr>
 							
 							<?php
 							}
 							?>
-						
 						</table>
+
 	
 							<!--
 								<input type="button" id="tst" value="ok" onclick="fnselect()"/>

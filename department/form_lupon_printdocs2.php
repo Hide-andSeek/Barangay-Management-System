@@ -25,6 +25,11 @@ require 'db/conn.php';
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap CSS -->
     <link href="https://cdn
 	.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -37,6 +42,7 @@ require 'db/conn.php';
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -47,6 +53,7 @@ require 'db/conn.php';
      <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/captain.css">
+
 	
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -54,27 +61,15 @@ require 'db/conn.php';
 	 
 	 
 	 <style>
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-
-		}
 		
-		 i.menu{color: #fff}
-			 i.id{color: #a809b0}
-			 i.clearance{color: #1cb009}
-			 i.sms{color: #478eff}
-			 i.blotter-com{color: #9e0202}
-			 i.indigency{color: #0218bd}
-			 i.permit{color: #e0149c}
 	 </style>
    </head>
+   <style>
+	   html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+div.a{
+  text-align: justify;
+}
+	   </style>
 	<body>
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
@@ -85,7 +80,7 @@ require 'db/conn.php';
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="lupon.php">
+			  <a class="side_bar" href="lupon_mediation.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -93,7 +88,7 @@ require 'db/conn.php';
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs2.php">
+			   <a class="side_bar" href="lupon_printdocs2.php">
 				 <i class='fa fa-print'></i>
 				 <span class="links_name">Print Document</span>
 			   </a>
@@ -127,86 +122,13 @@ require 'db/conn.php';
 		  <!-- Middle Section -->
 		  <section class="home-section">
 			<!-- Top Section -->
-			  <section class="top-section">
-				  <div class="top-content">
-					<div>
-						<h5>FOR MEDIATION
-						<a href="#" class="circle">
-							 <img src="img/dt.png" >
-					    </a>
-					    </h5>	  
-					</div>
-				  </div>
-			  </section>
-			    <br>
-			  <div>
 			
-
-	<form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
-                        </label>
-                </div> 
-			  </form>
-
-			  
 									
-					
-					
-			  <div class="reg_table emp_tbl">
-						<table class="content-table">
-						
-						<?php
-						include "db/conn.php";
-	                    include "db/user.php";
-							
-						$mquery = "SELECT * FROM lupondb";
-						$countemployee = $db->query($mquery)
-						?>
-
-							<thead>
-								<tr class="t_head">
-									<th>Case No.</th>
-									<th>Complainant</th>
-									<th>Accussed</th>
-									<th>Address</th>
-									<th>Time And Date:</th>
-									<th>Contact No.</th>
-									<th>Complaints:</th>
-									<th>Status</th>
-									<th>Action</th>
-								</tr>                       
-							</thead>
-							
-						</table>
-							<!--
-								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
-						     -->
-						</div>
-					</div>
-				</div>
-				
-			</section>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-
-			<script>
-			
-			 /*-- Fuction for Login Modal Form --*/
-			var modal = document.getElementById('id1');
-				window.onclick = function (event) {
-					if (event.target == modal) {
-					modal.style.display = "none";
-				}
-			}  
-			</script>
-			
-			</section>
+			<div align= "center" style= "background-color: black;width:100%; height:660px;">
+<embed style= "width: 80%; height: 100%" src = "upload/SINUMPAANG SALAYSAY.pdf" type="application/pdf"></embed>
+</div>
+												
+													
+											
 	</body>
 </html>
