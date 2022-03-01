@@ -390,7 +390,7 @@ if(isset($_POST['btnverify'])){
 	}
 					
 	// number of data that will be display per page		
-	$offset = 20;
+	$offset = 50;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
@@ -617,7 +617,7 @@ if(isset($_POST['btnverify'])){
 	}
 					
 	// number of data that will be display per page		
-	$offset = 10;
+	$offset = 50;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){

@@ -3,13 +3,7 @@ include "db/conn.php";
 include "db/user.php";
 
 ?>
-<?php
-	$user = '';
 
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
-	}
-?>
 
 
 <!DOCTYPE html>
@@ -19,7 +13,7 @@ include "db/user.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Barangay Programs - Barangay Commonwealth QC.</title>
+    <title>Announcement - Barangay Commonwealth QC.</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -51,7 +45,7 @@ include "db/user.php";
 		img.spot{margin-left: 45px;}
 		.announce_item{padding: 25px 25px 25px 25px;}
 		ul.newslatest_postnav{list-style-type: none;}
-
+    a.login{cursor:pointer;}
 	</style>
 </head>
 
@@ -82,37 +76,23 @@ include "db/user.php";
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="resident-defaultpage.php">Home</a>
+                            <a class="page-scroll" href="index.php">Home</a>
                         </li>
                         <li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
-                              <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
-                              <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="academic-related.php">Academic Related</a>
+                              <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
+                              <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
                             </span>
                         </li>
-                        <li class="logdropdown">
-                            <a class="page-scroll logout" href="javascript:void(0)">Services</a>
-                            <span class="logdropdown-content">
-                              <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
-                              <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
-                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
-                              <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
-                            </span>
+                          <li>
+                              <a class="page-scroll" href="contact.php">Contact Us</a>
                           </li>
                           <li>
-                              <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
-                          </li>
-                          <li class="logdropdown">
-                            <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-                            <span class="logdropdown-content">
-                            <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
-                              <a href="resident_viewprofile.php">View Profile</a>
-                            </span>
-                          </li>
+                            <a class="page-scroll login" onclick="document.getElementById('id01').style.display='block'">Login</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -121,7 +101,77 @@ include "db/user.php";
         </nav>
 
     </header>
- 
+
+    <!--Modal form for Login-->
+    <div id="formatValidatorName" >
+          <div id="id01" class="modal">
+                <div class="modal-content animate " >
+                    <span class="imgcontainer">
+						<label>
+                            <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
+						</label>
+                    </span>
+                    
+					
+                    <div class="form-bar">
+                        <button class="form-bar-item form-button tablink form-active log_in" onclick="openForm(event.preventDefault(),'Login')">Login</button>
+                        <button class="form-bar-item form-button tablink create_account" onclick="openForm(event.preventDefault(),'CreateAcc')">Create Account</button>
+                      </div>
+					  
+					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+						<div id="Login" class="login_container form">
+								<div class="information">
+									<input required class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email"> 
+								</div>
+								
+								<div class="information">
+									<input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password">   
+								</div>
+							   
+								<div>
+									<a href="#" class="fp">Forgot password?</a>
+								</div>
+								<div class="information">   
+									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
+										Sign in
+									</button>  
+									<div>
+										<button class="log_button gmail">
+											<i class="fa fa-google"></i>  Sign with Gmail
+										</button>
+									</div>
+								</div>
+						</div> 	
+					</form>
+<!-- Create an Account-->
+					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+						<div id="CreateAcc" class="login_container form" style="display: none;">
+            <div class="information">
+								  <input required class="inputtext" type="text" name="uname" placeholder="Username" >
+							</div>
+							<div class="information">
+								<input required class="inputtext" type="email" id="" name ="email" placeholder="Email" >
+							</div>
+							<div class="information controls">
+								<input required class="inputpass" type="password" id="" name ="password"" placeholder="Password">
+							</div>
+
+							<div class="guidelines">
+              <input required type="checkbox" value="yes" id="policy" name="policy">
+								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
+								<span class="checkmark"></span>	
+							</div>
+							<div class="information">   
+								<button type="submit" name="regbtn" class="log_button sign_in getstarted popup_mess">
+									Get Started
+								</button>  
+							</div>
+						</div>
+					</form>
+              </div>
+        </div>
+    </div>
+
     <div class="sep_announcement">
  <!-- News section-->
  <section>
@@ -134,7 +184,7 @@ include "db/user.php";
 				include ('db/conn.php');
 				include ('db/captain.php');
 				//Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '24'");
+				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '23'");
 				$stmt->execute();
 				$imagelist = $stmt->fetchAll();
 				if (count($imagelist) > 0) {
@@ -149,7 +199,7 @@ include "db/user.php";
 				} else {
 					echo "<div class='errormessage'>
 						  <i class='bx bx-error'></i>
-                          No Barangay Program Post yet!
+                          No announcement yet!
 						  </div>";
 				}
 			?> 
@@ -159,7 +209,7 @@ include "db/user.php";
             include ('db/conn.php');
             include ('db/captain.php');
               //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '24'");
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '23'");
             $stmt->execute();
             $imagelist = $stmt->fetchAll();
             if (count($imagelist) > 0) {
@@ -183,7 +233,7 @@ include "db/user.php";
 			} else {
 				echo "<div class='errormessage'>
                       <i class='bx bx-error'></i>
-                      No Barangay Program Post yet!
+                      No announcement yet!
 					  </div>";
 			}
 			?> 
@@ -216,7 +266,7 @@ include "db/user.php";
 			} else {
 				echo "<div class='errormessage'>
                       <i class='bx bx-error'></i>
-                      No Barangay Program Post yet!
+                      No announcement yet!
 					  </div>";
 			}
 			?> 
@@ -261,22 +311,25 @@ include "db/user.php";
       <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
 	
-    <script src="https://use.fontawesome.com/f7721642f4.js"></script>
-    <!-- Color Settings script -->
-    <script src="resident-js/settings-script.js"></script>
-    <!-- jQuery -->
-    <script src="resident-js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="resident-js/bootstrap.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="resident-js/jquery.easing.min.js"></script>
-    <!-- Contact Form JavaScript -->
-    <script src="resident-js/jqBootstrapValidation.js"></script>
-    <!-- SmoothScroll script -->
-    <script src="resident-js/smoothscroll.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="resident-js/barangay.js"></script>
-    <!-- Isotope -->
-    <script src="resident-js/jquery.isotope.min.js"></script>
+  <!-- jQuery -->
+  <script src="resident-js/jquery.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="resident-js/bootstrap.min.js"></script>
+  <!-- Color Settings script -->
+  <script src="resident-js/settings-script.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="resident-js/jquery.easing.min.js"></script>
+  <!-- Contact Form JavaScript -->
+  <script src="resident-js/jqBootstrapValidation.js"></script>
+  <!-- SmoothScroll script -->
+  <script src="resident-js/smoothscroll.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="resident-js/barangay.js"></script>
+  <!-- Isotope -->
+  <script src="resident-js/jquery.isotope.min.js"></script>
+  
+  <script src="resident-js/accordions.js"></script>
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+
 </body>
 </html>

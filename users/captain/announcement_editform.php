@@ -181,7 +181,7 @@ if(!isset($_SESSION["type"]))
 					<div class="profile-details">
 					<div class="name_job" style="font-size: 13px;">
 						<div><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?> || Online </div>
 						</div>
 					</div>
 					<a href="officiallogout.php">

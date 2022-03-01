@@ -287,7 +287,7 @@ if(!file_exists($f)){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand logo-top page-scroll" href="resident-defaultpage.php">
+                    <a class="navbar-brand logo-top page-scroll" href="resident-defaultpage.php" onclick="dstry()">
                             <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
                     </a>
                 </div>
@@ -299,13 +299,13 @@ if(!file_exists($f)){
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="resident-defaultpage.php">Home</a>
+                            <a class="page-scroll" href="resident-defaultpage.php" onclick="dstry()">Home</a>
                         </li>
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
                               <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
                               <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
@@ -314,19 +314,20 @@ if(!file_exists($f)){
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
-							  <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
-                              <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
-                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
+							  <a class="page-scroll" href="reqdoc_barangayid.php" onclick="dstry()">Barangay ID</a>
+                              <a class="page-scroll" href="reqdoc_bpermit.php" onclick="dstry()">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_indigency.php" onclick="dstry()">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_clearance.php" onclick="dstry()">Barangay Clearance</a>
                             </span>
                           </li>
                         <li>
-                            <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
+                            <a class="page-scroll" href="residentcontactus.php" onclick="dstry()">Contact Us</a>
                         </li>
                         <li class="logdropdown">
 							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
 							<span class="logdropdown-content">
-								<a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+								<a class="page-scroll" href="resident_logout.php" onclick="dstry()"><i class="bx bx-log-out"></i> Logout</a>
+								<a href="resident_viewprofile.php">View Profile</a>
 							</span>
 						</li>
                     </ul>
@@ -342,16 +343,33 @@ if(!file_exists($f)){
 	<section>
         <h2>Online Blotter</h2>
         <p>
-			<a href="resident-defaultpage.php">Home </a>>> <a href="reqdoc_barangayid.php">Barangay ID</a> >> <a href="reqdoc_bpermit.php">Business Permit</a>>> <a href="reqdoc_indigency.php">Certificate of Indigency</a>>><a href="reqdoc_clearance.php"> Barangay Clearance</a>>> <a href="#"><strong> Online Blotter</strong></a>
+			<a href="resident-defaultpage.php" onclick="dstry()">Home </a>>> <a href="reqdoc_barangayid.php" onclick="dstry()">Barangay ID</a> >> <a href="reqdoc_bpermit.php" onclick="dstry()">Business Permit</a>>> <a href="reqdoc_indigency.php" onclick="dstry()">Certificate of Indigency</a>>><a href="reqdoc_clearance.php" onclick="dstry()"> Barangay Clearance</a>>> <a href="#"><strong> Online Blotter</strong></a>
 		</p>
 		<div>
-		<a href="reqdoc_clearance.php">
+		<a href="reqdoc_clearance.php" onclick="dstry()">
             <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i> <strong> Barangay Clearance </strong></p>
     	</a>
 		<br>
         <br>
 		</div>
 		<?php echo isset($error['add_blotter']) ? $error['add_blotter'] : '';?>
+		<div style="text-align: center;">
+			<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
+			<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
+			<?php echo isset($error['comp_gender']) ? $error['comp_gender'] : '';?>
+			<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
+			<?php echo isset($error['inci_address']) ? $error['inci_address'] : '';?>
+			<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
+			<?php echo isset($error['bemailadd']) ? $error['bemailadd'] : '';?>
+			<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
+			<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?>
+			<?php echo isset($error['violator_age']) ? $error['violator_age'] : '';?>
+			<?php echo isset($error['violator_gender']) ? $error['violator_gender'] : '';?>
+			<?php echo isset($error['relationship']) ? $error['relationship'] : '';?>
+			<?php echo isset($error['violator_address']) ? $error['violator_address'] : '';?>
+			<?php echo isset($error['witnesses']) ? $error['witnesses'] : '';?>
+			<?php echo isset($error['complaints']) ? $error['complaints'] : '';?>
+		</div>
         <blockquote class="blockqoute-color">
             <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
@@ -404,19 +422,19 @@ if(!file_exists($f)){
 																
                                                             <div class="form-group selec">
 																	<label for="n_complainant">Name of Complainant: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="n_complainant" name="n_complainant" placeholder="Fullname" title="Please specify your name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input type="text" class="form-control form-text auto-save" id="n_complainant" name="n_complainant" placeholder="Fullname" title="Please specify your name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['n_complainant']) ? $error['n_complainant'] : '';?>
 																</div>
 																
 																<div class="form-group selec">
 																	<label for="comp_age">Age: <i class="red">*</i></label>
-																	<input type="number" class="form-control form-text age" id="comp_age" title="Please specify your age" name="comp_age" placeholder="Your Age">
+																	<input type="number" class="form-control form-text age auto-save" id="comp_age" title="Please specify your age" name="comp_age" placeholder="Your Age">
 																	<?php echo isset($error['comp_age']) ? $error['comp_age'] : '';?>
 																</div>
 
 																<div class="form-group">
 																	<label>Gender: <i class="red">*</i></label>
-																	<select class="form-control form-text" name="comp_gender">
+																	<select class="form-control form-text auto-save" name="comp_gender">
 																		<option disabled>--Select--</option>
 																		<option value="Male">Male</option>
 																		<option value="Female">Female</option>
@@ -426,7 +444,7 @@ if(!file_exists($f)){
 																
 																<div class="form-group selec">
 																	<label for="comp_address">Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="comp_address" name="comp_address" title="Please specify your address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input type="text" class="form-control form-text auto-save" id="comp_address" name="comp_address" title="Please specify your address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['comp_address']) ? $error['comp_address'] : '';?>
 																</div>
 															</div>	
@@ -434,20 +452,20 @@ if(!file_exists($f)){
 
                                                             <div class="form-group selec selecu">
 																	<label for="inci_address">Incident Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="inci_address" name="inci_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" aria-details="inci_address" >
+																	<input type="text" class="form-control form-text auto-save" id="inci_address" name="inci_address" placeholder="#Blk No. Street City/Town" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" aria-details="inci_address" >
 																	
 																	<i aria-details="inci_address" class="detailid"><label> where incident happened (Kung saan nangyari ang insidente)	<?php echo isset($error['inci_address']) ? $error['inci_address'] : '';?></label></i>
 																</div>
 
 																<div class="form-group selec">
 																	<label for="contactno">Contact No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text" id="contactno" name="contactno" title="Please specify your Contact #" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input type="number" class="form-control number form-text auto-save" id="contactno" name="contactno" title="Please specify your Contact #" onKeyPress="if(this.value.length==11) return false;" placeholder="Ex. 09123456789" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
 																</div>
 
 																<div class="form-group selec">
 																	<label>Email Address: <i class="red">*</i></label>
-																	<input type="email" class="form-control form-text form-text-desc" id="bemailadd" name="bemailadd" title="Please specify your Email" placeholder="example@gmail.com">
+																	<input type="email" class="form-control form-text form-text-desc auto-save" id="bemailadd" name="bemailadd" title="Please specify your Email" placeholder="example@gmail.com">
 																	<?php echo isset($error['bemailadd']) ? $error['bemailadd'] : '';?>
 																</div>
 
@@ -466,13 +484,13 @@ if(!file_exists($f)){
 													<div class="left_userpersonal_info left_userpersonal_info1">
                                                     <div class="form-group selec">
 															<label for="n_violator">Name of Violator: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="n_violator" name="n_violator" placeholder=" Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+															<input type="text" class="form-control form-text auto-save" id="n_violator" name="n_violator" placeholder=" Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?>
 														</div>
 
 														<div class="form-group selec">
 															<label for="violator_age">Violator's Age: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text age" id="violator_age" name="violator_age" placeholder="Ex. Around 30's of age">
+															<input type="text" class="form-control form-text age auto-save" id="violator_age" name="violator_age" placeholder="Ex. Around 30's of age">
 															<?php echo isset($error['violator_age']) ? $error['violator_age'] : '';?>
 														</div>
 
@@ -480,8 +498,8 @@ if(!file_exists($f)){
 															<label>Gender: <i class="red">*</i></label>
 															<select class="form-control form-text" name="violator_gender">
 																<option disabled>--Select--</option>
-																<option value="Male">Male</option>
-																<option value="Female">Female</option>
+																<option value="FMale">Male</option>
+																<option value="EFemale">Female</option>
 															</select>
 															<?php echo isset($error['violator_gender']) ? $error['violator_gender'] : '';?>
 														</div>
@@ -499,13 +517,13 @@ if(!file_exists($f)){
 													<div class="left_userpersonal_info left_userpersonal_info1">
                                                         <div class="form-group selec">
 															<label for="violator_address">Violator's Address: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="violator_address" name="violator_address" placeholder="#Blk No. Street City/Town" title="Please specify address"onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+															<input type="text" class="form-control form-text auto-save" id="violator_address" name="violator_address" placeholder="#Blk No. Street City/Town" title="Please specify address"onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['violator_address']) ? $error['violator_address'] : '';?>
 														</div>
 
 														<div class="form-group selec">
 															<label for="witnesses">Witnesses: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text" id="witnesses" name="witnesses" placeholder="Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+															<input type="text" class="form-control form-text auto-save" id="witnesses" name="witnesses" placeholder="Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 															<?php echo isset($error['witnesses']) ? $error['witnesses'] : '';?>
 														</div>
 
@@ -515,7 +533,7 @@ if(!file_exists($f)){
                                                     <div class="left_userpersonal_info ">
                                                         <div style="margin-left: 10px;">
 															<label for="complaints">Complaints: <i class="red">*</i></label>
-															<textarea name="complaints" id="complaints" cols="155" style="resize: none; padding: 10px;" rows="5" placeholder="Your Concerns"></textarea>
+															<textarea name="complaints" id="complaints" cols="155" style="resize: none; padding: 10px;" rows="5" class="auto-save" placeholder="Your Concerns"></textarea>
                                                            
 															<?php echo isset($error['complaints']) ? $error['complaints'] : '';?>
 														</div><br>
@@ -532,7 +550,7 @@ if(!file_exists($f)){
                                             <br>
                                             <br>
 											
-                                            <a href="reqdoc_clearance.php">
+                                            <a href="reqdoc_clearance.php" onclick="dstry()">
                                                 <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i><strong> Barangay Clearance</strong></p>
                                             </a>
                                             <br>
@@ -690,6 +708,22 @@ var countries = ["Barangay Commonwealth"];
 autocomplete(document.getElementById("myInput"), countries);
 
 </script>
+<script src="resident-js/savy.min.js"></script>
+	<script src="resident-js/jquery-3.2.1.min.js"></script>
+	<script src="resident-js/savy.js"></script>
+	<script>
+		//$('.auto-save').savy('load') --> can be used without callback
+		$('.auto-save').savy('load',function(){
+		console.log("All data from savy are loaded");
+		});
 
+		function dstry(){
+		//$('.auto-save').savy('destroy') --> can be used without callback
+		$('.auto-save').savy('destroy',function(){
+			console.log("All data from savy are Destroyed");
+			window.location.reload();
+		});
+		}
+	</script>
 </body>
 </html>

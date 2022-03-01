@@ -19,7 +19,7 @@ include "db/user.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Barangay Programs - Barangay Commonwealth QC.</title>
+    <title>Barangay Funds - Barangay Commonwealth QC.</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -88,9 +88,9 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
                               <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
+                              <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
                             </span>
                         </li>
                         <li class="logdropdown">
@@ -109,8 +109,8 @@ include "db/user.php";
                           <li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
                             <span class="logdropdown-content">
-                            <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
-                              <a href="resident_viewprofile.php">View Profile</a>
+                              <a class="page-scroll" href="resident_logout.php">Logout</a>
+                              <a href="#">View Profile</a>
                             </span>
                           </li>
                     </ul>
@@ -134,7 +134,7 @@ include "db/user.php";
 				include ('db/conn.php');
 				include ('db/captain.php');
 				//Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '24'");
+				$stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '25'");
 				$stmt->execute();
 				$imagelist = $stmt->fetchAll();
 				if (count($imagelist) > 0) {
@@ -159,7 +159,7 @@ include "db/user.php";
             include ('db/conn.php');
             include ('db/captain.php');
               //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '24'");
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '25'");
             $stmt->execute();
             $imagelist = $stmt->fetchAll();
             if (count($imagelist) > 0) {

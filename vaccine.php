@@ -3,14 +3,6 @@ include "db/conn.php";
 include "db/user.php";
 
 ?>
-<?php
-	$user = '';
-
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
-	}
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +43,7 @@ include "db/user.php";
 		img.spot{margin-left: 45px;}
 		.announce_item{padding: 25px 25px 25px 25px;}
 		ul.newslatest_postnav{list-style-type: none;}
-        a.login{cursor:pointer;};
+    a.login{cursor:pointer;}
 	</style>
 </head>
 
@@ -88,8 +80,8 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
-                              <a class="page-scroll" href="#">Latest Announcement</a>
+                              <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
+                              <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
                             </span>
                         </li>
@@ -142,11 +134,6 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<div>
-										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div>
 								</div>
 						</div> 	
 					</form>

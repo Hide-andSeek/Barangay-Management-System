@@ -361,7 +361,7 @@ if(!isset($_SESSION["type"]))
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt ="Back?">
                     </a>
                 </div>
-                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_bpermit/<?php echo $data['businessid_image']; ?>">Here's the Document</iframe>
+                <iframe type="file" style="position: absolute;width:0;height:0;border:0;" src="../img/fileupload_bpermit/<?php echo $data['businessid_image']; ?>">Here's the Document</iframe>
 
                 <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">

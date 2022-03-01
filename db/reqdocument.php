@@ -592,46 +592,46 @@ if(isset($_POST['permitBtn'])){
                 $error = array();
                                                                 
                 if(empty($n_complainant)){
-                $error['n_complainant'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['n_complainant'] = "<span class='label label-danger cattxtbox errormsg'>Name of complainant is required field!</span>";
                 }
                 if(empty($comp_age)){
-                $error['comp_age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['comp_age'] = "<span class='label label-danger cattxtbox errormsg'>Complainants age is required field!</span>";
                 }
                 if(empty($comp_gender)){
-                $error['comp_gender'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['comp_gender'] = "<span class='label label-danger cattxtbox errormsg'>Complainants gender is required field!</span>";
                 }
                 if(empty($comp_address)){
-                $error['comp_address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['comp_address'] = "<span class='label label-danger cattxtbox errormsg'>Complainants address is required field!</span>";
                 }
                 if(empty($inci_address)){
-                $error['inci_address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['inci_address'] = "<span class='label label-danger cattxtbox errormsg'>Incident address is required field!</span>";
                 }
                 if(empty($contactno)){
-                $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Contact no. is required field!</span>";
                 }
                 if(empty($bemailadd)){
-                    $error['bemailadd'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                    $error['bemailadd'] = "<span class='label label-danger cattxtbox errormsg'>Email address is required field!</span>";
                     }
                 if(empty($n_violator)){
-                $error['n_violator'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['n_violator'] = "<span class='label label-danger cattxtbox errormsg'>Name of violator is required field!</span>";
                 }
                 if(empty($violator_age)){
-                $error['violator_age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['violator_age'] = "<span class='label label-danger cattxtbox errormsg'>Violator's age is required field!</span>";
                 }
                 if(empty($violator_gender)){
-                $error['violator_gender'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['violator_gender'] = "<span class='label label-danger cattxtbox errormsg'>Violator's gender is required field!</span>";
                 }
                 if(empty($relationship)){
-                $error['relationship'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['relationship'] = "<span class='label label-danger cattxtbox errormsg'>Relationship is required field!</span>";
                 }
                 if(empty($violator_address)){
-                $error['violator_address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['violator_address'] = "<span class='label label-danger cattxtbox errormsg'>Violator's address is required field!</span>";
                 }
                 if(empty($witnesses)){
-                $error['witnesses'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['witnesses'] = "<span class='label label-danger cattxtbox errormsg'>Witnesses is required field!</span>";
                 }
                 if(empty($complaints)){
-                $error['complaints'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+                $error['complaints'] = "<span class='label label-danger cattxtbox errormsg'>Complaints is required field!</span>";
                 }
             
                 // common image file extensions

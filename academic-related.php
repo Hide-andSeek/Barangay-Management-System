@@ -82,13 +82,13 @@ include "db/user.php";
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="resident-defaultpage.php">Home</a>
+                            <a class="page-scroll" href="index.php">Home</a>
                         </li>
                         <li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="residentreqdocu.php#permit">Barangay Funds</a>
-                              <a class="page-scroll" href="announcement.php">Latest Announcement</a>
+                              <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
+                              <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="vaccine.php">Vaccine</a>
                               <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
                             </span>
@@ -142,11 +142,6 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<div>
-										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div>
 								</div>
 						</div> 	
 					</form>

@@ -83,7 +83,7 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
                               <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
                               <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
@@ -94,7 +94,7 @@ include "db/user.php";
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
                               <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
-                              <a class="page-scroll" href="reqdoc_.indigency.php">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
                             </span>

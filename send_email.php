@@ -40,8 +40,8 @@ if(isset($_POST['send'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -53,11 +53,11 @@ if(isset($_POST['send'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
         $mail->addAttachment ($file, 'Barangay Clearance');
    
@@ -102,8 +102,8 @@ if(isset($_POST['sendemail'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -115,11 +115,11 @@ if(isset($_POST['sendemail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
         $mail->addAttachment ($file, 'Softcopy: Business Permit');
    
@@ -137,9 +137,7 @@ if(isset($_POST['sendemail'])){
 	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
 	   $_SESSION['status'] = 'error';
     }
-	
 	unlink($file);
-
 }
 
 if(isset($_POST['clearancesendemail'])){
@@ -163,8 +161,8 @@ if(isset($_POST['clearancesendemail'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -176,11 +174,11 @@ if(isset($_POST['clearancesendemail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
         $mail->addAttachment ($file, 'Softcopy: Barangay Clearance');
    
@@ -221,12 +219,13 @@ if(isset($_POST['barangayidsendemail'])){
     $mail = new PHPMailer(true);                            
     try {
         //Server settings
+        // $mail->SMTPDebug = 2;
         $mail->isSMTP();                                     
         // $mail->Host = 'smtp.gmail.com'; 
         $mail->Host = 'smtp.gmail.com';                       
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -238,12 +237,12 @@ if(isset($_POST['barangayidsendemail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
-        
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
+ 
         $mail->addAttachment ($file, 'Softcopy: Barangay ID');
    
         //Content
@@ -260,9 +259,7 @@ if(isset($_POST['barangayidsendemail'])){
 	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
 	   $_SESSION['status'] = 'error';
     }
-	
 	unlink($file);
-
 }
 
 if(isset($_POST['indigencysendemail'])){
@@ -286,8 +283,8 @@ if(isset($_POST['indigencysendemail'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -299,11 +296,11 @@ if(isset($_POST['indigencysendemail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
         $mail->addAttachment ($file, 'Softcopy: Certificate of Indigency');
    
@@ -349,8 +346,8 @@ if(isset($_POST['admincompsendemail'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -362,11 +359,11 @@ if(isset($_POST['admincompsendemail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
         // $mail->addAttachment ($file, 'From: Admin Complaints Department');
    
@@ -405,8 +402,8 @@ if(isset($_POST['denysendmail'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -418,11 +415,11 @@ if(isset($_POST['denysendmail'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
    
         //Content
@@ -458,8 +455,8 @@ if(isset($_POST['sendlinkpayment'])){
         $mail->isSMTP();                                     
         $mail->Host = 'smtp.gmail.com';                      
         $mail->SMTPAuth = true;                             
-        $mail->Username = 'barangaycommonwealth0@gmail.com';     
-        $mail->Password = 'gepalitanmopayungpasswordbuddy';             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
         $mail->SMTPOptions = array(
             'ssl' => array(
             'verify_peer' => false,
@@ -471,11 +468,11 @@ if(isset($_POST['sendlinkpayment'])){
         $mail->Port = 465;                                   
 
         //Send Email
-        $mail->setFrom('barangaycommonwealth0@gmail.com');
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
         
         //Recipients
         $mail->addAddress($email);              
-        $mail->addReplyTo('barangaycommonwealth0@gmail.com');
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
    
         //Content

@@ -133,8 +133,8 @@ if(isset($_POST['generate']) ) {
 		.textarea{padding-left: 40px; padding-right: 40px; padding-top: 10px; margin-bottom: 15px;}
         .body{ margin: 20px 170px; }
         .sendi{margin-top: 20px;}
-         .draft1{position: absolute; z-index: 9999; margin-top: -20%; margin-left: 5%;}
-         img.draft{width: 70%; height: 70%; opacity: 0.7; }
+         .draft1{position: absolute; z-index: 9999; margin-top: -10%; margin-left: 5%;}
+         img.draft{width: 40%; height: 40%; opacity: 0.7; }
         .instruc{display: flex; justify-content: center; align-items: center;}
         label{font-size: 14px;}
     </style>
@@ -257,7 +257,7 @@ if(isset($_POST['generate']) ) {
 														
 														<div style="position: absolute; padding-left: 5px; border: 2px solid; width: 100px; height: 100px; font-size: 15px; margin-top: -90px; margin-left: 323px; background: #ffffff; font-size: 10px; padding-top: 60px; text-align: center;">
                                                         <div style="margin-top: -60px; margin-left: -6px;">
-                                                        <?php echo '<img src="../img/'. @$filename.'.png" style="width:98px; height:98px;"><br>'; ?>
+                                                        <?php echo '<img src="../img/qrcode_barangayid'. @$filename.'.png" style="width:98px; height:98px;"><br>'; ?>
                                                         <?php echo $message;?>
                                                          </div>
 														<!-- Bearer's Right Thumb Mark -->
@@ -343,8 +343,13 @@ if(isset($_POST['generate']) ) {
 
                                                 <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
                                                 <br>
-                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?barangayidfile=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div> -->
+                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
+                                                    <i class="bx bx-save saveicon"></i> Print
+                                                </button>
                                                 </div>
                                             </div>
                                             </form>

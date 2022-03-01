@@ -390,7 +390,7 @@ if(isset($_POST['btnverify'])){
 	}
 					
 	// number of data that will be display per page		
-	$offset = 20;
+	$offset = 50;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
@@ -617,13 +617,13 @@ if(isset($_POST['btnverify'])){
 	}
 					
 	// number of data that will be display per page		
-	$offset = 10;
+	$offset = 50;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
 		$from 	= ($page * $offset) - $offset;
 	}else{
-		//if nothing was given in page request, lets load the first page
+		//if nothing was given in page ]'2221h51l,request, lets load the first page
 		$from = 0;	
 	}	
 	
