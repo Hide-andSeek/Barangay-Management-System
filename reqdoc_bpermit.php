@@ -236,7 +236,7 @@ if(!file_exists($f)){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand logo-top page-scroll" href="resident-defaultpage.php">
+                    <a class="navbar-brand logo-top page-scroll" href="resident-defaultpage.php" onclick="dstry()">
                             <img class="brgy-logo"  src="resident-img/Brgy-Commonwealth.png" alt="logo">
                     </a>
                 </div>
@@ -248,25 +248,25 @@ if(!file_exists($f)){
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="resident-defaultpage.php">Home</a>
+                            <a class="page-scroll" href="resident-defaultpage.php" onclick="dstry()">Home</a>
                         </li>
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
-                              <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
-                              <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
-                              <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
+                              <a class="page-scroll" href="residentacademic.php" onclick="dstry()">Academic Related</a>
+                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
+                              <a class="page-scroll" href="residentannouncement.php" onclick="dstry()">Latest Announcement</a>
+                              <a class="page-scroll" href="residentvaccine.php" onclick="dstry()">Vaccine</a>
+                              <a class="page-scroll" href="residentbrgyprogram.php" onclick="dstry()">Barangay Programs</a>
                             </span>
                         </li>
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
-							  <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
-                              <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
-							  <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
+							  <a class="page-scroll" href="reqdoc_barangayid.php" onclick="dstry()">Barangay ID</a>
+                              <a class="page-scroll" href="reqdoc_indigency.php" onclick="dstry()">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_clearance.php" onclick="dstry()">Barangay Clearance</a>
+							  <a class="page-scroll" href="reqdoc_blotter.php" onclick="dstry()">Blotter</a>
                             </span>
                           </li>
                         <li>
@@ -276,6 +276,7 @@ if(!file_exists($f)){
 							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
 							<span class="logdropdown-content">
 								<a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+								<a href="resident_viewprofile.php">View Profile</a>
 							</span>
 						</li>
                     </ul>
@@ -291,13 +292,13 @@ if(!file_exists($f)){
 	<section>
         <h2>Business Permit</h2>
         <p>
-			<a href="resident-defaultpage.php">Home </a>>> <a href="reqdoc_barangayid.php">Barangay ID</a> >> <a href="#"><strong>Business Permit</strong></a> 
+			<a href="resident-defaultpage.php" onclick="dstry()">Home </a>>> <a href="reqdoc_barangayid.php" onclick="dstry()">Barangay ID</a> >> <a href="#"><strong>Business Permit</strong></a> 
 		</p>
 		<div>
-		<a href="reqdoc_barangayid.php">
+		<a href="reqdoc_barangayid.php" onclick="dstry()">
             <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i> <strong> Barangay ID </strong></p>
     	</a>
-        <a href="reqdoc_indigency.php">
+        <a href="reqdoc_indigency.php" onclick="dstry()">
 			<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Certificate of Indigency </strong><i class="bx bx-skip-next"></i></p>
         </a>
 		<br>
@@ -367,24 +368,24 @@ if(!file_exists($f)){
 																
 																	<div class="form-group">
 																		<label>Full Name: <i class="red">*</i></label>
-																		<input type="text" class="form-control form-text" id="fullname" name="fullname" placeholder="Please write your name"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																		<input type="text" class="form-control form-text auto-save" id="fullname" name="fullname" placeholder="Please write your name"  onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																		<?php echo isset($error['fullname']) ? $error['fullname'] : '';?>
 																	</div><br>
 																	<div class="form-group">
 																		<label for="contactno">Contact No.: <i class="red">*</i></label>
-																		<input type="number" class="form-control number form-text" id="contactno" name="contactno" placeholder="Ex. 09123456789" onKeyPress="if(this.value.length==11) return false;">
+																		<input type="number" class="form-control number form-text auto-save" id="contactno" name="contactno" placeholder="Ex. 09123456789" onKeyPress="if(this.value.length==11) return false;">
 																		<?php echo isset($error['contactno']) ? $error['contactno'] : '';?>
 																	</div><br>
 
 																	<div class="form-group">
 																		<label for="businessname">Business Name: <i class="red">*</i></label>
-																		<input type="text" class="form-control form-text" id="businessname" name="businessname" placeholder="Your Business Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																		<input type="text" class="form-control form-text auto-save" id="businessname" name="businessname" placeholder="Your Business Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																		<?php echo isset($error['businessname']) ? $error['businessname'] : '';?>
 																	</div><br>	
 																	
 																	<div class="form-group">
 																	<label for="businessaddress">Business Address: <i class="red">*</i></label>
-																	<input type="text" class="form-control form-text" id="businessaddress" name="businessaddress" placeholder="Your Business Address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
+																	<input type="text" class="form-control form-text auto-save" id="businessaddress" name="businessaddress" placeholder="Your Business Address" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 																	<?php echo isset($error['businessaddress']) ? $error['businessaddress'] : '';?>
 																</div></br>
 															</div>	
@@ -392,12 +393,12 @@ if(!file_exists($f)){
 																
 																<div class="form-group">
 																	<label for="plateno">Plate No.: <i class="red">*</i></label>
-																	<input type="number" class="form-control number form-text" id="plateno" name="plateno" placeholder="Your Business Plate No.">
+																	<input type="number" class="form-control number form-text auto-save" id="plateno" name="plateno" placeholder="Your Business Plate No.">
 																	<?php echo isset($error['plateno']) ? $error['plateno'] : '';?>
 																</div><br>
 																<div class="form-group">
 																	<label>Email Address: <i class="red">*</i></label>
-																	<input type="email" class="form-control form-text form-text-desc" id="email_add" name="email_add" placeholder="example@gmail.com">
+																	<input type="email" class="form-control form-text form-text-desc auto-save" id="email_add" name="email_add" placeholder="example@gmail.com">
 																	<?php echo isset($error['email_add']) ? $error['email_add'] : '';?>
 																</div><br>
 
@@ -411,7 +412,7 @@ if(!file_exists($f)){
 																
 																<div class="form-group">
 																		<label>ID type, please choose<i class="red">*</i></label>
-																		<select class="form-control form-text" style="font-size: 12px;" name="bpermitid_type" id="bpermitid_type">
+																		<select class="form-control form-text auto-save" style="font-size: 12px;" name="bpermitid_type" id="bpermitid_type">
 																		<option disabled>--Select--</option>
 																		<option value="SSS">SSS</option>
 																		<option value="PhilHealth">PhilHealth</option>
@@ -429,7 +430,7 @@ if(!file_exists($f)){
                                                                
 																<div class="form-group selec">
 																	<label>Document type, please choose<i class="red">*</i></label>
-																	<select class="form-control form-text" name="permitfilechoice" aria-details="permitfilechoice">
+																	<select class="form-control form-text auto-save" name="permitfilechoice" aria-details="permitfilechoice">
 																		<option disabled>--Select--</option>
 																		<option value="Hardcopy">Hardcopy</option>
 																		<option value="Softcopy">Softcopy</option>
@@ -467,10 +468,10 @@ if(!file_exists($f)){
                                             <br>
                                             <br>
 											
-                                            <a href="reqdoc_barangayid.php">
+                                            <a href="reqdoc_barangayid.php" onclick="dstry()">
                                                 <p class="linkpath" style="float: left; margin-left: 20px;"><i class="bx bx-skip-previous"></i><strong> Barangay ID </strong></p>
                                             </a>
-                                            <a href="reqdoc_indigency.php">
+                                            <a href="reqdoc_indigency.php" onclick="dstry()">
 												<p class="linkpath" style="float: right; margin-right: 20px;"><strong> Certificate of Indigency </strong><i class="bx bx-skip-next"></i></p>
                                             </a>
                                             <br>
@@ -520,6 +521,23 @@ if(!file_exists($f)){
 	<script src="https://use.fontawesome.com/f7721642f4.js"></script>
 	<script>
 		document.querySelector("#date_issued").valueAsDate = new Date();
+	</script>
+	<script src="resident-js/savy.min.js"></script>
+	<script src="resident-js/jquery-3.2.1.min.js"></script>
+	<script src="resident-js/savy.js"></script>
+	<script>
+		//$('.auto-save').savy('load') --> can be used without callback
+		$('.auto-save').savy('load',function(){
+		console.log("All data from savy are loaded");
+		});
+
+		function dstry(){
+		//$('.auto-save').savy('destroy') --> can be used without callback
+		$('.auto-save').savy('destroy',function(){
+			console.log("All data from savy are Destroyed");
+			window.location.reload();
+		});
+		}
 	</script>
 </body>
 </html>

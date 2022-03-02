@@ -197,7 +197,7 @@ include "db/announcementquery.php";
 					<div class="profile-details">
 					<div class="name_job" style="font-size: 13px;">
 						<div><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						<div class="job" id=""><?php echo $dept; ?> || Online </div>
 						</div>
 					</div>
 					<a href="officiallogout.php">
@@ -440,6 +440,10 @@ include "db/announcementquery.php";
 			<hr /> 
 		</div>
 <!-- Search -->
+<div style="text-align: center;">
+	<?php echo isset($error['category_name']) ? $error['category_name'] : '';?>
+	<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>	
+</div>
 							<div class="search_content">
 								<form class="list_header" method="get">
 									<label>
@@ -457,7 +461,7 @@ include "db/announcementquery.php";
 							</div>
 							<br>						
 <!-- end of search form -->
-							
+	
 					<div class="col-md-12">
 							<table class="content-table">
 								<thead>
@@ -677,7 +681,7 @@ include "db/announcementquery.php";
 																			<label>Announcement Date :<i class="asterisk">*</i></label>
 																			<span class="asterisk"><?php echo isset($error['announcement_date']) ? $error['announcement_date'] : '';?>
 																			</span>
-																			<input type="date" name="announcement_date" id="announcement_date" value="<?php if(isset($_GET['aid'])){echo $announcement_date['announcement_date'];}?>" class="form-control">
+																			<input type="date" name="announcement_date" id="announcement_date" value="<?php if(isset($_GET['aid'])){echo $announcement_date['announcement_date'];}?>" class="form-control" readonly>
 
 																			<label> Choose Category: <i class="asterisk">*</i></label>
 																			<span class="asterisk">
@@ -888,5 +892,8 @@ include "db/announcementquery.php";
 			<script src="resident-js/barangay.js"></script>
 			<script src="announcement_css/js/jquery.min.js"></script>
    			<script src="announcement_css/js/bootstrap.min.js"></script>	
+			<script>
+				document.querySelector("#announcement_date").valueAsDate = new Date();
+			</script>
 	</body>
 </html>

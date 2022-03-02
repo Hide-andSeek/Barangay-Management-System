@@ -19,7 +19,7 @@ include "db/user.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Barangay Programs - Barangay Commonwealth QC.</title>
+    <title>Barangay Funds - Barangay Commonwealth QC.</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -51,7 +51,7 @@ include "db/user.php";
 		img.spot{margin-left: 45px;}
 		.announce_item{padding: 25px 25px 25px 25px;}
 		ul.newslatest_postnav{list-style-type: none;}
-
+    a.login{cursor:pointer;}
 	</style>
 </head>
 
@@ -89,7 +89,7 @@ include "db/user.php";
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="academic-related.php">Academic Related</a>
                               <a class="page-scroll" href="#">Barangay Funds</a>
-                              <a class="page-scroll" href="#">Latest Announcement</a>
+                              <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="vaccine.php">Vaccine</a>
                             </span>
                         </li>
@@ -141,11 +141,6 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<div>
-										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div>
 								</div>
 						</div> 	
 					</form>
@@ -230,7 +225,7 @@ include "db/user.php";
               <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
             </div>
               <div>
-                <p style="text-align: justify">
+                <p style="text-align: justify;">
                    <?php echo $image['announcement_description']; ?>
                 </p>
               </div>
@@ -278,6 +273,8 @@ include "db/user.php";
 					  </div>";
 			}
 			?> 
+      <hr>
+      <hr>
         </div>
      </div>
     </div>

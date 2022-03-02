@@ -118,7 +118,7 @@ include('db/barcharts.php');
 					<div class="profile-details">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> || Online </div>
 						</div>
 					</div>
 					<a href="officiallogout.php">

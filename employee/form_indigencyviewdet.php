@@ -360,7 +360,7 @@ if(!isset($_SESSION["type"]))
                     </a>
                 </div>
 
-                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>">Here's the Document</iframe>
+                <iframe type="file" style="position: absolute;width:0;height:0;border:0;" src="../img/fileupload_indigency/<?php echo $data['indigencyid_image']; ?>">Here's the Document</iframe>
 
                 <form method="post" action=""  enctype="multipart/form-data">
                     <div style="display: flex;">

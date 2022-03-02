@@ -153,7 +153,7 @@ include "db/user.php";
             .services_1 {
                 background-size: cover;
                 padding: 20px 0px;
-            }
+           }
 
             .services_1 .service-item1 {
                 text-align: center;
@@ -221,7 +221,7 @@ include "db/user.php";
                     padding-bottom: 20px;
                 }
             }
-      a.login{cursor:pointer;};
+          a.login{cursor:pointer;}
 	</style>
 
 </head>
@@ -257,7 +257,7 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="residentacademic.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
+                              <a class="page-scroll" href="residentbarangayfunds.php">Barangay Funds</a>
                               <a class="page-scroll" href="residentannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="residentvaccine.php">Vaccine</a>
                               <a class="page-scroll" href="residentbrgyprogram.php">Barangay Programs</a>
@@ -268,7 +268,7 @@ include "db/user.php";
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
                               <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
-                              <a class="page-scroll" href="reqdoc_.indigency.php">Certificate of Indigency</a>
+                              <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
                             </span>
@@ -351,7 +351,7 @@ include "db/user.php";
 			<div class="services_1">
 				  <div class="container">
 					<div class="row">
-					  <div class="col-md-2">
+					  <div class="col-md-3">
 					  <a class="filled-button" href="reqdoc_barangayid.php">
 						<div class="service-item1">
 						  <div class="icon">
@@ -399,7 +399,7 @@ include "db/user.php";
 						</div>
 						</a>
 					  </div>
-					  <div class="col-md-2">
+					  <div class="col-md-3">
 					    <a class="filled-button" href="reqdoc_bpermit.php">
 						<div class="service-item1">
 						  <div class="icon">
@@ -410,19 +410,8 @@ include "db/user.php";
 						  </div>
 						</div>
 						</a>
-                        </div>
-                        <div class="col-md-2">
-					    <a class="filled-button" href="reqdoc_bpermit.php">
-						<div class="service-item1">
-						  <div class="icon">
-							<i class="fa fa-gear"></i>
-						  </div>
-						  <div class="down-content1">
-							<h4>Instructions</h4>
-						  </div>
-						</div>
-						</a>
-					  </div>
+            </div>
+ 
 					</div>
 				  </div>
 				</div>

@@ -12,7 +12,7 @@
 		$error = array();
 														
 		if(empty($category_name)){
-		$error['category_name'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+		$error['category_name'] = "<span class='label label-danger cattxtbox errormsg'>Category name is required field!</span>";
 														}
         // common image file extensions
 		$allowedExts = array("gif", "jpeg", "jpg", "png");

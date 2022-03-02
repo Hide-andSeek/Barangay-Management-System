@@ -75,8 +75,8 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                              <a class="page-scroll" href="#">Barangay Funds</a>
-                              <a class="page-scroll" href="#">Latest Announcement</a>
+                              <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
+                              <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
                               <a class="page-scroll" href="vaccine.php">Vaccine</a>
                               <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
                             </span>
@@ -129,11 +129,6 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<div>
-										<button class="log_button gmail">
-											<i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div>
 								</div>
 						</div> 	
 					</form>
