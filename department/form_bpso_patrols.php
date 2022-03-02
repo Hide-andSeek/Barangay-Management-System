@@ -74,6 +74,43 @@ require 'db/conn.php';
 			 i.blotter-com{color: #9e0202}
 			 i.indigency{color: #0218bd}
 			 i.permit{color: #e0149c}
+
+
+			 .dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
 	 </style>
    </head>
 	<body>
@@ -140,98 +177,62 @@ require 'db/conn.php';
 			  <div class="w3-container">
 			
 <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align">Patrol Duties</button>
-<div id="Demo1" class="w3-hide w3-animate-zoom">
-  <a href="#" class="w3-button w3-block w3-left-align">Monday</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Tuesday</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Wednesday</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Thursday</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Friday</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Saturday</a>
+
+
+
+<div class="dropdown">
+    <button class="dropbtn">MONDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 1</a>
+    <a href="#about">MR. 2</a>
+    <a href="#contact">MR. 3</a>
   </div>
 </div>
 
-<script>
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
+<div class="dropdown">
+    <button class="dropbtn">TUESDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 4</a>
+    <a href="#about">MR. 5</a>
+    <a href="#contact">MR. 6</a>
+  </div>
+</div>
+
+<div class="dropdown">
+    <button class="dropbtn">WEDNESDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 7</a>
+    <a href="#about">MR. 8</a>
+    <a href="#contact">MR. 9</a>
+  </div>
+</div>
+
+<div class="dropdown">
+    <button class="dropbtn">THURSDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 10</a>
+    <a href="#about">MR. 11</a>
+    <a href="#contact">MR. 12</a>
+  </div>
+</div>
+<div class="dropdown">
+    <button class="dropbtn">FRIDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 13</a>
+    <a href="#about">MR. 14</a>
+    <a href="#contact">MR. 15</a>
+  </div>
+</div>
+<div class="dropdown">
+    <button class="dropbtn">SATURDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 16</a>
+    <a href="#about">MR. 17</a>
+    <a href="#contact">MR. 18</a>
+  </div>
+</div>
 
 
-
-			  <fieldset>
-	<legend>SCHEDULE LIST</legend>
-			<div class="w3-quarter w3padd ">
-				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>MONDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd ">
-				<a href="bpso.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>TUESDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd ">
-				<a href="includes/dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>WEDNESDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd">
-				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>THURSDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-		
-
-			<div class="w3-quarter">
-				<a href="">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>FRIDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter">
-				<a href="includes/vawcdashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>SATURDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-		</fieldset>
 
 
 

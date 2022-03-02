@@ -93,11 +93,11 @@ require 'db/conn.php';
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs2.php">
+			   <a class="side_bar" href="lupon_printdocs2.php">
 				 <i class='fa fa-print'></i>
-				 <span class="links_name">Print Document</span>
+				 <span class="links_name">SWORN STATEMENT</span>
 			   </a>
-			   <span class="tooltip">Print Document</span>
+			   <span class="tooltip">SWORN STATEMENT</span>
 			 </li>
 			   
 
