@@ -55,20 +55,12 @@ require 'db/conn.php';
 	 
 	 
 	 <style>
-
-
-
 .dropbtn {
-  background-color: #3498DB;
+  background-color: #04AA6D;
   color: white;
   padding: 16px;
   font-size: 16px;
   border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
 }
 
 .dropdown {
@@ -81,7 +73,6 @@ require 'db/conn.php';
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -93,33 +84,11 @@ require 'db/conn.php';
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #ddd;}
 
-.show {display: block;}
+.dropdown:hover .dropdown-content {display: block;}
 
-
-
-
-
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
-		.box-report{
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-
-		}
-		
-		 i.menu{color: #fff}
-			 i.id{color: #a809b0}
-			 i.clearance{color: #1cb009}
-			 i.sms{color: #478eff}
-			 i.blotter-com{color: #9e0202}
-			 i.indigency{color: #0218bd}
-			 i.permit{color: #e0149c}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 	 </style>
    </head>
 	<body>
@@ -185,9 +154,11 @@ require 'db/conn.php';
 					</div>
 				  </div>
 			  </section>
+			  <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align"> TAGAPAMAYAPA SCHEDULES</button>
+		
 			  <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">MONDAY</button>
-  <div id="myDropdown" class="dropdown-content">
+    <button class="dropbtn">MONDAY</button>
+    <div class="dropdown-content"> 
     <a href="#home">MR. 1</a>
     <a href="#about">MR. 2</a>
     <a href="#contact">MR. 3</a>
@@ -195,8 +166,8 @@ require 'db/conn.php';
 </div>
 
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">TUESDAY</button>
-  <div id="myDropdown" class="dropdown-content">
+    <button class="dropbtn">TUESDAY</button>
+    <div class="dropdown-content"> 
     <a href="#home">MR. 4</a>
     <a href="#about">MR. 5</a>
     <a href="#contact">MR. 6</a>
@@ -204,50 +175,51 @@ require 'db/conn.php';
 </div>
 
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">WEDNESDAY</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">MR. 4</a>
-    <a href="#about">MR. 5</a>
-    <a href="#contact">MR. 6</a>
+    <button class="dropbtn">WEDNESDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 7</a>
+    <a href="#about">MR. 8</a>
+    <a href="#contact">MR. 9</a>
   </div>
 </div>
 
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">THURSDAY</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">MR. 4</a>
-    <a href="#about">MR. 5</a>
-    <a href="#contact">MR. 6</a>
+    <button class="dropbtn">THURSDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 10</a>
+    <a href="#about">MR. 11</a>
+    <a href="#contact">MR. 12</a>
   </div>
 </div>
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">FRIDAY</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">MR. 4</a>
-    <a href="#about">MR. 5</a>
-    <a href="#contact">MR. 6</a>
+    <button class="dropbtn">FRIDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 13</a>
+    <a href="#about">MR. 14</a>
+    <a href="#contact">MR. 15</a>
   </div>
 </div>
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">SATURDAY</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">MR. 4</a>
-    <a href="#about">MR. 5</a>
-    <a href="#contact">MR. 6</a>
+    <button class="dropbtn">SATURDAY</button>
+    <div class="dropdown-content"> 
+    <a href="#home">MR. 16</a>
+    <a href="#about">MR. 17</a>
+    <a href="#contact">MR. 18</a>
   </div>
 </div>
 
-			  <div>
+			
+			  
+
+			  <div class="reg_table emp_tbl">
 			  <form action="user.php" method="POST">
 				<div class="search_content">
                         <label>Search: 
                             <input type="text" class="r_search" name="keyword">
 							<button type="button" name="search"><i class="bx bx-search"></i></button>
                         </label>
-                </div> 
+             
 			  </form>
-
-			  <div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php

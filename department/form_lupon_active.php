@@ -96,9 +96,9 @@ require 'db/conn.php';
 			 <li>
 			   <a class="side_bar" href="lupon_printdocs.php">
 				 <i class='fa fa-print'></i>
-				 <span class="links_name">Print Document</span>
+				 <span class="links_name">SUMMON LETTER</span>
 			   </a>
-			   <span class="tooltip">Print Document</span>
+			   <span class="tooltip">SUMMON LETTER</span>
 			 </li>
 			   
 
