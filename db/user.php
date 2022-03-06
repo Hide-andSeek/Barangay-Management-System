@@ -1,4 +1,6 @@
 <?php
+DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
+error_reporting(~E_NOTICE);
 // Welcome to Create Account and Login Query
 
 /* 
@@ -26,49 +28,111 @@ Create Account
 
 //1.0 Resident Login Prepared Statement
 
+// if(isset($_POST['logbtn']))
+// {
+
+// 	if(empty($_POST["email"]) || empty($_POST["password"]))
+// 	{
+// 		echo "<script>
+// 				alert('Both Fields are required!');
+// 				window.location.href='index.php';
+// 			</script>";
+// 	}else{
+// 		$residentequery = "SELECT * FROM accreg_resident WHERE email = :email";
+// 		$stmt = $db->prepare($residentequery);
+// 		$stmt->execute(array('email' => $_POST["email"]));
+// 		$count = $stmt->rowCount();
+// 		if($count > 0)
+// 		{
+// 			$result = $stmt->fetchAll();
+// 			foreach($result as $row)
+// 			{
+// 					if(password_verify($_POST["password"], $row["password"]))
+// 					{
+// 						$_SESSION["email"] = $row["email"];
+// 						header("location: resident-defaultpage.php");
+// 					}
+// 					else
+// 					{
+// 					   echo "<script>
+// 					   			alert('Wrong Password!')
+// 								window.location.href='index.php';
+// 							</script>";
+// 					}
+// 			}
+// 		}
+// 		else
+// 		{
+// 			echo "<script>
+// 					alert('Wrong Email. Please try again!!')
+// 					window.location.href='index.php';
+// 				</script>";
+// 		}
+// 	}
+
+// }
+if (isset($_SESSION['email'])!="")
+{
+	header("Location:resident-defaultpage.php");
+	//exit();
+}
+	if($_SERVER['REQUEST_METHOD']=='POST')
+	{
 if(isset($_POST['logbtn']))
 {
+$email=trim($_POST['email']);
+$email=htmlspecialchars($_POST['email']);
+$password=trim($_POST['password']);
+$password=htmlspecialchars($_POST['password']);
 
-	if(empty($_POST["email"]) || empty($_POST["password"]))
+if(empty($_POST["email"]) || empty($_POST["password"]))
 	{
 		echo "<script>
 				alert('Both Fields are required!');
 				window.location.href='index.php';
 			</script>";
-	}else{
-		$residentequery = "SELECT * FROM accreg_resident WHERE email = :email";
-		$stmt = $db->prepare($residentequery);
-		$stmt->execute(array('email' => $_POST["email"]));
-		$count = $stmt->rowCount();
-		if($count > 0)
-		{
-			$result = $stmt->fetchAll();
-			foreach($result as $row)
-			{
-					if(password_verify($_POST["password"], $row["password"]))
-					{
-						$_SESSION["email"] = $row["email"];
-						header("location: resident-defaultpage.php");
-					}
-					else
-					{
-					   echo "<script>
-					   			alert('Wrong Password!')
-								window.location.href='index.php';
-							</script>";
-					}
-			}
-		}
-		else
-		{
-			echo "<script>
-					alert('Wrong Email. Please try again!!')
-					window.location.href='index.php';
-				</script>";
-		}
 	}
 
+
+        $sth=$db->prepare("SELECT * FROM accreg_resident WHERE email=:email");
+        $sth->execute(array(':email'=>htmlspecialchars($_POST['email'])));
+        $row=$sth->fetch(PDO::FETCH_ASSOC);
+        $count=$sth->rowCount();
+        if($count==1)
+                {
+        if (password_verify(htmlspecialchars($_POST['password']) , $row['password']))
+        {
+            $_SESSION['email'] = $row['resident_id'] ;
+                header('location:resident-defaultpage.php');
+        } 
+        else
+        {
+            echo "<script>
+                    alert('Wrong Password!')
+                    window.location.href='index.php';
+                </script>";
+        }
+    	
+$resident_status="online";
+		$stmt =$db->prepare('UPDATE accreg_resident SET
+resident_status=:resident_status WHERE resident_id=:id');
+$stmt->bindParam(':resident_status',$resident_status);
+$stmt->bindParam(':id',$_SESSION['email']);
+$stmt->execute();	
+	$time_loged =date("Y-m-d H:i:s",strtotime("now"));
+	$stmt=$db->prepare('insert into resident_activity(time_loged,resident_id)VALUES(?,?)');
+	$stmt->bindparam(1,$time_loged);
+	$stmt->bindparam(2,$_SESSION['email']);
+	$stmt->execute();
+		}
+		}
+	else
+	{
+		$_SESSION['msg']='something went wrong';
+		}
 }
+
+
 
 //1.1 Request Document Login Prepared Statement
 
@@ -674,13 +738,63 @@ if(isset($_POST['contactusbtn'])){
 
 
 // 2.4 Create Account (Resident) Prepared Statement
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
 if(isset($_POST['regbtn'])){
 	
-	$uname = $_POST['uname'];
+	$fname = $_POST['fname'];
+	$mname = $_POST['mname'];
+	$lname = $_POST['lname'];
+	$birthday = $_POST['birthday'];
+	$gender = $_POST['gender'];
 	$email = $_POST['email'];
+	$contactno = $_POST['contactno'];
+	$address = $_POST['address'];
 	$password = $_POST['password'];
 	$policy = $_POST['policy'];
-	
+	$time_joined =date("Y-m-d H:i:s",strtotime("now"));
+	$date_joined =date("Y-m-d", strtotime("now"));
+
+	$error = array();
+                                                            
+    if(empty($fname)){
+    $error['fname'] = "<span class='label label-danger cattxtbox errormsg'>Firstname is required field!</span>";
+    }
+    if(empty($lname)){
+    $error['lname'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($birthday)){
+    $error['birthday'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($gender)){
+    $error['gender'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($email)){
+    $error['email'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($contactno)){
+    $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($address)){
+    $error['address'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($password)){
+    $error['password'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+	if(empty($policy)){
+    $error['policy'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    }
+
+	if( !empty($fname) &&  
+        !empty($lname) &&
+		!empty($birthday) && 
+		!empty($gender) && 
+		!empty($email) && 
+		!empty($contactno) && 
+		!empty($address) && 
+		!empty($password) &&
+		!empty($policy)){
+
 	$password = password_hash($password, PASSWORD_BCRYPT);
 
 	$sql_create_acc = "SELECT COUNT(email) AS num FROM accreg_resident WHERE email = :email";
@@ -698,21 +812,31 @@ if(isset($_POST['regbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO accreg_resident (uname, email, password, policy) VALUES (:uname, :email, :password, :policy)");
-		$stmt->bindParam(':uname', $uname);
+		$stmt = $db->prepare("INSERT INTO accreg_resident (fname, mname, lname, birthday, gender, email, contactno, address, password, policy, time_joined, date_joined) VALUES (:fname, :mname, :lname,:birthday, :gender, :email, :contactno, :address, :password, :policy, :time_joined, :date_joined)");
+		$stmt->bindParam(':fname', $fname);
+		$stmt->bindParam(':mname', $mname);
+		$stmt->bindParam(':lname', $lname);
+		$stmt->bindParam(':birthday', $birthday);
+		$stmt->bindParam(':gender', $gender);
 		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':contactno', $contactno);
+		$stmt->bindParam(':address', $address);
 		$stmt->bindParam(':password', $password);
 		$stmt->bindParam(':policy', $policy);
+		$stmt->bindParam(':time_joined', $time_joined);
+		$stmt->bindParam(':date_joined', $date_joined);
 		
 	if($stmt->execute()){
 		echo "<script>
-				alert('You are registered');
+				alert('You are now registered!');
 				window.location.href='index.php';
 			 </script>";
 	}else{
 		echo '<script>alert("An error occured")</script>';
 		}	
 	}
+}
+}
 }
 ?>
 

@@ -55,7 +55,7 @@ if(!isset($_SESSION["type"]))
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Admin Complaint Details </title>
+     <title>BCPC: Admin Complaint Details </title>
 	 
 	
 	<!-- Side Navigation Bar-->
@@ -125,7 +125,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Lupon >> View BPSO Details
+						<h5>BCPC DEPARTMENT >> BCPC >> View BCPC Details
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -189,7 +189,7 @@ if(!isset($_SESSION["type"]))
                 <hr>
                 <div style="text-align: center;">
                     <h5>
-                    View: BPSO
+                    View: BCPC Details
                     </h5>
                 </div>
                 <hr>

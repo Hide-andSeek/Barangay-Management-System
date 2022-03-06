@@ -1,14 +1,30 @@
-<?php session_start();
-include "db/conn.php";
-include "db/user.php";
+<?php 
+require('timezone.php');
+require "db/conn.php";
 include('announcement_includes/functions.php'); 
-?>
-<?php
-	$user = '';
 
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
+function start_session()
+{
+	$_SESSION['email']='';
+	session_start();
+if(empty($_SESSION['email']))
+{
+	header("Location:index.php");
+	exit();
 	}
+}
+echo start_session();
+function db_query()
+{
+global $db;
+$stmt=$db->prepare( "SELECT * FROM accreg_resident where resident_id=:uid") ;
+if($stmt->execute(['uid'=>$_SESSION['email']]))
+{
+	$row=$stmt->fetch(PDO::FETCH_ASSOC);
+	$count=$stmt->rowcount();
+	       }
+	}
+	echo db_query();
 ?>
 
 
@@ -30,6 +46,7 @@ include('announcement_includes/functions.php');
     <link rel="stylesheet" href="resident-css/style.css">
     <link rel="stylesheet" href="resident-css/resident.css">
 	
+	
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
 
@@ -46,7 +63,43 @@ include('announcement_includes/functions.php');
 		.body{background: #ebebeb}
 		.navnav{background:#35363A; opacity: 0.9;}
 		.contact_block-text{width:100%}
-    .cntctbtn{margin-bottom: 15px;}
+    	.cntctbtn{margin-bottom: 15px;}
+
+		#viewdetails {
+          border-collapse: collapse;
+          width: 100%;
+		  text-align: center;
+		 
+        }
+
+        #viewdetails td, #viewdetails th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #viewdetails tr:nth-child(even){background-color: #f2f2f2;}
+
+        #viewdetails tr:hover {background-color: #ddd;}
+
+        #viewdetails th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+		  text-align: center;
+          /* background-color: #04AA6D; */
+		  background: white;
+          color: black;
+        }
+        .btnmargin{margin-bottom: 5px;}
+		.find-us{ padding: 40px;}
+		.table-heading{background: #ebebeb; text-align: center; padding: 10px;}
+        .reminder{background: #FCF8F2; padding: 20px;}
+        .reminder-heading{color: #EEA236}
+        .blockqoute-color{border-left-color: #EEA236;}
+		.linkpath:hover{color: orange;}
+		.usersel{pointer-events: none; border: 1px solid orange}
+		.left_userpersonal_info{display: flex;}
+		
 	</style>
 </head>
 
@@ -93,7 +146,7 @@ include('announcement_includes/functions.php');
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_bpermit_new.php">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
@@ -103,11 +156,25 @@ include('announcement_includes/functions.php');
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
-                        <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-                        <span class="logdropdown-content">
-                          <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
-                        </span>
-						</li>
+                        <?php
+                            $id=$_SESSION['email'];
+                            $query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+                            while($roww = $query->fetch())
+                            {
+                            $resident_id = $roww['resident_id'];
+							$resident_status = $roww['resident_status'];
+			                    ?>
+                          <a class="page-scroll logout" href="javascript:void(0)">
+                          	<?php echo $roww['email']?>
+						  </a>
+                          <?php
+                            }
+                          ?>	
+                          <span class="logdropdown-content">
+                              <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+                              <a href="resident_viewprofile.php">View Profile</a>
+                          </span>
+						            </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -118,228 +185,308 @@ include('announcement_includes/functions.php');
     </header>
 
  <section>
-    <div class="contactus_content">
+    <div class="contactus_content contactus_content1">
       <div class="find-us">
-        <div class="container">
+        <div class="container" >
           <div class="row">
-            <div class="col-md-8">
-              <h2>Your Profile</h2>
-              <div id="map" style="margin-top: 30px;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.273526067959!2d121.0861187150456!3d14.69711778974107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ba0d1e186d73%3A0x575e861aa5cfcd55!2sBarangay%20Commonwealth%20Barangay%20Hall!5e0!3m2!1sen!2sph!4v1637581521007!5m2!1sen!2sph" width="100%" height="350" style="border:0;" allowfullscreen=""></iframe>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="left-content">
-                <h2>Barangay Commonwealth</h2>
-                <p>Barangay Commonwealth is located along the Commonwealth Avenue with an estimated population of 213,229 determined by the 2020 census. This represented 7.20% of the total population of Quezon City. A population that is considered to be one of the largest in the Quezon City. </p>
-              </div>
-            </div>
+		  <form method="POST" enctype="multipart/form-data" action="">
+                                                            <hr>
+															    <h4 style="text-align: center;" id="barangayid">Your Personal Information</h4>
+														    <hr>
+															<br>
+															<div class="left_userpersonal_info left_userpersonal_info1">
+															<?php
+																$id=$_SESSION['email'];
+																		$query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+																		while($roww = $query->fetch())
+																		{
+																		$resident_id = $roww['resident_id'];
+																		$fname = $roww['fname'];
+																		$mname = $roww['mname'];
+																		$lname = $roww['lname'];
+																		$address = $roww['address'];
+																		$birthday = $roww['birthday'];
+																		$contactno = $roww['contactno'];
+																		$time_joined = $roww['time_joined'];
+																		$date_joined = $roww['date_joined'];
+																		$gender = $roww['gender'];
+																	?>
+																	
+																	
+                                                           		<div class="form-group selec">
+																	<label for="fname">First name:</label>
+																	<input type="text" class="form-control form-text" value="<?php echo $roww['fname']?>" placeholder="Full name" style="background: #fff;" readonly>
+																</div>
+
+																<div class="form-group selec">
+																	<label for="mname">Middle name:</label>
+																	<input type="text" class="form-control form-text" value="<?php echo $roww['mname']?>" placeholder="Middle name" style="background: #fff;" readonly>
+																</div>
+
+																<div class="form-group selec">
+																	<label for="lname">Last name:</label>
+																	<input type="text" class="form-control form-text" value="<?php echo $roww['lname']?>" placeholder="Full name" style="background: #fff;" readonly>
+																</div>
+																
+																 <div class="form-group selec">
+																	<label for="address">Address:</label>
+																	<input type="text" class="form-control form-text" placeholder="Address" value="<?php echo $roww['address']?>" style="background: #fff;" readonly>
+																</div>
+												
+																
+															</div>	
+															<div class="left_userpersonal_info left_userpersonal_info1">
+																
+																<div class="form-group selec">
+																	<label for="birthday">Birthday: </label>
+																	<input type="text" class="form-control form-text" value="<?php echo $roww['birthday']?>" style="background: #fff;" placeholder="Birthday" readonly>
+																</div></br>
+
+																<div class="form-group selec">
+																	<label for="contactno">Contact No.: </label>
+																	<input type="text" class="form-control number form-text" name="contactnum" value="<?php echo $roww['contactno']?>" placeholder="Contact Number" style="background: #fff;" readonly>
+																</div>
+                                                            	<div class="form-group selec">
+																	<label>Email Address: </label>
+																	<input type="text" class="form-control form-text" placeholder="Email Address" value="<?php echo $roww['email']?>" style="background: #fff;" readonly>
+																</div>
+
+																<div class="form-group selec">
+																	<label>Date Joined: </label>
+																	<input type="text" class="form-control form-text" placeholder="Date Joined" value="<?php echo $roww['date_joined']?> | <?php echo $roww['time_joined']?>" style="background: #fff;" readonly>
+																</div>
+																<?php
+																	}
+																?>	
+															</div>
+															
+													<br>
+													<br>
+													
+												</div>
+											</div>
+							</form>
           </div>
         </div>
       </div>
     </div>
-    <div class="contactus_content">
+    <div class="contactus_content"  style="border-radius: 20px;">
       <div class="find-us">
         <div class="container">
           <div class="row">
-           
-<div id="content" class="container col-md-12">
-	<?php 
-		// create object of functions class
-		$function = new functions;
-		
-		// create array variable to store data from database
-		$data = array();
-		
-		if(isset($_GET['keyword'])){	
-			// check value of keyword variable
-			$keyword = $function->sanitize($_GET['keyword']);
-			$bind_keyword = "%".$keyword."%";
-		}else{
-			$keyword = "";
-			$bind_keyword = $keyword;
-		}
-			
-		if(empty($keyword)){
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Pending'
-					ORDER BY barangay_id ASC";
-		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC";
-		}
-		
-		
-		$stmt = $connect->stmt_init();
-		if($stmt->prepare($sql_query)) {	
-			// Bind your variables to replace the ?s
-			if(!empty($keyword)){
-				$stmt->bind_param('s', $bind_keyword);
-			}
-			// Execute query
-			$stmt->execute();
-			// store result 
-			$stmt->store_result();
-			$stmt->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
-					);
-			// get total records
-			$total_records = $stmt->num_rows;
-		}
-			
-		// check page parameter
-		if(isset($_GET['page'])){
-			$page = $_GET['page'];
-		}else{
-			$page = 1;
-		}
-						
-		// number of data that will be display per page		
-		$offset = 50;
-						
-		//lets calculate the LIMIT for SQL, and save it $from
-		if ($page){
-			$from 	= ($page * $offset) - $offset;
-		}else{
-			//if nothing was given in page request, lets load the first page
-			$from = 0;	
-		}	
-		
-		if(empty($keyword)){
-			$sql_query = "SELECT  barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid WHERE status = 'Pending'
-					ORDER BY barangay_id ASC LIMIT ?, ?";
-		}else{
-			$sql_query = "SELECT barangay_id, fname, mname, lname, address, birthday,placeofbirth, contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, status, id_image
-					FROM barangayid 
-					WHERE fname LIKE ? 
-					ORDER BY barangay_id ASC LIMIT ?, ?";
-		}
-		
-		$stmt_paging = $connect->stmt_init();
-		if($stmt_paging ->prepare($sql_query)) {
-			// Bind your variables to replace the ?s
-			if(empty($keyword)){
-				$stmt_paging ->bind_param('ss', $from, $offset);
-			}else{
-				$stmt_paging ->bind_param('sss', $bind_keyword, $from, $offset);
-			}
-			// Execute query
-			$stmt_paging ->execute();
-			// store result 
-			$stmt_paging ->store_result();
-			$stmt_paging->bind_result($data['barangay_id'], 
-					$data['fname'],
-					$data['mname'],
-					$data['lname'],
-					$data['address'],
-					$data['birthday'],
-					$data['placeofbirth'],
-					$data['contact_no'],
-					$data['emailadd'],
-					$data['guardianname'],
-					$data['emrgncycontact'],
-					$data['reladdress'],
-					$data['dateissue'],
-					$data['status'],
-					$data['id_image']
-					);
-			// for paging purpose
-			$total_records_paging = $total_records; 
-		}
-
-		// if no data on database show "No Reservation is Available"
-		if($total_records_paging == 0){
-			echo "
-			<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
-			<div class='alert alert-warning cattxtbox'>
-				<h6> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-				<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
-					<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
-				</div>
-			</div>
-			<div style='text-align: center; margin-top: 5%'>
-				<a href='barangayidapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
-				<a href='barangayiddeny.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
-			</div>
-			";
-	?>
-
-	<?php 
-		// otherwise, show data
-		}else{
-			$row_number = $from + 1;
-	?>
-		<div style="text-align: center;">
+		  <div style="text-align: center;">
 			<hr>
-			<h3>Transaction History: Things you made char!</h3>
+			<h4>Transaction History: Things you've made</h3>
 			<hr /> 
 		</div>
 
 							
 					<div class="col-md-12">
-							<table class="content-table">
+							<br>
+							<h5 class="table-heading">Barangay ID</h5>
+								<table id="viewdetails" class="content-table">
+
+								<?php
+									$id=$_SESSION['email'];
+									$query = $db->query("SELECT * FROM accreg_resident inner join barangayid on accreg_resident.resident_id=barangayid.resident_id where accreg_resident.resident_id='$id'");
+								?>
+								
 								<thead>
 									<tr class="t_head">
-										<th width="5%">BarangayID No</th>
-										<th width="5%">First name</th>
-										<th width="5%">Middle name</th>
-										<th width="5%">Last Name</th>
-										<th width="5">Contact No.</th>
+										<th width="5%">Full Name</th>
+										<th width="5%">Document Type</th>
+										<th width="5%">Birthday</th>
 										<th width="5%">Address</th>
-										<th width="5%">Date of Request</th>
-										<!-- <th width="5%">Identification Card</th> -->
-					
+										<th width="5%">Contact no</th>
+										<th width="5%">Email Address</th>
+										<th width="5%">File Choice</th>
+										<th width="5%">Date Requested</th>
 									</tr>
 								</thead>
-							<?php 
-								while ($stmt_paging->fetch()){ ?>
+								<?php
+									while($roww = $query->fetch())
+									{
+									$resident_id = $roww['resident_id'];
+									$resident_status = $roww['resident_status'];
+									$birthday = $roww['birthday'];
+									$address = $roww['address'];
+									$doc_type = $roww['doc_type'];
+									$dateissue = $roww['dateissue'];
+									$fname = $roww['fname'];
+									$mname = $roww['mname'];
+									$lname = $roww['lname'];
+									$brgyidfilechoice = $roww['brgyidfilechoice'];
+								?>
 								<tbody>
 								<tr class="table-row">
-									<td><?php echo $data ['barangay_id']; ?></td>
-									<td><?php echo $data ['fname']; ?></td>
-									<td><?php echo $data ['mname']; ?></td>
-									<td><?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['contact_no']?></td>
-									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
-		
+									<td><?php echo $roww['fname']; ?> <?php echo $roww['mname']; ?> <?php echo $roww['lname']; ?></td>
+									<!-- <td><?php echo 'You last login was &nbsp;'.date("d/m/y H:i:sA",strtotime($roww['time_loged'])); ?></td> -->
+									<td><?php echo $roww['doc_type']; ?></td>
+									<td><?php echo $roww['birthday']; ?></td>
+									<td><?php echo $roww['address']; ?></td>
+									<td><?php echo $roww['contact_no']; ?></td>
+									<td><?php echo $roww['emailadd']; ?></td>
+									<td><?php echo $roww['brgyidfilechoice']; ?></td>
+									<td><?php echo $roww['dateissue']; ?></td>
 									
-								
 								</tr>	
 								</tbody>
-								<?php 
-								} 
-							}
-						?>
+								<?php
+								}
+								?>	
 							</table>
-					</div>
-							<div class="col-md-12 pagination">
+							<br>
+							<h5 class="table-heading">Business Permit</h5>
+							<table id="viewdetails" class="content-table">
+
+								<?php
+									$id=$_SESSION['email'];
+									$query = $db->query("SELECT * FROM accreg_resident inner join businesspermit on accreg_resident.resident_id=businesspermit.resident_id  where accreg_resident.resident_id='$id'");
+								?>
 								
-								<!-- <div class="transact">
-									<label style="font-size: 14px;">Transaction History: </label>
-									<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
-								</div> -->
-							</div>
-							
-	</div>
-							<div class="separator"></div>
-</div>     
+								<thead>
+									<tr class="t_head">
+										<th width="5%">Full Name</th>
+										<th width="5%">Document Type</th>
+										<th width="5%">Selection</th>
+										<th width="5%">Business Name</th>
+										<th width="5%">Plate no</th>
+										<th width="5%">File Choice</th>
+										<th width="5%">Email Address</th>
+										<th width="5%">Date Requested</th>
+									</tr>
+								</thead>
+								<?php
+									while($roww = $query->fetch())
+									{
+									$resident_id = $roww['resident_id'];
+									$fullname = $roww['fullname'];
+									$businessname = $roww['businessname'];
+									$businessaddress = $roww['businessaddress'];
+									$bpermit_doctype = $roww['bpermit_doctype'];
+									$plateno = $roww['plateno'];
+									$permitfilechoice = $roww['permitfilechoice'];
+									$email_add = $roww['email_add'];
+									$dateissued = $roww['dateissued'];
+									$status = $roww['status'];
+									$selection = $roww['selection'];
+								?>
+								<tbody>
+								<tr class="table-row">
+									<td><?php echo $roww['fullname']; ?></td>
+									<td><?php echo $roww['bpermit_doctype']; ?></td>
+									<td><?php echo $roww['selection']; ?></td>
+									<td><?php echo $roww['businessname']; ?></td>
+									<td><?php echo $roww['plateno']; ?></td>
+									<td><?php echo $roww['permitfilechoice']; ?></td>
+									<td><?php echo $roww['email_add']; ?></td>
+									<td><?php echo $roww['dateissued']; ?></td>
+								</tr>
+								</tbody>
+								<?php
+								}
+								?>	
+							</table>
+							<br>
+							<h5 class="table-heading">Certificate of Indigency</h5>
+							<table id="viewdetails" class="content-table">
+
+								<?php
+									$id=$_SESSION['email'];
+									$query = $db->query("SELECT * FROM accreg_resident inner join certificateindigency on accreg_resident.resident_id=certificateindigency.resident_id  where accreg_resident.resident_id='$id'");
+								?>
+								
+								<thead>
+									<tr class="t_head">
+										<th width="5%">Full Name</th>
+										<th width="5%">Document Type</th>
+										<th width="5%">Purpose</th>
+										<th width="5%">Contact no</th>
+										<th width="5%">Email Address</th>
+										<th width="5%">File Choice</th>
+										<th width="5%">Date Requested</th>
+									</tr>
+								</thead>
+								<?php
+									while($roww = $query->fetch())
+									{
+									$resident_id = $roww['resident_id'];
+									$fullname = $roww['fullname'];
+									$doc_type = $roww['doc_type'];
+									$purpose = $roww['purpose'];
+									$contactnum = $roww['contactnum'];
+									$emailaddress = $roww['emailaddress'];
+									$date_issue = $roww['date_issue'];
+									$indigencyfilechoice = $roww['indigencyfilechoice'];
+								?>
+								<tbody>
+								<tr class="table-row">
+									<td><?php echo $roww['fullname']; ?></td>
+									<td><?php echo $roww['doc_type']; ?></td>
+									<td><?php echo $roww['purpose']; ?></td>
+									<td><?php echo $roww['contactnum']; ?></td>
+									<td><?php echo $roww['emailaddress']; ?></td>
+									<td><?php echo $roww['indigencyfilechoice']; ?></td>
+									<td><?php echo $roww['date_issue']; ?></td>
+								</tr>
+								</tbody>
+								<?php
+								}
+								?>	
+							</table>
+							<br>
+							<h5 class="table-heading">Barangay Clearance</h5>
+							<table id="viewdetails" class="content-table">
+
+								<?php
+									$id=$_SESSION['email'];
+									$query = $db->query("SELECT * FROM accreg_resident inner join barangayclearance on accreg_resident.resident_id=barangayclearance.resident_id  where accreg_resident.resident_id='$id'");
+								?>
+								
+								<thead>
+									<tr class="t_head">
+										<th width="5%">Full Name</th>
+										<th width="5%">Document Type</th>
+										<th width="5%">Age</th>
+										<th width="5%">Status</th>
+										<th width="5%">Nationality</th>
+										<th width="5%">Email Address</th>
+										<th width="5%">File Choice</th>
+										<th width="5%">Date Requested</th>
+									</tr>
+								</thead>
+								<?php
+									while($roww = $query->fetch())
+									{
+									$resident_id = $roww['resident_id'];
+									$full_name = $roww['full_name'];
+									$document_type = $roww['document_type'];
+									$age = $roww['age'];
+									$status = $roww['status'];
+									$nationality = $roww['nationality'];
+									$purpose = $roww['purpose'];
+									$date_issued = $roww['date_issued'];
+									$filechoice = $roww['filechoice'];
+									$emailadd = $roww['emailadd'];
+								?>
+								<tbody>
+								<tr class="table-row">
+									<td><?php echo $roww['full_name']; ?></td>
+									<td><?php echo $roww['document_type']; ?></td>
+									<td><?php echo $roww['age']; ?></td>
+									<td><?php echo $roww['status']; ?></td>
+									<td><?php echo $roww['nationality']; ?></td>
+									<td><?php echo $roww['emailadd']; ?></td>
+									<td><?php echo $roww['filechoice']; ?></td>
+									<td><?php echo $roww['date_issued']; ?></td>
+								</tr>
+								</tbody>
+								<?php
+								}
+								?>	
+							</table>
+					</div>		
+
           </div>
         </div>
       </div>
@@ -356,7 +503,8 @@ include('announcement_includes/functions.php');
 					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+                    <br>
 					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">

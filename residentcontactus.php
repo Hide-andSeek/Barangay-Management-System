@@ -1,15 +1,31 @@
-<?php session_start();
-include "db/conn.php";
-include "db/user.php";
+<?php 
+require('timezone.php');
+require "db/conn.php";
 
-?>
-<?php
-	$user = '';
-
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
+function start_session()
+{
+	$_SESSION['email']='';
+	session_start();
+if(empty($_SESSION['email']))
+{
+	header("Location:index.php");
+	exit();
 	}
+}
+echo start_session();
+function db_query()
+{
+global $db;
+$stmt=$db->prepare( "SELECT * FROM accreg_resident where resident_id=:uid") ;
+if($stmt->execute(['uid'=>$_SESSION['email']]))
+{
+	$row=$stmt->fetch(PDO::FETCH_ASSOC);
+	$count=$stmt->rowcount();
+	       }
+	}
+	echo db_query();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -93,7 +109,7 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_bpermit_new.php">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
@@ -103,12 +119,24 @@ include "db/user.php";
                             <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                         </li>
                         <li class="logdropdown">
-                        <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-                        <span class="logdropdown-content">
-                          <a class="page-scroll" href="resident_logout.php"> <i class="bx bx-log-out"></i>Logout</a>
-                          <a href="resident_viewprofile.php">View Profile</a>
-                        </span>
-						</li>
+                        <?php
+                            $id=$_SESSION['email'];
+                            $query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+                            while($roww = $query->fetch())
+                            {
+                            $resident_id = $roww['resident_id'];
+			                    ?>
+                          <a class="page-scroll logout" href="javascript:void(0)">
+                          
+                          <?php echo $roww['email']?></a>
+                          <?php
+                            }
+                          ?>	
+                          <span class="logdropdown-content">
+                              <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+                              <a href="resident_viewprofile.php">View Profile</a>
+                          </span>
+						            </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -139,13 +167,13 @@ include "db/user.php";
     </div>
   </div>
 
-  <!-- Contact Official Section-->
-  <section id="contact_officials">
+ <!-- Contact Official Section-->
+ <section id="contact_officials">
     <div class="container-fluid wrapper">
     <div class="w3-bar w3-black">
-      <button class="form-control cntctbtn" onclick="openContact('Contact1')">Contact1</button>
-      <button class="form-control cntctbtn" onclick="openContact('Contact2')">Contact2</button>
-      <button class="form-control cntctbtn" onclick="openContact('Contact3')">Contact3</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact1')" style="border: none; font-size: 19px;">In case of emergency hotlines</button>
+      <!-- <button class="form-control cntctbtn" onclick="openContact('Contact2')">Contact2</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact3')">Contact3</button> -->
     </div>
         <div id="myCarousel-three" class="carousel-testimonials slide" >
             <!-- Wrapper for Slides -->
@@ -156,29 +184,42 @@ include "db/user.php";
                         <div class="col-md-6 col-sm-6 " >
                             <div class="block-text contact_block-text">
                                 <span>
-                                  <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
+                                  <h5><i class="fa fa-location-arrow fa_icon"></i> Emergency 911</h5>
                                 </span>
                                 <span>
-                                  <h5 class="contact_officials_text">                                
-                                  <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-                                  </h5>
+                                  <h4 class="contact_officials_text">                                
+                                  <i class="fa fa-mobile-phone fa_icon"></i>(02) 925-9111/ +63966-5000-299 [Globe]
+                                  </h4>
                                 </span>
-                                <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                                <p class="contact_officials_author"><strong>NCR Region</strong></p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="block-text contact_block-text">
                               <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> Bureau of Fire Protection</h5>
                               </span>
                               <span>
                                 <h5 class="contact_officials_text">                                  
-                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                <i class="fa fa-mobile-phone fa_icon"></i> (02) 426-0219 / (02) 426-3812 / (02)426-0246
                                 </h5>
                               </span>
-                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                              <p class="contact_officials_author"><strong>NCR Region</strong></p>
                           </div>
-                        </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> Philippine National Police</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> (02) 722-0650/ +63917-847-5757
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>NCR Region</strong></p>
+                          </div>
+                          </div>
                         </div>
                     </div>
 
@@ -296,12 +337,13 @@ include "db/user.php";
     </div>
 </section>
 
-<div class="send-message" >
+ <div class="send-message">
         <div class="container">
           <div class="row" style="background: #ebebeb; padding: 20px 20px 20px 20px;">
             <div class="col-md-12">
               <div class="section-heading">
                 <h2>Contact Us</h2>
+                
               </div>
             </div>
             <div class="col-md-8">
@@ -310,12 +352,12 @@ include "db/user.php";
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <fieldset>
-                        <input name="username" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                        <input name="username" type="text" class="form-control" id="name" placeholder="Name" required="">
                       </fieldset>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <fieldset>
-                        <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                        <input name="email" type="text" class="form-control" id="email" placeholder="Your email" required="">
                       </fieldset>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -330,7 +372,7 @@ include "db/user.php";
                     </div>
                     <div class="col-lg-12">
                       <fieldset>
-                        <button type="submit" id="form-submit" name="contactusbtn" class="filled-button">Send Message</button>
+                        <button type="submit" id="form-submit" name="contactusbtn" class="filled-button form-control">Send Message</button>
                       </fieldset>
                     </div>
                   </div>
@@ -358,8 +400,9 @@ include "db/user.php";
 					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
-					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
+                <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+                <br>
+                <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">
 					<a>Terms of Service</a> | 

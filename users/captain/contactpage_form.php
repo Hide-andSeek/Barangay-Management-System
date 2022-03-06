@@ -33,7 +33,7 @@ require 'db/conn.php';
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/captain.css">
-	
+	<link rel="stylesheet" href="announcement_css/custom.css">
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
 	
@@ -287,7 +287,6 @@ require 'db/conn.php';
 					</fieldset>
 					</div>
 				</form>
-				
 			</section>
 			<script src="resident-js/barangay.js"></script>
 			<script language="javascript" type="text/javascript">

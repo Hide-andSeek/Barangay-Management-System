@@ -348,6 +348,10 @@ if(!isset($_SESSION["type"]))
 			<div style='display: flex; justify-content: center; align-items: center; margin-left: 90px; margin-top: 25px;'>
 				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
 			</div>
+			<div style='text-align: center; margin-top: 5%'>
+			<a href='indigencyapproval.php' class='viewbtn1' style='float: left;width: 40%; margin-left: 60px;' title='Visit?'><< Wanna visit <strong> approval page?</strong></a>
+			<a href='indigencydenied.php' class='viewbtn1' style='float: right; width: 40%; margin-right: 60px;' title='Visit?'>Wanna visit <strong> denied request page? >></strong></a>
+		</div>
 		</div>";
 	?>
 

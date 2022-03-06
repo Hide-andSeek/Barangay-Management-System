@@ -183,7 +183,7 @@ if(!isset($_SESSION["type"]))
         }
         .viewbtn{width: 100%; height: 35px;  background-color: #91D9F1; color: black; border: 1px solid #008CBA;}
         .viewbtn:hover{ background-color: #008CBA;color: white;}
-        .usersel{pointer-events: none; border: 1px solid orange}
+
 	 </style>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
@@ -408,19 +408,19 @@ if(!isset($_SESSION["type"]))
                 <div id="option_menu">
                       <div class="information col">
                         <label class="employee-label"> Approved By </label>
-                          <input class="form-control btnmargin inputtext control-label usersel" id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+                          <input class="form-control btnmargin inputtext control-label " id="approvedby" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" readonly> 
                       </div>
 
                       <div class="information col">
                         <label class="employee-label ">Approval Date </label>
-                          <input type="date" class="form-control btnmargin inputtext control-label usersel" id="approvedate" name="app_date">
+                          <input type="date" class="form-control btnmargin inputtext control-label " id="approvedate" name="app_date" readonly>
                       </div>
                      
-                      <div class="information col">
+                      <!-- <div class="information col">
                       <label class="employee-label ">Attach 2x2 Pic</label>
                           <input type='file' class="form-control" name='indigencyid_image' id="indigencyid_image"/>
                           <?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : '';?>
-                      </div>
+                      </div> -->
                         <input type="hidden" name="status" id="status" value="Approved">
                         <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertindigency">Approve</button></a>
                   </form>

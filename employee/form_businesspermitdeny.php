@@ -427,10 +427,10 @@ if(!isset($_SESSION["type"]))
 										<th width="10%">Contact no</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Business name</th>
-										<th width="5%">Email</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Certificate Status</th>
-										<th width="5%">View Details</th>
+										<th width="5%"></th>
+										
 									</tr>
 								</thead>
 							<?php 
@@ -443,12 +443,13 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
 									<td><?php echo $data ['businessname']; ?></td>
-									<td><?php echo $data ['email_add']; ?></td>
 									
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
-									<td><button class="view_approvebtn" onclick="location.href='bpermitdeniedviewdet.php?id=<?php echo $data['businesspermit_id'];?>'">View Details</button></td>
+									<td>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="bpermit_deniedsendmess.php?id=<?php echo $data['businesspermit_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Message</a>
+									</td>
 								</tr>	
 								</tbody>
 								<?php 

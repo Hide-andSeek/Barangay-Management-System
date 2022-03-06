@@ -1,22 +1,37 @@
-<?php session_start();
-if(!isset($_SESSION['email'])){
-	header("location: resident-defaultpage.php");
-}
-?>
-<?php
-	$user = '';
+<?php 
+require('timezone.php');
+require "db/conn.php";
+include "db/reqdocument.php";
+include "db/documents.php";
+include "db/user.php";
 
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
+
+function start_session()
+{
+	$_SESSION['email']='';
+	session_start();
+if(empty($_SESSION['email']))
+{
+	header("Location:index.php");
+	exit();
 	}
+}
+echo start_session();
+function db_query()
+{
+global $db;
+$stmt=$db->prepare( "SELECT * FROM accreg_resident where resident_id=:uid") ;
+if($stmt->execute(['uid'=>$_SESSION['email']]))
+{
+	$row=$stmt->fetch(PDO::FETCH_ASSOC);
+	$count=$stmt->rowcount();
+	       }
+	}
+	echo db_query();
 ?>
 
 <?php 
 
-include "db/conn.php";
-include "db/reqdocument.php";
-include "db/documents.php";
-include "db/user.php";
 
 $f = "resources/blotter_visit.php";
 if(!file_exists($f)){
@@ -315,7 +330,7 @@ if(!file_exists($f)){
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
 							  <a class="page-scroll" href="reqdoc_barangayid.php" onclick="dstry()">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php" onclick="dstry()">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_bpermit_new.php" onclick="dstry()">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php" onclick="dstry()">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php" onclick="dstry()">Barangay Clearance</a>
                             </span>
@@ -323,12 +338,24 @@ if(!file_exists($f)){
                         <li>
                             <a class="page-scroll" href="residentcontactus.php" onclick="dstry()">Contact Us</a>
                         </li>
-                        <li class="logdropdown">
-							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-							<span class="logdropdown-content">
-								<a class="page-scroll" href="resident_logout.php" onclick="dstry()"><i class="bx bx-log-out"></i> Logout</a>
-								<a href="resident_viewprofile.php">View Profile</a>
-							</span>
+						<li class="logdropdown">
+                        <?php
+                            $id=$_SESSION['email'];
+                            $query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+                            while($roww = $query->fetch())
+                            {
+                            $resident_id = $roww['resident_id'];
+			                    ?>
+                          <a class="page-scroll logout" href="javascript:void(0)">
+                          
+                          <?php echo $roww['email']?></a>
+                          <?php
+                            }
+                          ?>	
+                          <span class="logdropdown-content">
+                              <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+                              <a href="resident_viewprofile.php">View Profile</a>
+                          </span>
 						</li>
                     </ul>
                 </div>
@@ -371,20 +398,20 @@ if(!file_exists($f)){
 			<?php echo isset($error['complaints']) ? $error['complaints'] : '';?>
 		</div>
         <blockquote class="blockqoute-color">
-            <p class="reminder"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
+            <p class="reminder" style="text-align: justify;"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
         </blockquote>
     <fieldset class="left_userpersonal_info">
 																<div>
 																	<label>Tagalog Translation - Sundin ang mga sumusunod, sa pag proseso ng dokumento</label>
-																	<ol style="padding: 15px 15px 15px 15px">
+																	<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
 																		<li>Siguraduhin na ang iyong impormasyon ay tugma. Huwag magsumite ng mga expired na ID.</li>
 																		<li>Kuhanan ng litrato ang harap at likod ng iyong ID. Siguraduhin na ang iyong Scanned Photo ay malinaw at nababasa. </li>
 																		<!-- <li>Lagyan ng pangalan ang iyong file. Halimbawa <strong style="color: black">DICARPIOLEONARDO - BarangayID.docx </strong></li> -->
-																		<li>I-save ang iyong file sa <strong style="color: black">docx </strong> format.</li>
+																		<li>I-save ang iyong file sa <strong style="color: black">pdf </strong> format.</li>
 																		<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 																	</ol>
 																	<label>Listahan ng mga ipapasang dokumento <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
-																		<ol style="padding: 15px 15px 15px 15px">
+																		<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
 																		<li>Valid ID (Likod at harap ng iyong ID)- Ito ay magsisilbing kumpirmasyon ng iyong pagkakakilanlan</li>
 																		<li>Larawan: 2x2 ID Picture (Nakunan sa loob ng nakalipas na taon) </li>
 																	</ol>
@@ -395,15 +422,15 @@ if(!file_exists($f)){
                                                                     
 																	<div>
 																	<label>English Translation - Please follow the process of document</label>
-																	<ol style="padding: 15px 15px 15px 15px">
+																	<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
 																		<li>Make sure your information is accurate and precise. Do not submit expired IDs.</em></strong></li>
 																		<li>Take a photo of your ID (Front and Back). Please make sure your Scanned Photo is clear and easy to read.</li>
 																		<!-- <li>Put your name inline with your file. Example <strong style="color: black">DICARPIOLEONARDO - BarangayID.docx </strong>  </li> -->
-																		<li>Save your file in <strong style="color: black">docx</strong> format.</li>
+																		<li>Save your file in <strong style="color: black">pdf</strong> format.</li>
 																		<li>Please wait for the announcement of Barangay. For more inquiry visit our webpage. <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 																	</ol>
 																	<label>List of documents to be submitted  <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
-																		<ol style="padding: 15px 15px 15px 15px">
+																		<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
 																		<li>Valid ID (Front and Back Portion of your ID)- This will serve as confirmation of your Identity</li>
 																		<li>Photo: 2x2 ID Picture (Taken within the a year ago) </li>
 																	</ol>
@@ -473,10 +500,10 @@ if(!file_exists($f)){
 																	<label for="file">Attach Files Here: <i class="red">*</i></label>
 																	<input type='file' class="form-control form-text" name='blotterid_image' aria-details="blotterid_image"/>
 
-																	<i aria-details="blotterid_image" class="detailid"><label> please attach the right format (.pdf)	<?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?></label></i>
+																	<i aria-details="blotterid_image" class="detailid"><label> please attach VALID ID and your documents in the right format (.pdf) <?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?></label></i>
 																</div>
 															</div>
-															<br>
+															<br> 		
 															
 															<hr>
                                                         <h5 style="text-align: center;">Other Information</h5>
@@ -484,8 +511,10 @@ if(!file_exists($f)){
 													<div class="left_userpersonal_info left_userpersonal_info1">
                                                     <div class="form-group selec">
 															<label for="n_violator">Name of Violator: <i class="red">*</i></label>
-															<input type="text" class="form-control form-text auto-save" id="n_violator" name="n_violator" placeholder=" Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
-															<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?>
+															<input type="text" class="form-control form-text auto-save" id="n_violator" name="n_violator" placeholder=" Ex. Juan, Jose and Jack" title="You can specify multiple names here" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;			this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" aria-details="inci_address">
+															
+															
+															<i aria-details="inci_address" class="detailid"><label>If you don't know the violator, you can specify 'unknown'<?php echo isset($error['n_violator']) ? $error['n_violator'] : '';?></label></i>
 														</div>
 
 														<div class="form-group selec">
@@ -573,6 +602,7 @@ if(!file_exists($f)){
                 </p>
 				<p class="footer-text">
                     <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<br>
 					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">
@@ -595,8 +625,23 @@ if(!file_exists($f)){
       <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
 
-  <script src="resident-js/barangay.js"></script>
-  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+    <!-- jQuery -->
+    <script src="resident-js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="resident-js/bootstrap.min.js"></script>
+    <!-- Color Settings script -->
+    <script src="resident-js/settings-script.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="resident-js/jquery.easing.min.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="resident-js/jqBootstrapValidation.js"></script>
+    <!-- SmoothScroll script -->
+    <script src="resident-js/smoothscroll.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="resident-js/barangay.js"></script>
+    <!-- Isotope -->
+    <script src="resident-js/jquery.isotope.min.js"></script>
+    <script src="https://use.fontawesome.com/f7721642f4.js"></script>
   <script>
 	document.querySelector("#date_issued").valueAsDate = new Date();
 	document.querySelector("#date_issue").valueAsDate = new Date();

@@ -99,8 +99,9 @@ if(!isset($_SESSION["type"]))
 
         /* The Modal (background) */
         .modal {
-        display: absolute; /* Hidden by default */
-        z-index: 1; /* Sit on top */
+        display: none; 
+		position: absolute; 
+        z-index: 9999;
         padding-top: 50px; /* Location of the box */
         left: 0;
         top: 0;
@@ -559,7 +560,7 @@ if(!isset($_SESSION["type"]))
                    
                     <div class="information col">
 						<label class="employee-label"> Department </label>
-							<select class="form-control inputtext control-label" style="padding: 5px;"  id="dept" name="dept">
+							<select class="form-control inputtext control-label" style="padding: 5px;"  id="dept" name="dept" >
 							    <option disabled>--Select--</option>
 								<option value="BCPC">BCPC</option>
 								<option value="VAWC">VAWC</option>
@@ -571,17 +572,17 @@ if(!isset($_SESSION["type"]))
 																
 					<div class="information col">
 						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control inputtext control-label usersel" id="app_date"  style="padding: 5px;" name="app_date">
+							<input type="date" class="form-control inputtext control-label usersel" id="app_date"  style="padding: 5px;" name="app_date" readonly>
 					</div>
 
 			        <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control inputtext control-label usersel"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
+							<input class="form-control inputtext control-label usersel"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" readonly> 
 					</div>
                     <div class="information col">
 						<label class="employee-label ">Attach File </label>
 							<input type="file" class="form-control inputtext control-label" id="blotterid_image"  style="padding: 5px;" name="blotterid_image">
-                            <?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?>
+                            <div style="color: red; text-align: center;"><strong><?php echo isset($error['blotterid_image']) ? $error['blotterid_image'] : '';?></strong></div>
 					</div>
                     <br>
                     <div id="option_menu">
