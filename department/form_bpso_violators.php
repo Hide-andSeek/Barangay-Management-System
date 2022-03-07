@@ -136,23 +136,7 @@ require 'db/conn.php';
 					</div>
 				  </div>
 			  </section>
-			  <?php require_once 'bpso_process.php'; ?>
-			<div class="row justify-content-center">
-				<form action="bpso_process.php" method="POST">
-					<div class ="form-group">
-						<label>Name</label>
-						<Input type="text" name="name" class="form-control" value="Enter Your Name">	
-					</div>
-					<div class ="form-group">
-						<label>Location</label>
-						<Input type="text" name="location" class="form-control" value="Enter Your Location">	
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary" name="save">Save</button>
-					</div>
-				</form>
-			</div>
- 
+			 
 
 
 

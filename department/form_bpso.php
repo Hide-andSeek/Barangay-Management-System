@@ -224,6 +224,54 @@ require 'db/conn.php';
 		</div>
 	</div>
 
+
+	<div class="reg_table emp_tbl">
+						<table class="content-table">
+						
+						<?php
+						include "db/conn.php";
+	                    include "db/user.php";
+							
+						$mquery = "SELECT * FROM bpso";
+						$countemployee = $db->query($mquery)
+						?>
+
+							<thead>
+								<tr class="t_head">
+									<th>Case No.</th>
+									<th>Complainant</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
+									<th>Contact No.</th>
+									<th>Complaints:</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['CaseNo']; ?></td>
+									<td><?php echo $data ['Complainant']; ?></td>
+									<td><?php echo $data ['Accused']; ?></td>
+									<td><?php echo $data ['Address']; ?></td>
+									<td><?php echo $data ['TimeAndDate']; ?></td>
+									<td><?php echo $data ['Contact']; ?></td>
+									<td><?php echo $data ['Complaints']; ?></td>
+									<td>Active</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="fa fa-check-circle"></i>Done</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="fa fa-ban"></i>Deny</button>
+									</td>	
+								</tr>
+							
+							<?php
+							}
+							?>
+						</table>
 			
 			</section>
 	</body>
