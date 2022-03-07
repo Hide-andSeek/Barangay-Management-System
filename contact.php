@@ -39,6 +39,7 @@ include "db/user.php";
 		.container{padding: 50px 50px 50px 50px;}
     .contact_block-text{width:100%}
     .cntctbtn{margin-bottom: 15px;}
+    .send-message {margin-top: 15px; margin-bottom: 20px; margin-bottom: 20px;}
 	</style>
 </head>
 
@@ -177,8 +178,9 @@ include "db/user.php";
         </div>
         <div class="col-md-4">
           <div class="left-content">
-            <h2>Barangay Commonwealth</h2>
-            <p>Barangay Commonwealth is located along the Commonwealth Avenue with an estimated population of 213,229 determined by the 2020 census. This represented 7.20% of the total population of Quezon City. A population that is considered to be one of the largest in the Quezon City. </p>
+            <br>
+            <br>
+            <p style="text-align: justify; font-size: 16px;"><strong>Barangay Commonwealth</strong> is located along the Commonwealth Avenue with an estimated population of 213,229 determined by the 2020 census. This represented 7.20% of the total population of Quezon City. A population that is considered to be one of the largest in the Quezon City. </p>
           </div>
         </div>
       </div>
@@ -189,9 +191,9 @@ include "db/user.php";
    <section id="contact_officials">
     <div class="container-fluid wrapper">
     <div class="w3-bar w3-black">
-      <button class="form-control cntctbtn" onclick="openContact('Contact1')">Contact1</button>
-      <button class="form-control cntctbtn" onclick="openContact('Contact2')">Contact2</button>
-      <button class="form-control cntctbtn" onclick="openContact('Contact3')">Contact3</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact1')" style="border: none; font-size: 19px;">In case of emergency hotlines</button>
+      <!-- <button class="form-control cntctbtn" onclick="openContact('Contact2')">Contact2</button>
+      <button class="form-control cntctbtn" onclick="openContact('Contact3')">Contact3</button> -->
     </div>
         <div id="myCarousel-three" class="carousel-testimonials slide" >
             <!-- Wrapper for Slides -->
@@ -202,29 +204,42 @@ include "db/user.php";
                         <div class="col-md-6 col-sm-6 " >
                             <div class="block-text contact_block-text">
                                 <span>
-                                  <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
+                                  <h5><i class="fa fa-location-arrow fa_icon"></i> Emergency 911</h5>
                                 </span>
                                 <span>
-                                  <h5 class="contact_officials_text">                                
-                                  <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
-                                  </h5>
+                                  <h4 class="contact_officials_text">                                
+                                  <i class="fa fa-mobile-phone fa_icon"></i>(02) 925-9111/ +63966-5000-299 [Globe]
+                                  </h4>
                                 </span>
-                                <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                                <p class="contact_officials_author"><strong>NCR Region</strong></p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="block-text contact_block-text">
                               <span>
-                                <h5><i class="fa fa-location-arrow fa_icon"></i> 1st Ave. Katuparan Street</h5>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> Bureau of Fire Protection</h5>
                               </span>
                               <span>
                                 <h5 class="contact_officials_text">                                  
-                                <i class="fa fa-mobile-phone fa_icon"></i> 8932-2395 / 8283-9695 / 8951-8466
+                                <i class="fa fa-mobile-phone fa_icon"></i> (02) 426-0219 / (02) 426-3812 / (02)426-0246
                                 </h5>
                               </span>
-                              <p class="contact_officials_author"><strong>Manuel A. Co</strong>, Punong Barangay</p>
+                              <p class="contact_officials_author"><strong>NCR Region</strong></p>
                           </div>
-                        </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                            <div class="block-text contact_block-text">
+                              <span>
+                                <h5><i class="fa fa-location-arrow fa_icon"></i> Philippine National Police</h5>
+                              </span>
+                              <span>
+                                <h5 class="contact_officials_text">                                  
+                                <i class="fa fa-mobile-phone fa_icon"></i> (02) 722-0650/ +63917-847-5757
+                                </h5>
+                              </span>
+                              <p class="contact_officials_author"><strong>NCR Region</strong></p>
+                          </div>
+                          </div>
                         </div>
                     </div>
 
@@ -349,9 +364,7 @@ include "db/user.php";
             <div class="col-md-12">
               <div class="section-heading">
                 <h2>Contact Us</h2>
-                <span>
-                  <a>Home</a><label> >> <label><a>Contact Us</a>
-                </span>
+                
               </div>
             </div>
             <div class="col-md-8">
@@ -409,7 +422,8 @@ include "db/user.php";
 					        For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				        <p class="footer-text">
-                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+                    <br>
 					          <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">

@@ -1,22 +1,36 @@
-<?php session_start();
-if(!isset($_SESSION['email'])){
-	header("location: resident-defaultpage.php");
-}
-?>
-<?php
-	$user = '';
-
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
-	}
-?>
-
 <?php 
-
-include "db/conn.php";
+require('timezone.php');
+require "db/conn.php";
 include "db/reqdocument.php";
 include "db/documents.php";
 include "db/user.php";
+
+
+function start_session()
+{
+	$_SESSION['email']='';
+	session_start();
+if(empty($_SESSION['email']))
+{
+	header("Location:index.php");
+	exit();
+	}
+}
+echo start_session();
+function db_query()
+{
+global $db;
+$stmt=$db->prepare( "SELECT * FROM accreg_resident where resident_id=:uid") ;
+if($stmt->execute(['uid'=>$_SESSION['email']]))
+{
+	$row=$stmt->fetch(PDO::FETCH_ASSOC);
+	$count=$stmt->rowcount();
+	       }
+	}
+	echo db_query();
+?>
+
+<?php 
 
 $f = "resources/barangayid_visit.php";
 if(!file_exists($f)){
@@ -282,7 +296,7 @@ if(!file_exists($f)){
 						<li class="logdropdown">
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
-                              <a class="page-scroll" href="reqdoc_bpermit.php" onclick="dstry()">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_bpermit_new.php" onclick="dstry()">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php" onclick="dstry()">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php" onclick="dstry()">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php" onclick="dstry()">Blotter</a>
@@ -292,11 +306,25 @@ if(!file_exists($f)){
                             <a class="page-scroll" href="residentcontactus.php" onclick="dstry()">Contact Us</a>
                         </li>
 						<li class="logdropdown">
-							<a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-							<span class="logdropdown-content">
-								<a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
-								<a href="resident_viewprofile.php">View Profile</a>
-							</span>
+                        <?php
+                            $id=$_SESSION['email'];
+                            $query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+                            while($roww = $query->fetch())
+                            {
+                            $resident_id = $roww['resident_id'];
+			                    ?>
+                          <a class="page-scroll logout" href="javascript:void(0)">
+                          
+                          <?php echo $roww['email']?>
+						  
+						  </a>
+                          <?php
+                            }
+                          ?>	
+                          <span class="logdropdown-content">
+                              <a class="page-scroll" href="resident_logout.php" onclick="dstry()"><i class="bx bx-log-out"></i> Logout</a>
+                              <a href="resident_viewprofile.php" onclick="dstry()">View Profile</a>
+                          </span>
 						</li>
                     </ul>
                 </div>
@@ -392,7 +420,18 @@ if(!file_exists($f)){
 															    <h5 style="text-align: center;" id="barangayid">Personal Information</h5>
 														    <hr>
 															<div class="left_userpersonal_info left_userpersonal_info1">
-																
+
+																<?php
+																	$id=$_SESSION['email'];
+																	$query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+																	while($roww = $query->fetch())
+																	{
+																	$resident_id = $roww['resident_id'];
+																?>
+																<input type="hidden" value="<?php echo $roww['resident_id']?>" name="resident_id">
+																<?php
+																	}
+																?>	
 																<div class="form-group lname">
 																	<label for="fname">First Name:<i class="red">*</i> </label>
 																	<input type="text" class="form-control form-text form-text-desc auto-save" name="fname" placeholder="Your First name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
@@ -406,7 +445,7 @@ if(!file_exists($f)){
 																
 																<div class="form-group">
 																	<label for="lname">Last Name:<i class="red">*</i></label>
-																	<input type="text" class="form-control form-text form-text-desc auto-save" id="lname" name="lname" placeholder="Please write your Last Name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+																	<input type="text" class="form-control form-text form-text-desc auto-save" id="lname" name="lname" placeholder="Your Last name" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 																	<?php echo isset($error['lname']) ? $error['lname'] : '';?>	
 																</div><br>
 							
@@ -467,7 +506,7 @@ if(!file_exists($f)){
 																	<label for="file">Attach Document: <i class="red">*</i></label>
 																	<input type='file' style="margin: 3px 3px;font-size: 12px;" class="form-control " name='id_image' id="id_image" aria-details="id_image"/>
 																	
-																	<i aria-details="id_image" class="detailid"><label> please attach the right format (.docx) <?php echo isset($error['id_image']) ? $error['id_image'] : '';?></label></i>
+																	<i aria-details="id_image" class="detailid"><label> please attach VALID ID and 2x2 PICTURE in the right format (.docx) <?php echo isset($error['id_image']) ? $error['id_image'] : '';?></label></i>
 																</div><br>
 
 																<div class="form-group">
@@ -483,9 +522,9 @@ if(!file_exists($f)){
 																		<label>Document type, please choose<i class="red">*</i></label>
 																		<select class="form-control auto-save" style="font-size: 12px;" name="brgyidfilechoice" id="brgyidfilechoice" aria-details="brgyidfilechoice" >
 																		<option disabled>--Select--</option>
+																		<option value="Both">Both</option>
 																		<option value="Hardcopy">Hardcopy</option>
 																		<option value="Softcopy">Softcopy</option>
-																		<option value="Both">Both</option>
 																		</select>
 																		<i aria-details="brgyidfilechoice" class="detailid"><label> What type of document you want to receive?</label></i>
 																</div>
@@ -556,6 +595,7 @@ if(!file_exists($f)){
                 </p>
 				<p class="footer-text">
                     <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+					<br>
 					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">
@@ -580,8 +620,21 @@ if(!file_exists($f)){
 	
     <!-- jQuery -->
     <script src="resident-js/jquery.js"></script>
-	<script src="resident-js/barangay.js"></script>
-	<script src="https://use.fontawesome.com/f7721642f4.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="resident-js/bootstrap.min.js"></script>
+    <!-- Color Settings script -->
+    <script src="resident-js/settings-script.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="resident-js/jquery.easing.min.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="resident-js/jqBootstrapValidation.js"></script>
+    <!-- SmoothScroll script -->
+    <script src="resident-js/smoothscroll.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="resident-js/barangay.js"></script>
+    <!-- Isotope -->
+    <script src="resident-js/jquery.isotope.min.js"></script>
+    <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 	<script>
 		document.querySelector("#date_issued").valueAsDate = new Date();
 	</script>

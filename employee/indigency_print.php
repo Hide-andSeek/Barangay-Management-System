@@ -137,7 +137,7 @@ if(!isset($_SESSION["type"]))
                 ?>
                    
                         <form action="" method="post">
-                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <strong><?php echo $data['emailaddress']; ?></strong>
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>  <strong><?php echo $data['emailaddress']; ?></strong>
                                
                                 <input type="hidden" name="approvedindigency_id" id="approvedindigency_id" value="<?php echo $data['approvedindigency_id']; ?>">
                                 <input type="hidden" name="status" id="status" value="Done">
@@ -312,8 +312,13 @@ if(!isset($_SESSION["type"]))
                                             <div class="generatebtn" style="margin-top: 50px;">
                                                 <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
 												<input type="hidden" class="inp" name="approvedindigency_id" value="<?php echo $data['approvedindigency_id']; ?>"/>
-												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+												<!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?indigencyfile=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div> -->
+												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
+                                                    <i class="bx bx-save saveicon"></i> Print
+                                                </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -378,7 +383,7 @@ if(!isset($_SESSION["type"]))
                                             </div>
 
                                             <div class="sendi">
-                                                <button name="clearancesendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                                <button name="clearancesendemail" class="form-control viewbtn" style="width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
                                             </div>
                                         </div>
                                     </form>

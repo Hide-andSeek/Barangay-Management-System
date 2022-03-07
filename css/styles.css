@@ -446,7 +446,8 @@ div.a_u_d_buttons{
 
 #footer{
 	display: auto;
-	background: #252525;
+  background: linear-gradient(to bottom left, gray 5%, #009879 100%);
+	/* background: #252525; */
 	color: #fff;
 	opacity: 0.5px;
 	font-size: 13px;

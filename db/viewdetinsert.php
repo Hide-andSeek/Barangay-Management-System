@@ -336,9 +336,9 @@ if(isset($_POST['insertindigency'])){
     $approvedby = $_POST['approvedby'];
     $app_date = $_POST['app_date'];
     // get image info
-    $indigency_image = $_FILES['indigencyid_image']['name'];
-    $image_error = $_FILES['indigencyid_image']['error'];
-    $image_type = $_FILES['indigencyid_image']['type'];               
+    // $indigency_image = $_FILES['indigencyid_image']['name'];
+    // $image_error = $_FILES['indigencyid_image']['error'];
+    // $image_type = $_FILES['indigencyid_image']['type'];               
     $indigencyid_type = $_POST['indigencyid_type'];
     $status = $_POST['status'];
                                                     
@@ -366,23 +366,23 @@ if(isset($_POST['insertindigency'])){
     }
 
     // common image file extensions
-    $allowedExts = array("jpeg", "jpg", "png");
+    // $allowedExts = array("jpeg", "jpg", "png");
                                                     
     // get image file extension
-    error_reporting(E_ERROR | E_PARSE);
-    $extension = end(explode(".", $_FILES["indigencyid_image"]["name"]));
+    // error_reporting(E_ERROR | E_PARSE);
+    // $extension = end(explode(".", $_FILES["indigencyid_image"]["name"]));
                                                             
-    if($image_error > 0){
-    $error['indigencyid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
-    }else if(!(($image_type == "image/jpeg") || 
-    ($image_type == "image/jpg") || 
-    ($image_type == "image/x-png") ||
-    ($image_type == "image/png") || 
-    ($image_type == "image/pjpeg")) &&
-    !(in_array($extension, $allowedExts))){
+    // if($image_error > 0){
+    // $error['indigencyid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
+    // }else if(!(($image_type == "image/jpeg") || 
+    // ($image_type == "image/jpg") || 
+    // ($image_type == "image/x-png") ||
+    // ($image_type == "image/png") || 
+    // ($image_type == "image/pjpeg")) &&
+    // !(in_array($extension, $allowedExts))){
                                                     
-    $error['indigencyid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
-    }
+    // $error['indigencyid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
+    // }
                                                     
     if( !empty($fullname) &&  
         !empty($address) && 
@@ -391,27 +391,27 @@ if(isset($_POST['insertindigency'])){
         !empty($contactnum) && 
         !empty($emailaddress) && 
         !empty($date_issue) && 
-        !empty($status) && 
-        empty($error['indigencyid_image'])){
+        !empty($status)){
+        // empty($error['indigencyid_image'])){
                                                         
-    // create random image file name
-    $string = '0123456789';
-    $file = preg_replace("/\s+/", "_", $_FILES['indigencyid_image']['name']);
-    $function = new functions;
-    $indigency_image = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
+    // // create random image file name
+    // $string = '0123456789';
+    // $file = preg_replace("/\s+/", "_", $_FILES['indigencyid_image']['name']);
+    // $function = new functions;
+    // $indigency_image = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
                                                             
-    // upload new image
-    $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], '../img/approved_indigency/'.$indigency_image);
+    // // upload new image
+    // $upload = move_uploaded_file($_FILES['indigencyid_image']['tmp_name'], '../img/approved_indigency/'.$indigency_image);
                                                 
     // insert new data to menu table
-    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_image, indigencyid_type, status)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql_query = "INSERT INTO approved_indigency (approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyfilechoice, approvedby, app_date, indigencyid_type, status)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                                                         
-    $upload_image = $indigency_image;
+    // $upload_image = $indigency_image;
     $stmt = $connect->stmt_init();
     if($stmt->prepare($sql_query)) {	
     // Bind your variables to replace the ?s
-    $stmt->bind_param('sssssssssssss', 
+    $stmt->bind_param('ssssssssssss', 
     $approvedindigency_id,
     $fullname,
     $address,
@@ -422,7 +422,7 @@ if(isset($_POST['insertindigency'])){
     $indigencyfilechoice,
     $approvedby,
     $app_date,
-    $upload_image,
+    // $upload_image,
     $indigencyid_type,
     $status
     );
@@ -655,7 +655,7 @@ if(isset($_POST['insertAdminComp'])){
     $extension = end(explode(".", $_FILES["blotterid_image"]["name"]));
                                                             
     if($image_error > 0){
-        $error['blotterid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
+        $error['blotterid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert pdf file here! </span>";
         }else if(!(($image_type == "pdf")) &&
         !(in_array($extension, $allowedExts))){  
         

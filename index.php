@@ -1,8 +1,7 @@
-<?php session_start();
-
-include "db/conn.php";
-include "db/user.php";
-
+<?php 
+session_start();
+require_once "db/conn.php";
+include ('db/user.php');
 ?>
 
 <!DOCTYPE html>
@@ -95,6 +94,7 @@ include "db/user.php";
                 color: #fff;
             }
 
+            .section-subheading{text-align: justify;}
 
             @media only screen and (max-width: 455px) {
                 *{font-family: "Poppins" , sans-serif;}
@@ -245,7 +245,7 @@ include "db/user.php";
             .news_heading:hover{color: blue; text-decoration: none;}
             div.announce{background-color: white; margin-top: 15px; float: center;}
             .pic{background-color: gray; margin: 50px 50px 50px 50px}
-
+            a.createacc{text-decoration: none; color: white;}
             /*-- Mobile Device --*/
 
            
@@ -270,7 +270,7 @@ include "db/user.php";
                 float: right;
                 padding:8px 24px;
             }
-
+            
           
 	</style>
 
@@ -341,12 +341,9 @@ include "db/user.php";
 					    </label>
                     </span>
         
-                    <div class="form-bar">
-                        <button class="form-bar-item form-button tablink form-active log_in" onclick="openForm(event.preventDefault(),'Login')">Login</button>
-                        <button class="form-bar-item form-button tablink create_account" onclick="openForm(event.preventDefault(),'CreateAcc')">Create Account</button>
-                      </div>
+
 					  
-					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+					<form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             					
 						<div id="Login" class="login_container form">
 								<div class="information">
@@ -365,38 +362,13 @@ include "db/user.php";
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
-									<!-- <div>
-										<button class="log_button gmail">
-                                             <i class="fa fa-google"></i>  Sign with Gmail
-										</button>
-									</div> -->
+								    <button class="log_button gmail" onclick="window.location.href= 'resident_account_registration.php'">
+                                    <a class="createacc" href="resident_account_registration.php">Create Account</a>
+
+									</button>
+                                    
 								</div>
 						</div> 	
-					</form>
-<!-- Create an Account-->
-					<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-						<div id="CreateAcc" class="login_container form" style="display: none;">
-							<div class="information">
-								<input required class="inputtext" type="text" name="uname" placeholder="Username" >
-							</div>
-							<div class="information">
-								<input required class="inputtext" type="email" name="email" placeholder="Email" >
-							</div>
-							<div class="information controls">
-								<input required class="inputpass" type="password" name="password" placeholder="Password">
-							</div>
-
-							<div class="guidelines">
-								<input type="checkbox" value="Yes" id="policy" name="policy" required>
-								I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
-								<span class="checkmark"></span>	
-							</div>
-							<div class="information">   
-								<button type="submit" name="regbtn" class="log_button sign_in getstarted popup_mess">
-									Get Started
-								</button>  
-							</div>
-						</div>
 					</form>
               </div>
         </div>
@@ -648,23 +620,6 @@ include "db/user.php";
 
     <script src="https://use.fontawesome.com/f7721642f4.js"></script>
     <script>
-		document.querySelector('.button').onclick = function(){
-			var password = document.querySelector('.password').value,
-				confirmpass = document.querySelector('.confirmpass').value;
-				
-				if(password == ""){
-					alert("Field cannot be empty.");
-				}
-				else if(password != confirmpass){
-					alert("Password didn't match try again.");
-					return false
-				}
-				else if(password == confirmpass){
-					alert("Password match.");
-				}
-				return true
-		}
-
         const togglePassword = document.querySelector('#togglePassword');
 				const password = document.querySelector('#logpassword');
 				

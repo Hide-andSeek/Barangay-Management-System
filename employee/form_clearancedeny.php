@@ -448,6 +448,7 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Precint no</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%">Certificate Status</th>
+										<th width="5%"></th>
 									</tr>
 								</thead>
 							<?php 
@@ -468,6 +469,9 @@ if(!isset($_SESSION["type"]))
 									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<td>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="clearance_deniedsendmess.php?id=<?php echo $data['clearance_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Message</a>
+									</td>
 								</tr>	
 								</tbody>
 								<?php 

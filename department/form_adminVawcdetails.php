@@ -55,7 +55,7 @@ if(!isset($_SESSION["type"]))
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title> Admin Complaint Details </title>
+     <title>VAWC: Admin Complaint Details </title>
 	<!-- Side Navigation Bar-->
 		  <div class="sidebar">
 			<div class="logo-details">
@@ -123,7 +123,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Lupon >> View VAWC Details
+						<h5>VAWC DEPARTMENT >> VAWC >> View VAWC Details
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>

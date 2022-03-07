@@ -277,11 +277,11 @@ if(!isset($_SESSION["type"]))
 		}
 			
 		if(empty($keyword)){
-			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, indigencyid_type, date_issue, status, indigencyid_image
             FROM certificateindigency WHERE status = 'Deny'
 					ORDER BY indigency_id ASC";
 		}else{
-			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, indigencyid_type, date_issue, status, indigencyid_image
 					FROM certificateindigency
 					WHERE fullname LIKE ? 
 					ORDER BY indigency_id ASC";
@@ -304,7 +304,7 @@ if(!isset($_SESSION["type"]))
                     $data['purpose'],
                     $data['contactnum'],
                     $data['emailaddress'],
-                    $data['id_type'],
+                    $data['indigencyid_type'],
                     $data['date_issue'],
                     $data['status'],
                     $data['indigencyid_image']
@@ -332,11 +332,11 @@ if(!isset($_SESSION["type"]))
 		}	
 		
 		if(empty($keyword)){
-			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, indigencyid_type, date_issue, status, indigencyid_image
             FROM certificateindigency WHERE status = 'Deny'
 					ORDER BY indigency_id ASC LIMIT ?, ?";
 		}else{
-			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, id_type, date_issue, status, indigencyid_image
+			$sql_query = "SELECT indigency_id, fullname, address, purpose, contactnum, emailaddress, indigencyid_type, date_issue, status, indigencyid_image
 					FROM certificateindigency
 					WHERE fullname LIKE ? 
 					ORDER BY indigency_id ASC LIMIT ?, ?";
@@ -360,7 +360,7 @@ if(!isset($_SESSION["type"]))
                     $data['purpose'],
                     $data['contactnum'],
                     $data['emailaddress'],
-                    $data['id_type'],
+                    $data['indigencyid_type'],
                     $data['date_issue'],
                     $data['status'],
                     $data['indigencyid_image']
@@ -428,11 +428,12 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Address</th>
 										<th width="5%">Purpose</th>
 										<th width="5">Contact</th>
-										<th width="15%">Email</th>
+										
 										<th width="5%">ID Type</th>
 										<th width="10%">Date Issued</th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%">Status</th>
+										<th width="5%"></th>
 									</tr>
 								</thead>
 							<?php 
@@ -444,11 +445,14 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['contactnum']; ?></td>
-									<td><?php echo $data ['emailaddress']?></td>
-									<td><?php echo $data ['id_type']; ?></td>
+								
+									<td><?php echo $data ['indigencyid_type']; ?></td>
 									<td><?php echo $data ['date_issue']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<td>
+									<a style="text-decoration: none; width: 110px; border-radius: 20px;  height:100%" class="viewbtn form-control" href="indigency_deniedsendmess.php?id=<?php echo $data['indigency_id'];?>" target="_blank"><i style="color: black;" class="bx bxs-data" ></i> Message</a>
+									</td>
 								</tr>	
 								</tbody>
 								<?php 

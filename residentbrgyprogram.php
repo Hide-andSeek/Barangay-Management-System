@@ -1,14 +1,29 @@
-<?php session_start();
-include "db/conn.php";
-include "db/user.php";
+<?php 
+require('timezone.php');
+require "db/conn.php";
 
-?>
-<?php
-	$user = '';
-
-	if(isset($_SESSION['email'])){
-		$user = $_SESSION['email'];
+function start_session()
+{
+	$_SESSION['email']='';
+	session_start();
+if(empty($_SESSION['email']))
+{
+	header("Location:index.php");
+	exit();
 	}
+}
+echo start_session();
+function db_query()
+{
+global $db;
+$stmt=$db->prepare( "SELECT * FROM accreg_resident where resident_id=:uid") ;
+if($stmt->execute(['uid'=>$_SESSION['email']]))
+{
+	$row=$stmt->fetch(PDO::FETCH_ASSOC);
+	$count=$stmt->rowcount();
+	       }
+	}
+	echo db_query();
 ?>
 
 
@@ -97,7 +112,7 @@ include "db/user.php";
                             <a class="page-scroll logout" href="javascript:void(0)">Services</a>
                             <span class="logdropdown-content">
                               <a class="page-scroll" href="reqdoc_barangayid.php">Barangay ID</a>
-                              <a class="page-scroll" href="reqdoc_bpermit.php">Business Permit</a>
+                              <a class="page-scroll" href="reqdoc_bpermit_new.php">Business Permit</a>
                               <a class="page-scroll" href="reqdoc_indigency.php">Certificate of Indigency</a>
                               <a class="page-scroll" href="reqdoc_clearance.php">Barangay Clearance</a>
                               <a class="page-scroll" href="reqdoc_blotter.php">Blotter</a>
@@ -107,12 +122,24 @@ include "db/user.php";
                               <a class="page-scroll" href="residentcontactus.php">Contact Us</a>
                           </li>
                           <li class="logdropdown">
-                            <a class="page-scroll logout" href="javascript:void(0)"><?php echo $user; ?></a>
-                            <span class="logdropdown-content">
-                            <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
+                        <?php
+                            $id=$_SESSION['email'];
+                            $query = $db->query("SELECT * FROM accreg_resident where resident_id='$id'");
+                            while($roww = $query->fetch())
+                            {
+                            $resident_id = $roww['resident_id'];
+			                    ?>
+                          <a class="page-scroll logout" href="javascript:void(0)">
+                          
+                          <?php echo $roww['email']?></a>
+                          <?php
+                            }
+                          ?>	
+                          <span class="logdropdown-content">
+                              <a class="page-scroll" href="resident_logout.php"><i class="bx bx-log-out"></i> Logout</a>
                               <a href="resident_viewprofile.php">View Profile</a>
-                            </span>
-                          </li>
+                          </span>
+						            </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -238,8 +265,9 @@ include "db/user.php";
 					For any inquiries, please Email us and visit our Facebook Page 
                 </p>
 				<p class="footer-text">
-                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
-					<a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
+                <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+                <br>
+                <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a> 
                 </p>
 				<div class="footer-text">
 					<a>Terms of Service</a> | 

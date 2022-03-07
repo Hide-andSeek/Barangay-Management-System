@@ -398,8 +398,13 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 										<br>
                                             <div class="generatebtn" style="margin-top: 50px;">
                                                 <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
-												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+												<!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div> -->
+												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
+                                                    <i class="bx bx-save saveicon"></i> Print
+                                                </button>
                                                 </div>
                                             </div>
                                         </form>

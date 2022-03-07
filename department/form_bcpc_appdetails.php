@@ -71,13 +71,10 @@ if(!isset($_SESSION["type"]))
 
         /* Modal Content (image) */
         .modal-content {
-       font-family: 'Montserrat', sans-serif;
-			padding-top: 1%;
-			background-color: #fefefe;
-			margin: 5% auto 2% auto;
-			border: 1px solid #888;
-			width: 68%; 
-			z-index: 9999;
+        display: absolute;
+        margin: auto;
+        max-width: 700px;
+        width: 60%;
         }
 
 

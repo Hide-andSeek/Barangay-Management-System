@@ -57,7 +57,7 @@ if(isset($_POST['generate']) ) {
     <link rel="stylesheet" href="../css/documentprint.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 	<!--Font Styles-->
 	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
     <title>Printed: Business Permit</title>
@@ -68,8 +68,8 @@ if(isset($_POST['generate']) ) {
 		.offic{font-size:13px;}
         .borderstyle{border: none; font-size: 15px;}  
         .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
-        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .viewbtn{width: 100%; height: 35px; background-color: #008CBA;color: white;  }
+        .viewbtn:hover{  background-color: white; color: black; border: 1px solid #008CBA;}
         .done{width: 30%; font-size: 11px;}
         .inputtext, .inputpass {
 			font-family: 'Montserrat', sans-serif;
@@ -212,10 +212,10 @@ if(isset($_POST['generate']) ) {
                                         <div style="float: right;"><img src="../img/approved_bpermit/<?php echo $data['businessid_image']; ?>" style="width: 150px; height: 150px; margin-right: 120px; margin-top: -120px;"></div>
                                         <div style="margin-left: 710px;"><label>PLATE#</label> <input type="text" name="plateno" class="borderstyle" id="plateno" style="width: 50px; border-bottom: 1px solid black;" value="<?php echo $data['plateno']; ?>"> </div>
                                         <div style="margin-top: -5px; margin-left: 120px;">Pursuant to existing ordinance in this barangay, CLEARANCE is granted to,</div>
-                                        <div style="margin-top: 5px;"><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 75%; margin-left: 120px;padding-left: 50px; padding-left: 320px;" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>"><p style="text-align: center;"  >(NAME OF THE OWNER)</p></div>
+                                        <div style="margin-top: 5px;"><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 75%; margin-left: 120px;padding-left: 50px; padding-left: 290px; text-transform: uppercase;" id="fullname" name="fullname" value="<?php echo $data['fullname']; ?>"><p style="text-align: center;"  >(NAME OF THE OWNER)</p></div>
                                         <div style="margin-top: -90px; margin-left: 220px; position: absolute;"><img src="../img/Brgy-Commonwealth150x150.png" style="width: 290%; height: 290%; opacity: 0.2" alt=""></div>
-                                        <div style="margin-top: 30px; margin-left: 50px;"><label>And owner/proprietor of </label><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 65%; padding-left: 175px;" id="businessname" name="businessname"  value="<?php echo $data['businessname']; ?>"><p style="text-align: center; margin-right: 80px;" >(BUSINESS NAME)</p></div>
-                                        <div style="margin-left: 50px;"><label>Located at </label><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 77%; padding-left: 30px;" id="businessaddress" name="businessaddress"  value="<?php echo $data['businessaddress']; ?>">,<p>Barangay Commonwealth, District II, Quezon City.</p></div>
+                                        <div style="margin-top: 30px; margin-left: 50px;"><label>And owner/proprietor of </label><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 65%; padding-left: 175px; text-transform: uppercase;" id="businessname" name="businessname"  value="<?php echo $data['businessname']; ?>"><p style="text-align: center; margin-right: 80px;" >(BUSINESS NAME)</p></div>
+                                        <div style="margin-left: 50px;"><label>Located at </label><input type="text" class="borderstyle" style="border-bottom: 1px solid black; width: 77%; padding-left: 30px; text-transform: uppercase;" id="businessaddress" name="businessaddress"  value="<?php echo $data['businessaddress']; ?>">,<p>Barangay Commonwealth, District II, Quezon City.</p></div>
                                         <div style="margin-top: 25px; margin-left: 120px;">This Clearance valid up to <input class="borderstyle" style="border-bottom: 1px solid black; width: 30%; text-align: center;" type="text" name="dateissued" id="dateissued" value="<?php echo $data['dateissued']; ?>">unless revoked to a valid cause.</div>
                                         <div style="margin-left: 50px; text-align: justify;"><label for="">CONDITIONS: <label style="margin-left: 60px;  margin-right: 50px;"> Applicant is hereby advised to follow strictly the existing ordinances in relation <br> <label style="margin-left: 163px;">  with  the conduct of his/her business. Violation of the same ground for the  revo<br><label style="margin-left:163px; "> cation of this clearance.</label></label></label></label></div>
                                         <div style="margin-top: 25px; margin-left: 120px;">Issued this <input class="borderstyle" style="text-align: center; border-bottom: 1px solid black; width: 45%;" type="text" name="dateissued" id="dateissued" value="<?php echo $data['dateissued']; ?>">, Quezon City, Metro Manila, <br> <label style="margin-left: -68px;"></label> Philippines.</div>
@@ -259,10 +259,15 @@ if(isset($_POST['generate']) ) {
 
                                             <div class="generatebtn" style="margin-top: 50px; width: 90%;">
                                             <hr>
-                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 15px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
+                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 15px;" class="form-control generate viewbtn" name="generate"><i class="bx bx-barcode"> Generate QR Code </i></button>
                                                 <br>
-                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
+                                                <!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?bpermitfile=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                                </div> -->
+                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
+                                                    <i class="bx bx-save saveicon"></i> Print
+                                                </button>
                                                 </div>
                                         </div>
                                         </form>
@@ -326,7 +331,7 @@ if(isset($_POST['generate']) ) {
                                             </div>
 
                                             <div class="sendi">
-                                                <button name="sendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                                <button name="sendemail" class="form-control viewbtn" style="width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
                                             </div>
                                         </div>
                                     </form>
