@@ -96,11 +96,15 @@ require 'db/conn.php';
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
+<<<<<<< HEAD
 			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
+=======
+			   <a class="side_bar" href="lupon_active.php">
+>>>>>>> 0b7318a54383eebb043598ac5976f623f28106e2
 				 <i class='fas fa-user-clock'></i>
-				 <span class="links_name">Tagapamayapa</span>
+				 <span class="links_name">Active Cases</span>
 			   </a>
-			   <span class="tooltip">Tagapamayapa</span>
+			   <span class="tooltip">Active Cases</span>
 			 </li>
 			 
 
@@ -159,11 +163,11 @@ require 'db/conn.php';
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-					<a href= "lupon_ongoing.php">
+					
 				</div>
 				
 				<div class="w3-clear"></div>
-				<h4>Upcoming Hearing</h4>
+				<a href= "lupon_ongoing.php">Upcoming Hearing</a>
 				
 			</div>
 			</div>
@@ -180,10 +184,10 @@ require 'db/conn.php';
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-<a href= "lupon_active.php">				
+				
 				</div>
 				<div class="w3-clear"></div>
-				<h4>Active</h4>
+				<a href= "lupon_active.php">Active</a>
 			</div>
 			</div>
 			
@@ -200,17 +204,19 @@ require 'db/conn.php';
 
 					echo "<h3>$pdoexecute</h3>"
 					?>
-		          <a href= "lupon_settled.php">
+		          
 				 </div>
 				<div class="w3-clear"></div>
-				<h4>Settled</h4>
+				<a href= "lupon_settled.php">Settled</a>
 			</div>
 			</div>
 
 			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
+			
+			<div class="w3-container w3-teal w3-padding-16"  >
 				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
+				<div class="w3-right"> 
+				
 				<?php 
 					require 'db/conn.php';
  
@@ -219,16 +225,17 @@ require 'db/conn.php';
 					$pdoexecute = $query_run->rowCount();
 
 					echo "<h3>$pdoexecute</h3>"
+					 
 					?>
-				<a href= "lupon_mediation.php">
+				
 				</div>
-				<div class="w3-clear"></div>
-				<h4>Mediation</h4>
+				<div class="w3-clear"> </div>
+				<a href= "lupon_mediation.php">Mediation </a>
 			</div>
 			</div>
 		</div>
 	</div>
-
+ 
 
 	
 
@@ -254,6 +261,7 @@ require 'db/conn.php';
 									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
+									
 								</tr>                       
 							</thead>
 							<?php
@@ -270,8 +278,9 @@ require 'db/conn.php';
 									<td><?php echo $data ['Complaint']; ?></td>
 									<td>Active</td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="fa fa-check-circle"></i>Done</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="fa fa-ban"></i>Deny</button>
+								
+										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_update.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
+										
 									</td>	
 								</tr>
 							
@@ -280,9 +289,23 @@ require 'db/conn.php';
 							?>
 						</table>
 
-				
+						</div>
 					
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
 			
 			</section>
 	</body>

@@ -493,3 +493,67 @@ if(isset($_POST['sendlinkpayment'])){
     }
 
 }
+
+
+if(isset($_POST['luponsendemail'])){
+
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    // $config = parse_ini_file('resources/var/app/config.ini', true);
+    // $attachfile = $_FILES['fileattach']['tmp_name'];
+
+	if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
+		$file = "../img/" . basename($_FILES['fileattach']['name']);
+		move_uploaded_file($_FILES['fileattach']['tmp_name'], $file);
+	} else
+		$file = "";
+   
+    //Load composer's autoloader
+
+    $mail = new PHPMailer(true);                            
+    try {
+        //Server settings
+        $mail->isSMTP();                                     
+        $mail->Host = 'smtp.gmail.com';                      
+        $mail->SMTPAuth = true;                             
+        $mail->Username = 'barangaycommonwealth01@gmail.com';     
+        $mail->Password = 'gepalitanmopapasswordbuddy';             
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+        );                         
+        $mail->SMTPSecure = 'ssl';                           
+        $mail->Port = 465;                                   
+
+        //Send Email
+        $mail->setFrom('barangaycommonwealth01@gmail.com');
+        
+        //Recipients
+        $mail->addAddress($email);              
+        $mail->addReplyTo('barangaycommonwealth01@gmail.com');
+        
+        $mail->addAttachment ($file, 'From: Lupon Department');
+   
+        //Content
+        $mail->isHTML(true);        
+
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+
+        $mail->send();
+		
+       $_SESSION['resultadmincomp'] = 'Email successfully sent to' ;
+	   $_SESSION['statusadmincomp'] = 'ok';
+    } catch (Exception $e) {
+	   $_SESSION['resultadmincomp'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
+	   $_SESSION['statusadmincomp'] = 'error';
+    }
+	
+	unlink($file);
+
+}
