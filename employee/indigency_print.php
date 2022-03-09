@@ -55,7 +55,7 @@ if(!isset($_SESSION["type"]))
 	<link rel="stylesheet" href="../css/documentprint.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/print.css">
-
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!--Font Styles-->
 	<link rel="icon" type="/image/png" href="../img/Brgy-Commonwealth.png">
     <title>Printed: Indigency</title>
@@ -67,6 +67,8 @@ if(!isset($_SESSION["type"]))
 		.draft1{position: absolute; z-index: 9999; margin-top: -80%; margin-left: 30%; background: none; }
         img.draft{width: 70%; height: 70%; z-index: 9999;  opacity: 0.7; }
 		.body{ margin: 20px 170px; }
+		.viewbtn{width: 100%; height: 35px; background-color: #008CBA;color: white;}
+        .viewbtn:hover{ background-color: white; color: black; border: 1px solid #008CBA; }
     </style>
 </head>
 <body>
@@ -310,13 +312,13 @@ if(!isset($_SESSION["type"]))
 										<br>
 										<br>
                                             <div class="generatebtn" style="margin-top: 50px;">
-                                                <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
+                                                <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate"><i class="bx bx-barcode"></i> Generate</button>
 												<input type="hidden" class="inp" name="approvedindigency_id" value="<?php echo $data['approvedindigency_id']; ?>"/>
 												<!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?indigencyfile=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div> -->
-												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
-                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
+												<div style="display: flex;  align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <button style=" cursor: pointer;  font-size: 14px;" class="form-control  viewbtn" onclick="window.print(); ">
                                                     <i class="bx bx-save saveicon"></i> Print
                                                 </button>
                                                 </div>
@@ -324,9 +326,13 @@ if(!isset($_SESSION["type"]))
                                         </form>
 
 										<form method="POST" action="" class="body" enctype="multipart/form-data">
+										<div  style="text-align: center; font-weight: 600">
+                                            <label>Send Attachment (Gmail)</label>
+                                        </div>
+										<br>
+										<br>
+										<br>
                                         <div class="main-content-email">
-                                           
-
                                             <div class="information col">
                                                 <p style="font-size: 14px;"> Fullname: </p>
                                                 <input style="font-size: 14px;" class="form-control inputtext usersel inp" id="fullname" name="fullname" type="text"  value="<?php echo $data['fullname']; ?>">

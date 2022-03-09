@@ -1,5 +1,10 @@
-<?php session_start();
+<?php
+session_start();
+include "../db/conn.php";
+include "../db/user.php";
+include "../db/documents.php";
 include('../announcement_includes/functions.php'); 
+
 
 if(!isset($_SESSION["type"]))
 {
@@ -22,6 +27,7 @@ if(!isset($_SESSION["type"]))
 		$dept = $_SESSION['type'];
 	}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

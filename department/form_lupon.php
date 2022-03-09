@@ -9,6 +9,22 @@ require 'db/conn.php';
 ?>
 
 
+<?php
+	$user = '';
+
+	if(isset($_SESSION['user'])){
+		$user = $_SESSION['user'];
+	}
+?>
+
+<?php
+	$dept = '';
+
+	if(isset($_SESSION['type'])){
+		$dept = $_SESSION['type'];
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -68,19 +84,19 @@ require 'db/conn.php';
 		   <div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Lupon Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
 			  <li>
-			  <a class="side_bar" href="     ">
+			  <a class="side_bar nav-button nav-active" href="#">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-			   <a class="side_bar" href="lupon_tagapamayapa.php">
+			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
 				 <i class='fas fa-user-clock'></i>
 				 <span class="links_name">Tagapamayapa</span>
 			   </a>
@@ -90,7 +106,7 @@ require 'db/conn.php';
 
 			<!--Setting Section-->
 			 <li>
-			   <a class="side_bar" href="settings.php">
+			   <a class="side_bar nav-button" href="settings.php">
 				 <i class='bx bx-cog' ></i>
 				 <span class="links_name">Setting</span>
 			   </a>
@@ -99,10 +115,9 @@ require 'db/conn.php';
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
+						   <div class="job" id=""><?php echo $dept; ?></div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">

@@ -663,8 +663,8 @@ padding: 10px 25px;
   /* View and Approve btn from req documents*/
 
   
-  button.view_approvebtn, a.view_approvebtn{width: 160px; height: 34px;margin-bottom: 5px;  background-color: white; color: black; border: 1px solid #4CAF50;}
-  button.view_approvebtn:hover, a.view_approvebtn:hover{ background-color: #4CAF50; color: white;}
+  button.view_approvebtn, a.view_approvebtn{width: 160px; height: 34px;margin-bottom: 5px; background-color: #4CAF50; color: white;}
+  button.view_approvebtn:hover, a.view_approvebtn:hover{ background-color: white; color: black; border: 1px solid #4CAF50; }
   button.view_declinebtn{background: #c24c44}
   button.view_declinebtn:hover{color: white; background: #d9534a;}
 

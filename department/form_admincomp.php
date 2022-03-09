@@ -430,7 +430,7 @@ if(!isset($_SESSION["type"]))
 	}
 					
 	// number of data that will be display per page		
-	$offset = 5;
+	$offset = 50;
 					
 	//lets calculate the LIMIT for SQL, and save it $from
 	if ($page){
@@ -520,14 +520,14 @@ if(!isset($_SESSION["type"]))
 							<table class="content-table">
 								<thead>
 									<tr class="t_head">
-										<th width="5%">Blotter ID</th>
-										<th width="5%">Name of Complainant</th>
-										<th width="5%">Age</th>
-										<th width="5%">Gender</th>
-										<th width="5">Address</th>
-										<th width="5%">Incident Address</th>
-										<th width="5%">Contact No</th>
-										<th width="5%">View Details</th>
+										<th width="15%">Blotter ID</th>
+										<th width="15%">Name of Complainant</th>
+										<th width="15%">Age</th>
+										<th width="15%">Gender</th>
+										<th width="15">Address</th>
+										<th width="15%">Incident Address</th>
+										<th width="15%">Contact No</th>
+										<th width="15%">View Details</th>
 										<!-- <th width="5%">Message</th> -->
 									</tr>
 								</thead>

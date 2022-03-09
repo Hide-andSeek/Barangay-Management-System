@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-include "db/conn.php";
-include "db/documents.php";
-include('announcement_includes/functions.php');
-include "db/viewdetinsert.php";
-include('send_email.php');
+include "../db/conn.php";
+include "../db/documents.php";
+include('../announcement_includes/functions.php');
+include "../db/viewdetinsert.php";
+include('../send_email.php');
 
 if (!isset($_SESSION["type"])) {
     header("location: 0index.php");
@@ -42,12 +42,12 @@ if (isset($_SESSION['type'])) {
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/admincompviewdet.css">
-    <link rel="stylesheet" href="announcement_css/custom.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admincompviewdet.css">
+    <link rel="stylesheet" href="../announcement_css/custom.css">
 
     <!--Font Styles-->
-    <link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+    <link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 
     <!-- Boxicons CDN Link -->
@@ -178,43 +178,42 @@ if (isset($_SESSION['type'])) {
     <!-- Side Navigation Bar-->
     <div class="sidebar">
         <div class="logo-details">
-            <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt="" />
-            <div class="logo_name">Barangay Commonwealth</div>
+            <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt="" />
+            <div class="logo_name">VAWC Department</div>
             <i class='bx bx-menu menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            <li>
-                <a class="side_bar nav-button nav-active" href="bcpcdashboard.php">
-                    <i class='bx bx-category-alt dash'></i>
-                    <span class="links_name">Dashboard</span>
-                </a>
-                <span class="tooltip">Dashboard</span>
-            </li>
+              <li>
+			  <a class="side_bar nav-button nav-active" href="vawcdashboard.php">
+				  <i class='bx bx-grid-alt dash'></i>
+				  <span class="links_name">Dashboard</span>
+				</a>
+				 <span class="tooltip">Dashboard</span>
+			  </li>
+			  
+			  <li>
+			   <a class="side_bar nav-button" href="vawc_ongoing.php">
+				 <i class='bx bx-user-circle ongoing'></i>
+				 <span class="links_name">Ongoing Case</span>
+			   </a>
+			   <span class="tooltip">Ongoing Case</span>
+			 </li>
 
-            <li>
-                <a class="side_bar nav-button" href="bcpc_ongoing.php">
-                    <i class='bx bx-user-voice ongoing'></i>
-                    <span class="links_name">Ongoing Case</span>
-                </a>
-                <span class="tooltip">Ongoing Case</span>
-            </li>
+			 <li>
+			   <a class="side_bar nav-button " href="vawc_closed.php">
+				 <i class='bx bx-user-check closed'></i>
+				 <span class="links_name">Closed Case</span>
+			   </a>
+			   <span class="tooltip">Closed Cased</span>
+			 </li>
 
-
-            <li>
-                <a class="side_bar nav-button" href="bcpc_closed.php">
-                    <i class='bx bx-user-check closed'></i>
-                    <span class="links_name">Closed Case</span>
-                </a>
-                <span class="tooltip">Closed Cased</span>
-            </li>
-
-            <li>
-                <a class="side_bar nav-button" href="bcpc_total.php">
-                    <i class='bx bx-group total'></i>
-                    <span class="links_name">Total Complaints</span>
-                </a>
-                <span class="tooltip">Total Complaints</span>
-            </li>
+			 <li>
+			   <a class="side_bar nav-button" href="vawc_total.php">
+				 <i class='bx bx-user-pin total'></i>
+				 <span class="links_name">Total Cases</span>
+			   </a>
+			   <span class="tooltip">Total Cases</span>
+			 </li>
 
             <li class="profile">
                 <div class="profile-details">
@@ -237,7 +236,7 @@ if (isset($_SESSION['type'])) {
                 <div>
                     <h5>Dashboard >> Pending Case
                         <a href="#" class="circle">
-                            <img src="img/dt.png">
+                            <img src="../img/dt.png">
                         </a>
                     </h5>
                 </div>
@@ -256,7 +255,7 @@ if (isset($_SESSION['type'])) {
             $data = array();
 
             // get all data from menu table and category table
-            $sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+            $sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
                             FROM admin_complaints
                             WHERE admincomp_id = ?";
 
@@ -287,7 +286,9 @@ if (isset($_SESSION['type'])) {
                     $data['dept'],
                     $data['app_date'],
                     $data['app_by'],
-                    $data['blotterid_image']
+                    $data['blotterid_image'],
+                    $data['gmail'],
+                    $data['sms']
                 );
                 $stmt->fetch();
                 $stmt->close();
@@ -303,7 +304,7 @@ if (isset($_SESSION['type'])) {
                 if (mysqli_query($connect, $sql)) {
                     echo "<script>
                                     alert('Case Opened!');
-                                    window.location.href='bcpcdashboard.php';
+                                    window.location.href='vawcdashboard.php';
                                 </script>";
                 } else {
                     echo "Error updating record: " . mysqli_error($connect);
@@ -353,14 +354,14 @@ if (isset($_SESSION['type'])) {
                 <div style="float: right; display: inline-block;">
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
-                        <img src="img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                        <img src="../img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
-                    <a href="bcpcdashboard.php">
-                        <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    <a href="vawcdashboard.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
                 </div>
@@ -399,7 +400,7 @@ if (isset($_SESSION['type'])) {
                                     <div class="information col">
                                         <p>Body: </p>
                                         <textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
-                                        <script type="text/javascript" src="announcement_css/js/ckeditor/ckeditor.js"></script>
+                                        <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
                                         <script type="text/javascript">
                                             CKEDITOR.replace('message');
                                         </script>
@@ -451,7 +452,7 @@ if (isset($_SESSION['type'])) {
                     </div>
                 </div>
 
-                <iframe type="file" style="width:100%; height: 500px;" src="img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
                 <br>
                 <table id="viewdetails" class="font-sizee">

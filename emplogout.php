@@ -1,7 +1,10 @@
 <?php
-
 	session_start();
-	session_destroy();
-	header("location: 0index.php");
+	unset($_SESSION['type']);
+	
+	if(session_destroy())
+	{
+		header("Location: 0index.php");
+	}
 	
 ?>
