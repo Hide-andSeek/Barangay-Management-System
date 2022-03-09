@@ -242,6 +242,7 @@ require 'db/conn.php';
 									<th>Complaints:</th>
 									<th>Status</th>
 									<th>Action</th>
+									
 								</tr>                       
 							</thead>
 							<?php
@@ -258,8 +259,8 @@ require 'db/conn.php';
 									<td><?php echo $data ['Complaint']; ?></td>
 									<td>Active</td>
 									<td>
-									
-										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_active.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
+								
+										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_update.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
 										
 									</td>	
 								</tr>

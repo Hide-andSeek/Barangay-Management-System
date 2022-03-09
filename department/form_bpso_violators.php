@@ -138,8 +138,66 @@ require 'db/conn.php';
 			  </section>
 			 
 
+              <div class="reg_table emp_tbl">
+						<table class="content-table">
+						
+						<?php
+						include "db/conn.php";
+	                    include "db/user.php";
+							
+						$mquery = "SELECT * FROM admin_complaints";
+						$countemployee = $db->query($mquery)
+						?>
 
+							<thead>
+								<tr class="t_head">
+									<th>Case No.</th>
+									<th>Complainant</th>
+									<th>Age</th>
+									<th>Address</th>
+									<th>Incident Address</th>
+									<th>Contact</th>
+									<th>Email</th>
+									<th>Violator</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Witnesses</th>
+                                    <th>Complaints</th>
+                                    <th>Action</th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['admincomp_id']; ?></td>
+									<td><?php echo $data ['n_complainant']; ?></td>
+									<td><?php echo $data ['comp_age']; ?></td>
+									
+									<td><?php echo $data ['comp_address']; ?></td>
+									<td><?php echo $data ['inci_address']; ?></td>
+									<td><?php echo $data ['contactno']; ?></td>
+                                    <td><?php echo $data ['bemailadd']; ?></td>
+                                    <td><?php echo $data ['n_violator']; ?></td>
+                                    <td><?php echo $data ['violator_age']; ?></td>
+                                   
+                                    <td><?php echo $data ['violator_address']; ?></td>
+                                    <td><?php echo $data ['witnesses']; ?></td>
+                                    <td><?php echo $data ['complaints']; ?></td>
+                                    
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><a href="lupon_ongoing.php"><i class="fa fa-check-circle"></i>Done</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><a href="lupon_mediation.php"><i class="fa fa-ban"></i>Deny</button>
+							</a>
+									</td>	
 
+								</tr>
+							
+							<?php
+							}
+							?>
+						</table>
 
 
 

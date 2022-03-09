@@ -232,7 +232,7 @@ require 'db/conn.php';
 						include "db/conn.php";
 	                    include "db/user.php";
 							
-						$mquery = "SELECT * FROM bpso";
+						$mquery = "SELECT * FROM admin_complaints";
 						$countemployee = $db->query($mquery)
 						?>
 
@@ -240,13 +240,18 @@ require 'db/conn.php';
 								<tr class="t_head">
 									<th>Case No.</th>
 									<th>Complainant</th>
-									<th>Accussed</th>
+									<th>Age</th>
 									<th>Address</th>
-									<th>Time And Date:</th>
-									<th>Contact No.</th>
-									<th>Complaints:</th>
-									<th>Status</th>
-									<th>Action</th>
+									<th>Incident Address</th>
+									<th>Contact</th>
+									<th>Email</th>
+									<th>Violator</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Witnesses</th>
+                                    <th>Complaints</th>
+									<th>Department</th>
+                                    <th>Action</th>
 								</tr>                       
 							</thead>
 							<?php
@@ -254,18 +259,84 @@ require 'db/conn.php';
 							{
 							?>
 							<tr class="table-row">
-									<td><?php echo $data ['CaseNo']; ?></td>
-									<td><?php echo $data ['Complainant']; ?></td>
-									<td><?php echo $data ['Accused']; ?></td>
-									<td><?php echo $data ['Address']; ?></td>
-									<td><?php echo $data ['TimeAndDate']; ?></td>
-									<td><?php echo $data ['Contact']; ?></td>
-									<td><?php echo $data ['Complaints']; ?></td>
-									<td>Active</td>
+									<td><?php echo $data ['admincomp_id']; ?></td>
+									<td><?php echo $data ['n_complainant']; ?></td>
+									<td><?php echo $data ['comp_age']; ?></td>
+									<td><?php echo $data ['comp_address']; ?></td>
+									<td><?php echo $data ['inci_address']; ?></td>
+									<td><?php echo $data ['contactno']; ?></td>
+                                    <td><?php echo $data ['bemailadd']; ?></td>
+                                    <td><?php echo $data ['n_violator']; ?></td>
+                                    <td><?php echo $data ['violator_age']; ?></td>
+                                    <td><?php echo $data ['violator_address']; ?></td>
+                                    <td><?php echo $data ['witnesses']; ?></td>
+                                    <td><?php echo $data ['complaints']; ?></td>
+									<td><?php echo $data ['dept']; ?></td>
 									<td>
-										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><i class="fa fa-check-circle"></i>Done</button>
-										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><i class="fa fa-ban"></i>Deny</button>
+									<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Process</button>
+
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+	
+
+	<div class="container">
+				<div class="row">
+						<div class="col-md-8">
+							<h4 class="container">  </h4> 
+	              </div>
+	              </div> 
+				<form class="w3-container" method="POST">
+					<div class="">
+						<div class="col-md-6">
+							<label><b>Complainant</b></label>
+							<input type="text" name="Complainant" class="form-control" placeholder="Enter Name" required>
+					</div>
+					<div class="col-md-6">
+							<label>Accused</label>
+							<input type="text" name="Accussed" class="form-control" placeholder="Enter Name" required>
+					</div>
+					</div>
+					<div class="row">
+					<div class="col-md-6">
+							<label>Address</label>
+							<input type="text" name="Address" class="form-control" placeholder="Enter address" required>
+					</div>
+					</div>
+
+					<div class="row">
+					<div class="col-md-6">
+							<label>Contact</label>
+							<input type="text" name="ContactNo" class="form-control" placeholder="Enter contact" required>
+					</div>
+					</div>
+					
+					<div class="row">
+					<div class="col-md-6">
+							<label>Complaints</label>
+							<input type="text" name="Complaint" class="form-control" placeholder="Enter complaints" required>
+					</div>
+					</div>
+
+					<div class="row">
+					<div class="col-md-6">
+							
+							
+					</div>
+					</div>
+				</form>
+
+	<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+	<input type="submit" name="insert" class="btn btn-success"></button>
+	  <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+	  
+	</div>
+
+  </div>
+</div>
+</div>
 									</td>	
+
 								</tr>
 							
 							<?php
