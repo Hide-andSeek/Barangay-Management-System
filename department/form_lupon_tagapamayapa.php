@@ -9,7 +9,7 @@ require_once "db/conn.php" ;
 		$contact=$_POST['ContactNo'];
 		$complaint=$_POST['Complaint'];
 
-		$sql = mysqli_query($conn,"INSERT INTO lupondb(Complainant,Accussed,Address,ContactNo,Complaint,DateandTime)VALUES('$cname','$aname','$address','$contact','$complaint',NOW())");''
+		$sql = mysqli_query($conn,"INSERT INTO lupondb(Complainant,Accussed,Address,ContactNo,Complaint,DateandTime)VALUES('$cname','$aname','$address','$contact','$complaint',NOW())");
 		
 		if($sql){
 			echo"<script>alert('Record Succesfully Added!!!');</script>";

@@ -4,7 +4,7 @@
 	if(!isset($_SESSION["type"])){
 		header("location: 0index.php");
 	}
-	require 'db/conn.php';
+	require_once 'db/conn.php';
 
 	$user = '';
 	if(isset($_SESSION['user'])){
@@ -21,8 +21,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link href="https://cdn
+		.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
+		mes/base/jquery-ui.css">
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 		<link rel="stylesheet" href="css/styles.css">
 
@@ -39,7 +41,7 @@
 		<link rel="stylesheet" href="css/captain.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title> Lupon Case Details </title>
+		<title> Lupon Dashboard </title>
 
 		<style>
 			.content-table thead tr{
@@ -47,6 +49,17 @@
 			}
 			.content-table tbody tr{
 				text-align: left !important;
+			}
+			.w3-modal-content{
+				width: 600px !important;
+			}
+			.form-group {
+				padding: 0;
+				height: auto;
+				width: auto;
+			}
+			.required{
+				color: red;
 			}
 			.r_search{
 				padding: 0 10px;
@@ -84,14 +97,14 @@
 					</a>
 					<span class="tooltip">Upcoming Hearing</span>
 				</li>
-				<li>
+				<li class="active">
 					<a class="side_bar" href="lupon_active_cases.php">
 						<i class='fas fa-briefcase'></i>
 						<span class="links_name">Active Cases</span>
 					</a>
 					<span class="tooltip">Active Cases</span>
 				</li>
-				<li class="active">
+				<li>
 					<a class="side_bar" href="lupon_settled.php">
 						<i class='fas fa-user-check'></i>
 						<span class="links_name">Settled Cases</span>
@@ -158,10 +171,8 @@
 							<th>Case No.</th>
 							<th>Complainant</th>
 							<th>Accused</th>
-							<th>Date and Time</th>
-							<th>Complaint</th>
+							<th>Hearing Date and Time</th>
 							<th>Personnel</th>
-							<th>Status</th>
 							<th>Action</th>
 						</tr>                 
 					</thead>
@@ -174,19 +185,18 @@
 										ac.`admincomp_id`,
 										ac.`n_complainant`,
 										ac.`n_violator`,
-										ac.`app_date`,
-										ac.`complaints`,
+										lc.`hearingDate`,
+										lc.`hearingTime`,
 										ls.`statusID`,
-										ls.`status`,
 										hp.`personnelID`,
 										hp.fullname
 									FROM luponCases lc
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4 AND ac.`admincomp_id` LIKE ?
-									OR ls.`statusID` = 4 AND ac.`n_complainant` LIKE ?
-									ORDER BY ac.`admincomp_id` DESC;
+									WHERE ls.`statusID` = 2 AND ac.`admincomp_id` LIKE ?
+									OR ls.`statusID` = 2 AND ac.`n_complainant` LIKE ?
+									ORDER BY lc.`hearingDate` ASC;
 								";
 								$stmt = $db->prepare($sql);
 								$stmt->execute(["%$search%","%$search%"]);
@@ -196,18 +206,17 @@
 										ac.`admincomp_id`,
 										ac.`n_complainant`,
 										ac.`n_violator`,
-										ac.`app_date`,
-										ac.`complaints`,
+										lc.`hearingDate`,
+										lc.`hearingTime`,
 										ls.`statusID`,
-										ls.`status`,
 										hp.`personnelID`,
 										hp.fullname
 									FROM luponCases lc
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4
-									ORDER BY ac.`admincomp_id` DESC;
+									WHERE ls.`statusID` = 2
+									ORDER BY lc.`hearingDate` ASC;
 								";
 								$stmt = $db->prepare($sql);
 								$stmt->execute();
@@ -219,23 +228,98 @@
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
 							<td><?php echo ucwords($row['n_complainant']); ?></td>
 							<td><?php echo ucwords($row['n_violator']); ?></td>
-							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
-							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+							<td><?php echo date("F d, Y", strtotime($row['hearingDate']))." ".date("h:i a", strtotime($row['hearingTime'])); ?></td>
 							<td><?php echo $row['fullname']; ?></td>
-							<td><?php echo strtoupper($row['status']); ?></td>
-							<td class="text-end">
-								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+							<td class="text-end d-flex gap-2">
+								<button class="btn btn-primary btn-sm settled">Settled</button>
+								<button class="btn btn-danger btn-sm notSettled">Not Settled</button>
 							</td>	
 						</tr>
 						<?php }}else{ ?>
 						<tr>
-							<td colspan="8" class="text-center text-muted">No records to show</td>
+							<td colspan="6" class="text-center text-muted">No records to show</td>
 						</tr>
 						<?php } ?>
 					</tbody>
 				</table>
+				<!-- Settled Modal -->
+				<div id="settledModal" class="w3-modal">
+					<div class="w3-modal-content w3-animate-top">
+						<header class="w3-container w3-teal">
+							<span class="w3-button w3-display-topright closeModal">&times;</span>
+							<h2>Settled Case</h2>
+						</header>
+						<div class="w3-container p-3">
+							<div class="alert alert-info"><i class="fa fa-info-circle"></i> Only PDF File is allowed.</div>
+							<p>Case Number: <strong><span class="caseNo"></span></strong></p>
+							<form action="db/lupon.php" method="post" id="form-settled" enctype="multipart/form-data">
+								<input type="hidden" id="complaintID" name="complaintID" value="" required>
+								<div class="form-group mb-3">
+									<label for="uploadFile">Upload File: <span class="required">*</span></label>
+									<input type="file" class="form-control" name="uploadFile" id="uploadFile" accept=".pdf" required>
+								</div>
+								<div class="text-end">
+									<button class="btn btn-primary btn-sm setSettled" name="setSettled">Submit</button>
+									<button class="btn btn-secondary btn-sm closeModal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- Not Settled Modal -->
+				<div id="notSettledModal" class="w3-modal">
+					<div class="w3-modal-content w3-animate-top">
+						<header class="w3-container w3-teal">
+							<span class="w3-button w3-display-topright closeModal">&times;</span>
+							<h2>Not Settled Case</h2>
+						</header>
+						<div class="w3-container p-3">
+							<div class="alert alert-info"><i class="fa fa-info-circle"></i> Only PDF File is allowed.</div>
+							<p>Case Number: <strong><span class="caseNo"></span></strong></p>
+							<form action="db/lupon.php" method="post" id="form-notSettled" enctype="multipart/form-data">
+								<input type="hidden" id="complaintID" name="complaintID" value="" required>
+								<div class="form-group mb-3">
+									<label for="uploadFile">Upload File: <span class="required">*</span></label>
+									<input type="file" class="form-control" name="uploadFile" id="uploadFile" accept=".pdf" required>
+								</div>
+								<div class="text-end">
+									<button class="btn btn-primary btn-sm setNotSettled" name="setNotSettled">Submit</button>
+									<button class="btn btn-secondary btn-sm closeModal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(".closeModal").click(function(){
+					$(".w3-modal").css("display", "none");
+				});
+				// Settled
+				$(".settled").click(function(){
+					var form = $("#form-settled");
+					var complaintID = $(this).closest("tr").data("id");
+					$(form).trigger('reset');
+					$(form).find("#complaintID").val(complaintID);
+					$("#settledModal").find(".caseNo").text(complaintID);
+					$("#settledModal").css("display", "block");
+				});
+				// Not Settled
+				$(".notSettled").click(function(){
+					var form = $("#form-notSettled");
+					var complaintID = $(this).closest("tr").data("id");
+					$(form).trigger('reset');
+					$(form).find("#complaintID").val(complaintID);
+					$("#notSettledModal").find(".caseNo").text(complaintID);
+					$("#notSettledModal").css("display", "block");
+				});
+			});
+		</script>
 	</body>
 </html>			
 					

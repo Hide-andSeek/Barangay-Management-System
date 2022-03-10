@@ -4,7 +4,7 @@
 	if(!isset($_SESSION["type"])){
 		header("location: 0index.php");
 	}
-	require 'db/conn.php';
+	require_once 'db/conn.php';
 
 	$user = '';
 	if(isset($_SESSION['user'])){
@@ -21,8 +21,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link href="https://cdn
+		.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
+		mes/base/jquery-ui.css">
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 		<link rel="stylesheet" href="css/styles.css">
 
@@ -39,7 +41,7 @@
 		<link rel="stylesheet" href="css/captain.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title> Lupon Case Details </title>
+		<title> Lupon Dashboard </title>
 
 		<style>
 			.content-table thead tr{
@@ -77,7 +79,7 @@
 					</a>
 					<span class="tooltip">Awaiting Schedule</span>
 				</li>
-				<li>
+				<li class="active">
 					<a class="side_bar" href="lupon_upcoming_hearings.php">
 						<i class='fas fa-user-clock'></i>
 						<span class="links_name">Upcoming Hearings</span>
@@ -91,7 +93,7 @@
 					</a>
 					<span class="tooltip">Active Cases</span>
 				</li>
-				<li class="active">
+				<li>
 					<a class="side_bar" href="lupon_settled.php">
 						<i class='fas fa-user-check'></i>
 						<span class="links_name">Settled Cases</span>
@@ -158,10 +160,8 @@
 							<th>Case No.</th>
 							<th>Complainant</th>
 							<th>Accused</th>
-							<th>Date and Time</th>
-							<th>Complaint</th>
+							<th>Hearing Date and Time</th>
 							<th>Personnel</th>
-							<th>Status</th>
 							<th>Action</th>
 						</tr>                 
 					</thead>
@@ -174,40 +174,38 @@
 										ac.`admincomp_id`,
 										ac.`n_complainant`,
 										ac.`n_violator`,
-										ac.`app_date`,
-										ac.`complaints`,
+										lc.`hearingDate`,
+										lc.`hearingTime`,
 										ls.`statusID`,
-										ls.`status`,
 										hp.`personnelID`,
 										hp.fullname
 									FROM luponCases lc
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4 AND ac.`admincomp_id` LIKE ?
-									OR ls.`statusID` = 4 AND ac.`n_complainant` LIKE ?
-									ORDER BY ac.`admincomp_id` DESC;
+									WHERE ls.`statusID` = 1 AND ac.`admincomp_id` LIKE ?
+									OR ls.`statusID` = 1 AND ac.`n_complainant` LIKE ?
+									ORDER BY lc.`hearingDate` ASC;
 								";
 								$stmt = $db->prepare($sql);
-								$stmt->execute(["%$search%","%$search%"]);
+								$stmt->execute(["%$search%", "%$search%"]);
 							}else{
 								$sql = "
 									SELECT 
 										ac.`admincomp_id`,
 										ac.`n_complainant`,
 										ac.`n_violator`,
-										ac.`app_date`,
-										ac.`complaints`,
+										lc.`hearingDate`,
+										lc.`hearingTime`,
 										ls.`statusID`,
-										ls.`status`,
 										hp.`personnelID`,
 										hp.fullname
 									FROM luponCases lc
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4
-									ORDER BY ac.`admincomp_id` DESC;
+									WHERE ls.`statusID` = 1
+									ORDER BY lc.`hearingDate` ASC;
 								";
 								$stmt = $db->prepare($sql);
 								$stmt->execute();
@@ -219,23 +217,52 @@
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
 							<td><?php echo ucwords($row['n_complainant']); ?></td>
 							<td><?php echo ucwords($row['n_violator']); ?></td>
-							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
-							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+							<td><?php echo date("F d, Y", strtotime($row['hearingDate']))." ".date("h:i a", strtotime($row['hearingTime'])); ?></td>
 							<td><?php echo $row['fullname']; ?></td>
-							<td><?php echo strtoupper($row['status']); ?></td>
 							<td class="text-end">
-								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+								<form action="db/lupon.php" method="post" id="form-setActive">
+									<input type="hidden" name="complaintID" value="<?php echo $row['admincomp_id']; ?>">
+									<input type="hidden" name="setAsActive">
+									<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+									<button name="setAsActive" class="btn btn-primary btn-sm setAsActive">Set as Active</button>
+								</form>
 							</td>	
 						</tr>
 						<?php }}else{ ?>
 						<tr>
-							<td colspan="8" class="text-center text-muted">No records to show</td>
+							<td colspan="6" class="text-center text-muted">No records to show</td>
 						</tr>
 						<?php } ?>
 					</tbody>
 				</table>
 			</div>
 		</section>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(".setAsActive").click(function(e){
+					var form = $("#form-setActive");
+					var btn = $(this);
+					e.preventDefault();
+					Swal.fire({
+						title: 'Set it Active?',
+						text: "Once it activated, it will be moved to active cases!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Continue'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$(btn).prop("disabled", true);
+							$(form).unbind("submit").submit();
+						}
+					})
+				});
+			});
+		</script>
 	</body>
 </html>			
 					
