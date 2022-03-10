@@ -1,29 +1,37 @@
 <?php
 session_start();
-include('announcement_includes/functions.php');
-require 'db/conn.php';
 
-if(!isset($_SESSION["type"]))
-{
+include "../db/conn.php";
+include "../db/documents.php";
+include('../announcement_includes/functions.php');
+include "../db/viewdetinsert.php";
+include('../send_email.php');
+
+if (!isset($_SESSION["type"])) {
     header("location: 0index.php");
+}
+?>
+
+<?php
+$user = '';
+
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
+?>
+
+<?php
+$dept = '';
+
+if (isset($_SESSION['type'])) {
+    $dept = $_SESSION['type'];
 }
 ?>
 
 
 <?php
-	$user = '';
-	if(isset($_SESSION['user'])){
-		$user = $_SESSION['user'];
-	}
-	
-	$dept = '';
-	if(isset($_SESSION['type'])){
-		$dept = $_SESSION['type'];
-	}
+
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -36,9 +44,10 @@ if(!isset($_SESSION["type"]))
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/admincompviewdet.css">
-    <link rel="stylesheet" href="announcement_css/custom.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admincompviewdet.css">
+    <link rel="stylesheet" href="../announcement_css/custom.css">
+    <script src="../resident-js/sweetalert.min.js"></script>
 
     <!--Font Styles-->
     <link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
@@ -50,113 +59,194 @@ if(!isset($_SESSION["type"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-       div.align-box {
-			padding-top: 23px;
-			display: flex;
-			align-items: center;
-		}
+        .modal {
+            display: none;
+            position: absolute;
+            z-index: 9999;
+            padding-top: 50px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Black w/ opacity */
+        }
 
-		.box-report {
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-		}
+        /* Modal Content (image) */
+        .modal-content {
+            display: absolute;
+            margin: auto;
+            max-width: 700px;
+            width: 60%;
+        }
 
-		* {
-			font-size: 13px;
-		}
 
-		a {
-			text-decoration: none;
-		}
+        /* Add Animation */
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
 
-		.addannounce {
-			margin-top: 340px;
-			margin-left: 25px;
-			font-size: 13px;
-		}
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
 
-		.fileupload {
-			font-size: 13px;
-			margin-left: 15px;
-		}
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
 
-		.pagination {
-			margin-top: 32%
-		}
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
 
-		.page {
-			margin-left: 15px;
-		}
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .emailwidth {
+            width: 95%;
+        }
+
+        .main-content {
+            display: flex;
+        }
+
+        .main-content-email {
+            padding: 20px;
+        }
+
+        span.topright {
+            text-align: right;
+            padding: 8px 24px;
+            font-size: 25px;
+        }
+
+        .topright:hover {
+            color: red;
+            cursor: pointer;
+            float: right;
+            padding: 8px 24px;
+        }
+
+        .viewbtn {
+            width: 100%;
+            height: 35px;
+            background-color: white;
+            color: black;
+            border: 1px solid #008CBA;
+        }
+
+        .viewbtn:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .usersel {
+            pointer-events: none;
+            border: 1px solid orange
+        }
     </style>
-     <title> BPSO Dashboard </title>
+    <title> Ongoing Case View Details </title>
 
     <!-- Side Navigation Bar-->
-	<div class="sidebar">
-			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
-				<i class='bx bx-menu menu' id="btn"></i>
-			</div>
-			<ul class="nav-list">
-			  <li>
-			  <a class="side_bar" href="     ">
+    <div class="sidebar">
+        <div class="logo-details">
+            <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt="" />
+            <div class="logo_name">VAWC Department</div>
+            <i class='bx bx-menu menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+        <li>
+			  <a class="side_bar nav-button" href="vawcdashboard.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  
-              
+			  <li>
+			   <a class="side_bar nav-button nav-active" href="vawc_ongoing.php">
+				 <i class='bx bx-user-circle ongoing'></i>
+				 <span class="links_name">Ongoing Case</span>
+			   </a>
+			   <span class="tooltip">Ongoing Case</span>
+			 </li>
 
 			 <li>
-			   <a class="side_bar" href="bpso_violators.php">
-				 <i class='bx bx-error'></i>
-				 <span class="links_name">Violations</span>
+			   <a class="side_bar nav-button " href="vawc_closed.php">
+				 <i class='bx bx-user-check closed'></i>
+				 <span class="links_name">Closed Case</span>
 			   </a>
-			   <span class="tooltip">Violations</span>
+			   <span class="tooltip">Closed Cased</span>
 			 </li>
+
 			 <li>
-			   <a class="side_bar" href="bpso_patrols.php">
-				 <i class='bx bx-walk'></i>
-				 <span class="links_name">Night Patrol</span>
+			   <a class="side_bar nav-button" href="vawc_total.php">
+				 <i class='bx bx-user-pin total'></i>
+				 <span class="links_name">Total Cases</span>
 			   </a>
-			   <span class="tooltip">Night Patrol</span>
+			   <span class="tooltip">Total Cases</span>
 			 </li>
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
-				   <div class="name_job">
-				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
-				   </div>
-				 </div>
-				 <a href="emplogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
-			</ul>
-		  </div>
-		  <!-- Middle Section -->
-		  <section class="home-section">
-			<!-- Top Section -->
-			  <section class="top-section">
-				  <div class="top-content">
-					<div>
-						<h5>BARANGAY PUBLIC SAFETY OFFICER (BPSO)
-						<a href="#" class="circle">
-							 <img src="img/dt.png" >
-					    </a>
-					    </h5>	  
-					</div>
-				  </div>
-			  </section>
-			  
-			  <div id="content" class="container col-md-12">
+
+            <li class="profile">
+                <div class="profile-details">
+                    <div class="name_job">
+                        <div class="job"><strong><?php echo $user; ?></strong></div>
+                        <div class="job" id=""><?php echo $dept; ?>|| Online</div>
+                    </div>
+                </div>
+                <a href="emplogout.php">
+                    <i class='bx bx-log-out d_log_out' id="log_out"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Middle Section -->
+    <section class="home-section">
+        <!-- Top Section -->
+        <section class="top-section">
+            <div class="top-content">
+                <div>
+                    <h5>Ongoing Case >> View Details
+                        <a href="#" class="circle">
+                            <img src="../img/dt.png">
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </section>
+
+        <div id="content" class="container col-md-12">
             <?php
             if (isset($_GET['id'])) {
                 $ID = $_GET['id'];
@@ -238,9 +328,13 @@ if(!isset($_SESSION["type"]))
             ?>
 
             <div>
-                
-                
-               
+                <hr>
+                <div style="text-align: center;">
+                    <h5>
+                        View: Ongoing Case
+                    </h5>
+                </div>
+                <hr>
                 <?php
                 if (isset($_SESSION['statusadmincomp'])) {
                     if ($_SESSION['statusadmincomp'] == "ok") {
@@ -261,11 +355,11 @@ if(!isset($_SESSION["type"]))
                 <div style="float: right; display: inline-block;">
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
 
-                    <a href="bpso_violators.php">
-                        <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                    <a href="vawc_ongoing.php">
+                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
                 </div>
@@ -304,7 +398,7 @@ if(!isset($_SESSION["type"]))
                                     <div class="information col">
                                         <p>Body: </p>
                                         <textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
-                                        <script type="text/javascript" src="announcement_css/js/ckeditor/ckeditor.js"></script>
+                                        <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
                                         <script type="text/javascript">
                                             CKEDITOR.replace('message');
                                         </script>
@@ -327,7 +421,7 @@ if(!isset($_SESSION["type"]))
                     <div id="ssms" class="modal">
                         <div class="modal-content animate">
                             <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="send_sms.php" class="body">
+                            <form method="POST" action="../send_sms.php" class="body">
                                 <div class="main-content-email">
 
                                     <div class="main-content">
@@ -356,7 +450,7 @@ if(!isset($_SESSION["type"]))
                     </div>
                 </div>
 
-                
+                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
                 <br>
                 <table id="viewdetails" class="font-sizee" style="margin-bottom: -10px;">
@@ -476,43 +570,35 @@ if(!isset($_SESSION["type"]))
                             // create array variable to store data from database
                             $data = array();	
 
-							$mquery = "SELECT * FROM lupondb";
-						$countemployee = $db->query($mquery)
+							$mquery = "SELECT * FROM ongoingcase WHERE admincomp_id = $ID";
+							$countemployee = $db->query($mquery)
 						?>
-
+						
 							<thead>
-								<tr class="t_head">
-									<th>Case No.</th>
-									<th>Complainant</th>
-									<th>Accussed</th>
-									<th>Address</th>
-									<th>Time And Date:</th>
-									<th>Contact No.</th>
-									<th>Complaints:</th>
-									<th>Status</th>
-									<th>Action</th>
-									
+								<tr>
+                                    <th width="15%">Complainant's Name</th>
+                                    <th width="15%">Violator's Name</td>
+                                    <th width="15">Hearing Date</th>
+                                    <th width="15%">Facilitated By</th>
+                                    <th width="15%">Date Added</th>
+                                    <th width="15%">Remarks</th>
+                                    <th width="15%">Approved By</th>
 								</tr>                       
 							</thead>
 							<?php
 							foreach($countemployee as $data) 
 							{
 							?>
-							<tr class="table-row">
-									<td><?php echo $data ['CaseNo']; ?></td>
-									<td><?php echo $data ['Complainant']; ?></td>
-									<td><?php echo $data ['Accussed']; ?></td>
-									<td><?php echo $data ['Address']; ?></td>
-									<td><?php echo $data ['DateandTime']; ?></td>
-									<td><?php echo $data ['ContactNo']; ?></td>
-									<td><?php echo $data ['Complaint']; ?></td>
-									<td>Active</td>
-									<td>
-								
-										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_update.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
-										
-									</td>	
-								</tr>
+                            <tbody>
+                                <tr>
+                                        <td><?php echo $data['n_complainant']; ?></td>
+                                        <td><?php echo $data['n_violator']; ?></td>
+                                        <td><?php echo $data['hearing_date'] ?></td>
+                                        <td><?php echo $data['app_by']; ?></td>
+                                        <td><?php echo $data['date_added']; ?></td>
+                                        <td><?php echo $data['remarks']; ?></td>
+                                        <td><?php echo $data['ongoing_appby']; ?></td>
+                                </tr>	
 							</tbody>
 							<?php
 							}
@@ -520,7 +606,6 @@ if(!isset($_SESSION["type"]))
 						
 						</table>
         </div>
-		
                     <div class="information col">
                         <label class="employee-label ">Hearing Date</label>
                         <input type="date" class="form-control inputtext control-label" id="hearing_date" style="padding: 5px;" name="hearing_date">

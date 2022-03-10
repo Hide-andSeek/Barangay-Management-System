@@ -630,6 +630,7 @@ select.form-text {
   margin-top: 16px;
 }
 
+<<<<<<< HEAD
 .red {
   color: red;
 }
@@ -754,6 +755,112 @@ a.btnhover:hover {
   background-color: green;
   color: black;
 }
+=======
+ .userpersonal_form{
+		 display: flex;
+	 }
+
+	 
+	 .form-group{
+		 font-family: inherit;
+		 font-size: 13px;
+		 padding-left: 10px;
+		 margin-bottom: 20px;
+		 width: 300px;
+		 height: 35px;
+
+	 }
+	 input.form-text, select.form-text{
+		 font-size: 13px;
+	 }
+															/* Disabling Contact Number Arrow */
+	 .number::-webkit-outer-spin-button,
+	 .number::-webkit-inner-spin-button,
+	 .contactnumber::-webkit-outer-spin-button,
+	 .contactnumber::-webkit-inner-spin-button{
+		-webkit-appearance: none;
+		margin: 0;
+	 }
+	  
+	 .left_userpersonal_info{
+		margin-left: 3%;
+		margin-top: 15px;
+	 }
+				
+	 .right_userpersonal_info{
+		margin-left: 50px;
+		margin-top: 16px;
+	 }
+	 
+	 .red{
+		 color: red;
+	 }
+	 
+	.field_set{
+		border-color: black;
+		border-style: solid;
+	}
+	
+	legend{
+		font-size: 18px;
+	}	 
+	
+	i.bx:hover{
+		color: white;
+	}
+			 
+																			/*bx - icon color */
+	i.menu{color: #fff}
+	i.id, i.admin, i.lupon{color: #a809b0}
+	i.clearance, i.employee{color: #1cb009}
+	i.sms, i.official{color: #478eff}
+	i.blotter-com, i.census, i.vawc{color: #9e0202}
+	i.indigency, i.dash, i.bcpc{color: #0218bd}
+	i.permit, i.iannouncement{color: #e0149c}
+	i.saveicon:hover{color: blue;}
+	i.payment:hover{color: rgba(255, 136, 0, 0.801);}
+	
+	
+  i.ongoing{color: blue;}
+  i.pending{color: gray;}
+  i.closed, i.asterisk{color: red;}
+  i.total{color: #d834eb}
+
+
+  /* View and Approve btn from req documents*/
+
+  
+  button.view_approvebtn, a.view_approvebtn{width: 160px; height: 34px;margin-bottom: 5px; background-color: #4CAF50; color: white;}
+  button.view_approvebtn:hover, a.view_approvebtn:hover{ background-color: white; color: black; border: 1px solid #4CAF50; }
+  button.view_declinebtn{background: #c24c44}
+  button.view_declinebtn:hover{color: white; background: #d9534a;}
+
+  input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+			margin: 0;
+		}
+		.topright{
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.topright:hover {
+			color: red;
+			cursor: pointer;
+			width:100%;
+			float:right;
+			padding:8px 16px;
+		}
+		.send-message{margin: 15px 15px 15px 15px;}
+
+    a.btnhover{color: black; background: gray;}
+    /* Style the active class (and buttons on mouse-over) */
+		a.activehover, a.btnhover:hover {
+      background-color: green;
+      color: black;
+    }
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 /* 
     ::-webkit-scrollbar{ width: 8px; border-radius: 5px;}
 		::-webkit-scrollbar-track{background: #f1f1f1;  border-radius: 5px;}

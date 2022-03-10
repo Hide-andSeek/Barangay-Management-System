@@ -75,9 +75,10 @@ if(isset($_POST['generate']) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <link rel="stylesheet" href="../css/styles.css">
-
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/documentprint.css">
     <link rel="stylesheet" href="../css/print.css">
+    
     <!-- <link rel="stylesheet" type="text/css" href="../qr_code/css/bootstrap.min.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Font Styles-->
@@ -100,9 +101,9 @@ if(isset($_POST['generate']) ) {
 		.borderb{border-bottom: 1px solid black}
 		.offic{font-size:13px;}
         .borderstyle{border: none; font-size: 15px;}  
-        .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
-        .viewbtn{ height: 35px;  background-color: white; color: black; border: 1px solid #008CBA; width: 100%;}
-        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .barangay_permit{display: flex; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
+        .viewbtn{ height: 35px;  background-color: #008CBA;color: white; width: 100%;}
+        .viewbtn:hover{background-color: white; color: black; border: 1px solid #008CBA; }
         .done{width: 30%; font-size: 11px;}
         .inputtext, .inputpass {
 			font-family: 'Montserrat', sans-serif;
@@ -341,12 +342,12 @@ if(isset($_POST['generate']) ) {
                                             <input type="hidden" name="link" id="link" value="http://localhost:4000/Updated-Barangay-System">
                                             <div class="generatebtn" style="margin-top: 50px;">
 
-                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" name="generate">Generate QR Code</button>
+                                                <button type="submit" style="margin-top: 10px; cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" name="generate"><i class="bx bx-barcode"></i> Generate QR Code</button>
                                                 <br>
                                                 <!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?barangayidfile=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div> -->
-                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <div style="display: flex; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
                                                     <i class="bx bx-save saveicon"></i> Print
                                                 </button>

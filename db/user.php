@@ -161,10 +161,22 @@ if(isset($_POST['documentlogbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: includes/dashboard.php");
+							if($row["department"] == 'REQUESTDOCUMENT')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: includes/dashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
+						
 					else
 					{
 					   echo "<script>
@@ -218,9 +230,20 @@ if(isset($_POST['bcpcbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: bcpcdashboard.php");
+						if($row["department"] == 'BCPC')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: bcpcdashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
 					else
 					{
@@ -274,10 +297,20 @@ if(isset($_POST['officiallog']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: captaindashboard.php");
-						exit;
+						if($row["department"] == 'BRGYOFFICIAL')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: captaindashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='officials.php';
+									</script>";
+							}
 					}
 					else
 					{
@@ -331,12 +364,22 @@ if(isset($_POST['luponbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: lupon.php");
-						exit;
+						if($row["department"] == 'LUPON')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: lupon.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
-					else
+					else 
 					{
 					   echo "<script>
 					   			alert('Wrong Password!')
@@ -390,9 +433,20 @@ if(isset($_POST['vawcbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: includes/vawcdashboard.php");
+						if($row["department"] == 'VAWC')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: includes/vawcdashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
 					else
 					{
@@ -449,9 +503,20 @@ if(isset($_POST['complaintsbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: includes/compAdmin_dashboard.php");
+						if($row["department"] == 'COMPLAINT')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: includes/compAdmin_dashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
 					else
 					{
@@ -508,9 +573,21 @@ if(isset($_POST['accountingbtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						$_SESSION["type"] = $row["user_type"];
-						$_SESSION["user"] = $row["username"];
-						header("location: includes/compAdmin_dashboard.php");
+						
+						if($row["department"] == 'ACCOUNTING')
+							{
+								$_SESSION["type"] = $row["user_type"];
+								$_SESSION["user"] = $row["username"];
+								header("location: includes/compAdmin_dashboard.php");
+							}
+
+							else
+							{
+							echo "<script>
+										alert('Access Denied, You dont have a permission to access this department!')
+										window.location.href='0index.php';
+									</script>";
+							}
 					}
 					else
 					{

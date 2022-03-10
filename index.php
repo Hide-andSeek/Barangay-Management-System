@@ -237,7 +237,7 @@ include ('db/user.php');
             .announcement_item, .news_item{display: block; margin-left: auto; margin-right: auto; width: 50%; float: center;}
             .announce, .news{display: flex; justify-content: center; align-items: center;}
             .news{margin-top: 15px;}
-            .see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer; -webkit-transition-duration: 0.2s;}
+            .see_announcement, .see_news{margin-left: 20px;border: none; padding: 15px 32px; text-align: center; font-size: 16px; margin: 4px 2px; cursor: pointer;}
             .block-text{background-color: #d1d1d1;}
             .see_announcement:hover, .see_news:hover{box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8px 25px 0 rgba(0,0,0,0.10)}
 

@@ -1,21 +1,38 @@
 <?php
 require_once "db/conn.php" ;
 
-	if(isset($_POST['submit'])){
+	if(isset($_POST['insert'])){
 
 		$cname=$_POST['Complainant'];
-		$aname=$_POST['Accussed'];
+		$aname=$_POST['Accused'];
 		$address=$_POST['Address'];
 		$contact=$_POST['ContactNo'];
 		$complaint=$_POST['Complaint'];
+<<<<<<< HEAD
 
 		$sql = mysqli_query($conn,"INSERT INTO lupondb(Complainant,Accussed,Address,ContactNo,Complaint,DateandTime)VALUES('$cname','$aname','$address','$contact','$complaint',NOW())");
+=======
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 		
-		if($sql){
+		$sql = "INSERT INTO bpso(Complainant,Accused,Address,ContactNo,Complaint)VALUES(:cn,:an,:adrss,:cno,:comp)";
+		$query = $db->prepare($sql);
+
+		$query->bindParam(':cn',$cname,PDO::PARAM_STR);
+		$query->bindParam(':an',$aname,PDO::PARAM_STR);
+		$query->bindParam(':adrss',$address,PDO::PARAM_STR);
+		$query->bindParam(':cno',$contact,PDO::PARAM_STR);
+		$query->bindParam(':comp',$complaint,PDO::PARAM_STR);
+
+		$query->Execute();
+
+		$lastInsertId = $db->lastInsertId();
+ 
+		if($lastInsertId){
 			echo"<script>alert('Record Succesfully Added!!!');</script>";
-			echo"<script>document.location='lupon_tagapamayapa.php';</script>";
+			echo"<script>window.location='lupon_tagapamayapa.php'</script>";
 		}else{
-			echo"<script> alert('Something Went Wrong !!!');</script>";
+			echo"<script>alert('Something Went Wrong !!!');</script>";
+			echo"<script>window.location='lupon_tagapamayapa.php'</script>";
 		}
 	}
 ?>
@@ -29,7 +46,7 @@ require_once "db/conn.php" ;
 	<!-- Bootstrap CSS -->
     <link href="https://cdn
 	.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-   
+	 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>--> 
@@ -52,7 +69,9 @@ require_once "db/conn.php" ;
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <title> Lupon Dashboard </title>
-	 
+	 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+	 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	 
 	 <style>
 		div.align-box{padding-top: 23px; display: flex; align-item: center;}
@@ -69,28 +88,71 @@ require_once "db/conn.php" ;
 	 </style>
    </head>
 	<body>
+<<<<<<< HEAD
+		<!-- Side Navigation Bar-->
+		   <div class="sidebar">
+			<div class="logo-details">
+			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+				<div class="logo_name">Barangay Commonwealth</div>
+				<i class='bx bx-menu menu' id="btn"></i>
+			</div>
+			<ul class="nav-list">
+			  <li>
+			  <a class="side_bar" href="lupon.php">
+				  <i class='bx bx-grid-alt dash'></i>
+				  <span class="links_name">Dashboard</span>
+				</a>
+				 <span class="tooltip">Dashboard</span>
+			  </li>
+			  
+			
+			   
+
+			<!--Setting Section-->
+			 <li>
+			   <a class="side_bar" href="settings.php">
+				 <i class='bx bx-cog' ></i>
+				 <span class="links_name">Setting</span>
+			   </a>
+			   <span class="tooltip">Setting</span>
+			 </li>
+			 
+			 <li class="profile">
+				 <div class="profile-details">
+				   <div class="name_job">
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id="">User Type: <?php echo $dept; ?></div>
+				   </div>
+				 </div>
+				 <a href="emplogout.php">
+					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+				 </a>
+			 </li>
+			</ul>
+		  </div>
+		  <!-- Middle Section -->
+		  <section class="home-section">
+=======
 	<section class="home-section">
+>>>>>>> 0b7318a54383eebb043598ac5976f623f28106e2
 			<!-- Top Section -->
 			  <section class="top-section">
-				  <div class="top-content">
-					<div>
-						<h5>OFFICE OF THE LUPONG TAGAPAMAYAPA
-						<a href="#" class="circle">
-							 <img src="img/dt.png" >
-					    </a>
-					    </h5>	  
-					</div>
-				  </div>
+				  
+						
+					
+				  
+					
+				  
 			  </section>
 		
 
 			    
 				<div class="container" style="width:50%;">
 				<div class="row">
-						<div class="col-md-6">
-							<h4> LUPON </h4> 
-	</div>
-	</div> 
+						<div class="col-md-8">
+							<h4 class="container" style="width:50%;"> CASE DETAILS </h4> 
+	              </div>
+	              </div> 
 				<form method="POST">
 					<div class="row">
 						<div class="col-md-6">
@@ -99,7 +161,7 @@ require_once "db/conn.php" ;
 					</div>
 					<div class="col-md-6">
 							<label>Accused</label>
-							<input type="text" name="Accussed" class="form-control" placeholder="Enter Name" required>
+							<input type="text" name="Accused" class="form-control" placeholder="Enter Name" required>
 					</div>
 					</div>
 					<div class="row">
@@ -112,7 +174,7 @@ require_once "db/conn.php" ;
 					<div class="row">
 					<div class="col-md-6">
 							<label>Contact</label>
-							<input type="text" name="Contact" class="form-control" placeholder="Enter contact" required>
+							<input type="text" name="ContactNo" class="form-control" placeholder="Enter contact" required>
 					</div>
 					</div>
 					
@@ -125,8 +187,8 @@ require_once "db/conn.php" ;
 
 					<div class="row" style="margin-top:1%;">
 					<div class="col-md-6">
-							<button type="text" name="submit" class="btn btn-primary">Submit</button>
-							<a href="#" class="btn btn-success">View Details</a>
+							<input type="submit" name="insert" class="btn btn-success"></button>
+							<a href="lupon.php" class="btn btn-danger">Back</a>
 					</div>
 					</div>
 				</form>

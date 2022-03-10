@@ -340,7 +340,7 @@
                     ?>
                    
                         <form action="" method="post">
-                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['bemailadd']; ?>
                                
                                 <input type="hidden" name="blotter_id" id="blotter_id" value="<?php echo $data['blotter_id']; ?>">
                                 <input type="hidden" name="status" id="status" value="Done">
@@ -522,12 +522,12 @@
 																
 					<div class="information col">
 						<label class="employee-label ">Approval Date </label>
-							<input type="date" class="form-control inputtext control-label usersel" id="app_date"  style="padding: 5px;" name="app_date" readonly>
+							<input type="date" class="form-control inputtext control-label" id="app_date"  style="padding: 5px;" name="app_date" readonly>
 					</div>
 
 			        <div class="information col">
 						<label class="employee-label"> Approved By </label>
-							<input class="form-control inputtext control-label usersel"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" readonly> 
+							<input class="form-control inputtext control-label"  style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $user; ?>" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" readonly> 
 					</div>
                     <div class="information col">
 						<label class="employee-label ">Attach File </label>

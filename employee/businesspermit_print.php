@@ -67,7 +67,7 @@ if(isset($_POST['generate']) ) {
 		.borderb{border-bottom: 1px solid black}
 		.offic{font-size:13px;}
         .borderstyle{border: none; font-size: 15px;}  
-        .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
+        .barangay_permit{display: flex; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
         .viewbtn{width: 100%; height: 35px; background-color: #008CBA;color: white;  }
         .viewbtn:hover{  background-color: white; color: black; border: 1px solid #008CBA;}
         .done{width: 30%; font-size: 11px;}
@@ -175,7 +175,7 @@ if(isset($_POST['generate']) ) {
                     ?>
                    
                         <form action="" method="post">
-                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
+                            <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>  <strong><?php echo $data['email_add']; ?></strong> || 
                                
                                 <input type="hidden" name="approved_bpermitid" id="approved_bpermitid" value="<?php echo $data['approved_bpermitid']; ?>">
                                 <input type="hidden" name="status" id="status" value="Done">
@@ -264,7 +264,7 @@ if(isset($_POST['generate']) ) {
                                                 <!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?bpermitfile=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div> -->
-                                                <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+                                                <div style="display: flex; justify-content: center; align-items: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
                                                     <i class="bx bx-save saveicon"></i> Print
                                                 </button>
@@ -273,7 +273,9 @@ if(isset($_POST['generate']) ) {
                                         </form>
                                     <form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
-                                           
+                                            <div  style="text-align: center; font-weight: 600">
+                                                <label>Send Attachment (Gmail)</label>
+                                            </div>
 
                                             <div class="information col">
                                                 <p> Fullname: </p>

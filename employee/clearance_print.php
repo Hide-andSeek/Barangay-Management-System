@@ -75,7 +75,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/documentprint_styles.css">
-	
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -89,9 +89,9 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 		.borderb{border-bottom: 1px solid black}
 		.offic{font-size:11.5px;}
         .borderstyle{border: none; font-size: 15px;}  
-        .barangay_permit{display: flex; justify; align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
-        .viewbtn{width: 100%; height: 35px;  background-color: white; color: black; border: 1px solid #008CBA;}
-        .viewbtn:hover{ background-color: #008CBA;color: white;}
+        .barangay_permit{display: flex;  align-items: center; justify-content: center; margin-left: 15px; margin-top: -35px;}
+        .viewbtn{width: 100%; height: 35px; background-color: #008CBA;color: white;}
+        .viewbtn:hover{ background-color: white; color: black; border: 1px solid #008CBA; }
         .done{width: 30%; font-size: 11px;}
         .inputtext, .inputpass {
 			font-family: 'Montserrat', sans-serif;
@@ -397,11 +397,11 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 										<br>
 										<br>
                                             <div class="generatebtn" style="margin-top: 50px;">
-                                                <button type="submit" style="cursor: pointer; " class="form-control generate viewbtn" name="generate">Generate</button>
+                                                <button type="submit" class="form-control viewbtn" style="width: 100%; cursor: pointer;" name="generate"><i class="bx bx-barcode"></i> Generate</button>
 												<!-- <div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 15px;">
                                                 <a style="text-decoration: none; margin-bottom: 5px;" class="form-control generate viewbtn" href="downloadqr.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
                                                 </div> -->
-												<div style="display: flex; justify; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
+												<div style="display: flex; align-items: center; justify-content: center; text-align:center; margin-top: 5px; font-size: 14px;">
                                                 <button style=" cursor: pointer;  font-size: 14px;" class="form-control generate viewbtn" onclick="window.print(); ">
                                                     <i class="bx bx-save saveicon"></i> Print
                                                 </button>
@@ -410,17 +410,19 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                                         </form>
 									<div >
 										<form method="POST" action="" class="body" enctype="multipart/form-data">
+											<div  style="text-align: center; font-weight: 600">
+                                                <label>Send Attachment (Gmail)</label>
+                                            </div>
+											<br>
                                         <div class="main-content-email">
-                                           
-
                                             <div class="information col">
                                                 <p> Fullname: </p>
-                                                <input class="form-control inputtext usersel" id="fullname" name="fullname" type="text"  value="<?php echo $data['full_name']; ?>">
+                                                <input class="form-control inputtext " id="fullname" name="fullname" type="text"  value="<?php echo $data['full_name']; ?>" readonly>
                                             </div>
 
                                             <div class="information col">
                                                 <p> To: </p>
-                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $data['emailadd']; ?>">
+                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $data['emailadd']; ?>" readonly>
                                             </div>
 
                                             <div class="information col">
@@ -436,7 +438,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 
                                             <div class="information col">
                                                 <p>Body: </p>
-                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day Ms/ Mr. <?php echo $data['full_name']; ?>, here is the pdf file of your Document Request <strong> (Barangay Clearance)</strong>
+                                                <textarea name="message" id="message" class="form-control inputtext" rows="32">Good Day Ms/ Mr. <strong><?php echo $data['full_name']; ?></strong>, here is the pdf file of your Document Request <strong> (Barangay Clearance)</strong>
 												<br>
                                                 <br>
                                                 Reminder: This is confidential document and intended for the specified recipient in message only. It is strictly forbidden to share, without a consent from the owner.
@@ -469,7 +471,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                                             </div>
 
                                             <div class="sendi">
-                                                <button name="clearancesendemail" class="form-control viewbtn" style="width: 96%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
+                                                <button name="clearancesendemail" class="form-control viewbtn" style="width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
                                             </div>
                                         </div>
                                     </form>

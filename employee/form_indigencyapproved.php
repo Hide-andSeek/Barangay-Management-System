@@ -129,7 +129,7 @@ if(!isset($_SESSION["type"]))
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 		.viewbtn{width: 65px; height: 35px; background-color: #008CBA;color: white; }
-		.viewbtn:hover{  background-color: white; color: black; border: 1px solid #008CBA;}
+		.viewbtn:hover{  background-color: white; color: black; }
 
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -659,7 +659,7 @@ if(!isset($_SESSION["type"]))
 
 										<input name="payment_stat" id="payment_stat" value="Paid" type="hidden">
 
-										<button style="text-decoration: none; width: 90px; height:30px;" class="form-control generate viewbtn verify" name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600"></i> Verify</button>
+										<button style="text-decoration: none; width: 90px; height:30px; background: #55cf71;" class="form-control generate viewbtn verify " name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600; "></i> Verify</button>
 									</form>
 									</td>
 

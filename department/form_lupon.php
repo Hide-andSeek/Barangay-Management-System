@@ -57,10 +57,11 @@
 		<div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Lupon Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
+<<<<<<< HEAD
 				<li class="active">
 					<a class="side_bar" href="lupon.php">
 						<i class='bx bx-grid-alt dash'></i>
@@ -123,6 +124,48 @@
 						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 					</a>
 				</li>
+=======
+			  <li>
+			  <a class="side_bar nav-button nav-active" href="#">
+				  <i class='bx bx-grid-alt dash'></i>
+				  <span class="links_name">Dashboard</span>
+				</a>
+				 <span class="tooltip">Dashboard</span>
+			  </li>
+			  <li>
+<<<<<<< HEAD
+			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
+=======
+			   <a class="side_bar" href="lupon_active.php">
+>>>>>>> 0b7318a54383eebb043598ac5976f623f28106e2
+				 <i class='fas fa-user-clock'></i>
+				 <span class="links_name">Active Cases</span>
+			   </a>
+			   <span class="tooltip">Active Cases</span>
+			 </li>
+			 
+
+			<!--Setting Section-->
+			 <li>
+			   <a class="side_bar nav-button" href="settings.php">
+				 <i class='bx bx-cog' ></i>
+				 <span class="links_name">Setting</span>
+			   </a>
+			   <span class="tooltip">Setting</span>
+			 </li>
+			 
+			 <li class="profile">
+				 <div class="profile-details">
+				   <div class="name_job">
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						   <div class="job" id=""><?php echo $dept; ?></div>
+				   </div>
+				 </div>
+				 <a href="emplogout.php">
+					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+				 </a>
+			 </li>
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 			</ul>
 		</div>
 		<!-- Middle Section -->
@@ -310,6 +353,7 @@
 							if($stmt->rowCount() > 0){
 								while($row = $stmt->fetch()){
 						?>
+<<<<<<< HEAD
 						<tr class="table-row">
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
 							<td><?php echo ucwords($row['n_complainant']); ?></td>
@@ -326,6 +370,67 @@
 				</table>
 			</div>
 		</section>
+=======
+
+							<thead>
+								<tr class="t_head">
+									<th>Case No.</th>
+									<th>Complainant</th>
+									<th>Accussed</th>
+									<th>Address</th>
+									<th>Time And Date:</th>
+									<th>Contact No.</th>
+									<th>Complaints:</th>
+									<th>Status</th>
+									<th>Action</th>
+									
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['CaseNo']; ?></td>
+									<td><?php echo $data ['Complainant']; ?></td>
+									<td><?php echo $data ['Accussed']; ?></td>
+									<td><?php echo $data ['Address']; ?></td>
+									<td><?php echo $data ['DateandTime']; ?></td>
+									<td><?php echo $data ['ContactNo']; ?></td>
+									<td><?php echo $data ['Complaint']; ?></td>
+									<td>Active</td>
+									<td>
+								
+										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_update.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
+										
+									</td>	
+								</tr>
+							
+							<?php
+							}
+							?>
+						</table>
+
+						</div>
+					
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
+			
+			</section>
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 	</body>
 </html>			
 					

@@ -298,11 +298,11 @@ if(!isset($_SESSION["type"]))
 										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
 										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
 									</label>
-									<div style="float: right;">
+									<!-- <div style="float: right;">
 										<a href="compAdmin_dashboard.php">
 											<img src="../img/back.png" title="Back?" class="hoverback" style="margin-right: 20px; width: 50px; height: 50; cursor: pointer;" alt="Back?">
 										</a>
-									</div>		
+									</div>		 -->
 								</form>
 							</div>						
 <!-- end of search form -->
@@ -348,12 +348,12 @@ if(!isset($_SESSION["type"]))
 						
 					</div>
 							<div class="col-md-12 pagination">
-								<h4 class="page">
+								<!-- <h4 class="page">
 									<?php 
 										// for pagination purpose
 										$function->doPages($offset, 'compAdmin_BCPCpage.php', '', $total_records, $keyword);
 									?>
-								</h4>
+								</h4> -->
 							</div>
 	</div>
 							<div class="separator"></div>

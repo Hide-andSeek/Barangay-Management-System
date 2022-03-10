@@ -63,6 +63,7 @@
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
+<<<<<<< HEAD
 				<li>
 					<a class="side_bar" href="lupon.php">
 						<i class='bx bx-grid-alt dash'></i>
@@ -125,6 +126,45 @@
 						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 					</a>
 				</li>
+=======
+			  <li>
+			  <a class="side_bar" href="lupon.php">
+				  <i class='bx bx-grid-alt dash'></i>
+				  <span class="links_name">Dashboard</span>
+				</a>
+				 <span class="tooltip">Dashboard</span>
+			  </li>
+			  
+			 <li>
+			   <a class="side_bar" href="form_lupon_printdocs.php">
+				 <i class='fa fa-print'></i>
+				 <span class="links_name">Print Document</span>
+			   </a>
+			   <span class="tooltip">Print Document</span>
+			 </li>
+			   
+
+			<!--Setting Section-->
+			 <li>
+			   <a class="side_bar" href="settings.php">
+				 <i class='bx bx-cog' ></i>
+				 <span class="links_name">Setting</span>
+			   </a>
+			   <span class="tooltip">Setting</span>
+			 </li>
+			 
+			 <li class="profile">
+				 <div class="profile-details">
+				   <div class="name_job">
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
+				   </div>
+				 </div>
+				 <a href="emplogout.php">
+					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+				 </a>
+			 </li>
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 			</ul>
 		</div>
 		<!-- Middle Section -->

@@ -1,6 +1,6 @@
 <?php
-
-
+DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
+error_reporting(~E_NOTICE);
 
         // 6.0 Prepared Statement for Admin Complaints: Req Documents
         if(isset($_POST['insertappbrgyid'])){
@@ -730,6 +730,132 @@ if(isset($_POST['insertAdminComp'])){
     }else{
         $_SESSION['result'] = 'There is an Error: ';
         $_SESSION['status'] = 'error';
+    }
+
+}
+}
+
+
+
+if(isset($_POST['saveCasebtn'])){
+
+    $admincomp_id = $_POST['admincomp_id'];
+    $n_complainant = $_POST['n_complainant'];
+    $comp_age = $_POST['comp_age'];
+    $comp_gender = $_POST['comp_gender'];
+    $comp_address = $_POST['comp_address'];
+    $inci_address = $_POST['inci_address'];
+    $contactno = $_POST['contactno'];
+    $bemailadd = $_POST['bemailadd'];
+    $n_violator = $_POST['n_violator'];
+    $violator_age = $_POST['violator_age'];
+    $violator_gender = $_POST['violator_gender'];
+    $relationship = $_POST['relationship'];
+    $violator_address = $_POST['violator_address'];
+    $witnesses = $_POST['witnesses'];
+    $complaints = $_POST['complaints'];
+    $dept = $_POST['dept'];
+    $app_date = $_POST['app_date'];
+    $app_by = $_POST['app_by'];
+    $date_added =date("Y-m-d H:i:s",strtotime("now"));
+    $hearing_date = $_POST['hearing_date'];       
+    $ongoing_appby = $_POST['ongoing_appby'];
+    $remarks = $_POST['remarks'];
+                     
+    // get image info
+    $blotter_image = $_FILES['ongoingcase_file']['name'];
+    $image_error = $_FILES['ongoingcase_file']['error'];
+    $image_type = $_FILES['ongoingcase_file']['type'];
+                                                    
+    // create array variable to handle error
+    $error = array();
+                                                    
+    if(empty($hearing_date)){
+    $error['hearing_date'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+    }
+    if(empty($ongoing_appby)){
+    $error['ongoing_appby'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+    }
+    if(empty($remarks)){
+    $error['remarks'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+    }
+
+    // common image file extensions
+    $allowedExts = array("pdf");
+                                                    
+    // get image file extension
+    error_reporting(E_ERROR | E_PARSE);
+    $extension = end(explode(".", $_FILES["ongoingcase_file"]["name"]));
+                                                            
+    if($image_error > 0){
+        $error['ongoingcase_file'] = " <span class='label label-danger cattxtbox errormsg'> You must insert pdf file here! </span>";
+        }else if(!(($image_type == "pdf")) &&
+        !(in_array($extension, $allowedExts))){  
+        
+         
+                                                    
+    $error['ongoingcase_file'] = " <span class='label label-danger errormsg'>File type must pdf!</span>";
+    }
+                                                    
+    if( !empty($hearing_date) &&  
+        !empty($ongoing_appby) && 
+        !empty($remarks) && 
+        empty($error['ongoingcase_file'])){
+                                                        
+    // create random image file name
+    $string = '0123456789';
+    $file = preg_replace("/\s+/", "_", $_FILES['ongoingcase_file']['name']);
+    $function = new functions;
+    $blotter_image = $function->get_random_string($string, 4)."-".date("Y-m-d").".".$extension;
+                                                            
+    // upload new image
+    $upload = move_uploaded_file($_FILES['ongoingcase_file']['tmp_name'], 'img/fileupload_ongoinbcpc/'.$blotter_image);
+                                                
+    // insert new data to menu table
+    $sql_query = "INSERT INTO ongoingcase (admincomp_id, n_complainant, comp_age, comp_gender, comp_address,inci_address, contactno, bemailadd, n_violator, violator_age, violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, date_added, hearing_date, ongoing_appby, remarks, ongoingcase_file) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                                        
+    $upload_image = $blotter_image;
+    $stmt = $connect->stmt_init();
+    if($stmt->prepare($sql_query)) {	
+    // Bind your variables to replace the ?s
+    $stmt->bind_param('sssssssssssssssssssssss', 
+    $admincomp_id,
+    $n_complainant,
+    $comp_age,
+    $comp_gender,
+    $comp_address,
+    $inci_address,
+    $contactno,
+    $bemailadd,
+    $n_violator,
+    $violator_age,
+    $violator_gender,
+    $relationship,
+    $violator_address,
+    $witnesses, 
+    $complaints,
+    $dept,
+    $app_date,
+    $app_by,
+    $date_added,
+    $hearing_date,
+    $ongoing_appby,
+    $remarks,
+    $upload_image
+    );
+    // Execute query
+    $stmt->execute();
+    // store result 
+    $result = $stmt->store_result();
+    $stmt->close();
+    }
+
+    if($result){
+        $_SESSION['status'] ="Submitted Successfully";
+        $_SESSION['status_code'] ="success";
+    }else{
+        $_SESSION['status'] ="Oh there's an Error";
+        $_SESSION['status_code'] ="error";
     }
 
 }

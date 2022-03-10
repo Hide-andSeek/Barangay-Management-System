@@ -1,29 +1,32 @@
 <?php
 session_start();
-include('announcement_includes/functions.php');
-require 'db/conn.php';
 
-if(!isset($_SESSION["type"]))
-{
+include "db/conn.php";
+include "db/documents.php";
+include('announcement_includes/functions.php');
+include "db/viewdetinsert.php";
+include('send_email.php');
+
+if (!isset($_SESSION["type"])) {
     header("location: 0index.php");
 }
 ?>
 
-
 <?php
-	$user = '';
-	if(isset($_SESSION['user'])){
-		$user = $_SESSION['user'];
-	}
-	
-	$dept = '';
-	if(isset($_SESSION['type'])){
-		$dept = $_SESSION['type'];
-	}
+$user = '';
+
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
 ?>
 
+<?php
+$dept = '';
 
-
+if (isset($_SESSION['type'])) {
+    $dept = $_SESSION['type'];
+}
+?>
 
 
 <!DOCTYPE html>
@@ -38,10 +41,11 @@ if(!isset($_SESSION["type"]))
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/admincompviewdet.css">
-    <link rel="stylesheet" href="announcement_css/custom.css">
+    <link rel="stylesheet" href="../announcement_css/custom.css">
+    <script src="resident-js/sweetalert.min.js"></script>
 
     <!--Font Styles-->
-    <link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
+    <link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 
     <!-- Boxicons CDN Link -->
@@ -50,113 +54,195 @@ if(!isset($_SESSION["type"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-       div.align-box {
-			padding-top: 23px;
-			display: flex;
-			align-items: center;
-		}
+        .modal {
+            display: none;
+            position: absolute;
+            z-index: 9999;
+            padding-top: 50px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Black w/ opacity */
+        }
 
-		.box-report {
-			width: 300px;
-			font-size: 14px;
-			border: 4px solid #7dc748;
-			padding: 30px;
-			margin: 10px;
-			border-radius: 5px;
-			align-items: center;
-		}
+        /* Modal Content (image) */
+        .modal-content {
+            display: absolute;
+            margin: auto;
+            max-width: 700px;
+            width: 60%;
+        }
 
-		* {
-			font-size: 13px;
-		}
 
-		a {
-			text-decoration: none;
-		}
+        /* Add Animation */
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
 
-		.addannounce {
-			margin-top: 340px;
-			margin-left: 25px;
-			font-size: 13px;
-		}
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
 
-		.fileupload {
-			font-size: 13px;
-			margin-left: 15px;
-		}
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
 
-		.pagination {
-			margin-top: 32%
-		}
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
 
-		.page {
-			margin-left: 15px;
-		}
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .emailwidth {
+            width: 95%;
+        }
+
+        .main-content {
+            display: flex;
+        }
+
+        .main-content-email {
+            padding: 20px;
+        }
+
+        span.topright {
+            text-align: right;
+            padding: 8px 24px;
+            font-size: 25px;
+        }
+
+        .topright:hover {
+            color: red;
+            cursor: pointer;
+            float: right;
+            padding: 8px 24px;
+        }
+
+        .viewbtn {
+            width: 100%;
+            height: 35px;
+            background-color: white;
+            color: black;
+            border: 1px solid #008CBA;
+        }
+
+        .viewbtn:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .usersel {
+            pointer-events: none;
+            border: 1px solid orange
+        }
     </style>
-     <title> BPSO Dashboard </title>
+    <title> Ongoing Case View Details </title>
 
     <!-- Side Navigation Bar-->
-	<div class="sidebar">
-			<div class="logo-details">
-			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
-				<i class='bx bx-menu menu' id="btn"></i>
-			</div>
-			<ul class="nav-list">
-			  <li>
-			  <a class="side_bar" href="     ">
-				  <i class='bx bx-grid-alt dash'></i>
-				  <span class="links_name">Dashboard</span>
-				</a>
-				 <span class="tooltip">Dashboard</span>
-			  </li>
-			  
-              
+    <div class="sidebar">
+        <div class="logo-details">
+            <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt="" />
+            <div class="logo_name">Barangay Commonwealth</div>
+            <i class='bx bx-menu menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a class="side_bar nav-button " href="bcpcdashboard.php">
+                    <i class='bx bx-category-alt dash'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
 
-			 <li>
-			   <a class="side_bar" href="bpso_violators.php">
-				 <i class='bx bx-error'></i>
-				 <span class="links_name">Violations</span>
-			   </a>
-			   <span class="tooltip">Violations</span>
-			 </li>
-			 <li>
-			   <a class="side_bar" href="bpso_patrols.php">
-				 <i class='bx bx-walk'></i>
-				 <span class="links_name">Night Patrol</span>
-			   </a>
-			   <span class="tooltip">Night Patrol</span>
-			 </li>
-			 <li class="profile">
-				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
-				   <div class="name_job">
-				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						<div class="job" id=""><?php echo $dept; ?></div>
-				   </div>
-				 </div>
-				 <a href="emplogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
-			</ul>
-		  </div>
-		  <!-- Middle Section -->
-		  <section class="home-section">
-			<!-- Top Section -->
-			  <section class="top-section">
-				  <div class="top-content">
-					<div>
-						<h5>BARANGAY PUBLIC SAFETY OFFICER (BPSO)
-						<a href="#" class="circle">
-							 <img src="img/dt.png" >
-					    </a>
-					    </h5>	  
-					</div>
-				  </div>
-			  </section>
-			  
-			  <div id="content" class="container col-md-12">
+            <li>
+                <a class="side_bar nav-button nav-active" href="bcpc_ongoing.php">
+                    <i class='bx bx-user-voice ongoing'></i>
+                    <span class="links_name">Ongoing Case</span>
+                </a>
+                <span class="tooltip">Ongoing Case</span>
+            </li>
+
+
+            <li>
+                <a class="side_bar nav-button" href="bcpc_closed.php">
+                    <i class='bx bx-user-check closed'></i>
+                    <span class="links_name">Closed Case</span>
+                </a>
+                <span class="tooltip">Closed Cased</span>
+            </li>
+
+            <li>
+                <a class="side_bar nav-button" href="bcpc_total.php">
+                    <i class='bx bx-group total'></i>
+                    <span class="links_name">Total Complaints</span>
+                </a>
+                <span class="tooltip">Total Complaints</span>
+            </li>
+
+            <li class="profile">
+                <div class="profile-details">
+                    <div class="name_job">
+                        <div class="job"><strong><?php echo $user; ?></strong></div>
+                        <div class="job" id=""><?php echo $dept; ?>|| Online</div>
+                    </div>
+                </div>
+                <a href="emplogout.php">
+                    <i class='bx bx-log-out d_log_out' id="log_out"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Middle Section -->
+    <section class="home-section">
+        <!-- Top Section -->
+        <section class="top-section">
+            <div class="top-content">
+                <div>
+                    <h5>Ongoing Case >> View Details
+                        <a href="#" class="circle">
+                            <img src="img/dt.png">
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </section>
+
+        <div id="content" class="container col-md-12">
             <?php
             if (isset($_GET['id'])) {
                 $ID = $_GET['id'];
@@ -210,7 +296,7 @@ if(!isset($_SESSION["type"]))
                 $ongoing_stat	= $_POST['ongoing_stat'];
                 $ongoingcase_id = $_POST['ongoingcase_id'];
 
-                $sql = "UPDATE bcpc_ongoingcase SET ongoing_stat  = 'Closed' WHERE ongoingcase_id = $ongoingcase_id";
+                $sql = "UPDATE ongoingcase SET ongoing_stat  = 'Closed' WHERE ongoingcase_id = $ongoingcase_id";
 
                 if (mysqli_query($connect, $sql)) {
                     echo "<script>
@@ -238,9 +324,13 @@ if(!isset($_SESSION["type"]))
             ?>
 
             <div>
-                
-                
-               
+                <hr>
+                <div style="text-align: center;">
+                    <h5>
+                        View: Ongoing Case
+                    </h5>
+                </div>
+                <hr>
                 <?php
                 if (isset($_SESSION['statusadmincomp'])) {
                     if ($_SESSION['statusadmincomp'] == "ok") {
@@ -264,7 +354,7 @@ if(!isset($_SESSION["type"]))
                         <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
 
-                    <a href="bpso_violators.php">
+                    <a href="bcpc_ongoing.php">
                         <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
@@ -327,7 +417,7 @@ if(!isset($_SESSION["type"]))
                     <div id="ssms" class="modal">
                         <div class="modal-content animate">
                             <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="send_sms.php" class="body">
+                            <form method="POST" action="../send_sms.php" class="body">
                                 <div class="main-content-email">
 
                                     <div class="main-content">
@@ -356,27 +446,10 @@ if(!isset($_SESSION["type"]))
                     </div>
                 </div>
 
-                
+                <iframe type="file" style="width:100%; height: 500px;" src="img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
                 <br>
-                <table id="viewdetails" class="font-sizee" style="margin-bottom: -10px;">
-                        <tr>
-                            <th width="30%">Assigned Department: </th>
-                            <td><strong><?php echo $data['dept']; ?> Dept.</strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Approved Date: </th>
-                            <td><strong><?php echo $data['app_date']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Facilitated by: </th>
-                            <td><strong><?php echo $data['app_by']; ?></strong></td>
-                        </tr>
-                        <!-- <tr>
-                                <th width="30%">Created on </th>
-                                <td><strong><?php echo $data['created_on']; ?></strong></td>
-                            </tr> -->
-                    </table>
+
             <form method="POST" action="" enctype="multipart/form-data">
                     <br>
                     <br>
@@ -384,7 +457,7 @@ if(!isset($_SESSION["type"]))
                         <table id="viewdetails" class="font-sizee" style="margin-right: 25px;">
                             <tr>
                                 <th width="30%">ID No.</th>
-                                <td><input type="hidden" name="admincomp_id" value="<?php echo $data['admincomp_id']; ?>"><?php echo $data['admincomp_id']; ?></td>
+                                <td><input type="hidden" name="ongoingcase_id" value="<?php echo $data['admincomp_id']; ?>"><?php echo $data['admincomp_id']; ?></td>
                             </tr>
                             <tr>
                                 <th width="30%">Complainant's Name</th>
@@ -447,81 +520,70 @@ if(!isset($_SESSION["type"]))
                     </table>
                     <br>
             </div>
-            <br>
-                    <h5><strong>Complaints: </strong></h5>
+                    <label><strong>Complaints: </strong></label>
                     <strong>
-                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA; text-align: justify;" disabled="disabled" id="" cols="175" rows="7"><?php echo $data['complaints']; ?></textarea>
+                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="7"><?php echo $data['complaints']; ?></textarea>
                         <input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>">
                     </strong>
                     <br>
-
-                    <input type="hidden" name="dept" value="<?php echo $data['dept']; ?>">
-                    <input type="hidden" name="app_date" value="<?php echo $data['app_date']; ?>">
-                    <input type="hidden" name="app_by" value="<?php echo $data['app_by']; ?>">
-
-                    <hr>
-        <div style="text-align: center;">
-            <label style="font-size: 14px;">Case Trials</label>
-        </div>
-        <hr>
-                    <table id="viewdetails" style="margin-bottom: 30px; margin-top: 30px;">
-						
-						<?php	
-                            if (isset($_GET['id'])) {
-                            $ID = $_GET['id'];
-                            } else {
-                                $ID = "";
-                            }
-                
-                            // create array variable to store data from database
-                            $data = array();	
-
-							$mquery = "SELECT * FROM lupondb";
-						$countemployee = $db->query($mquery)
-						?>
-
-							<thead>
-								<tr class="t_head">
-									<th>Case No.</th>
-									<th>Complainant</th>
-									<th>Accussed</th>
-									<th>Address</th>
-									<th>Time And Date:</th>
-									<th>Contact No.</th>
-									<th>Complaints:</th>
-									<th>Status</th>
-									<th>Action</th>
-									
-								</tr>                       
-							</thead>
-							<?php
-							foreach($countemployee as $data) 
-							{
-							?>
-							<tr class="table-row">
-									<td><?php echo $data ['CaseNo']; ?></td>
-									<td><?php echo $data ['Complainant']; ?></td>
-									<td><?php echo $data ['Accussed']; ?></td>
-									<td><?php echo $data ['Address']; ?></td>
-									<td><?php echo $data ['DateandTime']; ?></td>
-									<td><?php echo $data ['ContactNo']; ?></td>
-									<td><?php echo $data ['Complaint']; ?></td>
-									<td>Active</td>
-									<td>
+                    <table id="viewdetails" class="font-sizee">
+                        <tr>
+                            <th width="30%">Assigned Department: </th>
+                            <td><input type="hidden" name="dept" value="<?php echo $data['dept']; ?>"><strong><?php echo $data['dept']; ?> Dept.</strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Approved Date: </th>
+                            <td><input type="hidden" name="app_date" value="<?php echo $data['app_date']; ?>"><strong><?php echo $data['app_date']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Facilitated by: </th>
+                            <td><input type="hidden" name="app_by" value="<?php echo $data['app_by']; ?>"><strong><?php echo $data['app_by']; ?></strong></td>
+                        </tr>
+                        <!-- <tr>
+                                <th width="30%">Created on </th>
+                                <td><strong><?php echo $data['created_on']; ?></strong></td>
+                            </tr> -->
+                    </table>
+                    <div class="col-md-12">
+					<table id="viewdetails" style="margin-bottom: 30px; margin-top: 30px;">
+						<thead>
+							<tr class="t_head">
+								<th width="5%">Blotter ID</th>
+								<th width="5%">Name of Complainant</th>
+								<th width="5%">Age</th>
+								<th width="5%">Gender</th>
+								<th width="5">Address</th>
+								<th width="5%">Incident Address</th>
+								<th width="5%">Contact No</th>
 								
-										<button class="form-control btn-info"  data-toggle="modal" style="font-size: 13px; width: 100px;"  onclick="location.href='lupon_update.php?id=<?php echo $data['CaseNo'];?>'"><i class="fa fa-check-circle"></i>View Details</button>
-										
-									</td>	
+								<th width="5%">Gmail Status</th>
+								<th width="5%">SMS Status</th>
+								<th width="5%">View Details</th>
+							</tr>
+						</thead>
+							<tbody>
+								<tr class="table-row">
+									<td><?php echo $data['admincomp_id']; ?></td>
+									<td><?php echo $data['n_complainant']; ?></td>
+									<td><?php echo $data['comp_age']; ?></td>
+									<td><?php echo $data['comp_gender']; ?></td>
+									<td><?php echo $data['comp_address'] ?></td>
+									<td><?php echo $data['inci_address']; ?></td>
+									<td><?php echo $data['contactno']; ?></td>
+									<td><?php echo $data['gmail']; ?></td>
+									<td><?php echo $data['sms']; ?></td>
+
+									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
 								</tr>
 							</tbody>
-							<?php
-							}
-							?>
-						
-						</table>
-        </div>
-		
+					</table>
+
+                    </div>
+                    <br>
+                    <br>
+
                     <div class="information col">
+
                         <label class="employee-label ">Hearing Date</label>
                         <input type="date" class="form-control inputtext control-label" id="hearing_date" style="padding: 5px;" name="hearing_date">
                         <?php echo isset($error['hearing_date']) ? $error['hearing_date'] : ''; ?>
@@ -529,7 +591,7 @@ if(!isset($_SESSION["type"]))
 
                     <div class="information col">
                         <label class="employee-label"> Facilitated By </label>
-                        <input class="form-control inputtext control-label" style="padding: 5px;" id="ongoing_appby" name="ongoing_appby" value="<?php echo $user; ?>" type="text" readonly>
+                        <input class="form-control inputtext control-label" style="padding: 5px;" id="ongoing_appby" name="ongoing_appby" value="<?php echo $user; ?>" type="text">
                         <?php echo isset($error['ongoing_appby']) ? $error['ongoing_appby'] : ''; ?>
                     </div>
 
@@ -539,7 +601,7 @@ if(!isset($_SESSION["type"]))
                         <?php echo isset($error['remarks']) ? $error['remarks'] : ''; ?>
                     </div>
 
-                    <div class="information col" style="margin-bottom: 15px;">
+                    <div class="information col">
                         <label class="employee-label ">Attach File </label>
                         <input type="file" class="form-control inputtext control-label" id="ongoingcase_file" style="padding: 5px;" name="ongoingcase_file">
                         <div style="color: red; text-align: center;"><strong><?php echo isset($error['ongoingcase_file']) ? $error['ongoingcase_file'] : ''; ?></strong></div>
@@ -556,7 +618,8 @@ if(!isset($_SESSION["type"]))
 
             <a><button class="btn btn-danger font-sizee form-control btnmargin" name="closeCase">Close</button></a>
         </form>
-       
+
+        </div>
 
         </div>
 

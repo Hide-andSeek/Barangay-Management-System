@@ -48,7 +48,7 @@ require 'db/conn.php';
 	 
 	 
 	 <style>
-		div.align-box{padding-top: 23px; display: flex; align-item: center;}
+		div.align-box{padding-top: 23px; display: flex; align-items: center;}
 		.box-report{
 			width: 300px;
 			font-size: 14px;
@@ -110,7 +110,6 @@ require 'db/conn.php';
 			 
 			 <li class="profile">
 				 <div class="profile-details">
-				   <img class="profile_pic" src="img/1.jpeg">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
 						<div class="job" id=""><?php echo $dept; ?></div>

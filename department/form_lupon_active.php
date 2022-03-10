@@ -21,7 +21,6 @@ require 'db/conn.php';
 	}
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -38,6 +37,7 @@ require 'db/conn.php';
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
@@ -55,40 +55,25 @@ require 'db/conn.php';
 	 
 	 
 	 <style>
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+		div.align-box{padding-top: 23px; display: flex; align-item: center;}
+		.box-report{
+			width: 300px;
+			font-size: 14px;
+			border: 4px solid #7dc748;
+			padding: 30px;
+			margin: 10px;
+			border-radius: 5px;
+			align-items: center;
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+		}
+		
+		 i.menu{color: #fff}
+			 i.id{color: #a809b0}
+			 i.clearance{color: #1cb009}
+			 i.sms{color: #478eff}
+			 i.blotter-com{color: #9e0202}
+			 i.indigency{color: #0218bd}
+			 i.permit{color: #e0149c}
 	 </style>
    </head>
 	<body>
@@ -109,11 +94,11 @@ require 'db/conn.php';
 			  </li>
 			  
 			 <li>
-			   <a class="side_bar" href="form_lupon_printdocs.php">
+			   <a class="side_bar" href="lupon_printdocs.php">
 				 <i class='fa fa-print'></i>
-				 <span class="links_name">Print Document</span>
+				 <span class="links_name">SUMMON LETTER</span>
 			   </a>
-			   <span class="tooltip">Print Document</span>
+			   <span class="tooltip">SUMMON LETTER</span>
 			 </li>
 			   
 
@@ -145,7 +130,7 @@ require 'db/conn.php';
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>UPCOMING HEARING
+						<h5>ACTIVE CASES
 						<a href="#" class="circle">
 							 <img src="img/dt.png" >
 					    </a>
@@ -153,72 +138,19 @@ require 'db/conn.php';
 					</div>
 				  </div>
 			  </section>
-			  <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align"> TAGAPAMAYAPA SCHEDULES</button>
-		
-			  <div class="dropdown">
-    <button class="dropbtn">MONDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 1</a>
-    <a href="#about">MR. 2</a>
-    <a href="#contact">MR. 3</a>
-  </div>
-</div>
-
-<div class="dropdown">
-    <button class="dropbtn">TUESDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 4</a>
-    <a href="#about">MR. 5</a>
-    <a href="#contact">MR. 6</a>
-  </div>
-</div>
-
-<div class="dropdown">
-    <button class="dropbtn">WEDNESDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 7</a>
-    <a href="#about">MR. 8</a>
-    <a href="#contact">MR. 9</a>
-  </div>
-</div>
-
-<div class="dropdown">
-    <button class="dropbtn">THURSDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 10</a>
-    <a href="#about">MR. 11</a>
-    <a href="#contact">MR. 12</a>
-  </div>
-</div>
-<div class="dropdown">
-    <button class="dropbtn">FRIDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 13</a>
-    <a href="#about">MR. 14</a>
-    <a href="#contact">MR. 15</a>
-  </div>
-</div>
-<div class="dropdown">
-    <button class="dropbtn">SATURDAY</button>
-    <div class="dropdown-content"> 
-    <a href="#home">MR. 16</a>
-    <a href="#about">MR. 17</a>
-    <a href="#contact">MR. 18</a>
-  </div>
-</div>
-
+			  <div>
+			  <<div class="search_content">
+								<form class="list_header" method="get">
+									<label>
+										Search: 
+										<input type="text" class=" r_search" name="keyword" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>" />
+										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
+									</label>
+										
+								</form>
+							</div>
 			
-			  
-
-			  <div class="reg_table emp_tbl">
-			  <form action="user.php" method="POST">
-				<div class="search_content">
-                        <label>Search: 
-                            <input type="text" class="r_search" name="keyword">
-							<button type="button" name="search"><i class="bx bx-search"></i></button>
-                        </label>
-             
-			  </form>
+							<div class="reg_table emp_tbl">
 						<table class="content-table">
 						
 						<?php
@@ -242,8 +174,33 @@ require 'db/conn.php';
 									<th>Action</th>
 								</tr>                       
 							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+							<tr class="table-row">
+									<td><?php echo $data ['CaseNo']; ?></td>
+									<td><?php echo $data ['Complainant']; ?></td>
+									<td><?php echo $data ['Accussed']; ?></td>
+									<td><?php echo $data ['Address']; ?></td>
+									<td><?php echo $data ['DateandTime']; ?></td>
+									<td><?php echo $data ['ContactNo']; ?></td>
+									<td><?php echo $data ['Complaint']; ?></td>
+									<td>Active</td>
+									<td>
+										<button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;"><a href="lupon_ongoing.php"><i class="fa fa-check-circle"></i>Done</button>
+										<button class="form-control btn-danger" style="font-size: 13px; width: 100px;"><a href="lupon_mediation.php"><i class="fa fa-ban"></i>Deny</button>
+							</a>
+									</td>	
+
+								</tr>
 							
+							<?php
+							}
+							?>
 						</table>
+
+	
 							<!--
 								<input type="button" id="tst" value="ok" onclick="fnselect()"/>
 						     -->
@@ -258,28 +215,17 @@ require 'db/conn.php';
 			<br>
 			<br>
 			<br>
-
+		
 			<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
+			
+			 /*-- Fuction for Login Modal Form --*/
+			var modal = document.getElementById('id1');
+				window.onclick = function (event) {
+					if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}  
+			</script>
 			
 			</section>
 	</body>
