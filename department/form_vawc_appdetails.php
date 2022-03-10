@@ -304,7 +304,7 @@ if (isset($_SESSION['type'])) {
                 if (mysqli_query($connect, $sql)) {
                     echo "<script>
                                     alert('Case Opened!');
-                                    window.location.href='vawcdashboard.php';
+                                    window.location.href=bpso.php';
                                 </script>";
                 } else {
                     echo "Error updating record: " . mysqli_error($connect);
