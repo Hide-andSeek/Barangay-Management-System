@@ -119,14 +119,20 @@ if(!isset($_SESSION["type"]))
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  
-              
+              <li>
+			   <a class="side_bar" href="bpso_newcases.php">
+				 <i class='fas fa-briefcase'></i>
+				 <span class="links_name">New Cases</span>
+			   </a>
+			   <span class="tooltip">New Cases</span>
+			 </li>
 
 			 <li>
 			   <a class="side_bar" href="bpso_violators.php">
-				 <i class='bx bx-error'></i>
-				 <span class="links_name">Violations</span>
+				 <i class='fas fa-user-check'></i>
+				 <span class="links_name">Blotter Cases</span>
 			   </a>
-			   <span class="tooltip">Violations</span>
+			   <span class="tooltip">Blotter Cases</span>
 			 </li>
 			 <li>
 			   <a class="side_bar" href="bpso_patrols.php">
@@ -277,6 +283,7 @@ if(!isset($_SESSION["type"]))
 				ORDER BY admincomp_id ASC";
 			}
 
+
 			$stmt = $connect->stmt_init();
 			if ($stmt->prepare($sql_query)) {
 				// Bind your variables to replace the ?s
@@ -426,7 +433,7 @@ if(!isset($_SESSION["type"]))
 								
 								<th width="15%">Gmail Status</th>
 								<th width="15%">SMS Status</th>
-								<th width="15%">Action</th>
+								<th width="15%">View Details</th>
 							</tr>
 						</thead>
 						<?php
@@ -443,7 +450,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['gmail']; ?></td>
 									<td><?php echo $data['sms']; ?></td>
 
-									<td><button class="view_approvebtn" onclick="location.href='bpso_process.php?id=<?php echo $data['admincomp_id']; ?>'">Process Case</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='bpso_viewrecords.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
 
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 
@@ -466,6 +473,8 @@ if(!isset($_SESSION["type"]))
 
 
 		<script src="js/resident.js"></script>	
+		
+		
 		
 		
 				

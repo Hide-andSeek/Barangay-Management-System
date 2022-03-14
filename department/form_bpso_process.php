@@ -248,341 +248,169 @@ if (isset($_SESSION['type'])) {
 				  </div>
 			  </section>
 
-        <div id="content" class="container col-md-12">
-            <?php
-            if (isset($_GET['id'])) {
-                $ID = $_GET['id'];
-            } else {
-                $ID = "";
-            }
+        <!-- Table -->
+			<div class="reg_table emp_tbl">
+				<table class="content-table">
+					<thead>
+						<tr class="t_head">
+							<th>Case No.</th>
+							<th>Complainant</th>
+							<th>Accused</th>
+							<th>Date and Time</th>
+							<th>Complaint</th>
+							<th>Action</th>
+						</tr>                 
+					</thead>
+					<tbody>
+						<?php
+							if(isset($_GET["search"]) && !empty($_GET["search"])){
+								$search = htmlspecialchars($_GET["search"]);
+								$sql = "
+									SELECT 
+										ac.`admincomp_id`,
+										ac.`n_complainant`,
+										ac.`n_violator`,
+										ac.`app_date`,
+										ac.`complaints`
+									FROM admin_complaints ac
+									LEFT JOIN luponCases lc USING(admincomp_id)
+									WHERE ac.`dept` = 'LUPON' AND lc.`admincomp_id` IS NULL AND ac.`admincomp_id` LIKE ?
+									OR ac.`dept` = 'LUPON' AND lc.`admincomp_id` IS NULL AND ac.`n_complainant` LIKE ?
+									ORDER BY ac.`app_date` ASC;
+								";
+								$stmt = $db->prepare($sql);
+								$stmt->execute(["%$search%", "%$search%"]);
+							}else{
+								$sql = "
+									SELECT 
+										ac.`admincomp_id`,
+										ac.`n_complainant`,
+										ac.`n_violator`,
+										ac.`app_date`,
+										ac.`complaints`
+									FROM admin_complaints ac
+									LEFT JOIN luponCases lc USING(admincomp_id)
+									WHERE ac.`dept` = 'LUPON' AND lc.`admincomp_id` IS NULL
+									ORDER BY ac.`app_date` ASC;
+								";
+								$stmt = $db->prepare($sql);
+								$stmt->execute();
+							}
+							
+							if($stmt->rowCount() > 0){
+								while($row = $stmt->fetch()){
+						?>
+						<tr class="table-row" data-id="<?php echo $row['admincomp_id']; ?>">
+							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
+							<td><?php echo ucwords($row['n_complainant']); ?></td>
+							<td><?php echo ucwords($row['n_violator']); ?></td>
+							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
+							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+							<td class="text-end">
+								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+								<a href="#" class="btn btn-primary btn-sm set-schedule">Set Schedule</a>
+							</td>	
+						</tr>
+						<?php }}else{ ?>
+						<tr>
+							<td colspan="6" class="text-center text-muted">No records to show</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+                		<!-- Set Schedule Modal -->
+				<div id="setSchedModal" class="w3-modal">
+					<div class="w3-modal-content w3-animate-top">
+						<header class="w3-container w3-teal">
+							<span onclick="document.getElementById('id01').style.display='none'"
+							class="w3-button w3-display-topright closeModal">&times;</span>
+							<h2>Set Schedule</h2>
+						</header>
+						<div class="w3-container p-3">
+							<form action="db/lupon.php" method="post" id="form-setSchedule">
+								<input type="hidden" name="complaintID" class="form-control complaintID" value="" required>
+								<p>Case Number: <strong><span class="complaintID">8</span></strong></p>
+								<div class="row form-group mb-3">
+									<div class="col-6">
+										<label for="hearingDay">Select Date: <span class="required">*</span></label>
+										<input type="date" class="form-control" name="hearingDate" id="hearingDate" required>
+									</div>
+									<div class="col-6">
+										<label for="hearingTime">Select Time: <span class="required">*</span></label>
+										<input type="time" class="form-control" name="hearingTime" id="hearingTime" required>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<label for="personnel">Select Personnel: <span class="required">*</span></label>
+									<select name="personnel" class="form-control" id="personnel" required>
+										<option value="">--</option>
+									</select>
+								</div>
+								<div class="text-end">
+									<input type="hidden" name="setSchedule">
+									<button type="submit" name="setSchedule" class="btn btn-primary btn-sm setSchedule">Set Schedule</button>
+									<button type="button" class="btn btn-secondary btn-sm closeModal">Close</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-            // create array variable to store data from database
-            $data = array();
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+			$(document).ready(function(){
+				$(".set-schedule").click(function(){
+					var form = $("#form-setSchedule");
+					// Clear Form
+					$(form).find("p .complaintID").text();
+					$(form).find(".setSchedule").prop('disabled', false);
+					$(form).trigger("reset");
+					// Set Content
+					var complaintID = $(this).closest("tr").data("id");
+					$(form).find("p .complaintID").text(complaintID);
+					$(form).find(".complaintID").val(complaintID);
+					$("#setSchedModal").css("display", "block");
+				});
+				$(".closeModal").click(function(){
+					$("#setSchedModal").css("display", "none");
+				});
 
-            // get all data from menu table and category table
-            $sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, bemailadd, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
-                            FROM admin_complaints
-                            WHERE admincomp_id = ?";
+				$("#form-setSchedule").on("submit", function(){
+					$(this).find(".setSchedule").prop('disabled', true);
+				});
 
-            $stmt = $connect->stmt_init();
-            if ($stmt->prepare($sql_query)) {
-                // Bind your variables to replace the ?s
-                $stmt->bind_param('s', $ID);
-                // Execute query
-                $stmt->execute();
-                // store result 
-                $stmt->store_result();
-                $stmt->bind_result(
-                    $data['admincomp_id'],
-                    $data['n_complainant'],
-                    $data['comp_age'],
-                    $data['comp_gender'],
-                    $data['comp_address'],
-                    $data['inci_address'],
-                    $data['contactno'],
-                    $data['bemailadd'],
-                    $data['n_violator'],
-                    $data['violator_age'],
-                    $data['violator_gender'],
-                    $data['relationship'],
-                    $data['violator_address'],
-                    $data['witnesses'],
-                    $data['complaints'],
-                    $data['dept'],
-                    $data['app_date'],
-                    $data['app_by'],
-                    $data['blotterid_image'],
-                    $data['gmail'],
-                    $data['sms']
-                );
-                $stmt->fetch();
-                $stmt->close();
-            }
+				$("#hearingDate").change(function(){
+					var hearingDate = $(this).val();
+					if(hearingDate.length > 0){
+						$.ajax({
+							url: "db/lupon.php",
+							type: "post",
+							dataType: "json",
+							data: {
+								fetchAvailablePersonnel: 1,
+								hearingDate: hearingDate,
+							}, success:function(data){
+								console.log(data);
+								populatePersonnel(data);
+							}
+						});
 
-            if (isset($_POST['openCase'])) {
-
-                $status    = $_POST['status'];
-                $admincomp_id    = $_POST['admincomp_id'];
-
-                $sql = "UPDATE admin_complaints SET status = 'Ongoing' WHERE admincomp_id = $admincomp_id";
-
-                if (mysqli_query($connect, $sql)) {
-                    echo "<script>
-                                    alert('Case Opened!');
-                                    window.location.href='bpso.php';
-                                </script>";
-                } else {
-                    echo "Error updating record: " . mysqli_error($connect);
-                }
-            }
-
-
-            if (isset($_POST['admincompsendemail'])) {
-
-                $gmail    = $_POST['gmail'];
-                $admincomp_id = $_POST['admincomp_id'];
-
-                $sql = "UPDATE admin_complaints SET gmail = 'sent' WHERE admincomp_id = $admincomp_id";
-
-                if (mysqli_query($connect, $sql)) {
-                } else {
-                    echo "Error updating record: " . mysqli_error($connect);
-                }
-            }
-            ?>
-
-            <div>
-                <hr>
-                <div style="text-align: center;">
-                    <h5>
-                        View: Pending Case
-                    </h5>
-                </div>
-                <hr>
-                <?php
-                if (isset($_SESSION['statusadmincomp'])) {
-                    if ($_SESSION['statusadmincomp'] == "ok") {
-                ?>
-
-                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['resultadmincomp'] ?> <?php echo $data['bemailadd']; ?> <i style="font-size:20px;" class="bx bx-checkbox-checked"></i>
-                        </div>
-                    <?php
-                    } else {
-                    ?>
-                        <div class="alert alert-danger messcompose"><?php echo $_SESSION['resultadmincomp'] ?></div>
-                <?php
-                    }
-                    unset($_SESSION['resultadmincomp']);
-                    unset($_SESSION['statusadmincomp']);
-                }
-                ?>
-                <div style="float: right; display: inline-block;">
-
-                    <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-
-                    <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
-                        <img src="img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-                    <a href="bpso.php">
-                        <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
-                    </a>
-
-                </div>
-                <!--Modal form for Login-->
-                <div id="formatValidatorName">
-                    <div id="eemail" class="modal">
-                        <div class="modal-content animate">
-                            <span onclick="document.getElementById('eemail').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="" class="body" enctype="multipart/form-data">
-                                <div class="main-content-email">
-
-                                    <div class="main-content main-content1">
-                                        <div class="information col">
-                                            <p> Fullname: </p>
-                                            <input class="form-control emailwidth" id="fullname" name="fullname" value="<?php echo $data['n_complainant']; ?>" type="text" placeholder="Enter Fullname">
-                                        </div>
-
-                                        <div class="information col">
-                                            <p> To: </p>
-                                            <input required class="form-control emailwidth" id="email" name="email" style="width:100%" value="<?php echo $data['bemailadd']; ?>" type="text" placeholder="Enter Email Address">
-                                        </div>
-                                    </div>
-                                    <div class="main-content">
-                                        <div class="information col">
-                                            <p>Subject: </p>
-                                            <input required class="form-control" style="width: 100%" id="subject" name="subject" type="text" placeholder="Subject">
-                                        </div>
-
-
-                                        <!-- <div class="information col">
-                                                    <p>Attachment: </p>
-                                                    <input class="form-control emailwidth" style="background: white;" id="fileattach" name="fileattach" type="file" value=""> 
-                                                </div> -->
-                                    </div>
-
-                                    <div class="information col">
-                                        <p>Body: </p>
-                                        <textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
-                                        <script type="text/javascript" src="announcement_css\js\ckeditor\ckeditor.js"></script>
-                                        <script type="text/javascript">
-                                            CKEDITOR.replace('message');
-                                        </script>
-                                    </div>
-
-                                    <input class="form-control" style="width: 100%" id="gmail" name="gmail" type="hidden" value="sent" placeholder="gmail">
-
-                                    <input class="form-control" style="width: 100%" id="admincomp_id" name="admincomp_id" type="hidden" value="<?php echo $data['admincomp_id']; ?>" placeholder="gmail">
-
-                                    <div class="sendi">
-                                        <button name="admincompsendemail" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- SMS -->
-                <div id="formatValidatorName">
-                    <div id="ssms" class="modal">
-                        <div class="modal-content animate">
-                            <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="send_sms.php" class="body">
-                                <div class="main-content-email">
-
-                                    <div class="main-content">
-                                        <div class="information col">
-                                            <p> Fullname: </p>
-                                            <input class="form-control emailwidth" id="fullname" name="fullname" value="<?php echo $data['n_complainant']; ?>" type="text" placeholder="Enter Fullname">
-                                        </div>
-
-                                        <div class="information col">
-                                            <p> Contact Number: </p>
-                                            <input required class="form-control emailwidth" id="number" name="number" value="<?php echo $data['contactno']; ?>" type="text" placeholder="Enter Contact No">
-                                        </div>
-                                    </div>
-
-                                    <div class="information col">
-                                        <p>Body: </p>
-                                        <textarea name="msg" id="msg" class="form-control inputtext" rows="16" placeholder="Your message"></textarea>
-                                    </div>
-
-                                    <div class="sendi">
-                                        <button name="sendSms" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send <i class="bx bx-send"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <br>
-                <br>
-                <table id="viewdetails" class="font-sizee">
-                    <tr>
-                        <th width="30%">Assigned Department: </th>
-                        <td><strong><?php echo $data['dept']; ?> Dept.</strong></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Approved Date: </th>
-                        <td><strong><?php echo $data['app_date']; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Facilitated by: </th>
-                        <td><strong><?php echo $data['app_by']; ?></strong></td>
-                    </tr>
-                    <!-- <tr>
-                        <th width="30%">Created on </th>
-                        <td><strong><?php echo $data['created_on']; ?></strong></td>
-                    </tr> -->
-                </table>
-                <br>
-                <br>
-                <label><strong>Complaints: </strong></label>
-                <strong>
-                    <textarea class="form-control inputtext" style="padding: 100px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="7"><?php echo $data['complaints']; ?></textarea>
-                </strong>
-                <br>
-                <br>
-                <div style="display: flex;">
-                    <table id="viewdetails" class="font-sizee" style="margin-right: 25px;">
-                        <tr>
-                            <th width="30%">ID No.</th>
-                            <td><?php echo $data['admincomp_id']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Complainant's Name</th>
-                            <td><strong><?php echo $data['n_complainant']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Complainant's Age</th>
-                            <td><strong><?php echo $data['comp_age']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Complainant's Gender</th>
-                            <td><?php echo $data['comp_gender']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Complainant's Address</th>
-                            <td><?php echo $data['comp_address']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Incident Address</th>
-                            <td><?php echo $data['inci_address']; ?></td>
-                        </tr>
-
-                        <tr>
-                            <th width="30%">Contact No</th>
-                            <td><strong><?php echo $data['contactno']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Email</th>
-                            <td><strong><?php echo $data['bemailadd']; ?></strong></td>
-                        </tr>
-                </div>
-                </table>
-
-                <table id="viewdetails" class="font-sizee">
-                    <tr>
-                        <th width="30%">Name of Violator</th>
-                        <td><strong><?php echo $data['n_violator']; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Violator's Age</th>
-                        <td><strong><?php echo $data['violator_age']; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Violator's Gender</th>
-                        <td><?php echo $data['violator_gender']; ?></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Relationship</th>
-                        <td><?php echo $data['relationship']; ?></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Violator's Address</th>
-                        <td><?php echo $data['violator_address']; ?></td>
-                    </tr>
-                    <tr>
-                        <th width="30%">Witnesses</th>
-                        <td><?php echo $data['witnesses']; ?></td>
-                    </tr>
-                </table>
-            </div>
-
-        </div>
-        <br>
-        <br>
-
-        <div class="information col">
-            <label class="employee-label ">Approval Date </label>
-            <input type="text" class="form-control inputtext control-label" id="app_date" value="<?php echo $data['app_date']; ?>" style="padding: 5px;" name="app_date" readonly>
-        </div>
-
-        <div class="information col">
-            <label class="employee-label"> Approved By </label>
-            <input class="form-control inputtext control-label" style="padding: 5px;" id="app_by" name="app_by" value="<?php echo $data['app_by']; ?>" type="text" readonly>
-        </div>
-        <br>
-
-        <form action="" method="post">
-            <input type="hidden" name="admincomp_id" id="admincomp_id" value="<?php echo $data['admincomp_id']; ?>">
-            <input type="hidden" name="status" id="status" value="Ongoing">
-            <a><button class="btn btn-success font-sizee form-control btnmargin" name="openCase">Add Case</button></a>
-            </div>
-        </form>
-
-        </div>
-
-        </div>
-
-        <div class="separator"> </div>
-        </div>
-        <br>
-        <br>
-    </section>
+						function populatePersonnel(data){
+							var selectPersonnel = $("#personnel");
+							$(selectPersonnel).find("option").remove();
+							$(selectPersonnel).append("<option value=''>--</option>");
+							for(var i = 0; i < data.length; i++){
+								$(selectPersonnel).append(`<option value='${data[i].personnelID}'>${data[i].fullname}</option>`);
+							}
+						}
+					}else{
+						$("#personnel").find("option").remove();
+					}
+				});
+			});
+		</script>
     </body>
 
 </html>

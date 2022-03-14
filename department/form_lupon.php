@@ -165,7 +165,7 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a href= "lupon_ongoing.php">Awaiting Schedule</a>
+							<a>Awaiting Schedule</a>
 						</div>
 					</div>
 					<div class="w3-quarter">
@@ -192,7 +192,7 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a href= "lupon_ongoing.php">Upcoming Hearing</a>
+							<a>Upcoming Hearing</a>
 						</div>
 					</div>
 					<div class="w3-quarter">
@@ -219,7 +219,7 @@
 								?>
 								</div>
 							<div class="w3-clear"></div>
-							<a href= "lupon_active.php">Active Cases</a>
+							<a>Active Cases</a>
 						</div>
 					</div>
 					<div class="w3-quarter">
@@ -246,7 +246,7 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a href= "lupon_settled.php">Settled</a>
+							<a>Settled</a>
 						</div>
 					</div>
 					<div class="w3-quarter">
@@ -272,12 +272,15 @@
 									echo "<h3>$total</h3>";
 								?>
 							</div>
+							<break></break>
 							<div class="w3-clear"></div>
-							<a href= "lupon_mediation.php">Not Settled </a>
+							<a>Not Settled </a>
 						</div>
 					</div>
 				</div>
 			</div>
+		
+		
 			<!-- Table -->
 			<div class="reg_table emp_tbl">
 				<table class="content-table">
@@ -328,16 +331,10 @@
 						<?php }} ?>
 					</tbody>
 				</table>
+				
 			</div>
-		</section>
-
-
-
-
-						
 			
 			</section>
-
 	</body>
 </html>			
 					
