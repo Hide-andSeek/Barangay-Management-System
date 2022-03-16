@@ -366,7 +366,7 @@ if (isset($_SESSION['type'])) {
                     <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
                         <img src="img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
-                    <a href="vawcdashboard.php">
+                    <a href="bpso.php">
                         <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
@@ -571,7 +571,7 @@ if (isset($_SESSION['type'])) {
         <form action="" method="post">
             <input type="hidden" name="admincomp_id" id="admincomp_id" value="<?php echo $data['admincomp_id']; ?>">
             <input type="hidden" name="status" id="status" value="Ongoing">
-            <a><button class="btn btn-success font-sizee form-control btnmargin" name="openCase">Open Case</button></a>
+            <a><button class="btn btn-success font-sizee form-control btnmargin" name="openCase">Approve Case</button></a>
             </div>
         </form>
 
