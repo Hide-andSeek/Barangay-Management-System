@@ -50,6 +50,7 @@
 			.content-table tbody tr{
 				text-align: left !important;
 			}
+			
 		</style>
 	</head>
 	<body>
@@ -301,7 +302,7 @@
 		
 		
 			<!-- Table -->
-			<div class="reg_table emp_tbl">
+			<div class="col-md-12">
 				<table class="content-table">
 					<thead>
 						<tr class="t_head">
