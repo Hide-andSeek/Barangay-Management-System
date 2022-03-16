@@ -276,12 +276,12 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
-				ORDER BY approved_clearanceids ASC";
+				ORDER BY approved_clearanceids DESC";
 	}else{
 		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance
 				WHERE full_name LIKE ? 
-				ORDER BY approved_clearanceids ASC";
+				ORDER BY approved_clearanceids DESC";
 	}
 	
 	
@@ -340,13 +340,13 @@ if(!isset($_SESSION["type"]))
 	if(empty($keyword)){
 		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
-				ORDER BY approved_clearanceids ASC LIMIT ?, ?";
+				ORDER BY approved_clearanceids DESC LIMIT ?, ?";
 
 	}else{
 		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
 				FROM approved_clearance 
 				WHERE full_name LIKE ? 
-				ORDER BY approved_clearanceids ASC LIMIT ?, ?";
+				ORDER BY approved_clearanceids DESC LIMIT ?, ?";
 	}
 	
 	$stmt_paging = $connect->stmt_init();
@@ -578,11 +578,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Barangay Clearance'
 				ORDER BY document_id ASC";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments
 				WHERE fname LIKE ? 
 				ORDER BY document_id ASC";
@@ -605,8 +605,7 @@ if(!isset($_SESSION["type"]))
 					$data['reference_no'],
 					$data['document_type'],
 					$data['payment_status'],
-					$data['payment_method'],
-					$data['added_on']
+					$data['payment_method']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -631,11 +630,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Barangay Clearance'
 				ORDER BY document_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments
 				WHERE fullname LIKE ? 
 				ORDER BY document_id ASC LIMIT ?, ?";
@@ -659,8 +658,7 @@ if(!isset($_SESSION["type"]))
 					$data['reference_no'],
 					$data['document_type'],
 					$data['payment_status'],
-					$data['payment_method'],
-					$data['added_on']
+					$data['payment_method']
 					
 				);
 		// for paging purpose

@@ -147,7 +147,7 @@ if(!isset($_SESSION["type"]))
 
 			if (empty($keyword)) {
 				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
-				FROM admin_complaints WHERE dept = 'VAWC' AND status='Pending'
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Closed'
 				ORDER BY admincomp_id ASC";
 			} else {
 				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
@@ -213,10 +213,10 @@ if(!isset($_SESSION["type"]))
 
 			if (empty($keyword)) {
 				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
-				FROM admin_complaints WHERE dept = 'VAWC' AND status='Pending'
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Closed'
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 			} else {
-				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints 
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
@@ -318,7 +318,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
 
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='vawc_closed_viewdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
 
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 

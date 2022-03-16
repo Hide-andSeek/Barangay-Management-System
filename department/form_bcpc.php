@@ -37,11 +37,12 @@ if (isset($_SESSION['type'])) {
 	mes/base/jquery-ui.css">
 	<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 	<link rel="stylesheet" href="css/styles.css">
-
+	<link rel="stylesheet" href="css/design.css">
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="announcement_css/custom.css">
+	<script src="resident-js/sweetalert.min.js"></script>
 	<!-- Boxicons CDN Link -->
 	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -248,6 +249,9 @@ if (isset($_SESSION['type'])) {
 </head>
 
 <body>
+<script>
+        swal("Welcome to:","Barangay Commonwealth: BCPC Department");
+    </script>
 	<!-- Side Navigation Bar-->
 	<div class="sidebar">
 		<div class="logo-details">
@@ -322,87 +326,122 @@ if (isset($_SESSION['type'])) {
 		<br>
 
 		<div>
-			<div class="w3-row-padding w3-margin-bottom">
-				<div class="w3-quarter">
-					<div class="w3-container w3-red w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-							<?php
-							require 'db/conn.php';
+		<div class="w3-row-padding w3-margin-bottom">
+		<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+ 
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE status = 'Pending' AND dept = 'BCPC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
 
-							$query = "SELECT resident_id FROM accreg_resident ORDER BY resident_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-
-							echo "<h3>$pdoexecute</h3>"
-
-							?>
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Total Cases</h4>
-					</div>
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				
 				</div>
-
-				<div class="w3-quarter">
-					<div class="w3-container w3-blue w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-							<?php
-							require 'db/conn.php';
-
-							$query = "SELECT barangay_id FROM barangayid ORDER BY barangay_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-
-							echo "<h3>$pdoexecute</h3>"
-							?>
-
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Ongoing Cases</h4>
-					</div>
+				<div class="w3-clear"></div>
+				
+				<div style="text-align: center;">
+				<h4>Pending Cases</h4>
 				</div>
-
-				<div class="w3-quarter">
-					<div class="w3-container w3-teal w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-							<?php
-							require 'db/conn.php';
-
-							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
-
-							echo "<h3>$pdoexecute</h3>"
-							?>
-
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Pending Cases</h4>
-					</div>
+				<br>
+				<a href="vawcdashboard.php" class="small-box-footer more-info">
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right"></i>
 				</div>
-				<div class="w3-quarter">
-					<div class="w3-container w3-orange w3-text-white w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-						<div class="w3-right">
-							<?php
-							require 'db/conn.php';
+				</a>
+			</div>
+			</div>
 
-							$query = "SELECT indigency_id FROM certificateindigency ORDER BY indigency_id";
-							$query_run = $db->query($query);
-							$pdoexecute = $query_run->rowCount();
+			<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
 
-							echo "<h3>$pdoexecute</h3>"
-							?>
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE status = 'Ongoing' AND dept = 'BCPC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
 
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Closed Cases</h4>
-					</div>
+					echo "<h3>$pdoexecute</h3>"
+					?>
+		
 				</div>
+				<div class="w3-clear"></div>
+				<div style="text-align: center;">
+				<h4>Ongoing Cases</h4>
+				</div>
+				<br>
+				<a href="vawc_ongoing.php" class="small-box-footer more-info">
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right" ></i>
+				</div>
+				</a>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE dept = 'BCPC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					
+					?>
+				</div>
+				<div class="w3-clear"></div>
+				<div style="text-align: center;">
+				<h4>Total Cases</h4>
+				</div>
+				
+				<br>
+				<a href="vawc_total.php" class="small-box-footer more-info" >
+				<div style="text-align: center; background: #0000001A; padding: 3px 0">
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</div>
+				</a>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-red">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require 'db/conn.php';
+ 
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE status = 'Closed' AND dept = 'BCPC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+				
+				</div>
+				<div class="w3-clear"></div>
+				<div style="text-align: center;">
+				<h4>Closed Cases</h4>
+				</div>
+				<br>
+				<a href="vawc_closed.php" class="small-box-footer more-info" >
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</div>
+				</a>
+			</div>
 			</div>
 		</div>
+	</div>
 
 		<div id="content" class="container col-md-12" style="margin-top: 230px;">
 			<?php

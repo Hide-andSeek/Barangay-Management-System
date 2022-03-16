@@ -108,11 +108,13 @@ include "../db/e_payment.php";
                                     <label for="refno">Reference ID:</label>
                                     <input required type="text" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXX" onKeyPress="if(this.value.length==12) return false;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 
-                                    <input type="hidden" id="document_type" value="Business Permit" class="form-control inpmargin usersel" name="document_type">
+                                    <input type="hidden" id="document_type" value="Business Permit" class="form-control inpmargin usersel" name="document_type" readonly>
 
-                                    <input type="hidden" id="payment_status " value="Approval" class="form-control inpmargin usersel" name="payment_status">
+                                    <input type="hidden" id="payment_status " value="Approval" class="form-control inpmargin usersel" name="payment_status" readonly>
 
-                                    <input type="hidden" id="payment_method" value="Paymaya" class="form-control inpmargin usersel" name="payment_method">
+                                    <input type="hidden" id="payment_method" value="Paymaya" class="form-control inpmargin usersel" name="payment_method" readonly>
+
+                                    <input type="hidden" id="amount" value="10" class="form-control inpmargin " name="amount" readonly>
                                 </div>
                                 <div class="gen">
                                     <div style="margin-right: 20px;">

@@ -347,7 +347,7 @@ include ('db/user.php');
             					
 						<div id="Login" class="login_container form">
 								<div class="information">
-									<input class="inputtext control-label" id="email" name ="email" type="text"  placeholder="Email">
+									<input class="inputtext control-label" id="email" name ="email" type="email"  placeholder="Email">
                                     
 								</div>
 								
@@ -355,16 +355,12 @@ include ('db/user.php');
 									<input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password"> 
 								</div>
 							   
-								<div>
-									<a href="#" class="fp">Forgot password?</a>
-								</div>
 								<div class="information">   
 									<button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
 										Sign in
 									</button>  
 								    <button class="log_button gmail" onclick="window.location.href= 'resident_account_registration.php'">
                                     <a class="createacc" href="resident_account_registration.php">Create Account</a>
-
 									</button>
                                     
 								</div>

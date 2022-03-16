@@ -1,6 +1,5 @@
 <?php
 session_start();
-header('Refresh: 3;');
 
 
 include "../db/conn.php";
@@ -104,7 +103,7 @@ include "../db/e_payment.php";
                                     <input type="hidden" id="document_id" value="<?php echo $data ['app_brgyid']; ?>" class="form-control inpmargin usersel" name="document_id">
 
                                     <label for="refno">Name: </label>
-                                    <input required type="text" id="fullname" class="form-control inpmargin usersel" name="fullname" placeholder="Your name" value="<?php echo $data ['fname']; ?> <?php echo $data ['mname']; ?> <?php echo $data ['lname']; ?>">
+                                    <input required type="text" id="fullname" class="form-control inpmargin" name="fullname" placeholder="Your name" value="<?php echo $data ['fname']; ?> <?php echo $data ['mname']; ?> <?php echo $data ['lname']; ?>" readonly>
                                     <i aria-details="fullname" class="detailid">The name you registered in Document Request</i>
                                     <br>
                                     <label for="refno">Contact: </label>
@@ -115,11 +114,13 @@ include "../db/e_payment.php";
                                     <label for="refno">Reference No.</label>
                                     <input required type="number" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXXX" onKeyPress="if(this.value.length==13) return false;" >
 
-                                    <input type="hidden" id="document_type" value="Barangay ID" class="form-control inpmargin usersel" name="document_type">
+                                    <input type="hidden" id="document_type" value="Barangay ID" class="form-control inpmargin usersel" name="document_type" readonly>
 
-                                    <input type="hidden" id="payment_status" value="Approval" class="form-control inpmargin usersel" name="payment_status">
+                                    <input type="hidden" id="payment_status" value="Approval" class="form-control inpmargin usersel" name="payment_status" readonly>
 
-                                    <input type="hidden" id="payment_method" value="Gcash" class="form-control inpmargin usersel" name="payment_method">
+                                    <input type="hidden" id="payment_method" value="Gcash" class="form-control inpmargin usersel" name="payment_method" readonly>
+
+                                    <input type="hidden" id="amount" value="50" class="form-control inpmargin usersel" name="amount" readonly>
                                 </div>
                                 <div class="gen">
                                     <div style="margin-right: 20px;">

@@ -303,11 +303,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount
 				FROM payments
 				ORDER BY document_id ASC";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount
 				FROM payments
 				WHERE fullname LIKE ? 
 				ORDER BY document_id ASC";
@@ -331,7 +331,7 @@ if(!isset($_SESSION["type"]))
 					$data['document_type'],
 					$data['payment_status'],
 					$data['payment_method'],
-					$data['added_on']
+					$data['amount']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -356,11 +356,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount
 				FROM payments
 				ORDER BY document_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount
 				FROM payments 
 				WHERE fullname LIKE ? 
 				ORDER BY document_id ASC LIMIT ?, ?";
@@ -385,7 +385,7 @@ if(!isset($_SESSION["type"]))
 					$data['document_type'],
 					$data['payment_status'],
 					$data['payment_method'],
-					$data['added_on']
+					$data['amount']
 					
 				);
 		// for paging purpose
@@ -448,7 +448,7 @@ if(!isset($_SESSION["type"]))
 										<th width="10%">Reference No</th>
 										<th width="15%">Document Type</th>
 										<th width="10%">Payment Method</th>
-										<th width="5">Added on</th>
+										<th width="5">Amount</th>
 										<th width="10%">Payment Status</th>
 									</tr>
 								</thead>
@@ -462,7 +462,7 @@ if(!isset($_SESSION["type"]))
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['document_type']; ?></td>
 									<td><strong><?php echo $data ['payment_method']?></strong></td>
-									<td><?php echo $data ['added_on']; ?></td>
+									<td><?php echo $data ['amount']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['payment_status']; ?>"></td>
 
 								</tr>	

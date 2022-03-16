@@ -25,6 +25,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -40,7 +41,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -49,6 +50,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -113,6 +115,7 @@ if(isset($_POST['paymentbtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -128,7 +131,7 @@ if(isset($_POST['paymentbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -137,6 +140,7 @@ if(isset($_POST['paymentbtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -161,6 +165,7 @@ if(isset($_POST['clearancepaymentbtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -176,7 +181,7 @@ if(isset($_POST['clearancepaymentbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -185,6 +190,7 @@ if(isset($_POST['clearancepaymentbtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -249,6 +255,7 @@ if(isset($_POST['clearancepaymayabtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -264,7 +271,7 @@ if(isset($_POST['clearancepaymayabtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -273,7 +280,8 @@ if(isset($_POST['clearancepaymayabtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
-
+        $stmt->bindParam(':amount', $amount);
+        
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
         $_SESSION['status_code'] ="success";
@@ -295,6 +303,7 @@ if(isset($_POST['indigencypayment'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -310,7 +319,7 @@ if(isset($_POST['indigencypayment'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -319,6 +328,7 @@ if(isset($_POST['indigencypayment'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -342,6 +352,7 @@ if(isset($_POST['payamayaindigency'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -357,7 +368,7 @@ if(isset($_POST['payamayaindigency'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -366,6 +377,7 @@ if(isset($_POST['payamayaindigency'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -387,6 +399,7 @@ if(isset($_POST['gcashbpermitbtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -402,7 +415,7 @@ if(isset($_POST['gcashbpermitbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -411,6 +424,7 @@ if(isset($_POST['gcashbpermitbtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -432,6 +446,7 @@ if(isset($_POST['payamayabpermitbtn'])){
     $document_type = $_POST['document_type'];
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
+    $amount = $_POST['amount'];
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -447,7 +462,7 @@ if(isset($_POST['payamayabpermitbtn'])){
 	
 	}else{
 		
-		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method)");
+		$stmt = $db->prepare("INSERT INTO payments (document_id,fullname, contact_no, reference_no, document_type, payment_status, payment_method, amount) VALUES (:document_id, :fullname, :contact_no, :reference_no, :document_type, :payment_status, :payment_method, :amount)");
 
         $stmt->bindParam(':document_id', $document_id);
 		$stmt->bindParam(':fullname', $fullname);
@@ -456,6 +471,7 @@ if(isset($_POST['payamayabpermitbtn'])){
         $stmt->bindParam(':document_type', $document_type);
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
+        $stmt->bindParam(':amount', $amount);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";

@@ -41,7 +41,8 @@ if (isset($_SESSION['type'])) {
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/admincompviewdet.css">
-    <link rel="stylesheet" href="../announcement_css/custom.css">
+    <link rel="stylesheet" href="announcement_css/custom.css">
+
     <script src="resident-js/sweetalert.min.js"></script>
 
     <!--Font Styles-->
@@ -168,7 +169,7 @@ if (isset($_SESSION['type'])) {
 
         .usersel {
             pointer-events: none;
-            border: 1px solid orange
+            border: 1px solid orange;
         }
     </style>
     <title> Ongoing Case View Details </title>
@@ -354,7 +355,7 @@ if (isset($_SESSION['type'])) {
                         <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
 
-                    <a href="bcpc_ongoing.php">
+                    <a href="vawc_ongoing.php">
                         <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
@@ -417,7 +418,7 @@ if (isset($_SESSION['type'])) {
                     <div id="ssms" class="modal">
                         <div class="modal-content animate">
                             <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="../send_sms.php" class="body">
+                            <form method="POST" action="send_sms.php" class="body">
                                 <div class="main-content-email">
 
                                     <div class="main-content">
@@ -449,7 +450,31 @@ if (isset($_SESSION['type'])) {
                 <iframe type="file" style="width:100%; height: 500px;" src="img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
                 <br>
                 <br>
+                <table id="viewdetails" class="font-sizee" style="margin-bottom: -10px;">
+                        <tr>
+                            <th width="30%">Assigned Department: </th>
+                            <td><strong><?php echo $data['dept']; ?> Dept.</strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Approved Date: </th>
+                            <td><strong><?php echo $data['app_date']; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Facilitated by: </th>
+                            <td><strong><?php echo $data['app_by']; ?></strong></td>
+                        </tr>
+                        <!-- <tr>
+                                <th width="30%">Created on </th>
+                                <td><strong><?php echo $data['created_on']; ?></strong></td>
+                            </tr> -->
+                    </table>
 
+                    <br>
+                    <h5><strong>Complaints: </strong></h5>
+                    <strong>
+                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA; text-align: justify;" disabled="disabled" id="" cols="155" rows="7"><?php echo $data['complaints']; ?></textarea>
+                        
+                    </strong>
             <form method="POST" action="" enctype="multipart/form-data">
                     <br>
                     <br>
@@ -457,7 +482,7 @@ if (isset($_SESSION['type'])) {
                         <table id="viewdetails" class="font-sizee" style="margin-right: 25px;">
                             <tr>
                                 <th width="30%">ID No.</th>
-                                <td><input type="hidden" name="ongoingcase_id" value="<?php echo $data['admincomp_id']; ?>"><?php echo $data['admincomp_id']; ?></td>
+                                <td><input type="hidden" name="admincomp_id" value="<?php echo $data['admincomp_id']; ?>"><?php echo $data['admincomp_id']; ?></td>
                             </tr>
                             <tr>
                                 <th width="30%">Complainant's Name</th>
@@ -520,70 +545,97 @@ if (isset($_SESSION['type'])) {
                     </table>
                     <br>
             </div>
-                    <label><strong>Complaints: </strong></label>
-                    <strong>
-                        <textarea class="form-control inputtext" style="padding: 20px; background: #D6EACA;  " disabled="disabled" id="" cols="175" rows="7"><?php echo $data['complaints']; ?></textarea>
-                        <input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>">
-                    </strong>
-                    <br>
-                    <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">Assigned Department: </th>
-                            <td><input type="hidden" name="dept" value="<?php echo $data['dept']; ?>"><strong><?php echo $data['dept']; ?> Dept.</strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Approved Date: </th>
-                            <td><input type="hidden" name="app_date" value="<?php echo $data['app_date']; ?>"><strong><?php echo $data['app_date']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Facilitated by: </th>
-                            <td><input type="hidden" name="app_by" value="<?php echo $data['app_by']; ?>"><strong><?php echo $data['app_by']; ?></strong></td>
-                        </tr>
-                        <!-- <tr>
-                                <th width="30%">Created on </th>
-                                <td><strong><?php echo $data['created_on']; ?></strong></td>
-                            </tr> -->
-                    </table>
-                    <div class="col-md-12">
-					<table id="viewdetails" style="margin-bottom: 30px; margin-top: 30px;">
-						<thead>
-							<tr class="t_head">
-								<th width="5%">Blotter ID</th>
-								<th width="5%">Name of Complainant</th>
-								<th width="5%">Age</th>
-								<th width="5%">Gender</th>
-								<th width="5">Address</th>
-								<th width="5%">Incident Address</th>
-								<th width="5%">Contact No</th>
-								
-								<th width="5%">Gmail Status</th>
-								<th width="5%">SMS Status</th>
-								<th width="5%">View Details</th>
-							</tr>
-						</thead>
-							<tbody>
-								<tr class="table-row">
-									<td><?php echo $data['admincomp_id']; ?></td>
-									<td><?php echo $data['n_complainant']; ?></td>
-									<td><?php echo $data['comp_age']; ?></td>
-									<td><?php echo $data['comp_gender']; ?></td>
-									<td><?php echo $data['comp_address'] ?></td>
-									<td><?php echo $data['inci_address']; ?></td>
-									<td><?php echo $data['contactno']; ?></td>
-									<td><?php echo $data['gmail']; ?></td>
-									<td><?php echo $data['sms']; ?></td>
+                    
 
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
-								</tr>
-							</tbody>
-					</table>
+                    <input type="hidden" name="complaints" value="<?php echo $data['complaints']; ?>">
+                    <input type="hidden" name="dept" value="<?php echo $data['dept']; ?>">
+                    <input type="hidden" name="app_date" value="<?php echo $data['app_date']; ?>">
+                    <input type="hidden" name="app_by" value="<?php echo $data['app_by']; ?>">
 
+                    <hr>
+                    <div style="text-align: center;">
+                        <label style="font-size: 14px;">Case Trials</label>
                     </div>
-                    <br>
-                    <br>
+                    <hr>
+                    <table id="viewdetails" style="margin-bottom: 30px; margin-top: 30px;">
+						
+						<?php	
+                            if (isset($_GET['id'])) {
+                            $ID = $_GET['id'];
+                            } else {
+                                $ID = "";
+                            }
+                
+                            // create array variable to store data from database
+                            $data = array();	
 
+							$mquery = "SELECT * FROM ongoingcase WHERE admincomp_id = $ID";
+							$countemployee = $db->query($mquery)
+						?>
+						
+							<thead>
+								<tr>
+                                    <th width="8%" style="text-align:center;">Case ID</th>
+                                    <th width="15%" style="text-align:center;">Complainant's Name</th>
+                                    <th width="15%" style="text-align:center;">Violator's Name</td>
+                                    <th width="15%" style="text-align:center;">Hearing Date</th>
+                                    <th width="15%" style="text-align:center;">Facilitated By</th>
+                                    <th width="15%" style="text-align:center;">Date Added</th>
+                                    
+                                    <th width="15%" style="text-align:center;">Approved By</th>
+                                    <th width="15%" style="text-align:center;"></th>
+								</tr>                       
+							</thead>
+							<?php
+							foreach($countemployee as $data) 
+							{
+							?>
+                            <tbody>
+                                <tr onclick="document.getElementById('viewdet_id=?<?php echo $data['ongoingcase_id']; ?>').style.display='block'">
+                                        <td style="text-align:center;"><?php echo $data['ongoingcase_id']; ?></td>
+                                        <td style="text-align:center;"><?php echo $data['n_complainant']; ?></td>
+                                        <td style="text-align:center;"><?php echo $data['n_violator']; ?></td>
+                                        <td style="text-align:center;"><?php echo $data['hearing_date'] ?></td>
+                                        <td style="text-align:center;"><?php echo $data['app_by']; ?></td>
+                                        <td style="text-align:center;"><?php echo $data['date_added']; ?></td>
+                                        
+                                        <td style="text-align:center;"><?php echo $data['ongoing_appby']; ?></td>
+                                        <td style="text-align:center;">
+                                            <img src="img/folder.png" title="View Trial" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail" >
+                                       </td>
+                                </tr>	
+							</tbody>
+                             <!-- SMS -->
+                    <div id="viewdet_id=?<?php echo $data['ongoingcase_id']; ?>" class="modal">
+                        <div class="modal-content animate">
+                            <span onclick="document.getElementById('viewdet_id=?<?php echo $data['ongoingcase_id']; ?>').style.display='none'" class="topright">&times;</span>
+                                <div class="main-content-email">
+
+                                        <div class="information col">
+                                            <p> Name: </p>
+                                            <input class="form-control" value="<?php echo $data['n_complainant']; ?>" type="text" readonly>
+                                        </div>
+
+                                        <div class="information col">
+                                            <p> Remarks: </p>
+                                            <textarea class="form-control" cols="5" rows="5" readonly><?php echo $data['remarks']; ?></textarea>
+                                        </div>
+                                    <br>
+                                    <div class="information col">
+                                        <iframe type="file" style="width:100%; height: 400px;" src="img/fileupload_ongoingbcpc/<?php echo $data['ongoingcase_file']; ?>">Here's the Document</iframe>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+							<?php
+							}
+							?>
+						
+						</table>
+                        
+                
+        </div>
                     <div class="information col">
-
                         <label class="employee-label ">Hearing Date</label>
                         <input type="date" class="form-control inputtext control-label" id="hearing_date" style="padding: 5px;" name="hearing_date">
                         <?php echo isset($error['hearing_date']) ? $error['hearing_date'] : ''; ?>
@@ -591,7 +643,7 @@ if (isset($_SESSION['type'])) {
 
                     <div class="information col">
                         <label class="employee-label"> Facilitated By </label>
-                        <input class="form-control inputtext control-label" style="padding: 5px;" id="ongoing_appby" name="ongoing_appby" value="<?php echo $user; ?>" type="text">
+                        <input class="form-control inputtext control-label" style="padding: 5px;" id="ongoing_appby" name="ongoing_appby" value="<?php echo $user; ?>" type="text" readonly>
                         <?php echo isset($error['ongoing_appby']) ? $error['ongoing_appby'] : ''; ?>
                     </div>
 
@@ -601,7 +653,7 @@ if (isset($_SESSION['type'])) {
                         <?php echo isset($error['remarks']) ? $error['remarks'] : ''; ?>
                     </div>
 
-                    <div class="information col">
+                    <div class="information col" style="margin-bottom: 15px;">
                         <label class="employee-label ">Attach File </label>
                         <input type="file" class="form-control inputtext control-label" id="ongoingcase_file" style="padding: 5px;" name="ongoingcase_file">
                         <div style="color: red; text-align: center;"><strong><?php echo isset($error['ongoingcase_file']) ? $error['ongoingcase_file'] : ''; ?></strong></div>
@@ -618,8 +670,7 @@ if (isset($_SESSION['type'])) {
 
             <a><button class="btn btn-danger font-sizee form-control btnmargin" name="closeCase">Close</button></a>
         </form>
-
-        </div>
+       
 
         </div>
 

@@ -578,7 +578,7 @@ if(isset($_POST['accountingbtn']))
 							{
 								$_SESSION["type"] = $row["user_type"];
 								$_SESSION["user"] = $row["username"];
-								header("location: includes/compAdmin_dashboard.php");
+								header("location: includes/accounting_dashboard.php");
 							}
 
 							else
