@@ -96,11 +96,8 @@ require 'db/conn.php';
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 			  <li>
-<<<<<<< HEAD
 			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
-=======
-			   <a class="side_bar" href="lupon_active.php">
->>>>>>> 0b7318a54383eebb043598ac5976f623f28106e2
+			   <!-- <a class="side_bar" href="lupon_active.php"> -->
 				 <i class='fas fa-user-clock'></i>
 				 <span class="links_name">Active Cases</span>
 			   </a>

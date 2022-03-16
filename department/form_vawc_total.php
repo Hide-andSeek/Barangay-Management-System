@@ -160,6 +160,7 @@ if(!isset($_SESSION["type"]))
 					</div>
 				  </div>
 			  </section>
+
 			  <hr>
 				<div style="text-align: center;">
 					<h5>Pending Cases</h5>			
@@ -183,11 +184,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Pending'
 				ORDER BY admincomp_id ASC";
 			} else {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC";
@@ -222,7 +223,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// get total records
 				$total_records = $stmt->num_rows;
@@ -247,11 +250,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Pending'
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 			} else {
-				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints 
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
@@ -287,7 +290,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// for paging purpose
 				$total_records_paging = $total_records;
@@ -333,11 +338,9 @@ if(!isset($_SESSION["type"]))
 								<th width="15%">Name of Complainant</th>
 								<th width="15%">Age</th>
 								<th width="15%">Gender</th>
-								<th width="15">Address</th>
+								<th width="15%">Address</th>
 								<th width="15%">Incident Address</th>
 								<th width="15%">Contact No</th>
-								<th width="15%">View Details</th>
-								<!-- <th width="5%">Message</th> -->
 							</tr>
 						</thead>
 						<?php
@@ -351,11 +354,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['comp_address'] ?></td>
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
-
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
-
-									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
-
 								</tr>
 							</tbody>
 					<?php
@@ -366,14 +364,13 @@ if(!isset($_SESSION["type"]))
 
 				</div>
 				<div class="col-md-12 pagination">
-					<h4 class="page">
+					<!-- <h4 class="page">
 						<?php
 						// for pagination purpose
-						$function->doPages($offset, 'compAdmin_dashpage.php', '', $total_records, $keyword);
+						$function->doPages($offset, '.php', '', $total_records, $keyword);
 						?>
-					</h4>
+					</h4> -->
 				</div>
-				<!-- <button class="button" style="vertical-align:middle"><span>Hover </span></button> -->
 		</div>
 		
 		<div class="separator"></div>
@@ -384,7 +381,7 @@ if(!isset($_SESSION["type"]))
 					<h5>Ongoing Cases</h5>			
 				</div>
 			<hr>
-			  <div id="content" class="container col-md-12" >
+			<div id="content" class="container col-md-12" style="margin-top: 50px;">
 			<?php
 			// create object of functions class
 			$function = new functions;
@@ -402,11 +399,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Ongoing'
+				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Ongoing'
 				ORDER BY admincomp_id ASC";
 			} else {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC";
@@ -441,7 +438,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// get total records
 				$total_records = $stmt->num_rows;
@@ -466,11 +465,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Ongoing'
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Ongoing'
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 			} else {
-				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints 
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
@@ -506,7 +505,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// for paging purpose
 				$total_records_paging = $total_records;
@@ -515,14 +516,14 @@ if(!isset($_SESSION["type"]))
 			// if no data on database show "No Reservation is Available"
 			if ($total_records_paging == 0) {
 				echo "
-		<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
-		<div class='alert alert-warning cattxtbox'>
-			<h6  style='margin-top: -7px;'> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
-			<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
-				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
-			</div>
-		</div>
-		";
+				<h3 style='text-align: center; margin-top: 5%;'>Data Not Shown!</h3>
+				<div class='alert alert-warning cattxtbox'>
+					<h6  style='margin-top: -7px;'> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
+					<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
+						<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
+					</div>
+				</div>
+				";
 			?>
 
 			<?php
@@ -552,11 +553,9 @@ if(!isset($_SESSION["type"]))
 								<th width="15%">Name of Complainant</th>
 								<th width="15%">Age</th>
 								<th width="15%">Gender</th>
-								<th width="15">Address</th>
+								<th width="15%">Address</th>
 								<th width="15%">Incident Address</th>
 								<th width="15%">Contact No</th>
-								<th width="15%">View Details</th>
-								<!-- <th width="5%">Message</th> -->
 							</tr>
 						</thead>
 						<?php
@@ -570,11 +569,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['comp_address'] ?></td>
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
-
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
-
-									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
-
 								</tr>
 							</tbody>
 					<?php
@@ -585,25 +579,23 @@ if(!isset($_SESSION["type"]))
 
 				</div>
 				<div class="col-md-12 pagination">
-					<h4 class="page">
+					<!-- <h4 class="page">
 						<?php
 						// for pagination purpose
-						$function->doPages($offset, 'compAdmin_dashpage.php', '', $total_records, $keyword);
+						$function->doPages($offset, '.php', '', $total_records, $keyword);
 						?>
-					</h4>
+					</h4> -->
 				</div>
-				<!-- <button class="button" style="vertical-align:middle"><span>Hover </span></button> -->
 		</div>
 		<div class="separator"></div>
 		</div>
-
 		<hr>
 			<div style="text-align: center;">
 				<h5>Closed Cases</h5>			
 			</div>
 		<hr>
 		
-		<div id="content" class="container col-md-12" >
+		<div id="content" class="container col-md-12" style="margin-top: 50px;">
 			<?php
 			// create object of functions class
 			$function = new functions;
@@ -621,11 +613,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Closed'
+				$sql_query = "SELECT  admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Closed'
 				ORDER BY admincomp_id ASC";
 			} else {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC";
@@ -660,7 +652,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// get total records
 				$total_records = $stmt->num_rows;
@@ -685,11 +679,11 @@ if(!isset($_SESSION["type"]))
 			}
 
 			if (empty($keyword)) {
-				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
-				FROM admin_complaints WHERE dept = 'VAWC' AND status = 'Closed'
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
+				FROM admin_complaints WHERE dept = 'VAWC' AND status='Closed'
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
 			} else {
-				$sql_query = "SELECT a admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image
+				$sql_query = "SELECT admincomp_id, n_complainant, comp_age, comp_gender, comp_address, inci_address,contactno, n_violator, violator_age,violator_gender, relationship, violator_address, witnesses, complaints, dept, app_date, app_by, blotterid_image, gmail, sms
 				FROM admin_complaints 
 				WHERE n_complainant LIKE ? 
 				ORDER BY admincomp_id ASC LIMIT ?, ?";
@@ -725,7 +719,9 @@ if(!isset($_SESSION["type"]))
 					$data['dept'],
 					$data['app_date'],
 					$data['app_by'],
-					$data['blotterid_image']
+					$data['blotterid_image'],
+					$data['gmail'],
+					$data['sms']
 				);
 				// for paging purpose
 				$total_records_paging = $total_records;
@@ -771,11 +767,9 @@ if(!isset($_SESSION["type"]))
 								<th width="15%">Name of Complainant</th>
 								<th width="15%">Age</th>
 								<th width="15%">Gender</th>
-								<th width="15">Address</th>
+								<th width="15%">Address</th>
 								<th width="15%">Incident Address</th>
 								<th width="15%">Contact No</th>
-								<th width="15%">View Details</th>
-								<!-- <th width="5%">Message</th> -->
 							</tr>
 						</thead>
 						<?php
@@ -789,11 +783,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['comp_address'] ?></td>
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
-
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_appdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
-
-									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
-
 								</tr>
 							</tbody>
 					<?php
@@ -804,14 +793,13 @@ if(!isset($_SESSION["type"]))
 
 				</div>
 				<div class="col-md-12 pagination">
-					<h4 class="page">
+					<!-- <h4 class="page">
 						<?php
 						// for pagination purpose
-						$function->doPages($offset, 'compAdmin_dashpage.php', '', $total_records, $keyword);
+						$function->doPages($offset, '.php', '', $total_records, $keyword);
 						?>
-					</h4>
+					</h4> -->
 				</div>
-				<!-- <button class="button" style="vertical-align:middle"><span>Hover </span></button> -->
 		</div>
 		<div class="separator"></div>
 		</div>

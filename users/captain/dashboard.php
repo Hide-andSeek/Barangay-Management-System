@@ -39,6 +39,7 @@ include('db/barcharts.php');
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/captain.css">
+	<link rel="stylesheet" href="css/design.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Signika&display=swap" rel="stylesheet">
@@ -147,8 +148,8 @@ include('db/barcharts.php');
 
 			  <div class="w3-row-padding w3-margin-bottom">
 			<div class="w3-quarter w3padd ">
-				<div class="w3-container w3-teal w3-padding-16 w3borderbot">
-					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-container w3-padding-16 w3borderbot bg-green">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 					<div class="w3-right">
 					<?php 
 
@@ -161,13 +162,21 @@ include('db/barcharts.php');
 						?>
 					</div>
 					<div class="w3-clear"></div>
-					<h4>ADMIN</h4>
+					<div style="text-align: center;">
+							<h4>ADMIN</h4>
+						</div>
+						<br>
+						<a href="accounting_funds.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 				</div>
 			</div>
 
 			<div class="w3-quarter w3padd ">
-				<div class="w3-container w3-teal w3-padding-16 w3borderbot">
-					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-container w3-padding-16 w3borderbot bg-green">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 					<div class="w3-right">
 					<?php 
 
@@ -180,13 +189,21 @@ include('db/barcharts.php');
 			
 					</div>
 					<div class="w3-clear"></div>
-					<h4>EMPLOYEE</h4>
+					<div style="text-align: center;">
+							<h4>EMPLOYEE</h4>
+						</div>
+						<br>
+						<a href="accounting_funds.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 				</div>
 			</div>
 
 			<div class="w3-quarter w3padd ">
-				<div class="w3-container w3-teal w3-padding-16 w3borderbot">
-					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+				<div class="w3-container w3-padding-16 w3borderbot bg-green">
+					<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 					<div class="w3-right">
 					<?php 
 	
@@ -199,13 +216,21 @@ include('db/barcharts.php');
 					
 					</div>
 					<div class="w3-clear"></div>
-					<h4>BARANGAY OFFICIAL</h4>
+					<div style="text-align: center;">
+							<h4>BARANGAY OFFICIALS</h4>
+						</div>
+						<br>
+						<a href="accounting_funds.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 				</div>
 			</div>
 			
 			<div class="w3-quarter w3padd">
-				<div class="w3-container w3-teal w3borderbot w3-text-white w3-padding-16">
-					<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+				<div class="w3-container w3borderbot w3-text-white w3-padding-16 bg-green">
+					<div class="w3-left"><i class="fa fa-users w3-xxxlarge" style="color: #0000001A;"></i></div>
 					<div class="w3-right">
 					<?php 
 	
@@ -217,7 +242,15 @@ include('db/barcharts.php');
 					?>
 					</div>
 					<div class="w3-clear"></div>
-					<h4>CON. EMPLOYEE</h4>
+					<div style="text-align: center;">
+							<h4>CON. EMPLOYEE</h4>
+						</div>
+						<br>
+						<a href="accounting_funds.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 				</div>
 			</div>
 			<br>

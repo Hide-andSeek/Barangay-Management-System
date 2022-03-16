@@ -1,5 +1,46 @@
 <?php
 
+	if(isset($_POST['save'])){
+		$curr_password = $_POST['curr_password'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+		if(password_verify($curr_password, $user['password'])){
+
+			if($password == $user['password']){
+				$password = $user['password'];
+			}
+			else{
+				$password = password_hash($password, PASSWORD_DEFAULT);
+			}
+
+			$sql = "UPDATE accreg_resident SET email = '$email', password = '$password' WHERE resident_id = '".$user['resident_id']."'";
+			if($connect->query($sql)){
+	
+				echo "<script>
+						alert('Admin profile updated successfully!')
+						window.location.href='index.php';
+					</script>";
+			}
+			else{
+				$_SESSION['error'] = $conn->error;
+			}
+			
+		}
+		else{
+			$_SESSION['error'] = 'Incorrect password';
+		}
+	}
+	else{
+		$_SESSION['error'] = 'Fill up required details first';
+	}
+
+
+
+?>
+
+<?php
+
 //Barangay Clearance
 if(isset($_POST[''])){
 	

@@ -72,9 +72,6 @@ include "db/announcementquery.php";
             padding-top: 5px; 
         }
 		
-		.addannoucement-modal{
-
-		}
 		.modal-contentannouncement, .modal-contentaddannouncement{
             background-color: #fefefe;
             margin: 5% auto 15% auto;

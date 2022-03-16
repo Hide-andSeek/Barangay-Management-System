@@ -26,11 +26,11 @@ if(isset($_POST['send'])){
     $message = $_POST['message'];
     // $attachfile = $_FILES['fileattach']['tmp_name'];
 
-	if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
-		$file = "img/" . basename($_FILES['fileattach']['name']);
-		move_uploaded_file($_FILES['fileattach']['tmp_name'], $file);
-	} else
-		$file = "";
+	// if (isset($_FILES['fileattach']['name']) && $_FILES['fileattach']['name'] != "") {
+	// 	$file = "img/" . basename($_FILES['fileattach']['name']);
+	// 	move_uploaded_file($_FILES['fileattach']['tmp_name'], $file);
+	// } else
+	// 	$file = "";
    
     //Load composer's autoloader
 
@@ -59,7 +59,7 @@ if(isset($_POST['send'])){
         $mail->addAddress($email);              
         $mail->addReplyTo('barangaycommonwealth01@gmail.com');
         
-        $mail->addAttachment ($file, 'Barangay Clearance');
+        // $mail->addAttachment ($file, 'From');
    
         //Content
         $mail->isHTML(true);        
@@ -77,7 +77,7 @@ if(isset($_POST['send'])){
     }
 	
 	header("location: contactmodule.php");
-	unlink($file);
+	// unlink($file);
 
 }
 

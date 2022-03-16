@@ -129,7 +129,7 @@ if(!isset($_SESSION["type"]))
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 		.viewbtn{width: 65px; height: 35px; background-color: #008CBA;color: white; }
-		.viewbtn:hover{  background-color: white; color: black; border: 1px solid #008CBA;}
+		.viewbtn:hover{  background-color: white; color: black; }
 
 	.preview{font-size:13px; padding-left:50px; inline-block: none;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
@@ -495,11 +495,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Certificate of Indigency'
 				ORDER BY document_id ASC";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments
 				WHERE fname LIKE ? 
 				ORDER BY document_id ASC";
@@ -522,8 +522,7 @@ if(!isset($_SESSION["type"]))
 					$data['reference_no'],
 					$data['document_type'],
 					$data['payment_status'],
-					$data['payment_method'],
-					$data['added_on']
+					$data['payment_method']
 				);
 		// get total records
 		$total_records = $stmt->num_rows;
@@ -548,11 +547,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments WHERE payment_status = 'Approval' AND document_type = 'Certificate of Indigency'
 				ORDER BY document_id ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method,added_on
+		$sql_query = "SELECT document_id, fullname, contact_no, reference_no, document_type, payment_status, payment_method
 				FROM payments
 				WHERE fullname LIKE ? 
 				ORDER BY document_id ASC LIMIT ?, ?";
@@ -576,8 +575,7 @@ if(!isset($_SESSION["type"]))
 					$data['reference_no'],
 					$data['document_type'],
 					$data['payment_status'],
-					$data['payment_method'],
-					$data['added_on']
+					$data['payment_method']
 					
 				);
 		// for paging purpose
@@ -633,7 +631,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Contact no</th>
 										<th width="15%">Reference No</th>
 										<th width="5%">Payment Method</th>
-										<th width="5">Added on</th>
 										<th width="5%"></th>
 										<th width="5%"></th>
 									</tr>
@@ -647,7 +644,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['contact_no']; ?></td>
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['payment_method']?></td>
-									<td><?php echo $data ['added_on']; ?></td>
 									<td>
 									<form method="POST" action="">
 										<input name="payment_status" id="payment_status" value="Paid" type="hidden">
@@ -659,7 +655,7 @@ if(!isset($_SESSION["type"]))
 
 										<input name="payment_stat" id="payment_stat" value="Paid" type="hidden">
 
-										<button style="text-decoration: none; width: 90px; height:30px;" class="form-control generate viewbtn verify" name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600"></i> Verify</button>
+										<button style="text-decoration: none; width: 90px; height:30px; background: #55cf71;" class="form-control generate viewbtn verify " name="btnverify"><i class="bx bx-check-shield veri" style="font-weight: 600; "></i> Verify</button>
 									</form>
 									</td>
 

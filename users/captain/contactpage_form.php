@@ -1,4 +1,5 @@
 <?php session_start();
+include ('send_email.php');
 
 if(!isset($_SESSION["type"]))
 {
@@ -187,7 +188,22 @@ require 'db/conn.php';
                 </h5>
             <hr>
             </div>
-            
+			<?php
+						if(ISSET($_SESSION['status'])){
+							if($_SESSION['status'] == "ok"){
+						?>
+									<div class="alert alert-info messcompose"><?php echo $_SESSION['result']?></div>
+						<?php
+								}else{
+						?>
+									<div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
+						<?php
+								}
+								
+								unset($_SESSION['result']);
+								unset($_SESSION['status']);
+							}
+						?>
                     <div class="reg_table">
                         <table class="content-table"  id="table">
 							<?php
@@ -227,51 +243,37 @@ require 'db/conn.php';
 							?>
 						</table>
 			</div>
-				<form method="POST" action="send_email.php" enctype="multipart/form-data">
+					
+						
+				<form method="POST" action="" >
 					<div class="main-content-email">
 					<fieldset>
 						<legend style=" text-align: center;">Compose Email</legend>	
-						<?php
-						if(ISSET($_SESSION['status'])){
-							if($_SESSION['status'] == "ok"){
-						?>
-									<div class="alert alert-info messcompose"><?php echo $_SESSION['result']?></div>
-						<?php
-								}else{
-						?>
-									<div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
-						<?php
-								}
-								
-								unset($_SESSION['result']);
-								unset($_SESSION['status']);
-							}
-						?>
+					
 						<div class="information col">
 							<label class="employee-label "> ID: </label>
-							<input type="number" class="form-control inputtext email usersel id" id="id" type="hidden">
+							<input type="number" class="form-control inputtext email id" id="id" type="hidden" readonly>
 						</div>
 
 						<div class="information col">
 							<label class="employee-label"> To: </label>
-							<input class="form-control inputtext email usersel id" id="username" type="text">
+							<input class="form-control inputtext email id" id="username" type="text" readonly>
 						</div>
 
 						<div class="information col">
 							<label class="employee-label"> Email: </label>
-							<input required class="form-control inputtext email em" id="email" name="email" type="text">
+							<input required class="form-control inputtext email em" id="email" name="email" type="email">
 						</div>
 
 						<div class="information col">
 							<label class="employee-label">Subject:  </label>
 							<input required class="form-control inputtext email" id="subject" name="subject" type="text"> 
 						</div>
-					
-
-						<div class="information col">
+				
+						<!-- <div class="information col">
 							<label class="employee-label">Attachment: </label>
 							<input required class="form-control inputtext email" id="fileattach" name="fileattach" type="file"> 
-						</div>
+						</div> -->
 
 						<div class="information col textarea">
 							<label>Body: </label>

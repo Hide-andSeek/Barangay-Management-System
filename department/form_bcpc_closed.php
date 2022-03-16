@@ -485,7 +485,7 @@ require 'db/conn.php';
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
 
-									<td><button class="view_approvebtn" onclick="location.href='bcpc_ongoing_viewdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
+									<td><button class="view_approvebtn" onclick="location.href='bcpc_closed_viewdetails.php?id=<?php echo $data['admincomp_id']; ?>'">View Details</button></td>
 
 									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
 

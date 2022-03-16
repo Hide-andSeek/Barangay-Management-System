@@ -34,8 +34,10 @@ if(!isset($_SESSION["type"]))
 	mes/base/jquery-ui.css">
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/design.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
 	<!--Font Styles-->
+	<script src="../resident-js/sweetalert.min.js"></script>
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -96,9 +98,13 @@ if(!isset($_SESSION["type"]))
 		.page {
 			margin-left: 15px;
 		}
+		.more-info:hover{color: orange; background-color: orange;}
 	 </style>
    </head>
 	<body>
+	<script>
+        swal("Welcome to:","Barangay Commonwealth: VAWC Department");
+    </script>
 		<!-- Side Navigation Bar-->
 		   <div class="sidebar">
 			<div class="logo-details">
@@ -158,7 +164,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard
+						<h5>VAWC Department Dashboard
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -166,58 +172,14 @@ if(!isset($_SESSION["type"]))
 					</div>
 				  </div>
 			  </section>
-			  
+			 
 			 <br> 
 			 
 	 <div>
 		<div class="w3-row-padding w3-margin-bottom">
-			<a href="vawc_total.php">
-			<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
-
-					$query = "SELECT admincomp_id FROM admin_complaints WHERE dept = 'VAWC' ORDER BY admincomp_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					
-					?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Total Cases</h4>
-
-			</div>
-			</div>
-	
-	</a>
-
-			<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-				<div class="w3-right">
-				<?php 
-					require '../db/conn.php';
-
-					$query = "SELECT admincomp_id FROM admin_complaints WHERE status = 'Ongoing' AND dept = 'VAWC' ORDER BY admincomp_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-					?>
-		
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Ongoing Cases</h4>
-			</div>
-			</div>
-
-			<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+		<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -231,12 +193,79 @@ if(!isset($_SESSION["type"]))
 				
 				</div>
 				<div class="w3-clear"></div>
+				
+				<div style="text-align: center;">
 				<h4>Pending Cases</h4>
+				</div>
+				<br>
+				<a href="vawcdashboard.php" class="small-box-footer more-info">
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</div>
+				</a>
 			</div>
 			</div>
+
 			<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE status = 'Ongoing' AND dept = 'VAWC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					?>
+		
+				</div>
+				<div class="w3-clear"></div>
+				<div style="text-align: center;">
+				<h4>Ongoing Cases</h4>
+				</div>
+				<br>
+				<a href="vawc_ongoing.php" class="small-box-footer more-info">
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right" ></i>
+				</div>
+				</a>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-green">
+				<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+				<div class="w3-right">
+				<?php 
+					require '../db/conn.php';
+
+					$query = "SELECT admincomp_id FROM admin_complaints WHERE dept = 'VAWC' ORDER BY admincomp_id";
+					$query_run = $db->query($query);
+					$pdoexecute = $query_run->rowCount();
+
+					echo "<h3>$pdoexecute</h3>"
+					
+					?>
+				</div>
+				<div class="w3-clear"></div>
+				<div style="text-align: center;">
+				<h4>Total Cases</h4>
+				</div>
+				
+				<br>
+				<a href="vawc_total.php" class="small-box-footer more-info" >
+				<div style="text-align: center; background: #0000001A; padding: 3px 0">
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</div>
+				</a>
+			</div>
+			</div>
+
+			<div class="w3-quarter">
+			<div class="w3-container w3-padding-16 bg-red">
+				<div class="w3-left"><i class="fa fa-users w3-xxxlarge" style="color: #0000001A;"></i></div>
 				<div class="w3-right">
 				<?php 
 					require '../db/conn.php';
@@ -250,82 +279,19 @@ if(!isset($_SESSION["type"]))
 				
 				</div>
 				<div class="w3-clear"></div>
+				<div style="text-align: center;">
 				<h4>Closed Cases</h4>
+				</div>
+				<br>
+				<a href="vawc_closed.php" class="small-box-footer more-info" >
+				<div style="text-align: center; background: #0000001A; padding: 3px 0" >
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</div>
+				</a>
 			</div>
 			</div>
 		</div>
 	</div>
-
-<!-- 
-	<fieldset>
-	<legend>SCHEDULE LIST</legend>
-			<div class="w3-quarter w3padd ">
-				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>MONDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd ">
-				<a href="bpso.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>TUESDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd ">
-				<a href="includes/dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>WEDNESDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter w3padd">
-				<a href="includes/compAdmin_dashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>THURSDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-		
-
-			<div class="w3-quarter">
-				<a href="">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>FRIDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="w3-quarter">
-				<a href="includes/vawcdashboard.php">
-					<div class="w3-container w3bord w3back w3point w3borderbot">
-						<div class="w3-left"><i class="bx bx-building-house fa-fw w3-xxxlarge" style="color: yellow;"></i></div>
-						<div class="w3-right">
-							<h3>SATURDAY</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-		</fieldset> -->
 
 		<div id="content" class="container col-md-12" style="margin-top: 50px;">
 			<?php
@@ -466,7 +432,7 @@ if(!isset($_SESSION["type"]))
 		<div class='alert alert-warning cattxtbox'>
 			<h6  style='margin-top: -7px;'> Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists </h6>
 			<div style='display: flex; justify-content: center; align-items: center; margin-top: 25px;'>
-				<img style='opacity: 0.8;' src='img/inmaintenance.png'/>
+				<img style='opacity: 0.8;' src='../img/inmaintenance.png'/>
 			</div>
 		</div>
 		";
@@ -492,17 +458,15 @@ if(!isset($_SESSION["type"]))
 				<!-- end of search form -->
 
 				<div class="col-md-12">
-					<table class="content-table">
+					<table class="content-table" >
 						<thead>
-							<tr class="t_head">
+							<tr class="t_head" >
 								<th width="15%">Blotter ID</th>
 								<th width="15%">Name of Complainant</th>
 								<th width="15%">Age</th>
 								<th width="15%">Gender</th>
-								<th width="15">Address</th>
 								<th width="15%">Incident Address</th>
 								<th width="15%">Contact No</th>
-								
 								<th width="15%">Gmail Status</th>
 								<th width="15%">SMS Status</th>
 								<th width="15%">View Details</th>
@@ -516,7 +480,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data['n_complainant']; ?></td>
 									<td><?php echo $data['comp_age']; ?></td>
 									<td><?php echo $data['comp_gender']; ?></td>
-									<td><?php echo $data['comp_address'] ?></td>
 									<td><?php echo $data['inci_address']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>
 									<td><?php echo $data['gmail']; ?></td>

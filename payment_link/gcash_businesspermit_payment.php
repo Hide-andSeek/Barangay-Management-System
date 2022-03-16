@@ -110,11 +110,13 @@ include "../db/e_payment.php";
                                     <label for="refno">Reference No.</label>
                                     <input required type="number" id="reference_no" class="form-control inpmargin" name="reference_no" placeholder="XXXXXXXXXXXXX" onKeyPress="if(this.value.length==13) return false;" >
 
-                                    <input type="hidden" id="document_type" value="Business Permit" class="form-control inpmargin usersel" name="document_type">
+                                    <input type="hidden" id="document_type" value="Business Permit" class="form-control inpmargin usersel" name="document_type" readonly>
 
-                                    <input type="hidden" id="payment_status" value="Approval" class="form-control inpmargin usersel" name="payment_status">
+                                    <input type="hidden" id="payment_status" value="Approval" class="form-control inpmargin usersel" name="payment_status" readonly>
 
-                                    <input type="hidden" id="payment_method" value="Gcash" class="form-control inpmargin usersel" name="payment_method">
+                                    <input type="hidden" id="payment_method" value="Gcash" class="form-control inpmargin usersel" name="payment_method" readonly>
+
+                                    <input type="hidden" id="amount" value="10" class="form-control inpmargin usersel" name="amount" readonly>
                                 </div>
                                 <div class="gen">
                                     <div style="margin-right: 20px;">

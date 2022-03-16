@@ -645,15 +645,17 @@ padding: 10px 25px;
 																			/*bx - icon color */
 	i.menu{color: #fff}
 	i.id, i.admin, i.lupon{color: #a809b0}
-	i.clearance, i.employee{color: #1cb009}
-	i.sms, i.official{color: #478eff}
+	i.clearance, i.employee, i.payroll{color: #1cb009}
+	i.sms, i.official, i.salary{color: #478eff}
 	i.blotter-com, i.census, i.vawc{color: #9e0202}
 	i.indigency, i.dash, i.bcpc{color: #0218bd}
 	i.permit, i.iannouncement{color: #e0149c}
 	i.saveicon:hover{color: blue;}
 	i.payment:hover{color: rgba(255, 136, 0, 0.801);}
+	i.budget{color: rgba(255, 136, 0, 0.801);}
 	
-	
+  i.salary:hover, i.payroll:hover{color: white}
+
   i.ongoing{color: blue;}
   i.pending{color: gray;}
   i.closed, i.asterisk{color: red;}

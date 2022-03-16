@@ -110,7 +110,7 @@ if(!file_exists($f)){
 		.detailid{font-size: 11px;  color: black; font-weight: 600}
 		.form-text-desc{font-size: 14px;margin: 3px 3px; color:black;}
 
-		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
+		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}
 		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
 		.modalcontent-notif{height: 230px; width: 450px;}
 		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
