@@ -267,7 +267,6 @@ if(isset($_POST['clearancepaymayabtn'])){
 	if($count_row['num']>0){
         $_SESSION['status'] ="Session Expired!";
         $_SESSION['status_code'] ="warning";
-    
 	
 	}else{
 		

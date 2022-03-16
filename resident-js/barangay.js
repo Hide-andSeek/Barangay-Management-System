@@ -221,7 +221,3 @@ btns[i].addEventListener("click", function() {
 });
 }
 
-
-// For Request Document
-
-               
