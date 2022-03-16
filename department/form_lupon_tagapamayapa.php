@@ -8,6 +8,11 @@ require_once "db/conn.php" ;
 		$address=$_POST['Address'];
 		$contact=$_POST['ContactNo'];
 		$complaint=$_POST['Complaint'];
+<<<<<<< HEAD
+
+		$sql = mysqli_query($conn,"INSERT INTO lupondb(Complainant,Accussed,Address,ContactNo,Complaint,DateandTime)VALUES('$cname','$aname','$address','$contact','$complaint',NOW())");
+=======
+>>>>>>> 8c2f781d92b5fc3533e5120158d143d340d00969
 		
 		$sql = "INSERT INTO bpso(Complainant,Accused,Address,ContactNo,Complaint)VALUES(:cn,:an,:adrss,:cno,:comp)";
 		$query = $db->prepare($sql);

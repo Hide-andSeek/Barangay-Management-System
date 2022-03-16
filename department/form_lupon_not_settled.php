@@ -91,14 +91,14 @@
 					</a>
 					<span class="tooltip">Active Cases</span>
 				</li>
-				<li class="active">
+				<li>
 					<a class="side_bar" href="lupon_settled.php">
 						<i class='fas fa-user-check'></i>
 						<span class="links_name">Settled Cases</span>
 					</a>
 					<span class="tooltip">Settled Cases</span>
 				</li>
-				<li>
+				<li class="active">
 					<a class="side_bar" href="lupon_not_settled.php">
 						<i class='fas fa-user-minus'></i>
 						<span class="links_name">Not Settled</span>
@@ -125,8 +125,6 @@
 						<i class='bx bx-log-out d_log_out' id="log_out" ></i>
 					</a>
 				</li>
-
-			
 			</ul>
 		</div>
 		<!-- Middle Section -->
@@ -186,8 +184,8 @@
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4 AND ac.`admincomp_id` LIKE ?
-									OR ls.`statusID` = 4 AND ac.`n_complainant` LIKE ?
+									WHERE ls.`statusID` = 3 AND ac.`admincomp_id` LIKE ?
+									OR ls.`statusID` = 3 AND ac.`n_complainant` LIKE ?
 									ORDER BY ac.`admincomp_id` DESC;
 								";
 								$stmt = $db->prepare($sql);
@@ -208,12 +206,14 @@
 									JOIN admin_complaints ac USING(admincomp_id)
 									JOIN luponStatus ls USING(statusID)
 									JOIN hearingPersonnels hp USING(personnelID)
-									WHERE ls.`statusID` = 4
+									WHERE ls.`statusID` = 3
 									ORDER BY ac.`admincomp_id` DESC;
 								";
 								$stmt = $db->prepare($sql);
 								$stmt->execute();
 							}
+							$stmt = $db->prepare($sql);
+							$stmt->execute();
 							if($stmt->rowCount() > 0){
 								while($row = $stmt->fetch()){
 						?>

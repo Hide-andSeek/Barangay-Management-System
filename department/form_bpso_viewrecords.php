@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-include "../db/conn.php";
-include "../db/documents.php";
-include('../announcement_includes/functions.php');
-include "../db/viewdetinsert.php";
-include('../send_email.php');
+include "db/conn.php";
+include "db/documents.php";
+include('announcement_includes/functions.php');
+include "db/viewdetinsert.php";
+include('send_email.php');
 
 if (!isset($_SESSION["type"])) {
     header("location: 0index.php");
@@ -34,29 +34,35 @@ if (isset($_SESSION['type'])) {
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head>
+  <meta charset="UTF-8">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+		<link rel="stylesheet" href="css/styles.css">
 
-<head>
-    <meta charset="UTF-8">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    	<link rel="stylesheet" href="css/admincompviewdet.css">
+    	<link rel="stylesheet" href="announcement_css/custom.css">
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/admincompviewdet.css">
-    <link rel="stylesheet" href="../announcement_css/custom.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--Font Styles-->
+		<link rel="icon" type="image/png" href="img/Brgy-Commonwealth.png">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+		<!-- Boxicons CDN Link -->
+		<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/captain.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--Font Styles-->
-    <link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
-
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+     <title> BPSO Dashboard </title>
+	 
+	 
     <style>
-        .modal {
+       .modal {
             display: none;
             position: absolute;
             z-index: 9999;
@@ -176,15 +182,15 @@ if (isset($_SESSION['type'])) {
     <title> Admin Complaint Details </title>
 
     <!-- Side Navigation Bar-->
-    <div class="sidebar">
-        <div class="logo-details">
-            <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt="" />
-            <div class="logo_name">VAWC Department</div>
-            <i class='bx bx-menu menu' id="btn"></i>
-        </div>
-        <ul class="nav-list">
-              <li>
-			  <a class="side_bar nav-button nav-active" href="vawcdashboard.php">
+	<div class="sidebar">
+			<div class="logo-details">
+			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
+				<div class="logo_name">Barangay Commonwealth</div>
+				<i class='bx bx-menu menu' id="btn"></i>
+			</div>
+			<ul class="nav-list">
+			  <li>
+			  <a class="side_bar" href="bpso.php">
 				  <i class='bx bx-grid-alt dash'></i>
 				  <span class="links_name">Dashboard</span>
 				</a>
@@ -192,58 +198,58 @@ if (isset($_SESSION['type'])) {
 			  </li>
 			  
 			  <li>
-			   <a class="side_bar nav-button" href="vawc_ongoing.php">
-				 <i class='bx bx-user-circle ongoing'></i>
-				 <span class="links_name">Ongoing Case</span>
+			   <a class="side_bar" href="bpso_newcases.php">
+				 <i class='fas fa-briefcase'></i>
+				 <span class="links_name">New Cases</span>
 			   </a>
-			   <span class="tooltip">Ongoing Case</span>
+			   <span class="tooltip">New Cases</span>
 			 </li>
+
 
 			 <li>
-			   <a class="side_bar nav-button " href="vawc_closed.php">
-				 <i class='bx bx-user-check closed'></i>
-				 <span class="links_name">Closed Case</span>
+			   <a class="side_bar" href="bpso_violators.php">
+				 <i class='fas fa-user-check'></i>
+				 <span class="links_name">Blotter Cases</span>
 			   </a>
-			   <span class="tooltip">Closed Cased</span>
+			   <span class="tooltip">Blotter Cases</span>
 			 </li>
-
 			 <li>
-			   <a class="side_bar nav-button" href="vawc_total.php">
-				 <i class='bx bx-user-pin total'></i>
-				 <span class="links_name">Total Cases</span>
+			   <a class="side_bar" href="bpso_patrols.php">
+				 <i class='bx bx-walk'></i>
+				 <span class="links_name">Night Patrol</span>
 			   </a>
-			   <span class="tooltip">Total Cases</span>
+			   <span class="tooltip">Night Patrol</span>
 			 </li>
+			 <li class="profile">
+				 <div class="profile-details">
+				   <img class="profile_pic" src="img/1.jpeg">
+				   <div class="name_job">
+				   		<div class="job"><strong><?php echo $user;?></strong></div>
+						<div class="job" id=""><?php echo $dept; ?></div>
+				   </div>
+				 </div>
+				 <a href="emplogout.php">
+					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
+				 </a>
+			 </li>
+			</ul>
+		  </div>
+		  <!-- Middle Section -->
+		  <section class="home-section">
+			<!-- Top Section -->
+			  <section class="top-section">
+				  <div class="top-content">
+					<div>
+						<h5>BARANGAY PUBLIC SAFETY OFFICER (BPSO)
+						<a href="#" class="circle">
+							 <img src="img/dt.png" >
+					    </a>
+					    </h5>	  
+					</div>
+				  </div>
+			  </section>
 
-            <li class="profile">
-                <div class="profile-details">
-                    <div class="name_job">
-                        <div class="job"><strong><?php echo $user; ?></strong></div>
-                        <div class="job" id=""><?php echo $dept; ?>|| Online</div>
-                    </div>
-                </div>
-                <a href="emplogout.php">
-                    <i class='bx bx-log-out d_log_out' id="log_out"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- Middle Section -->
-    <section class="home-section">
-        <!-- Top Section -->
-        <section class="top-section">
-            <div class="top-content">
-                <div>
-                    <h5>Dashboard >> Pending Case
-                        <a href="#" class="circle">
-                            <img src="../img/dt.png">
-                        </a>
-                    </h5>
-                </div>
-            </div>
-        </section>
-
-        <div id="content" class="container col-md-12">
+<div id="content" class="container col-md-12">
             <?php
             if (isset($_GET['id'])) {
                 $ID = $_GET['id'];
@@ -354,14 +360,14 @@ if (isset($_SESSION['type'])) {
                 <div style="float: right; display: inline-block;">
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="../img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                        <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
-                        <img src="../img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
+                        <img src="img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
                     </button>
                     <a href="vawcdashboard.php">
-                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+                        <img src="img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
 
                 </div>
@@ -400,7 +406,7 @@ if (isset($_SESSION['type'])) {
                                     <div class="information col">
                                         <p>Body: </p>
                                         <textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
-                                        <script type="text/javascript" src="../announcement_css/js/ckeditor/ckeditor.js"></script>
+                                        <script type="text/javascript" src="announcement_css/js/ckeditor/ckeditor.js"></script>
                                         <script type="text/javascript">
                                             CKEDITOR.replace('message');
                                         </script>
@@ -423,7 +429,7 @@ if (isset($_SESSION['type'])) {
                     <div id="ssms" class="modal">
                         <div class="modal-content animate">
                             <span onclick="document.getElementById('ssms').style.display='none'" class="topright">&times;</span>
-                            <form method="POST" action="../send_sms.php" class="body">
+                            <form method="POST" action="send_sms.php" class="body">
                                 <div class="main-content-email">
 
                                     <div class="main-content">
@@ -452,7 +458,7 @@ if (isset($_SESSION['type'])) {
                     </div>
                 </div>
 
-                <iframe type="file" style="width:100%; height: 500px;" src="../img/fileupload_admin/<?php echo $data['blotterid_image']; ?>">Here's the Document</iframe>
+                
                 <br>
                 <br>
                 <table id="viewdetails" class="font-sizee">
@@ -577,7 +583,7 @@ if (isset($_SESSION['type'])) {
         </div>
         <br>
         <br>
-    </section>
-    </body>
+		</section>
+        </body>
 
 </html>

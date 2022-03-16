@@ -130,12 +130,20 @@ require 'db/conn.php';
 				 <span class="tooltip">Dashboard</span>
 			  </li>
 
-              <li>
-			   <a class="side_bar" href="bpso_violators.php">
-				 <i class='bx bx-error'></i>
-				 <span class="links_name">Violations</span>
+			  <li>
+			   <a class="side_bar" href="bpso_newcases.php">
+				 <i class='fas fa-briefcase'></i>
+				 <span class="links_name">New Cases</span>
 			   </a>
-			   <span class="tooltip">Violations</span>
+			   <span class="tooltip">New Cases</span>
+			 </li>
+
+			 <li>
+			   <a class="side_bar" href="bpso_violators.php">
+				 <i class='fas fa-user-check'></i>
+				 <span class="links_name">Blotter Cases</span>
+			   </a>
+			   <span class="tooltip">Blotter Cases</span>
 			 </li>
 			 <li>
 			   <a class="side_bar" href="bpso_patrols.php">
