@@ -13,7 +13,6 @@
 	}
 
 	$dept = '';
-
 	if(isset($_SESSION['type'])){
 		$dept = $_SESSION['type'];
 	}
@@ -78,7 +77,7 @@
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-				<li class="active">
+				<li>
 					<a class="side_bar" href="bpso.php">
 						<i class='bx bx-grid-alt dash'></i>
 						<span class="links_name">Dashboard</span>
@@ -99,7 +98,7 @@
 					</a>
 					<span class="tooltip">Blotter Cases</span>
 				</li>
-				<li>
+				<li class="active">
 					<a class="side_bar" href="bpso_deniedCases.php">
 						<i class='fas fa-user-minus'></i>
 						<span class="links_name">Denied Cases</span>
@@ -131,109 +130,14 @@
 				</div>
 			</section>
 			<br>
-			<div class="w3-row-padding w3-margin-bottom">
-				<div class="w3-quarter">
-					<div class="w3-container w3-teal w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							$sql = "
-								SELECT 
-									ac.`admincomp_id`,
-									ac.`n_violator`,
-									ac.`violator_age`,
-									ac.`violator_gender`,
-									ac.`violator_address`,
-									ac.`inci_address`,
-									ac.`complaints`,
-									ac.`app_date`
-								FROM admin_complaints ac
-								LEFT JOIN bpsoCases bc USING(admincomp_id)
-								WHERE dept = 'BPSO' AND STATUS = 'Pending' AND bc.`admincomp_id` IS NULL
-								ORDER BY ac.`app_date` DESC;
-							";
-							$stmt = $db->prepare($sql);
-							$stmt->execute();
-							$total = $stmt->rowCount();
-
-							echo "<h3>{$total}</h3>";
-						?>
-						</div>
-						<div class="w3-clear"></div>
-						<h4>New Cases</h4>
-					</div>
-				</div>
-				<div class="w3-quarter">
-					<div class="w3-container w3-blue w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							$sql = "
-								SELECT
-									ac.`admincomp_id`,
-									ac.`n_violator`,
-									ac.`violator_age`,
-									ac.`violator_gender`,
-									ac.`violator_address`,
-									ac.`inci_address`,
-									ac.`complaints`,
-									ac.`app_date`
-								FROM bpsoCases bc
-								JOIN admin_complaints ac USING(admincomp_id)
-								WHERE bc.`isDenied` = 0
-								ORDER BY ac.`app_date` DESC;
-							";
-							$stmt = $db->prepare($sql);
-							$stmt->execute();
-							$total = $stmt->rowCount();
-							
-							echo "<h3>{$total}</h3>";
-						?>
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Blottler Cases</h4>
-					</div>
-				</div>
-				<div class="w3-quarter">
-					<div class="w3-container w3-red w3-padding-16">
-						<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
-						<div class="w3-right">
-						<?php 
-							$sql = "
-								SELECT
-									ac.`admincomp_id`,
-									ac.`n_violator`,
-									ac.`violator_age`,
-									ac.`violator_gender`,
-									ac.`violator_address`,
-									ac.`inci_address`,
-									ac.`complaints`,
-									ac.`app_date`
-								FROM bpsoCases bc
-								JOIN admin_complaints ac USING(admincomp_id)
-								WHERE bc.`isDenied` = 1
-								ORDER BY ac.`app_date` DESC;
-							";
-							$stmt = $db->prepare($sql);
-							$stmt->execute();
-							$total = $stmt->rowCount();
-							
-							echo "<h3>{$total}</h3>";
-						?>
-						</div>
-						<div class="w3-clear"></div>
-						<h4>Denied Cases</h4>
-					</div>
-				</div>
-			</div>
 			<div id="content" class="container col-md-12" style="margin-top: 50px;">
 				<!-- Search -->
 				<div class="search_content">
 					<form class="list_header" method="get">
 						<label>
 							Search:
-							<input type="text" class=" r_search" name="search" placeholder="Blotter ID / Name" value="<?php echo isset($_GET['search']) ? htmlentities($_GET['search']) : "" ?>" />
-							<button type="submit" class="btn btn-primary"><i class="bx bx-search-alt"></i></button>
+							<input type="text" class="r_search" placeholder="Blotter ID / Name" name="search" value="<?php echo isset($_GET['search']) ? htmlentities($_GET['search']) : "" ?>" />
+							<button type="submit" class="btn btn-primary" value="Search"><i class="bx bx-search-alt"></i></button>
 						</label>
 					</form>
 				</div>
@@ -255,10 +159,10 @@
 						</thead>
 						<tbody>
 							<?php 
-								if(isseT($_GET["search"]) && !empty($_GET["search"])){
+								if(isset($_GET["search"]) && !empty($_GET["search"])){
 									$search = $_GET["search"];
 									$sql = "
-										SELECT 
+										SELECT
 											ac.`admincomp_id`,
 											ac.`n_violator`,
 											ac.`violator_age`,
@@ -267,18 +171,18 @@
 											ac.`inci_address`,
 											ac.`complaints`,
 											ac.`app_date`,
-											bc.`isDenied`
-										FROM admin_complaints ac
-										LEFT JOIN bpsoCases bc USING(admincomp_id)
-										WHERE ac.`dept` = 'BPSO' AND ac.`admincomp_id` LIKE ?
-										OR ac.`dept` = 'BPSO' AND ac.`n_violator` LIKE ?
+											ac.`status`
+										FROM bpsoCases bc
+										JOIN admin_complaints ac USING(admincomp_id)
+										WHERE bc.`isDenied` = 1 AND ac.`admincomp_id` LIKE ?
+										OR bc.`isDenied` = 1 AND ac.`n_violator` LIKE ?
 										ORDER BY ac.`app_date` DESC;
 									";
 									$stmt = $db->prepare($sql);
 									$stmt->execute(["%$search%", "%$search%"]);
 								}else{
 									$sql = "
-										SELECT 
+										SELECT
 											ac.`admincomp_id`,
 											ac.`n_violator`,
 											ac.`violator_age`,
@@ -287,10 +191,10 @@
 											ac.`inci_address`,
 											ac.`complaints`,
 											ac.`app_date`,
-											bc.`isDenied`
-										FROM admin_complaints ac
-										LEFT JOIN bpsoCases bc USING(admincomp_id)
-										WHERE ac.`dept` = 'BPSO'
+											ac.`status`
+										FROM bpsoCases bc
+										JOIN admin_complaints ac USING(admincomp_id)
+										WHERE bc.`isDenied` = 1
 										ORDER BY ac.`app_date` DESC;
 									";
 									$stmt = $db->prepare($sql);
@@ -308,17 +212,9 @@
 								<td><?php echo ucwords($row['violator_address']); ?></td>
 								<td><?php echo ucwords($row['inci_address']); ?></td>
 								<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+								<td><?php echo ucwords($row['status']); ?></td>
 								<td>
-									<?php 
-										if($row['isDenied'] == ""){ 
-											echo "New Case";
-										}else{
-											echo ($row['isDenied'] == 0) ? "Blotter Case" : "Denied Case";
-										}
-									?>
-								</td>
-								<td>
-									<a href="bpso_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+                                    <a href="bpso_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 								</td>
 							</tr>
 							<?php }}else{ ?>
@@ -332,6 +228,6 @@
 				<div class="col-md-12 pagination"></div>
 			</div>
 			<div class="separator"></div>
-		</section>
+		</section>		
 	</body>
 </html>

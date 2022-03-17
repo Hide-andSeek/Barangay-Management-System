@@ -62,26 +62,6 @@
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-<<<<<<< HEAD
-			  <li>
-			  <a class="side_bar nav-button nav-active" href="#">
-				  <i class='bx bx-grid-alt dash'></i>
-				  <span class="links_name">Dashboard</span>
-				</a>
-				 <span class="tooltip">Dashboard</span>
-			  </li>
-			  <li>
-			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
-			   <!-- <a class="side_bar" href="lupon_active.php"> -->
-				 <i class='fas fa-user-clock'></i>
-				 <span class="links_name">Active Cases</span>
-			   </a>
-			   <span class="tooltip">Active Cases</span>
-			 </li>
-			 
-=======
->>>>>>> 89efe6325ef5620301184ac03fe41686e1c0661d
-
 				<li class="active">
 					<a class="side_bar" href="lupon.php">
 						<i class='bx bx-grid-alt dash'></i>

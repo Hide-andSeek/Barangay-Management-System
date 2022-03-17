@@ -1,8 +1,7 @@
 <?php
 	session_start();
 
-	require 'db/conn.php';
-	include('send_email.php');
+	require_once 'db/conn.php';
 
 	if(!isset($_SESSION["type"])){
 		header("location: 0index.php");
@@ -150,54 +149,32 @@
 			</div>
 			<ul class="nav-list">
 				<li>
-					<a class="side_bar" href="lupon.php">
+					<a class="side_bar" href="bpso.php">
 						<i class='bx bx-grid-alt dash'></i>
 						<span class="links_name">Dashboard</span>
 					</a>
 					<span class="tooltip">Dashboard</span>
 				</li>
 				<li>
-					<a class="side_bar" href="lupon_awaiting_schedule.php">
-						<i class='fas fa-calendar-day'></i>
-						<span class="links_name">Awaiting Schedule</span>
-					</a>
-					<span class="tooltip">Awaiting Schedule</span>
-				</li>
-				<li>
-					<a class="side_bar" href="lupon_upcoming_hearings.php">
-						<i class='fas fa-user-clock'></i>
-						<span class="links_name">Upcoming Hearings</span>
-					</a>
-					<span class="tooltip">Upcoming Hearing</span>
-				</li>
-				<li>
-					<a class="side_bar" href="lupon_active_cases.php">
+					<a class="side_bar" href="bpso_newCases.php">
 						<i class='fas fa-briefcase'></i>
-						<span class="links_name">Active Cases</span>
+						<span class="links_name">New Cases</span>
 					</a>
-					<span class="tooltip">Active Cases</span>
+					<span class="tooltip">New Cases</span>
 				</li>
 				<li>
-					<a class="side_bar" href="lupon_settled.php">
+					<a class="side_bar" href="bpso_blotterCases.php">
 						<i class='fas fa-user-check'></i>
-						<span class="links_name">Settled Cases</span>
+						<span class="links_name">Blotter Cases</span>
 					</a>
-					<span class="tooltip">Settled Cases</span>
+					<span class="tooltip">Blotter Cases</span>
 				</li>
 				<li>
-					<a class="side_bar" href="lupon_not_settled.php">
+					<a class="side_bar" href="bpso_deniedCases.php">
 						<i class='fas fa-user-minus'></i>
-						<span class="links_name">Not Settled</span>
+						<span class="links_name">Denied Cases</span>
 					</a>
-					<span class="tooltip">Not Settled</span>
-				</li>
-				<!--Setting Section-->
-				<li>
-					<a class="side_bar" href="lupon_settings.php">
-						<i class='bx bx-cog' ></i>
-						<span class="links_name">Setting</span>
-					</a>
-					<span class="tooltip">Setting</span>
+					<span class="tooltip">Denied Cases</span>
 				</li>
 				<li class="profile">
 					<div class="profile-details">
@@ -262,25 +239,6 @@
 				if($stmt->rowCount() > 0){
 					while($row = $stmt->fetch()){
 			?>
-			<?php 
-				$sql2 = "SELECT sworn_statement FROM luponCases WHERE admincomp_id = ? AND sworn_statement IS NOT NULL;";
-				$stmt2 = $db->prepare($sql2);
-				$stmt2->execute([$row['admincomp_id']]);
-				if($stmt2->rowCount() > 0){
-					while($row2 = $stmt2->fetch()){
-			?>
-			<div class="container text-end">
-				<div class="mb-3">
-                    <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
-                        <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-                    <button style="background: none; padding: 0;" onclick="document.getElementById('ssms').style.display='block'">
-                        <img src="img/sms.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
-                    </button>
-				</div>
-				<iframe type='file' style='width:100%; height: 500px;' src='upload/lupon/<?php echo $row2['sworn_statement']; ?>'>Here's the Document</iframe>
-			</div>
-			<?php }} ?>
 			<div class="container my-5">
                 <label><strong>Complaint: </strong></label>
                 <div class="complaint"><?php echo $row['complaints']; ?></div>
@@ -293,7 +251,7 @@
                             </tr>
                             <tr>
                                 <th>Complainant's Name</th>
-                                <td><strong><?php echo $row['n_complainant']; ?></strong></td>
+                                <td><strong><?php echo ucwords($row['n_complainant']); ?></strong></td>
                             </tr>
                             <tr>
                                 <th>Complainant's Age</th>
@@ -305,11 +263,11 @@
                             </tr>
                             <tr>
                                 <th>Complainant's Address</th>
-                                <td><?php echo $row['comp_address']; ?></td>
+                                <td><?php echo ucwords($row['comp_address']); ?></td>
                             </tr>
                             <tr>
                                 <th>Incident Address</th>
-                                <td><?php echo $row['inci_address']; ?></td>
+                                <td><?php echo ucwords($row['inci_address']); ?></td>
                             </tr>
                             <tr>
                                 <th>Contact No.</th>
@@ -325,7 +283,7 @@
                         <table class="table-complaint">
                             <tr>
                                 <th>Name of Violator</th>
-                                <td><strong><?php echo $row['n_violator']; ?></strong></td>
+                                <td><strong><?php echo ucwords($row['n_violator']); ?></strong></td>
                             </tr>
                             <tr>
                                 <th>Violator's Age</th>
@@ -333,11 +291,11 @@
                             </tr>
                             <tr>
                                 <th>Violator's Gender</th>
-                                <td><?php echo $row['violator_gender']; ?></td>
+                                <td><?php echo ucwords($row['violator_gender']); ?></td>
                             </tr>
                             <tr>
                                 <th>Relationship</th>
-                                <td><?php echo ucwords($row['relationship']); ?></td>
+                                <td><?php echo $row['relationship']; ?></td>
                             </tr>
                             <tr>
                                 <th>Violator's Address</th>
@@ -397,7 +355,7 @@
 									<textarea name="message" id="message" class="form-control inputtext" rows="32" placeholder="Your message"></textarea>
 									<script type="text/javascript" src="announcement_css/js/ckeditor/ckeditor.js"></script>
 									<script type="text/javascript">                        
-										CKEDITOR.replace( 'message' );
+										CKEDITOR.replace('message');
 									</script>
 								</div>
 								<div class="sendi">
