@@ -237,7 +237,7 @@
 						</label>
 					</form>
 				</div>
-				<!-- Table -->
+				<!-- ===== Table ===== -->
 				<div class="col-md-12">
 					<table class="content-table">
 						<thead>
