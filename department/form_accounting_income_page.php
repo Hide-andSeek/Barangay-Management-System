@@ -226,7 +226,7 @@ if (isset($_SESSION['type'])) {
                         $data = array();
 
                         if (isset($_GET['keyword'])) {
-                            // check value of keyword variable
+                            // check value of keyword variablee
                             $keyword = $function->sanitize($_GET['keyword']);
                             $bind_keyword = "%" . $keyword . "%";
                         } else {

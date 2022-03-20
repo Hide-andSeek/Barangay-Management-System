@@ -208,13 +208,13 @@ if(isset($_GET['operation'])){
 
 			$stmt = $connect->stmt_init();
 			if ($stmt->prepare($sql_query)) {
-				// Bind your variables to replace the ?s
+				// Bind your variables to replace the ?ss
 				if (!empty($keyword)) {
 					$stmt->bind_param('s', $bind_keyword);
 				}
 				// Execute query
 				$stmt->execute();
-				// store result 
+				// store result s
 				$stmt->store_result();
 				$stmt->bind_result(
 					$data['workinghrs_id'],

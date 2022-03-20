@@ -249,7 +249,7 @@ if (isset($_SESSION['type'])) {
 </head>
 
 <body>
-	<!-- Side Navigation Bar-->
+	<!-- Side Navigations Bar-->
 	<div class="sidebar">
 		<div class="logo-details">
 			<img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt="" />

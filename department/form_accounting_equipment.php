@@ -329,10 +329,6 @@ if (isset($_SESSION['type'])) {
 				</div>
 			</div>
 
-
-			<!-- <a href="accounting_salary.php"><button class="btn btn-danger font-sizee form-control btnmargin">Cancel</button></a> -->
-
-
 		</div>
 
 		</div>

@@ -145,7 +145,7 @@ if (isset($_SESSION['type'])) {
 				$date_added = date("Y-m-d", strtotime("now"));
 				$time_added = date("Y-m-d H:i:s", strtotime("now"));
 
-				// create array variable to handle error
+				// create array variable to handle errorr
 				$error = array();
 
 				if (empty($name)) {

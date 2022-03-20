@@ -416,7 +416,7 @@ if (isset($_SESSION['type'])) {
 						</div>
 						<div class="w3-clear"></div>
 						<div style="text-align: center;">
-							<h4>Total Funds</h4>
+							<h4>Total Fund</h4>
 						</div>
 
 						<br>

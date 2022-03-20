@@ -181,7 +181,7 @@ if (isset($_SESSION['type'])) {
 
                         $stmt = $connect->stmt_init();
                         if ($stmt->prepare($sql_query)) {
-                            // Bind your variables to replace the ?s
+                            // Bind your variables to replace the ?ss
                             if (!empty($keyword)) {
                                 $stmt->bind_param('s', $bind_keyword);
                             }

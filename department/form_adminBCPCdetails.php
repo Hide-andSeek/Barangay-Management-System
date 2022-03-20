@@ -142,7 +142,7 @@ if(!isset($_SESSION["type"]))
                         $ID = "";
                     }
                     
-                    // create array variable to store data from database
+                    // create array variable to store data from databasee
                     $data = array();
                     
                     // get all data from menu table and category table

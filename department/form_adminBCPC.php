@@ -131,7 +131,7 @@ if(!isset($_SESSION["type"]))
 			 </li>
 			</ul>
 		  </div>
-		  <!-- Middle Section -->
+		  <!-- Middle Sections -->
 		  <section class="home-section">
 			<!-- Top Section -->
 			  <section class="top-section">
