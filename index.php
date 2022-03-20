@@ -143,19 +143,18 @@ include ('db/user.php');
                     padding: 80px 0;
                 }
                 
-                img.munisipyo{width: 1685px; height: 490px;}
-            }
+        
 
-            /* @media only screen and (max-width: 1945px;) {
+             @media only screen and (max-width: 2010px;) {
                 section {
                     padding: 80px 0;
                 }
                 h3.mv_content_heading{font-size: 50px}
                 
-                img.munisipyo{width: 1920px; height: 1080px;}
+                img.munisipyo{width: 2006px; height: 1080px;}
 
                 section.slider{margin: 20px;}
-            } */
+            }
 
             @media all and (max-width:480px) {
                 section h2.section-heading {
@@ -389,7 +388,7 @@ include ('db/user.php');
                             </div>
                         </div>
                     </div>
-                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth_1.jpg" alt="slider-image"/>
+                    <img class="munisipyo" src="resident-img/eliswork.jpeg" alt="slider-image"/>
                 </div>	
             </div>
         </div>
