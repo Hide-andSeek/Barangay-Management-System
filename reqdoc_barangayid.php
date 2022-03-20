@@ -83,7 +83,7 @@ if(!file_exists($f)){
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
+   <link rel="stylesheet" href="css/preloader.css">
     <!-- Custom Animations -->
 
     <link rel="stylesheet" href="residentcss/animate.css">
@@ -109,7 +109,7 @@ if(!file_exists($f)){
 		.detailid{font-size: 11px;  color: black; font-weight: 600}
 		.form-text-desc{font-size: 14px;margin: 3px 3px; color:black;}
 
-		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}}
+		.animatem{position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-450px;opacity:0} to{top:0;opacity:1}}
 		.modal-header{padding:15px; border-bottom:1px solid #e5e5e5; background: red;}
 		.modalcontent-notif{height: 230px; width: 450px;}
 		.modal-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}
@@ -254,7 +254,12 @@ if(!file_exists($f)){
 	</style>
 </head>
 
-<body onload="display_ct()" id="#documents">
+<body id="#documents">
+	<div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
     
 
     <header id="header">
@@ -619,6 +624,8 @@ if(!file_exists($f)){
     </div>
 	
     <!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/preloader.js"></script>
     <script src="resident-js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="resident-js/bootstrap.min.js"></script>

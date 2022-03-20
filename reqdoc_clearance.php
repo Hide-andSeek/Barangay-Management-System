@@ -377,7 +377,7 @@ if(!file_exists($f)){
 		<br>
         <br>
 		</div>
-		<?php echo isset($error['add_brgyclearance']) ? $error['add_brgyclearance'] : '';?>
+		
 
 		
 		<div style="text-align: center;">

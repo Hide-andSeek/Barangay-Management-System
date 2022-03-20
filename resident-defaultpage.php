@@ -69,7 +69,7 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
+   <link rel="stylesheet" href="css/preloader.css">
     <!-- Custom Animations -->
 
     <link rel="stylesheet" href="resident-css/animate.css">
@@ -249,6 +249,11 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
 
 <body onload="display_ct()" id="home">
     <!-- HEADER -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
 
     <header id="header">
         <!-- Navigation -->
@@ -333,7 +338,7 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="intro-text">
-                                    <h1 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth</h1>
+                                    <h2 class="intro-lead-in animated bounceInRight u-description">Barangay Commonwealth</h2>
                                     <h2 class="intro-heading animated bounceInLeft u-description">Barangay Management</h2>
                                     <p class="intro-paragraph animated bounceInRight"> </p>
                                 </div>
@@ -448,55 +453,81 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
 				</div>
     </section>
    
-     <!-- <section id="news_and_announcement">
-        <div class="container-fluid wrapper">
+      <!-- Services Section -->
+      <section>
+      <div class="container-fluid wrapper">
             <div class="row">
                 <div class="col-sm-8 col-lg-12 text-left">
                     <h2 class="section-heading a_c">Announcement</h2>
                 </div>
             </div>
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
+
                 <div class="carousel-inner">
-                        
-                                    <?php
-										include ('db/conn.php');
-										include ('db/captain.php');
 
-										$stmt = $db->prepare('SELECT * from tbl_announcement');
-										$stmt->execute();
-										$imagelist = $stmt->fetchAll();
-											if (count($imagelist) > 0) {
-												foreach ($imagelist as $image) {
-										?>
-													<div class="item active">
-														<div class="col-md-4 col-sm-6 announce">
-															<div class="block-text">
-                                                                        <a class="news_heading" href="residentannouncement.php">
-                                                                            <img class="announcement_item col-md-6" src="upload/<?php echo $image['announcement_image']; ?>" style="width:300px; height:200px">
+                    <?php
+                    include('db/conn.php');
+                    include('db/captain.php');
 
-                                                                            <strong><h3 class="announcement_entry_text"><?php echo $image['announcement_heading']; ?></h3></strong>
-																		</a>
-															</div>
-														</div>
-													</div>
-										<?php
-														}
-											} else {
-											echo "<div class='errormessage'>
+                    $stmt = $db->prepare('SELECT * from announcement_category ');
+                    $stmt->execute();
+                    $imagelist = $stmt->fetchAll();
+                    if (count($imagelist) > 0) {
+                        foreach ($imagelist as $image) {
+                    ?>
+                            <div class="item active">
+                                <div class="col-md-4 col-sm-6 announce">
+                                    <div class="block-text">
+                                        <a class="news_heading" href="announcement.php">
+                                            <img class="announcement_item col-md-6" src="upload/category/<?php echo $image['category_image']; ?>" style="width:300px; height:200px">
+
+                                            <strong>
+                                                <h3 class="announcement_entry_text"><?php echo $image['category_name']; ?></h3>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } else {
+                        echo "<div class='errormessage'>
                                                     <i class='bx bx-error'></i>
                                                     No announcement yet!
                                                  </div>";
-										}
-										?> 
+                    }
+                    ?>
 
-						</div>
-					</div>
-				</div>			
+                </div>
+            </div>
+        </div>
+       
+        <br>
+        <br>
+        <div class="announce">
+            <button class="see_announcement" onclick="document.location='announcement.php'">See announcements</button>
+        </div>
+        <br>
+            <div class="container-fluid wrapper">
+                <div class="row">
+                    <div class="col-lg-12 text-left">
+                        <h2 class="section-heading service" style="color: gray">Maningning na Barangay Commonwealth</h2>
+                    </div>
+                </div>
+            </div>
 
-			<div class="announce">
-				<button class="see_announcement" onclick="document.location='residentannouncement.php'" >See announcements</button>
-			</div>	
-	</section > -->
+            <div class="services_1">
+                <div class="container">
+                    <div class="row">
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                            <iframe width="860" height="385" src="https://www.youtube.com/embed/FLS6q04tutw" title="YouTube video player" frameborder="15" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <br>
+                        <p style="text-align: center; font-size: 18px"><i class="bx bxs-camera-movie movie"></i>: <a href="https://www.youtube.com/channel/UC-LtvvmPd1SdwHxvGLmc_vg" target="_blank">DarenjayTV</a>  </p>
+                    </div>
+                </div>
+            </div>
+        </section>
                      
 
   <!-- Footer -->
@@ -576,7 +607,9 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
             </ul>
         </div>
     </div> -->
-   
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/preloader.js"></script>
     <!-- jQuery -->
     <script src="resident-js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->

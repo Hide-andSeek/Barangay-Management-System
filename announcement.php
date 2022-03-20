@@ -204,13 +204,13 @@ include "db/user.php";
             foreach ($imagelist as $image) {
           ?>
               <div class="announcement-item">
-                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
+                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="75%" height="50%"></a>
                   <div>
                     <h4><?php echo $image['announcement_heading']; ?></h4>
                     <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
                   </div>
-                  <div>
-                    <p style="text-align: justify">
+                  <div style="text-align: justify">
+                    <p>
                       <?php echo $image['announcement_description']; ?>
                     </p>
                   </div>

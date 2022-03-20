@@ -21,7 +21,7 @@ include "db/user.php";
 
   <link rel="stylesheet" href="resident-css/style.css">
   <link rel="stylesheet" href="resident-css/resident.css">
-
+  <link rel="stylesheet" href="css/preloader.css">
   <!-- Icon -->
   <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
 
@@ -71,8 +71,12 @@ include "db/user.php";
   </style>
 </head>
 
-<body onload=display_ct() class="body">
-
+<body class="body">
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
 
   <header id="header">
     <!-- Navigation -->
@@ -209,15 +213,16 @@ include "db/user.php";
             foreach ($imagelist as $image) {
           ?>
               <div class="announcement-item">
-                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
+                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="75%" height="50%"></a>
                   <div>
                     <h4><?php echo $image['announcement_heading']; ?></h4>
                     <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
                   </div>
-                  <div>
-                    <p style="text-align: justify">
+                  <div style="text-align: justify;">
+                    <p>
                       <?php echo $image['announcement_description']; ?>
                     </p>
+                    <hr>
                   </div>
                 </div>
               </div>
@@ -306,6 +311,8 @@ include "db/user.php";
   </div>
 
   <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/preloader.js"></script>
   <!-- Color Settings script -->
   <script src="resident-js/settings-script.js"></script>
   <!-- jQuery -->

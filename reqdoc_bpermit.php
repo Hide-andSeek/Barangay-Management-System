@@ -83,7 +83,8 @@ if(!file_exists($f)){
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
+   <link rel="stylesheet" href="qr_code/css.css">
+   <link rel="stylesheet" href="css/preloader.css">
     <!-- Custom Animations -->
 
     <link rel="stylesheet" href="residentcss/animate.css">
@@ -236,7 +237,11 @@ if(!file_exists($f)){
 </head>
 
 <body onload="display_ct()" id="#documents">
-    
+	<div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
 
     <header id="header">
          <!-- Navigation -->
@@ -572,8 +577,10 @@ if(!file_exists($f)){
     <div class="scroll-up">
       <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-	  <!-- jQuery -->
-	  <script src="resident-js/jquery.js"></script>
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/preloader.js"></script>
+	<script src="resident-js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="resident-js/bootstrap.min.js"></script>
     <!-- Color Settings script -->

@@ -84,7 +84,7 @@ if(!file_exists($f)){
    <link href="resident-css/font-awesome.min.css" rel="stylesheet" type="text/css">
    
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
+   <link rel="stylesheet" href="css/preloader.css">
     <!-- Custom Animations -->
 
     <link rel="stylesheet" href="residentcss/animate.css">
@@ -288,7 +288,11 @@ if(!file_exists($f)){
 </head>
 
 <body onload="display_ct()" id="#documents">
-    
+	<div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
 
     <header id="header">
          <!-- Navigation -->
@@ -398,7 +402,10 @@ if(!file_exists($f)){
 			<?php echo isset($error['complaints']) ? $error['complaints'] : '';?>
 		</div>
         <blockquote class="blockqoute-color">
-            <p class="reminder" style="text-align: justify;"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon requesting your document, please expect around 5 to 15 minutes waiting time. Sa paghiling ng iyong dokumento, asahan ang humigit-kumulang 5 hanggang 15 minutong oras ng paghihintay. Punan ang impormasyon sa ibaba. Ang iyong impormasyon ay lalabas sa dokumento na iyong hinihiling. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).</p> <?php echo $visitt ;?>
+            <p class="reminder" style="text-align: justify;"><label class="reminder-heading">Reminder/ Tagubilin: </label> Upon submitting online complaints/blotter, the barangay admin will immediately verify the information. You will then receive notifications on SMS and email about the status of your complaint to proceed to legal action.
+			Sa pagsumite ng online complaints/blotter, agarang ibe-verify ng Barangay Admin ang iyong impormasyon. Pagkatapos ay makakatanggap ka ng abiso mula SMS at Email tungkol sa istatus ng iyong reklamo upang magpatuloy sa legal na aksyon.
+			Punan ang impormasyon sa ibaba. Pakisuri muna bago ito isumite. Upang maiwasan ang typographical error (misspelled names).
+			</p> <?php echo $visitt ;?>
         </blockquote>
     <fieldset class="left_userpersonal_info">
 																<div>
@@ -626,6 +633,8 @@ if(!file_exists($f)){
     </div>
 
     <!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/preloader.js"></script>
     <script src="resident-js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="resident-js/bootstrap.min.js"></script>
