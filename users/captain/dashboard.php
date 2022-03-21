@@ -554,7 +554,7 @@ if (isset($_SESSION['type'])) {
 
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
-			['Date', 'Current Funds', 'Total Expenses', 'Income'],
+			['Date', 'CurrentFunds', 'Total Expenses', 'Income'],
 			['As of today', <?php $total_summary = $total_amount - ($project_total_amount + $equip_total_amount + $payroll_total_amount);
 							echo $total_summary  + $payment_amount; ?>, <?php echo $project_total_amount + $equip_total_amount + $payroll_total_amount; ?>, <?php echo $payment_amount ?>]
 		]);
@@ -768,7 +768,6 @@ if (isset($_SESSION['type'])) {
 	}
 </script>
 
-// Senior Citizen
 <script type="text/javascript">
 	google.charts.load('current', {
 		'packages': ['corechart']
