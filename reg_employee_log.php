@@ -5,7 +5,6 @@ $myButtonText = "Disabled";
 include "db/conn.php";
 include "db/user.php";
 include "db/contractual.php";
-
 ?>
 
 

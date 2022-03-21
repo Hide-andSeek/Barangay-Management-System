@@ -61,6 +61,10 @@ include "db/user.php";
       margin-bottom: 20px;
       margin-bottom: 20px;
     }
+    a.createacc {
+            text-decoration: none;
+            color: white;
+        }
   </style>
 </head>
 

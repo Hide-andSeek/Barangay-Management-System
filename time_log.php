@@ -2,7 +2,7 @@
 session_start();
 
 include "db/conn.php";
-include "db/contractual.php";
+
 
 if (!isset($_SESSION["type"])) {
   header("location: reg_employee_log.php");
@@ -271,6 +271,8 @@ while ($roww = $query->fetch()) {
       unset($_SESSION['status']);
     }
     ?>
+
+  
     <script type="text/javascript">
       $(function() {
         var interval = setInterval(function() {

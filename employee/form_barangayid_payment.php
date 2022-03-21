@@ -268,7 +268,7 @@ if(!isset($_SESSION["type"]))
 				  </div>
 			  </section>
 				 
-              <div id="content" class="container col-md-12">
+              <div id="content" class="container col-md-12" style="margin-left: 50px; ">
                 <?php 
                     if(isset($_GET['id'])){
                         $ID = $_GET['id'];
@@ -317,7 +317,7 @@ if(!isset($_SESSION["type"]))
                     }
                 ?>
 
-            <div>
+            <div style="margin-right: 90px;">
                 <hr>
                 <div style="text-align: center;">
                     <h5>
@@ -325,11 +325,14 @@ if(!isset($_SESSION["type"]))
                     </h5>
                 </div>
                 <hr>
+              
                 <div style="float: right;">
-                    <a href="barangayidapproval.php">
+                <a href="barangayidapproval.php">
                         <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
                     </a>
                 </div>
+                <br>
+                <br>
                 <?php
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
@@ -346,7 +349,7 @@ if(!isset($_SESSION["type"]))
                         }
                     ?>
                   <div>  
-                <form method="POST" action="" class="body">
+                <form method="POST" action="" class="body" >
                                         <div class="main-content-email">
                                            
                                             <div class="main-content">
