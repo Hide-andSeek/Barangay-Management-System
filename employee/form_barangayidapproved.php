@@ -159,7 +159,7 @@ if(isset($_POST['btnverify'])){
 		.viewbtn{width: 65px; height: 35px; background-color: #008CBA;color: white;}
 		.viewbtn:hover{background-color: white; color: black; border: 1px solid #008CBA;}
 
-	.preview{font-size:13px; padding-left:50px; inline-block: none;}
+		.preview{font-size:13px; padding-left:50px;}
 		.previewbtn{width: 350px; height: 90px; margin: 25px; width: calc(100% - 125px); transition: all 0.5s ease; } 
 		.preview_txtbx{width: 350px; margin-bottom: 15px;}
 		

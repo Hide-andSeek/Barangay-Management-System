@@ -225,7 +225,7 @@ include('db/user.php');
                 section.slider{margin: 20px;}
             } */
 
-        @media all and (max-width:480px) {
+            @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
             section h2.section-heading {
                 font-size: 25px;
                 margin-top: 0;
@@ -248,6 +248,8 @@ include('db/user.php');
             .u-description {
                 display: none;
             }
+
+            iframe.youtube{margin: 0 auto;width: 60%; height: 40%;}
         }
 
         .radius {
@@ -694,7 +696,7 @@ include('db/user.php');
 
 
         <!-- Services Section -->
-        <section>
+        <!-- <section>
             <div class="container-fluid wrapper">
                 <div class="row">
                     <div class="col-lg-12 text-left">
@@ -714,7 +716,7 @@ include('db/user.php');
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </section>
 
@@ -769,7 +771,7 @@ include('db/user.php');
 
     <!-- Color Settings script -->
     <script src="js/jquery.min.js"></script>
-
+    <script type="text/javascript" async src="//l.getsitecontrol.com/d4ejnve7.js"></script>
     <script src="js/preloader.js"></script>
 
     <script src="resident-js/settings-script.js"></script>

@@ -841,25 +841,25 @@ if(isset($_POST['regbtn'])){
     $error['lname'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
     }
 	if(empty($birthday)){
-    $error['birthday'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['birthday'] = "<span class='label label-danger cattxtbox errormsg'>Birthday is required field!</span>";
     }
 	if(empty($gender)){
-    $error['gender'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['gender'] = "<span class='label label-danger cattxtbox errormsg'>Gender is required field!</span>";
     }
 	if(empty($email)){
-    $error['email'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['email'] = "<span class='label label-danger cattxtbox errormsg'>Email is required field!</span>";
     }
 	if(empty($contactno)){
-    $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>Contact Number is required field!</span>";
     }
 	if(empty($address)){
-    $error['address'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['address'] = "<span class='label label-danger cattxtbox errormsg'>Address is required field!</span>";
     }
 	if(empty($password)){
-    $error['password'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['password'] = "<span class='label label-danger cattxtbox errormsg'>Password is required field!</span>";
     }
 	if(empty($policy)){
-    $error['policy'] = "<span class='label label-danger cattxtbox errormsg'>Lastname is required field!</span>";
+    $error['policy'] = "<span class='label label-danger cattxtbox errormsg'>Policy is required field!</span>";
     }
 
 	if( !empty($fname) &&  

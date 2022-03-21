@@ -188,6 +188,7 @@ include "db/user.php";
         }
         .validatiion{padding-left: 35px; }
         .formborder{border-style: solid; border-color: #ebebeb; border-radius: 20px;padding: 50px;}
+        .passwordvalid{font-size: 13px;}
     </style>
 </head>
 
@@ -231,7 +232,7 @@ include "db/user.php";
                             </span>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#contact">Contact Us</a>
+                            <a class="page-scroll" href="contact.php">Contact Us</a>
                         </li>
                         <li>
                             <a class="page-scroll b_login" onclick="document.getElementById('id01').style.display='block'" href="#login">Login</a>
@@ -320,7 +321,7 @@ include "db/user.php";
                         <fieldset>
                             <div class="left_userpersonal_info left_userpersonal_info1">
 
-                                <div class="form-group selec">
+                                <div class="form-group selec col-lg-12 col-md-12 col-sm-12">
                                     <label for="purpose">Birthday: <i class="red">*</i></label>
                                     <input type="date" class="form-control form-text" name="birthday" placeholder="Birthday">
                                     <?php echo isset($error['birthday']) ? $error['birthday'] : ''; ?>
@@ -338,13 +339,13 @@ include "db/user.php";
 
                                 <div class="form-group selec">
                                     <label for="contactno">Contact No.: <i class="red">*</i></label>
-                                    <input type="text" class="form-control number form-text" name="contactno" placeholder="Contact Number" value="09">
+                                    <input type="number" class="form-control number form-text" name="contactno" placeholder="Contact Number" value="09" onKeyPress="if(this.value.length==11) return false;">
                                     <?php echo isset($error['contactno']) ? $error['contactno'] : ''; ?>
                                 </div>
 
                                 <div class="form-group selec">
                                     <label for="email">Email Address: <i class="red">*</i></label>
-                                    <input type="text" class="form-control form-text" name="email" placeholder="example@gmail.com">
+                                    <input type="email" pattern="^.*@gmail\.com$" class="form-control form-text" name="email" title="This should be @gmail.com" placeholder="example@gmail.com">
                                     <?php echo isset($error['email']) ? $error['email'] : ''; ?>
                                 </div>
 
@@ -360,15 +361,15 @@ include "db/user.php";
                         <div class="form-group selec">
                             <label>Confirm Password: <i class="red">*</i></label>
                             <input class="form-control form-text" type="password" id="txtConfirmPassword" placeholder="Confirm Password" onChange="checkPasswordMatch();" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-                           
+                            <p id="divCheckPasswordMatch"></p>
                         </div>
                         <div class="form-group selec validatiion">
                             <div id="message">
                                 <label>Password must contain the following:</label>
-                                <p id="divCheckPasswordMatch"></p>
-                                <p id="letter" class="invalid">A <strong>lowercase</strong> letter</p>
-                                <p id="capital" class="invalid">A <strong>capital (UPPERCASE)</strong> letter</p>
-                                <p id="number" class="invalid">A <strong>number</strong></p>
+                               
+                                <p id="letter" class="invalid"><strong>lowercase</strong> letter</p>
+                                <p id="capital" class="invalid"><strong>capital (UPPERCASE)</strong> letter</p>
+                                <p id="number" class="invalid"><strong>number</strong></p>
                                 <p id="length" class="invalid">Minimum <strong>8 characters</strong></p>
                             </div>
                         </div>
@@ -470,9 +471,9 @@ include "db/user.php";
             var confirmPassword = $("#txtConfirmPassword").val();
 
             if (password != confirmPassword)
-                $("#divCheckPasswordMatch").html(" <div style='color: red;margin-left: 5px;'  class='invalid'> <strong>Password</strong> do not match! </div>");
+                $("#divCheckPasswordMatch").html(" <div style='color: red;margin-left: 5px;'  class='invalid passwordvalid'> <strong>Password</strong> do not match! </div>");
             else
-                $("#divCheckPasswordMatch").html(" <div style='color: green; margin-left: 5px;' class='valid'> <strong>Password</strong> match. </div>");
+                $("#divCheckPasswordMatch").html(" <div style='color: green; margin-left: 5px;' class='valid passwordvalid'> <strong>Password</strong> match. </div>");
         }
 
         $(document).ready(function() {

@@ -175,26 +175,26 @@ if(!file_exists($f)){
 
         .left_userpersonal_info{display: flex;}
 
-		@media only screen and (max-width: 720px) {
-
-		*{font-size: 18px;}
+		@media only screen and (max-width: 700px) {
 		.left_userpersonal_info {
 			display: block;
 		}
-	
 		.form-group{margin-bottom: 35px; margin-left: 15px;}
-		
-		.form-text{width: 90%; padding: 5px;}
+		input{width:100%; padding: 5px;}
 		}
+		.form-text{width: 100%; padding: 5px;}
+		.selec{padding-bottom: 50px;}
+
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
 			display: block;
 		}
 		.form-group{margin-bottom: 35px; margin-left: 15px;}
 		input{width:100; padding: 5px;}
-		
+		}
 		.form-text{width: 100%;  padding: 5px;}
-	}
+		.selec{padding-bottom: 50px;}
+		
 		.button {
 		display: absolute;
 		border-radius: 4px;

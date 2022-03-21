@@ -508,7 +508,7 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
             <button class="see_announcement" onclick="document.location='announcement.php'">See announcements</button>
         </div>
         <br>
-            <div class="container-fluid wrapper">
+            <!-- <div class="container-fluid wrapper">
                 <div class="row">
                     <div class="col-lg-12 text-left">
                         <h2 class="section-heading service" style="color: gray">Maningning na Barangay Commonwealth</h2>
@@ -526,7 +526,7 @@ if($stmt->execute(['uid'=>$_SESSION['email']]))
                         <p style="text-align: center; font-size: 18px"><i class="bx bxs-camera-movie movie"></i>: <a href="https://www.youtube.com/channel/UC-LtvvmPd1SdwHxvGLmc_vg" target="_blank">DarenjayTV</a>  </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
                      
 
