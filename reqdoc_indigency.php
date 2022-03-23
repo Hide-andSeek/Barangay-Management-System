@@ -612,7 +612,7 @@ fclose($handle);
 						<label for="file">Attach Document <i class="red">*</i></label>
 						<input type='file' name='indigencyid_image' class="form-control form-text" aria-details="indigencyid_image" />
 
-						<i aria-details="indigencyid_image" class="detailid" style="color: red"><label> please attach your VALID ID (front and back) in the right format (.docx) <?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : ''; ?></label></i>
+						<i aria-details="indigencyid_image" class="detailid" style="color: red"><label> please attach your VALID ID (front and back) in the right format (.pdf) <?php echo isset($error['indigencyid_image']) ? $error['indigencyid_image'] : ''; ?></label></i>
 					</div>
 					<br>
 					<div class="form-group">

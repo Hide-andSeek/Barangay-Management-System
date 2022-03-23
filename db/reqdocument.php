@@ -473,7 +473,7 @@ if(isset($_POST['permitBtn'])){
         }else if(!(($image_type == "pdf")) &&
         !(in_array($extension, $allowedExts))){
                                                         
-        $error['indigencyid_image'] = " <span class='label label-danger errormsg'>File type must docx!</span>";
+        $error['indigencyid_image'] = " <span class='label label-danger errormsg'>File type must be pdf!</span>";
         }
                                                         
         if( !empty($fullname) &&  
