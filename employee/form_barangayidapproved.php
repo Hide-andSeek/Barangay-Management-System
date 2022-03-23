@@ -335,11 +335,11 @@ if(isset($_POST['btnverify'])){
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, email_status, payment_stat
 					FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_brgyids
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC";
@@ -376,6 +376,7 @@ if(isset($_POST['btnverify'])){
 					$data['approvedby'],
 					$data['app_date'],
 					$data['status'],
+					$data['email_status'],
 					$data['payment_stat']
 				);
 		// get total records
@@ -401,11 +402,11 @@ if(isset($_POST['btnverify'])){
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_brgyids WHERE status = 'Approved'
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd, barangayid_type, guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_brgyids 
 				WHERE fname LIKE ? 
 				ORDER BY app_brgyid DESC LIMIT ?, ?";
@@ -443,6 +444,7 @@ if(isset($_POST['btnverify'])){
 					$data['approvedby'],
 					$data['app_date'],
 					$data['status'],
+					$data['email_status'],
 					$data['payment_stat']
 				);
 		// for paging purpose
@@ -509,6 +511,7 @@ if(isset($_POST['btnverify'])){
 										<th width="5%">Document Type</th>
 										<th width="10%">Verified by</th>
 										<th width="5%">Payment Status</th>
+										<th width="5%">Message Status</th>
 										<th width="5%"></th>
 										<th width="5%">Link for Payment</th>
 									</tr>
@@ -524,9 +527,7 @@ if(isset($_POST['btnverify'])){
 									<td><?php echo $data ['brgyidfilechoice']; ?></td>
 									<td><?php echo $data ['approvedby']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
-									<!-- <td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td> -->
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
-									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<td><?php echo $data ['email_status']; ?></td>
 									<td>
 										<a style="text-decoration: none; width: 110px; height:30px;" class="form-control generate viewbtn" href="print_barangayid.php?id=<?php echo $data['app_brgyid'];?>" target="_blank"><i style="color: black;" class="bx bxs-printer" ></i> Print PDF</a>
 									</td>

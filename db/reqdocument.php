@@ -152,14 +152,14 @@ if(isset($_POST['brgyidbtn'])){
 														
 	if($result){
 	$error['add_barangayid'] = " 
-		<div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+		<div class='alert alert-success cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
 			<label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
             <i style='18px;' class='bx bx-smile fa-lg'></i>
             </a></label>
 		</div>";
 	}else{
 		$error['add_barangayid'] = " 
-            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                 <label> * Failed Submission! <a href='reqdoc_blotter.php'>
                 <i style='18px;' class='bx bx-sad fa-lg'></i>
                 </a></label>
@@ -283,14 +283,14 @@ if(isset($_POST['permitBtn'])){
 														
 	if($result){
 	$error['add_brgypermit'] = " 
-            <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <div class='alert alert-success cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
             <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
             <i style='18px;' class='bx bx-smile fa-lg'></i>
             </a></label>
         </div>";
 	}else{
 		$error['add_brgypermit'] = " 
-            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                 <label> * Failed Submission! <a href='reqdoc_blotter.php'>
                 <i style='18px;' class='bx bx-sad fa-lg'></i>
                 </a></label>
@@ -405,14 +405,14 @@ if(isset($_POST['permitBtn'])){
                                                                 
             if($result){
             $error['add_brgypermit'] = " 
-                    <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+                    <div class='alert alert-success cattxtbox'font-size: 18px; style='font-size: 18px; text-align: center; margin-top: 5px;'>
                     <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
                     <i style='18px;' class='bx bx-smile fa-lg'></i>
                     </a></label>
                 </div>";
             }else{
                 $error['add_brgypermit'] = " 
-                    <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                    <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                         <label> * Failed Submission! <a href='reqdoc_blotter.php'>
                         <i style='18px;' class='bx bx-sad fa-lg'></i>
                         </a></label>
@@ -523,14 +523,14 @@ if(isset($_POST['permitBtn'])){
                                                             
         if($result){
         $error['add_brgyindigency'] = " 
-            <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <div class='alert alert-success cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                 <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
                 <i style='18px;' class='bx bx-smile fa-lg'></i>
                 </a></label>
             </div>";
         }else{
             $error['add_brgyindigency'] = " 
-            <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+            <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                 <label> * Failed Submission! <a href='reqdoc_blotter.php'>
                 <i style='18px;' class='bx bx-sad fa-lg'></i>
                 </a></label>
@@ -678,15 +678,15 @@ if(isset($_POST['permitBtn'])){
                                                                 
             if($result){
             $error['add_brgyclearance'] = " 
-                <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
-                    <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_barangayid.php'>
+                <div class='alert alert-success cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
+                    <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='resident-defaultpage.php'>
                     <i style='18px;' class='bx bx-smile fa-lg'></i>
                     </a></label>
                 </div>";
             }else{
                 $error['add_brgyclearance'] = " 
-                    <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
-                        <label> * Failed Submission! <a href='reqdoc_blotter.php'>
+                    <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
+                        <label> * Failed Submission! <a href='resident-defaultpage.php'>
                         <i style='18px;' class='bx bx-sad fa-lg'></i>
                         </a></label>
                     </div>";
@@ -837,14 +837,14 @@ if(isset($_POST['permitBtn'])){
                                                                     
                 if($result){
                 $error['add_blotter'] = " 
-                    <div class='alert alert-success cattxtbox' style='text-align: center; margin-top: 5px;'>
+                    <div class='alert alert-success cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                         <label> * Your request was submitted successfully. Please wait for the confirmation of Barangay <a href='reqdoc_blotter.php'>
                         <i style='18px;' class='bx bx-smile fa-lg'></i>
                         </a></label>
                     </div>";
                 }else{
                     $error['add_blotter'] = " 
-                    <div class='alert alert-warning cattxtbox' style='text-align: center; margin-top: 5px;'>
+                    <div class='alert alert-warning cattxtbox' style='font-size: 18px; text-align: center; margin-top: 5px;'>
                         <label> * Failed Submission! <a href='reqdoc_blotter.php'>
                         <i style='18px;' class='bx bx-sad fa-lg'></i>
                         </a></label>

@@ -20,6 +20,7 @@ include "db/contractual.php";
     <link rel="stylesheet" href="css/font-awesome.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <title>Document</title>
     <style>
@@ -79,7 +80,7 @@ include "db/contractual.php";
                     <input class=" form-control input-lg" id="username" name="username" type="text" placeholder="Fullname" style="font-size: 14px;" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
                     <span class="form-control-feedback"> <i class="bx bx-user-circle" style="font-size: 18px; padding-top: 9px;"></i></span>
                     <br>
-                    <input class="form-control input-lg" style="font-size: 14px;" id="employeeid" name="user_no" type="password" placeholder="Employee ID" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8 or more characters">
+                    <input class="form-control input-lg" style="font-size: 14px;" id="employeeid" name="user_no" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8 or more characters">
                     <div style="float:right; margin-top: -35px; margin-right: 10px;">
                     <i class="bx bx-show showpass ipass" id="employeetogglePassword" style="font-size: 18px; margin-left:-20px; cursor: pointer;"></i>
                     </div>

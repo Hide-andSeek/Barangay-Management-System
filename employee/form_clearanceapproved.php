@@ -274,11 +274,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, email_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
 				ORDER BY approved_clearanceids DESC";
 	}else{
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, email_status, payment_stat
 				FROM approved_clearance
 				WHERE full_name LIKE ? 
 				ORDER BY approved_clearanceids DESC";
@@ -313,6 +313,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['clearance_status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// get total records
@@ -338,12 +339,12 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, email_status, payment_stat
 				FROM approved_clearance WHERE clearance_status = 'Approved'
 				ORDER BY approved_clearanceids DESC LIMIT ?, ?";
 
 	}else{
-		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, payment_stat
+		$sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, email_status,payment_stat
 				FROM approved_clearance 
 				WHERE full_name LIKE ? 
 				ORDER BY approved_clearanceids DESC LIMIT ?, ?";
@@ -379,6 +380,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['clearance_status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// for paging purpose
@@ -506,9 +508,8 @@ if(!isset($_SESSION["type"]))
 										<th width="5">Address</th>
 										<th width="5%">Purpose</th>
 										<!-- <th width="5%">Identification Card</th> -->
-										<th width="5%">Issued at</th>
 										<th width="5%">Date Issued</th>
-										<!-- <th width="5%">ID Picture</th> -->
+										<th width="5%">Email Status</th>
 										<th width="5%"></th>
 										<th width="5%"></th>
 										<th width="5%">Link for Payment</th>
@@ -525,10 +526,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['nationality']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['purpose']; ?></td>
-									<td><?php echo $data ['issued_at']; ?></td>
 									<td><?php echo $data ['date_issued']; ?></td>
-									<!-- <td><img src="../img/fileupload_clearance/<?php echo $data['clearanceid_image']; ?>" width="210" height="100"></td> -->
-									<!-- <td><button class="view_approvebtn" style="width: 110px; height:40px;" onclick="location.href=" target="_blank"> Print</button></td> -->
+									<td><?php echo $data ['email_status']; ?></td>
 
 									<td><input type="text" class="tblinput inpwidth" style=" border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
 

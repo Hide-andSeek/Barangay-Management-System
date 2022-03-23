@@ -345,7 +345,7 @@ include "db/user.php";
 
                                 <div class="form-group selec">
                                     <label for="email">Email Address: <i class="red">*</i></label>
-                                    <input type="email" pattern="^.*@gmail\.com$" class="form-control form-text" name="email" title="This should be @gmail.com" placeholder="example@gmail.com">
+                                    <input type="email" class="form-control form-text" name="email"  pattern="^.*@gmail\.com$" title="This should be @gmail.com" placeholder="example@gmail.com">
                                     <?php echo isset($error['email']) ? $error['email'] : ''; ?>
                                 </div>
 
@@ -411,7 +411,7 @@ include "db/user.php";
                     For any inquiries, please Email us and visit our Facebook Page
                 </p>
                 <p class="footer-text">
-                    <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+                    <a href="https://mail.google.com/mail/barangaycommonwealth01@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
                     <br>
                     <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a>
                 </p>

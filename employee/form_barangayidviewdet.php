@@ -351,7 +351,7 @@ if(!isset($_SESSION["type"]))
                     }
                 ?>
 
-            <div>
+            <div style="margin-left: 50px; margin-right: 50px">
                 <hr>
                 <div style="text-align: center;">
                     <h5>
@@ -373,7 +373,7 @@ if(!isset($_SESSION["type"]))
                 <form method="post" action="" enctype="multipart/form-data">
                     <div style="display: flex;">
                     <table id="viewdetails" class="font-sizee">
-                        <span><strong> Personal Information</strong></span>
+                        <!-- <span><strong> Personal Information</strong></span> -->
                         <tr>
                             <th width="30%">ID No.</th>
                             <td><input type="hidden" name="app_brgyid" value="<?php echo $data['barangay_id']; ?>"><?php echo $data['barangay_id']; ?></td>
@@ -422,7 +422,7 @@ if(!isset($_SESSION["type"]))
                  
                     </table>
                     <br>
-                    <div><strong> In case of Emergency:</strong></div>
+                    <!-- <div><strong> In case of Emergency:</strong></div> -->
                     <br>
                     <table id="viewdetails" class="font-sizee">
                         <tr>
@@ -482,6 +482,8 @@ if(!isset($_SESSION["type"]))
                                  <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnEdit">Deny</button></a>
                             </div>
                         </form>
+                        <br>
+                        <br>
                         <?php
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
@@ -489,7 +491,6 @@ if(!isset($_SESSION["type"]))
                    
                         <form action="" method="post">
                             <div class="alert alert-info messcompose"><?php echo $_SESSION['result']?>
-                               
                                 <input type="hidden" name="barangay_id" id="barangay_id" value="<?php echo $data['barangay_id']; ?>">
                                 <input type="hidden" name="status" id="status" value="Approved">
                                 <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="btnEditt">Mark as done</button>

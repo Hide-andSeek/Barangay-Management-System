@@ -271,11 +271,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_indigency WHERE status = 'Approved'
 				ORDER BY approvedindigency_id ASC";
 	}else{
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_indigency
 				WHERE fullname LIKE ? 
 				ORDER BY approvedindigency_id ASC";
@@ -304,6 +304,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// get total records
@@ -329,11 +330,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, email_status,  payment_stat
 				FROM approved_indigency WHERE status = 'Approved'
 				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approvedindigency_id, fullname, address, purpose, contactnum, emailaddress, date_issue, indigencyid_image, indigencyfilechoice, approvedby, app_date, status, email_status,  payment_stat
 				FROM approved_indigency 
 				WHERE fullname LIKE ? 
 				ORDER BY approvedindigency_id DESC LIMIT ?, ?";
@@ -363,6 +364,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// for paging purpose
@@ -429,7 +431,8 @@ if(!isset($_SESSION["type"]))
 										<th width="5">Contact</th>
 										<th width="10%">Date Issued</th>
 										<th width="10%">Facilitated By</th>
-										<th width="15%">Document Type</th>
+										<th width="15%">File Choice</th>
+										<th width="5%">Email Status</th>
 										<th width="5%"></th>
 										<!-- <th width="5%">Identification Card</th> -->
 										<th width="5%"></th>
@@ -448,6 +451,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['date_issue']; ?></td>
 									<td><?php echo $data ['approvedby']; ?></td>
 									<td><?php echo $data ['indigencyfilechoice']?></td>
+									<td><?php echo $data ['email_status']?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
 
 									<td>

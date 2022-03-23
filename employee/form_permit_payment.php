@@ -280,7 +280,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status
+                    $sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, permitfilechoice, approvedby, app_date, status, email_status
                             FROM approved_bpermits
                             WHERE approved_bpermitid = ?";
                     
@@ -305,11 +305,25 @@ if(!isset($_SESSION["type"]))
                             $data['permitfilechoice'],
                             $data['approvedby'],
                             $data['app_date'],
-                            $data['status']
+                            $data['status'],
+                            $data['email_status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if (isset($_POST['sendlinkpayment'])) {
+
+                      $email_status    = $_POST['email_status'];
+                      $approved_bpermitid = $_POST['approved_bpermitid'];
+      
+                      $sql = "UPDATE approved_bpermits SET email_status = 'Sent' WHERE approved_bpermitid = $ID";
+      
+                      if (mysqli_query($connect, $sql)) {
+                      } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                 ?>
 
             <div>
@@ -329,7 +343,7 @@ if(!isset($_SESSION["type"]))
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
                     ?>
-                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['email_add']; ?></div>
+                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['email_add']; ?> <a href="businesspermitapproval.php">Approval Page</a></div>
                     <?php
                         }else{
                     ?>

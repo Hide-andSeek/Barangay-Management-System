@@ -146,6 +146,77 @@ echo db_query();
 		.left_userpersonal_info {
 			display: flex;
 		}
+		.view{margin-left: 40px; margin-right: 0;}
+		#slider{background-color: white; }
+
+		@media only screen and (max-width: 700px) {
+			.left_userpersonal_info {
+				display: block;
+			}
+
+			.form-group {
+				margin-bottom: 35px;
+				margin-left: 15px;
+			}
+
+			input {
+				width: 100%;
+				padding: 5px;
+			}
+
+			.contactus_content1 {
+				margin: 0;
+				width: 100%;
+				padding-right: 100px;
+			}
+			div.tables{margin-bottom: 50px;}
+			.view{margin-left: 10px; margin-right: 10x;}
+
+		}
+
+		.form-text {
+			width: 100%;
+			padding: 5px;
+		}
+
+		.selec {
+			padding-bottom: 50px;
+		}
+
+		.taybul{margin-left: 50px; margin-right: 50px}
+
+		@media only screen and (max-width: 500px) {
+			.left_userpersonal_info {
+				display: block;
+			}
+
+			.form-group {
+				margin-bottom: 35px;
+				margin-left: 15px;
+			}
+
+			input {
+				width: 100;
+				padding: 5px;
+			}
+		}
+		@media screen and (max-width: 720px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+
+        @media screen and (max-width: 995px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
 	</style>
 </head>
 
@@ -284,7 +355,7 @@ echo db_query();
 								<div class="form-group selec">
 									<label for="birthday">Birthday: </label>
 									<input type="text" class="form-control form-text" value="<?php echo $roww['birthday'] ?>" style="background: #fff;" placeholder="Birthday" readonly>
-								</div></br>
+								</div>
 
 								<div class="form-group selec">
 									<label for="contactno">Contact No.: </label>
@@ -314,227 +385,176 @@ echo db_query();
 		</div>
 		</div>
 		</div>
-		<div class="contactus_content" style="border-radius: 20px;">
-			<div class="find-us">
-				<div class="container">
-					<div class="row">
+
 						<div style="text-align: center;">
 							<hr>
 							<h4>Transaction History: Things you've made</h3>
 								<hr />
 						</div>
-
+						<div class="view">
 						<!-- Slider -->
 						<section id="slider">
-							<div id="myCarousel-one" class="carousel slide">
-									
-								<ol class="carousel-indicators" >
-									<li data-target="#myCarousel-one" data-slide-to="0" class="active"></li>
-									<li data-target="#myCarousel-one" data-slide-to="1"></li>
-									<li data-target="#myCarousel-one" data-slide-to="2"></li>
-									<li data-target="#myCarousel-one" data-slide-to="3"></li>
-								</ol>
+							<div class="carousel-inner">
+								<div class="col-md-12 tables">
+									<h5 class="table-heading taybul">Barangay ID</h5>
+									<div style="overflow-x:auto;" class="taybul">
+										<table id="viewdetails" class="content-table" alt="slider-image">
+											<thead>
+												<tr class="t_head">
+													<th width="5%">Full Name</th>
+													<th width="5%">Birthday</th>
+													<th width="5%">Address</th>
+													<th width="5%">Contact no</th>
+													<th width="5%">Email Address</th>
+													<th width="5%">File Choice</th>
+													<th width="5%">Date Requested</th>
+												</tr>
+											</thead>
+											<?php
+											$id = $_SESSION['email'];
+											$barangay_id = '';
 
-								<div class="carousel-inner">
-									<div class="item active">
+											$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayid on accreg_resident.resident_id=barangayid.resident_id where accreg_resident.resident_id='$id'");
+											$stmt->execute();
+											$imagelist = $stmt->fetchAll();
+											if (count($imagelist) > 0) {
+												foreach ($imagelist as $roww) {
+											?>
+												<tbody>
+													<tr class="table-row">
+														<td><?php echo $roww['fname']; ?> <?php echo $roww['mname']; ?> <?php echo $roww['lname']; ?></td>
+														<!-- <td><?php echo 'You last login was &nbsp;' . date("d/m/y H:i:sA", strtotime($roww['time_loged'])); ?></td> -->
+														<td><?php echo $roww['birthday']; ?></td>
+														<td><?php echo $roww['address']; ?></td>
+														<td><?php echo $roww['contact_no']; ?></td>
+														<td><?php echo $roww['emailadd']; ?></td>
+														<td><?php echo $roww['brgyidfilechoice']; ?></td>
+														<td><?php echo $roww['dateissue']; ?></td>
 
-										<!-- <div class="carousel-caption wrapper">
-											<div class="row">
-												<h3>He</h3>
-											</div>
-										</div> -->
-										<div class="col-md-12">
-											<h5 class="table-heading">Barangay ID</h5>
-											<table id="viewdetails" class="content-table" alt="slider-image">
-
-												<?php
-												$id = $_SESSION['email'];
-												$query = $db->query("SELECT * FROM accreg_resident inner join barangayid on accreg_resident.resident_id=barangayid.resident_id where accreg_resident.resident_id='$id'");
-												?>
-
-												<thead>
-													<tr class="t_head">
-														<th width="5%">Full Name</th>
-														<th width="5%">Document Type</th>
-														<th width="5%">Birthday</th>
-														<th width="5%">Address</th>
-														<th width="5%">Contact no</th>
-														<th width="5%">Email Address</th>
-														<th width="5%">File Choice</th>
-														<th width="5%">Date Requested</th>
 													</tr>
-												</thead>
-												<?php
-												while ($roww = $query->fetch()) {
-													$resident_id = $roww['resident_id'];
-													$resident_status = $roww['resident_status'];
-													$birthday = $roww['birthday'];
-													$address = $roww['address'];
-													$doc_type = $roww['doc_type'];
-													$dateissue = $roww['dateissue'];
-													$fname = $roww['fname'];
-													$mname = $roww['mname'];
-													$lname = $roww['lname'];
-													$brgyidfilechoice = $roww['brgyidfilechoice'];
-												?>
-													<tbody>
-														<tr class="table-row">
-															<td><?php echo $roww['fname']; ?> <?php echo $roww['mname']; ?> <?php echo $roww['lname']; ?></td>
-															<!-- <td><?php echo 'You last login was &nbsp;' . date("d/m/y H:i:sA", strtotime($roww['time_loged'])); ?></td> -->
-															<td><?php echo $roww['doc_type']; ?></td>
-															<td><?php echo $roww['birthday']; ?></td>
-															<td><?php echo $roww['address']; ?></td>
-															<td><?php echo $roww['contact_no']; ?></td>
-															<td><?php echo $roww['emailadd']; ?></td>
-															<td><?php echo $roww['brgyidfilechoice']; ?></td>
-															<td><?php echo $roww['dateissue']; ?></td>
-
-														</tr>
-													</tbody>
-												<?php
-												}
-												?>
-											</table>
-										</div>
+												</tbody>
+											<?php
+											}} else {
+												$barangay_id = "
+																<br>
+																<div style='text-align: center;'>
+																		  <i class='bx bx-error'></i>
+																		 No Barangay ID Request Yet!
+																</div>";
+											}
+											?>
+										</table>
 									</div>
+									<?php echo $barangay_id; ?>
+								</div>
+								<div class="col-md-12 tables">
+									<h5 class="table-heading taybul">Business Permit</h5>
+									<div style="overflow-x:auto;"  class="taybul">
 
-									<div class="item">
+										<table id="viewdetails" class="content-table" alt="slider-image">
+											
+											<thead>
+												<tr class="t_head">
+													<th width="5%">Full Name</th>
+													<th width="5%">Selection</th>
+													<th width="5%">Business Name</th>
+													<th width="5%">Plate no</th>
+													<th width="5%">File Choice</th>
+													<th width="5%">Email Address</th>
+													<th width="5%">Date Requested</th>
+												</tr>
+											</thead>
+											<?php
+											$id = $_SESSION['email'];
+											$bpermit = '';
 
-										<!-- <div class="carousel-caption wrapper">
-											<div class="row">
-
-											</div>
-										</div> -->
-										<div class="col-md-12">
-											<h5 class="table-heading">Business Permit</h5>
-											<table id="viewdetails" class="content-table" alt="slider-image">
-
-												<?php
-												$id = $_SESSION['email'];
-												$query = $db->query("SELECT * FROM accreg_resident inner join businesspermit on accreg_resident.resident_id=businesspermit.resident_id  where accreg_resident.resident_id='$id'");
-												?>
-
-												<thead>
-													<tr class="t_head">
-														<th width="5%">Full Name</th>
-														<th width="5%">Document Type</th>
-														<th width="5%">Selection</th>
-														<th width="5%">Business Name</th>
-														<th width="5%">Plate no</th>
-														<th width="5%">File Choice</th>
-														<th width="5%">Email Address</th>
-														<th width="5%">Date Requested</th>
+											$stmt = $db->prepare("SELECT * FROM accreg_resident inner join businesspermit on accreg_resident.resident_id=businesspermit.resident_id  where accreg_resident.resident_id='$id'");
+											$stmt->execute();
+											$imagelist = $stmt->fetchAll();
+											if (count($imagelist) > 0) {
+												foreach ($imagelist as $roww) {
+											?>
+												<tbody>
+													<tr class="table-row">
+														<td><?php echo $roww['fullname']; ?></td>
+														<td><?php echo $roww['selection']; ?></td>
+														<td><?php echo $roww['businessname']; ?></td>
+														<td><?php echo $roww['plateno']; ?></td>
+														<td><?php echo $roww['permitfilechoice']; ?></td>
+														<td><?php echo $roww['email_add']; ?></td>
+														<td><?php echo $roww['dateissued']; ?></td>
 													</tr>
-												</thead>
-												<?php
-												while ($roww = $query->fetch()) {
-													$resident_id = $roww['resident_id'];
-													$fullname = $roww['fullname'];
-													$businessname = $roww['businessname'];
-													$businessaddress = $roww['businessaddress'];
-													$bpermit_doctype = $roww['bpermit_doctype'];
-													$plateno = $roww['plateno'];
-													$permitfilechoice = $roww['permitfilechoice'];
-													$email_add = $roww['email_add'];
-													$dateissued = $roww['dateissued'];
-													$status = $roww['status'];
-													$selection = $roww['selection'];
-												?>
-													<tbody>
-														<tr class="table-row">
-															<td><?php echo $roww['fullname']; ?></td>
-															<td><?php echo $roww['bpermit_doctype']; ?></td>
-															<td><?php echo $roww['selection']; ?></td>
-															<td><?php echo $roww['businessname']; ?></td>
-															<td><?php echo $roww['plateno']; ?></td>
-															<td><?php echo $roww['permitfilechoice']; ?></td>
-															<td><?php echo $roww['email_add']; ?></td>
-															<td><?php echo $roww['dateissued']; ?></td>
-														</tr>
-													</tbody>
-												<?php
-												}
-												?>
-											</table>
-										</div>
+												</tbody>
+											<?php
+											}} else {
+												$bpermit = "
+																<br>
+																<div style='text-align: center;'>
+																		  <i class='bx bx-error'></i>
+																		 No Business Permit Request Yet!
+																</div>";
+											}
+											?>
+										</table>
 									</div>
+									<?php echo $bpermit; ?>
+								</div>
+								<div class="col-md-12 tables">
+								<h5 class="table-heading taybul">Certificate of Indigency</h5>
+								<div  style="overflow-x:auto;"  class="taybul">				
+									<table id="viewdetails" class="content-table" alt="slider-image">
+										<thead>
+											<tr class="t_head">
+												<th width="5%">Full Name</th>
+												<th width="5%">Purpose</th>
+												<th width="5%">Contact no</th>
+												<th width="5%">Email Address</th>
+												<th width="5%">File Choice</th>
+												<th width="5%">Date Requested</th>
+											</tr>
+										</thead>
+										
+										<?php
+										$id = $_SESSION['email'];
+										$indigency = '';
 
-									<div class="item">
-
-										<!-- <div class="carousel-caption wrapper">
-											<div class="row">
-
-											</div>
-										</div> -->
-										<div class="col-md-12">
-											<h5 class="table-heading">Certificate of Indigency</h5>
+										$stmt = $db->prepare("SELECT * FROM accreg_resident inner join certificateindigency on accreg_resident.resident_id=certificateindigency.resident_id  where accreg_resident.resident_id='$id'");
+										$stmt->execute();
+										$imagelist = $stmt->fetchAll();
+										if (count($imagelist) > 0) {
+											foreach ($imagelist as $roww) {
+										?>
+											<tbody>
+												<tr class="table-row">
+													<td><?php echo $roww['fullname']; ?></td>
+													<td><?php echo $roww['purpose']; ?></td>
+													<td><?php echo $roww['contactnum']; ?></td>
+													<td><?php echo $roww['emailaddress']; ?></td>
+													<td><?php echo $roww['indigencyfilechoice']; ?></td>
+													<td><?php echo $roww['date_issue']; ?></td>
+												</tr>
+											</tbody>
+										<?php
+										}} else {
+											$indigency = "
+															<br>
+															<div style='text-align: center;'>
+																	  <i class='bx bx-error'></i>
+																	 No Certificate of Indigency Request Yet!
+															</div>";
+										}
+										?>
+									</table>
+								</div>
+								<?php echo $indigency; ?>
+								</div>
+								<div class="col-md-12 tables">
+								<h5 class="table-heading taybul">Barangay Clearance</h5>
+								<div style="overflow-x:auto;" class="taybul">	
 											<table id="viewdetails" class="content-table" alt="slider-image">
-
-												<?php
-												$id = $_SESSION['email'];
-												$query = $db->query("SELECT * FROM accreg_resident inner join certificateindigency on accreg_resident.resident_id=certificateindigency.resident_id  where accreg_resident.resident_id='$id'");
-												?>
-
 												<thead>
 													<tr class="t_head">
 														<th width="5%">Full Name</th>
-														<th width="5%">Document Type</th>
-														<th width="5%">Purpose</th>
-														<th width="5%">Contact no</th>
-														<th width="5%">Email Address</th>
-														<th width="5%">File Choice</th>
-														<th width="5%">Date Requested</th>
-													</tr>
-												</thead>
-												<?php
-												while ($roww = $query->fetch()) {
-													$resident_id = $roww['resident_id'];
-													$fullname = $roww['fullname'];
-													$doc_type = $roww['doc_type'];
-													$purpose = $roww['purpose'];
-													$contactnum = $roww['contactnum'];
-													$emailaddress = $roww['emailaddress'];
-													$date_issue = $roww['date_issue'];
-													$indigencyfilechoice = $roww['indigencyfilechoice'];
-												?>
-													<tbody>
-														<tr class="table-row">
-															<td><?php echo $roww['fullname']; ?></td>
-															<td><?php echo $roww['doc_type']; ?></td>
-															<td><?php echo $roww['purpose']; ?></td>
-															<td><?php echo $roww['contactnum']; ?></td>
-															<td><?php echo $roww['emailaddress']; ?></td>
-															<td><?php echo $roww['indigencyfilechoice']; ?></td>
-															<td><?php echo $roww['date_issue']; ?></td>
-														</tr>
-													</tbody>
-												<?php
-												}
-												?>
-											</table>
-										</div>
-									</div>
-
-									<div class="item">
-
-										<!-- <div class="carousel-caption wrapper">
-											<div class="row">
-
-											</div>
-										</div> -->
-										<div class="col-md-12">
-											<h5 class="table-heading">Barangay Clearance</h5>
-											<table id="viewdetails" class="content-table" alt="slider-image">
-
-												<?php
-												$id = $_SESSION['email'];
-												$query = $db->query("SELECT * FROM accreg_resident inner join barangayclearance on accreg_resident.resident_id=barangayclearance.resident_id  where accreg_resident.resident_id='$id'");
-												?>
-
-												<thead>
-													<tr class="t_head">
-														<th width="5%">Full Name</th>
-														<th width="5%">Document Type</th>
 														<th width="5%">Age</th>
 														<th width="5%">Gender</th>
 														<th width="5%">Nationality</th>
@@ -544,47 +564,52 @@ echo db_query();
 													</tr>
 												</thead>
 												<?php
-														while ($roww = $query->fetch()) {
-															$resident_id = $roww['resident_id'];
-															$full_name = $roww['full_name'];
-															$document_type = $roww['document_type'];
-															$age = $roww['age'];
-															$status = $roww['status'];
-															$nationality = $roww['nationality'];
-															$purpose = $roww['purpose'];
-															$date_issued = $roww['date_issued'];
-															$filechoice = $roww['filechoice'];
-															$emailadd = $roww['emailadd'];
-														?>
-															<tbody>
-																<tr class="table-row">
-																	<td><?php echo $roww['full_name']; ?></td>
-																	<td><?php echo $roww['document_type']; ?></td>
-																	<td><?php echo $roww['age']; ?></td>
-																	<td><?php echo $roww['status']; ?></td>
-																	<td><?php echo $roww['nationality']; ?></td>
-																	<td><?php echo $roww['emailadd']; ?></td>
-																	<td><?php echo $roww['filechoice']; ?></td>
-																	<td><?php echo $roww['date_issued']; ?></td>
-																</tr>
-															</tbody>
-														<?php
-														}
-														?>
+												$id = $_SESSION['email'];
+												$error = '';
+
+												$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayclearance on accreg_resident.resident_id=barangayclearance.resident_id  where accreg_resident.resident_id='$id'");
+												$stmt->execute();
+												$imagelist = $stmt->fetchAll();
+												if (count($imagelist) > 0) {
+													foreach ($imagelist as $roww) {
+												?>
+												<tbody>
+													<tr class="table-row">
+														<td><?php echo $roww['full_name']; ?></td>
+														<td><?php echo $roww['age']; ?></td>
+														<td><?php echo $roww['status']; ?></td>
+														<td><?php echo $roww['nationality']; ?></td>
+														<td><?php echo $roww['emailadd']; ?></td>
+														<td><?php echo $roww['filechoice']; ?></td>
+														<td><?php echo $roww['date_issued']; ?></td>
+													</tr>
+												</tbody>
+										<?php
+										}
+									} else {
+										$error = "
+														<br>
+														<div style='text-align: center;'>
+																  <i class='bx bx-error'></i>
+																 No Barangay Clearance Request Yet!
+														</div>";
+									}
+										?>
 											</table>
-										</div>
-									</div>
-
-										</div>
-
-									</div>
 								</div>
+								<?php echo $error;?>
+								<br>
+								<br>
+								</div>
+								
+							</section>
 							</div>
-						</section>
-					</div>
-				</div>
-			</div>
-		</div>
+	</div>
+	</div>
+	<br>
+								<br>
+	</div>
+	</div>
 	</section>
 
 

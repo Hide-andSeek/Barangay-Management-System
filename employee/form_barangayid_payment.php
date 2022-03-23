@@ -280,7 +280,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status
+                    $sql_query = "SELECT app_brgyid, fname, mname, lname, address, birthday,placeofbirth, precintno,contact_no, emailadd,guardianname, emrgncycontact, reladdress, dateissue, id_image, brgyidfilechoice, approvedby, app_date, status, email_status
                             FROM approved_brgyids
                             WHERE app_brgyid = ?";
                     
@@ -310,11 +310,25 @@ if(!isset($_SESSION["type"]))
                                 $data['brgyidfilechoice'],
                                 $data['approvedby'],
                                 $data['app_date'],
-                                $data['status']
+                                $data['status'],
+                                $data['email_status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if (isset($_POST['sendlinkpayment'])) {
+
+                      $email_status    = $_POST['email_status'];
+                      $app_brgyid = $_POST['app_brgyid'];
+      
+                      $sql = "UPDATE approved_brgyids SET email_status = 'Sent' WHERE app_brgyid = $ID";
+      
+                      if (mysqli_query($connect, $sql)) {
+                      } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                 ?>
 
             <div style="margin-right: 90px;">
@@ -409,7 +423,7 @@ if(!isset($_SESSION["type"]))
                                                     CKEDITOR.replace( 'message' );
                                                 </script>
                                             </div>
-
+    
                                             <div class="sendi">
                                                 <button name="sendlinkpayment" class="form-control viewbtn" style="margin-top: 10px; width: 100%; cursor: pointer;"><span class="glyphicon glyphicon-envelope"></span> Send Link <i class="bx bx-send"></i></button>
                                             </div>

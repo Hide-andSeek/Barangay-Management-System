@@ -77,7 +77,7 @@ while ($roww = $query->fetch()) {
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome.css">
-
+  <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
   <script src="resident-js/sweetalert.min.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

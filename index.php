@@ -2,6 +2,7 @@
 session_start();
 require_once "db/conn.php";
 include('db/user.php');
+include('db/index_announcement.php')
 ?>
 
 <!DOCTYPE html>
@@ -225,7 +226,7 @@ include('db/user.php');
                 section.slider{margin: 20px;}
             } */
 
-            @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
             section h2.section-heading {
                 font-size: 25px;
                 margin-top: 0;
@@ -249,7 +250,11 @@ include('db/user.php');
                 display: none;
             }
 
-            iframe.youtube{margin: 0 auto;width: 60%; height: 40%;}
+            iframe.youtube {
+                margin: 0 auto;
+                width: 60%;
+                height: 40%;
+            }
         }
 
         .radius {
@@ -382,35 +387,58 @@ include('db/user.php');
             }
         }
 
+        @media screen and (max-width: 600px) {
+
+            .topnav a:not(:first-child),
+            .dropdown .dropbtn {
+                display: none;
+            }
+
+            .topnav a.icon {
+                float: right;
+                display: block;
+            }
+        }
+
         a.login {
             cursor: pointer;
         }
-
-        ;
 
         .center {
             text-align: center;
         }
 
-        span.topright {
-            display: flex;
-            float: right;
-            padding: 8px 24px;
-            font-size: 25px;
+
+        .movie {
+            color: gray;
+            font-size: 23px;
         }
 
-        .topright:hover {
-            color: red;
-            cursor: pointer;
-            float: right;
-            padding: 8px 24px;
+        blockquote.section-subheading {
+            border-left-color: #EEA236;
         }
-        .movie{color: gray; font-size: 23px;}
+
+        @media screen and (max-width: 720px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+        @media screen and (max-width: 995px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
     </style>
 
 </head>
 
-<body id="home">
+<body onload=display_ct() id="home">
     <!-- HEADER -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -447,10 +475,11 @@ include('db/user.php');
                             <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
                             <span class="logdropdown-content">
                                 <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                                <a class="page-scroll" href="barangayfunds.php">Barangay Announcement</a>
-                                <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
-                                <a class="page-scroll" href="vaccine.php">Health Related</a>
+                                <a class="page-scroll" href="barangay_announcement.php">Barangay Announcement</a>
+                                <a class="page-scroll" href="barangay_seminars.php">Barangay Seminar/ Course</a>
+                                <a class="page-scroll" href="health_related.php">Health Related</a>
                                 <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                                <a class="page-scroll" href="sanguniang_kabataan.php">Sangunian Kabataan</a>
                             </span>
                         </li>
                         <li>
@@ -480,8 +509,6 @@ include('db/user.php');
                     </label>
                 </span>
 
-
-
                 <form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
                     <div id="Login" class="login_container form">
@@ -498,9 +525,7 @@ include('db/user.php');
                             <button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
                                 Sign in
                             </button>
-                            <button class="log_button gmail" onclick="window.location.href= 'resident_account_registration.php'">
-                                <a class="createacc" href="resident_account_registration.php">Create Account</a>
-                            </button>
+                            <p style="text-align: center;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
 
                         </div>
                     </div>
@@ -647,46 +672,92 @@ include('db/user.php');
                 </div>
             </div>
             <div id="myCarousel-three" class="carousel-testimonials" data-ride="carousel">
-
                 <div class="carousel-inner">
 
-                    <?php
-                    include('db/conn.php');
-                    include('db/captain.php');
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="sanguniang_kabataan.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement['category_image']; ?>" style="width:300px; height:200px">
 
-                    $stmt = $db->prepare('SELECT * from announcement_category ');
-                    $stmt->execute();
-                    $imagelist = $stmt->fetchAll();
-                    if (count($imagelist) > 0) {
-                        foreach ($imagelist as $image) {
-                    ?>
-                            <div class="item active">
-                                <div class="col-md-4 col-sm-6 announce">
-                                    <div class="block-text">
-                                        <a class="news_heading" href="announcement.php">
-                                            <img class="announcement_item col-md-6" src="upload/category/<?php echo $image['category_image']; ?>" style="width:300px; height:200px">
-
-                                            <strong style="text-align: center;">
-                                                <h3 class="announcement_entry_text"><?php echo $image['category_name']; ?></h3>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement['category_name']; ?></h3>
+                                    </strong>
+                                </a>
                             </div>
-                    <?php
-                        }
-                    } else {
-                        echo "<div class='errormessage'>
-                                                    <i class='bx bx-error'></i>
-                                                    No announcement yet!
-                                                 </div>";
-                    }
-                    ?>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="barangay_seminars.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement1['category_image']; ?>" style="width:300px; height:200px">
+
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement1['category_name']; ?></h3>
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="barangay_announcement.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement2['category_image']; ?>" style="width:300px; height:200px">
+
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement2['category_name']; ?></h3>
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="academic-related.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement5['category_image']; ?>" style="width:300px; height:200px">
+
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement5['category_name']; ?></h3>
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="barangayprograms.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement3['category_image']; ?>" style="width:300px; height:200px">
+
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement3['category_name']; ?></h3>
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="col-md-4 col-sm-6 announce">
+                            <div class="block-text">
+                                <a class="news_heading" href="health_related.php">
+                                    <img class="announcement_item col-md-6" src="upload/category/<?php echo $announcement4['category_image']; ?>" style="width:300px; height:200px">
+
+                                    <strong style="text-align: center;">
+                                        <h3 class="announcement_entry_text"><?php echo $announcement4['category_name']; ?></h3>
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
         </div>
-       
+
         <br>
         <br>
         <div class="announce">

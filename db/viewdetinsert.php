@@ -162,13 +162,12 @@ error_reporting(~E_NOTICE);
         }
     }
 
-
     if(isset($_POST['insertclearance'])){
-
+            
         $approved_clearanceids = $_POST['approved_clearanceids'];
         $full_name = $_POST['full_name'];
         $age = $_POST['age'];
-        $status = $_POST['status'];
+        $status	= $_POST['status'];
         $nationality = $_POST['nationality'];
         $address = $_POST['address'];
         $contactno = $_POST['contactno'];
@@ -178,60 +177,25 @@ error_reporting(~E_NOTICE);
         $ctc_no = $_POST['ctc_no'];
         $issued_at = $_POST['issued_at'];
         $precint_no = $_POST['precint_no'];
-        $filechoice = $_POST['filechoice'];   
-        $clearanceid_type = $_POST['clearanceid_type'];  
-        // get image info
+        $filechoice = $_POST['filechoice'];
+        $clearanceid_type = $_POST['clearanceid_type'];
+
+        $approvedby = $_POST['approvedby'];
+        $app_date = $_POST['app_date'];
+        
         $clearance_image = $_FILES['clearanceid_image']['name'];
         $image_error = $_FILES['clearanceid_image']['error'];
         $image_type = $_FILES['clearanceid_image']['type'];
 
-        $approvedby = $_POST['approvedby'];  
-        $app_date = $_POST['app_date'];  
-        $clearance_status = $_POST['clearance_status'];                                 
-                                                        
+        $clearance_status = $_POST['clearance_status'];
+                                   
         // create array variable to handle error
         $error = array();
                                                         
-        if(empty($full_name)){
-        $error['full_name'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+        if(empty($approvedby)){
+        $error['approvedby'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
         }
-        if(empty($age)){
-        $error['age'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($status)){
-        $error['status'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($nationality)){
-        $error['nationality'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($address)){
-        $error['address'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($contactno)){
-        $error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($emailadd)){
-        $error['emailadd'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($purpose)){
-        $error['purpose'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        if(empty($date_issued)){
-        $error['date_issued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        // if(empty($ctc_no)){
-        // $error['ctc_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        // }
-        if(empty($issued_at)){
-        $error['issued_at'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        }
-        // if(empty($precint_no)){
-        // $error['precint_no'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-        // }
-        if(empty($filechoice)){
-            $error['filechoice'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-            }
-    
+        
         // common image file extensions
         $allowedExts = array("jpeg", "jpg", "png");
                                                         
@@ -243,7 +207,6 @@ error_reporting(~E_NOTICE);
         $error['clearanceid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
         }else if(!(($image_type == "image/jpeg") || 
         ($image_type == "image/jpg") || 
-        ($image_type == "image/x-png") ||
         ($image_type == "image/png") || 
         ($image_type == "image/pjpeg")) &&
         !(in_array($extension, $allowedExts))){
@@ -251,21 +214,8 @@ error_reporting(~E_NOTICE);
         $error['clearanceid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
         }
                                                         
-        if( !empty($full_name) &&  
-            !empty($age) && 
-            !empty($status) && 
-            !empty($nationality) && 
-            !empty($address) && 
-            !empty($contactno) && 
-            !empty($emailadd) && 
-            !empty($purpose) && 
-            !empty($date_issued) && 
-            // !empty($ctc_no) && 
-            !empty($issued_at) && 
-            // !empty($precint_no) &&
-            empty($error['clearanceid_image']) && 
-            !empty($filechoice) && 
-            !empty($clearance_status)){
+        if( !empty($approvedby) &&  
+            empty($error['clearanceid_image'])){
                                                             
         // create random image file name
         $string = '0123456789';
@@ -277,15 +227,14 @@ error_reporting(~E_NOTICE);
         $upload = move_uploaded_file($_FILES['clearanceid_image']['tmp_name'], '../img/approved_clearance/'.$clearance_image);
                                                     
         // insert new data to menu table
-        $sql_query = "INSERT INTO approved_clearance (approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, filechoice,clearanceid_type, clearanceid_image, approvedby, app_date, clearance_status)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql_query = "INSERT INTO approved_clearance (approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose, date_issued, ctc_no, issued_at, precint_no, filechoice, clearanceid_type, approvedby, app_date,clearanceid_image, clearance_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                             
         $upload_image = $clearance_image;
         $stmt = $connect->stmt_init();
         if($stmt->prepare($sql_query)) {	
         // Bind your variables to replace the ?s
-        $stmt->bind_param('sssssssssssssssssss', 
-        $approved_clearanceids,
+        $stmt->bind_param('sssssssssssssssssss',
+        $approved_clearanceids, 
         $full_name,
         $age,
         $status,
@@ -299,10 +248,10 @@ error_reporting(~E_NOTICE);
         $issued_at,
         $precint_no,
         $filechoice,
-        $clearanceid_type,
-        $upload_image,
+        $clearanceid_type,       
         $approvedby,
         $app_date,
+        $upload_image,
         $clearance_status
         );
         // Execute query
@@ -445,7 +394,7 @@ if(isset($_POST['insertindigency'])){
 }
 
 
-if(isset($_POST['insertpermit'])){
+if(isset($_POST['insertpermitbtn'])){
 	
     $approved_bpermitid = $_POST['approved_bpermitid'];
 	$dateissued = $_POST['dateissued'];
@@ -457,40 +406,22 @@ if(isset($_POST['insertpermit'])){
 	$plateno = $_POST['plateno'];
 	$email_add = $_POST['email_add'];
     $permitfilechoice = $_POST['permitfilechoice'];
+    $bpermitid_type = $_POST['bpermitid_type'];
     $app_date = $_POST['app_date'];
     $approvedby = $_POST['approvedby'];
 
-	// get image info
+    	// get image info
 	$permit_image = $_FILES['businessid_image']['name'];
 	$image_error = $_FILES['businessid_image']['error'];
 	$image_type = $_FILES['businessid_image']['type'];
-    $bpermitid_type = $_POST['bpermitid_type'];
 
     $status = $_POST['status'];
 													
 	// create array variable to handle error
 	$error = array();
 													
-	if(empty($dateissued)){
-	$error['dateissued'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-	if(empty($fullname)){
-	$error['fullname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-    if(empty($contactno)){
-	$error['contactno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-	if(empty($businessname)){
-	$error['businessname'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-    if(empty($businessaddress)){
-	$error['businessaddress'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-	if(empty($plateno)){
-	$error['plateno'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
-	}
-	if(empty($email_add)){
-	$error['email_add'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
+	if(empty($approvedby)){
+	$error['approvedby'] = "<span class='label label-danger cattxtbox errormsg'>This is required field!</span>";
 	}
 
 	// common image file extensions
@@ -503,24 +434,15 @@ if(isset($_POST['insertpermit'])){
 	if($image_error > 0){
 	$error['businessid_image'] = " <span class='label label-danger cattxtbox errormsg'> You must insert an image! </span>";
 	}else if(!(($image_type == "image/jpeg") || 
-	($image_type == "image/jpg") || 
-	($image_type == "image/x-png") ||
-	($image_type == "image/png") || 
-	($image_type == "image/pjpeg")) &&
+	($image_type == "image/jpg") ||
+	($image_type == "image/png")) &&
 	!(in_array($extension, $allowedExts))){
 													
 	$error['businessid_image'] = " <span class='label label-danger errormsg'>Image type must jpg, jpeg, or png!</span>";
 	}
 													
 	if( !empty($dateissued) &&  
-		!empty($fullname) && 
-        !empty($contactno) && 
-		!empty($businessname) && 
-		!empty($businessaddress) && 
-		!empty($plateno) && 
-		!empty($email_add) && 
-        !empty($status) && 
-		empty($error['businessid_image'])){
+	    empty($error['businessid_image'])){
 														
 	// create random image file name
 	$string = '0123456789';
@@ -532,7 +454,7 @@ if(isset($_POST['insertpermit'])){
 	$upload = move_uploaded_file($_FILES['businessid_image']['tmp_name'], '../img/approved_bpermit/'.$permit_image);
 												
 	// insert new data to menu table
-	$sql_query = "INSERT INTO approved_bpermits (approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add,permitfilechoice, app_date, approvedby, businessid_image, bpermitid_type, status)
+	$sql_query = "INSERT INTO approved_bpermits (approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add,permitfilechoice,bpermitid_type, app_date, approvedby, businessid_image, status)
 	VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 														
 	$upload_image = $permit_image;
@@ -550,10 +472,10 @@ if(isset($_POST['insertpermit'])){
 	$plateno,
 	$email_add,
     $permitfilechoice,
+    $bpermitid_type,
     $app_date,
     $approvedby,
     $upload_image,
-    $bpermitid_type,
     $status
 	);
 	// Execute query

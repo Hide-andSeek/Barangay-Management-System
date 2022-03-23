@@ -4,6 +4,8 @@ include "db/user.php";
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +14,7 @@ include "db/user.php";
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Vaccine - Barangay Commonwealth QC.</title>
+  <title>Announcement - Barangay Commonwealth QC.</title>
 
   <!-- Bootstrap Core CSS -->
 
@@ -68,6 +70,24 @@ include "db/user.php";
     a.login {
       cursor: pointer;
     }
+
+    @media screen and (max-width: 720px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 995px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
   </style>
 </head>
 
@@ -108,9 +128,11 @@ include "db/user.php";
               <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
               <span class="logdropdown-content">
                 <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
-                <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
+                <a class="page-scroll" href="barangay_announcement.php">Barangay Announcement</a>
+                <a class="page-scroll" href="#">Barangay Seminar/ Course</a>
+                <a class="page-scroll" href="health_related.php">Health Related</a>
                 <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                <a class="page-scroll" href="sanguniang_kabataan.php">Sangunian Kabataan</a>
               </span>
             </li>
             <li>
@@ -119,7 +141,6 @@ include "db/user.php";
             <li>
               <a class="page-scroll login" onclick="document.getElementById('id01').style.display='block'">Login</a>
             </li>
-
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -132,35 +153,55 @@ include "db/user.php";
   <!--Modal form for Login-->
   <div id="formatValidatorName">
     <div id="id01" class="modal">
-      <div class="modal-content animate">
-        <span onclick="document.getElementById('id01').style.display='none'" class="topright">&times;</span>
-
+      <div class="modal-content animate ">
         <span class="imgcontainer">
           <label>
-            <img class="logcomm" src="resident-img/Brgy-Commonwealth_1.png" alt="">
+            <img src="resident-img/Brgy-Commonwealth_1.png" alt="">
           </label>
         </span>
 
-        <form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
           <div id="Login" class="login_container form">
             <div class="information">
-              <input class="inputtext control-label" id="email" name="email" type="text" placeholder="Email">
+              <input required class="inputtext control-label" id="email" name="email" type="text" placeholder="Email">
             </div>
 
             <div class="information">
-              <input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password">
+              <input required class="inputpass c_password" type="password" id="password" placeholder="Password" name="password">
             </div>
 
-            <div>
+            <!-- <div>
               <a href="#" class="fp">Forgot password?</a>
-            </div>
+            </div> -->
             <div class="information">
               <button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
                 Sign in
               </button>
-              <button class="log_button gmail" onclick="window.location.href= 'resident_=--account_registration.php'">
-                <a class="createacc" href="resident_account_registration.php">Create Account</a>
+              <p style="text-align: center;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
+            </div>
+          </div>
+        </form>
+        <!-- Create an Account-->
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          <div id="CreateAcc" class="login_container form" style="display: none;">
+            <div class="information">
+              <input required class="inputtext" type="text" name="uname" placeholder="Username">
+            </div>
+            <div class="information">
+              <input required class="inputtext" type="email" id="" name="email" placeholder="Email">
+            </div>
+            <div class="information controls">
+              <input required class="inputpass" type="password" id="" name="password"" placeholder=" Password">
+            </div>
+
+            <div class="guidelines">
+              <input required type="checkbox" value="yes" id="policy" name="policy">
+              I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
+              <span class="checkmark"></span>
+            </div>
+            <div class="information">
+              <button type="submit" name="regbtn" class="log_button sign_in getstarted popup_mess">
+                Get Started
               </button>
             </div>
           </div>
@@ -169,109 +210,109 @@ include "db/user.php";
     </div>
   </div>
 
-  <div class="sep_announcement">
-    <!-- News section-->
-    <section>
-      <div class="row announce_item">
-        <div class="col-lg-8 col-md-8 col-sm-8 first-section">
-          <div class="col-md-12">
-            <div class="section-heading">
+  <br>
+  <br>
+  <br>
+  <div class="row announce_item">
+    <div class="col-lg-8 col-md-8 col-sm-8 first-section">
+      <div class="col-md-12">
+        <div class="section-heading">
 
-              <?php
-              include('db/conn.php');
-              include('db/captain.php');
-              //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-              $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '20'");
-              $stmt->execute();
-              $imagelist = $stmt->fetchAll();
-              if (count($imagelist) > 0) {
-                foreach ($imagelist as $data) {
-              ?>
-                  <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
-                  <span>
-                    <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
-                  </span>
-              <?php
-                }
-              } else {
-                echo "<div class='errormessage'>
-						  <i class='bx bx-error'></i>
-                          No Vaccination Post yet!
-						  </div>";
-              }
-              ?>
-            </div>
-          </div>
           <?php
           include('db/conn.php');
           include('db/captain.php');
           //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-          $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '20'");
+          $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '26'");
           $stmt->execute();
           $imagelist = $stmt->fetchAll();
           if (count($imagelist) > 0) {
-            foreach ($imagelist as $image) {
+            foreach ($imagelist as $data) {
           ?>
-              <div class="announcement-item">
-                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
-                  <div>
-                    <h4><?php echo $image['announcement_heading']; ?></h4>
-                    <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
-                  </div>
-                  <div>
-                    <p style="text-align: justify">
-                      <?php echo $image['announcement_description']; ?>
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
+              <span>
+                <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
+              </span>
           <?php
             }
           } else {
             echo "<div class='errormessage'>
-                      <i class='bx bx-error'></i>
-                      No Vaccination Post yet!
-					  </div>";
+						  <i class='bx bx-error'></i>
+                          No announcement yet!
+						  </div>";
           }
           ?>
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="newslatest_post section-heading">
-            <h3><span>Related post</span></h3>
-            <?php
-            include('db/conn.php');
-            include('db/captain.php');
-            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM announcement_category");
-            $stmt->execute();
-            $sidelist = $stmt->fetchAll();
-            if (count($sidelist) > 0) {
-              foreach ($sidelist as $list) {
-            ?>
-                <div class="newslatest_post_container">
-                  <ul class="newslatest_postnav">
-                    <li>
-                      <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
-                        <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-            <?php
-              }
-            } else {
-              echo "<div class='errormessage'>
-                      <i class='bx bx-error'></i>
-                      No Vaccination Post yet!
-					  </div>";
-            }
-            ?>
-          </div>
-        </div>
       </div>
-    </section>
+      <?php
+      include('db/conn.php');
+      include('db/captain.php');
+      //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+      $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '26'");
+      $stmt->execute();
+      $imagelist = $stmt->fetchAll();
+      if (count($imagelist) > 0) {
+        foreach ($imagelist as $image) {
+      ?>
+          <div class="announcement-item">
+            <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="75%" height="50%"></a>
+              <div>
+                <h4><?php echo $image['announcement_heading']; ?></h4>
+                <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
+              </div>
+              <div style="text-align: justify">
+                <p>
+                  <?php echo $image['announcement_description']; ?>
+                </p>
+                <hr>
+              </div>
+            </div>
+          </div>
+      <?php
+        }
+      } else {
+        echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No announcement yet!
+					  </div>";
+      }
+      ?>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="newslatest_post section-heading">
+        <h3><span>Related post</span></h3>
+        <?php
+        include('db/conn.php');
+        include('db/captain.php');
+        //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+        $stmt = $db->prepare("SELECT * FROM announcement_category");
+        $stmt->execute();
+        $sidelist = $stmt->fetchAll();
+        if (count($sidelist) > 0) {
+          foreach ($sidelist as $list) {
+        ?>
+            <div class="newslatest_post_container">
+              <ul class="newslatest_postnav">
+                <li>
+                  <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
+                    <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        <?php
+          }
+        } else {
+          echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No announcement yet!
+					  </div>";
+        }
+        ?>
+      </div>
+    </div>
   </div>
+
 
 
   <!-- Footer -->
@@ -285,7 +326,8 @@ include "db/user.php";
           For any inquiries, please Email us and visit our Facebook Page
         </p>
         <p class="footer-text">
-          <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank"> <i style="font-size: 20px;" class="fa fa-google" title="https://mail.google.com/mail/barangaycommonwealth0@gmail.com"></i></a>
+          <a href="https://mail.google.com/mail/barangaycommonwealth0@gmail.com" target="_blank">barangaycommonwealth0@gmail.com</a>
+          <br>
           <a href="https://facebook.com//barangay.commonwealth.3551" target="_blank"> <i style="font-size: 20px;" class="fa fa-facebook" title="https://facebook.com//barangay.commonwealth.3551"></i></a>
         </p>
         <div class="footer-text">
@@ -307,16 +349,14 @@ include "db/user.php";
   <div class="scroll-up">
     <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
   </div>
-
-  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/preloader.js"></script>
-  <!-- Color Settings script -->
-  <script src="resident-js/settings-script.js"></script>
   <!-- jQuery -->
   <script src="resident-js/jquery.js"></script>
   <!-- Bootstrap Core JavaScript -->
   <script src="resident-js/bootstrap.min.js"></script>
+  <!-- Color Settings script -->
+  <script src="resident-js/settings-script.js"></script>
   <!-- Plugin JavaScript -->
   <script src="resident-js/jquery.easing.min.js"></script>
   <!-- Contact Form JavaScript -->
@@ -327,6 +367,10 @@ include "db/user.php";
   <script src="resident-js/barangay.js"></script>
   <!-- Isotope -->
   <script src="resident-js/jquery.isotope.min.js"></script>
+
+  <script src="resident-js/accordions.js"></script>
+  <script src="https://use.fontawesome.com/f7721642f4.js"></script>
+
 </body>
 
 </html>

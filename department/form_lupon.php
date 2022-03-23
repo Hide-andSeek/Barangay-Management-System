@@ -27,7 +27,7 @@
 		mes/base/jquery-ui.css">
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 		<link rel="stylesheet" href="css/styles.css">
-
+		<link rel="stylesheet" href="css/design.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -37,7 +37,7 @@
 		<!-- Boxicons CDN Link -->
 		<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-		<link rel="stylesheet" href="css/styles.css">
+	
 		<link rel="stylesheet" href="css/captain.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -62,25 +62,6 @@
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
-<<<<<<< HEAD
-			  <li>
-			  <a class="side_bar nav-button nav-active" href="#">
-				  <i class='bx bx-grid-alt dash'></i>
-				  <span class="links_name">Dashboard</span>
-				</a>
-				 <span class="tooltip">Dashboard</span>
-			  </li>
-			  <li>
-			   <a class="side_bar nav-button" href="lupon_tagapamayapa.php">
-			   <!-- <a class="side_bar" href="lupon_active.php"> -->
-				 <i class='fas fa-user-clock'></i>
-				 <span class="links_name">Active Cases</span>
-			   </a>
-			   <span class="tooltip">Active Cases</span>
-			 </li>
-			 
-=======
->>>>>>> 89efe6325ef5620301184ac03fe41686e1c0661d
 
 				<li class="active">
 					<a class="side_bar" href="lupon.php">
@@ -134,10 +115,9 @@
 				</li>
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" src="img/1.jpeg">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> | Online</div>
 						</div>
 					</div>
 					<a href="emplogout.php">
@@ -164,8 +144,8 @@
 			<div>
 				<div class="w3-row-padding">
 					<div class="w3-quarter">
-						<div class="w3-container w3-red w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-container bg-green w3-padding-16">
+							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -185,12 +165,15 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a>Awaiting Schedule</a>
+							<div style="text-align: center;">
+								<h4>Awaiting Schedule</h4>
+							</div>
+							
 						</div>
 					</div>
 					<div class="w3-quarter">
-						<div class="w3-container w3-red w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-container bg-green w3-padding-16">
+							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -212,12 +195,15 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a>Upcoming Hearing</a>
+							<div style="text-align: center;">
+								<h4>Upcoming Hearing</h4>
+							</div>
+							
 						</div>
 					</div>
 					<div class="w3-quarter">
-						<div class="w3-container w3-orange w3-text-white w3-padding-16 ">
-							<div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+						<div class="w3-container bg-green w3-text-white w3-padding-16 ">
+							<div class="w3-left"><i class="fa fa-users w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -239,12 +225,15 @@
 								?>
 								</div>
 							<div class="w3-clear"></div>
-							<a>Active Cases</a>
+							<div style="text-align: center;">
+								<h4>Active Cases</h4>
+							</div>
+							
 						</div>
 					</div>
-					<div class="w3-quarter">
-						<div class="w3-container w3-blue w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+					<div class="w3-quarter" style="margin-bottom: 20px;">
+						<div class="w3-container bg-green w3-padding-16">
+							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -266,12 +255,16 @@
 								?>
 							</div>
 							<div class="w3-clear"></div>
-							<a>Settled</a>
+							
+							<div style="text-align: center;">
+								<h4>Settled</h4>
+							</div>
+							
 						</div>
 					</div>
 					<div class="w3-quarter">
-						<div class="w3-container w3-teal w3-padding-16"  >
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge"></i></div>
+						<div class="w3-container bg-green w3-padding-16"  >
+							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right"> 
 								<?php 
 									require 'db/conn.php';
@@ -294,7 +287,10 @@
 							</div>
 							<break></break>
 							<div class="w3-clear"></div>
-							<a>Not Settled </a>
+							<div style="text-align: center;">
+								<h4>Not Settled</h4>
+							</div>
+							
 						</div>
 					</div>
 				</div>

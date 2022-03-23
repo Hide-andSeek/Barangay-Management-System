@@ -309,6 +309,19 @@ if(!isset($_SESSION["type"]))
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if (isset($_POST['sendlinkpayment'])) {
+
+                      $email_status    = $_POST['email_status'];
+                      $approvedindigency_id = $_POST['approvedindigency_id'];
+      
+                      $sql = "UPDATE approved_indigency SET email_status = 'Sent' WHERE approvedindigency_id = $ID";
+      
+                      if (mysqli_query($connect, $sql)) {
+                      } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                 ?>
 
             <div>
@@ -328,7 +341,7 @@ if(!isset($_SESSION["type"]))
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
                     ?>
-                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailaddress']; ?></div>
+                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailaddress']; ?> <a href="indigencyapproval.php">Approval Page</a></div>
                     <?php
                         }else{
                     ?>

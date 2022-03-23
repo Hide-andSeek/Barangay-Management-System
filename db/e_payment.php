@@ -1,4 +1,6 @@
 <?php
+DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
+error_reporting(~E_NOTICE);
 /* 
 ----------------------------------------------------------------
 			TABLE OF CONTENTS: PREPARED STATEMENT
@@ -15,7 +17,8 @@ Insertion of Data with Image and Files
 */
 
 // 1.0 Paymaya Barangay ID
-
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
 if(isset($_POST['brgyidpaymentbtn'])){
 	
     $document_id = $_POST['document_id'];
@@ -26,6 +29,8 @@ if(isset($_POST['brgyidpaymentbtn'])){
 	$payment_status = $_POST['payment_status'];
     $payment_method = $_POST['payment_method'];
     $amount = $_POST['amount'];
+    // $time_added =date("Y-m-d H:i:s",strtotime("now"));
+	// $date_added =date("Y-m-d", strtotime("now"));
 
 	$sql_create_acc = "SELECT COUNT(document_id) AS num FROM payments WHERE document_id = :document_id";
 	$stmt = $db->prepare($sql_create_acc);
@@ -51,6 +56,8 @@ if(isset($_POST['brgyidpaymentbtn'])){
 		$stmt->bindParam(':payment_status', $payment_status);
 		$stmt->bindParam(':payment_method', $payment_method);
         $stmt->bindParam(':amount', $amount);
+        // $stmt->bindParam(':time_added', $time_added);
+        // $stmt->bindParam(':date_added', $date_added);
 
 	if($stmt->execute()){
 		$_SESSION['status'] ="Submitted Successfully";
@@ -61,6 +68,7 @@ if(isset($_POST['brgyidpaymentbtn'])){
         $_SESSION['status_code'] ="error";
 		}	
 	}
+}
 }
   if(isset($_GET['id'])){
                     $ID = $_GET['id'];

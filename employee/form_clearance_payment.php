@@ -280,7 +280,7 @@ if(!isset($_SESSION["type"]))
                     $data = array();
                     
                     // get all data from menu table and category table
-                    $sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status
+                    $sql_query = "SELECT approved_clearanceids, full_name, age, status, nationality, address,contactno, emailadd, purpose,date_issued, ctc_no, issued_at, precint_no, clearanceid_image, filechoice, approvedby, app_date, clearance_status, email_status
                             FROM approved_clearance
                             WHERE approved_clearanceids = ?";
                     
@@ -309,11 +309,25 @@ if(!isset($_SESSION["type"]))
                                 $data['filechoice'],
                                 $data['approvedby'],
                                 $data['app_date'],
-                                $data['clearance_status']
+                                $data['clearance_status'],
+                                $data['email_status']
                                 );
                         $stmt->fetch();
                         $stmt->close();
                     }
+
+                    if (isset($_POST['sendlinkpayment'])) {
+
+                      $email_status    = $_POST['email_status'];
+                      $approved_clearanceids = $_POST['approved_clearanceids'];
+      
+                      $sql = "UPDATE approved_clearance SET email_status = 'Sent' WHERE approved_clearanceids = $ID";
+      
+                      if (mysqli_query($connect, $sql)) {
+                      } else {
+                          echo "Error updating record: " . mysqli_error($connect);
+                      }
+                  }
                 ?>
 
             <div>
@@ -333,7 +347,7 @@ if(!isset($_SESSION["type"]))
                         if(ISSET($_SESSION['status'])){
                         if($_SESSION['status'] == "ok"){
                     ?>
-                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailadd']; ?></div>
+                        <div style="text-align: center;" class="alert alert-info messcompose"><?php echo $_SESSION['result']?> <?php echo $data['emailadd']; ?> <a href="clearanceapproval.php">Approval Page</a></div>
                     <?php
                         }else{
                     ?>

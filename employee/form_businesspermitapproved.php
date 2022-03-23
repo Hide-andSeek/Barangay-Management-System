@@ -269,11 +269,11 @@ if(!isset($_SESSION["type"]))
 	}
 		
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_bpermits WHERE status = 'Approved'
 				ORDER BY approved_bpermitid ASC";
 	}else{
-		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, email_status, payment_stat
 				FROM approved_bpermits
 				WHERE fullname LIKE ? 
 				ORDER BY approved_bpermitid ASC";
@@ -305,6 +305,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// get total records
@@ -330,11 +331,11 @@ if(!isset($_SESSION["type"]))
 	}	
 	
 	if(empty($keyword)){
-		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status,email_status, payment_stat
 		FROM approved_bpermits WHERE status = 'Approved'
 				ORDER BY approved_bpermitid ASC LIMIT ?, ?";
 	}else{
-		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status, payment_stat
+		$sql_query = "SELECT approved_bpermitid, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, businessid_image, bpermitid_type, permitfilechoice, approvedby, app_date, status,email_status, payment_stat
 				FROM approved_bpermits 
 				WHERE fullname LIKE ? 
 				ORDER BY approved_bpermitid ASC LIMIT ?, ?";
@@ -367,6 +368,7 @@ if(!isset($_SESSION["type"]))
 				$data['approvedby'],
 				$data['app_date'],
 				$data['status'],
+				$data['email_status'],
 				$data['payment_stat']
 				);
 		// for paging purpose
@@ -430,6 +432,7 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Business name</th>
 										<th width="5%">Business Address</th>
 										<th width="5%">Plate no</th>
+										<th width="5%">Email Status	</th>
 										<!-- <th width="5%">ID Picture</th> -->
 										<th width="5%"></th>
 										<th width="5%"></th>
@@ -448,7 +451,8 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['businessname']; ?></td>
 									<td><?php echo $data ['businessaddress']; ?></td>
 									<td><?php echo $data ['plateno']; ?></td>
-			
+									<td><?php echo $data ['email_status']; ?></td>
+
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>
 									
 									<td>

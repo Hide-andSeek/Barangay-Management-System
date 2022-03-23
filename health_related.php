@@ -3,14 +3,6 @@ include "db/conn.php";
 include "db/user.php";
 
 ?>
-<?php
-$user = '';
-
-if (isset($_SESSION['email'])) {
-  $user = $_SESSION['email'];
-}
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +12,7 @@ if (isset($_SESSION['email'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Barangay Programs - Barangay Commonwealth QC.</title>
+  <title>Health - Barangay Commonwealth QC.</title>
 
   <!-- Bootstrap Core CSS -->
 
@@ -31,6 +23,7 @@ if (isset($_SESSION['email'])) {
   <link rel="stylesheet" href="resident-css/style.css">
   <link rel="stylesheet" href="resident-css/resident.css">
   <link rel="stylesheet" href="css/preloader.css">
+
   <!-- Icon -->
   <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
 
@@ -75,10 +68,28 @@ if (isset($_SESSION['email'])) {
     a.login {
       cursor: pointer;
     }
+
+    @media screen and (max-width: 720px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 995px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
   </style>
 </head>
 
-<body  class="body">
+<body class="body">
   <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
@@ -115,9 +126,11 @@ if (isset($_SESSION['email'])) {
               <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
               <span class="logdropdown-content">
                 <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                <a class="page-scroll" href="#">Barangay Funds</a>
-                <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
-                <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                <a class="page-scroll" href="barangay_announcement.php">Barangay Announcement</a>
+                <a class="page-scroll" href="barangay_seminars.php">Barangay Seminar/ Course</a>
+                <a class="page-scroll" href="#">Health Related</a>
+                <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                <a class="page-scroll" href="sanguniang_kabataan.php">Sangunian Kabataan</a>
               </span>
             </li>
             <li>
@@ -126,6 +139,7 @@ if (isset($_SESSION['email'])) {
             <li>
               <a class="page-scroll login" onclick="document.getElementById('id01').style.display='block'">Login</a>
             </li>
+
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -158,16 +172,14 @@ if (isset($_SESSION['email'])) {
               <input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password">
             </div>
 
-            <div>
+            <!-- <div>
               <a href="#" class="fp">Forgot password?</a>
-            </div>
+            </div> -->
             <div class="information">
               <button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
                 Sign in
               </button>
-              <button class="log_button gmail" onclick="window.location.href= 'resident_=--account_registration.php'">
-                <a class="createacc" href="resident_account_registration.php">Create Account</a>
-              </button>
+              <p style="text-align: center;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
             </div>
           </div>
         </form>
@@ -175,110 +187,108 @@ if (isset($_SESSION['email'])) {
     </div>
   </div>
 
-  <div class="sep_announcement">
-    <!-- News section-->
-    <section>
-      <div class="row announce_item">
-        <div class="col-lg-8 col-md-8 col-sm-8 first-section">
-          <div class="col-md-12">
-            <div class="section-heading">
+  <br>
+  <br>
+  <br>
+  <div class="row announce_item">
+    <div class="col-lg-8 col-md-8 col-sm-8 first-section">
+      <div class="col-md-12">
+        <div class="section-heading">
 
-              <?php
-              include('db/conn.php');
-              include('db/captain.php');
-              //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-              $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '25'");
-              $stmt->execute();
-              $imagelist = $stmt->fetchAll();
-              if (count($imagelist) > 0) {
-                foreach ($imagelist as $data) {
-              ?>
-                  <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
-                  <span>
-                    <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
-                  </span>
-              <?php
-                }
-              } else {
-                echo "<div class='errormessage'>
-						  <i class='bx bx-error'></i>
-                          No announcement yet!
-						  </div>";
-              }
-              ?>
-            </div>
-          </div>
           <?php
           include('db/conn.php');
           include('db/captain.php');
           //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-          $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '25'");
+          $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '20'");
           $stmt->execute();
           $imagelist = $stmt->fetchAll();
           if (count($imagelist) > 0) {
-            foreach ($imagelist as $image) {
+            foreach ($imagelist as $data) {
           ?>
-              <div class="announcement-item">
-                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
-                  <div>
-                    <h4><?php echo $image['announcement_heading']; ?></h4>
-                    <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
-                  </div>
-                  <div>
-                    <p style="text-align: justify">
-                      <?php echo $image['announcement_description']; ?>
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
+              <span>
+                <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
+              </span>
           <?php
             }
           } else {
             echo "<div class='errormessage'>
-                      <i class='bx bx-error'></i>
-                      No Barangay Program Post yet!
-					  </div>";
+						  <i class='bx bx-error'></i>
+                          No Vaccination Post yet!
+						  </div>";
           }
           ?>
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="newslatest_post section-heading">
-            <h3><span>Related post</span></h3>
-            <?php
-            include('db/conn.php');
-            include('db/captain.php');
-            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-            $stmt = $db->prepare("SELECT * FROM announcement_category");
-            $stmt->execute();
-            $sidelist = $stmt->fetchAll();
-            if (count($sidelist) > 0) {
-              foreach ($sidelist as $list) {
-            ?>
-                <div class="newslatest_post_container">
-                  <ul class="newslatest_postnav">
-                    <li>
-                      <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
-                        <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-            <?php
-              }
-            } else {
-              echo "<div class='errormessage'>
-                      <i class='bx bx-error'></i>
-                      No Barangay Progroms Post yet!
-					  </div>";
-            }
-            ?>
-          </div>
-        </div>
       </div>
-    </section>
-  </div>
+      <?php
+      include('db/conn.php');
+      include('db/captain.php');
+      //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+      $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '20'");
+      $stmt->execute();
+      $imagelist = $stmt->fetchAll();
+      if (count($imagelist) > 0) {
+        foreach ($imagelist as $image) {
+      ?>
+          <div class="announcement-item">
+            <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="85%" height="60%"></a>
+              <div>
+                <h4><?php echo $image['announcement_heading']; ?></h4>
+                <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
+              </div>
+              <div style="text-align: justify">
+                <p>
+                  <?php echo $image['announcement_description']; ?>
+                </p>
+                <hr>
+              </div>
+            </div>
+          </div>
+      <?php
+        }
+      } else {
+        echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No Vaccination Post yet!
+					  </div>";
+      }
+      ?>
+    </div>
 
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="newslatest_post section-heading">
+        <h3><span>Related post</span></h3>
+        <?php
+        include('db/conn.php');
+        include('db/captain.php');
+        //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+        $stmt = $db->prepare("SELECT * FROM announcement_category");
+        $stmt->execute();
+        $sidelist = $stmt->fetchAll();
+        if (count($sidelist) > 0) {
+          foreach ($sidelist as $list) {
+        ?>
+            <div class="newslatest_post_container">
+              <ul class="newslatest_postnav">
+                <li>
+                  <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
+                    <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        <?php
+          }
+        } else {
+          echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No Vaccination Post yet!
+					  </div>";
+        }
+        ?>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -317,7 +327,7 @@ if (isset($_SESSION['email'])) {
 
   <script src="https://use.fontawesome.com/f7721642f4.js"></script>
   <script src="js/jquery.min.js"></script>
-   <script src="js/preloader.js"></script>
+  <script src="js/preloader.js"></script>
   <!-- Color Settings script -->
   <script src="resident-js/settings-script.js"></script>
   <!-- jQuery -->

@@ -21,7 +21,7 @@ include "db/user.php";
   <!-- Custom CSS -->
   <link rel="stylesheet" href="resident-css/style.css">
   <link rel="stylesheet" href="resident-css/resident.css">
-
+  <link rel="stylesheet" href="css/preloader.css">
   <!-- Icon -->
   <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
 
@@ -61,15 +61,38 @@ include "db/user.php";
       margin-bottom: 20px;
       margin-bottom: 20px;
     }
+
     a.createacc {
-            text-decoration: none;
-            color: white;
-        }
+      text-decoration: none;
+      color: white;
+    }
+
+    @media screen and (max-width: 720px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 995px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
   </style>
 </head>
 
 <body onload=display_ct() id="contact" class="body">
-
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
 
   <header id="header">
     <!-- Navigation -->
@@ -101,10 +124,11 @@ include "db/user.php";
               <a class="page-scroll logout" href="javascript:void(0)">Announcement</a>
               <span class="logdropdown-content">
                 <a class="page-scroll" href="academic-related.php">Academic Related</a>
-                <a class="page-scroll" href="barangayfunds.php">Barangay Funds</a>
-                <a class="page-scroll" href="latestannouncement.php">Latest Announcement</a>
-                <a class="page-scroll" href="vaccine.php">Vaccine</a>
+                <a class="page-scroll" href="barangay_announcement.php">Barangay Announcement</a>
+                <a class="page-scroll" href="barangay_seminars.php">Barangay Seminar/ Course</a>
+                <a class="page-scroll" href="health_related.php">Health Related</a>
                 <a class="page-scroll" href="barangayprograms.php">Barangay Programs</a>
+                <a class="page-scroll" href="sanguniang_kabataan.php">Sangunian Kabataan</a>
               </span>
             </li>
             <li>
@@ -145,16 +169,14 @@ include "db/user.php";
               <input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password">
             </div>
 
-            <div>
+            <!-- <div>
               <a href="#" class="fp">Forgot password?</a>
-            </div>
+            </div> -->
             <div class="information">
               <button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
                 Sign in
               </button>
-              <button class="log_button gmail" onclick="window.location.href= 'resident_=--account_registration.php'">
-                <a class="createacc" href="resident_account_registration.php">Create Account</a>
-              </button>
+              <p style="text-align: center;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
             </div>
           </div>
         </form>
@@ -444,22 +466,27 @@ include "db/user.php";
     <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
   </div>
 
-  <!-- jQuery -->
-  <script src="resident-js/jquery.js"></script>
-  <!-- Bootstrap Core JavaScript -->
-  <script src="resident-js/bootstrap.min.js"></script>
-  <!-- Color Settings script -->
-  <script src="resident-js/settings-script.js"></script>
-  <!-- Plugin JavaScript -->
-  <script src="resident-js/jquery.easing.min.js"></script>
-  <!-- Contact Form JavaScript -->
-  <script src="resident-js/jqBootstrapValidation.js"></script>
-  <!-- SmoothScroll script -->
-  <script src="resident-js/smoothscroll.js"></script>
-  <!-- Custom Theme JavaScript -->
-  <script src="resident-js/barangay.js"></script>
-  <!-- Isotope -->
-  <script src="resident-js/jquery.isotope.min.js"></script>
+<!-- Color Settings script -->
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" async src="//l.getsitecontrol.com/d4ejnve7.js"></script>
+    <script src="js/preloader.js"></script>
+
+    <script src="resident-js/settings-script.js"></script>
+    <!-- jQuery -->
+    <script src="resident-js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="resident-js/bootstrap.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="resident-js/jquery.easing.min.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="resident-js/jqBootstrapValidation.js"></script>
+    <!-- SmoothScroll script -->
+    <script src="resident-js/smoothscroll.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="resident-js/barangay.js"></script>
+    <!-- Isotope -->
+    <script src="resident-js/jquery.isotope.min.js"></script>
+ 
 
   <script src="https://use.fontawesome.com/f7721642f4.js"></script>
 

@@ -28,6 +28,45 @@ include "../db/e_payment.php";
         .swal {
         font-family: "Poppins" , sans-serif;
         }
+        @media only screen and (max-width: 980px) {
+            .main-content{width: 60%; }
+            .form_group input{ width: 100%; }
+
+		}
+
+        @media only screen and (max-width: 730px) {
+
+        .main-content{width: 70%; }
+        .form_group input{ width: 100%; }
+
+        }
+
+        @media only screen and (max-width: 700px) {
+
+            .main-content{width: 80%; }
+            .form_group input{ width: 100%; }
+
+		}
+
+        @media only screen and (max-width: 550px) {
+
+        .main-content{width: 90%; }
+        .form_group input{ width: 100%; }
+
+        }
+
+        @media only screen and (max-width: 450px) {
+        .fontweight{left: 0;}
+        .main-content{width: 100%; }
+        .form_group input, .margin input{ width: 90%; margin-left: 20px;}
+        .form_group label, .margin label{margin-left: 20px;}
+        .form_group i{margin-left: 70px;}
+        .gen{display: block}
+        .comlogo{margin-left: 20px; margin-top: -20px;width: 60%; height: 40%;}
+        .pay, .but{display: flex; justify-content: center; align-items: center;}
+        .button{width: 90%;}
+        }
+
     </style>
 </head>
 <body>
@@ -93,7 +132,7 @@ include "../db/e_payment.php";
                     </div> -->
                         <form method="POST" action="">
                             <div class="margin" >
-                                <div>
+                                <div class="form_group">
                                     <input type="hidden" id="document_id" value="<?php echo $data ['approved_bpermitid']; ?>" class="form-control inpmargin usersel" name="document_id">
 
                                     <label for="refno">Name: </label>
@@ -117,14 +156,15 @@ include "../db/e_payment.php";
                                     <input type="hidden" id="amount" value="10" class="form-control inpmargin " name="amount" readonly>
                                 </div>
                                 <div class="gen">
-                                    <div style="margin-right: 20px;">
+                                    <div class="pay" style="margin-right: 20px;">
                                         <img class="PaymentMethodImage" alt="paymaya" src="../resident-img/paymaya.jpeg">
                                     </div>
                                     
                                     <div class="g-recaptcha" data-sitekey="6LdD7I0eAAAAADNiE6z_yE7QQEHlWsa9G3bFVTOy"></div>
                                 </div>
+                                <div class="but">
                                 <button class="button form-control" name="payamayabpermitbtn"><span>Submit </span><button>
-                                
+                                </div>
                                 
                             </div>
                             <p style="text-align:center;">

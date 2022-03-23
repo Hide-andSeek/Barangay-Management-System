@@ -2,30 +2,28 @@
 session_start();
 
 include "../db/conn.php";
-include "../db/documents.php";
-include('../announcement_includes/functions.php'); 
+include('../announcement_includes/functions.php');
 include "../db/viewdetinsert.php";
 
-if(!isset($_SESSION["type"]))
-{
-    header("location: 0index.php");
+if (!isset($_SESSION["type"])) {
+  header("location: 0index.php");
 }
 ?>
 
 <?php
-	$user = '';
+$user = '';
 
-	if(isset($_SESSION['user'])){
-		$user = $_SESSION['user'];
-	}
+if (isset($_SESSION['user'])) {
+  $user = $_SESSION['user'];
+}
 ?>
 
 <?php
-	$dept = '';
+$dept = '';
 
-	if(isset($_SESSION['type'])){
-		$dept = $_SESSION['type'];
-	}
+if (isset($_SESSION['type'])) {
+  $dept = $_SESSION['type'];
+}
 ?>
 
 
@@ -53,7 +51,7 @@ if(!isset($_SESSION["type"]))
 //     ]);
 //     $sendMessages = $messageClient->sendMessages([
 //         $sendMessageRequest2
-		
+
 //     ]);
 // }
 ?>
@@ -61,443 +59,496 @@ if(!isset($_SESSION["type"]))
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-	<!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-   
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="../css/styles.css">
-	<link rel="stylesheet" href="../announcement_css/custom.css">
-	<link rel="stylesheet/less" type="text/css" href="../css/animated.less" />
-	<!--Font Styles-->
-	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
-	
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <meta http-equiv="refresh" content="120">
+<head>
+  <meta charset="UTF-8">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-     <title> View: Business Permit </title>
-	 
-	 
-	 <style>
- *{font-size: 13px;}
-		 .home-section{
-			min-height: 95vh;
-			}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../announcement_css/custom.css">
+  <link rel="stylesheet/less" type="text/css" href="../css/animated.less" />
+  <!--Font Styles-->
+  <link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 
-		 .home-section{
-			min-height: 95vh;
-			}
-        #viewdetails {
-          border-collapse: collapse;
-          width: 100%;
-          box-shadow:  0 3px 10px rgba(0 0 0/ 0.2)
-        }
+  <!-- Boxicons CDN Link -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-        #viewdetails td, #viewdetails th {
-          border: 1px solid #ddd;
-          padding: 8px;
-        }
-
-        #viewdetails tr:nth-child(even){background-color: #f2f2f2;}
-
-        #viewdetails tr:hover {background-color: #ddd;}
-
-        #viewdetails th {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          text-align: left;
-          background-color: #D6EACA;
-          color: black;
-        }
-        .btnmargin{margin-bottom: 5px;}
-
-        #myImg {
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-        }
-
-        #myImg:hover {opacity: 0.7;}
-
-        /* The Modal (background) */
-        .modal {
-        display: absolute; /* Hidden by default */
-        z-index: 1; /* Sit on top */
-        padding-top: 120px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-        }
-
-        /* Modal Content (image) */
-        .modal-content {
-        display: absolute;
-        margin: auto;
-        width: 80%;
-        max-width: 700px;
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-        /* Add Animation */
-        .modal-content, #caption {  
-        -webkit-animation-name: zoom;
-        -webkit-animation-duration: 0.6s;
-        animation-name: zoom;
-        animation-duration: 0.6s;
-        }
+  <title> View: Business Permit </title>
 
-        @-webkit-keyframes zoom {
-        from {-webkit-transform:scale(0)} 
-        to {-webkit-transform:scale(1)}
-        }
 
-        @keyframes zoom {
-        from {transform:scale(0)} 
-        to {transform:scale(1)}
-        }
+  <style>
+    * {
+      font-size: 13px;
+    }
 
-        /* The Close Button */
-        .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 25px;
-        font-weight: bold;
-        transition: 0.3s;
-        }
+    .home-section {
+      min-height: 95vh;
+    }
 
-        .close:hover,
-        .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-        }
-        .viewbtn{width: 100%; height: 35px;  background-color: #91D9F1; color: black; border: 1px solid #008CBA;}
-        .viewbtn:hover{ background-color: #008CBA;color: white;}
-	 </style>
-	<!-- Side Navigation Bar-->
-		  <div class="sidebar">
-			<div class="logo-details">
-			    <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
-				<i class='bx bx-menu menu' id="btn"></i>
-			</div>
-			<ul class="nav-list">
-			 <li>
-			  <a class="side_bar nav-button" href="dashboard.php">
-				  <i class='bx bx-grid-alt dash'></i>
-				  <span class="links_name">Dashboard</span>
-				</a>
-				 <span class="tooltip">Dashboard</span>
-			  </li>
-			  <li>
-				<a class="side_bar nav-button" href="barangayid.php">
-				   <i class='bx bx-id-card id'></i>
-				  <span class="links_name">Barangay ID</span>
-				</a>
-				 <span class="tooltip">Barangay ID</span>
-			  </li>
-			  
-			  <li>
-				<a class="side_bar nav-button" href="barangayclearance.php">
-				   <i class='bx bx-receipt clearance'></i>
-				  <span class="links_name">Barangay Clearance</span>
-				</a>
-				 <span class="tooltip">Barangay Clearance</span>
-			  </li>
-			  
-			  <li>
-				<a class="side_bar nav-button" href="certificateofindigency.php">
-				   <i class='bx bx-file indigency'></i>
-				  <span class="links_name">Certificate of Indigency</span>
-				</a>
-				 <span class="tooltip">Certificate of Indigency</span>
-			  </li>			  
-			  
-			  <li>
-				<a class="side_bar nav-button nav-active" href="businesspermit.php">
-				   <i class='bx bx-news permit'></i>
-				  <span class="links_name">Business Permit</span>
-				</a>
-				 <span class="tooltip">Business Permit</span>
-			  </li>
+    .home-section {
+      min-height: 95vh;
+    }
 
-              <li>
-				<a class="side_bar nav-button" href="payment_history.php">
-				   <i class='bx bx-data payment'></i>
-				  <span class="links_name">Payment History</span>
-				</a>
-				 <span class="tooltip">Payment History</span>
-			  </li>
-			
-			 <li class="profile">
-				 <div class="profile-details">
-				   <div class="name_job">
-				   		<div class="job"><strong><?php echo $user;?></strong></div>
-              <div class="job" id=""><?php echo $dept; ?> || Online </div>
-				   </div>
-				 </div>
-				 <a href="../emplogout.php">
-					<i class='bx bx-log-out d_log_out' id="log_out" ></i>
-				 </a>
-			 </li>
-			</ul>
-		  </div>
-			<!-- Middle Section -->
-		  <section class="home-section">
-			<!-- Top Section -->
-			  <section class="top-section">
-				  <div class="top-content">
-					<div>
-						<h5> Business Permit >> View  Business Permit Detail
-						<a href="#" class="circle">
-							 <img src="../img/dt.png" >
-					    </a>
-					    </h5>	  
-					</div>
-				  </div>
-			  </section>
-				 
-              <div id="content" class="container col-md-12">
-                <?php 
-                    if(isset($_GET['id'])){
-                        $ID = $_GET['id'];
-                    }else{
-                        $ID = "";
-                    }
-                    
-                    // create array variable to store data from database
-                    $data = array();
-                    
-                    // get all data from menu table and category table
-                    $sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, permitfilechoice, businessid_image, bpermitid_type, status
+    #viewdetails {
+      border-collapse: collapse;
+      width: 100%;
+      box-shadow: 0 3px 10px rgba(0 0 0/ 0.2)
+    }
+
+    #viewdetails td,
+    #viewdetails th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #viewdetails tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #viewdetails tr:hover {
+      background-color: #ddd;
+    }
+
+    #viewdetails th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #D6EACA;
+      color: black;
+    }
+
+    .btnmargin {
+      margin-bottom: 5px;
+    }
+
+    #myImg {
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #myImg:hover {
+      opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: absolute;
+      /* Hidden by default */
+      z-index: 1;
+      /* Sit on top */
+      padding-top: 120px;
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.6);
+      /* Black w/ opacity */
+    }
+
+    /* Modal Content (image) */
+    .modal-content {
+      display: absolute;
+      margin: auto;
+      width: 80%;
+      max-width: 700px;
+    }
+
+
+    /* Add Animation */
+    .modal-content,
+    #caption {
+      -webkit-animation-name: zoom;
+      -webkit-animation-duration: 0.6s;
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+
+    @-webkit-keyframes zoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* The Close Button */
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .viewbtn {
+      width: 100%;
+      height: 35px;
+      background-color: #91D9F1;
+      color: black;
+      border: 1px solid #008CBA;
+    }
+
+    .viewbtn:hover {
+      background-color: #008CBA;
+      color: white;
+    }
+  </style>
+  <!-- Side Navigation Bar-->
+  <div class="sidebar">
+    <div class="logo-details">
+      <img class="brgy_icon" src="../img/Brgy-Commonwealth.png" alt="" />
+      <div class="logo_name">Barangay Commonwealth</div>
+      <i class='bx bx-menu menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a class="side_bar nav-button" href="dashboard.php">
+          <i class='bx bx-grid-alt dash'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a class="side_bar nav-button" href="barangayid.php">
+          <i class='bx bx-id-card id'></i>
+          <span class="links_name">Barangay ID</span>
+        </a>
+        <span class="tooltip">Barangay ID</span>
+      </li>
+
+      <li>
+        <a class="side_bar nav-button" href="barangayclearance.php">
+          <i class='bx bx-receipt clearance'></i>
+          <span class="links_name">Barangay Clearance</span>
+        </a>
+        <span class="tooltip">Barangay Clearance</span>
+      </li>
+
+      <li>
+        <a class="side_bar nav-button" href="certificateofindigency.php">
+          <i class='bx bx-file indigency'></i>
+          <span class="links_name">Certificate of Indigency</span>
+        </a>
+        <span class="tooltip">Certificate of Indigency</span>
+      </li>
+
+      <li>
+        <a class="side_bar nav-button nav-active" href="businesspermit.php">
+          <i class='bx bx-news permit'></i>
+          <span class="links_name">Business Permit</span>
+        </a>
+        <span class="tooltip">Business Permit</span>
+      </li>
+
+      <li>
+        <a class="side_bar nav-button" href="payment_history.php">
+          <i class='bx bx-data payment'></i>
+          <span class="links_name">Payment History</span>
+        </a>
+        <span class="tooltip">Payment History</span>
+      </li>
+
+      <li class="profile">
+        <div class="profile-details">
+          <div class="name_job">
+            <div class="job"><strong><?php echo $user; ?></strong></div>
+            <div class="job" id=""><?php echo $dept; ?> || Online </div>
+          </div>
+        </div>
+        <a href="../emplogout.php">
+          <i class='bx bx-log-out d_log_out' id="log_out"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- Middle Section -->
+  <section class="home-section">
+    <!-- Top Section -->
+    <section class="top-section">
+      <div class="top-content">
+        <div>
+          <h5> Business Permit >> View Business Permit Detail
+            <a href="#" class="circle">
+              <img src="../img/dt.png">
+            </a>
+          </h5>
+        </div>
+      </div>
+    </section>
+
+    <div id="content" class="container col-md-12">
+      <?php
+      if (isset($_GET['id'])) {
+        $ID = $_GET['id'];
+      } else {
+        $ID = "";
+      }
+
+      // create array variable to store data from database
+      $data = array();
+
+      // get all data from menu table and category table
+      $sql_query = "SELECT businesspermit_id, dateissued, selection, fullname, contactno, businessname, businessaddress, plateno, email_add, permitfilechoice, businessid_image, bpermitid_type, status
                             FROM businesspermit
                             WHERE businesspermit_id = ?";
-                    
-                    $stmt = $connect->stmt_init();
-                    if($stmt->prepare($sql_query)) {	
-                        // Bind your variables to replace the ?s
-                        $stmt->bind_param('s', $ID);
-                        // Execute query
-                        $stmt->execute();
-                        // store result 
-                        $stmt->store_result();
-                        $stmt->bind_result($data['businesspermit_id'], 
-                                $data['dateissued'],
-                                $data['selection'],
-                                $data['fullname'],
-                                $data['contactno'],
-                                $data['businessname'],
-                                $data['businessaddress'],
-                                $data['plateno'],
-                                $data['email_add'],
-                                $data['permitfilechoice'],
-                                $data['businessid_image'],
-                                $data['bpermitid_type'],
-                                $data['status']
-                                );
-                        $stmt->fetch();
-                        $stmt->close();
-                    }
 
-                    if(isset($_POST['btnDeny'])){
-                    
-                      $status	= $_POST['status'];
-                      $businesspermit_id = $_POST['businesspermit_id'];
+      $stmt = $connect->stmt_init();
+      if ($stmt->prepare($sql_query)) {
+        // Bind your variables to replace the ?s
+        $stmt->bind_param('s', $ID);
+        // Execute query
+        $stmt->execute();
+        // store result 
+        $stmt->store_result();
+        $stmt->bind_result(
+          $data['businesspermit_id'],
+          $data['dateissued'],
+          $data['selection'],
+          $data['fullname'],
+          $data['contactno'],
+          $data['businessname'],
+          $data['businessaddress'],
+          $data['plateno'],
+          $data['email_add'],
+          $data['permitfilechoice'],
+          $data['businessid_image'],
+          $data['bpermitid_type'],
+          $data['status']
+        );
+        $stmt->fetch();
+        $stmt->close();
+      }
 
-                      $sql = "UPDATE businesspermit SET status = 'Deny' WHERE businesspermit_id = $businesspermit_id";
+      if (isset($_POST['btnDeny'])) {
 
-                      if (mysqli_query($connect, $sql)) {
-                        echo "<script>
+        $status  = $_POST['status'];
+        $businesspermit_id = $_POST['businesspermit_id'];
+
+        $sql = "UPDATE businesspermit SET status = 'Deny' WHERE businesspermit_id = $businesspermit_id";
+
+        if (mysqli_query($connect, $sql)) {
+          echo "<script>
                                   alert('Denied Request!');
                                   window.location.href='businesspermit.php';
                               </script>";
-                      } else {
-                        echo "Error updating record: " . mysqli_error($connect);
-                      }
-                  }
+        } else {
+          echo "Error updating record: " . mysqli_error($connect);
+        }
+      }
 
-                  
 
-                  if(isset($_POST['markasdone'])){
 
-                      $status	= $_POST['status'];
-                      $businesspermit_id = $_POST['businesspermit_id'];
+      if (isset($_POST['markasdone'])) {
 
-                      $sql = "UPDATE businesspermit SET status = 'Approved' WHERE businesspermit_id = $businesspermit_id";
+        $status  = $_POST['status'];
+        $businesspermit_id = $_POST['businesspermit_id'];
 
-                      if (mysqli_query($connect, $sql)) {
-                      echo "<script>
+        $sql = "UPDATE businesspermit SET status = 'Approved' WHERE businesspermit_id = $businesspermit_id";
+
+        if (mysqli_query($connect, $sql)) {
+          echo "<script>
                                   alert('Mark as Done Successfully!');
                                   window.location.href='businesspermit.php';
                               </script>";
-                      } else {
-                      echo "Error updating record: " . mysqli_error($connect);
-                      }
-                  }
-                    
-                ?>
-
-            <div>
-                <hr>
-                <div style="text-align: center;">
-                    <h5>
-                    View: Business Permit Detail
-                    </h5>
-                </div>
-                <hr>
-                <div style="float: right;">
-                    <a href="businesspermit.php">
-                        <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt ="Back?">
-                    </a>
-                </div>
-                <iframe type="file" style="position: absolute;width:0;height:0;border:0;" src="../img/fileupload_bpermit/<?php echo $data['businessid_image']; ?>">Here's the Document</iframe>
-
-                <form method="post" action=""  enctype="multipart/form-data">
-                    <div style="display: flex;">
-                    <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">ID No.</th>
-                            <td><input type="hidden" name="approved_bpermitid" value="<?php echo $data['businesspermit_id']; ?>"><?php echo $data['businesspermit_id']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Date Issued</th>
-                            <td><input type="hidden" name="dateissued" value="<?php echo $data['dateissued']; ?>"><strong><?php echo $data['dateissued']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Selection</th>
-                            <td><input type="hidden" name="selection" value="<?php echo $data['selection']; ?>"><strong><?php echo $data['selection']; ?></strong></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Full name</th>
-                            <td><input type="hidden" name="fullname" value="<?php echo $data['fullname']; ?>"><strong><?php echo $data['fullname']; ?></strong></td>
-                        </tr>
-
-                 </table>
-                    <table id="viewdetails" class="font-sizee">
-                        <tr>
-                            <th width="30%">Contact no</th>
-                            <td><input type="hidden" name="contactno" value="<?php echo $data['contactno']; ?>"><?php echo $data['contactno']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Business name</th>
-                            <td><input type="hidden" name="businessname" value="<?php echo $data['businessname']; ?>"><?php echo $data['businessname']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Business Address</th>
-                            <td><input type="hidden" name="businessaddress" value="<?php echo $data['businessaddress']; ?>"><?php echo $data['businessaddress']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Plate no</th>
-                            <td><input type="hidden" name="plateno" value="<?php echo $data['plateno']; ?>"><?php echo $data['plateno']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Email</th>
-                            <td><input type="hidden" name="email_add" value="<?php echo $data['email_add']; ?>"><?php echo $data['email_add']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Document Type</th>
-                            <td><input type="hidden" name="permitfilechoice" value="<?php echo $data['permitfilechoice']; ?>"><?php echo $data['permitfilechoice']; ?></td>
-                        </tr>
-                        <tr>
-                            <th width="30%">Document Type</th>
-                            <td><input type="hidden" name="bpermitid_type" value="<?php echo $data['bpermitid_type']; ?>"><?php echo $data['bpermitid_type']; ?></td>
-                        </tr>
-                    </table>
-                    </div>
-                    <br>
-                
-                <br>
-                <div id="option_menu">
-                      <div class="information col">
-                        <label class="employee-label ">Approval Date </label>
-                          <input type="date" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
-                      </div>
-
-                          <div class="information col">
-                        <label class="employee-label"> Approved By </label>
-                          <input class="form-control btnmargin inputtext control-label" id="app_by" value="<?php echo $user; ?>" name ="approvedby" type="text" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);"> 
-                      </div>
-                      <div class="information col">
-                      <label class="employee-label ">Attach 2x2 Pic</label>
-                          <input type='file' class="form-control" name='businessid_image' id="businessid_image"/>
-                          <?php echo isset($error['businessid_image']) ? $error['businessid_image'] : '';?>
-                      </div>
-                      <input type="hidden" name="status" id="status" value="Approved">
-                        <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertpermit">Approve</button></a>
-                </form>
-                      <form action="" method="post">
-                                <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
-                                <input type="hidden" name="status" id="status" value="Deny">
-                                 <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
-                            </div>
-                        </form>
-                        <?php
-                        if(ISSET($_SESSION['status'])){
-                        if($_SESSION['status'] == "ok"){
-                            ?>
-                        
-                                <form action="" method="post">
-                                    <div>
-                                    
-                                        <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
-                                        <input type="hidden" name="status" id="status" value="Approved">
-                                        <div style="text-align: center;"><?php echo $_SESSION['result']?> </div>
-                                        <button type="submit" style="cursor: pointer; margin-bottom: 5px;" class="form-control generate viewbtn done" id="markasdone" name="markasdone">Mark as done <i class="bx bx-check"></i></button>
-                                        
-                                    </div>
-                                </form>
-                            <?php
-                                }else{
-                            ?>
-                                <div class="alert alert-danger messcompose"><?php echo $_SESSION['result']?></div>
-                            <?php
-                                }
-                                unset($_SESSION['result']);
-                                unset($_SESSION['status']);
-                                }
-                            ?>
-                
-                </div>
-                            
-                <div class="separator"> </div>
-            </div>
-			
-	</section>	
-    <script>
-        var modal = document.getElementById("myModal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        img.onclick = function(){
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
+        } else {
+          echo "Error updating record: " . mysqli_error($connect);
         }
+      }
+      ?>
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+      <div style="margin-left: 50px; margin-right: 50px">
+        <hr>
+        <div style="text-align: center;">
+          <h5>
+            View: Business Permit Details
+          </h5>
+        </div>
+        <hr>
+        <div style="float: right;">
+          <a href="businesspermit.php">
+            <img src="../img/back.png" title="Back?" class="hoverback" style="width: 50px; height: 50; cursor: pointer;" alt="Back?">
+          </a>
+        </div>
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() { 
-        modal.style.display = "none";
+        <iframe type="file" style="position: absolute;width:0;height:0;border:0;" src="../img/fileupload_bpermit/<?php echo $data['id_image']; ?>">Here's the Document</iframe>
+
+        <form method="post" action="" enctype="multipart/form-data">
+          <div style="display: flex;">
+            <table id="viewdetails" class="font-sizee">
+              <!-- <span><strong> Personal Information</strong></span> -->
+              <tr>
+                <th width="30%">ID No.</th>
+                <td><input type="hidden" name="approved_bpermitid" value="<?php echo $data['businesspermit_id']; ?>"><?php echo $data['businesspermit_id']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Date Requested</th>
+                <td><input type="hidden" name="dateissued" value="<?php echo $data['dateissued']; ?>"><?php echo $data['dateissued']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Selection</th>
+                <td><input type="hidden" name="selection" value="<?php echo $data['selection']; ?>"><?php echo $data['selection']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Fullname</th>
+                <td><input type="hidden" name="fullname" value="<?php echo $data['fullname']; ?>"><?php echo $data['fullname']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Contact no</th>
+                <td><input type="hidden" name="contactno" value="<?php echo $data['contactno']; ?>"><?php echo $data['contactno']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Businessname</th>
+                <td><input type="hidden" name="businessname" value="<?php echo $data['businessname']; ?>"><?php echo $data['businessname']; ?></td>
+              </tr>
+
+
+            </table>
+            <br>
+            <!-- <div><strong> In case of Emergency:</strong></div> -->
+            <br>
+            <table id="viewdetails" class="font-sizee">
+              <tr>
+                <th width="30%">Business Address</th>
+                <td><input type="hidden" name="businessaddress" value="<?php echo $data['businessaddress']; ?>"><?php echo $data['businessaddress']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Plate no</th>
+                <td><input type="hidden" name="plateno" value="<?php echo $data['plateno']; ?>"><?php echo $data['plateno']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">Email address</th>
+                <td><input type="hidden" name="email_add" value="<?php echo $data['email_add']; ?>"><?php echo $data['email_add']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">File Choice</th>
+                <td><input type="hidden" name="permitfilechoice" value="<?php echo $data['permitfilechoice']; ?>"><?php echo $data['permitfilechoice']; ?></td>
+              </tr>
+              <tr>
+                <th width="30%">ID Type</th>
+                <td> <input type="hidden" name="bpermitid_type" value="<?php echo $data['bpermitid_type']; ?>"><?php echo $data['bpermitid_type']; ?></td>
+              </tr>
+            </table>
+          </div>
+          <br>
+
+          <br>
+
+          <div class="information col">
+            <label class="employee-label ">Approval Date </label>
+            <input type="date" readonly="readonly" class="form-control btnmargin inputtext control-label" id="approvedate" name="app_date">
+          </div>
+          <div class="information col">
+            <label class="employee-label"> Approved By </label>
+            <input class="form-control btnmargin inputtext control-label" id="approvedby" value="<?php echo $user; ?>" name="approvedby" type="text" readonly="readonly" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+          </div>
+
+
+          <div class="information col">
+            <label class="employee-label ">Attach 2x2 Pic</label>
+            <input type='file' class="form-control" name='businessid_image' id="businessid_image" />
+            <?php echo isset($error['businessid_image']) ? $error['businessid_image'] : ''; ?>
+          </div>
+
+          <input type="hidden" name="status" id="status" value="Approved">
+
+          <a><button class="btn btn-success font-sizee form-control btnmargin" name="insertpermitbtn">Approve</button></a>
+        </form>
+
+        <form action="" method="post">
+          <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
+          <input type="hidden" name="status" id="status" value="Deny">
+          <a><button class="btn btn-danger font-sizee form-control btnmargin" name="btnDeny">Deny</button></a>
+        </form>
+
+        <br>
+        <br>
+        <?php
+        if (isset($_SESSION['status'])) {
+          if ($_SESSION['status'] == "ok") {
+        ?>
+
+            <form action="" method="post">
+              <div class="alert alert-info messcompose"><?php echo $_SESSION['result'] ?>
+                <input type="hidden" name="businesspermit_id" id="businesspermit_id" value="<?php echo $data['businesspermit_id']; ?>">
+                <input type="hidden" name="status" id="status" value="Approved">
+                <button type="submit" style="cursor: pointer;" class="form-control generate viewbtn done" name="markasdone">Mark as done</button>
+              </div>
+            </form>
+          <?php
+          } else {
+          ?>
+            <div class="alert alert-danger messcompose"><?php echo $_SESSION['result'] ?></div>
+        <?php
+          }
+          unset($_SESSION['result']);
+          unset($_SESSION['status']);
         }
+        ?>
+      </div>
 
-    </script>
-    <script>
-	    document.querySelector("#approvedate").valueAsDate = new Date();
-    </script>
-	</body>
+    </div>
+
+    <div class="separator"> </div>
+
+  </section>
+  <script>
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  </script>
+  <script>
+    document.querySelector("#approvedate").valueAsDate = new Date();
+  </script>
+  </body>
+
 </html>
