@@ -687,8 +687,8 @@ fclose($handle);
 						<label>Gender: <i class="red">*</i></label>
 						<select class="form-control form-text" name="violator_gender">
 							<option disabled>--Select--</option>
-							<option value="FMale">Male</option>
-							<option value="EFemale">Female</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
 						</select>
 						<?php echo isset($error['violator_gender']) ? $error['violator_gender'] : ''; ?>
 					</div>

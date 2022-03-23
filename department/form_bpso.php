@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('D:\xammp\htdocs\Updated-Barangay-System\announcement_includes\functions.php');
-require 'D:\xammp\htdocs\Updated-Barangay-System/db/conn.php';
+include('announcement_includes/functions.php');
+require 'db/conn.php';
 
 if(!isset($_SESSION["type"]))
 {
