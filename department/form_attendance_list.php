@@ -162,6 +162,14 @@ if (isset($_SESSION['type'])) {
 				<span class="tooltip">Payroll</span>
 			</li>
 
+			<li>
+                <a class="side_bar nav-button" href="accounting_transaction_history.php">
+                    <i class='fa fa-money payroll'></i>
+                    <span class="links_name">Transaction History</span>
+                </a>
+                <span class="tooltip">Transaction History</span>
+            </li>
+
 			<li class="profile">
 				<div class="profile-details">
 					<div class="name_job">

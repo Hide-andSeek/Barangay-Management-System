@@ -122,7 +122,7 @@ $random_num = rand(10000000, 999999); ?>
         -ms-user-select: none;
         }
         
-        .viewdetails tbody tr:last-of-type {
+        .viewdetailss tbody tr:last-of-type {
         border-bottom: 2px solid #009879;
         }
         tr.worked_days{border-bottom: 2px solid gray}
@@ -221,7 +221,7 @@ $random_num = rand(10000000, 999999); ?>
                                             </div>
                                         <br>
                                         <br>
-                                        <div style="margin-top: -40px; margin-left: 290px; position: absolute;"><img src="../img/Brgy-Commonwealth150x150.png" style="width: 190%; height:  0%; opacity: 0.2" alt=""></div>   
+                                        <div style="margin-top: -40px; margin-left: 330px; position: absolute;"><img src="../img/Brgy-Commonwealth150x150.png" style="width: 190%; height:  0%; opacity: 0.1" alt=""></div>   
                                         <table class="viewdetails" style="margin-left: 50px; margin-right: 50px">
                                             <thead>
                                                 <tr style="margin-bottom: 50px;">
@@ -264,27 +264,62 @@ $random_num = rand(10000000, 999999); ?>
 
                                                 </tr>
                                                 <tr class="worked_days">
-                                                    <td width="15%">Worked Days</th>
-                                                    <td width="15%"><strong><?php echo $workingdays ?> days </strong></td>
+                                                    
                                                     <td>Department</td>
                                                     <td><strong><?php echo $data['department']; ?></strong></td>
 
                                                 </tr>
-                                                <tr class="worked_hours">
-                                                    <td width="15%">Worked hours</th>
-                                                    <td width="15%"><strong><?php echo $total_hours; ?> hrs </strong></td>
-                                                    <td>Salary</td>
-                                                    <td><strong>₱<?php echo $total_salary; ?></strong></td>
-
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
+                                        <br>
+                                        <br>
+                                        <?php
+                                    
+                                    $usesdb = '';
+
+                                    $stmt = $db->prepare("SELECT * FROM usersdb WHERE user_id = $ID ");
+                                    $stmt->execute();
+                                    $imagelist = $stmt->fetchAll();
+                                    if (count($imagelist) > 0) {
+                                        foreach ($imagelist as $deyta) {
+                                        }
+                                    } else {
+                                        $usesdb = "<div class='errormessage' style='text-align: center; font-size: 14px;'>
+                                                    <i class='bx bx-error'></i>
+                                                    No data shown!
+                                            </div>";
+                                    }
+                                    
+                                    ?>
+                                        <div style="margin-left: 70px;">
+                                            <table class="viewdetailss" style="margin-left: 50px; margin-right: 50px">
+                                                <thead>
+                                                    <tr class="worked_days">
+                                                        <td width="15%">Worked Days</th>
+                                                        <td width="15%"><strong><?php echo $workingdays ?> days </strong></td>
+                                        
+                                                        <td width="15%">Worked hours</th>
+                                                        <td width="15%"><strong><?php echo $total_hours; ?> hrs </strong></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="border-bottom: 2px solid ">
+                                                <tr>
+                                                        <td>Rate</td>
+                                                        <td><strong><?php echo $deyta['rate']; ?></strong></td>
+                                                
+                                                        <td>Salary</td>
+                                                        <td><strong>₱<?php echo $total_salary; ?></strong></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <br>
                                         <br>
                                         <br>
                                         <table class="viewdetails" style="margin-left: 50px; margin-right: 50px">
                                             <thead>
-                                                
                                                 <tr>
                                                     <td width="15%">Facilitated by: </td>
                                                     <td width="15%" style="border-bottom: 1px solid black"><strong><?php echo $user; ?></strong></td>
@@ -293,7 +328,6 @@ $random_num = rand(10000000, 999999); ?>
 
                                                 </tr>
                                             </thead>
-                                            
                                         </table>
                                         <br>
                                         <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
@@ -333,7 +367,7 @@ $random_num = rand(10000000, 999999); ?>
                                         </div>
                                         </form>
 
-
+                                    
                                     <form method="POST" action="" class="body" enctype="multipart/form-data">
                                         <div class="main-content-email">
                                             <div  style="text-align: center; font-weight: 600">
@@ -342,12 +376,12 @@ $random_num = rand(10000000, 999999); ?>
 
                                             <div class="information col">
                                                 <p> Fullname: </p>
-                                                <input class="form-control inputtext" id="fullname" name="fullname" type="text"  value="<?php echo $user; ?>" readonly>
+                                                <input class="form-control inputtext" id="fullname" name="fullname" type="text"  value="<?php echo $data['employee_name']; ?>" readonly>
                                             </div>
 
                                             <div class="information col">
                                                 <p> To: </p>
-                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $emailaddress ?>" >
+                                                <input required class="form-control inputtext" id="email" name="email" type="text"  value="<?php echo $deyta['emailadd']; ?>" >
                                             </div>
 
                                             <div class="information col">
