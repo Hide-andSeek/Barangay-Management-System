@@ -163,6 +163,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 {
 if(isset($_POST['savetopayroll'])){
   
+  $user_id = $_POST['user_id'];
   $employee_name = $_POST['employee_name'];
   $job_position = $_POST['job_position'];
   $department = $_POST['department'];
@@ -172,8 +173,9 @@ if(isset($_POST['savetopayroll'])){
   $date_added = date("Y-m-d", strtotime("now"));
   $time_added = date("Y-m-d H:i:s",strtotime("now"));
 
-	$stmt = $db->prepare("INSERT INTO payroll (employee_name, job_position, department, facilitated_by, working_hours, salary, date_added, time_added) VALUES (:employee_name, :job_position, :department, :facilitated_by, :working_hours, :salary, :date_added, :time_added)");
+	$stmt = $db->prepare("INSERT INTO payroll (user_id,employee_name, job_position, department, facilitated_by, working_hours, salary, date_added, time_added) VALUES (:user_id,:employee_name, :job_position, :department, :facilitated_by, :working_hours, :salary, :date_added, :time_added)");
 
+	$stmt->bindParam(':user_id', $user_id);
 	$stmt->bindParam(':employee_name', $employee_name);
 	$stmt->bindParam(':job_position', $job_position);
 	$stmt->bindParam(':department', $department);

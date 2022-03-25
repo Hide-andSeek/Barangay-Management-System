@@ -578,6 +578,7 @@ if(isset($_POST['accountingbtn']))
 							{
 								$_SESSION["type"] = $row["user_type"];
 								$_SESSION["user"] = $row["username"];
+								$_SESSION["emails"] = $row["emailadd"];
 								header("location: includes/accounting_dashboard.php");
 							}
 

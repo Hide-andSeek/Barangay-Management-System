@@ -424,7 +424,11 @@ fclose($handle);
 			background-color: DodgerBlue !important;
 			color: #ffffff;
 		}
-
+		@media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
 		@media screen and (max-width: 600px) {
         .logdropdown-content {position: relative;}
         }

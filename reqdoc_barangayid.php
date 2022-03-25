@@ -415,6 +415,11 @@ fclose($handle);
 			margin-bottom: 10px;
 		}
 
+		@media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
 		@media screen and (max-width: 600px) {
         .logdropdown-content {position: relative;}
         }

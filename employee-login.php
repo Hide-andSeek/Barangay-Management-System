@@ -329,7 +329,7 @@ include "db/user.php";
 						</div>
 					</div>
 			</div>
-			<img src="resident-img/login-page-img.png" alt="">
+
 		</main>
 		<script src="js/loginmodalform.js"></script>
 		<script src="js/employee.js"></script>

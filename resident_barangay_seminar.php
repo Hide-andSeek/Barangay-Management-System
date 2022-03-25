@@ -85,12 +85,17 @@ echo db_query();
       list-style-type: none;
     }
 
+    @media screen and (max-width: 800px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
     @media screen and (max-width: 600px) {
       .logdropdown-content {
         position: relative;
       }
     }
-    
   </style>
 </head>
 

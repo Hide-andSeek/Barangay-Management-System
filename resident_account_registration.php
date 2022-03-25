@@ -36,7 +36,7 @@ include "db/user.php";
 
     <style>
         .body {
-            background: #ebebeb
+            background: #ebebeb;
         }
 
         .navnav {
@@ -126,16 +126,6 @@ include "db/user.php";
             align-items: center;
         }
 
-        @media only screen and (max-width: 700px) {
-            .left_userpersonal_info {
-                display: block;
-            }
-
-            input {
-                width: 100%;
-            }
-        }
-
         .form-text {
             width: 100%;
             padding: 5px;
@@ -145,16 +135,7 @@ include "db/user.php";
             padding-bottom: 50px;
         }
 
-        @media only screen and (max-width: 500px) {
-            .left_userpersonal_info {
-                display: block;
-            }
-
-            input {
-                width: 100;
-            }
-        }
-
+    
         #message {
             display: none;
             color: #000;
@@ -186,9 +167,67 @@ include "db/user.php";
             left: -25px;
             content: "✖";
         }
-        .validatiion{padding-left: 35px; }
-        .formborder{border-style: solid; border-color: #ebebeb; border-radius: 20px;padding: 50px;}
-        .passwordvalid{font-size: 13px;}
+
+        .validatiion {
+            padding-left: 35px;
+        }
+
+        .formborder {
+            border-style: solid;
+            border-color: #ebebeb;
+            border-radius: 20px;
+            padding: 50px;
+        }
+
+        .passwordvalid {
+            font-size: 13px;
+        }
+        @media only screen and (max-width: 700px) {
+			.left_userpersonal_info {
+				display: block;
+			}
+
+			.form-group {
+				margin-bottom: 35px;
+				margin-left: 15px;
+			}
+
+			input {
+				width: 100%;
+				padding: 5px;
+			}
+		}
+
+		.form-text {
+			width: 100%;
+			padding: 5px;
+		}
+
+		.selec {
+			padding-bottom: 50px;
+		}
+
+		@media only screen and (max-width: 500px) {
+			.left_userpersonal_info {
+				display: block;
+			}
+
+			.form-group {
+				margin-bottom: 35px;
+				margin-left: 15px;
+			}
+
+			input {
+				width: 100;
+				padding: 5px;
+			}
+		}   
+        @media screen and (max-width: 800px) {
+        .logdropdown-content {position: relative;}
+        }
+        @media screen and (max-width: 600px) {
+        .logdropdown-content {position: relative;}
+        }
     </style>
 </head>
 
@@ -280,126 +319,122 @@ include "db/user.php";
             </div>
         </div>
     </div>
-
-
-
-    <div class="contactus_content">
-        <div class="find-us">
-            <div class="container">
-                <div class="row formborder">
-                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onSubmit="return checkPassword(this)">
-                        <hr>
-                        <h4 style="text-align: center;" id="barangayid">Registration Form</h4>
-                        <hr>
-                        <fieldset>
-                            <div class="left_userpersonal_info left_userpersonal_info1">
-                                <div class="form-group selec">
-                                    <label for="fname">First name: <i class="red">*</i></label>
-                                    <input type="text" class="form-control form-text" name="fname" placeholder="Your First name">
-                                    <?php echo isset($error['fname']) ? $error['fname'] : ''; ?>
-                                </div>
-
-                                <div class="form-group selec">
-                                    <label for="mname">Middle name:</label>
-                                    <input type="text" class="form-control form-text" name="mname" placeholder="(Optional)">
-                                </div>
-
-                                <div class="form-group selec">
-                                    <label for="lname">Last name: <i class="red">*</i></label>
-                                    <input type="text" class="form-control form-text" name="lname" placeholder="Your Lastname">
-                                    <?php echo isset($error['lname']) ? $error['lname'] : ''; ?>
-                                </div>
-
-                                <div class="form-group selec">
-                                    <label for="address">Address: <i class="red">*</i></label>
-                                    <input type="text" class="form-control form-text" name="address" placeholder="Your Address">
-                                    <?php echo isset($error['address']) ? $error['address'] : ''; ?>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <div class="left_userpersonal_info left_userpersonal_info1">
-
-                                <div class="form-group selec col-lg-12 col-md-12 col-sm-12">
-                                    <label for="purpose">Birthday: <i class="red">*</i></label>
-                                    <input type="date" class="form-control form-text" name="birthday" placeholder="Birthday">
-                                    <?php echo isset($error['birthday']) ? $error['birthday'] : ''; ?>
-                                </div></br>
-
-                                <div class="form-group">
-                                    <label for="gender">Gender: <i class="red">*</i></label>
-                                    <select class="form-control form-text auto-save" style="font-size: 12px;" name="gender" id="indigencyid_type">
-                                        <option disabled>--Select--</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                    <?php echo isset($error['gender']) ? $error['gender'] : ''; ?>
-                                </div>
-
-                                <div class="form-group selec">
-                                    <label for="contactno">Contact No.: <i class="red">*</i></label>
-                                    <input type="number" class="form-control number form-text" name="contactno" placeholder="Contact Number" value="09" onKeyPress="if(this.value.length==11) return false;">
-                                    <?php echo isset($error['contactno']) ? $error['contactno'] : ''; ?>
-                                </div>
-
-                                <div class="form-group selec">
-                                    <label for="email">Email Address: <i class="red">*</i></label>
-                                    <input type="email" class="form-control form-text" name="email"  pattern="^.*@gmail\.com$" title="This should be @gmail.com" placeholder="example@gmail.com">
-                                    <?php echo isset($error['email']) ? $error['email'] : ''; ?>
-                                </div>
-
-                            </div>
-                        </fieldset>
-                        <fieldset style="border: 1 px solid black;">
-                    <div class="left_userpersonal_info left_userpersonal_info1 userpersonal">
-                        <div class="form-group selec">
-                            <label>Password: <i class="red">*</i></label>
-                            <input class="form-control form-text" type="password" name="password" id="txtNewPassword" placeholder="Password" onChange="checkPasswordMatch();">
-                            <!-- <i class="bx bx-show" id="togglePassword" style="float: right; margin-top: -25px; margin-right: 20px; cursor: pointer; "></i> -->
-                        </div>
-                        <div class="form-group selec">
-                            <label>Confirm Password: <i class="red">*</i></label>
-                            <input class="form-control form-text" type="password" id="txtConfirmPassword" placeholder="Confirm Password" onChange="checkPasswordMatch();" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-                            <p id="divCheckPasswordMatch"></p>
-                        </div>
-                        <div class="form-group selec validatiion">
-                            <div id="message">
-                                <label>Password must contain the following:</label>
-                               
-                                <p id="letter" class="invalid"><strong>lowercase</strong> letter</p>
-                                <p id="capital" class="invalid"><strong>capital (UPPERCASE)</strong> letter</p>
-                                <p id="number" class="invalid"><strong>number</strong></p>
-                                <p id="length" class="invalid">Minimum <strong>8 characters</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <br>
-                <br>
-                <br>
-                        <div class="left_userpersonal_info left_userpersonal_info1">
-                            <div class="guidelines">
-                                <input type="checkbox" value="Yes" id="policy" name="policy" required>
-                                I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
-                                <span class="checkmark"></span>
-                            </div>
-                        </div>
-                        <button type="submit" name="regbtn" class="log_button sign_in popup_mess">
-                            Get Started
-                        </button>
-                        <br>
+<br>
+<br>
+<br>
+<div class="reg_form">
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onSubmit="return checkPassword(this)">
+        <hr>
+        <h4 style="text-align: center;" id="barangayid">Registration Form</h4>
+        <hr>
+        <fieldset>
+            <div class="left_userpersonal_info left_userpersonal_info1">
+                <div class="form-group selec">
+                    <label for="fname">First name: <i class="red">*</i></label>
+                    <input type="text" class="form-control form-text" name="fname" id="fname" placeholder="Your First name"  title="Only Alphabets" required onkeyup="textOnly();">
+                    <?php echo isset($error['fname']) ? $error['fname'] : ''; ?>
+                    <p id="text-Alert"></p>
                 </div>
-                
+               
+                <div class="form-group selec">
+                    <label for="mname">Middle name:</label>
+                    <input type="text" class="form-control form-text" name="mname" placeholder="(Optional)">
+                </div>
+
+                <div class="form-group selec">
+                    <label for="lname">Last name: <i class="red">*</i></label>
+                    <input type="text" class="form-control form-text" name="lname" placeholder="Your Lastname">
+                    <?php echo isset($error['lname']) ? $error['lname'] : ''; ?>
+                </div>
+
+                <div class="form-group selec">
+                    <label for="address">Address: <i class="red">*</i></label>
+                    <input type="text" class="form-control form-text" name="address" placeholder="Your Address">
+                    <?php echo isset($error['address']) ? $error['address'] : ''; ?>
+                </div>
             </div>
-            </form>
+        </fieldset>
+
+        <fieldset>
+            <div class="left_userpersonal_info left_userpersonal_info1">
+
+                <div class="form-group selec col-lg-12 col-md-12 col-sm-12">
+                    <label for="purpose">Birthday: <i class="red">*</i></label>
+                    <input type="date" class="form-control form-text" name="birthday" placeholder="Birthday">
+                    <?php echo isset($error['birthday']) ? $error['birthday'] : ''; ?>
+                </div></br>
+
+                <div class="form-group">
+                    <label for="gender">Gender: <i class="red">*</i></label>
+                    <select class="form-control form-text auto-save" style="font-size: 12px;" name="gender" id="indigencyid_type">
+                        <option disabled>--Select--</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <?php echo isset($error['gender']) ? $error['gender'] : ''; ?>
+                </div>
+
+                <div class="form-group selec">
+                    <label for="contactno">Contact No.: <i class="red">*</i></label>
+                    <input type="number" class="form-control number form-text" name="contactno" placeholder="Contact Number" value="09" onKeyPress="if(this.value.length==11) return false;">
+                    <?php echo isset($error['contactno']) ? $error['contactno'] : ''; ?>
+                </div>
+
+                <div class="form-group selec">
+                    <label for="email">Email Address: <i class="red">*</i></label>
+                    <input type="email" class="form-control form-text" name="email" pattern="^.*@gmail\.com$" title="This should be @gmail.com" placeholder="example@gmail.com">
+                    <?php echo isset($error['email']) ? $error['email'] : ''; ?>
+                </div>
+
+            </div>
+        </fieldset>
+        <fieldset style="border: 1 px solid black;">
+            <div class="left_userpersonal_info left_userpersonal_info1 userpersonal">
+                <div class="form-group selec">
+                    <label>Password: <i class="red">*</i></label>
+                    <input class="form-control form-text" type="password" name="password" id="txtNewPassword" placeholder="Password" onChange="checkPasswordMatch();">
+                    <!-- <i class="bx bx-show" id="togglePassword" style="float: right; margin-top: -25px; margin-right: 20px; cursor: pointer; "></i> -->
+                </div>
+                <div class="form-group selec">
+                    <label>Confirm Password: <i class="red">*</i></label>
+                    <input class="form-control form-text" type="password" id="txtConfirmPassword" placeholder="Confirm Password" onChange="checkPasswordMatch();" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                    <p id="divCheckPasswordMatch"></p>
+                </div>
+                <br>
+                <div class="form-group selec validatiion">
+                    <div id="message">
+                        <label>Password must contain the following:</label>
+
+                        <p id="letter" class="invalid"><strong>lowercase</strong> letter</p>
+                        <p id="capital" class="invalid"><strong>capital (UPPERCASE)</strong> letter</p>
+                        <p id="number" class="invalid"><strong>number</strong></p>
+                        <p id="length" class="invalid">Minimum <strong>8 characters</strong></p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <br>
+        <br>
+        <div class="left_userpersonal_info left_userpersonal_info1">
+            <div class="guidelines">
+                <input type="checkbox" value="Yes" id="policy" name="policy" required>
+                <label>
+                I agree to the collection and use of the data that I have provided to Barangay Commonwealth for the purpose of using their services. I understand that the collection and use of this data, which included personal information and sensitive personal information shall be accordance with the <a href="https://www.privacy.gov.ph/data-privacy-act#11" target="_blank">Data Privacy Act of 2012</a> and the <a href="">Privacy and Policy</a> of Barangay Commonwealth Hall.
+                </label>
             
+                <span class="checkmark"></span>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
+        <button type="submit" name="regbtn" class="log_button sign_in popup_mess">
+            Get Started
+        </button>
+        <br>
+        </div>
 
-
+        </div>
+    </form>
+    </div>
     <!-- Footer -->
     <footer>
         <div class="container-fluid wrapper">
@@ -493,7 +528,7 @@ include "db/user.php";
     </script>
 
     <script>
-        var myInput = document.getElementById("txtConfirmPassword");
+        var myInput = document.getElementById("txtNewPassword");
         var letter = document.getElementById("letter");
         var capital = document.getElementById("capital");
         var number = document.getElementById("number");
@@ -551,7 +586,22 @@ include "db/user.php";
             }
         }
     </script>
-
+    <script>
+        function textOnly(){
+            var str = document.getElementById("fname").value;
+            var textAlert = document.getElementById("text-Alert").value;
+            if(!((/^[a-zA-Z]+$/.test(str) )|| str.length==0)){
+                textAlert.style.display="block";
+                textAlert.innerHTML = "Only Alphabets!";
+                textFlag = false;
+            }
+            else{
+                textAlert.style.display = "none";
+                textFlag = true;
+            }
+        }
+    </script>
+ 
 </body>
 
 </html>

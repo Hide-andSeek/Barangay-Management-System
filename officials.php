@@ -98,7 +98,7 @@ include "db/user.php";
                                     <h1 class="intro-lead-in animated bounceInRight u-description">Commonwealth</h1>
                                     <h2 class="intro-heading animated bounceInLeft u-description">Barangay Official</h2>
                                 </div>
-                                s
+
                             </div>
                         </div>
                     </div>

@@ -202,7 +202,7 @@ if (isset($_SESSION['type'])) {
 
 			
 
-				$query = $db->query("SELECT * FROM usersdb inner join users_activity on  users_activity.user_id=usersdb.user_id inner join user_activityout on user_activityout.user_id=usersdb.user_id where usersdb.user_id AND user_status = 'Pending' AND timelog_status = 'Pending' AND timeout_status = 'Pending' ORDER BY usersdb.user_id DESC");
+				$query = $db->query("SELECT * FROM usersdb inner join users_activity on  users_activity.user_id=usersdb.user_id inner join user_activityout on user_activityout.user_id=usersdb.user_id where usersdb.user_id  AND timelog_status = 'Pending' AND timeout_status = 'Pending' ORDER BY usersdb.user_id DESC");
 				?>
 
 				<thead>

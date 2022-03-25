@@ -436,6 +436,12 @@ echo db_query();
                 position: relative;
             }
         }
+        @media screen and (max-width: 600px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+
 
         @media screen and (max-width: 995px) {
             .logdropdown-content {

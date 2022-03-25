@@ -9,6 +9,9 @@
             visibility: hidden;
         }
 
+        div.sidebar, ul.nav-list, div.logo-details{
+            visibility: hidden;
+        }
         div.main-content-email{
             visibility: hidden;
         }

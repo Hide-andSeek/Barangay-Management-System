@@ -433,6 +433,11 @@ fclose($handle);
 			background-color: DodgerBlue !important;
 			color: #ffffff;
 		}
+		@media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
 
 		@media screen and (max-width: 600px) {
         .logdropdown-content {position: relative;}
@@ -570,10 +575,11 @@ fclose($handle);
 						<li>I-save ang iyong file sa <strong style="color: black">pdf </strong> format.</li>
 						<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 					</ol>
-					<label>Listahan ng mga ipapasang dokumento <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
+					<label>Listahan ng mga ipapasang dokumento <a href="reqdoc_blotter.php#blotter"> (Blotter)</a></label>
 					<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
 						<li>Valid ID (Likod at harap ng iyong ID)- Ito ay magsisilbing kumpirmasyon ng iyong pagkakakilanlan</li>
 						<li>Larawan: 2x2 ID Picture (Nakunan sa loob ng nakalipas na taon) </li>
+						<li>A Softcopy of your complaints </li>
 					</ol>
 					<br>
 
@@ -589,13 +595,14 @@ fclose($handle);
 						<li>Save your file in <strong style="color: black">pdf</strong> format.</li>
 						<li>Please wait for the announcement of Barangay. For more inquiry visit our webpage. <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 					</ol>
-					<label>List of documents to be submitted <a href="reqdoc_barangayid.php#barangayid"> (Barangay ID)</a></label>
-					<ol style="padding: 15px 15px 15px 15px; text-align: justify;">
+					<label>List of documents to be submitted <a href="reqdoc_blotter.php#blotter"> (Blotter)</a></label>
+					<ol style="padding: 15px 15px 15px 15px; text-align: justify;" id="blotter">
 						<li>Valid ID (Front and Back Portion of your ID)- This will serve as confirmation of your Identity</li>
 						<li>Photo: 2x2 ID Picture (Taken within the a year ago) </li>
+						<li>Softcopy ng iyong reklamo</li>
 					</ol>
 					<!-- <a href="">
-																	    <p style="float: right;">Online Blottering <i class="bx bx-skip-next"></i></p>
+																		    <p style="float: right;">Online Blottering <i class="bx bx-skip-next"></i></p>
                                                                     </a> -->
 
 			</fieldset>

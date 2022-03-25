@@ -39,7 +39,7 @@ if (isset($_SESSION['type'])) {
 	<link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../css/design.css">
 	<link rel="stylesheet" href="../css/ionicons.min.css">
-	<link rel="stylesheet" href="../css/preloader.css">
+
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
@@ -262,20 +262,11 @@ if (isset($_SESSION['type'])) {
 		.bg-green {
 			border-radius: 15px;
 		}
-
-		
-
-
 	</style>
 </head>
 
 <body>
 
-<div id="loader-wrapper">
-	<div id="loader"></div>
-	<div class="loader-section section-left"></div>
-	<div class="loader-section section-right"></div>
-</div>
 	<!-- Side Navigation Bar-->
 	<div class="sidebar">
 		<div class="logo-details">
@@ -421,8 +412,8 @@ if (isset($_SESSION['type'])) {
 							<h3>
 								₱ <?php $total_summary = $total_amount - ($project_total_amount + $equip_total_amount + $payroll_total_amount);
 
-								echo $total_summary  + $payment_amount;
-								?>
+									echo $total_summary  + $payment_amount;
+									?>
 							</h3>
 						</div>
 						<div class="w3-clear"></div>
@@ -443,6 +434,6 @@ if (isset($_SESSION['type'])) {
 
 	</section>
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/preloader.js"></script>
+
+
 </html>

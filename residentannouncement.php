@@ -97,6 +97,12 @@ echo db_query();
       }
     }
 
+    @media screen and (max-width: 600px) {
+      .logdropdown-content {
+        position: relative;
+      }
+    }
+
     @media screen and (max-width: 995px) {
       .logdropdown-content {
         position: relative;
@@ -234,7 +240,7 @@ echo db_query();
                 <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
               </div>
               <div style="text-align: justify">
-                <p >
+                <p>
                   <?php echo $image['announcement_description']; ?>
                 </p>
                 <hr>

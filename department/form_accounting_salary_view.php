@@ -257,7 +257,7 @@ if (isset($_SESSION['type'])) {
                         <div class="row align-items-start">
                             <div class="information col">
                                 <label class="employee-label">Employee ID:</label>
-                                <input required class="form-control inputtext widthinp" type="text" value="<?php echo $data['user_id']; ?>" readonly>
+                                <input required class="form-control inputtext widthinp" type="text" name="user_id" value="<?php echo $data['user_id']; ?>" readonly>
                             </div>
 
                             <div class="information col">

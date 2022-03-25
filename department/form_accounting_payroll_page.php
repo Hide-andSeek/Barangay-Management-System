@@ -22,13 +22,6 @@ if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 ?>
-<?php
-$emailaddress = '';
-
-if (isset($_SESSION['emails'])) {
-    $emailaddress = $_SESSION['emails'];
-}
-?>
 
 <?php
 $dept = '';
@@ -321,13 +314,12 @@ if (isset($_SESSION['type'])) {
                                 <table id="viewdetails" style="margin-bottom: 30px; margin-top: 30px; text-align: center;">
                                     <thead>
                                         <tr class="t_head" style="text-align: center;">
-                                        <th width="5%" style="text-align: center;">User ID</th>
+                                         
                                             <th width="15%" style="text-align: center;">Username</th>
-                                           
+                                            <th width="5%" style="text-align: center;">User ID</th>
                                             <th width="15%" style="text-align: center;">User Type</th>
                                             <th width="15%" style="text-align: center;">Department</th>
                                             <th width="15%" style="text-align: center;">Status</th>
-                                            <th width="15%" style="text-align: center;">Contact No.</th>
                                             <th width="15%"></th>
                                         </tr>
                                     </thead>
@@ -335,14 +327,14 @@ if (isset($_SESSION['type'])) {
                                     while ($stmt_paging->fetch()) { ?>
                                         <tbody>
                                             <tr class="table-row">
-                                            <td><strong><?php echo $data['user_id']; ?></strong></td>
-                                                <td><?php echo $data['username']; ?></td>
-                                             
+                                            <td><?php echo $data['username']; ?></td>
+                                                <td><strong><?php echo $data['user_id']; ?></strong></td>
+                                            
                                                 <td><?php echo $data['user_type']; ?></td>
                                                 <td><strong><?php echo $data['department']; ?></strong></td>
                                                 <td><?php echo $data['status']; ?></td>
-                                                <td><?php echo $data['contact']; ?></td>
-                                                <td><button class="view_approvebtn" onclick="location.href='accounting_payroll_viewdetails.php?id=<?php echo $data['user_id']; ?>'">Details</button></td>
+
+                                                <td><button class="view_approvebtn" onclick="location.href='accounting_payroll_viewdetails.php?id=<?php echo $data['user_id']; ?>'">Print</button></td>
                                             </tr>
                                         </tbody>
                                 <?php
@@ -434,7 +426,7 @@ if (isset($_SESSION['editstatus']) && $_SESSION['editstatus'] != '') {
         table = document.getElementById("viewdetails");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
+            td = tr[i].getElementsByTagName("td")[0];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

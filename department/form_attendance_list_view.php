@@ -351,7 +351,7 @@ if (isset($_SESSION['type'])) {
                         $ID = "";
                     }
 
-                           $query = $db->query("SELECT * FROM usersdb inner join users_activity on  users_activity.user_id=usersdb.user_id inner join user_activityout on user_activityout.user_id=usersdb.user_id where usersdb.user_id= '$ID'");
+                           $query = $db->query("SELECT * FROM usersdb inner join users_activity on  users_activity.user_id=usersdb.user_id inner join user_activityout on user_activityout.user_id=usersdb.user_id where usersdb.user_id= '$ID' AND timelog_status = 'Pending' AND timeout_status = 'Pending' ORDER BY usersdb.user_id DESC");
                 ?>
                
                     <thead>
@@ -383,7 +383,7 @@ if (isset($_SESSION['type'])) {
                     ?>
                     <tbody>
                         <tr class="table-row">
-                            <td>Null</td>
+                            <td><?php echo $row['time_loged']; ?></td>
 							<td><?php echo $row['username']; ?></td>
 							<td><?php echo $row['user_type']; ?></td>
 							<td><?php echo $row['department']; ?></td>

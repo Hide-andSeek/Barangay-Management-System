@@ -82,6 +82,13 @@ include "db/user.php";
                 position: relative;
             }
         }
+
+        @media screen and (max-width: 600px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
+
         @media screen and (max-width: 995px) {
             .logdropdown-content {
                 position: relative;
@@ -185,108 +192,108 @@ include "db/user.php";
             </div>
         </div>
     </div>
-<br>
-<br>
-<br>
-            <div class="row announce_item">
-                <div class="col-lg-8 col-md-8 col-sm-8 first-section">
-                    <div class="col-md-12">
-                        <div class="section-heading">
+    <br>
+    <br>
+    <br>
+    <div class="row announce_item">
+        <div class="col-lg-8 col-md-8 col-sm-8 first-section">
+            <div class="col-md-12">
+                <div class="section-heading">
 
-                            <?php
-                            include('db/conn.php');
-                            include('db/captain.php');
-                            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-                            $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '27'");
-                            $stmt->execute();
-                            $imagelist = $stmt->fetchAll();
-                            if (count($imagelist) > 0) {
-                                foreach ($imagelist as $data) {
-                            ?>
-                                    <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
-                                    <span>
-                                        <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
-                                    </span>
-                            <?php
-                                }
-                            } else {
-                                echo "<div class='errormessage'>
-						  <i class='bx bx-error'></i>
-                          No announcement yet!
-						  </div>";
-                            }
-                            ?>
-                        </div>
-                    </div>
                     <?php
                     include('db/conn.php');
                     include('db/captain.php');
                     //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-                    $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '27'");
+                    $stmt = $db->prepare("SELECT * FROM announcement_category WHERE cid = '27'");
                     $stmt->execute();
                     $imagelist = $stmt->fetchAll();
                     if (count($imagelist) > 0) {
-                        foreach ($imagelist as $image) {
+                        foreach ($imagelist as $data) {
                     ?>
-                            <div class="announcement-item">
-                                <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="75%" height="50%"></a>
-                                    <div>
-                                        <h4><?php echo $image['announcement_heading']; ?></h4>
-                                        <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
-                                    </div>
-                                    <div style="text-align: justify">
-                                        <p>
-                                            <?php echo $image['announcement_description']; ?>
-                                        </p>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3 id="news_section"><?php echo $data['category_name']; ?> Announcement Section</h3>
+                            <span>
+                                <a href="resident-defaultpage.php">Home</a><label> >> <label><a><?php echo $data['category_name']; ?></a>
+                            </span>
                     <?php
                         }
                     } else {
                         echo "<div class='errormessage'>
-                      <i class='bx bx-error'></i>
-                      No announcement yet!
-					  </div>";
+						  <i class='bx bx-error'></i>
+                          No announcement yet!
+						  </div>";
                     }
                     ?>
                 </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="newslatest_post section-heading">
-                        <h3><span>Related post</span></h3>
-                        <?php
-                        include('db/conn.php');
-                        include('db/captain.php');
-                        //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
-                        $stmt = $db->prepare("SELECT * FROM announcement_category");
-                        $stmt->execute();
-                        $sidelist = $stmt->fetchAll();
-                        if (count($sidelist) > 0) {
-                            foreach ($sidelist as $list) {
-                        ?>
-                                <div class="newslatest_post_container">
-                                    <ul class="newslatest_postnav">
-                                        <li>
-                                            <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
-                                                <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                        <?php
-                            }
-                        } else {
-                            echo "<div class='errormessage'>
+            </div>
+            <?php
+            include('db/conn.php');
+            include('db/captain.php');
+            //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+            $stmt = $db->prepare("SELECT * FROM tbl_announcement WHERE cat_id = '27'");
+            $stmt->execute();
+            $imagelist = $stmt->fetchAll();
+            if (count($imagelist) > 0) {
+                foreach ($imagelist as $image) {
+            ?>
+                    <div class="announcement-item">
+                        <div class="announcementsingle_item"> <a href="#"><img src="upload/<?php echo $image['announcement_image']; ?>" width="75%" height="50%"></a>
+                            <div>
+                                <h4><?php echo $image['announcement_heading']; ?></h4>
+                                <p>Date Posted: <?php echo $image['announcement_date']; ?></p>
+                            </div>
+                            <div style="text-align: justify">
+                                <p>
+                                    <?php echo $image['announcement_description']; ?>
+                                </p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                }
+            } else {
+                echo "<div class='errormessage'>
                       <i class='bx bx-error'></i>
                       No announcement yet!
 					  </div>";
-                        }
-                        ?>
-                    </div>
-                </div>
+            }
+            ?>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="newslatest_post section-heading">
+                <h3><span>Related post</span></h3>
+                <?php
+                include('db/conn.php');
+                include('db/captain.php');
+                //Here we are fetching Category ID: 20; Which is equal to Vaccine Category
+                $stmt = $db->prepare("SELECT * FROM announcement_category");
+                $stmt->execute();
+                $sidelist = $stmt->fetchAll();
+                if (count($sidelist) > 0) {
+                    foreach ($sidelist as $list) {
+                ?>
+                        <div class="newslatest_post_container">
+                            <ul class="newslatest_postnav">
+                                <li>
+                                    <div class="media"> <a href="#" class="media-left"> <img alt="" src="upload/category/<?php echo $list['category_image']; ?>" width="70" height="70"> </a>
+                                        <div class="media-body"> <a href="#" class="catg_title"><?php echo $list['category_name']; ?></a></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo "<div class='errormessage'>
+                      <i class='bx bx-error'></i>
+                      No announcement yet!
+					  </div>";
+                }
+                ?>
             </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -322,7 +329,7 @@ include "db/user.php";
     <div class="scroll-up">
         <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-    
+
     <script src="js/jquery.min.js"></script>
     <script src="js/preloader.js"></script>
     <!-- jQuery -->

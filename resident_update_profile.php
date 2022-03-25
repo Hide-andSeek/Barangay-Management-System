@@ -64,6 +64,12 @@ include ('db/user.php');
 		}
 		.form-text{width: 100%; padding: 5px;}
 		.selec{padding-bottom: 50px;}
+        
+        @media screen and (max-width: 800px) {
+            .logdropdown-content {
+                position: relative;
+            }
+        }
 
 		@media only screen and (max-width: 500px) {
 		.left_userpersonal_info {
