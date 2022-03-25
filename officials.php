@@ -101,7 +101,7 @@ include "db/user.php";
                             </div>
                         </div>
                     </div>
-                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth_2.jpg" alt="slider-image"/>
+                    <img class="munisipyo" src="resident-img/backgrounds/commonwealth_3.jpg" alt="slider-image"/>
                 </div>			
             </div>
         </div>
