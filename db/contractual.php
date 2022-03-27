@@ -6,8 +6,9 @@
 if (isset($_SESSION['user'])!="")
 {
 	header("Location:reg_employee_log.php");
-	//exit();
 }
+
+
 if(isset($_POST['regularemployee']))
 {
 
@@ -34,21 +35,10 @@ if(isset($_POST['regularemployee']))
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
 						
-						if($row["department"] == 'BCPC')
-							{
-								$_SESSION["type"] = $row["user_type"];
-								$_SESSION["user"] = $row["username"];
-								$_SESSION["uid"] = $row["user_id"];
-								header("location: time_log.php");
-							}
-
-							else
-							{
-							echo "<script>
-										alert('Access Denied, You dont have a permission to access this department!')
-										window.location.href='reg_employee_log.php';
-									</script>";
-							}
+						$_SESSION["type"] = $row["user_type"];
+						$_SESSION["user"] = $row["username"];
+						$_SESSION["uid"] = $row["user_id"];
+						header("location: time_log.php");
 					}
 					else
 					{
@@ -76,3 +66,5 @@ if(isset($_POST['regularemployee']))
 		}
 	}
 }
+
+

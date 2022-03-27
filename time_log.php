@@ -57,7 +57,7 @@ if(isset($_POST['timeinbtn'])){
 	$count_row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
 	if($count_row['num']>0){
-        $_SESSION['status'] ="Time is already set! Come Back Tommorrow";
+        $_SESSION['status'] ="Time in is already set! Come Back Tommorrow";
         $_SESSION['status_code'] ="warning";
     
 	
@@ -104,8 +104,8 @@ if(isset($_POST['timeoutbtn'])){
   $count_row = $stmt->fetch(PDO::FETCH_ASSOC);
   
   if($count_row['num']>0){
-      $_SESSION['status'] ="Time is already set! Come Back Tommorrow";
-      $_SESSION['status_code'] ="warning";
+      $_SESSION['statusout'] ="Opps! Time out is already set! Come Back Tommorrow";
+      $_SESSION['statusout_code'] ="warning";
   
   
   }else{
@@ -118,12 +118,12 @@ if(isset($_POST['timeoutbtn'])){
       $stmt->bindParam(':date_logged_off', $date_logged_off);
 
   if($stmt->execute()){
-      $_SESSION['status'] ="Time In Recorded";
-      $_SESSION['status_code'] ="success";
+      $_SESSION['statusout'] ="Time Out Recorded";
+      $_SESSION['statusout_code'] ="success";
       
   }else{
-      $_SESSION['status'] ="Error";
-      $_SESSION['status_code'] ="error";
+      $_SESSION['statusout'] ="Error";
+      $_SESSION['statusout_code'] ="error";
       }	
   }
 }
@@ -158,7 +158,7 @@ while ($roww = $query->fetch()) {
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
 
-  <title>Document</title>
+  <title>Time Log: For Attendance</title>
   <style>
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -201,6 +201,9 @@ while ($roww = $query->fetch()) {
 </head>
 
 <body class="hold-transition login-page">
+<script>
+        swal("Barangay Commonwealth","Good Day! Welcome to Time Log");
+    </script>
   <div class="login-box">
     <div class="login-logo">
       <p id="date"></p>
@@ -267,7 +270,7 @@ while ($roww = $query->fetch()) {
                 <tr class="table-row">
                   <td><?php echo $image['activity_id']; ?></td>
                   <td><?php echo $image['time_loged']; ?> </td>
-                  <td><?php echo $image['date_logged']; ?></td>
+                  <td><?php echo date("F d, Y", strtotime($image ['date_logged'])); ?></td>
                 </tr>
               </tbody>
 
@@ -302,7 +305,7 @@ while ($roww = $query->fetch()) {
                 <tr class="table-row">
                   <td><?php echo $image['outactivity_id']; ?></td>
                   <td><?php echo $image['time_out']; ?> </td>
-                  <td><?php echo $image['date_logged_off']; ?></td>
+                  <td><?php echo date("F d, Y", strtotime($image ['date_logged_off'])); ?></td>
                 </tr>
               </tbody>
 
@@ -342,6 +345,22 @@ while ($roww = $query->fetch()) {
       </script>
     <?php
       unset($_SESSION['status']);
+    }
+    ?>
+
+<?php
+    if (isset($_SESSION['statusout']) && $_SESSION['statusout'] != '') {
+    ?>
+      <script>
+        swal({
+          title: "<?php echo $_SESSION['statusout']; ?>",
+          // text: "You can now print the document",
+          icon: "<?php echo $_SESSION['statusout_code']; ?>",
+          button: "Ok Done!",
+        });
+      </script>
+    <?php
+      unset($_SESSION['statusout']);
     }
     ?>
 

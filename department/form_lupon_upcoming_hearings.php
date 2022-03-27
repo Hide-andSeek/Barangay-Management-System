@@ -61,7 +61,7 @@
 		<div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Lupon Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
@@ -107,20 +107,12 @@
 					</a>
 					<span class="tooltip">Not Settled</span>
 				</li>
-				<!--Setting Section-->
-				<li>
-					<a class="side_bar" href="lupon_settings.php">
-						<i class='bx bx-cog' ></i>
-						<span class="links_name">Setting</span>
-					</a>
-					<span class="tooltip">Setting</span>
-				</li>
+
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" src="img/1.jpeg">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> | Online</div>
 						</div>
 					</div>
 					<a href="emplogout.php">
@@ -153,16 +145,15 @@
 				</form>
 			</div>
 			<!-- Table -->
-			<div class="reg_table emp_tbl">
 				<table class="content-table">
 					<thead>
 						<tr class="t_head">
-							<th>Case No.</th>
-							<th>Complainant</th>
-							<th>Accused</th>
-							<th>Hearing Date and Time</th>
-							<th>Personnel</th>
-							<th>Action</th>
+							<th width="5%" style="text-align: center">Case No.</th>
+							<th width="5%" style="text-align: center">Complainant</th>
+							<th width="5%" style="text-align: center">Accused</th>
+							<th width="5%" style="text-align: center">Hearing Date and Time</th>
+							<th width="5%" style="text-align: center">Personnel</th>
+							<th width="5%" style="text-align: center">Action</th>
 						</tr>                 
 					</thead>
 					<tbody>
@@ -215,15 +206,15 @@
 						?>
 						<tr class="table-row" data-id="<?php echo $row['admincomp_id']; ?>">
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
-							<td><?php echo ucwords($row['n_complainant']); ?></td>
-							<td><?php echo ucwords($row['n_violator']); ?></td>
-							<td><?php echo date("F d, Y", strtotime($row['hearingDate']))." ".date("h:i a", strtotime($row['hearingTime'])); ?></td>
-							<td><?php echo $row['fullname']; ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_complainant']); ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_violator']); ?></td>
+							<td class="text-center"><?php echo date("F d, Y", strtotime($row['hearingDate']))." ".date("h:i a", strtotime($row['hearingTime'])); ?></td>
+							<td class="text-center"><?php echo $row['fullname']; ?></td>
 							<td class="text-end">
 								<form action="db/lupon.php" method="post" id="form-setActive">
 									<input type="hidden" name="complaintID" value="<?php echo $row['admincomp_id']; ?>">
 									<input type="hidden" name="setAsActive">
-									<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+									<a href="lupon_upcoming_hearing_details.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 									<button name="setAsActive" class="btn btn-primary btn-sm setAsActive">Set as Active</button>
 								</form>
 							</td>	
@@ -235,7 +226,7 @@
 						<?php } ?>
 					</tbody>
 				</table>
-			</div>
+
 		</section>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

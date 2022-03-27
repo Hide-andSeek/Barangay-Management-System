@@ -3,7 +3,7 @@ session_start();
 include "../db/conn.php";
 include "../db/user.php";
 include "../db/documents.php";
-
+include('../db/accounting_computation.php');
 
 
 if (!isset($_SESSION["type"])) {
@@ -44,6 +44,7 @@ if (isset($_SESSION['type'])) {
 	<link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../css/design.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
+	<script src="../resident-js/sweetalert.min.js"></script>
 	<!--Customize-->
 
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -294,6 +295,9 @@ if (isset($_SESSION['type'])) {
 </head>
 
 <body>
+	<script>
+        swal("Welcome to:","Barangay Commonwealth: Request Document Department");
+    </script>
 	<!-- Side Navigation Bar-->
 	<div class="sidebar">
 		<div class="logo-details">
@@ -499,199 +503,47 @@ if (isset($_SESSION['type'])) {
 					</a>
 				</div>
 			</div>
-			<!-- <span style="text-align: center;">
-				<h3>Welcome to Document Request Department! <?php echo $user; ?></h3>
-			</span> -->
-
-			<!-- <div class="w3-row-padding w3-margin-bottom w3top">
-			<div class="w3-quarter">
-			<a href="barangayidapproval.php" class="notification">
-				<div class="w3-container w3borderbot w3-padding-16" w3borderbot>
-					<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
-					<div class="w3-right">
-					<?php
-					require '../db/conn.php';
-
-					$query = "SELECT * FROM barangayid WHERE status = 'Approved' ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-
-					?>
-					
-					</div>
-					<div class="w3-clear"></div>
-					<h4>Approved Barangay ID</h4>
-				</div>
-			</a>
-			</div>
-			
-			<div class="w3-quarter">
-			<a href="indigencyapproval.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-
-				$query = "SELECT indigency_id FROM certificateindigency WHERE status = 'Approved' ORDER BY indigency_id";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Approved Indigency</h4>
-			</div>
-			</a>
-			</div>
-			
-			<div class="w3-quarter">
-			<a href="clearanceapproval.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-				$query = "SELECT * FROM approved_clearance WHERE clearance_status = 'Done' ORDER BY approved_clearanceids";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Approved Clearance</h4>
-			</div>
-			<a>
-			</div>
-						
-			<div class="w3-quarter">
-			<a href="businesspermitapproval.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-checkbox-checked fa-fw w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-
-				$query = "SELECT * FROM businesspermit WHERE status = 'Approved' ORDER BY businesspermit_id";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Approved Permit</h4>
-			</div>
-			<a>
-			</div>
-			
-	</div>		 -->
-			<!-- <div class="w3-row-padding w3-margin-bottom w3top">
-			<div class="w3-quarter">
-			<a href="barangayiddeny.php" class="notification">
-				<div class="w3-container w3borderbot w3-padding-16" w3borderbot>
-					<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
-					<div class="w3-right">
-					<?php
-					require '../db/conn.php';
-
-					$query = "SELECT * FROM barangayid WHERE status = 'Deny' ORDER BY barangay_id";
-					$query_run = $db->query($query);
-					$pdoexecute = $query_run->rowCount();
-
-					echo "<h3>$pdoexecute</h3>"
-
-					?>
-					
-					</div>
-					<div class="w3-clear"></div>
-					<h4>Denied Barangay ID</h4>
-				</div>
-			</a>
-			</div>
-			
-			<div class="w3-quarter">
-			<a href="indigencydenied.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-
-				$query = "SELECT indigency_id FROM certificateindigency WHERE status = 'Deny' ORDER BY indigency_id";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Denied Indigency</h4>
-			</div>
-			</a>
-			</div>
-			
-			<div class="w3-quarter">
-			<a href="clearancedenied.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-				$query = "SELECT * FROM barangayclearance WHERE clearance_status = 'Deny' ORDER BY clearance_id";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Denied Clearance</h4>
-			</div>
-			<a>
-			</div>
-						
-			<div class="w3-quarter">
-			<a href="businesspermitdenied.php" class="notification">
-			<div class="w3-container w3borderbot w3-padding-16">
-				<div class="w3-left"><i class="bx bx-x-circle fa-fw w3-xxxlarge opac"></i></div>
-				<div class="w3-right">
-				<?php
-				require '../db/conn.php';
-
-				$query = "SELECT * FROM businesspermit WHERE status = 'Deny' ORDER BY businesspermit_id";
-				$query_run = $db->query($query);
-				$pdoexecute = $query_run->rowCount();
-
-				echo "<h3>$pdoexecute</h3>"
-				?>
-				
-				</div>
-				<div class="w3-clear"></div>
-				<h4>Denied Permit</h4>
-			</div>
-			<a>
-			</div>
-			 -->
-
-			
-			<div style="display: flex; justify-content: center; align-items: center;">
+			<div id="donut_single" style="width: 40%; height: 250px;  margin-left: 40px; margin-right: 30px;"></div>
+			<!-- <div style="display: flex; justify-content: center; align-items: center;">
 				<div id="chart_div" style="width: 900px; height: 500px;"></div>
-				
-			</div>
+			</div> -->
 		</div>
 	</section>
 	<script href="test.js"></script>
 
 </body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages': ['corechart']
+	});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+
+		var data = google.visualization.arrayToDataTable([
+			['Effort', 'Amount given'],
+			['Barangay ID', <?php echo $total_brgyid_request; ?>],
+			['Business Permit', <?php echo $total_no_bpermit_request; ?>],
+			['Barangay Clearance', <?php echo $total_no_clearance_request; ?>],
+			['Indigency', <?php echo $total_no_indigency_request; ?>]
+		]);
+
+		var options = {
+			pieHole: 0.5,
+			pieSliceTextStyle: {
+				color: 'black',
+			},
+			'title': 'Total of Approve Document (Request)',
+			'width': 420,
+			'height': 250
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+		chart.draw(data, options);
+	}
+</script>
+
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);

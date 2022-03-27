@@ -448,7 +448,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['address']; ?></td>
 									<td><?php echo $data ['purpose']; ?></td>
 									<td><?php echo $data ['contactnum']; ?></td>
-									<td><?php echo $data ['date_issue']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['date_issue'])); ?></td>
 									<td><?php echo $data ['approvedby']; ?></td>
 									<td><?php echo $data ['indigencyfilechoice']?></td>
 									<td><?php echo $data ['email_status']?></td>

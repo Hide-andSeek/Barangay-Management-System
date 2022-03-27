@@ -67,12 +67,12 @@ if(isset($_POST["action"]))
             }
 
             $output .= 
-            
+      
             '
             <tr>
                 <td>'.$data["user_id"].'</td>
                 <td>'.$data["username"].'</td>
-                <td>'.$data["birthday"].'</td>
+                <td>'.date("F d, Y", strtotime($data ['birthday'])).'</td>
                 <td>'.$data["address"].'</td>
                 <td>'.$data["contact"].'</td>
                 <td>'.$data["user_type"].'</td>

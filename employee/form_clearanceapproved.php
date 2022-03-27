@@ -526,7 +526,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['nationality']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['purpose']; ?></td>
-									<td><?php echo $data ['date_issued']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['date_issued'])); ?></td>
 									<td><?php echo $data ['email_status']; ?></td>
 
 									<td><input type="text" class="tblinput inpwidth" style=" border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>

@@ -1,6 +1,6 @@
 <?php session_start();
 include "db/conn.php";
-include "db/user.php";
+include "db/captain.php";
 ?>
 
 <!DOCTYPE html>

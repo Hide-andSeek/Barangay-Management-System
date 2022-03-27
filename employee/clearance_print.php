@@ -332,7 +332,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
                                                 </div>
 												<div style="margin-top: -310px; margin-left: 370px; position: absolute;"><img src="../img/Brgy-Commonwealth150x150.png" style="width: 290%; height: 290%; opacity: 0.1" alt="">
 												</div>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this day of <input class="inp  borderb" style="padding-left: 10px; width:95px;" value="<?php echo $data['date_issued']; ?>" type="text" id="demo" name="date_issue" placeholder="YEAR">, Quezon City.</p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this day of <input class="inp  borderb" style="padding-left: 10px; width:125px;" value="<?php echo date("F d, Y", strtotime($data ['date_issued'])); ?>" type="text" id="demo" name="date_issue" placeholder="YEAR">, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
 												<br>
 												<div style="display: auto; float: left; text-align:center; padding-left: 290px;" class="side_information">
@@ -342,7 +342,7 @@ $message = "<span style='color: red; font-weight: 600; margin: 0;'>Click Generat
 													<div style="text-align: left; margin-top: 45px;"> 
 														CTC NO.: <input class="inp  borderb" style="width: 75px;" name="ctc_no" id="ctc_no" value="<?php echo $data['ctc_no']; ?>"><br>
 														ISSUED AT: <input class="inp  borderb" style="width: 215px;" name="issued_at" id="issued_at" value="<?php echo $data['issued_at']; ?>" ><br>
-														ISSUED ON: <input class="inp  borderb"  style="width: 215px;" name="date_issued" id="date_issued" value="<?php echo $data['date_issued']; ?>"><br>
+														ISSUED ON: <input class="inp  borderb"  style="width: 215px;" name="date_issued" id="date_issued" value="<?php echo date("F d, Y", strtotime($data ['date_issued'])); ?>"><br>
 														PRECINT NO.: <input class="inp  borderb" style="width: 75px;" name="precint_no" id="precint_no" value="<?php echo $data['precint_no']; ?>"><br>
 													</div>
 												</div>

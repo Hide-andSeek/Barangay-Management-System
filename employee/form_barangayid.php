@@ -453,7 +453,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['lname']; ?></td>
 									<td><?php echo $data ['contact_no']?></td>
 									<td><?php echo $data ['address']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['dateissue']));  ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: black; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['status']; ?>"></td>
 									

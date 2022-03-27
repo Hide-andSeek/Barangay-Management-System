@@ -425,7 +425,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['status']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['contactno']; ?></td>
-									<td><?php echo $data ['date_issued']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['date_issued'])); ?></td>
 									<!-- <td><img src="../img/fileupload_barangayid/<?php echo $data['id_image']; ?>" width="210" height="100"></td> -->
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px;" value="<?php echo $data ['clearance_status']; ?>"></td>
 									

@@ -444,7 +444,7 @@ if(!isset($_SESSION["type"]))
 								<tbody>
 								<tr class="table-row">
 									<td><?php echo $data ['approved_bpermitid']; ?></td>
-									<td><?php echo $data ['dateissued']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['dateissued'])); ?></td>
 									<td><?php echo $data ['selection']; ?></td>
 									<td><?php echo $data ['fullname']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
@@ -637,7 +637,6 @@ if(!isset($_SESSION["type"]))
 										<th width="5%">Contact no</th>
 										<th width="15%">Reference No</th>
 										<th width="5%">Payment Method</th>
-										<th width="5">Added on</th>
 										<th width="5%"></th>
 										<th width="5%"></th>
 									</tr>
@@ -651,7 +650,6 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['contact_no']; ?></td>
 									<td><strong><?php echo $data ['reference_no']; ?></strong></td>
 									<td><?php echo $data ['payment_method']?></td>
-									<td><?php echo $data ['added_on']; ?></td>
 									<td>
 									<form method="POST" action="">
 										<input name="payment_status" id="payment_status" value="Paid" type="hidden">

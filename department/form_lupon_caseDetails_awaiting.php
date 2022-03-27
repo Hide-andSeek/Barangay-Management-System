@@ -42,7 +42,7 @@ if (isset($_SESSION['type'])) {
 	<link rel="stylesheet" href="css/captain.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title> Lupon Case Details </title>
+	<title> Lupon Awaiting Case Details </title>
 
 	<style>
 		* {
@@ -195,14 +195,14 @@ if (isset($_SESSION['type'])) {
 			<i class='bx bx-menu menu' id="btn"></i>
 		</div>
 		<ul class="nav-list">
-			<li class="active">
+			<li >
 				<a class="side_bar" href="lupon.php">
 					<i class='bx bx-grid-alt dash'></i>
 					<span class="links_name">Dashboard</span>
 				</a>
 				<span class="tooltip">Dashboard</span>
 			</li>
-			<li>
+			<li class="active">
 				<a class="side_bar" href="lupon_awaiting_schedule.php">
 					<i class='fas fa-calendar-day'></i>
 					<span class="links_name">Awaiting Schedule</span>
@@ -237,7 +237,14 @@ if (isset($_SESSION['type'])) {
 				</a>
 				<span class="tooltip">Not Settled</span>
 			</li>
-
+			<!--Setting Section-->
+			<li>
+				<a class="side_bar" href="lupon_settings.php">
+					<i class='bx bx-cog'></i>
+					<span class="links_name">Setting</span>
+				</a>
+				<span class="tooltip">Setting</span>
+			</li>
 			<li class="profile">
 				<div class="profile-details">
 					<div class="name_job">

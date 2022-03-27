@@ -416,17 +416,17 @@ echo db_query();
 													<th width="5%">Date Requested</th>
 												</tr>
 											</thead>
-											<?php
-											$id = $_SESSION['email'];
-											$barangay_id = '';
-
-											$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayid on accreg_resident.resident_id=barangayid.resident_id where accreg_resident.resident_id='$id'");
-											$stmt->execute();
-											$imagelist = $stmt->fetchAll();
-											if (count($imagelist) > 0) {
-												foreach ($imagelist as $roww) {
-											?>
 												<tbody>
+													<?php
+													$id = $_SESSION['email'];
+													$barangay_id = '';
+
+													$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayid on accreg_resident.resident_id=barangayid.resident_id where accreg_resident.resident_id='$id'");
+													$stmt->execute();
+													$imagelist = $stmt->fetchAll();
+													if (count($imagelist) > 0) {
+														foreach ($imagelist as $roww) {
+													?>
 													<tr class="table-row">
 														<td><?php echo $roww['fname']; ?> <?php echo $roww['mname']; ?> <?php echo $roww['lname']; ?></td>
 														<!-- <td><?php echo 'You last login was &nbsp;' . date("d/m/y H:i:sA", strtotime($roww['time_loged'])); ?></td> -->
@@ -438,20 +438,24 @@ echo db_query();
 														<td><?php echo $roww['dateissue']; ?></td>
 
 													</tr>
+													<?php
+													}} else {
+														$barangay_id = "
+																		<br>
+																		<div style='text-align: center;'>
+																				<i class='bx bx-error'></i>
+																				No Barangay ID Record to show!
+																		</div>";
+													}
+													?>
+													<tr>
+														<td colspan="7" class="text-center text-muted"><?php echo $barangay_id; ?></td>
+													</tr>
 												</tbody>
-											<?php
-											}} else {
-												$barangay_id = "
-																<br>
-																<div style='text-align: center;'>
-																		  <i class='bx bx-error'></i>
-																		 No Barangay ID Request Yet!
-																</div>";
-											}
-											?>
+											
 										</table>
 									</div>
-									<?php echo $barangay_id; ?>
+								
 								</div>
 								<div class="col-md-12 tables">
 									<h5 class="table-heading taybul">Business Permit</h5>
@@ -470,17 +474,17 @@ echo db_query();
 													<th width="5%">Date Requested</th>
 												</tr>
 											</thead>
-											<?php
-											$id = $_SESSION['email'];
-											$bpermit = '';
-
-											$stmt = $db->prepare("SELECT * FROM accreg_resident inner join businesspermit on accreg_resident.resident_id=businesspermit.resident_id  where accreg_resident.resident_id='$id'");
-											$stmt->execute();
-											$imagelist = $stmt->fetchAll();
-											if (count($imagelist) > 0) {
-												foreach ($imagelist as $roww) {
-											?>
 												<tbody>
+													<?php
+													$id = $_SESSION['email'];
+													$bpermit = '';
+
+													$stmt = $db->prepare("SELECT * FROM accreg_resident inner join businesspermit on accreg_resident.resident_id=businesspermit.resident_id  where accreg_resident.resident_id='$id'");
+													$stmt->execute();
+													$imagelist = $stmt->fetchAll();
+													if (count($imagelist) > 0) {
+														foreach ($imagelist as $roww) {
+													?>
 													<tr class="table-row">
 														<td><?php echo $roww['fullname']; ?></td>
 														<td><?php echo $roww['selection']; ?></td>
@@ -490,20 +494,23 @@ echo db_query();
 														<td><?php echo $roww['email_add']; ?></td>
 														<td><?php echo $roww['dateissued']; ?></td>
 													</tr>
+													<?php
+													}} else {
+														$bpermit = "
+																		<br>
+																		<div style='text-align: center;'>
+																				<i class='bx bx-error'></i>
+																				No Business Permit record to show!
+																		</div>";
+													}
+													?>
+													<tr>
+														<td colspan="7" class="text-center text-muted"><?php echo $bpermit; ?></td>
+													</tr>
 												</tbody>
-											<?php
-											}} else {
-												$bpermit = "
-																<br>
-																<div style='text-align: center;'>
-																		  <i class='bx bx-error'></i>
-																		 No Business Permit Request Yet!
-																</div>";
-											}
-											?>
 										</table>
 									</div>
-									<?php echo $bpermit; ?>
+								
 								</div>
 								<div class="col-md-12 tables">
 								<h5 class="table-heading taybul">Certificate of Indigency</h5>
@@ -519,18 +526,18 @@ echo db_query();
 												<th width="5%">Date Requested</th>
 											</tr>
 										</thead>
-										
-										<?php
-										$id = $_SESSION['email'];
-										$indigency = '';
-
-										$stmt = $db->prepare("SELECT * FROM accreg_resident inner join certificateindigency on accreg_resident.resident_id=certificateindigency.resident_id  where accreg_resident.resident_id='$id'");
-										$stmt->execute();
-										$imagelist = $stmt->fetchAll();
-										if (count($imagelist) > 0) {
-											foreach ($imagelist as $roww) {
-										?>
+									
 											<tbody>
+												<?php
+												$id = $_SESSION['email'];
+												$indigency = '';
+
+												$stmt = $db->prepare("SELECT * FROM accreg_resident inner join certificateindigency on accreg_resident.resident_id=certificateindigency.resident_id  where accreg_resident.resident_id='$id'");
+												$stmt->execute();
+												$imagelist = $stmt->fetchAll();
+												if (count($imagelist) > 0) {
+													foreach ($imagelist as $roww) {
+												?>
 												<tr class="table-row">
 													<td><?php echo $roww['fullname']; ?></td>
 													<td><?php echo $roww['purpose']; ?></td>
@@ -539,20 +546,24 @@ echo db_query();
 													<td><?php echo $roww['indigencyfilechoice']; ?></td>
 													<td><?php echo $roww['date_issue']; ?></td>
 												</tr>
+												<?php
+												}} else {
+													$indigency = "
+																	<br>
+																	<div style='text-align: center;'>
+																			<i class='bx bx-error'></i>
+																			No Certificate of Indigency record to show!
+																	</div>";
+												}
+												?>
+												<tr>
+													<td colspan="7" class="text-center text-muted"><?php echo $indigency; ?></td>
+												</tr>
 											</tbody>
-										<?php
-										}} else {
-											$indigency = "
-															<br>
-															<div style='text-align: center;'>
-																	  <i class='bx bx-error'></i>
-																	 No Certificate of Indigency Request Yet!
-															</div>";
-										}
-										?>
+										
 									</table>
 								</div>
-								<?php echo $indigency; ?>
+								
 								</div>
 								<div class="col-md-12 tables">
 								<h5 class="table-heading taybul">Barangay Clearance</h5>
@@ -569,17 +580,18 @@ echo db_query();
 														<th width="5%">Date Requested</th>
 													</tr>
 												</thead>
-												<?php
-												$id = $_SESSION['email'];
-												$error = '';
-
-												$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayclearance on accreg_resident.resident_id=barangayclearance.resident_id  where accreg_resident.resident_id='$id'");
-												$stmt->execute();
-												$imagelist = $stmt->fetchAll();
-												if (count($imagelist) > 0) {
-													foreach ($imagelist as $roww) {
-												?>
+												
 												<tbody>
+													<?php
+													$id = $_SESSION['email'];
+													$error = '';
+
+													$stmt = $db->prepare("SELECT * FROM accreg_resident inner join barangayclearance on accreg_resident.resident_id=barangayclearance.resident_id  where accreg_resident.resident_id='$id'");
+													$stmt->execute();
+													$imagelist = $stmt->fetchAll();
+													if (count($imagelist) > 0) {
+														foreach ($imagelist as $roww) {
+													?>
 													<tr class="table-row">
 														<td><?php echo $roww['full_name']; ?></td>
 														<td><?php echo $roww['age']; ?></td>
@@ -589,21 +601,25 @@ echo db_query();
 														<td><?php echo $roww['filechoice']; ?></td>
 														<td><?php echo $roww['date_issued']; ?></td>
 													</tr>
+													<?php
+														}
+														} else {
+															$error = "
+																			<br>
+																			<div style='text-align: center;'>
+																					<i class='bx bx-error'></i>
+																					No Barangay Clearance record to show!
+																			</div>";
+														}
+														?>
+														<tr>
+															<td colspan="7" class="text-center text-muted"><?php echo $error;?></td>
+														</tr>
 												</tbody>
-										<?php
-										}
-									} else {
-										$error = "
-														<br>
-														<div style='text-align: center;'>
-																  <i class='bx bx-error'></i>
-																 No Barangay Clearance Request Yet!
-														</div>";
-									}
-										?>
+										
 											</table>
 								</div>
-								<?php echo $error;?>
+								
 								<br>
 								<br>
 								</div>

@@ -525,7 +525,7 @@ if (isset($_SESSION['type'])) {
 							<tbody>
 								<tr class="table-row">
 									<td><?php echo $data['businesspermit_id']; ?></td>
-									<td><?php echo $data['dateissued']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['dateissued'])); ?></td>
 									<td><?php echo $data['selection']; ?></td>
 									<td><?php echo $data['fullname']; ?></td>
 									<td><?php echo $data['contactno']; ?></td>

@@ -73,7 +73,7 @@
 		<div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">BPSO Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
@@ -107,10 +107,9 @@
 				</li>
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" src="img/1.jpeg">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> | Online</div>
 						</div>
 					</div>
 					<a href="emplogout.php">
@@ -146,15 +145,15 @@
 					<table class="content-table">
 						<thead>
 							<tr class="t_head">
-								<th>Blotter ID</th>
-								<th>Name of Violator</th>
-								<th>Age</th>
-								<th>Gender</th>
-								<th>Address</th>
-								<th>Incident Address</th>
-								<th>Complaint</th>
-								<th>Status</th>
-								<th>Action</th>
+								<th width="5%" style="text-align: center;">Blotter ID</th>
+								<th width="5%" style="text-align: center;">Name of Violator</th>
+								<th width="5%" style="text-align: center;">Age</th>
+								<th width="5%" style="text-align: center;">Gender</th>
+								<th width="5%" style="text-align: center;">Address</th>
+								<th width="5%" style="text-align: center;">Incident Address</th>
+								<th width="5%" style="text-align: center;">Complaint</th>
+								<th width="5%" style="text-align: center;">Status</th>
+								<th width="5%" style="text-align: center;">Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -205,15 +204,15 @@
 									while($row = $stmt->fetch()){
 							?>
 							<tr class="table-row">
-								<td><?php echo $row['admincomp_id']; ?></td>
-								<td><?php echo ucwords($row['n_violator']); ?></td>
-								<td><?php echo $row['violator_age']; ?></td>
-								<td><?php echo ucwords($row['violator_gender']); ?></td>
-								<td><?php echo ucwords($row['violator_address']); ?></td>
-								<td><?php echo ucwords($row['inci_address']); ?></td>
-								<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
-								<td><?php echo ucwords($row['status']); ?></td>
-								<td>
+								<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
+								<td class="text-center"><?php echo ucwords($row['n_violator']); ?></td>
+								<td class="text-center"><?php echo $row['violator_age']; ?></td>
+								<td class="text-center"><?php echo ucwords($row['violator_gender']); ?></td>
+								<td class="text-center"><?php echo ucwords($row['violator_address']); ?></td>
+								<td class="text-center"><?php echo ucwords($row['inci_address']); ?></td>
+								<td class="text-center"><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+								<td class="text-center"><?php echo ucwords($row['status']); ?></td>
+								<td class="text-center">
                                     <a href="bpso_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 								</td>
 							</tr>

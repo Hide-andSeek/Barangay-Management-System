@@ -59,7 +59,7 @@
 		<div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Lupon Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
@@ -105,20 +105,12 @@
 					</a>
 					<span class="tooltip">Not Settled</span>
 				</li>
-				<!--Setting Section-->
-				<li>
-					<a class="side_bar" href="lupon_settings.php">
-						<i class='bx bx-cog' ></i>
-						<span class="links_name">Setting</span>
-					</a>
-					<span class="tooltip">Setting</span>
-				</li>
+
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" src="img/1.jpeg">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> | Online</div>
 						</div>
 					</div>
 					<a href="emplogout.php">
@@ -153,18 +145,17 @@
 				</form>
 			</div>
 			<!-- Table -->
-			<div class="reg_table emp_tbl">
 				<table class="content-table">
 					<thead>
 						<tr class="t_head">
-							<th>Case No.</th>
-							<th>Complainant</th>
-							<th>Accused</th>
-							<th>Date and Time</th>
-							<th>Complaint</th>
-							<th>Personnel</th>
-							<th>Status</th>
-							<th>Action</th>
+							<th width="5%" style="text-align: center">Case No.</th>
+							<th width="5%" style="text-align: center">Complainant</th>
+							<th width="5%" style="text-align: center">Accused</th>
+							<th width="5%" style="text-align: center">Date and Time</th>
+							<th width="5%" style="text-align: center">Complaint</th>
+							<th width="5%" style="text-align: center">Personnel</th>
+							<th width="5%" style="text-align: center">Status</th>
+							<th width="5%" style="text-align: center">Action</th>
 						</tr>                 
 					</thead>
 					<tbody>
@@ -219,14 +210,14 @@
 						?>
 						<tr class="table-row" data-id="<?php echo $row['admincomp_id']; ?>">
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
-							<td><?php echo ucwords($row['n_complainant']); ?></td>
-							<td><?php echo ucwords($row['n_violator']); ?></td>
-							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
-							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
-							<td><?php echo $row['fullname']; ?></td>
-							<td><?php echo strtoupper($row['status']); ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_complainant']); ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_violator']); ?></td>
+							<td class="text-center"><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
+							<td class="text-center"><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+							<td class="text-center"><?php echo $row['fullname']; ?></td>
+							<td class="text-center"><?php echo strtoupper($row['status']); ?></td>
 							<td class="text-end">
-								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
+								<a href="lupon_caseDetails_settled.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 							</td>	
 						</tr>
 						<?php }}else{ ?>
@@ -236,7 +227,7 @@
 						<?php } ?>
 					</tbody>
 				</table>
-			</div>
+
 		</section>
 	</body>
 </html>			

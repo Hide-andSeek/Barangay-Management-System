@@ -265,7 +265,7 @@ if(!isset($_SESSION["type"]))
 												<br>
 												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">This certification is issued upon the request of the above-named party as supporting document needed for <input class="inp borderb" type="text" id="purpose" name="purpose" value="<?php echo $data['purpose']; ?>"></p>
 												<br>
-												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp" type="text" id="date_issue" name="date_issue" width="auto" value="<?php echo $data['date_issue']; ?>"> of December 2021, Quezon City.</p>
+												<p style="display: auto; margin-left: 280px; text-indent: 50px; text-align: justify; padding-right: 65px;">Issued this <input class="inp" type="text" id="date_issue" name="date_issue" width="auto" value="<?php echo date("F d, Y", strtotime($data ['date_issue'])); ?>"> of December 2021, Quezon City.</p>
 												<input style="visibility: hidden;" type="text" id="indigency_id" name="indigency_id" >
 												<br>
 												<br>

@@ -28,6 +28,8 @@
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/design.css">
+		<link rel="stylesheet" href="css/captain.css">
+		<script src="resident-js/sweetalert.min.js"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,7 +40,7 @@
 		<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
 	
-		<link rel="stylesheet" href="css/captain.css">
+	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title> Lupon Dashboard </title>
@@ -54,6 +56,9 @@
 		</style>
 	</head>
 	<body>
+	<script>
+        swal("Welcome to:","Barangay Commonwealth: Lupon Department");
+    </script>
 		<!-- Side Navigation Bar-->
 		<div class="sidebar">
 			<div class="logo-details">
@@ -105,14 +110,7 @@
 					</a>
 					<span class="tooltip">Not Settled</span>
 				</li>
-				<!--Setting Section-->
-				<li>
-					<a class="side_bar" href="lupon_settings.php">
-						<i class='bx bx-cog' ></i>
-						<span class="links_name">Setting</span>
-					</a>
-					<span class="tooltip">Setting</span>
-				</li>
+
 				<li class="profile">
 					<div class="profile-details">
 						<div class="name_job">
@@ -142,10 +140,10 @@
 			</section>
 			<br>
 			<div>
-				<div class="w3-row-padding">
+				<div class="w3-row-padding" style="margin-left: 10px; margin-right: 10px;">
 					<div class="w3-quarter">
 						<div class="w3-container bg-green w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+							<div class="w3-left"><i class="fa fa-calendar-day fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -168,12 +166,18 @@
 							<div style="text-align: center;">
 								<h4>Awaiting Schedule</h4>
 							</div>
+							<br>
+							<a href="lupon_awaiting_schedule.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 							
 						</div>
 					</div>
 					<div class="w3-quarter">
 						<div class="w3-container bg-green w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+							<div class="w3-left"><i class="fa fa-user-clock fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -198,12 +202,18 @@
 							<div style="text-align: center;">
 								<h4>Upcoming Hearing</h4>
 							</div>
+							<br>
+							<a href="lupon_upcoming_hearings.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 							
 						</div>
 					</div>
 					<div class="w3-quarter">
 						<div class="w3-container bg-green w3-text-white w3-padding-16 ">
-							<div class="w3-left"><i class="fa fa-users w3-xxxlarge" style="color: #0000001A;"></i></div>
+							<div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -228,12 +238,18 @@
 							<div style="text-align: center;">
 								<h4>Active Cases</h4>
 							</div>
+							<br>
+							<a href="lupon_active_cases.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 							
 						</div>
 					</div>
 					<div class="w3-quarter" style="margin-bottom: 20px;">
-						<div class="w3-container bg-green w3-padding-16">
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+						<div class="w3-container bg-blue w3-padding-16">
+							<div class="w3-left"><i class="fa fa-user-check fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right">
 								<?php 
 									require 'db/conn.php';
@@ -259,12 +275,18 @@
 							<div style="text-align: center;">
 								<h4>Settled</h4>
 							</div>
+							<br>
+							<a href="lupon_settled.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 							
 						</div>
 					</div>
 					<div class="w3-quarter">
-						<div class="w3-container bg-green w3-padding-16"  >
-							<div class="w3-left"><i class="fa fa-users fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
+						<div class="w3-container bg-red w3-padding-16"  >
+							<div class="w3-left"><i class="fa fa-user-minus fa-fw w3-xxxlarge" style="color: #0000001A;"></i></div>
 							<div class="w3-right"> 
 								<?php 
 									require 'db/conn.php';
@@ -290,25 +312,31 @@
 							<div style="text-align: center;">
 								<h4>Not Settled</h4>
 							</div>
+							<br>
+							<a href="lupon_not_settled.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 							
 						</div>
 					</div>
 				</div>
 			</div>
 		
-		
+		<div>
 			<!-- Table -->
 			<div class="col-md-12">
 				<table class="content-table">
 					<thead>
 						<tr class="t_head">
-							<th>Case No.</th>
-							<th>Complainant</th>
-							<th>Accused</th>
-							<th>Date and Time</th>
-							<th>Complaint</th>
-							<th>Status</th>
-							<th>Action</th>
+							<th width="5%" style="text-align: center">Case No.</th>
+							<th width="5%" style="text-align: center">Complainant</th>
+							<th width="5%" style="text-align: center">Accused</th>
+							<th width="5%" style="text-align: center">Date and Time</th>
+							<th width="5%" style="text-align: center">Complaint</th>
+							<th width="5%" style="text-align: center">Status</th>
+							<th width="5%" style="text-align: center">Action</th>
 						</tr>                       
 					</thead>
 					<tbody>
@@ -335,11 +363,11 @@
 
 						<tr class="table-row">
 							<td class="text-center"><?php echo $row['admincomp_id']; ?></td>
-							<td><?php echo ucwords($row['n_complainant']); ?></td>
-							<td><?php echo ucwords($row['n_violator']); ?></td>
-							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
-							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
-							<td><?php echo strtoupper($row['status']); ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_complainant']); ?></td>
+							<td class="text-center"><?php echo ucwords($row['n_violator']); ?></td>
+							<td class="text-center"><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
+							<td class="text-center"><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
+							<td class="text-center"><?php echo strtoupper($row['status']); ?></td>
 							<td class="text-end">
 								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
 							</td>	
@@ -349,8 +377,14 @@
 				</table>
 				
 			</div>
-			
+			</div>
 			</section>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 	</body>
 </html>			
 					

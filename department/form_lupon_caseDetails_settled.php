@@ -42,7 +42,7 @@ if (isset($_SESSION['type'])) {
 	<link rel="stylesheet" href="css/captain.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title> Lupon Case Details </title>
+	<title> Lupon Settled Case Details </title>
 
 	<style>
 		* {
@@ -195,7 +195,7 @@ if (isset($_SESSION['type'])) {
 			<i class='bx bx-menu menu' id="btn"></i>
 		</div>
 		<ul class="nav-list">
-			<li class="active">
+			<li >
 				<a class="side_bar" href="lupon.php">
 					<i class='bx bx-grid-alt dash'></i>
 					<span class="links_name">Dashboard</span>
@@ -209,7 +209,7 @@ if (isset($_SESSION['type'])) {
 				</a>
 				<span class="tooltip">Awaiting Schedule</span>
 			</li>
-			<li>
+			<li >
 				<a class="side_bar" href="lupon_upcoming_hearings.php">
 					<i class='fas fa-user-clock'></i>
 					<span class="links_name">Upcoming Hearings</span>
@@ -223,7 +223,7 @@ if (isset($_SESSION['type'])) {
 				</a>
 				<span class="tooltip">Active Cases</span>
 			</li>
-			<li>
+			<li class="active">
 				<a class="side_bar" href="lupon_settled.php">
 					<i class='fas fa-user-check'></i>
 					<span class="links_name">Settled Cases</span>
@@ -326,7 +326,7 @@ if (isset($_SESSION['type'])) {
 
 					<?php }
 					} ?>
-					<iframe type='file' style='width:100%; height: 500px;' src='img/fileupload_admin/<?php echo $row['blotterid_image']; ?>'>Here's the Document</iframe>
+					<!-- <iframe type='file' style='width:100%; height: 500px;' src='img/fileupload_admin/<?php echo $row['blotterid_image']; ?>'>Here's the Document</iframe> -->
 					<div class="container my-5">
 						<label><strong>Complaint: </strong></label>
 						<div class="complaint"><?php echo $row['complaints']; ?></div>

@@ -326,12 +326,12 @@ if(isset($_POST['generate']) ) {
 														<div style="margin-left: 150px; font-size: 12px; margin-top: -45px; color: #1700cd; font-weight: 600;">
 															DATE ISSUED: 
 														</div>
-                                                        <input type="text" name="dateissue" id="dateissue" class="form-control" style="margin-left: 155px; width: 95px; height: 24px; margin-top: 5px; background:#C8CB58; font-size: 15px; border: none; border-bottom: 1px solid black;" value="<?php echo $data['dateissue']; ?>">
+                                                        <input type="text" name="dateissue" id="dateissue" class="form-control" style="margin-left: 155px; width: 115px; height: 24px; margin-top: 5px; background:#C8CB58; font-size: 15px; border: none; border-bottom: 1px solid black;" value="<?php echo date("F d, Y", strtotime($data ['dateissue'])); ?>">
                                                         
 														<div style="margin-left: 270px; font-size: 12px; margin-top: -33px; color: #1700cd; font-weight: 600;">
 															EXPIRED AT YEAR END:
 														</div>
-                                                        <input type="text" name="dateissued" id="dateissued" class="form-control" style="margin-left: 290px; width: 95px; height: 24px; margin-top: 5px; background:#C8CB58; font-size: 15px; border: none; border-bottom: 1px solid black;" value="<?php echo $data['dateissue']; ?>">
+                                                        <input type="text" name="dateissued" id="dateissued" class="form-control" style="margin-left: 290px; width: 115px; height: 24px; margin-top: 5px; background:#C8CB58; font-size: 15px; border: none; border-bottom: 1px solid black;" value="<?php echo date("F d, Y", strtotime($data ['dateissue'])); ?>">
 														<div style="margin-left: 430px; font-size: 12px; margin-top: 5px; text-align: center;">
 															<p style="font-size: 18px; font-weight: 600;"> MANUEL A. CO</p>
 															<p  style=" font-weight: 600;">Barangay Chairman</p>

@@ -462,7 +462,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['nationality']; ?></td>
 									<td><?php echo $data ['address']?></td>
 									<td><?php echo $data ['purpose']; ?></td>
-									<td><?php echo $data ['date_issued']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['date_issued'])); ?></td>
 									<td><?php echo $data ['ctc_no']; ?></td>
 									<td><?php echo $data ['issued_at']; ?></td>
 									<td><?php echo $data ['precint_no']; ?></td>

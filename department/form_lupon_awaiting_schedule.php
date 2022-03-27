@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/the
 		mes/base/jquery-ui.css">
 		<!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-		<link rel="stylesheet" href="css/styles.css">
+
 
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -65,6 +65,7 @@
 				padding: 0 10px;
 				width: 250px;
 			}
+			.btnwidth{width: 80%; margin-bottom: 5px;}
 		</style>
 	</head>
 	<body>
@@ -72,7 +73,7 @@
 		<div class="sidebar">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt=""/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Lupon Department</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">
@@ -119,19 +120,12 @@
 					<span class="tooltip">Not Settled</span>
 				</li>
 				<!--Setting Section-->
-				<li>
-					<a class="side_bar" href="lupon_settings.php">
-						<i class='bx bx-cog' ></i>
-						<span class="links_name">Setting</span>
-					</a>
-					<span class="tooltip">Setting</span>
-				</li>
+			
 				<li class="profile">
 					<div class="profile-details">
-						<img class="profile_pic" src="img/1.jpeg">
 						<div class="name_job">
 							<div class="job"><strong><?php echo $user;?></strong></div>
-							<div class="job" id=""><?php echo $dept; ?></div>
+							<div class="job" id=""><?php echo $dept; ?> | Online</div>
 						</div>
 					</div>
 					<a href="emplogout.php">
@@ -153,6 +147,8 @@
 				</div>
 			</section>
 			<br>
+			
+<div id="content" class="container col-md-12">
 			<!-- Search -->
 			<div class="search_content">
 				<form action="" class="list_header" method="get">
@@ -164,16 +160,15 @@
 				</form>
 			</div>
 			<!-- Table -->
-			<div class="reg_table emp_tbl">
 				<table class="content-table">
 					<thead>
 						<tr class="t_head">
-							<th>Case No.</th>
-							<th>Complainant</th>
-							<th>Accused</th>
-							<th>Date and Time</th>
-							<th>Complaint</th>
-							<th>Action</th>
+							<th width="5%" style="text-align: center">Case No.</th>
+							<th width="5%" style="text-align: center">Complainant</th>
+							<th width="5%" style="text-align: center">Accused</th>
+							<th width="5%" style="text-align: center">Date and Time</th>
+							<th width="5%" style="text-align: center">Complaint</th>
+							<th width="5%" style="text-align: center">Action</th>
 						</tr>                 
 					</thead>
 					<tbody>
@@ -222,8 +217,8 @@
 							<td><?php echo date("F d, Y", strtotime($row['app_date'])); ?></td>
 							<td><?php echo mb_strimwidth($row['complaints'], 0, 50, "..."); ?></td>
 							<td class="text-end">
-								<a href="lupon_caseDetails.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm">View Details</a>
-								<a href="#" class="btn btn-primary btn-sm set-schedule">Set Schedule</a>
+								<a href="lupon_awaiting_schedule_details.php?id=<?php echo $row['admincomp_id']; ?>" class="btn btn-info btn-sm btnwidth">View Details</a>
+								<a href="#" class="btn btn-primary btn-sm set-schedule btnwidth">Set Schedule</a>
 							</td>	
 						</tr>
 						<?php }}else{ ?>
@@ -270,7 +265,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			
+</div>
 		</section>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

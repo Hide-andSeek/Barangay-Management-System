@@ -522,8 +522,8 @@ if(isset($_POST['btnverify'])){
 								<tr class="table-row">
 									<td><?php echo $data ['app_brgyid']; ?></td>
 									<td><?php echo $data ['fname']; ?> <?php echo $data ['lname']; ?></td>
-									<td><?php echo $data ['birthday']; ?></td>
-									<td><?php echo $data ['dateissue']; ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['birthday'])); ?></td>
+									<td><?php echo date("F d, Y", strtotime($data ['dateissue'])); ?></td>
 									<td><?php echo $data ['brgyidfilechoice']; ?></td>
 									<td><?php echo $data ['approvedby']; ?></td>
 									<td><input type="text" class="tblinput inpwidth" style="background-color: #e1edeb;color: #4CAF50; border: 1px solid #4CAF50; border-radius: 20px; width: 80px; padding:3px; border: 1px solid gray;" value="<?php echo $data ['payment_stat']; ?>"></td>

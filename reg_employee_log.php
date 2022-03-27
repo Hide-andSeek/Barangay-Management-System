@@ -1,6 +1,6 @@
 <!-- <?php
-$myButtonText = "Disabled";
-?> -->
+        $myButtonText = "Disabled";
+        ?> -->
 <?php session_start();
 include "db/conn.php";
 include "db/user.php";
@@ -22,11 +22,11 @@ include "db/contractual.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="./resident-img/Brgy-Commonwealth.png">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <title>Document</title>
+    <title>Employee Time Log: Barangay Commonwealth</title>
     <style>
         #message {
             display: none;
- 
+
             color: #000;
             position: relative;
         }
@@ -70,7 +70,7 @@ include "db/contractual.php";
         <div class="login-box-body">
             <h4 class="login-box-msg">Employee Login</h4>
 
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <img src="resident-img/Brgy-Commonwealth_1.png" style="width: 122px; height: 120px" alt="">
                 </div>
@@ -82,7 +82,7 @@ include "db/contractual.php";
                     <br>
                     <input class="form-control input-lg" style="font-size: 14px;" id="employeeid" name="user_no" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8 or more characters">
                     <div style="float:right; margin-top: -35px; margin-right: 10px;">
-                    <i class="bx bx-show showpass ipass" id="employeetogglePassword" style="font-size: 18px; margin-left:-20px; cursor: pointer;"></i>
+                        <i class="bx bx-show showpass ipass" id="employeetogglePassword" style="font-size: 18px; margin-left:-20px; cursor: pointer;"></i>
                     </div>
                     <div id="message">
                         <p id="length" class="invalid">Minimum <b>8 characters</b></p>
@@ -90,20 +90,15 @@ include "db/contractual.php";
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
-                        <button type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat " name="regularemployee" ><i class="fa fa-sign-in"></i> Sign In</button>
+                        <button type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat " name="regularemployee"><i class="fa fa-sign-in"></i> Sign In</button>
                     </div>
                 </div>
                 <!-- onclick="changeText(this); get_accept('<?php echo $myButtonText; ?>'); this.disabled='disabled';" -->
-            </form>
 
-        </div>
-        <div class="alert alert-success alert-dismissible mt20 text-center" style="display:none;">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <span class="result"><i class="icon fa fa-check"></i> <span class="message"></span></span>
-        </div>
-        <div class="alert alert-danger alert-dismissible mt20 text-center" style="display:none;">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <span class="result"><i class="icon fa fa-warning"></i> <span class="message"></span></span>
+            </form>
+            <div style="float: right;">
+                <a href="employee-login.php"> Go to Department <i class="bx bx-skip-next"></i></a>
+            </div>
         </div>
 
     </div>
@@ -189,18 +184,18 @@ include "db/contractual.php";
         });
     </script>
     <script>
-            var myInput = document.getElementById("employeeid");
-            var length = document.getElementById("length");
-            // When the user clicks on the password field, show the message box
-            myInput.onfocus = function() {
-                document.getElementById("message").style.display = "block";
-            }
-            // When the user clicks outside of the password field, hide the message box
-            myInput.onblur = function() {
-                document.getElementById("message").style.display = "none";
-            }
+        var myInput = document.getElementById("employeeid");
+        var length = document.getElementById("length");
+        // When the user clicks on the password field, show the message box
+        myInput.onfocus = function() {
+            document.getElementById("message").style.display = "block";
+        }
+        // When the user clicks outside of the password field, hide the message box
+        myInput.onblur = function() {
+            document.getElementById("message").style.display = "none";
+        }
 
-            myInput.onkeyup = function() {
+        myInput.onkeyup = function() {
             // Validate length
             if (myInput.value.length >= 8) {
                 length.classList.remove("invalid");
@@ -209,7 +204,7 @@ include "db/contractual.php";
                 length.classList.remove("valid");
                 length.classList.add("invalid");
             }
-            }
+        }
     </script>
 </body>
 
