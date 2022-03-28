@@ -449,12 +449,12 @@ include "db/announcementquery.php";
 										<button type="submit" class="btn btn-primary" name="btnSearch" value="Search"><i class="bx bx-search-alt"></i></button>
 									</label>
 								</form>
-									<label class="select__select">
+									<!-- <label class="select__select">
 										New Category: 
 										<button class="addcat hoverbtn" onclick="document.getElementById('add_<?php echo $data['cid']; ?>').style.display='block'"><i class="bx bx-plus-circle " style="font-size: 16px;"></i>Click to Add
 										</button>
 										
-									</label>
+									</label> -->
 							</div>
 							<br>						
 <!-- end of search form -->

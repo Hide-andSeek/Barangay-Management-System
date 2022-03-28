@@ -69,7 +69,7 @@ if(!isset($_SESSION["type"]))
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../announcement_css/custom.css">
-
+	<link rel="stylesheet" href="../css/design.css">
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
 	
@@ -171,7 +171,7 @@ if(!isset($_SESSION["type"]))
 		.addcat{background: #B6B4B4; border: 2px solid gray; height: 40px;}
 		.tblinput{background: none; border: none; user-select: none; text-align: center;pointer-events: none;}
 
-		.transact{margin-left: 65%; }
+		.transact{margin-left: 75%; margin-right: 5%;}
 		
 	 </style>
 	<!-- Side Navigation Bar-->
@@ -415,13 +415,11 @@ if(!isset($_SESSION["type"]))
 									</label>
 								</form>
 								<div style="display: flex;" class="  select__select">
-									<div>
-										<label style="font-size: 14px;">Approved: </label>
-										<button class="btn btn-success viewbtn" onclick="window.location.href='barangayidapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>
+									<div style="margin-right: 10px;">
+										<button class="btn btn-success viewbtn" onclick="window.location.href='barangayidapproval.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> Approved</button>
 									</div>
 									<div>
-										<label style="font-size: 14px;">Deny: </label>
-										<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
+										<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-window-close" style="font-size: 20px;"></i>Deny</button>	
 									</div>
 								</div>
 							</div>						
@@ -473,15 +471,16 @@ if(!isset($_SESSION["type"]))
 										$function->doPages($offset, 'barangayid_page.php', '', $total_records, $keyword);
 									?>
 								</h4>
-								<!-- <div class="transact">
-									<label style="font-size: 14px;">Transaction History: </label>
-									<button class="btn btn-danger viewbtn" onclick="window.location.href='barangayiddeny.php'"><i class="bx bx-xs bx-checkbox-checked" style="font-size: 20px;"></i> </button>	
-								</div> -->
+								<div class="transact">
+									<button class="btn bg-olive viewbtn" onclick="window.location.href='barangayid_transaction_history.php'" ><i class="bx bx-xs bx-folder-open" style="font-size: 20px;"></i> Transaction History </button>	
+									
+								</div>
 							</div>
 							
 	</div>
 							<div class="separator"></div>
 </div>     
+
 
 	</section>	
 

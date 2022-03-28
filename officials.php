@@ -1,6 +1,6 @@
 <?php session_start();
 include "db/conn.php";
-include "db/captain.php";
+include "db/captain_login.php";
 ?>
 
 <!DOCTYPE html>

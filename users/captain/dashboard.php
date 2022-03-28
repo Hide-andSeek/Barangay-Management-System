@@ -217,7 +217,7 @@ if (isset($_SESSION['type'])) {
 	<div class="sidebar captain_sidebar myDIV">
 		<div class="logo-details">
 			<img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt="Brgy Commonwealth Logo" />
-			<div class="logo_name">Barangay Commonwealth</div>
+			<div class="logo_name">Barangay Captain</div>
 			<i class='bx bx-menu menu' id="btn"></i>
 		</div>
 		<ul class="nav-list">
@@ -447,7 +447,7 @@ if (isset($_SESSION['type'])) {
 						<div id="donutchart1" style="width: 40%; height: 250px;"></div>
 					</div>
 				</div>
-
+<!--Doc Request-->
 				<div class="mySlides">
 					<div style="text-align: center;">
 						<label style="font-size: 15px;">Account/ Request Document</label>
@@ -522,7 +522,7 @@ if (isset($_SESSION['type'])) {
 
 			while ($row = mysqli_fetch_array($result)) {
 				$project_total_amount = $row['amount'];
-			?>['Total Funds', <?php echo $total_amount; ?>],
+			?>	['Total Funds', <?php echo $total_amount; ?>],
 				['Project Budget', <?php echo $project_total_amount; ?>],
 				['Equipment Budget', <?php echo $equip_total_amount; ?>],
 				['Income', <?php echo $payment_amount; ?>],
@@ -679,8 +679,8 @@ if (isset($_SESSION['type'])) {
 		data.addColumn('string', 'Topping');
 		data.addColumn('number', 'User');
 		data.addRows([
-			['Employeed', <?php echo $no_employeed; ?>],
-			['Not Employeed', <?php echo $no_unemployeed; ?>]
+			['Account of Resident', <?php echo $no_resident; ?>],
+			['Account of Employee', <?php echo $no_employee; ?>]
 		]);
 
 		// Set chart options
@@ -688,7 +688,7 @@ if (isset($_SESSION['type'])) {
 			pieSliceTextStyle: {
 				color: 'black',
 			},
-			'title': 'Total number of Employeed & not Employeed',
+			'title': 'Account Registered',
 			'width': 420,
 			'height': 250
 		};

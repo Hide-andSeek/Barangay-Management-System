@@ -94,60 +94,43 @@ include "db/employee.php";
 			user-select: none;
 		}
 
-		#message,
-		#message1 {
-			display: none;
 
+		#message, #message1, #message2, #message3, #message4, #message5, #message6{
+			display: none;
 			color: #000;
 			position: relative;
 		}
 
-		#message p {
+		#message p, #message1 p, #message2 p, #message3 p, #message4 p, #message5 p, #message6 p{
 			padding: 15px 45px;
 			font-size: 13px;
 		}
 
-		#message1 p {
-			padding: 15px 45px;
-			font-size: 13px;
-		}
 
 		/* Add a green text color and a checkmark when the requirements are right */
-		.valid,
-		.valid1 {
+		.valid, .validcomplaint, .validbcpc, .validvawc, .validlupon, .validaccounting, .validbpso{
 			color: green;
 		}
 
-		.valid:before {
+		.valid:before, .validcomplaint:before, .validbcpc:before, .validvawc:before, .validlupon:before, .validaccounting:before, .validbpso:before{
 			position: relative;
 			left: -35px;
 			content: "✔";
 		}
 
-		.valid1:before {
-			position: relative;
-			left: -35px;
-			content: "✔";
-		}
-
+	
 
 		/* Add a red text color and an "x" when the requirements are wrong */
-		.invalid,
-		.invalid1 {
+		.invalid, .invalidcomplaint, .invalidbcpc, .invalidvawc, .invalidlupon, .invalidaccounting, .invalidbpso{
 			color: red;
 		}
 
-		.invalid:before {
+		.invalid:before, .invalidcomplaint:before, .invalidbcpc:before, .invalidvawc:before, .invalidlupon:before, .invalidaccounting:before, .invalidbpso:before{
 			position: relative;
 			left: -35px;
 			content: "✖";
 		}
 
-		.invalid1:before {
-			position: relative;
-			left: -35px;
-			content: "✖";
-		}
 	</style>
 
 </head>
@@ -166,6 +149,8 @@ include "db/employee.php";
 							<br>
 							<p class="mb-8">Welcome to Barangay Commonwealth Department. Login your respective account!</p>
 						</div>
+
+<!-- Document Request-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="docreq" class="dept">
 								<label> Document Request Dept. </label>
@@ -177,17 +162,17 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" id="employeeno" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8 or more characters">
+									<input name="user_no" id="employeeno" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="togglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
 
 								</div>
 								<div id="message">
-									<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+									<p id="length" class="invalid">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="documentlogbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
 						</form>
-
+<!-- Admin Complaints-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="complaints" class="dept" style="display:none">
 								Admin Complaints Dept.
@@ -199,17 +184,16 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" id="complaintsemployeenoo" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8 or more characters">
+									<input name="user_no" id="admincomp" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="complaintstogglePasswordd" style="float: right; margin-top: -20px; cursor: pointer;"></i>
 								</div>
 								<div id="message1">
-									<p id="length1" class="invalid1">Minimum <b>8 characters</b></p>
+									<p id="lengthcomplaint" class="invalidcomplaint">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="complaintsbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
-
 						</form>
-
+<!-- BCPC Dept-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="bcpc" class="dept" style="display:none">
 								BCPC Dept.
@@ -221,13 +205,16 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" id="vawcemployeeno" type="password" class="form-control">
+									<input name="user_no" id="bcpccemployeeno" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
+								</div>
+								<div id="message2">
+									<p id="lengthbcpc" class="invalidbcpc">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="bcpcbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
 						</form>
-
+<!-- VAWC Dept-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="vawc" class="dept" style="display:none">
 								VAWC Dept.
@@ -239,13 +226,16 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" id="vawcemployeeno" type="password" class="form-control">
+									<input name="user_no" id="vawcemployeeno" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
+								</div>
+								<div id="message3">
+									<p id="lengthvawc" class="invalidvawc">Maximum <b>10 numbers</b></p>
 								</div>
 								<button type="submit" name="vawcbtn" class="btn btn-block btn-primary">Log in</button>
 							</div>
 						</form>
-
+<!-- Lupon Dept-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="lupon" class="dept" style="display:none">
 								Lupon Dept.
@@ -257,31 +247,37 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" type="password" class="form-control" id="password">
+									<input name="user_no" id="luponemployeeno"  type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
+								</div>
+								<div id="message4">
+									<p id="lengthlupon" class="invalidlupon">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="luponbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
 						</form>
-
+<!-- Accounting Dept-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="accounting" class="dept" style="display:none">
 								Accounting Dept.
 								<br>
 								<div class="form-group first">
 									<label for="username">Employee Name</label>
-									<input type="text" class="form-control" id="username" name="username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
+									<input type="text" class="form-control" id="username" name="username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);" >
 									<i class="bx bx-user-circle" style="float: right; margin-top: -20px;"></i>
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" type="password" class="form-control" id="password">
+									<input name="user_no" type="password" class="form-control" id="accountingemployeeno" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
+								</div>
+								<div id="message5">
+									<p id="lengthaccounting" class="invalidaccounting">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="accountingbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
 						</form>
-
+<!-- Accounting Dept-->
 						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div id="bpso" class="dept" style="display:none">
 								BPSO Dept.
@@ -293,8 +289,11 @@ include "db/employee.php";
 								</div>
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
-									<input name="user_no" type="password" class="form-control" id="password">
+									<input name="user_no" type="password" class="form-control" id="bpsoemployeeno" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8"  onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="vawctogglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
+								</div>
+								<div id="message6">
+									<p id="lengthbpso" class="invalidbpso">Maximum <b>10 numbers</b></p>
 								</div>
 								<input type="submit" name="bpsobtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
@@ -336,11 +335,9 @@ include "db/employee.php";
 		</div>
 	</div>
 
-	<!-- <img src="resident-img/login-page-img.png" alt=""> -->
 	</main>
 	<script src="js/loginmodalform.js"></script>
 	<script src="js/employee.js"></script>
-	<script type="text/javascript" async src="//l.getsitecontrol.com/d7o5309w.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -467,27 +464,147 @@ include "db/employee.php";
 			}
 		}
 	</script>
-	<script>
-		var myInput1 = document.getElementById("complaintsemployeenoo");
+	<script>				
+		var myInputcomplaint = document.getElementById("admincomp");
 
-		var length1 = document.getElementById("length1");
+		var lengthcomplaint = document.getElementById("lengthcomplaint");
 		// When the user clicks on the password field, show the message box
-		myInput1.onfocus = function() {
+		myInputcomplaint.onfocus = function() {
 			document.getElementById("message1").style.display = "block";
 		}
 		// When the user clicks outside of the password field, hide the message box
-		myInput1.onblur = function() {
+		myInputcomplaint.onblur = function() {
 			document.getElementById("message1").style.display = "none";
 		}
 
-		myInput1.onkeyup = function() {
+		myInputcomplaint.onkeyup = function() {
 			// Validate length
-			if (myInput1.value.length1 >= 8) {
-				length1.classList.remove("invalid1");
-				length1.classList.add("valid1");
+			if (myInputcomplaint.value.length >= 8) {
+				lengthcomplaint.classList.remove("invalidcomplaint");
+				lengthcomplaint.classList.add("validcomplaint");
 			} else {
-				length1.classList.remove("valid1");
-				length1.classList.add("invalid1");
+				lengthcomplaint.classList.remove("validcomplaint");
+				lengthcomplaint.classList.add("invalidcomplaint");
+			}
+		}
+	</script>
+	<script>				
+		var myInputbcpc = document.getElementById("bcpccemployeeno");
+
+		var lengthbcpc = document.getElementById("lengthbcpc");
+		// When the user clicks on the password field, show the message box
+		myInputbcpc.onfocus = function() {
+			document.getElementById("message2").style.display = "block";
+		}
+		// When the user clicks outside of the password field, hide the message box
+		myInputbcpc.onblur = function() {
+			document.getElementById("message2").style.display = "none";
+		}
+
+		myInputbcpc.onkeyup = function() {
+			// Validate length
+			if (myInputbcpc.value.length >= 8) {
+				lengthbcpc.classList.remove("invalidbcpc");
+				lengthbcpc.classList.add("validbcpc");
+			} else {
+				lengthbcpc.classList.remove("validbcpc");
+				lengthbcpc.classList.add("invalidbcpc");
+			}
+		}
+	</script>
+	<script>				
+		var myInputvawc = document.getElementById("vawcemployeeno");
+
+		var lengthvawc = document.getElementById("lengthvawc");
+		// When the user clicks on the password field, show the message box
+		myInputvawc.onfocus = function() {
+			document.getElementById("message3").style.display = "block";
+		}
+		// When the user clicks outside of the password field, hide the message box
+		myInputvawc.onblur = function() {
+			document.getElementById("message3").style.display = "none";
+		}
+
+		myInputvawc.onkeyup = function() {
+			// Validate length
+			if (myInputvawc.value.length >= 8) {
+				lengthvawc.classList.remove("invalidvawc");
+				lengthvawc.classList.add("validvawc");
+			} else {
+				lengthvawc.classList.remove("validvawc");
+				lengthvawc.classList.add("invalidvawc");
+			}
+		}
+	</script>
+	<script>				
+		var myInputlupon = document.getElementById("luponemployeeno");
+
+		var lengthlupon = document.getElementById("lengthlupon");
+		// When the user clicks on the password field, show the message box
+		myInputlupon.onfocus = function() {
+			document.getElementById("message4").style.display = "block";
+		}
+		// When the user clicks outside of the password field, hide the message box
+		myInputlupon.onblur = function() {
+			document.getElementById("message4").style.display = "none";
+		}
+
+		myInputlupon.onkeyup = function() {
+			// Validate length
+			if (myInputlupon.value.length >= 8) {
+				lengthlupon.classList.remove("invalidlupon");
+				lengthlupon.classList.add("validlupon");
+			} else {
+				lengthlupon.classList.remove("validlupon");
+				lengthlupon.classList.add("invalidlupon");
+			}
+		}
+	</script>
+	<script>				
+		var myInputaccounting = document.getElementById("accountingemployeeno");
+
+		var lengthaccounting = document.getElementById("lengthaccounting");
+		// When the user clicks on the password field, show the message box
+		myInputaccounting.onfocus = function() {
+			document.getElementById("message5").style.display = "block";
+		}
+		// When the user clicks outside of the password field, hide the message box
+		myInputaccounting.onblur = function() {
+			document.getElementById("message5").style.display = "none";
+		}
+
+		myInputaccounting.onkeyup = function() {
+			// Validate length
+			if (myInputaccounting.value.length >= 8) {
+				lengthaccounting.classList.remove("invalidaccounting");
+				lengthaccounting.classList.add("validaccounting");
+			} else {
+				lengthaccounting.classList.remove("validaccounting");
+				lengthaccounting.classList.add("invalidaccounting");
+			}
+		}
+	</script>
+	<script>				
+		var myInputbpso = document.getElementById("bpsoemployeeno");
+
+		var lengthbpso = document.getElementById("lengthbpso");
+		// When the user clicks on the password field, show the message box
+		myInputbpso.onfocus = function() {
+			document.getElementById("message6").style.display = "block";
+		}
+		// When the user clicks outside of the password field, hide the message box
+		myInputbpso.onblur = function() {
+			document.getElementById("message6").style.display = "none";
+		}
+
+		myInputbpso.onkeyup = function() {
+			// Validate length
+			if (myInputbpso.value.length >= 8) {
+				lengthbpso.classList.remove("invalidbpso");
+				lengthbpso.classList.add("validbpso");
+			} else {
+				lengthbpso.classList.remove("validbpso");
+				lengthbpso.classList.add("invalidbpso");
 			}
 		}
 	</script>

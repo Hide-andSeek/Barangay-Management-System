@@ -733,8 +733,14 @@ if (isset($_SESSION['type'])) {
 		</div>
 		<div class="separator"></div>
 
-		</div>
-
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div></div>
 	</section>
 
 </body>

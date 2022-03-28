@@ -19,7 +19,8 @@
     $no_unemployeed = '';
     $owner_house = '';
     $tenant_house = '';
-
+    $no_resident = '';
+    $no_employee = '';
 
     //This is for Project Budget Total Sum
 	$result = mysqli_query($connect, 'SELECT SUM(amount) AS amount FROM budget');
@@ -171,4 +172,23 @@
 
      while($row=mysqli_fetch_array($result)){
      $tenant_house = $row['house'];
+     }
+
+     $result=mysqli_query($connect,'SELECT SUM(no_resident)  AS no_resident  FROM  accreg_resident');
+
+     while($row=mysqli_fetch_array($result)){
+     $no_resident = $row['no_resident'];
+     }
+     
+
+     $result=mysqli_query($connect,'SELECT SUM(no_resident)  AS no_resident  FROM  accreg_resident');
+
+     while($row=mysqli_fetch_array($result)){
+     $no_resident = $row['no_resident'];
+     }
+
+     $result=mysqli_query($connect,'SELECT SUM(no_employee)  AS no_employee  FROM  usersdb');
+
+     while($row=mysqli_fetch_array($result)){
+     $no_employee = $row['no_employee'];
      }

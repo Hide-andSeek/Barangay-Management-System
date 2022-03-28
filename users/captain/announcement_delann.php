@@ -22,7 +22,7 @@ if(!isset($_SESSION["type"]))
 	}
 ?>
 
-
+	
 <?php
 include "db/captain.php";
 include "db/user.php";

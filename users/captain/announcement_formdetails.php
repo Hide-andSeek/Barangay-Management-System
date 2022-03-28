@@ -195,7 +195,7 @@ include "db/announcementquery.php";
                     
                 ?>
 
-            <div>
+            <div style="margin-left: 50px; margin-right: 50px;">
                 <hr>
                 <div style="text-align: center;">
                     <h6>

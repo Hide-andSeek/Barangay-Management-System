@@ -108,7 +108,7 @@ require 'db/conn.php';
 		   <div class="sidebar captain_sidebar myDIV">
 			<div class="logo-details">
 			    <img class="brgy_icon" src="img/Brgy-Commonwealth.png" alt="Brgy Commonwealth Logo"/>
-				<div class="logo_name">Barangay Commonwealth</div>
+				<div class="logo_name">Barangay Captain</div>
 				<i class='bx bx-menu menu' id="btn"></i>
 			</div>
 			<ul class="nav-list">

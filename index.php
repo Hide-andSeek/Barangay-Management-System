@@ -429,6 +429,7 @@ include('db/index_announcement.php')
                 position: relative;
             }
         }
+
         @media screen and (max-width: 995px) {
             .logdropdown-content {
                 position: relative;
@@ -520,12 +521,14 @@ include('db/index_announcement.php')
                         <div class="information">
                             <input class="inputpass c_password" type="password" id="logpassword" placeholder="Password" name="password">
                         </div>
+                        <p style="text-align: center; font-size: 12px;">Forgot Password? <a href="reset_password.php">Change Password</a></p>
 
                         <div class="information">
                             <button type="submit" id="logbtn" name="logbtn" value="signin" class="log_button sign_in">
                                 Sign in
                             </button>
-                            <p style="text-align: center;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
+                            <p style="text-align: center; font-size: 12px;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
+
 
                         </div>
                     </div>

@@ -351,7 +351,7 @@ include "db/announcementquery.php";
                             
                                 
                         ?>
-                        <div class="col-md-12">
+                        <div class="col-md-12" >
                             <div style="text-align: center;">
                                 <hr>
                                     <h6>

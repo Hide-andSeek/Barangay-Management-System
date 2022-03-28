@@ -197,12 +197,20 @@ if(!isset($_SESSION["type"]))
 			   </a>
 			   <span class="tooltip">BCPC</span>
 			 </li>
+
+			 <li>
+			   <a class="side_bar nav-button" href=".php">
+				 <i class='bx bx-user-pin bcpc'></i>
+				 <span class="links_name">Transaction History</span>
+			   </a>
+			   <span class="tooltip">Transaction History</span>
+			 </li>
 			  
 			 <li class="profile">
 				 <div class="profile-details">
 				   <div class="name_job">
 				   		<div class="job"><strong><?php echo $user;?></strong></div>
-						   <div class="job" id=""><?php echo $dept; ?>|| Online</div>
+						   <div class="job" id=""><?php echo $dept; ?>| Online</div>
 				   </div>
 				 </div>
 				 <a href="emplogout.php">
@@ -217,7 +225,7 @@ if(!isset($_SESSION["type"]))
 			  <section class="top-section">
 				  <div class="top-content">
 					<div>
-						<h5>Dashboard
+						<h5>Admin Complaints
 						<a href="#" class="circle">
 							 <img src="../img/dt.png" >
 					    </a>
@@ -335,7 +343,7 @@ if(!isset($_SESSION["type"]))
 							
 							</div>
 							<div class="w3-clear"></div>
-							<h4>Approve</h4>
+							<h4>Approved</h4>
 					</div>
 				</a>
 			</div>

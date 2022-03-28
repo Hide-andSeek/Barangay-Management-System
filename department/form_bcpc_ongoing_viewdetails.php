@@ -243,7 +243,7 @@ if (isset($_SESSION['type'])) {
             </div>
         </section>
 
-        <div id="content" class="container col-md-12">
+        <div id="content" class="container col-md-12" >
             <?php
             if (isset($_GET['id'])) {
                 $ID = $_GET['id'];
@@ -349,7 +349,7 @@ if (isset($_SESSION['type'])) {
                     unset($_SESSION['statusadmincomp']);
                 }
                 ?>
-                <div style="float: right; display: inline-block;">
+                <div style="float: right; display: inline-block; margin-left: 50px; margin-right:50px;">
 
                     <button style="background: none; padding: 0;" onclick="document.getElementById('eemail').style.display='block'">
                         <img src="img/gmail.png" title="Send a message" class="hoverback" style="margin-left: 10px; width: 40px; height: 40px; cursor: pointer;" alt="Gmail">
