@@ -32,6 +32,7 @@ Should be able to:
 ### Screenshot
 
 ![Design preview for the Employee Page](./readme_images/Dashboard.jpg)
+![Mobile Layout](./readme_images/Mobile-Phone.svg)
 
 ### Links
 
