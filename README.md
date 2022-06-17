@@ -66,6 +66,6 @@ Trying to enhance UX/UI experience with by simply customizing each design using 
 - Mr. Miñoza (Programmer)
 - Mr. Kenchie (Programmer)
 
-## Acknowledgments
+## Acknowledgment
 
 I deeply acknowledge my colleagues who worked with this project. Those sleepless night of working just to finish the project on time, in order to pass the requirement in Capstone Subject. Applause!
