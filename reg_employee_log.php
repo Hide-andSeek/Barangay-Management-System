@@ -68,7 +68,7 @@ include "db/contractual.php";
         </div> -->
 
         <div class="login-box-body">
-            <h4 class="login-box-msg">Employee Login</h4>
+            <h4 class="login-box-msg">Time In & Out</h4>
 
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div style="display: flex; justify-content: center; align-items: center;">

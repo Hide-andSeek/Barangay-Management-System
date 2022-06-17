@@ -21,6 +21,11 @@
     $tenant_house = '';
     $no_resident = '';
     $no_employee = '';
+    $total_request_bpermits = '';
+    $total_request_barangayid = '';
+    $total_request_clearance = '';
+    $total_request_indigency = '';
+    $total_request_bpermit_date = '';
 
     //This is for Project Budget Total Sum
 	$result = mysqli_query($connect, 'SELECT SUM(amount) AS amount FROM budget');
@@ -192,3 +197,33 @@
      while($row=mysqli_fetch_array($result)){
      $no_employee = $row['no_employee'];
      }
+
+
+     $result=mysqli_query($connect,'SELECT SUM(no_bpermit)  AS no_bpermit  FROM  businesspermit');
+
+     while($row=mysqli_fetch_array($result)){
+     $total_request_bpermits = $row['no_bpermit'];
+     }
+
+     $result=mysqli_query($connect,'SELECT SUM(no_barangayid)  AS no_barangayid  FROM  barangayid');
+
+     while($row=mysqli_fetch_array($result)){
+     $total_request_barangayid = $row['no_barangayid'];
+     }
+
+     $result=mysqli_query($connect,'SELECT SUM(no_clearance)  AS no_clearance  FROM  barangayclearance');
+
+     while($row=mysqli_fetch_array($result)){
+     $total_request_clearance = $row['no_clearance'];
+     }
+
+     $result=mysqli_query($connect,'SELECT SUM(no_indigency)  AS no_indigency  FROM  certificateindigency');
+
+     while($row=mysqli_fetch_array($result)){
+     $total_request_indigency = $row['no_indigency'];
+     }
+
+
+
+
+     

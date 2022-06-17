@@ -74,18 +74,19 @@ include "db/conn.php";
     <div>
       <div class="login-box-body">
         <h4 class="login-box-msg">Reset Password</h4>
-    
-        <?php
-        if(isset($_SESSION['status']))
-        {
-          ?>
-          <div>
-              <h5><?= $_SESSION['status']; ?></h5>
-          </div>
+        <div style="text-align: center;">
           <?php
-          unset($_SESSION['status']);
-        }
-        ?>
+          if(isset($_SESSION['status']))
+          {
+            ?>
+            <div class="alert alert-info messcompose">
+                <h5><?= $_SESSION['status']; ?></h5>
+            </div>
+            <?php
+            unset($_SESSION['status']); 
+          }
+          ?>
+        </div>
         <form method="post" action="password_reset_code.php">
           <div style="display: flex; justify-content: center; align-items: center;">
             <img src="resident-img/Brgy-Commonwealth_1.png" style="width: 122px; height: 120px" alt="">
@@ -105,7 +106,7 @@ include "db/conn.php";
 
           <div class="row">
             <div class="col-xs-4">
-              <button onclick="changeText(this); get_accept('<?php echo $myButtonText; ?>'); this.disabled='disabled';" type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat" name="password_reset_link"> Send a link</button>
+              <button  type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat" name="password_reset_link"> Send a link</button>
             </div>
           </div>
         </form>

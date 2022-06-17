@@ -155,20 +155,23 @@ include "db/employee.php";
 							<div id="docreq" class="dept">
 								<label> Document Request Dept. </label>
 								<br>
+
 								<div class="form-group first">
 									<label for="username">Employee Name</label>
 									<input type="text" class="form-control" id="username" name="username" onkeyup="var start = this.selectionStart; var end = this.selectionEnd;this.value = this.value.toUpperCase(); this.setSelectionRange(start, end);">
 									<i class="bx bx-user-circle" style="float: right; margin-top: -20px;"></i>
 								</div>
+
 								<div class="form-group last mb-3">
 									<label for="password">Password</label>
 									<input name="user_no" id="employeeno" type="password" class="form-control" pattern="(?=.*\d)(?=.*)(?=.*).{8,}" title="Must contain at least 8" onKeyPress="if(this.value.length==10) return false;">
 									<i class="bx bx-show showpass ipass" id="togglePassword" style="float: right; margin-top: -20px; cursor: pointer;"></i>
-
 								</div>
+
 								<div id="message">
 									<p id="length" class="invalid">Maximum <b>10 numbers</b></p>
 								</div>
+			
 								<input type="submit" name="documentlogbtn" value="Log In" class="btn btn-block btn-primary">
 							</div>
 						</form>
@@ -302,25 +305,25 @@ include "db/employee.php";
 						<span class="d-block text-center my-4 text-muted">&mdash; Select Department &mdash;</span>
 						<div class="social-login">
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'docreq')">
-								<span class="icon-google mr-3"></span> Document Request Deparment
+								Document Request Deparment
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'complaints')">
-								<span class="icon-google mr-3"></span> Admin Complaints Deparment
+								Admin Complaints Deparment
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'bcpc')">
-								<span class="icon-facebook mr-3"></span> BCPC Department
+								BCPC Department
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'vawc')">
-								<span class="icon-twitter mr-3"></span> VAWC Department
+								VAWC Department
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'lupon')">
-								<span class="icon-google mr-3"></span> Lupon Deparment
+							    Lupon Deparment
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'accounting')">
-								<span class="icon-google mr-3"></span> Accounting Deparment
+								Accounting Deparment
 							</a>
 							<a href="#" class="facebook btn d-flex justify-content-center align-items-center tablink" onclick="openCity(event,'bpso')">
-								<span class="icon-google mr-3"></span> BPSO Deparment
+								BPSO Deparment
 							</a>
 
 						</div>
@@ -370,6 +373,7 @@ include "db/employee.php";
 			// toggle the eye slash icon
 			this.classList.toggle('fa-eye-slash');
 		});
+	
 
 		const bcpctogglePassword = document.querySelector('#bcpctogglePassword');
 		const bcpcemployee_no = document.querySelector('#bcpcemployeeno');

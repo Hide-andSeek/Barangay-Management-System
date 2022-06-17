@@ -205,11 +205,11 @@ if (isset($_SESSION['type'])) {
 </head>
 
 <body>
-<div id="loader-wrapper">
-	<div id="loader"></div>
-	<div class="loader-section section-left"></div>
-	<div class="loader-section section-right"></div>
-</div>
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+		<div class="loader-section section-left"></div>
+		<div class="loader-section section-right"></div>
+	</div>
 	<!-- <script>
         swal("Welcome to:","Barangay Commonwealth: Barangay Official Dashboard");
     </script> -->
@@ -447,7 +447,7 @@ if (isset($_SESSION['type'])) {
 						<div id="donutchart1" style="width: 40%; height: 250px;"></div>
 					</div>
 				</div>
-<!--Doc Request-->
+				<!--Doc Request-->
 				<div class="mySlides">
 					<div style="text-align: center;">
 						<label style="font-size: 15px;">Account/ Request Document</label>
@@ -522,7 +522,7 @@ if (isset($_SESSION['type'])) {
 
 			while ($row = mysqli_fetch_array($result)) {
 				$project_total_amount = $row['amount'];
-			?>	['Total Funds', <?php echo $total_amount; ?>],
+			?>['Total Funds', <?php echo $total_amount; ?>],
 				['Project Budget', <?php echo $project_total_amount; ?>],
 				['Equipment Budget', <?php echo $equip_total_amount; ?>],
 				['Income', <?php echo $payment_amount; ?>],
@@ -699,7 +699,7 @@ if (isset($_SESSION['type'])) {
 	}
 </script>
 
-// Voters 
+// Voters
 <script type="text/javascript">
 	google.charts.load('current', {
 		'packages': ['corechart']

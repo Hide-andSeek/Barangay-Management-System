@@ -221,7 +221,7 @@ if(!isset($_SESSION["type"]))
 							<label>Image :</label>
 							<?php echo isset($error['category_image']) ? $error['category_image'] : '';?>
 							<input type="file" class="form-control font-sizee fileimg" name="category_image" id="category_image" />
-							<br/>s
+							<br/>	
 							
 							<img src="upload/category/<?php echo $data['category_image']; ?>" width="280" height="190"/>
 							

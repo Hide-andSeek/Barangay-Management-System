@@ -1,5 +1,3 @@
-
-
 <?php
 DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
 require "db/conn.php";

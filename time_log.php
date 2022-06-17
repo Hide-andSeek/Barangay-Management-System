@@ -36,80 +36,72 @@ if (isset($_SESSION['uid'])) {
 DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
 error_reporting(~E_NOTICE);
 
-// 1.1 GCash Barangay ID Payment
 
-if($_SERVER['REQUEST_METHOD']=='POST')
-  {
-if(isset($_POST['timeinbtn'])){
-	
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['timeinbtn'])) {
+
     $id = $_POST['user_id'];;
 
     $username = $_POST['username'];
-	$user_id = $_POST['user_id'];
-	$time_loged = date("Y-m-d H:i:s",strtotime("now"));
-	$date_logged = date("Y-m-d", strtotime("now"));
+    $user_id = $_POST['user_id'];
+    $time_loged = date("Y-m-d H:i:s", strtotime("now"));
+    $date_logged = date("Y-m-d", strtotime("now"));
 
-	$sql_create_acc = "SELECT COUNT(date_logged) AS num FROM users_activity WHERE date_logged = :date_logged AND user_id = $id";
-	$stmt = $db->prepare($sql_create_acc);
-	$stmt->bindValue(':date_logged', $date_logged);
-	$stmt->execute();
-	
-	$count_row = $stmt->fetch(PDO::FETCH_ASSOC);
-	
-	if($count_row['num']>0){
-        $_SESSION['status'] ="Time in is already set! Come Back Tommorrow";
-        $_SESSION['status_code'] ="warning";
-    
-	
-	}else{
-		
-		$stmt = $db->prepare("INSERT INTO users_activity (username, user_id, time_loged, date_logged) VALUES (:username, :user_id, :time_loged, :date_logged)");
+    $sql_create_acc = "SELECT COUNT(date_logged) AS num FROM users_activity WHERE date_logged = :date_logged AND user_id = $id";
+    $stmt = $db->prepare($sql_create_acc);
+    $stmt->bindValue(':date_logged', $date_logged);
+    $stmt->execute();
 
-        $stmt->bindParam(':username', $username);
-		$stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':time_loged', $time_loged);
-		$stmt->bindParam(':date_logged', $date_logged);
+    $count_row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	if($stmt->execute()){
-		$_SESSION['status'] ="Time In Recorded";
-        $_SESSION['status_code'] ="success";
-        
-	}else{
-        $_SESSION['status'] ="Error";
-        $_SESSION['status_code'] ="error";
-		}	
-	}
-}
+    if ($count_row['num'] > 0) {
+      $_SESSION['status'] = "Time in is already set! Come Back Tommorrow";
+      $_SESSION['status_code'] = "warning";
+    } else {
+
+      $stmt = $db->prepare("INSERT INTO users_activity (username, user_id, time_loged, date_logged) VALUES (:username, :user_id, :time_loged, :date_logged)");
+
+      $stmt->bindParam(':username', $username);
+      $stmt->bindParam(':user_id', $user_id);
+      $stmt->bindParam(':time_loged', $time_loged);
+      $stmt->bindParam(':date_logged', $date_logged);
+
+      if ($stmt->execute()) {
+        $_SESSION['status'] = "Time In Recorded";
+        $_SESSION['status_code'] = "success";
+      } else {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_code'] = "error";
+      }
+    }
   }
+}
 ?>
 
 
 <?php
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-if(isset($_POST['timeoutbtn'])){
-  
-  $id = $_POST['user_id'];;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['timeoutbtn'])) {
 
-  $username = $_POST['username'];
-  $user_id = $_POST['user_id'];
-  $time_out = date("Y-m-d H:i:s",strtotime("now"));
-  $date_logged_off = date("Y-m-d", strtotime("now"));
+    $id = $_POST['user_id'];;
 
-  $sql_create_acc = "SELECT COUNT(date_logged_off) AS num FROM user_activityout WHERE date_logged_off = :date_logged_off AND user_id = $id";
-  $stmt = $db->prepare($sql_create_acc);
-  $stmt->bindValue(':date_logged_off', $date_logged_off);
-  $stmt->execute();
-  
-  $count_row = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-  if($count_row['num']>0){
-      $_SESSION['statusout'] ="Opps! Time out is already set! Come Back Tommorrow";
-      $_SESSION['statusout_code'] ="warning";
-  
-  
-  }else{
-      
+    $username = $_POST['username'];
+    $user_id = $_POST['user_id'];
+    $time_out = date("Y-m-d H:i:s", strtotime("now"));
+    $date_logged_off = date("Y-m-d", strtotime("now"));
+
+    $sql_create_acc = "SELECT COUNT(date_logged_off) AS num FROM user_activityout WHERE date_logged_off = :date_logged_off AND user_id = $id";
+    $stmt = $db->prepare($sql_create_acc);
+    $stmt->bindValue(':date_logged_off', $date_logged_off);
+    $stmt->execute();
+
+    $count_row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($count_row['num'] > 0) {
+      $_SESSION['statusout'] = "Opps! Time out is already set! Come Back Tommorrow";
+      $_SESSION['statusout_code'] = "warning";
+    } else {
+
       $stmt = $db->prepare("INSERT INTO user_activityout (username, user_id, time_out, date_logged_off) VALUES (:username, :user_id, :time_out, :date_logged_off)");
 
       $stmt->bindParam(':username', $username);
@@ -117,16 +109,15 @@ if(isset($_POST['timeoutbtn'])){
       $stmt->bindParam(':time_out', $time_out);
       $stmt->bindParam(':date_logged_off', $date_logged_off);
 
-  if($stmt->execute()){
-      $_SESSION['statusout'] ="Time Out Recorded";
-      $_SESSION['statusout_code'] ="success";
-      
-  }else{
-      $_SESSION['statusout'] ="Error";
-      $_SESSION['statusout_code'] ="error";
-      }	
+      if ($stmt->execute()) {
+        $_SESSION['statusout'] = "Time Out Recorded";
+        $_SESSION['statusout_code'] = "success";
+      } else {
+        $_SESSION['statusout'] = "Error";
+        $_SESSION['statusout_code'] = "error";
+      }
+    }
   }
-}
 }
 ?>
 
@@ -201,9 +192,9 @@ while ($roww = $query->fetch()) {
 </head>
 
 <body class="hold-transition login-page">
-<script>
-        swal("Barangay Commonwealth","Good Day! Welcome to Time Log");
-    </script>
+  <script>
+    swal("Barangay Commonwealth", "Good Day! Welcome to Time Log");
+  </script>
   <div class="login-box">
     <div class="login-logo">
       <p id="date"></p>
@@ -212,7 +203,7 @@ while ($roww = $query->fetch()) {
 
     <div>
       <div class="login-box-body">
-        <h4 class="login-box-msg">Enter Employee ID</h4>
+        <h4 class="login-box-msg">Employee ID</h4>
 
         <form method="post" action="">
           <div style="display: flex; justify-content: center; align-items: center;">
@@ -236,8 +227,8 @@ while ($roww = $query->fetch()) {
             <div class="col-xs-4">
               <button onclick="changeText(this); get_accept('<?php echo $myButtonText; ?>'); this.disabled='disabled';" type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat" name="timeinbtn"><i class="bx bx-log-in"></i> In</button>
             </div>
-           
-            <div class="col-xs-4" >
+
+            <div class="col-xs-4">
               <button onclick="changeText(this); get_accept('<?php echo $myButtonText; ?>'); this.disabled='disabled';" type="submit" id="btn-submit" class="btn btn-primary btn-block btn-flat" name="timeoutbtn"><i class="bx bx-log-out"></i> Out</button>
             </div>
 
@@ -270,7 +261,7 @@ while ($roww = $query->fetch()) {
                 <tr class="table-row">
                   <td><?php echo $image['activity_id']; ?></td>
                   <td><?php echo $image['time_loged']; ?> </td>
-                  <td><?php echo date("F d, Y", strtotime($image ['date_logged'])); ?></td>
+                  <td><?php echo date("F d, Y", strtotime($image['date_logged'])); ?></td>
                 </tr>
               </tbody>
 
@@ -305,7 +296,7 @@ while ($roww = $query->fetch()) {
                 <tr class="table-row">
                   <td><?php echo $image['outactivity_id']; ?></td>
                   <td><?php echo $image['time_out']; ?> </td>
-                  <td><?php echo date("F d, Y", strtotime($image ['date_logged_off'])); ?></td>
+                  <td><?php echo date("F d, Y", strtotime($image['date_logged_off'])); ?></td>
                 </tr>
               </tbody>
 
@@ -348,7 +339,7 @@ while ($roww = $query->fetch()) {
     }
     ?>
 
-<?php
+    <?php
     if (isset($_SESSION['statusout']) && $_SESSION['statusout'] != '') {
     ?>
       <script>
@@ -364,7 +355,7 @@ while ($roww = $query->fetch()) {
     }
     ?>
 
-  
+
     <script type="text/javascript">
       $(function() {
         var interval = setInterval(function() {

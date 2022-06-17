@@ -291,6 +291,16 @@ if (isset($_SESSION['type'])) {
 			background: orange;
 			color: green
 		}
+
+		.piechart{
+            display: none; 
+            position: fixed; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 5px;
+        }
 	</style>
 </head>
 
@@ -503,7 +513,10 @@ if (isset($_SESSION['type'])) {
 					</a>
 				</div>
 			</div>
-			<div id="donut_single" style="width: 40%; height: 250px;  margin-left: 40px; margin-right: 30px;"></div>
+			<div style="display: flex; justify-content: center; align-items: center;margin-left: -50px;">
+				<div id="donut_single" style="width: 40%; height: 250px;  margin-left: 40px; margin-right: 30px;"></div>
+				<div id="piechart" style="width: 40%; height: 250px; margin-right: 30px;"></div>
+			</div>
 			<!-- <div style="display: flex; justify-content: center; align-items: center;">
 				<div id="chart_div" style="width: 900px; height: 500px;"></div>
 			</div> -->
@@ -523,10 +536,10 @@ if (isset($_SESSION['type'])) {
 
 		var data = google.visualization.arrayToDataTable([
 			['Effort', 'Amount given'],
-			['Barangay ID', <?php echo $total_brgyid_request; ?>],
-			['Business Permit', <?php echo $total_no_bpermit_request; ?>],
-			['Barangay Clearance', <?php echo $total_no_clearance_request; ?>],
-			['Indigency', <?php echo $total_no_indigency_request; ?>]
+			['Barangay ID: <?php echo $total_brgyid_request; ?>', <?php echo $total_brgyid_request; ?>],
+			['Business Permit: <?php echo $total_no_bpermit_request; ?>', <?php echo $total_no_bpermit_request; ?>],
+			['Barangay Clearance: <?php echo $total_no_clearance_request; ?>', <?php echo $total_no_clearance_request; ?>],
+			['Indigency: <?php echo $total_no_indigency_request; ?>', <?php echo $total_no_indigency_request; ?>]
 		]);
 
 		var options = {
@@ -544,23 +557,20 @@ if (isset($_SESSION['type'])) {
 	}
 </script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawVisualization);
 
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar'],
-          ['2004/05',  165,      938,         522],
-          ['2005/06',  135,      1120,        599],
-          ['2006/07',  157,      1167,        587],
-          ['2007/08',  139,      1110,        615]
+          ['Month', 'Business Permit', 'Barangay ID', 'Barangay Clearance', 'Indigency'],
+          ['<?= $total_request_bpermit_date;?>',  165,      938,         522, 545]
         ]);
 
         var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
+          title : 'Monthly Total of Document Re	quest',
+          vAxis: {title: 'Request'},
           hAxis: {title: 'Month'},
           seriesType: 'bars',
           series: {5: {type: 'line'}}
@@ -569,8 +579,32 @@ if (isset($_SESSION['type'])) {
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-    </script>
+    </script> -->
 	<script>
 		  document.getElementById('chart_div').outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>';
 	</script>
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+	  
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Document Name', 'Amount'],
+
+		  ['Barangay ID: <?php echo $total_request_barangayid; ?>', <?php echo $total_request_barangayid; ?>],
+          ['Business Permit: <?php echo $total_request_bpermits; ?>', <?php echo $total_request_bpermits; ?>],
+          ['Barangay Clearance: <?php echo $total_request_clearance; ?>', <?php echo $total_request_clearance; ?>],
+		  ['Indigency: <?php echo $total_request_indigency; ?>', <?php echo $total_request_indigency; ?>]
+
+        ]);
+
+        var options = {
+          title: 'Total Request'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 </html>

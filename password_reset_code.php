@@ -4,18 +4,23 @@ include ('db/conn.php');
 
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require 'vendor/PHPMailer/src/Exception.php';
+require 'vendor/PHPMailer/src/PHPMailer.php';
+require 'vendor/PHPMailer/src/SMTP.php';
+
+//Load Composer's autoloader
 require 'vendor/autoload.php';
 
 function send_password_reset($get_name, $get_email, $token)
 {
+    $mail = new PHPMailer(true);
     $mail->isSMTP();                                     
     $mail->Host = 'smtp.gmail.com';                      
     $mail->SMTPAuth = true;                             
     $mail->Username = 'barangaycommonwealth01@gmail.com';     
-    $mail->Password = 'gepalitanmopapasswordbuddy';             
+    $mail->Password = 'gegepalitanmopapasswordbuddyy';             
     $mail->SMTPOptions = array(
         'ssl' => array(
         'verify_peer' => false,
@@ -40,10 +45,20 @@ function send_password_reset($get_name, $get_email, $token)
 
     $mail->Subject = "Reset Password Notification";
     $email_template = "
-    <h2>Good Day!</h2>
-    <h3>You receive this email because we received a password reset request for your account. </h3>
-    <br><br>
-    <a href='http://localhost/Updated-Barangay-System/email-verification/change_password.php?token=$token&email=$get_email'>Click Here</a>
+    
+    <p>Good Day!</p>
+    <br>    
+    <p>You receive this email because we received a password reset request for your account. </p>
+    <p>If you didn't request this, you can safely ignore this email.</p>
+    <br>
+
+    <p>Tagalog - Translation</p>
+    <p>Natanggap mo ang email na ito dahil nakatanggap kami ng kahilingan sa pag-reset ng password para sa iyong account.</p>
+    <p>Kung hindi mo ito hiniling, maaari mong balewalain ang email na ito.</p>
+    <br>
+    <p>Thanks,</p>
+    <p>From: Barangay Commonwealth </p>
+    <a href='http://localhost/Updated-Barangay-System/commonwealth/email-verification/change_password.php?token=$token&email=$get_email'>Click Here</a>
     ";
     $mail->Body = $email_template;
     $mail->send();
@@ -57,7 +72,7 @@ if(isset($_POST['password_reset_link']))
     $check_email = "SELECT email FROM accreg_resident WHERE email ='$email' LIMIT 1";
     $check_email_run = mysqli_query($connect, $check_email);
 
-    if(mysqli_num_rows() > 0)
+    if(mysqli_num_rows( $check_email_run) > 0)
     {
         $rows = mysqli_fetch_array($check_email_run);
         $get_name = $rows['uname'];
@@ -85,4 +100,3 @@ if(isset($_POST['password_reset_link']))
         exit();
     }
 }
-?>

@@ -318,9 +318,7 @@ if(isset($_POST['indigencysendemail'])){
 	   $_SESSION['result'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
 	   $_SESSION['status'] = 'error';
     }
-	
 	unlink($file);
-
 }
 
 if(isset($_POST['admincompsendemail'])){

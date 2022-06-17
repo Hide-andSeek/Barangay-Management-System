@@ -57,7 +57,7 @@ if(!isset($_SESSION["type"]))
 	 <style>
 		*{font-size: 13px;}
 		 .home-section{
-			min-height: 95vh;''
+			min-height: 95vh;
 			}
 
 

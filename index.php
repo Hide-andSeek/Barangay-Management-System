@@ -435,6 +435,30 @@ include('db/index_announcement.php')
                 position: relative;
             }
         }
+
+        #mylink:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#mylink:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#mylink:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+#mylink:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
     </style>
 
 </head>
@@ -461,6 +485,7 @@ include('db/index_announcement.php')
                     </button>
                     <a class="navbar-brand logo-top page-scroll" href="#header">
                         <img class="brgy-logo" src="resident-img/Brgy-Commonwealth.png" alt="logo">
+                        <span>BETA Version</span>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -515,7 +540,6 @@ include('db/index_announcement.php')
                     <div id="Login" class="login_container form">
                         <div class="information">
                             <input class="inputtext control-label" id="email" name="email" type="email" placeholder="Email">
-
                         </div>
 
                         <div class="information">
@@ -528,8 +552,6 @@ include('db/index_announcement.php')
                                 Sign in
                             </button>
                             <p style="text-align: center; font-size: 12px;">You do not have account yet? <a href="resident_account_registration.php">Register</a></p>
-
-
                         </div>
                     </div>
                 </form>
@@ -767,31 +789,7 @@ include('db/index_announcement.php')
             <button class="see_announcement" onclick="document.location='announcement.php'">See announcements</button>
         </div>
         <br>
-
-
         <!-- Services Section -->
-        <!-- <section>
-            <div class="container-fluid wrapper">
-                <div class="row">
-                    <div class="col-lg-12 text-left">
-                        <h2 class="section-heading service" style="color: gray">Maningning na Barangay Commonwealth</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="services_1">
-                <div class="container">
-                    <div class="row">
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <iframe width="860" height="385" src="https://www.youtube.com/embed/FLS6q04tutw" title="YouTube video player" frameborder="15" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <br>
-                        <p style="text-align: center; font-size: 18px"><i class="bx bxs-camera-movie movie"></i>: <a href="https://www.youtube.com/channel/UC-LtvvmPd1SdwHxvGLmc_vg" target="_blank">DarenjayTV</a>  </p>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
     </section>
 
     <!-- Footer -->
@@ -819,7 +817,7 @@ include('db/index_announcement.php')
             <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
                 <span class="copyright">
                     Copyright &copy; Barangay Commonwealth - 2022 Created By
-                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group</a>
+                    <a href="http://comm-bms.com/index.php" target="_blank">Beta Group/ Beta Version</a>
                 </span>
             </div>
         </div>
@@ -829,19 +827,6 @@ include('db/index_announcement.php')
     <div class="scroll-up">
         <a href="#header" class="page-scroll"><i class="bx bx-arrow-to-top"></i></a>
     </div>
-    <!-- <div id="theme-settings">
-        <div id="settings-button">
-			<img src="resident-img/options.png"></img>
-        </div>
-        <div class="color">
-            <span class="settings-title">Theme color selector</span>
-            <ul class="gradients">
-                <li>
-                    <a href="contact.php">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div> -->
 
     <!-- Color Settings script -->
     <script src="js/jquery.min.js"></script>

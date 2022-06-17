@@ -449,7 +449,7 @@ if(isset($_POST['bpsobtn']))
 				{
 					if(password_verify($_POST["user_no"], $row["user_no"]))
 					{
-						if($row["department"] == 'BPSO')
+						if($row["department"] == 'COMPLAINT')
 							{
 								$_SESSION["type"] = $row["user_type"];
 								$_SESSION["user"] = $row["username"];

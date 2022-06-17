@@ -1,6 +1,7 @@
 <?php
 DATE_DEFAULT_TIMEZONE_SET('Asia/Manila');
 error_reporting(~E_NOTICE);
+
 // Welcome to Create Account and Login Query
 
 /* 

@@ -41,7 +41,7 @@ if(!isset($_SESSION["type"]))
 
 	<!--Font Styles-->
 	<link rel="icon" type="image/png" href="../img/Brgy-Commonwealth.png">
-	
+	<link rel="stylesheet" href="../css/design.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -199,7 +199,7 @@ if(!isset($_SESSION["type"]))
 			 </li>
 
 			 <li>
-			   <a class="side_bar nav-button" href=".php">
+			   <a class="side_bar nav-button" href="compAdmin_Transachistory.php">
 				 <i class='bx bx-user-pin bcpc'></i>
 				 <span class="links_name">Transaction History</span>
 			   </a>
@@ -254,7 +254,14 @@ if(!isset($_SESSION["type"]))
 							?>
 						</div>
 						<div class="w3-clear"></div>
-						<h4>LUPON</h4>
+						<div style="text-align: center;">
+							<h4>LUPON</h4>
+						</div>
+						<a href="barangayid.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 					</div>
 				</a>
 			</div>
@@ -276,7 +283,14 @@ if(!isset($_SESSION["type"]))
 			
 					</div>
 					<div class="w3-clear"></div>
-					<h4>BPSO</h4>
+					<div style="text-align: center;">
+							<h4>BPSO</h4>
+						</div>
+						<a href="barangayid.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
 					</div>
 				</a>
 			</div>
@@ -298,7 +312,15 @@ if(!isset($_SESSION["type"]))
 						
 						</div>
 						<div class="w3-clear"></div>
-						<h4>VAWC</h4>
+						<div style="text-align: center;">
+							<h4>VAWC</h4>
+						</div>
+						<a href="barangayid.php" class="small-box-footer more-info">
+							<div style="text-align: center; background: #0000001A; padding: 3px 0">
+								More info <i class="fa fa-arrow-circle-right"></i>
+							</div>
+						</a>
+						</div>
 					</div>
 				</a>
 			</div>
@@ -320,7 +342,15 @@ if(!isset($_SESSION["type"]))
 							
 							</div>
 							<div class="w3-clear"></div>
+							<div style="text-align: center;">
 							<h4>BCPC</h4>
+							</div>
+								<a href="barangayid.php" class="small-box-footer more-info">
+									<div style="text-align: center; background: #0000001A; padding: 3px 0">
+										More info <i class="fa fa-arrow-circle-right"></i>
+									</div>
+								</a>
+							</div>
 					</div>
 				</a>
 			</div>
@@ -343,7 +373,14 @@ if(!isset($_SESSION["type"]))
 							
 							</div>
 							<div class="w3-clear"></div>
+							<div style="text-align: center;">
 							<h4>Approved</h4>
+							</div>
+							<a href="barangayid.php" class="small-box-footer more-info">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 					</div>
 				</a>
 			</div>
@@ -365,7 +402,14 @@ if(!isset($_SESSION["type"]))
 							
 							</div>
 							<div class="w3-clear"></div>
+							<div style="text-align: center;">
 							<h4>Deny</h4>
+							</div>
+							<a href="barangayid.php" class="small-box-footer more-info" style="margin-bottom: 10px">
+								<div style="text-align: center; background: #0000001A; padding: 3px 0">
+									More info <i class="fa fa-arrow-circle-right"></i>
+								</div>
+							</a>
 					</div>
 				</a>
 			</div>
@@ -511,7 +555,8 @@ if(!isset($_SESSION["type"]))
 			$row_number = $from + 1;
 	?>
 
-
+<br>
+<br>
 <!-- Search -->
 							<div class="search_content" >
 								<form class="list_header" method="get">
@@ -523,7 +568,6 @@ if(!isset($_SESSION["type"]))
 								</form>
 							</div>						
 <!-- end of search form -->
-							
 					<div class="col-md-12">
 							<table class="content-table">
 								<thead>
@@ -536,7 +580,6 @@ if(!isset($_SESSION["type"]))
 										<th width="15%">Incident Address</th>
 										<th width="15%">Contact No</th>
 										<th width="15%">View Details</th>
-										<!-- <th width="5%">Message</th> -->
 									</tr>
 								</thead>
 							<?php 
@@ -550,11 +593,7 @@ if(!isset($_SESSION["type"]))
 									<td><?php echo $data ['comp_address']?></td>
 									<td><?php echo $data ['inci_address']; ?></td>
 									<td><?php echo $data ['contactno']; ?></td>
-									
 									<td><button class="view_approvebtn" onclick="location.href='compAdmin_dashdetails.php?id=<?php echo $data['blotter_id'];?>'">View Details</button></td>
-									
-									<!-- <td><button class="form-control btn-info" data-toggle="modal" style="font-size: 13px; width: 100px;z-index: 100;" onclick="document.getElementById('id2').style.display='block'"><i class="bx bx-edit"></i>Reply</button></td> -->
-				
 								</tr>	
 								</tbody>
 								<?php 
@@ -572,7 +611,6 @@ if(!isset($_SESSION["type"]))
 									?>
 								</h4>
 							</div>
-							<!-- <button class="button" style="vertical-align:middle"><span>Hover </span></button> -->
 	</div>
 							<div class="separator"></div>
 </div>     

@@ -424,14 +424,18 @@ fclose($handle);
 			background-color: DodgerBlue !important;
 			color: #ffffff;
 		}
+
 		@media screen and (max-width: 800px) {
-            .logdropdown-content {
-                position: relative;
-            }
-        }
+			.logdropdown-content {
+				position: relative;
+			}
+		}
+
 		@media screen and (max-width: 600px) {
-        .logdropdown-content {position: relative;}
-        }
+			.logdropdown-content {
+				position: relative;
+			}
+		}
 	</style>
 </head>
 
@@ -531,8 +535,6 @@ fclose($handle);
 				<br>
 			</div>
 
-
-
 			<div style="text-align: center;">
 				<?php echo isset($error['add_brgyclearance']) ? $error['add_brgyclearance'] : ''; ?>
 				<?php echo isset($error['full_name']) ? $error['full_name'] : ''; ?>
@@ -556,7 +558,6 @@ fclose($handle);
 						<li>Siguraduhin na ang iyong impormasyon ay tugma. Huwag magsumite ng mga expired na ID.</li>
 						<li>Kuhanan ng litrato ang harap at likod ng iyong ID. Siguraduhin na ang iyong Scanned Photo ay malinaw at nababasa. </li>
 						<li>Pakilagay ang iyong email address. Ito ay magsisilbing kasangkapan para sa pagpapadala ng mensahe at softcopy ng iyong Barangay Clearance</li>
-						<!-- <li>Lagyan ng pangalan ang iyong file. Halimbawa <strong style="color: black">DICARPIOLEONARDO - BarangayID.docx </strong></li> -->
 						<li>I-save ang iyong file sa <strong style="color: black">docx </strong> format.</li>
 						<li>Antayin ang abiso ng Barangay. Para sa iba pang katanungan bisitahin ang aming website <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 					</ol>
@@ -576,7 +577,6 @@ fclose($handle);
 						<li>Make sure your information is accurate and precise. Do not submit expired IDs.</em></strong></li>
 						<li>Take a photo of your ID (Front and Back). Please make sure your Scanned Photo is clear and easy to read.</li>
 						<li>Place your email address. This will serve as a tool for sending a message and softcopy of your Barangay Clearance</li>
-						<!-- <li>Put your name inline with your file. Example <strong style="color: black">DICARPIOLEONARDO - BarangayID.docx </strong>  </li> -->
 						<li>Save your file in <strong style="color: black">docx</strong> format.</li>
 						<li>Please wait for the announcement of Barangay. For more inquiry visit our webpage. <a style="cursor: pointer;" href="residentcontactus.php" target="_blank">see more</a></li>
 					</ol>
@@ -585,10 +585,6 @@ fclose($handle);
 						<li>Valid ID (Front and Back Portion of your ID)- This will serve as confirmation of your Identity</li>
 						<li>Photo: 2x2 ID Picture (Taken within a year ago) </li>
 					</ol>
-					<!-- <a href="">
-																	    <p style="float: right;">Online Blottering <i class="bx bx-skip-next"></i></p>
-                                                                    </a> -->
-
 			</fieldset>
 			<br>
 			<br>
