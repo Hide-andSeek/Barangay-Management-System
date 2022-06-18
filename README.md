@@ -33,6 +33,7 @@ Should be able to:
 
 ![Design preview for the Employee Page](./readme_images/Dashboard.jpg)
 ![Mobile Layout](./readme_images/Mobile-Phone.svg)
+![Online Payment](./readme_images/Online-Payment.png)
 
 ### Links
 
